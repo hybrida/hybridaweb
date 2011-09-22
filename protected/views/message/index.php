@@ -1,7 +1,17 @@
 <?php
 $this->breadcrumbs=array(
-	'Message',
-);?>
-<h1><?php echo $this->id . '/' . $this->action->id; ?></h1>
+	'Messages',
+);
 
-<p>You may change the content of this page by modifying the file <tt><?php echo __FILE__; ?></tt>.</p>
+$this->menu=array(
+	array('label'=>'Create Message', 'url'=>array('create')),
+	array('label'=>'Manage Message', 'url'=>array('admin')),
+);
+?>
+
+<h1>Messages</h1>
+
+<?php $this->widget('zii.widgets.CListView', array(
+	'dataProvider'=>$dataProvider,
+	'itemView'=>'_view',
+)); ?>
