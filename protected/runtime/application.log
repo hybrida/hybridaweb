@@ -1320,3 +1320,1045 @@ REQUEST_URI=/yii/
 in /home/sigurd/www/yii/protected/views/layouts/main.php (69)
 in /home/sigurd/www/yii/protected/views/layouts/column1.php (7)
 in /home/sigurd/www/yii/protected/controllers/SiteController.php (32)
+2011/09/23 10:14:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "message".' in /home/sigurd/www/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CController.php(262): CController->missingAction('message')
+#1 /home/sigurd/www/yii/framework/web/CWebApplication.php(277): CController->run('message')
+#2 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('site/message')
+#3 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#4 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/yii/index.php/site/message
+2011/09/23 10:15:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "message".' in /home/sigurd/www/yii/framework/web/CController.php:477
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CController.php(262): CController->missingAction('message')
+#1 /home/sigurd/www/yii/framework/web/CWebApplication.php(277): CController->run('message')
+#2 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('site/message')
+#3 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#4 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#5 {main} REQUEST_URI=/yii/index.php/site/message
+2011/09/23 10:30:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:30:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:30:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:30:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:32:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:32:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:33:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "logout".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('logout')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/logout
+2011/09/23 10:33:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:33:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:33:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:33:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:33:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:34:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:34:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:34:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:34:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:34:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:34:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:35:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:35:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:26 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "logout".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('logout')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/logout
+2011/09/23 10:35:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "logout".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('logout')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/logout?/php/logout.php
+2011/09/23 10:35:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "logout".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('logout')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/logout
+2011/09/23 10:35:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:35:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil?/php/logout.php
+2011/09/23 10:35:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:35:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:35:51 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:36:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:36:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "logout".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('logout')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/logout
+2011/09/23 10:36:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:36:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:36:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:38:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "logout".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('logout')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/logout
+2011/09/23 10:38:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:38:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:38:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:43 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:44 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:45 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:52 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:38:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:39:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:39:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:39:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:39:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:22 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:40:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:42:14 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:42:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:42:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:42:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:42:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "logout".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('logout')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/logout
+2011/09/23 10:42:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:42:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:47:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:49:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:49:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:49:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:56:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:56:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:56:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:56:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:56:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:56:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:56:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:08 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:58:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:18 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:23 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:34 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:36 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:37 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "profil".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('profil')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/profil
+2011/09/23 10:59:38 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 10:59:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:42 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:00:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:01:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js
+2011/09/23 11:03:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "eScript2.js".' in /home/sigurd/www/yii/framework/web/CWebApplication.php:281
+Stack trace:
+#0 /home/sigurd/www/yii/framework/web/CWebApplication.php(136): CWebApplication->runController('eScript2.js')
+#1 /home/sigurd/www/yii/framework/base/CApplication.php(158): CWebApplication->processRequest()
+#2 /home/sigurd/www/yii/index.php(13): CApplication->run()
+#3 {main} REQUEST_URI=/yii/eScript2.js

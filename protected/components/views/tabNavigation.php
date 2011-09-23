@@ -1,8 +1,7 @@
 
 <items>
-	<div><a href='?site=newsfeed&sub=0'>Hjem</a></div>
-	<div><a href='?site=profile&sub=0'>Profil</a></div>
-	<div><a href='?site='></a></div>
-	<div><a href='?site=article&sub=0'>Om Oss</a></div>
-
+	<div><?=CHtml::link("Hjem",array("/")); ?></div>
+	<div><?=CHtml::link("eksempelside",array("message/"))?></div>
+	<div><?=CHtml::link("Profil",array("profil/")); ?></div>
+	<div><?=CHtml::link("Logg ut",array("logout/")); ?></div>
 </items>
