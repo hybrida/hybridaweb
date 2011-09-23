@@ -66,12 +66,12 @@
 	<nav>
 	<menu>
 		<div>
-			<? $this->widget("widgets/TabNavigation") ?>
+			<? $this->widget("TabNavigation") ?>
 		</div>
 	</menu> 
 	</nav>
 
-<div class="loggedIn"><? $this->widget("widgets/UserOptions") ?></div>
+<div class="loggedIn"><? $this->widget("UserOptions") ?></div>
 
 			</div>
 		</div>
