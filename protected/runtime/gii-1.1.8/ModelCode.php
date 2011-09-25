@@ -1,7 +1,7 @@
 <?php
 return array (
   'template' => 'default',
-  'tablePrefix' => 'tbl',
+  'tablePrefix' => '',
   'modelPath' => 'application.models',
   'baseClass' => 'CActiveRecord',
   'buildRelations' => '1',

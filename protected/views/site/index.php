@@ -4,8 +4,8 @@
 
 <p>You may change the content of this page by modifying the following two files:</p>
 <ul>
-	<li>View file: <tt><?php echo __FILE__; ?></tt></li>
-	<li>Layout file: <tt><?php echo $this->getLayoutFile('main'); ?></tt></li>
+	<li>View file: <i><?php echo __FILE__; ?></i></li>
+	<li>Layout file: <i><?php echo $this->getLayoutFile('main'); ?></i></li>
 </ul>
 
 <p>For more details on how to further develop this application, please read
@@ -14,6 +14,6 @@ Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
 should you have any questions.</p>
 
 <p> <?=CHtml::link("Message",array("message/")); ?> </p>
-<p><?=Yii::app()->getBaseUrl()?></p>
+<p>base url: <?=Yii::app()->getBaseUrl()?></p>
 
 <p>heisann</p>

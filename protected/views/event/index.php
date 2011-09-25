@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Messages',
+	'Events',
 );
 
 $this->menu=array(
-	array('label'=>'Create Message', 'url'=>array('create')),
-	array('label'=>'Manage Message', 'url'=>array('admin')),
+	array('label'=>'Create Event', 'url'=>array('create')),
+	array('label'=>'Manage Event', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Messages</h1>
+<h1>Events</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

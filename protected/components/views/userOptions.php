@@ -1,2 +1,1 @@
-
-<a href='?/php/logout.php'>Bjørnar Eggesbø¸ Askevold</a>
+<?=CHtml::link("Bjørnar Eggesbø¸ Askevold",array("logout/"));?>

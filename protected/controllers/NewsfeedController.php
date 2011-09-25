@@ -13,7 +13,12 @@
 class NewsfeedController extends Controller {
 	
 	public function actionIndex() {
+		$this->render("index");
 		
+	}
+	
+	public function actionDummy($id,$tull) {
+				$this->render("index");
 	}
 }
 

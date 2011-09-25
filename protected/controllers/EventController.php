@@ -1,6 +1,6 @@
 <?php
 
-class MessageController extends Controller
+class EventController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -61,14 +61,14 @@ class MessageController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Message;
+		$model=new Event;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Message']))
+		if(isset($_POST['Event']))
 		{
-			$model->attributes=$_POST['Message'];
+			$model->attributes=$_POST['Event'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -90,9 +90,9 @@ class MessageController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Message']))
+		if(isset($_POST['Event']))
 		{
-			$model->attributes=$_POST['Message'];
+			$model->attributes=$_POST['Event'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -127,7 +127,7 @@ class MessageController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Message');
+		$dataProvider=new CActiveDataProvider('Event');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +138,10 @@ class MessageController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Message('search');
+		$model=new Event('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Message']))
-			$model->attributes=$_GET['Message'];
+		if(isset($_GET['Event']))
+			$model->attributes=$_GET['Event'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,7 +155,7 @@ class MessageController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Message::model()->findByPk($id);
+		$model=Event::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,7 +167,7 @@ class MessageController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='message-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='event-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
