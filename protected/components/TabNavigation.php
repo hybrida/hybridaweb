@@ -11,8 +11,7 @@ class TabNavigation extends CWidget {
 	}
 	
 	public function run() {
-		$hei = "test";
-		$this->render('tabNavigation',array($hei));
+		$this->render('tabNavigation');
 	}
 
 	

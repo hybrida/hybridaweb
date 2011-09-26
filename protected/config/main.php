@@ -7,7 +7,7 @@
 return array(
 		'theme' => 'hybrida',
 		'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-		'name' => 'Hyb Yii',
+		'name' => 'Hyb-Yii',
 		// preloading 'log' component
 		'preload' => array('log'),
 		// autoloading model and component classes

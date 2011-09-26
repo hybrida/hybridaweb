@@ -1,8 +1,5 @@
+<h1>Nyheter</h1>
 
-<h1><?=$title?></h1>
-<img src='php/image.php?id=<?=$imageId?>&size=2' />
-<p>
-<?=$content?>
-</p>
+<p>Dette er nyhetssiden. Her vil det komme en liste over de 10 siste nyhetene</p>
 
-<b>Skribent:</b> <?=$firstName." ".$middleName." ".$sirName?>
+<p>Gå inn på <?=CHtml::link("en nyhet",array("news/1")); ?> for å se et eksempel på en enkeltnyhet</p>

@@ -12,8 +12,8 @@
  */
 class NewsController extends Controller {
 
-	public function actionIndex($id) {
-		echo $id;
+	public function actionIndex() {
+		$this->render("index");
 	}
 
 	//put your code here
@@ -26,17 +26,24 @@ class NewsController extends Controller {
 				WHERE  n.author = u.userId 
 				AND n.id = :id 
 				ORDER BY timestamp DESC";
-		$query = Yii::app()->db->createCommand($sql);
-		$data = $query->query(array("id" => $id));
-		$a = $data->read();
+		$command = Yii::app()->db->createCommand($sql);
+
+		$query = $command->query( array(
+				"id" => $id,
+		));
 		
-		if ($a == array()) {
+		$data = $query->read();
+
+		if ($data == array()) {
 			throw new CHttpException("Nyheten finnes ikke");
 		}
+		
+		$data['content'] = nl2br($data['content']);
+		
 
 
 
-		$this->render("index", $a);
+		$this->render("view", $data);
 	}
 
 }
