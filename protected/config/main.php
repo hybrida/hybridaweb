@@ -43,10 +43,10 @@ return array(
 						),
 				),
 				'db' => array(
-						'connectionString' => 'mysql:host=localhost;dbname=yii',
+						'connectionString' => 'mysql:host=localhost;dbname=hybrida',
 						'emulatePrepare' => true,
-						'username' => 'root',
-						'password' => 'manuel',
+						'username' => 'www-data',
+						'password' => 'Q8JdU5MY7dDr5XEU',
 						'charset' => 'utf8',
 				),
 				'errorHandler' => array(
