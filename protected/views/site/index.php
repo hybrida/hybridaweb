@@ -1,4 +1,5 @@
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
+<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?>, <?
+if ( ! Yii::app()->user->isGuest ): echo Yii::app()->user->name ; endif; ?></i></h1>
 
 <p>Congratulations! You have successfully created your Yii application.</p>
 
@@ -13,7 +14,14 @@ the <a href="http://www.yiiframework.com/doc/">documentation</a>.
 Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
 should you have any questions.</p>
 
-<p> <?=CHtml::link("Message",array("message/")); ?> </p>
-<p>base url: <?=Yii::app()->getBaseUrl()?></p>
+<h2>Info om CWebUser-klassen</h2>
+<pre><? print_r(Yii::app()->user); ?></pre>
 
-<p>heisann</p>
+<h2>Info om CWebUser-klassen 2</h2>
+<pre><? print_r(Yii::app()->user->id) ?> 
+<?= Yii::app()->user->name ?>
+
+
+</pre>
+
+

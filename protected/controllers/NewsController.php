@@ -12,8 +12,15 @@
  */
 class NewsController extends Controller {
 
-	public function actionIndex($id) {
-		echo $id;
+
+	public function __construct($id, $module = null) {
+		parent::__construct($id, $module);
+
+	}
+
+	public function actionIndex() {
+
+		$this->render("index");
 	}
 
 	//put your code here
@@ -29,15 +36,37 @@ class NewsController extends Controller {
 		$query = Yii::app()->db->createCommand($sql);
 		$data = $query->query(array("id" => $id));
 		$a = $data->read();
-		
+
 		if ($a == array()) {
 			throw new CHttpException("Nyheten finnes ikke");
 		}
 
 
 
-		$this->render("index", $a);
+		$this->render("view", $a);
+	}
+
+	public function actionFeed() {
+		
+		$selfId = Yii::app()->session['self_id'];
+
+
+
+
+		$query = "SELECT ma.userId FROM groups AS g  
+	LEFT JOIN access_definition AS ad ON g.title = ad.description  
+	LEFT JOIN membership_access AS ma ON ma.accessId = ad.id 
+	WHERE ma.userId = :selfId";
+		
+		$command = Yii::app()->db->createCommand($query);
+		$command->bindParam(':selfId', $selfId);
+		$reader = $command->query();
+		$data = $reader->readAll();
+		
+		$this->render("feed",array('data' => $data));
+
 	}
 
 }
+
 ?>

@@ -1,8 +1,3 @@
+<h1>Du har kommet til en nyhet!</h1>
 
-<h1><?=$title?></h1>
-<img src='php/image.php?id=<?=$imageId?>&size=2' />
-<p>
-<?=$content?>
-</p>
-
-<b>Skribent:</b> <?=$firstName." ".$middleName." ".$sirName?>
+<p>Vennligst spesifiser hvilken id den har, så fikser vi det ;)</p>
