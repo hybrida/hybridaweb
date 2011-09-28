@@ -1,7 +1,7 @@
 
 <items>
 	<div><?=CHtml::link("Hjem",array("/")); ?></div>
-	<div><?=CHtml::link("EventEndring",array("event/"))?></div>
+	<div><?=CHtml::link("News",array("news/"))?></div>
 	<div><?=CHtml::link("Profil",array("profil/")); ?></div>
 
 	<? if (Yii::app()->user->isGuest == true): ?>

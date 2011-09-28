@@ -1,8 +1,10 @@
-
+<?$this->breadcrumbs=array(
+	'News',
+);?>
 <h1><?=$title?></h1>
-<img src='php/image.php?id=<?=$imageId?>&size=2' />
+<b>Skribent:</b> <?=$firstName." ".$middleName." ".$sirName?>
+<br><img src='php/image.php?id=<?=$imageId?>&size=2' />
 <p>
 <?=$content?>
 </p>
 
-<b>Skribent:</b> <?=$firstName." ".$middleName." ".$sirName?>

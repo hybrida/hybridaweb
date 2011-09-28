@@ -1,3 +1,5 @@
-<h1>Du har kommet til en nyhet!</h1>
+<h1>Nyheter</h1>
 
-<p>Vennligst spesifiser hvilken id den har, så fikser vi det ;)</p>
+<p>Dette er nyhetssiden. Her vil det komme en liste over de 10 siste nyhetene</p>
+
+<p>Gå inn på <?=CHtml::link("en nyhet",array("news/1")); ?> for å se et eksempel på en enkeltnyhet</p>

@@ -32,7 +32,7 @@ class NewsController extends Controller {
 				FROM news n, user_info u 
 				WHERE  n.author = u.userId 
 				AND n.id = :id 
-				ORDER BY timestamp DESC";
+				ORDER BY timestCExceptionamp DESC";
 		$query = Yii::app()->db->createCommand($sql);
 		$data = $query->query(array("id" => $id));
 		$a = $data->read();
