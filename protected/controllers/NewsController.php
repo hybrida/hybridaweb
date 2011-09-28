@@ -13,14 +13,8 @@
 class NewsController extends Controller {
 
 
-	public function __construct($id, $module = null) {
-		parent::__construct($id, $module);
-
-	}
-
 	public function actionIndex() {
-
-		$this->render("index");
+		$this->actionFeed();
 	}
 
 	//put your code here
@@ -66,6 +60,24 @@ class NewsController extends Controller {
 		$this->render("feed",array('data' => $data));
 
 	}
+	
+	public function actionCreate($id=null) {
+		$news = new News;
+		if ($id !== null) {
+			$news->fetch($id);			
+		}
+		$data = $news->get();
+		
+	}
+	
+	public function actionUpdate($id) {
+		$news = new News;
+		$news->fetch($id);
+		$data = $news->get();
+		
+	}
+	
+	
 
 }
 

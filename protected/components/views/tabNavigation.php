@@ -5,7 +5,7 @@
 	<div><?=CHtml::link("Profil",array("profil/")); ?></div>
 
 	<? if (Yii::app()->user->isGuest == true): ?>
-	<div><?=CHtml::link("Logg inn",array("site/login/?user=sigurhol&pass=DetteErIkkeEkte")); ?></div>
+	<div><?=CHtml::link("Logg inn",array("site/login/?user=381&pass=DetteErIkkeEkte")); ?></div>
 	<? else: ?>
 	<div><?=CHtml::link("Logg ut",array("site/logout")); ?></div>
 	<? endif; ?>

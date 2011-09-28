@@ -7,16 +7,16 @@
  */
 class UserIdentity extends CUserIdentity {
 	
-	private $selfID;
+	public $_id;
 	
 	public function __construct($id) {
-		$this->selfID = 381; //FIXME
+		$this->_id = $id;
 		
 		parent::__construct($id, null);		
 	}
 	
 	public function getId() {
-		return $this->selfID;
+		return $this->_id;
 	}
 
 	/**

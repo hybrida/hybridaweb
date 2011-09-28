@@ -153,7 +153,7 @@
 						</menu> 
 					</nav>
 
-					<div class="loggedIn"><? $this->widget("UserOptions") ?></div>
+					<div class="loggedIn"><? //$this->widget("UserOptions") ?></div>
 
 				</div>
 			</div>
