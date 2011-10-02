@@ -1,79 +1,105 @@
 <?php
 
 /**
- * Alters a news-post in the database
+ * This is the model class for table "news".
+ *
+ * The followings are the available columns in table 'news':
+ * @property integer $id
+ * @property integer $parentId
+ * @property string $parentType
+ * @property string $title
+ * @property integer $imageId
+ * @property string $content
+ * @property integer $author
+ * @property string $timestamp
  */
-class News extends Edit {
+class News extends CActiveRecord
+{
+	/**
+	 * Returns the static model of the specified AR class.
+	 * @return News the static model class
+	 */
+	public static function model($className=__CLASS__)
+	{
+		return parent::model($className);
+	}
 
-	private $event = null;
+	/**
+	 * @return string the associated database table name
+	 */
+	public function tableName()
+	{
+		return 'news';
+	}
 
-	function __construct() {
-		parent::__construct();
-		$this->fields = array(
-				'id' => null,
-				'title' => null,
-				'parentId' => null,
-				'parentType' => null,
-				'imageId' => null,
-				'content' => null,
-				'author' => null,
-				'timestamp' => null,
+	/**
+	 * @return array validation rules for model attributes.
+	 */
+	public function rules()
+	{
+		// NOTE: you should only define rules for those attributes that
+		// will receive user inputs.
+		return array(
+			array('parentId, imageId, author', 'numerical', 'integerOnly'=>true),
+			array('parentType', 'length', 'max'=>7),
+			array('title', 'length', 'max'=>50),
+			array('content, timestamp', 'safe'),
+			// The following rule is used by search().
+			// Please remove those attributes that should not be searched.
+			array('id, parentId, parentType, title, imageId, content, author, timestamp', 'safe', 'on'=>'search'),
 		);
-
-		$this->updateFilter = array('id', 'author', 'timestamp');
-		$this->pushFilter = array();
-		$this->setFilter = array('id', 'author', 'timestamp');
-
-		$this->tableName = "news";
-	}
-
-	public function push() {
-		$this->fields['timestamp'] = date('Y-m-d H:i:s');
-		$this->fields['author'] = $_SESSION['self_id'];
-		parent::push();
 	}
 
 	/**
-	 * Returns this news' event if it exists.
-	 *
-	 * @return Event
-	 * @return null
+	 * @return array relational rules.
 	 */
-	function getEvent() {
-		if ($this->hasEvent()) {
-			if ($this->fields['parentType'] == 'event') {
-				$this->event = new Event();
-				$this->event->fetch($this->fields['parentId']);
-			}
-		}
-		return $this->event;
+	public function relations()
+	{
+		// NOTE: you may need to adjust the relation name and the related
+		// class name for the relations automatically generated below.
+		return array(
+		);
 	}
 
 	/**
-	 * Returns true if it has an event
-	 * @return boolean
+	 * @return array customized attribute labels (name=>label)
 	 */
-	public function hasEvent() {
-		return ($this->fields['parentType'] == 'event');
+	public function attributeLabels()
+	{
+		return array(
+			'id' => 'ID',
+			'parentId' => 'Parent',
+			'parentType' => 'Parent Type',
+			'title' => 'Title',
+			'imageId' => 'Image',
+			'content' => 'Content',
+			'author' => 'Author',
+			'timestamp' => 'Timestamp',
+		);
 	}
 
 	/**
-	 * Edits this news-object's event to $event
-	 * @param Event $event
+	 * Retrieves a list of models based on the current search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	function appendEvent(&$event) {
-		$this->event = $event;
-		$this->fields['parentId'] = $this->event->getId();
-		$this->fields['parentType'] = 'event';
-		$this->err->message("news->AppendEvent success");
-	}
+	public function search()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
 
-	function removeEvent() {
-		$this->event = null;
-		$this->fields['parentType'] = "";
-		$this->fields['parentId'] = "";
-	}
+		$criteria=new CDbCriteria;
 
+		$criteria->compare('id',$this->id);
+		$criteria->compare('parentId',$this->parentId);
+		$criteria->compare('parentType',$this->parentType,true);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('imageId',$this->imageId);
+		$criteria->compare('content',$this->content,true);
+		$criteria->compare('author',$this->author);
+		$criteria->compare('timestamp',$this->timestamp,true);
+
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+		));
+	}
 }
-
-// date( 'Y-m-d H:i:s');

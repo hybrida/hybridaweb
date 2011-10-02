@@ -1,21 +1,19 @@
 <?php
 
 /**
- * This is the model class for table "signup".
+ * This is the model class for table "menu_group".
  *
- * The followings are the available columns in table 'signup':
- * @property integer $eventId
- * @property integer $spots
- * @property string $open
- * @property string $close
- * @property string $signoff
- * @property integer $active
+ * The followings are the available columns in table 'menu_group':
+ * @property integer $group
+ * @property integer $site
+ * @property integer $contentId
+ * @property integer $sort
  */
-class Signup extends CActiveRecord
+class MenuGroup extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Signup the static model class
+	 * @return MenuGroup the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +25,7 @@ class Signup extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'signup';
+		return 'menu_group';
 	}
 
 	/**
@@ -38,12 +36,11 @@ class Signup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('spots, open, close, active', 'required'),
-			array('eventId, spots, active', 'numerical', 'integerOnly'=>true),
-			array('signoff', 'length', 'max'=>5),
+			array('group, site, sort', 'required'),
+			array('group, site, contentId, sort', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('eventId, spots, open, close, signoff, active', 'safe', 'on'=>'search'),
+			array('group, site, contentId, sort', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,12 +61,10 @@ class Signup extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'eventId' => 'Event',
-			'spots' => 'Spots',
-			'open' => 'Open',
-			'close' => 'Close',
-			'signoff' => 'Signoff',
-			'active' => 'Active',
+			'group' => 'Group',
+			'site' => 'Site',
+			'contentId' => 'Content',
+			'sort' => 'Sort',
 		);
 	}
 
@@ -84,12 +79,10 @@ class Signup extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('eventId',$this->eventId);
-		$criteria->compare('spots',$this->spots);
-		$criteria->compare('open',$this->open,true);
-		$criteria->compare('close',$this->close,true);
-		$criteria->compare('signoff',$this->signoff,true);
-		$criteria->compare('active',$this->active);
+		$criteria->compare('group',$this->group);
+		$criteria->compare('site',$this->site);
+		$criteria->compare('contentId',$this->contentId);
+		$criteria->compare('sort',$this->sort);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

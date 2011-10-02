@@ -1,21 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "signup".
+ * This is the model class for table "vote".
  *
- * The followings are the available columns in table 'signup':
- * @property integer $eventId
- * @property integer $spots
- * @property string $open
- * @property string $close
- * @property string $signoff
- * @property integer $active
+ * The followings are the available columns in table 'vote':
+ * @property integer $pollId
+ * @property integer $userId
+ * @property integer $choice
  */
-class Signup extends CActiveRecord
+class Vote extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Signup the static model class
+	 * @return Vote the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +24,7 @@ class Signup extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'signup';
+		return 'vote';
 	}
 
 	/**
@@ -38,12 +35,11 @@ class Signup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('spots, open, close, active', 'required'),
-			array('eventId, spots, active', 'numerical', 'integerOnly'=>true),
-			array('signoff', 'length', 'max'=>5),
+			array('pollId, userId, choice', 'required'),
+			array('pollId, userId, choice', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('eventId, spots, open, close, signoff, active', 'safe', 'on'=>'search'),
+			array('pollId, userId, choice', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,12 +60,9 @@ class Signup extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'eventId' => 'Event',
-			'spots' => 'Spots',
-			'open' => 'Open',
-			'close' => 'Close',
-			'signoff' => 'Signoff',
-			'active' => 'Active',
+			'pollId' => 'Poll',
+			'userId' => 'User',
+			'choice' => 'Choice',
 		);
 	}
 
@@ -84,12 +77,9 @@ class Signup extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('eventId',$this->eventId);
-		$criteria->compare('spots',$this->spots);
-		$criteria->compare('open',$this->open,true);
-		$criteria->compare('close',$this->close,true);
-		$criteria->compare('signoff',$this->signoff,true);
-		$criteria->compare('active',$this->active);
+		$criteria->compare('pollId',$this->pollId);
+		$criteria->compare('userId',$this->userId);
+		$criteria->compare('choice',$this->choice);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

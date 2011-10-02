@@ -1,21 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "signup".
+ * This is the model class for table "image".
  *
- * The followings are the available columns in table 'signup':
- * @property integer $eventId
- * @property integer $spots
- * @property string $open
- * @property string $close
- * @property string $signoff
- * @property integer $active
+ * The followings are the available columns in table 'image':
+ * @property integer $id
+ * @property string $title
+ * @property string $oldName
+ * @property integer $albumId
+ * @property integer $userId
+ * @property string $timestamp
  */
-class Signup extends CActiveRecord
+class Image extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Signup the static model class
+	 * @return Image the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +27,7 @@ class Signup extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'signup';
+		return 'image';
 	}
 
 	/**
@@ -38,12 +38,14 @@ class Signup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('spots, open, close, active', 'required'),
-			array('eventId, spots, active', 'numerical', 'integerOnly'=>true),
-			array('signoff', 'length', 'max'=>5),
+			array('oldName', 'required'),
+			array('albumId, userId', 'numerical', 'integerOnly'=>true),
+			array('title', 'length', 'max'=>30),
+			array('oldName', 'length', 'max'=>40),
+			array('timestamp', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('eventId, spots, open, close, signoff, active', 'safe', 'on'=>'search'),
+			array('id, title, oldName, albumId, userId, timestamp', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,12 +66,12 @@ class Signup extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'eventId' => 'Event',
-			'spots' => 'Spots',
-			'open' => 'Open',
-			'close' => 'Close',
-			'signoff' => 'Signoff',
-			'active' => 'Active',
+			'id' => 'ID',
+			'title' => 'Title',
+			'oldName' => 'Old Name',
+			'albumId' => 'Album',
+			'userId' => 'User',
+			'timestamp' => 'Timestamp',
 		);
 	}
 
@@ -84,12 +86,12 @@ class Signup extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('eventId',$this->eventId);
-		$criteria->compare('spots',$this->spots);
-		$criteria->compare('open',$this->open,true);
-		$criteria->compare('close',$this->close,true);
-		$criteria->compare('signoff',$this->signoff,true);
-		$criteria->compare('active',$this->active);
+		$criteria->compare('id',$this->id);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('oldName',$this->oldName,true);
+		$criteria->compare('albumId',$this->albumId);
+		$criteria->compare('userId',$this->userId);
+		$criteria->compare('timestamp',$this->timestamp,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
