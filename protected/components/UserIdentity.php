@@ -14,10 +14,7 @@ class UserIdentity extends CUserIdentity {
 		
 		parent::__construct($id, null);		
 	}
-	
-	public function getId() {
-		return $this->_id;
-	}
+
 
 	/**
 	 * Authenticates a user.

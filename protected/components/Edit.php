@@ -35,7 +35,7 @@ abstract class Edit {
 
 	public function __construct() {
 
-		$this->con = DbConnector::getDbConnector();
+		$this->pdo = Yii::app()->db->getPdoInstance();
 		$this->err = $this->con->getErrorHandler();
 	}
 
