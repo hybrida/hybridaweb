@@ -21,22 +21,6 @@ class NewsController extends Controller {
 
 	public function actionView($id) {
 
-
-		$sql = "SELECT title, n.imageId, content, firstName, middleName, sirName, timestamp
-				FROM news n, user_info u 
-				WHERE  n.author = u.userId 
-				AND n.id = :id 
-				ORDER BY timestCExceptionamp DESC";
-		$query = Yii::app()->db->createCommand($sql);
-		$data = $query->query(array("id" => $id));
-		$a = $data->read();
-
-		if ($a == array()) {
-			throw new CHttpException("Nyheten finnes ikke");
-		}
-
-
-
 		$this->render("view", $a);
 	}
 
@@ -62,19 +46,27 @@ class NewsController extends Controller {
 	}
 	
 	public function actionCreate($id=null) {
-		$news = new News;
-		if ($id !== null) {
-			$news->fetch($id);			
+		$model = News::model()->findByPk($id);
+		
+		if ( ! isset($_POST['news'])) {
+			
+		} else {
+			foreach ($_POST['news'] as $key => $value) {
+				$model->$key = $value;
+			}
+			$model->save();
+			
 		}
-		$data = $news->get();
+			
+
 		
 	}
 	
 	public function actionUpdate($id) {
-		$news = new News;
-		$news->fetch($id);
-		$data = $news->get();
+		$model=News::model()->findByPk($id);
 		
+		
+
 	}
 	
 	

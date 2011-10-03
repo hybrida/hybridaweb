@@ -1,7 +1,1 @@
-<?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<?= CHtml::link("Logg inn",Yii::app()->getBaseUrl()."/site/login/?user=381&pass=2") ?>

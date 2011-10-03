@@ -11,7 +11,9 @@ class TabNavigation extends CWidget {
 	}
 	
 	public function run() {
-		$this->render('tabNavigation');
+		$model = Site::model();
+		$data = $model->findAll();
+		$this->render('tabNavigation',array('model' => $model, 'data'=>$data));
 	}
 
 	
