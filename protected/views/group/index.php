@@ -7,6 +7,8 @@
 <!-- //Lister alle mulige grupper hvis ikke gruppeId er oppgitt. -->
 <h2>Komiteer</h2>
 <ul>
+	
+	
 <? foreach ($committee as $group): ?>
 
 <li><a href='?site=group&id=<?=$group['id']?>' ><?=$group['title']?></a> </li>

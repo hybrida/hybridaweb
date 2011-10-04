@@ -13,9 +13,10 @@
 class GroupController extends Controller {
 
 	public function actionIndex() {
-		
+
 		$data = array();
-		
+
+		// Henter kommiteer
 		$query = "SELECT id,title FROM groups WHERE committee = 'true'";
 
 		$command = $this->pdo->prepare($query);
@@ -23,6 +24,7 @@ class GroupController extends Controller {
 
 		$data['committee'] = $command->fetchAll(PDO::FETCH_ASSOC);
 
+		// Henter grupper
 		$query = "SELECT id,title FROM groups WHERE committee = 'false'";
 
 
@@ -31,15 +33,26 @@ class GroupController extends Controller {
 
 		$data['groups'] = $command->fetchAll(PDO::FETCH_ASSOC);
 
-		$this->render("index",$data);
+		$this->render("index", $data);
 	}
 
-	public function actionView($id = null) {
-		if ($id == null)
-			echo "her kommer info om en spesiell side";
-		else {
-			echo "du har kommet inn på gruppeId: " . $id;
-		}
+	public function actionView($id, $sub) {
+
+		$data = array();
+
+		$group = Groups::model()->findByPk($id);
+
+
+		$data['model'] = $group;
+		$this->render("view/comments", $data);
+	}
+
+
+
+	public function actions() {
+		return array(
+						//'view' => 'application.controllers.group.ViewAction',
+		);
 	}
 
 }
