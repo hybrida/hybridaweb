@@ -1,9 +1,8 @@
 <h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?>, <?
 if ( ! Yii::app()->user->isGuest ): echo Yii::app()->user->name ; endif; ?></i></h1>
 
-<h2>Info</h2>
-<p><strong>UserName:</strong> <?= ( ! Yii::app()->user->isGuest) ? Yii::app()->user->name : "IKKE DEFINERT" ?>
-<p><strong>UserID:</strong> <?= ! Yii::app()->user->isGuest ? Yii::app()->user->id : "IKKE DEFINERT" ?>
+
+
 
 <h2>Gammel side</h2>
 
