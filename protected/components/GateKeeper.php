@@ -14,10 +14,19 @@ class GateKeeper {
 
 	private $userId;
 	private $access;
+	private $pdo;
 
 	public function __construct() {
-		$this->userId = Yii::app()->user->id;
-		$this->access = Yii::app()->user->access;
+
+		$this->isGuest = Yii::app()->user->isGuest;
+		$this->userId = 1;
+		$this->access = array();
+
+		if (!$this->isGuest) {
+			$this->userId = Yii::app()->user->id;
+			$this->access = Yii::app()->user->access;
+		}
+		$this->pdo = Yii::app()->db->getPdoInstance();
 	}
 
 	// FIXME utestet
@@ -29,9 +38,8 @@ class GateKeeper {
 				":type" => $type
 		);
 
-		$typeAccess = $model->findAllByAttribute("*", $conditions, $param);
-		print_r($typeAcces);
-		
+		$typeAccess = $model->findAll($conditions, $param);
+		print_r($typeAccess);
 	}
 
 	/** @deprecated */
@@ -48,24 +56,31 @@ class GateKeeper {
 			
 		}
 	}
-
-	public function check(array $array) {
-		foreach ($array as $key => $value) {
-
-
-			switch ($key) {
-				case 'groups':
-					$this->checkGroup($value);
-					break;
-				case 'sex':
-					$this->checkSex($value);
-					break;
-				case 'access':
-					$this->checkAccess($value);
-					break;
+	
+	public function check($type, $id) {
+		
+		$sql = "SELECT * 
+FROM  `access_relations` 
+WHERE  `id` = :id
+AND  `type` =  :type ";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(":id",$id);
+		$stmt->bindValue(":type",$type);
+		$stmt->execute();
+		
+		$typeAccess = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		
+		foreach ($typeAccess as $ac) {
+			if (! in_array($ac, $this->access)) {
+				return false;				
 			}
 		}
+		
+		return true;
+		
+		
 	}
+
 
 }
 

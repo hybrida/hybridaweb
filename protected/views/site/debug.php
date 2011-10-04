@@ -8,3 +8,11 @@
 <? foreach ($_SESSION as $key => $value): ?>
 <p><strong><?=$key?></strong> <?print_r($value);?>
 <? endforeach;?>
+
+<h2>Hardcore debugging</h2>
+<pre>
+	<?
+
+		?>
+
+</pre>
