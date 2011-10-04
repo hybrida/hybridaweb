@@ -25,12 +25,11 @@ class Controller extends CController {
 	public $breadcrumbs = array();
 	
 	
-	public $PDO;
+	public $pdo;
 
 	public function __construct($id, $module=null) {
 		parent::__construct($id, $module);
-		$this->PDO = Yii::app()->db->getPdoInstance();
-		Yii::app()->session['self_id'] = "50"; //FIXME
+		$this->pdo = Yii::app()->db->getPdoInstance();
 	}
 
 }

@@ -65,7 +65,7 @@ class SiteController extends Controller {
 	public function actionLogin() {
 		$user = $_REQUEST['user'];
 		$pass = $_REQUEST['pass'];
-		$identity = new UserIdentity($user,$pass);
+		$identity = new InnsidaIdentity($user,$pass);
 		
 		if ($identity->authenticate()) {
 			Yii::app()->user->login($identity);
