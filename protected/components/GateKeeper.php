@@ -22,7 +22,7 @@ class GateKeeper {
 		$this->userId = 1;
 		$this->access = array();
 
-		if (!$this->isGuest) {
+		if ( ! $this->isGuest) {
 			$this->userId = Yii::app()->user->id;
 			$this->access = Yii::app()->user->access;
 			//print_r($this->access);

@@ -18,32 +18,31 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var integer
 	 */
-	public function a__construct() {
-		$this->login();
-
+	public function __construct() {
 		$this->tables = array(
 				"news", "event",
 		);
-		$this->loadAltsaaaa();
+		
+		$this->setUpOnce();
+		if (Yii::app()->user->isGuest) {
+			echo "Tester for gjester" . PHP_EOL;
+		} else {
+			echo "Tester for bruker: " . Yii::app()->user->name . PHP_EOL;
+			echo "VIKTIG: antar at brukeren kun har accesstilgang id 52 og 56" . PHP_EOL . PHP_EOL;
+		}
 	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */
-	protected function loadAltsaaaa() {
+	public function setUpOnce() {
 		
-
+		
 		foreach ($this->tables as $type) {
-
 			$className = ucfirst($type);
-
 			$this->data[$type] = array();
-
-
-			$this->insert($type, "allow", array(
-			));
-
+			$this->insert($type, "allow", array());
 			$this->insert($type, "deny", array(
 					rand(0, 10000),
 					rand(0, 10000),
@@ -84,16 +83,6 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	/**
-	 * Tears down the fixture, for example, closes a network connection.
-	 * This method is called after a test is executed.
-	 */
-
-	public function testA() {
-		var_dump(debug_backtrace());
-		$this->login();		
-	}
-
 	public function login() {
 		$user = 381;
 		$pass = null;
@@ -103,37 +92,31 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 		Yii::app()->user->login($identity);
 	}
 
-	/**
-	 * Logs out the current user and redirect to homepage.
-	 */
-	public function logout() {
-		Yii::app()->user->logout();
-	}
-	
-	public function atestAccess() {
-		$this->login();
-		//print_r(Yii::app()->user->access);
-	}
 
-	public function atestLoggedIn() {
-		$this->login();
+	public function testLoggedIn() {
+		if ( Yii::app()->user->isGuest) 
+			return;
+		
 		$keep = new GateKeeper();
 
 		foreach ($this->tables as $type) {
 			$this->assertTrue($keep->check($type, $this->data[$type]["allow"]));
 			$this->assertFalse($keep->check($type, $this->data[$type]["deny"]));
 
-			
+
 			$this->assertTrue($keep->check($type, $this->data[$type]["52"]));
 			$this->assertTrue($keep->check($type, $this->data[$type]["52,56"]));
 			$this->assertFalse($keep->check($type, $this->data[$type]["52,1000"]));
 		}
 	}
 
-	public function atestLoggedOut() {
-		$this->logout();
-		$keep = new GateKeeper();
+	public function testLoggedOut() {
+		if (! Yii::app()->user->isGuest) {
+			return;
+		}
 		
+		$keep = new GateKeeper();
+
 
 		foreach ($this->tables as $type) {
 
