@@ -10,7 +10,7 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	 * @var GateKeeper
 	 * 
 	 */
-	private $object;
+	private $keep;
 	private $data = array();
 	private $post;
 	private $tables;
@@ -18,7 +18,7 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @var integer
 	 */
-	public function __construct() {
+	public function a__construct() {
 		$this->login();
 
 		$this->tables = array(
@@ -32,11 +32,11 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	 * This method is called before a test is executed.
 	 */
 	protected function loadAltsaaaa() {
-		$this->object = new GateKeeper;
+		
 
 		foreach ($this->tables as $type) {
 
-			$className = ucwords($type);
+			$className = ucfirst($type);
 
 			$this->data[$type] = array();
 
@@ -72,7 +72,7 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 
 		$this->post->insert();
 		$this->data[$type][$name] = $this->post->id;
-		echo "data $type $name = {$this->post->id}" . PHP_EOL;
+		//echo "data $type $name = {$this->post->id}" . PHP_EOL;
 
 
 		foreach ($access as $a) {
@@ -88,8 +88,10 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	 * Tears down the fixture, for example, closes a network connection.
 	 * This method is called after a test is executed.
 	 */
-	protected function tearDown() {
-		
+
+	public function testA() {
+		var_dump(debug_backtrace());
+		$this->login();		
 	}
 
 	public function login() {
@@ -98,6 +100,7 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 		$identity = new InnsidaIdentity($user, $pass);
 
 		$identity->authenticate();
+		Yii::app()->user->login($identity);
 	}
 
 	/**
@@ -106,31 +109,40 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	public function logout() {
 		Yii::app()->user->logout();
 	}
-
-	public function testLoggedIn() {
+	
+	public function atestAccess() {
 		$this->login();
+		//print_r(Yii::app()->user->access);
+	}
+
+	public function atestLoggedIn() {
+		$this->login();
+		$keep = new GateKeeper();
 
 		foreach ($this->tables as $type) {
-			$this->assertTrue($this->object->check($type, $this->data[$type]["allow"]));
-			$this->assertFalse($this->object->check($type, $this->data[$type]["deny"]));
+			$this->assertTrue($keep->check($type, $this->data[$type]["allow"]));
+			$this->assertFalse($keep->check($type, $this->data[$type]["deny"]));
 
-			$this->assertTrue($this->object->check($type, $this->data[$type]["52"]));
-			$this->assertTrue($this->object->check($type, $this->data[$type]["52,56"]));
-			$this->assertFalse($this->object->check($type, $this->data[$type]["52,1000"]));
+			
+			$this->assertTrue($keep->check($type, $this->data[$type]["52"]));
+			$this->assertTrue($keep->check($type, $this->data[$type]["52,56"]));
+			$this->assertFalse($keep->check($type, $this->data[$type]["52,1000"]));
 		}
 	}
 
-	public function testLoggedOut() {
+	public function atestLoggedOut() {
 		$this->logout();
+		$keep = new GateKeeper();
+		
 
 		foreach ($this->tables as $type) {
 
-			$this->assertTrue($this->object->check($type, $this->data[$type]["allow"]));
-			$this->assertFalse($this->object->check($type, $this->data[$type]["deny"]));
+			$this->assertTrue($keep->check($type, $this->data[$type]["allow"]));
+			$this->assertFalse($keep->check($type, $this->data[$type]["deny"]));
 
-			$this->assertFalse($this->object->check($type, $this->data[$type]["52"]));
-			$this->assertFalse($this->object->check($type, $this->data[$type]["52,56"]));
-			$this->assertFalse($this->object->check($type, $this->data[$type]["52,1000"]));
+			$this->assertFalse($keep->check($type, $this->data[$type]["52"]));
+			$this->assertFalse($keep->check($type, $this->data[$type]["52,56"]));
+			$this->assertFalse($keep->check($type, $this->data[$type]["52,1000"]));
 		}
 	}
 

@@ -25,11 +25,13 @@ class GateKeeper {
 		if (!$this->isGuest) {
 			$this->userId = Yii::app()->user->id;
 			$this->access = Yii::app()->user->access;
+			//print_r($this->access);
 		}
 		$this->pdo = Yii::app()->db->getPdoInstance();
 	}
 
-	// FIXME utestet
+	// FIXME utestet/*/*/*/*
+	/*
 	public function checkOne($type, $id) {
 		$model = AccessRelations::model();
 		$conditions = "id = :id AND type = :type";
@@ -42,7 +44,7 @@ class GateKeeper {
 		print_r($typeAccess);
 	}
 
-	/** @deprecated */
+	/** @deprecated *//*
 	public function checkGroup(array $groups) {
 
 		// Finne groupId til gruppen
@@ -56,10 +58,10 @@ class GateKeeper {
 			
 		}
 	}
-	
+	*/
 	public function check($type, $id) {
 		
-		$sql = "SELECT * 
+		$sql = "SELECT access 
 FROM  `access_relations` 
 WHERE  `id` = :id
 AND  `type` =  :type ";
@@ -71,7 +73,7 @@ AND  `type` =  :type ";
 		$typeAccess = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		foreach ($typeAccess as $ac) {
-			if (! in_array($ac, $this->access)) {
+			if (! in_array($ac['access'], $this->access)) {
 				return false;				
 			}
 		}
@@ -83,5 +85,3 @@ AND  `type` =  :type ";
 
 
 }
-
-?>
