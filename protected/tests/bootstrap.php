@@ -8,3 +8,10 @@ require_once($yiit);
 require_once(dirname(__FILE__).'/WebTestCase.php');
 
 Yii::createWebApplication($config);
+
+// Login --------------------------
+
+$userIdentity = new InnsidaIdentity(381); // Bjørnar
+$userIdentity->authenticate();
+Yii::app()->user->login($userIdentity);
+ /**/

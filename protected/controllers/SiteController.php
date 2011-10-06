@@ -26,8 +26,6 @@ class SiteController extends Controller {
 	 */
 	public function actionIndex() {
 		$this->render('index');
-		
-		
 	}
 
 	/**
@@ -65,15 +63,14 @@ class SiteController extends Controller {
 	public function actionLogin() {
 		$user = $_REQUEST['user'];
 		$pass = $_REQUEST['pass'];
-		$identity = new UserIdentity($user,$pass);
-		
+		$identity = new InnsidaIdentity($user, $pass);
+
 		if ($identity->authenticate()) {
 			Yii::app()->user->login($identity);
 			$this->render("login");
 		} else {
-			$this->render("403",array('msg' => $identity->errorMessage()));
+			$this->render("403", array('msg' => $identity->errorMessage()));
 		}
-
 	}
 
 	/**
@@ -82,6 +79,22 @@ class SiteController extends Controller {
 	public function actionLogout() {
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	public function actionDebug() {
+		if (Yii::app()->user->isGuest) {
+			$this->render("403", array("msg" => "Du må være logget inn!"));
+		} else {
+			
+			$user = Yii::app()->user;
+			
+			$data = array();
+			$data['username'] = $user->name;
+			$data['id'] = $user->id;
+			$data['access'] = $user->access;
+			
+			$this->render("debug",$data);
+		}
 	}
 
 }
