@@ -5,7 +5,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-		'theme' => 'hybrida',
+		'theme' => 'classic',
 		'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 		'name' => 'Hyb-Yii',
 		// preloading 'log' component
@@ -20,7 +20,7 @@ return array(
 
 				'gii' => array(
 						'class' => 'system.gii.GiiModule',
-						'password' => 'manuel',
+						'password' => 'gii',
 				// If removed, Gii defaults to localhost only. Edit carefully to taste.
 				//'ipFilters'=>array('127.0.0.1','::1'),
 				),
