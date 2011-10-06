@@ -11,7 +11,7 @@ Yii::createWebApplication($config);
 
 // Login --------------------------
 
-$userIdentity = new InnsidaIdentity(381); // Bjørnar
+$userIdentity = new InnsidaIdentity(381); // Sigurd
 $userIdentity->authenticate();
 Yii::app()->user->login($userIdentity);
  /**/
