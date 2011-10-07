@@ -20,7 +20,23 @@ class NewsController extends Controller {
 
 	public function actionView($id) {
 
-		$this->render("view", $a);
+
+		$sql = "SELECT title, n.imageId, content, firstName, middleName, sirName, timestamp
+				FROM news n, user_info u 
+				WHERE  n.author = u.userId 
+				AND n.id = :id 
+				ORDER BY timestamp DESC";
+		$query = Yii::app()->db->createCommand($sql);
+		$query2 = $query->query(array("id" => $id));
+		$data = $query2->read();
+
+		if ($data == array()) {
+			throw new CHttpException("Nyheten finnes ikke");
+		}
+
+
+
+		$this->render("view", $data);
 	}
 
 	public function actionFeed() {

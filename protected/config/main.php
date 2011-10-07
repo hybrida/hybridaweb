@@ -6,6 +6,8 @@
 // CWebApplication properties can be configured here.
 return array(
 		'theme' => 'classic',
+		'theme' => 'hybrida',
+		
 		'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 		'name' => 'Hyb-Yii',
 		// preloading 'log' component
