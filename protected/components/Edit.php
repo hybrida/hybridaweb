@@ -36,7 +36,7 @@ abstract class Edit {
 	public function __construct() {
 
 		$this->pdo = Yii::app()->db->getPdoInstance();
-		$this->err = $this->con->getErrorHandler();
+		// $this->err = $this->con->getErrorHandler();
 	}
 
 
@@ -173,78 +173,17 @@ abstract class Edit {
 	/** Makes a new post in access_relations. */
 	public function pushAccess() {
 		foreach ($this->access as $value) {
-			$sql = "INSERT INTO access_relations VALUES (
-				{$this->fields[$this->idName]} ,
-				$value ,
-				'{$this->tableName}'
-			);";
-
-			$this->con->query($sql, "access.{$this->tableName}");
+			Access::insertAccessRelation($this->getId(), $value, $this->tableName);
 		}
 	}
-
-	/** Edits the access_relations posts for this element */
+	
 	public function updateAccess() {
-		$id = $this->getId();
-
-		foreach ($this->access as $newAccess) {
-			$funnet = false;
-			foreach ($this->oldAccess as $oldAccess) {
-				if ($newAccess == $oldAccess) {
-					$funnet = true;
-					break;
-				}
-			}
-			if ($funnet) {
-				continue;
-			}
-			$sql = "INSERT INTO access_relations VALUES (
-				$id , $newAccess , '{$this->tableName}'
-			);";
-
-			$this->con->query($sql, "access.{$this->tableName}");
-		}
-
-		foreach ($this->oldAccess as $oldAccess) {
-			$funnet = false;
-			foreach ($this->access as $newAccess) {
-				if ($newAccess == $oldAccess) {
-					$funnet = true;
-					break;
-				}
-			}
-			if ($funnet) {
-				continue;
-			}
-			$sql = "DELETE FROM `hybrida`.`access_relations` WHERE
-				`access_relations`.`id` = $id AND
-				`access_relations`.`access` = $oldAccess AND
-				`access_relations`.`type` = '{$this->tableName}'";
-
-			$this->con->query($sql, "access.{$this->tableName}");
-		}
-		echo "\n";
+		Access::deleteAccessRelation($this->tableName, $this->getId());
+		$this->pushAccess();		
 	}
 
-	/**
-	 * Returns the set of access'
-	 * @return array
-	 */
 	public function fetchAccess() {
-		$sql = "SELECT access FROM access_relations " .
-			" WHERE id = '" . $this->getId() .
-			"' AND type = '{$this->tableName}'";
-
-		$result = $this->con->query($sql);
-
-		$tmp = $this->con->fetch($result);
-
-
-		while ($tmp) {
-			$this->access[] = $tmp['access'];
-			$tmp = $this->con->fetch($result);
-		}
-		$this->err->message("Access burde ha vært funnet nå, med èn fetch-error");
+		Access::getAccessRelation($this->idName, $this->tableName);
 	}
 
 	/**

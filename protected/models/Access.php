@@ -2,10 +2,10 @@
 
 class Access {
 
-	private $pdo;
+	private static $pdo;
 
 	public function __construct() {
-		$this->pdo = Yii::app()->db->getPdoInstance();
+		self::$pdo = Yii::app()->db->getPdoInstance();
 	}
 
 	public function insertMembership($groupId, $userId) {
@@ -16,7 +16,7 @@ class Access {
 
 		$sql = "INSERT INTO membership_access VALUES (
             (SELECT ad.id FROM access_definition AS ad WHERE description = (SELECT title FROM groups WHERE id=:gID)),:uID)";
-		$query = $this->pdo->prepare($sql);
+		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
 	}
 
@@ -29,41 +29,59 @@ class Access {
 		$sql = "DELETE FROM membership_access WHERE groupId = 
             (SELECT ad.id FROM access_definition AS ad WHERE description = (SELECT title FROM groups WHERE id=:gID))
             AND userId = :uID";
-		$query = $this->pdo->prepare($sql);
+		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
 	}
 
 	//Slette tilgangsnivåer til gruppen
-	public function deleteAccessRelation($type, $id) {
+	public static function deleteAccessRelation($type, $id) {
+		self::$pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
 				'type' => $type,
 				'id' => $id
 		);
 
 		$sql = "DELETE FROM access_relations WHERE type = :type AND id = :id";
-		$query = $this->pdo->prepare($sql);
+		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
 	}
 
-	public function insertAccessRelation($id, $accessId, $type) {
+	public static function insertAccessRelation($id, $accessId, $type) {
+		self::$pdo = Yii::app()->db->getPdoInstance();
+
 		$data = array(
 				'sID' => $id,
 				'accessID' => $accessId,
 				'type' => $type
 		);
-		print_r($data);
 		$sql = "INSERT INTO access_relations VALUES (:sID,:accessID,:type)";
-		$query = $this->pdo->prepare($sql);
+		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
 	}
 
-	public function deleteAccessDefinition($description) {
+	public static function getAccessRelation($id, $type) {
+		self::$pdo = Yii::app()->db->getPdoInstance();
+
+		$sql = "SELECT access 
+			FROM access_relations
+			WHERE id = :id
+				AND type = :type";
+		
+		$stmt = self::$pdo->prepare($sql);
+		$stmt->bindValue("id", $id);
+		$stmt->bindValue("type", $type);
+		$stmt->execute();
+		$data = $stmt->fetchAll(PDO::FETCH_COLUMN);
+		return $data;
+	}
+
+	public static function deleteAccessDefinition($description) {
 		$data = array(
 				'name' => $description
 		);
 
 		$sql = "DELETE FROM access_definition WHERE description = :name";
-		$query = $this->pdo->prepare($sql);
+		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
 	}
 
@@ -73,10 +91,10 @@ class Access {
 		);
 
 		$sql = "INSERT INTO access_definition VALUES (null, :name)";
-		$query = $this->pdo->prepare($sql);
+		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
 
-		return $this->pdo->lastInsertId();
+		return self::$pdo->lastInsertId();
 	}
 
 	public static function innerSQLAllowedTypeIds() {

@@ -78,6 +78,7 @@ abstract class Edit {
 		if ($fieldsArray != null) {
 			// Validates the fieldsArray. 
 			foreach ($fieldsArray as $field) {
+
 				if (!in_array($field, array_keys($this->fields))) {
 					echo "error";
 					throw new Exception("Could not find field \"" . $field . "\" in table " . $this->tableName);
@@ -86,15 +87,16 @@ abstract class Edit {
 			$scope = implode(" , ", $fieldsArray);
 		}
 
-		$sql = "SELECT $scope FROM :tableName WHERE :idName = '$id'";
+		$sql = "SELECT $scope 
+			FROM {$this->tableName} 
+			WHERE :idName = '$id'";
 		
-		$command = $this->pdo->query($sql);
+		$stmt = $this->pdo->prepare($sql);
 		
-		$command->execute(array(
-				"tableName" => $this->tableName,
+		$stmt->execute(array(
 				"idName" =>  $this->idName)
 		);
-		$table = $command->fetch(PDO::FETCH_ASSOC);
+		$table = $stmt->fetch(PDO::FETCH_ASSOC);
 
 		if ($table) {
 
@@ -137,16 +139,15 @@ abstract class Edit {
 		$key = "";
 		$value = "";
 		
-		$sql = "UPDATE :tableName 
+		$sql = "UPDATE {$this->tableName}
 			SET :key = :value
-			WHERE :idName = :idNameReal";
+			WHERE {$this->idName} = :id";
 		
 		$command = $this->pdo->prepare($sql);
-		$command->bindParam('tableName', $this->tableName);
 		$command->bindParam('key',$key);
 		$command->bindParam('value',$value);
 		$command->bindParam('idName',  $this->idName);;
-		$command->bindParam('idNameReal', $this->fields[$this->idName]);
+		$command->bindParam('id', $this->fields[$this->idName]);
 		
 
 		foreach ($this->fields as $key => $value) {

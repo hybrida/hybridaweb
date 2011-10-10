@@ -12,7 +12,10 @@
 <h2>Hardcore debugging</h2>
 <pre>
 	<?
-
+		Access::deleteAccessRelation("event", 2);
+		Access::insertAccessRelation(2, 4, "event");
+		//echo PHP_EOL;
+		print_r(Access::getAccessRelation(2, "event"));
 		?>
 
 </pre>
