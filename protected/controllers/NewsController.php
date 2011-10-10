@@ -60,28 +60,22 @@ class NewsController extends Controller {
 	}
 
 	public function actionCreate($id=null) {
-		if ($id == null) $id = 2;
+
 		$model = new NewsForm;
+		$isUpdated = false;
 
-		
-						
 
-		if (!isset($_POST['news'])) {
+		if (isset($_POST['NewsForm'])) {
+			$input = $_POST['NewsForm'];
+			$model->setAttributes($input,false);
+			$model->testInput();
 			
-			
-		} else {
-			foreach ($_POST['news'] as $key => $value) {
-				$model->$key = $value;
-			}
-			$model->save();
 		}
-		$this->render("form",array('model'=>$model));
-	}
 
-	public function actionUpdate($id) {
-		$model = News::model()->findByPk($id);
+		$this->render("form", array(
+				'model' => $model,
+				'updated' => $isUpdated,
+		));
 	}
 
 }
-
-?>
