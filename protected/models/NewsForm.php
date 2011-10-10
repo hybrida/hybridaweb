@@ -49,7 +49,13 @@ class NewsForm extends CFormModel {
 	public function rules() {
 		return array(
 				array('hasNews, hasSignup, hasEvent','boolean'),
-				array('news[title],news[content]','required'),
+				array(
+						'news[title],news[content], '.
+						'event[start],event[end], event[location], event[title], event[imageId], event[conten], '.
+						'signup[spost], signup[open], signup[close], signup[signoff]',
+						'required'
+				),
+
 		);
 	}	
 }

@@ -2,7 +2,7 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'news-form-form-form',
-	'enableAjaxValidation'=>true,
+	'enableAjaxValidation'=>false,
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -29,33 +29,105 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'news[title]'); ?>
-		<?php echo $form->textField($model,'news[title]'); ?>
-		<?php echo $form->error($model,'news[title]'); ?>
+<?php
+
+$this->widget('application.components.widgets.XHeditor',array(
+	'language'=>'en', //options are en, zh-cn, zh-tw
+	'config'=>array(
+		'id'=>'xh1',
+		'name'=>'NewsForm[news][title]',
+		'tools'=>'mini', // mini, simple, full or from XHeditor::$_tools, tool names are case sensitive
+		'width'=>'100%',
+		//see XHeditor::$_configurableAttributes for more
+	),
+	'contentValue'=>'', // default value displayed in textarea/wysiwyg editor field
+	'htmlOptions'=>array('rows'=>5, 'cols'=>10),// to be applied to textarea
+));
+?>		<?php echo $form->error($model,'news[title]'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'Innhold'); ?>
-<?php 
-            $this->widget('application.components.widgets.XHeditor',array(
-                'language'=>'en', //options are en, zh-cn, zh-tw
-                'config'=>array(
-                    'id'=>'xh1',
-                    'name'=>'xh',
-                    'tools'=>'full', // mini, simple, fill or from XHeditor::$_tools
-                    'width'=>'100%',
-										'height' => "400",
-                    //see XHeditor::$_configurableAttributes for more
-                ),
-                'htmlOptions'=>array('rows'=>5, 'cols'=>10),// to be applied to textarea
-            ));
-            ?>
-		<?php echo $form->error($model,'news[content]'); ?>
+		<?php echo $form->labelEx($model,'news[content]'); ?>
+<?php
+
+$this->widget('application.components.widgets.XHeditor',array(
+	'language'=>'en', //options are en, zh-cn, zh-tw
+	'config'=>array(
+		'id'=>'xh2',
+		'name'=>'NewsForm[news][content]',
+		'tools'=>'mini', // mini, simple, full or from XHeditor::$_tools, tool names are case sensitive
+		'width'=>'100%',
+		//see XHeditor::$_configurableAttributes for more
+	),
+	'contentValue'=>'', // default value displayed in textarea/wysiwyg editor field
+	'htmlOptions'=>array('rows'=>5, 'cols'=>10),// to be applied to textarea
+));
+?>		<?php echo $form->error($model,'news[content]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'event[start]'); ?>
+		<?php echo $form->textField($model,'event[start]'); ?>
+		<?php echo $form->error($model,'event[start]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'event[end]'); ?>
+		<?php echo $form->textField($model,'event[end]'); ?>
+		<?php echo $form->error($model,'event[end]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'event[location]'); ?>
+		<?php echo $form->textField($model,'event[location]'); ?>
+		<?php echo $form->error($model,'event[location]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'event[title]'); ?>
+		<?php echo $form->textField($model,'event[title]'); ?>
+		<?php echo $form->error($model,'event[title]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'event[imageId]'); ?>
+		<?php echo $form->textField($model,'event[imageId]'); ?>
+		<?php echo $form->error($model,'event[imageId]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'event[conten]'); ?>
+		<?php echo $form->textField($model,'event[conten]'); ?>
+		<?php echo $form->error($model,'event[conten]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'signup[spost]'); ?>
+		<?php echo $form->textField($model,'signup[spost]'); ?>
+		<?php echo $form->error($model,'signup[spost]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'signup[open]'); ?>
+		<?php echo $form->textField($model,'signup[open]'); ?>
+		<?php echo $form->error($model,'signup[open]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'signup[close]'); ?>
+		<?php echo $form->textField($model,'signup[close]'); ?>
+		<?php echo $form->error($model,'signup[close]'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'signup[signoff]'); ?>
+		<?php echo $form->textField($model,'signup[signoff]'); ?>
+		<?php echo $form->error($model,'signup[signoff]'); ?>
 	</div>
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Send inn'); ?>
-		<?php echo CHtml::resetButton(); ?>
+		<?php echo CHtml::submitButton('Submit'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
