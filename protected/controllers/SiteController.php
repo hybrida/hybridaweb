@@ -60,14 +60,12 @@ class SiteController extends Controller {
 	/**
 	 * Displays the login page
 	 */
-	public function actionLogin() {
-		$user = $_REQUEST['user'];
-		$pass = $_REQUEST['pass'];
-		$identity = new InnsidaIdentity($user, $pass);
+	public function actionLogin($id) {
+		$identity = new InnsidaIdentity($id);
 
 		if ($identity->authenticate()) {
 			Yii::app()->user->login($identity);
-			$this->render("login");
+			$this->redirect(Yii::app()->user->returnUrl);			
 		} else {
 			$this->render("403", array('msg' => $identity->errorMessage()));
 		}

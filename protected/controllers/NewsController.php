@@ -60,9 +60,14 @@ class NewsController extends Controller {
 	}
 
 	public function actionCreate($id=null) {
-		$model = News::model()->findByPk($id);
+		if ($id == null) $id = 2;
+		$model = new NewsForm;
+
+		
+						
 
 		if (!isset($_POST['news'])) {
+			
 			
 		} else {
 			foreach ($_POST['news'] as $key => $value) {
@@ -70,6 +75,7 @@ class NewsController extends Controller {
 			}
 			$model->save();
 		}
+		$this->render("form",array('model'=>$model));
 	}
 
 	public function actionUpdate($id) {
