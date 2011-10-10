@@ -47,16 +47,23 @@ class Access {
 	}
 
 	public static function insertAccessRelation($id, $accessId, $type) {
+		self::insertAccessRelationArray(array($accessId), $id, $type);
+	}
+
+	public static function insertAccessRelationArray($array, $id, $type) {
 		self::$pdo = Yii::app()->db->getPdoInstance();
 
-		$data = array(
-				'sID' => $id,
-				'accessID' => $accessId,
-				'type' => $type
-		);
-		$sql = "INSERT INTO access_relations VALUES (:sID,:accessID,:type)";
-		$query = self::$pdo->prepare($sql);
-		$query->execute($data);
+		$sql = "INSERT INTO access_relations VALUES (:id, :access, :type)";
+		$stmt = self::$pdo->prepare($sql);
+
+		$access = "";
+		$stmt->bindParam("id", $id);
+		$stmt->bindParam("access", $access);
+		$stmt->bindParam("type", $type);
+
+		foreach ($array as $access) {
+			$stmt->execute($data);
+		}
 	}
 
 	public static function getAccessRelation($id, $type) {
@@ -66,7 +73,7 @@ class Access {
 			FROM access_relations
 			WHERE id = :id
 				AND type = :type";
-		
+
 		$stmt = self::$pdo->prepare($sql);
 		$stmt->bindValue("id", $id);
 		$stmt->bindValue("type", $type);
