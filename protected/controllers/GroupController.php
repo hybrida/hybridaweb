@@ -63,7 +63,7 @@ class GroupController extends Controller {
         
         
     }
-
+	
 }
 
 ?>

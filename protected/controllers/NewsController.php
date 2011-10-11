@@ -59,9 +59,9 @@ class NewsController extends Controller {
 		$this->render("feed", array('data' => $data));
 	}
 
-	public function actionCreate($id=null) {
+	public function actionEdit($id=null) {
 
-		$model = new NewsForm;
+		$model = new NewsEventForm;
 		$isUpdated = false;
 
 

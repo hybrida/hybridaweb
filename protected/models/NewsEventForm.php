@@ -10,7 +10,7 @@
  *
  * @author sigurd
  */
-class NewsForm extends CFormModel {
+class NewsEventForm extends CFormModel {
 
 	public $hasNews;
 	public $hasSignup;
