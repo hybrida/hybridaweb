@@ -17,7 +17,7 @@ class ViewAction extends CAction {
 	}
 
 	public function run() {
-		$this->render("viwe");
+		$this->render("view");
 		
 		
 	}
