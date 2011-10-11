@@ -27,6 +27,10 @@ class SiteController extends Controller {
 	public function actionIndex() {
 		$this->render('index');
 	}
+    
+    public function actionFaq() {
+        $this->render('faq');
+    }
 
 	/**
 	 * This is the action to handle external exceptions.
