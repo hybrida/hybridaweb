@@ -10,5 +10,8 @@ class ArticleController extends Controller {
 			$this->render("view", $data);
 		}
 	}
+    public function actionEdit($id){
+        
+    }
 
 }
