@@ -54,7 +54,7 @@ class GroupController extends Controller {
 						//'view' => 'application.controllers.group.ViewAction',
 		);
 	}
-
+	
 }
 
 ?>
