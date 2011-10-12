@@ -45,9 +45,11 @@ class NewsEventForm extends CFormModel {
 				array(
 						'news[title], news[content], ' .
 						'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
-						'signup[spost], signup[open], signup[close], signup[signoff]',
-						'required'
+						'signup[spots], signup[open], signup[close], signup[signoff]',
+						'default'
 				),
+				array('event[start], event[end], signup[open], signup[close]','date',),
+				array('signup[spots]','required'),
 		);
 	}
 
