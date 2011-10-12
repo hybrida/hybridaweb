@@ -113,7 +113,7 @@ class GetController extends Controller{
         return $output;
     }
     
-    public function actionEvent(){
+    public function actionEvent($id){
 		$split = '~%~';
         $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
         
