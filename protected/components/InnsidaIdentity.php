@@ -41,7 +41,7 @@ class InnsidaIdentity extends CUserIdentity {
 		//$this->setState("",$userInfo['']);
 		$this->setState("firstName", $userInfo['firstName']);
 		$this->setState("middleName", $userInfo['middleName']);
-		$this->setState("sirName", $userInfo['sirName']);
+		$this->setState("lastName", $userInfo['lastName']);
 		$this->setState("member", $userInfo['member']);
 		$this->setState("gender", $userInfo['gender']);
 		$this->setState("imageId", $userInfo['imageId']);

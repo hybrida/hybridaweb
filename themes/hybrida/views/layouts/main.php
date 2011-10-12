@@ -5,7 +5,7 @@
 		<title><?= CHtml::encode(Yii::app()->name) ?></title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/eScript2.js'></script>
+		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/e.js'></script>
 
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/layout.css" />

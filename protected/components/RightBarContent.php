@@ -32,7 +32,7 @@ class RightBarContent extends CWidget {
 	}
 
 	public function addActivities() {
-		$sql = "SELECT firstName, middleName, sirName FROM user_info WHERE userId = ?";
+		$sql = "SELECT firstName, middleName, lastName FROM user_info WHERE userId = ?";
 		$command = Yii::app()->db->createCommand($sql);
 		$query = $command->query(array(Yii::app()->user->id));
 		$this->data = $query->read();

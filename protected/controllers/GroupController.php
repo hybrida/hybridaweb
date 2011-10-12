@@ -61,7 +61,6 @@ class GroupController extends Controller {
         
         $this->render("edit",$data);
         
-        
     }
 	
 }
