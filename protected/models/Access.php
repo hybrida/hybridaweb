@@ -34,13 +34,25 @@ class Access {
 	}
 
 	//Slette tilgangsnivåer til gruppen
-	public static function deleteAccessRelation($type, $id) {
-		self::$pdo = Yii::app()->db->getPdoInstance();
+    public static function deleteAccessRelation($type, $id, $access){
+        self::$pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
 				'type' => $type,
-				'id' => $id
+				'id' => $id,
+                'access' => $access
 		);
-
+        
+		$sql = "DELETE FROM access_relations WHERE type = :type AND id = :id AND access = :access";
+		$query = self::$pdo->prepare($sql);
+		$query->execute($data);
+    }
+	public static function deleteAllAccessRelation($type, $id) {
+		        self::$pdo = Yii::app()->db->getPdoInstance();
+		$data = array(
+				'type' => $type,
+				'id' => $id,
+		);
+        
 		$sql = "DELETE FROM access_relations WHERE type = :type AND id = :id";
 		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
@@ -103,6 +115,18 @@ class Access {
 
 		return self::$pdo->lastInsertId();
 	}
+    
+    public static function getAccessDefinition($name){
+        $data = array(
+            'name' => $description
+		);
+
+		$sql = "SELECT id from access_definition WHERE name = :name";
+		$query = self::$pdo->prepare($sql);
+		$query->execute($data);
+        $result = $query-fetch(PDO::FETCH_ASSOC);
+        return $result['id'];
+    }
 
 	public static function innerSQLAllowedTypeIds() {
 		return "(SELECT ar.id AS accessId, ma.userId FROM membership_access ma LEFT JOIN access_relations ar ON ma.accessId=ar.access 

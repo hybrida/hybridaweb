@@ -41,8 +41,6 @@ class GroupController extends Controller {
 		$data = array();
 
 		$group = Groups::model()->findByPk($id);
-
-
 		$data['model'] = $group;
 		$this->render("view/comments", $data);
 	}
@@ -54,6 +52,16 @@ class GroupController extends Controller {
 						//'view' => 'application.controllers.group.ViewAction',
 		);
 	}
+    
+    public function actionEdit($id){
+        $group = Groups::model()->findByPk($id);
+        $data['title'] = $group->getTitle();
+        $data['groups'] = $group->getAdminMenu();
+        $data['members'] = $group->getMembers();
+        
+        $this->render("edit",$data);
+        
+    }
 	
 }
 

@@ -28,6 +28,188 @@ class GetController extends Controller{
         print_r($_GET);
     }
     
+    public function actionFeed(){
+        $contentLength = 500;
+        $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
+        
+
+        //Feil å bruke parentType for selection. 
+        if ( !isset($_GET['parentType'])) {			
+            $sql = "SELECT DISTINCT ui.userId AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp 
+                        FROM news n JOIN user_info ui ON n.author = ui.userId 
+                        RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
+                        ORDER BY timestamp DESC " . $limit;
+            
+            $data = array(
+                'userId' => 327,
+                'type' => 'news'
+                    
+        );
+        }
+        else {
+            $sql = "SELECT DISTINCT ui.userId AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp FROM news n
+                        RIGHT JOIN (SELECT ar.id AS accessId, ma.userId FROM membership_access ma LEFT JOIN access_relations ar ON ma.accessId=ar.access WHERE ar.type='news' AND ma.userId = 327) AS a ON a.accessId = n.id 
+                        RIGHT JOIN tag AS t ON t.id = n.id 
+                        LEFT JOIN groups AS g ON g.id = t.ownerId 
+                        LEFT JOIN user_info ui ON n.author = ui.userId
+                        WHERE g.id = :id AND t.contentType = 'news' AND t.tagType = 'group'";
+            
+            $data = array(
+                'id' => $_REQUEST['id'],
+                );
+        }
+        
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        $data['newslist'] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $data['contentLength'] = $contentLength;
+        $this->renderPartial('feed',$data);
+        
+    }
+    
+    public function actionComment(){
+            $split = '~%~';
+			$pId = $_REQUEST['id'];
+			$pType = $_REQUEST['parentType'];
+            
+			$data['html'] = $this->comment($pType,$pId,$split);	
+            $this->renderPartial('comment',$data);
+    }
+    
+    //List nested comments
+    private function comment($pType,$pId,$split) {
+        $this->pdo = Yii::app()->db->getPdoInstance();
+        
+        $data = array(
+            'userId' => Yii::app()->user->id,
+            'type' => 'comment',
+            'id' => $pId,
+            'pType' => $pType
+        );
+        echo Yii::app()->user->name;
+
+        $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
+
+        $sql = "SELECT u.imageId, c.id, c.content, c.timestamp, u.firstName, u.middleName, u.lastName 
+        FROM comment AS c JOIN user_info AS u ON c.author = u.userId
+        RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = c.id
+        WHERE c.parentType = :pType AND c.parentId = :id 
+        ORDER BY c.timestamp DESC " . $limit;
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+
+
+        $output = "";
+        foreach( $result as $row ) {
+            $image = ($row['path'] ? $row['path'] : "images/user/unknown.jpg");
+            $content = $row['content'];
+            $output .= "<img src='php/image.php?id=$row[imageId]&size=2' />";
+            $output .= $content;
+            $output .= "<div class='author'><i>skrevet av: $row[firstName] $row[middleName] $row[lastName] den: $row[timestamp]</i></div>";
+            $output .= comment('comment',$selfId,'¤£');		//Print 2.nivåkommentarer
+            $output .= $split;
+        }
+        return $output;
+    }
+    
+    public function actionEvent($id){
+		$split = '~%~';
+        $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
+        
+        $data = array(
+            'userId' =>  Yii::app()->user->id,
+            'type' => 'event'
+        );
+          
+        $sql = "SELECT e.id AS id, e.start AS start, e.title AS title
+        FROM event AS e 
+        RIGHT JOIN  " . Access::innerSQLAllowedTypeIds() . " = e.id 
+        WHERE start >= NOW()
+        ORDER BY start $limit";
+         
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        
+    
+        $data['events'] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $data['split'] = $split;
+        
+        $this->renderPartial('event',$data);
+    }
+    
+    public function actionSignup($id){
+        $split = '~%~';
+        $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
+        
+        $input = array(
+            'userId' =>  Yii::app()->user->id,
+            'type' => 'event',
+            'id' => $_REQUEST['id']
+        );
+ 
+        $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName 
+        FROM membership_signup AS ms LEFT JOIN user_info AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
+        RIGHT JOIN ". Access::innerSQLAllowedTypeIds() . " = e.id
+        WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($input);
+        
+        $data['list'] = $query->fetchAll(PDO::FETCH_ASSOC);
+        $data['id'] = $id;
+        
+        $input = array(
+            'id' => $_REQUEST['id']
+        );
+        $sql = "SELECT userId FROM membership_signup WHERE eventId = :id";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($input);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        
+        if ($result['userId'] == Yii::app()->user->id ){
+            $data['signType'] = "on";
+            $data['buttonText'] = "Meld meg på";
+        }
+        else
+        {
+            $data['signType'] = "off";
+            $data['buttonText'] = "Meld meg av";
+        }
+        
+        $this->renderPartial('signup',$data);
+    }
+    
+    public function actionGroup(){
+        $gId = $_REQUEST['gId'];
+        $type = $_REQUEST['type'];
+        
+        
+        $group = Groups::model()->findByPk($id);
+        if($group->isAdmin( Yii::app()->user->id )){
+            if ($type == 'delMember'){
+                $group->deleteMember( $_REQUEST['userId'] );
+            }
+            if($type == 'addMember'){
+                $group->addMember( $_REQUEST['userId'] , $_REQUEST['commission'] );
+            }
+            
+            if($type == 'modTabAccess'){
+                if($_REQUEST['access'] == 'private'){
+                    $group->setTabPrivate($_REQUEST['siteId']);
+                }
+                if($_REQUEST['access'] == 'open'){
+                    $group->setTabOpen($_REQUEST['siteId']);
+                }
+                if($_REQUEST['access'] == 'public'){
+                    $group->setTabPublic($_REQUEST['siteId']);
+                }
+            }
+        }
+        
+    }
+    
     public function actionIndex() {
 	
 	$split = "¤¤";
@@ -35,51 +217,16 @@ class GetController extends Controller{
 	
 	
 	$limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? " LIMIT " . $_GET['start'] . ", " . $_GET['interval'] : "";
-	$userId = clean(isset($_GET['userid']) ? $_GET['userid'] : $selfId);
-	$selfId = (($_SESSION['logged_in']==true) ? $_SESSION['self_id'] : $guest);		//406 er besøkende
-	$id  = clean((isset($_GET['id']) && $_GET['id'] != "null") ? $_GET['id'] : "");	//midlertidig - Bare for å fikse null-verdi fra eScript2
-	$pType = clean(isset($_GET['parentType']) ? $_GET['parentType'] : null);
+	$userId = (isset($_GET['userid']) ? $_GET['userid'] : $selfId);
+	$selfId = (($_SESSION['logged_in']==true) ? $_SESSION['self_id'] : 406);		//406 er besøkende
+	$id  = ((isset($_GET['id']) && $_GET['id'] != "null") ? $_GET['id'] : "");	//midlertidig - Bare for å fikse null-verdi fra eScript2
+	$pType = (isset($_GET['parentType']) ? $_GET['parentType'] : null);
 	
 	switch( $_GET['type'] ) {
 		case "albumList":
 			$this->albumList();
 			break;
-	
-		case "signup":
-			echo ("<dropdown data-title='påmeldte'>");
-			$query = "SELECT ui.userId, ui.firstName, ui.middleName, ui.sirName 
-			FROM membership_signup AS ms LEFT JOIN user_info AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
-			RIGHT JOIN  ".accessId('event',$selfId)." = e.id
-			WHERE ms.signedOff='false' AND ms.eventId=$id ORDER BY ui.graduationYear";
-			$result = mysql_query( $query ) or die(mysql_error());
-			$signType = "on";
-			$buttonText = "Meld meg på";
-			echo "<ul>";
-			while( $row = mysql_fetch_array( $result ) ) {
-				echo ("<li><a href='?site=profile&id=$row[userId]'>$row[firstName] $row[middleName] $row[sirName]</a></li>");
-				if( $row['userId'] == $userId ) {
-					$signType = "off";
-					$buttonText = "Meld meg av";
-				}
-			}
-			echo ("</ul></dropdown>");
-			/*$query = "SELECT EXISTS(signoff=='true' AND NOW() BETWEEN open AND close) AS signup FROM signup WHERE  AND eventId=$_GET[id]";
-			$result = mysql_query( $query );
-			$row = mysql_fetch_array( $result );*/
-			if( !($signType=="off" && $row['signoff'] == "false") ) echo ("<form data-event_id='$id' data-sign_type='$signType'><input name='submit' type='submit' value='$buttonText' /></form>");
-			break;
-			
-		case "event":
-			$query = "SELECT e.id, e.start, e.title 
-			FROM event AS e 
-			RIGHT JOIN  ".accessId('event',$selfId)." = e.id 
-			WHERE start >= NOW()
-			ORDER BY start $limit";
-			$result = mysql_query( $query ) or die(mysql_error());
-			while( $row = mysql_fetch_array( $result ) ) {
-				echo ("<a href=?site=event&id=$row[id]><div>$row[title]</div><div class='right'>$row[start]</div></a>") .$split;
-			}
-			break;
+				
 			
 		case "pastEvent":
 			$query = "SELECT e.id, e.start, e.title 
@@ -138,105 +285,6 @@ class GetController extends Controller{
 			break;
 			
 	
-		case "comment":
-			$pId = (($id==null) ? $selfId : $id);						//Hvis ikke profilid angitt, vis egen profil
-			$pType = $_GET['parentType'];
-			
-			function comment($pType,$pId,$selfId,$split) {
-				$query = "SELECT u.imageId, c.id, c.content, c.timestamp, u.firstName, u.middleName, u.sirName 
-				FROM comment AS c JOIN user_info AS u ON c.author = u.userId
-				RIGHT JOIN ".accessId('comment',$selfId)." = c.id
-				WHERE c.parentType = '$pType' AND c.parentId = $id 
-				ORDER BY c.timestamp DESC $limit";
-				//echo $query . "<p><br></p>";
-				$result = mysql_query( $query ) or die(mysql_error());
-				while( $row = mysql_fetch_array( $result ) ) {
-					$image = ($row['path'] ? $row['path'] : "images/user/unknown.jpg");
-					$content = $row['content'];
-					echo "<img src='php/image.php?id=$row[imageId]&size=2' />";
-					echo $content;
-					echo "<div class='author'><i>skrevet av: $row[firstName] $row[middleName] $row[sirName] den: $row[timestamp]</i></div>";
-					comment('comment',$row['id'],$selfId,'¤£');		//Print 2.nivåkommentarer
-					echo $split;
-				}
-			}
-			comment($pType,$pId,$selfId,$split);	//Print kommentarer
-			break;
-			
-			
-
-		case 'news':
-				
-			//Feil å bruke parentType for selection. 
-			if ( $pType == "newsfeed" ) {			
-				$query = "SELECT DISTINCT ui.userId AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, sirName, timestamp 
-							FROM news n JOIN user_info ui ON n.author = ui.userId 
-							RIGHT JOIN ".accessId('news',$selfId)." = n.id 
-							ORDER BY timestamp DESC $limit";
-			}
-			else {
-				$query = "SELECT DISTINCT ui.userId AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, sirName, timestamp FROM news n
-							RIGHT JOIN (SELECT ar.id AS accessId, ma.userId FROM membership_access ma LEFT JOIN access_relations ar ON ma.accessId=ar.access WHERE ar.type='news' AND ma.userId = 327) AS a ON a.accessId = n.id 
-							RIGHT JOIN news_tags AS nt ON nt.newsId = n.id 
-							LEFT JOIN groups AS g ON g.id = nt.ownerId 
-							LEFT JOIN user_info ui ON n.author = ui.userId
-							WHERE g.id = ".$id;
-			}
-			//echo $query;
-			
-			$result = mysql_query( $query ) or die(mysql_error());
-			//echo "numRows:" . mysql_num_rows($result) . "";
-			while( $row = mysql_fetch_array( $result ) ) {
-				
-				echo "<div class='contentItem'>";
-				echo "	<div class='blueBox'>";
-				echo "		<div class='blueBoxItem'>";
-				echo "		</div>";
-				echo "	</div>\n";
-					
-				echo "	<div class='topBar'>";
-				echo "		<div class='topBarItem'>";
-				echo "		</div>";
-				
-				//Printer overskrift som link hvis event eller lenger nyhet
-				if($row['parentType']==NULL) { // FIX parentType -> 'parentType'
-					$parentType = "news";
-					$parentId = $row['id'];
-					echo "<h1>".$row['title']."</h1>";
-				} else {
-					$parentType = $row['parentType'];
-					$parentId = $row['parentId'];
-					echo "<a href='?site=$parentType&id=$row[parentId]'><h1>$row[title]</h1></a>";
-				} 
-				
-				echo "	</div>";
-				echo "	<div class='articleContent'>";
-				
-				//Hvis nyheten har bilde
-				if ( $row['imageId']!=null) { // FIX imageId -> 'imageId'
-					echo "<img src='php/image.php?id=".$row['imageId']."&size=2' />"; // FIX imageId -> 'imageId'
-				}
-				echo	"<p>";
-				
-				//Hvis nyheten er for lang hvis en les mer link
-				if (strlen($row['content'])>$contentLength) {
-					echo ( substr($row['content'],0,$contentLength));
-					echo ("... ");
-					
-					
-					echo ("<a href='?site=$parentType&id=$parentId'>Les mer</a>");
-				} else {
-					echo ( $row['content']);
-				}
-				echo "</p>";
-				
-				//Printer dato og forfatter
-				echo "<div class='date'>".$row['timestamp']."</div>";
-				echo ("<div class='author'>skrevet av: <a href='?site=profile&id=".$row['userId']."'> $row[firstName] $row[middleName] $row[sirName] </a></div>"); // FIX userId -> 'userId'
-				echo ("</div>");
-				//echo ( $split );
-			}
-			break;
 		
 		case "all":
 			$searchArray = preg_split( '/ /', $_GET['q'] );
@@ -244,14 +292,14 @@ class GetController extends Controller{
 			for( $i = 0; $i < count( $searchArray ); $i++ ) {
 				if( $i > 0 ) $searchString .= " AND";
 				$search = clean($searchArray[$i]);
-				$searchString .= " (firstName LIKE '$search%' OR middleName LIKE '$search%' OR sirName LIKE '$search%')";
+				$searchString .= " (firstName LIKE '$search%' OR middleName LIKE '$search%' OR lastName LIKE '$search%')";
 			}
 			//Søke på brukere
-			$query = "SELECT DISTINCT ui.userId, ui.firstName, ui.middleName, ui.sirName 
+			$query = "SELECT DISTINCT ui.userId, ui.firstName, ui.middleName, ui.lastName 
 			FROM user_info AS ui,membership_access AS ma WHERE ma.accessId != 0 AND ma.userId=$selfId AND $searchString $limit";
 			$result = mysql_query( $query ) or die(mysql_error());
 			while( $row = mysql_fetch_array( $result ) ) {
-				echo ("<a href='?site=profile&id=" . $row['userId'] . "'>" . $row['firstName'] . " " . $row['middleName'] . " " . $row['sirName'] . "</a>");
+				echo ("<a href='?site=profile&id=" . $row['userId'] . "'>" . $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName'] . "</a>");
 				echo ( $split );
 			}
 			//Søke på nyheter

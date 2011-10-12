@@ -1,4 +1,4 @@
-<h4><?=$firstName." ".$middleName." ".$sirName?></h4>
+<h4><?=$firstName." ".$middleName." ".$lastName?></h4>
 <img class='block' src='php/image.php?id=<?=$imageId ?>&size=1' width='248px'>
 <div class='barTitle'><?=$firstName?>s aktiviteter</div>
 <div class='barText'>
