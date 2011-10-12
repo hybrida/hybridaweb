@@ -42,88 +42,6 @@
 			menu slider div div div div {
 				width: auto;
 			}
-
-			.portlet
-			{
-				float: right;
-				display:block;
-
-			}
-
-			.portlet-decoration
-			{
-				padding: 3px 8px;
-				background: #B7D6E7;
-				border-left: 5px solid #6FACCF;
-			}
-
-			.portlet-title
-			{
-				font-size: 12px;
-				font-weight: bold;
-				padding: 0;
-				margin: 0;
-				color: #298dcd;
-			}
-
-			.portlet-content
-			{
-				font-size:0.9em;
-				margin: 0 0 15px 0;
-				padding: 5px 8px;
-				background:#EFFDFF;
-			}
-
-			.portlet-content ul
-			{
-				list-style-image:none;
-				list-style-position:outside;
-				list-style-type:none;
-				margin: 0;
-				padding: 0;
-			}
-
-			.portlet-content li
-			{
-				padding: 2px 0 4px 0px;
-			}
-
-			.operations
-			{
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-
-			.operations li
-			{
-				padding-bottom: 2px;
-			}
-
-			.operations li a
-			{
-				font: bold 12px Arial;
-				color: #0066A4;
-				display: block;
-				padding: 2px 0 2px 8px;
-				line-height: 15px;
-				text-decoration: none;
-			}
-
-			.operations li a:visited
-			{
-				color: #0066A4;
-			}
-
-			.operations li a:hover
-			{
-				background: #80CFFF;
-			}
-
-			#sidebar
-			{
-				padding: 20px 20px 20px 0;
-			}
 		</style>
 
 	</head>
@@ -150,12 +68,12 @@
 					<nav>
 						<menu>
 							<div>
-								<? $this->widget("TabNavigation") ?>
+								<? $this->widget("application.components.widgets.TabNavigation") ?>
 							</div>
 						</menu> 
 					</nav>
 
-					<div class="loggedIn"><? //$this->widget("UserOptions") ?></div>
+					<div class="loggedIn"><? // TODO HEr var det en UserOptionsWidget, hent fra hybridaweb2 hvis vikgit ?></div>
 
 				</div>
 			</div>
@@ -175,7 +93,7 @@
 			</div>
 
 			<div class="rightBar">
-				<? $this->widget("RightBarContent"); ?>
+				<? $this->widget("application.components.widgets.RightBarContent"); ?>
 			</div>
 		</div>
 

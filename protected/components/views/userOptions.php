@@ -1,1 +1,0 @@
-<?=CHtml::link("Bjørnar Eggesbø¸ Askevold",array("logout/"));?>

@@ -30,35 +30,6 @@ class GateKeeper {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 	}
 
-	// FIXME utestet/*/*/*/*
-	/*
-	public function checkOne($type, $id) {
-		$model = AccessRelations::model();
-		$conditions = "id = :id AND type = :type";
-		$param = array(
-				":id" => $id,
-				":type" => $type
-		);
-
-		$typeAccess = $model->findAll($conditions, $param);
-		print_r($typeAccess);
-	}
-
-	/** @deprecated *//*
-	public function checkGroup(array $groups) {
-
-		// Finne groupId til gruppen
-
-
-		$sql = "SELECT * 
-			FROM  `membership_access` 
-			WHERE  `accessId` = :accessId
-			AND `userId = :userID";
-		foreach ($groups as $group) {
-			
-		}
-	}
-	*/
 	public function check($type, $id) {
 		
 		$sql = "SELECT access 

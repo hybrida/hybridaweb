@@ -15,9 +15,9 @@ class RightBarContent extends CWidget {
 
 	public function run() {
 		if (Yii::app()->user->isGuest) {
-			$this->render("rbc/guest");
+			$this->render("rightBarContent/guest");
 		} else {
-			$this->render("rbc/user",  $this->data);
+			$this->render("rightBarContent/user",  $this->data);
 		}
 	}
 
