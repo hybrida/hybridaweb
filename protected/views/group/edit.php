@@ -4,14 +4,14 @@
 <ul>
 <? foreach ($groups as $group): ?>
     <li>
-        <a href='<?= $group['id'] ?>\sub\<?= $group['menuId'] ?>'><?= $group['titleMenu'] ?></a> 
+        <?= $group['titleMenu'] ?> |
 
         <?= $group['openGroup'] == 1 ? "Åpen" : "Privat" ?>
         <?= $group['publicGroup'] == 1 ? "Gjester" : "Innlogget" ?>
 
-        <a href='<?= $group['id'] ?>\sub\<?= $group['menuId'] ?>'>Innloggede</a>
-        <a href='<?= $group['id'] ?>\sub\<?= $group['menuId'] ?>'>Privat</a>   
-        <a href='<?= $group['id'] ?>\sub\<?= $group['menuId'] ?>'>Slett</a>
+        <a href='group/<?= $group['id'] ?>/sub/<?= $group['siteId'] ?>'>Innloggede</a>
+        <a href='group/<?= $group['id'] ?>/sub/<?= $group['siteId'] ?>'>Privat</a>   
+        <a href='group/<?= $group['id'] ?>/sub/<?= $group['siteId'] ?>'>Slett</a>
     </li>
 
 <? endforeach ?>
@@ -22,8 +22,8 @@
 <? foreach ($members as $member): ?>
     
     <li>
-        <a href='<?= $member['userId'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['sirName'] ?></a> <?= $member['comission'] ?>
-        <a href='<?= $member['userId'] ?>'>Slett</a> 
+        <a href='/profile/<?= $member['userId'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['lastName'] ?></a> <?= $member['comission'] ?>
+        <a href='/profile/<?= $member['userId'] ?>'>Slett</a> 
     </li>
         
 <? endforeach ?>

@@ -76,6 +76,7 @@ class GetController extends Controller{
             $this->renderPartial('comment',$data);
     }
     
+    //List nested comments
     private function comment($pType,$pId,$split) {
         $this->pdo = Yii::app()->db->getPdoInstance();
         
@@ -178,6 +179,35 @@ class GetController extends Controller{
         }
         
         $this->renderPartial('signup',$data);
+    }
+    
+    public function actionGroup(){
+        $gId = $_REQUEST['gId'];
+        $type = $_REQUEST['type'];
+        
+        
+        $group = Groups::model()->findByPk($id);
+        if($group->isAdmin( Yii::app()->user->id )){
+            if ($type == 'delMember'){
+                $group->deleteMember( $_REQUEST['userId'] );
+            }
+            if($type == 'addMember'){
+                $group->addMember( $_REQUEST['userId'] , $_REQUEST['commission'] );
+            }
+            
+            if($type == 'modTabAccess'){
+                if($_REQUEST['access'] == 'private'){
+                    $group->setTabPrivate($_REQUEST['siteId']);
+                }
+                if($_REQUEST['access'] == 'open'){
+                    $group->setTabOpen($_REQUEST['siteId']);
+                }
+                if($_REQUEST['access'] == 'public'){
+                    $group->setTabPublic($_REQUEST['siteId']);
+                }
+            }
+        }
+        
     }
     
     public function actionIndex() {

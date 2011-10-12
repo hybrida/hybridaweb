@@ -159,14 +159,28 @@ class Groups extends CActiveRecord {
 	  }
 	 * 
 	 */
-
+    public function isAdmin($userId){
+        $data = array(
+            'gID' => $this->id,
+            'admin' => $userId
+        );
+        $sql = "SELECT COUNT(*) AS c FROM groups 
+                WHERE id = :gID AND admin = :admin";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        if($query->fetch(PDO::FETCH_ASSOC) < 1) {
+            return false;
+        }
+        return true;
+    }
+      
 	public function getMembers() {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array(
 				'gID' => $this->id
 		);
-		$sql = "SELECT ui.userId,ui.firstName,ui.middleName,ui.sirName,mg.comission 
+		$sql = "SELECT ui.userId,ui.firstName,ui.middleName,ui.lastName,mg.comission 
 					FROM membership_group AS mg 
 					LEFT JOIN user_info AS ui ON mg.userId=ui.userId 
 					WHERE mg.groupId = :gID";
@@ -360,7 +374,7 @@ class Groups extends CActiveRecord {
 		//$idGroup
 		//$openGroup (null => Lukket, 1 => Åpen for medlemmer)
 		//$publicGroup (null => Åpen for medlemmer, 1 => Public)
-		$sql = "SELECT DISTINCT :gID AS id,s.subId AS menuId, public.public AS publicGroup, priv.notPriv AS openGroup, s.title AS titleMenu FROM menu_group AS mg LEFT JOIN site AS s ON s.siteId = mg.site 
+		$sql = "SELECT DISTINCT :gID AS id,s.siteId AS siteId, public.public AS publicGroup, priv.notPriv AS openGroup, s.title AS titleMenu FROM menu_group AS mg LEFT JOIN site AS s ON s.siteId = mg.site 
         LEFT JOIN (SELECT 1 as notPriv,s.siteId AS sId FROM groups AS g, access_definition AS ad
         LEFT JOIN access_relations AS ar ON ad.id = ar.access RIGHT JOIN site AS s
         ON s.siteId = ar.id WHERE g.id = :gID AND ad.description != g.title) AS priv ON priv.sId = s.siteId 
@@ -379,6 +393,32 @@ class Groups extends CActiveRecord {
         return $result;
 	}
 
+    public function setTabPrivate($siteId){
+        Access::deleteAllAccessRelation('site', $siteId);
+        $groupAccess = Access::getAccessDefinition($this->getTitle());
+        Access::insertAccessRelation($siteId, $accessDefinition, 'site');
+    }
+    
+    public function setTabOpen($siteId){
+        Access::deleteAllAccessRelation('site', $siteId);
+        
+        $groupAccess = Access::getAccessDefinition($this->getTitle());
+        Access::insertAccessRelation($siteId, $accessDefinition, 'site');
+        
+        $loggedInAccess = Access::getAccessDefinition("logged_in");
+        Access::insertAccessRelation($siteId, $loggedInAccess, 'site');
+    }
+    
+    public function setTabPublic($siteId){
+        $groupAccess = Access::getAccessDefinition($this->getTitle());
+        Access::insertAccessRelation($siteId, $accessDefinition, 'site');
+        
+        $loggedInAccess = Access::getAccessDefinition("logged_in");
+        Access::insertAccessRelation($siteId, $loggedInAccess, 'site');
+        
+        $allAccess = Access::getAccessDefinition("all");
+        Access::insertAccessRelation($siteId, $allAccess, 'site');
+    }
 
 	//Hente ut id til siteContent
 	private function getSCId($var) {

@@ -11,7 +11,7 @@
 	
 <? foreach ($committee as $group): ?>
 
-<li><a href='?site=group&id=<?=$group['id']?>' ><?=$group['title']?></a> </li>
+<li><a href='group/<?=$group['id']?>' ><?=$group['title']?></a> </li>
 
 <? endforeach ?>
 
@@ -21,6 +21,6 @@
 
 <? foreach ($groups as $group): ?>
 
-<li><a href='?site=group&id=<?=$group['id']?>' ><?=$group['title']?></a> </li>
+<li><a href='group/<?=$group['id']?>' ><?=$group['title']?></a> </li>
 
 <? endforeach ?>
