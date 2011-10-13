@@ -18,27 +18,37 @@ class NewsEventForm extends CFormModel {
 	public $news;
 	public $event;
 	public $signup;
+	
+	private $newsModel;
+	private $eventModel;
+	private $signupModel;
 
-	public function __construct($scenario = '') {
+	public function __construct($scenario = '', $news, $event) {
 		parent::__construct($scenario);
-
-		$news = array(
-				'title', 'content', 'imageId',
-		);
-
-		$event = array(
-				'start', 'end', 'location', 'title',
-				'imageId', 'content',
-		);
-
-		$signup = array(
-				'spots',
-				'open',
-				'close',
-				'signoff',
-		);
+		
+		$this->updateModels();
+		
+		$this->newsModel = News::model();
+		$this->eventModel = Event::model();
+		$this->signupModel = Signup::model();
+	}
+	
+	private function updateModels(News $news, Event $event) {
+		if ($news == null) {
+			throw new Exception("News er null");
+		} else if ($event == null) {
+			throw new Exceptin("Event er null");
+		} 
+		
+		$this->eventModel = $event;
+		$this->newsModel = $news;
+		
+		$this->news = $this->newsModel->attributes;
+		$this->event = $this->eventModel->attributes;
+		
 	}
 
+	
 	public function rules() {
 		return array(
 				array('hasNews, hasSignup, hasEvent', 'boolean'),
@@ -54,53 +64,31 @@ class NewsEventForm extends CFormModel {
 	}
 
 	public function save() {
+		
 		if ($this->hasEvent) {
-			if ($news->hasEvent()) {
-				//Update Event
-				$event = new Event($_POST['event']['id']);
-				$event->set($_POST['event']);
-				$event->update();
-			} else {
-				// Lag ny Event
-				$event = new Event();
-				$event->set($_POST['event']);
-				$event->push();
-
-				$news->appendEvent($event);
+			$this->eventModel->attributes = $this->event;
+			$this->eventModel->save();
+			
+			if ($this->hasSignup) {
+				$this->signupModel->attributes = $this->signup;
+				$this->signupModel->id = $this->eventModel->id;
 			}
-
-			if ($_POST['isSignup']) {
-				if ($event->hasSignup()) {
-					// Update Signup
-					$signup = new Signup($event->getId());
-					$signup->set($_POST['signup']);
-					$signup->setActive(true);
-					$signup->update();
-				} else {
-					//Lag ny Signup
-					echo __FILE__ . "Lage Signup<pre>";
-					$signup = new Signup();
-					$signup->setId($event->getID());
-					$signup->set($_POST['signup']);
-					print_r($signup);
-					$signup->push();
-				}
-			} else {
-				if ($event->hasSignup()) {
-					// Slette Signup
-					$signup = $event->getSignup();
-					$signup->setActive(false);
-					$signup->update();
-				}
-			}
-		} else {
-			if ($news->hasEvent()) {
-				// Slette event
-				$news->removeEvent();
+			
+		}
+		if ($this->hasNews) {
+			$this->NewsModel->attributes = $this->news;
+			$this->newsModel->save();
+			if ($this->hasEvent) {
+				$this->newsModel->parentId = $this->eventModel->id;
+				$this->newsModel->parentType = "event";
+			} else if (! $this->hasEvent && $this->newsModel->parentType == "event") {
+				$this->newsModel->parentId = null;
+				$this->newsModel->parentType = null;				
 			}
 		}
 
-		$news->update();
+		
+		
 	}
 	
 	public function testInput() {
