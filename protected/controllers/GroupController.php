@@ -36,12 +36,13 @@ class GroupController extends Controller {
 		$this->render("index", $data);
 	}
 
-	public function actionView($id, $sub) {
+	public function actionView($id) {
 
 		$data = array();
 
 		$group = Groups::model()->findByPk($id);
 		$data['model'] = $group;
+        $data['title'] = $group->getTitle();
 		$this->render("view/comments", $data);
 	}
 
