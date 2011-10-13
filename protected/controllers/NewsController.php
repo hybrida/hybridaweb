@@ -72,7 +72,7 @@ class NewsController extends Controller {
 			
 		}
 
-		$this->render("form", array(
+		$this->render("edit", array(
 				'model' => $model,
 				'updated' => $isUpdated,
 		));
