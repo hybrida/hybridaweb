@@ -14,9 +14,9 @@ class EventController extends Controller {
 
 	public function actionView($id) {
 
-		$eventId = $_GET['id'];
+		/*$eventId = $_GET['id'];
 		$selfId = $_SESSION['self_id'];
-
+        */
 		// DEtte er en sjekk om  personen har tillgang. GateKeeper skal ta seg av dette senere
 		/*$sql = "SELECT id
 	FROM event AS e 
@@ -37,14 +37,18 @@ class EventController extends Controller {
 			$data = $query->read();
 			
 			// Henter Signup-info
-			$sql = "SELECT eventId FROM signup WHERE eventId=?";
+			$sql = "SELECT COUNT(eventId) AS c, spots, open, close FROM signup WHERE eventId=?";
 			$command = Yii::app()->db->createCommand($sql);
 			$query = $command->query(array($id));
 			$dataSignup = $query->read();
 			
 			$data['hasSignup'] = false;
-			if (count($dataSignup) > 0 ) {
+			if (($dataSignup['c']) > 0 ) {
 				$data['hasSignup'] = true;
+                $data['spots'] = $dataSignup['spots'];
+                $data['open'] = $dataSignup['open'];
+                $data['close'] = $dataSignup['close'];
+                
 			}
 		}
 		
