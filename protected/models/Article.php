@@ -85,4 +85,57 @@ class Article extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+    
+     public function insertArticle($title,$content,$uID){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+         
+        $data = array(
+            'title' => $title,
+            'content' => $content,
+            'uID' => $uID
+        );
+        
+        $sql = "INSERT INTO article VALUES (null,:title,:content,NOW(),:uID)";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        
+        $articleId = $this->pdo->lastInsertId();
+        
+        $this->access->insertAccessRelation($articleId, $accessId, $type);
+        
+        return $articleId;
+    }
+    
+    //FIXME ACCESSSJEKK
+    public function getArticle($aId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+        
+        $data = array('aId' => $aId);
+        $sql = "SELECT a.title, a.content, ui.firstName, ui.middleName, ui.lastName, a.timestamp FROM article AS a LEFT JOIN user_info AS ui ON a.author = userId
+                WHERE a.id=:aId";
+        $query = $this->$pdo->prepare($sql);
+        $query->execute($data);
+        
+        $result = $query->fetch(PDO::FETCH_ASSOC);   
+        return $result;
+        
+    }
+    
+    //ACCESSSJEKK
+    public function listArticles($tag){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+        
+        $data = array(
+            'tag' => $tag
+            );
+        $sql = "SELECT a.id,a.title FROM article AS a 
+                RIGHT JOIN tag AS t ON t.id = a.id
+                LEFT JOIN user_info AS ui ON a.author = userId
+                WHERE t.contentType = 'article' AND t.tagType = :tag";
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        
+        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
