@@ -186,10 +186,10 @@ class GetController extends Controller{
         $type = $_REQUEST['type'];
         
         
-        $group = Groups::model()->findByPk($id);
+        $group = Groups::model()->findByPk($gId);
         if($group->isAdmin( Yii::app()->user->id )){
             if ($type == 'delMember'){
-                $group->deleteMember( $_REQUEST['userId'] );
+                $group->removeMember( $_REQUEST['userId'] );
             }
             if($type == 'addMember'){
                 $group->addMember( $_REQUEST['userId'] , $_REQUEST['commission'] );
@@ -207,7 +207,7 @@ class GetController extends Controller{
                 }
             }
         }
-        
+        $this->renderPartial('group');
     }
     
     public function actionIndex() {

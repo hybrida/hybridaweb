@@ -160,6 +160,7 @@ class Groups extends CActiveRecord {
 	 * 
 	 */
     public function isAdmin($userId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
         $data = array(
             'gID' => $this->id,
             'admin' => $userId
@@ -204,7 +205,7 @@ class Groups extends CActiveRecord {
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
-		//Insert membershipAccess
+		Access::insertMembership($this->id, $userId);
 	}
 
 	public function removeMember($userId) {
@@ -212,7 +213,7 @@ class Groups extends CActiveRecord {
         $this->pdo = Yii::app()->db->getPdoInstance();
         
 		$data = array(
-				'gID' => $this->groupId,
+				'gID' => $this->id,
 				'uID' => $userId
 		);
 
@@ -220,7 +221,7 @@ class Groups extends CActiveRecord {
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
-		$access->removeMembershipAccess($this->groupId, $userId);
+		Access::deleteMembership($this->id, $userId);
 	}
 
 	public function deleteGroup() {
@@ -389,29 +390,31 @@ class Groups extends CActiveRecord {
 		$query->execute($data);
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-		print_r($result);
+		//print_r($result);
         return $result;
 	}
 
     public function setTabPrivate($siteId){
         Access::deleteAllAccessRelation('site', $siteId);
         $groupAccess = Access::getAccessDefinition($this->getTitle());
-        Access::insertAccessRelation($siteId, $accessDefinition, 'site');
+        Access::insertAccessRelation($siteId, $groupAccess, 'site');
     }
     
     public function setTabOpen($siteId){
         Access::deleteAllAccessRelation('site', $siteId);
         
         $groupAccess = Access::getAccessDefinition($this->getTitle());
-        Access::insertAccessRelation($siteId, $accessDefinition, 'site');
+        Access::insertAccessRelation($siteId, $groupAccess, 'site');
         
         $loggedInAccess = Access::getAccessDefinition("logged_in");
         Access::insertAccessRelation($siteId, $loggedInAccess, 'site');
     }
     
     public function setTabPublic($siteId){
+        Access::deleteAllAccessRelation('site', $siteId);
+        
         $groupAccess = Access::getAccessDefinition($this->getTitle());
-        Access::insertAccessRelation($siteId, $accessDefinition, 'site');
+        Access::insertAccessRelation($siteId, $groupAccess, 'site');
         
         $loggedInAccess = Access::getAccessDefinition("logged_in");
         Access::insertAccessRelation($siteId, $loggedInAccess, 'site');

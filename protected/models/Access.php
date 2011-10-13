@@ -8,10 +8,10 @@ class Access {
 		self::$pdo = Yii::app()->db->getPdoInstance();
 	}
 
-	public function insertMembership($groupId, $userId) {
+	public static function insertMembership($groupId, $userId) {
 		$data = array(
-				'gId' => $groupId,
-				'uId' => $userId
+				'gID' => $groupId,
+				'uID' => $userId
 		);
 
 		$sql = "INSERT INTO membership_access VALUES (
@@ -20,13 +20,13 @@ class Access {
 		$query->execute($data);
 	}
 
-	public function deleteMembership($groupId, $userId) {
+	public static function deleteMembership($groupId, $userId) {
 		$data = array(
-				'gId' => $groupId,
-				'uId' => $userId
+				'gID' => $groupId,
+				'uID' => $userId
 		);
 
-		$sql = "DELETE FROM membership_access WHERE groupId = 
+		$sql = "DELETE FROM membership_access WHERE accessId = 
             (SELECT ad.id FROM access_definition AS ad WHERE description = (SELECT title FROM groups WHERE id=:gID))
             AND userId = :uID";
 		$query = self::$pdo->prepare($sql);
@@ -66,15 +66,17 @@ class Access {
 		self::$pdo = Yii::app()->db->getPdoInstance();
 
 		$sql = "INSERT INTO access_relations VALUES (:id, :access, :type)";
-		$stmt = self::$pdo->prepare($sql);
+		$query = self::$pdo->prepare($sql);
 
-		$access = "";
-		$stmt->bindParam("id", $id);
-		$stmt->bindParam("access", $access);
-		$stmt->bindParam("type", $type);
-
-		foreach ($array as $access) {
-			$stmt->execute($data);
+		//$access = "";
+        foreach ($array as $access) {
+            $data = array(
+                'id' => $id,
+                'access' => $access,
+                'type' => $type
+            );
+            
+            $query->execute($data);
 		}
 	}
 
@@ -116,15 +118,15 @@ class Access {
 		return self::$pdo->lastInsertId();
 	}
     
-    public static function getAccessDefinition($name){
+    public static function getAccessDefinition($description){
         $data = array(
             'name' => $description
 		);
 
-		$sql = "SELECT id from access_definition WHERE name = :name";
+		$sql = "SELECT id from access_definition WHERE description = :name";
 		$query = self::$pdo->prepare($sql);
 		$query->execute($data);
-        $result = $query-fetch(PDO::FETCH_ASSOC);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
         return $result['id'];
     }
 

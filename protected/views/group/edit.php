@@ -9,9 +9,11 @@
         <?= $group['openGroup'] == 1 ? "Åpen" : "Privat" ?>
         <?= $group['publicGroup'] == 1 ? "Gjester" : "Innlogget" ?>
 
-        <a href='group/<?= $group['id'] ?>/sub/<?= $group['siteId'] ?>'>Innloggede</a>
-        <a href='group/<?= $group['id'] ?>/sub/<?= $group['siteId'] ?>'>Privat</a>   
-        <a href='group/<?= $group['id'] ?>/sub/<?= $group['siteId'] ?>'>Slett</a>
+        <a href='/yii/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=public'>Public</a>
+        <a href='/yii/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=open'>Innloggede</a>
+        <a href='/yii/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=private'>Privat</a>   
+        <a href='/yii/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=open'>Slett</a>
+        
     </li>
 
 <? endforeach ?>
@@ -23,7 +25,7 @@
     
     <li>
         <a href='/profile/<?= $member['userId'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['lastName'] ?></a> <?= $member['comission'] ?>
-        <a href='/profile/<?= $member['userId'] ?>'>Slett</a> 
+        <a href='/yii/get/group/?gId=<?= $group['id'] ?>&userId=<?= $member['userId'] ?>&type=delMember'>Slett</a> 
     </li>
         
 <? endforeach ?>
