@@ -29,8 +29,10 @@ abstract class Edit {
 	/** ErrorHandler */
 	protected $err;
 
+	/** PDO instance */
+	protected $pdo;
+
 	/** The default access that should be set if not specified */
-	
 
 
 	public function __construct() {
@@ -72,11 +74,17 @@ abstract class Edit {
 			
 		}
 
-		$sql = "SELECT $scope FROM {$this->tableName} WHERE {$this->idName} = '$id'";
+		$sql = "SELECT $scope 
+			FROM {$this->tableName} 
+			WHERE :idName = '$id'";
 
-		$result = $this->con->query($sql);
+		$stmt = $this->pdo->prepare($sql);
 
-		$table = $this->con->fetch($result);
+		$stmt->execute(array(
+				"idName" =>  $this->idName)
+		);
+		$table = $stmt->fetch(PDO::FETCH_ASSOC);
+
 		if ($table) {
 
 			foreach ($table as $key => $value) {
@@ -115,16 +123,25 @@ abstract class Edit {
 		if ($this->fields[$this->idName] == null)
 			return;
 
-		$sql = "UPDATE {$this->tableName} SET ";
+		$key = "";
+		$value = "";
+		
+		$sql = "UPDATE {$this->tableName}
+			SET :key = :value
+			WHERE {$this->idName} = :id";
+		
+		$command = $this->pdo->prepare($sql);
+		$command->bindParam('key',$key);
+		$command->bindParam('value',$value);
+		$command->bindParam('idName',  $this->idName);;
+		$command->bindParam('id', $this->fields[$this->idName]);
+		
+
 		foreach ($this->fields as $key => $value) {
 			if ($value !== null && !in_array($key, $this->updateFilter)) {
-				$sql .= "$key =  '$value' ,";
+				$command->execute();				
 			}
 		}
-		$sql = substr($sql, 0, -1);
-		$sql .= " WHERE {$this->idName} = " . $this->fields[$this->idName];
-
-		$this->con->query($sql, "{$this->tableName}->update()");
 
 		$this->updateAccess();
 	}
