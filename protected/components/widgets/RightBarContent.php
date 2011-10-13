@@ -20,7 +20,12 @@ class RightBarContent extends CWidget {
 			$this->render("rightBarContent/user",  $this->data);
 		}
 	}
-
+    //Ved å bruke en setfunksjon kan vi friere angi hvilket bilde som vises. 
+    //F.eks i ProfileController/EventController/ArticleController
+    public function setImageId($id){
+        $this->data['imageId'] = $id;
+    }
+    
 	private function getImageId() {
 		$userId = Yii::app()->user->id;
 		//Setter profilbildet
