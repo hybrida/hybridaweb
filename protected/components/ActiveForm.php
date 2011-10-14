@@ -6,7 +6,7 @@ class ActiveForm extends CActiveForm {
 		$this->widget('application.components.widgets.XHeditor', array(
 				'language' => 'en', //options are en, zh-cn, zh-tw
 				'config' => array(
-						'id' => 'facebook'  . rand(0, 100000),
+						'id' => 'facebook'  . rand(0, 100000), // FIXME
 						'name' => $tablePostName,
 						'tools' => 'mini', // mini, simple, full or from XHeditor::$_tools, tool names are case sensitive
 						'width' => '70%',
