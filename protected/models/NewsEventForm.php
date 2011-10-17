@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -18,37 +17,53 @@ class NewsEventForm extends CFormModel {
 	public $news;
 	public $event;
 	public $signup;
-	
 	private $newsModel;
 	private $eventModel;
 	private $signupModel;
 
-	public function __construct($scenario = '', $news, $event) {
+	public function __construct($scenario=' ') {
 		parent::__construct($scenario);
-		
-		$this->updateModels();
-		
+
+		$this->initializeModels();
+
+		$this->setNewsModel($news);
+		$this->setEventModel($event);
+		$this->updateSignupModel();
+		$this->updateModelAttributes();
+	}
+
+	private function initializeModels() {
 		$this->newsModel = News::model();
 		$this->eventModel = Event::model();
 		$this->signupModel = Signup::model();
 	}
-	
-	private function updateModels(News $news, Event $event) {
+
+	private function setNewsModel(News $news) {
 		if ($news == null) {
-			throw new Exception("News er null");
-		} else if ($event == null) {
-			throw new Exceptin("Event er null");
-		} 
-		
-		$this->eventModel = $event;
+			throw new Exception("NullPointerException: News kan ikke være null");
+		}
 		$this->newsModel = $news;
-		
-		$this->news = $this->newsModel->attributes;
-		$this->event = $this->eventModel->attributes;
-		
 	}
 
-	
+	private function setEventModel(Event $event) {
+		if ($event == null) {
+			throw new Exception("NullPointerException: Event kan ikke være null");
+		}
+		$this->eventModel = $event;
+	}
+
+	private function updateSignupModel() {
+		if ($this->eventModel->hasSignup()) {
+			$this->signupModel = $this->eventModel->getSignup();
+		}
+	}
+
+	private function updateModelAttributes(News $news, Event $event) {
+		$this->news = $this->newsModel->attributes;
+		$this->event = $this->eventModel->attributes;
+		$this->signup = $this->signupModel->attributes;
+	}
+
 	public function rules() {
 		return array(
 				array('hasNews, hasSignup, hasEvent', 'boolean'),
@@ -58,54 +73,65 @@ class NewsEventForm extends CFormModel {
 						'signup[spots], signup[open], signup[close], signup[signoff]',
 						'default'
 				),
-				array('event[start], event[end], signup[open], signup[close]','date',),
-				array('signup[spots]','required'),
+				array('event[start], event[end], signup[open], signup[close]', 'date',),
+				array('signup[spots]', 'required'),
 		);
 	}
 
 	public function save() {
-		
+		$this->saveEvent();
+		$this->saveSignup();
+		$this->saveNews();
+	}
+
+	private function saveEvent() {
 		if ($this->hasEvent) {
 			$this->eventModel->attributes = $this->event;
 			$this->eventModel->save();
-			
-			if ($this->hasSignup) {
-				$this->signupModel->attributes = $this->signup;
-				$this->signupModel->id = $this->eventModel->id;
-			}
-			
 		}
+	}
+
+	private function saveSignup() {
+
+
+		if ($this->hasSignup) {
+			$this->signupModel->attributes = $this->signup;
+			$this->signupModel->id = $this->eventModel->id;
+		}
+	}
+
+	private function saveNews() {
 		if ($this->hasNews) {
 			$this->NewsModel->attributes = $this->news;
 			$this->newsModel->save();
-			if ($this->hasEvent) {
-				$this->newsModel->parentId = $this->eventModel->id;
-				$this->newsModel->parentType = "event";
-			} else if (! $this->hasEvent && $this->newsModel->parentType == "event") {
-				$this->newsModel->parentId = null;
-				$this->newsModel->parentType = null;				
-			}
+			$this->saveNewsParent();
 		}
-
-		
-		
 	}
-	
+
+	private function saveNewsParent() {
+		if ($this->hasEvent) {
+			$this->newsModel->parentId = $this->eventModel->id;
+			$this->newsModel->parentType = "event";
+		} else if (!$this->hasEvent && $this->newsModel->parentType == "event") {
+			$this->newsModel->parentId = null;
+			$this->newsModel->parentType = null;
+		}
+	}
+
 	public function testInput() {
 		?>
-		<h1>testInput</h1>
-		<pre>
-		<strong>news</strong> <?print_r($this->news)?>
-		event: <? print_r($this->event)?>
-		signup: <? print_r($this->signup)?>
-		hasEvent: <? print_r($this->hasEvent)?>
-		hasNews: <? print_r($this->hasNews)?>
-		hasSignup: <? print_r($this->hasSignup)?>
-						
-		</pre>
+<h1>testInput</h1>
+<pre>
+		<strong>news</strong> <? print_r($this->news) ?>
+		event: <? print_r($this->event) ?>
+		signup: <? print_r($this->signup) ?>
+		hasEvent: <? print_r($this->hasEvent) ?>
+		hasNews: <? print_r($this->hasNews) ?>
+		hasSignup: <? print_r($this->hasSignup) ?>
+																												
+</pre>
 		<?
 	}
 
 }
-
 ?>
