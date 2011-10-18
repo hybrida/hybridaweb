@@ -11,7 +11,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$this->deleteUserIfFound();
 	}
 
-	private function getRandomUserObject() {
+	private function getCleanUserObject() {
 		$user = new User;
 		$user->username = "sigurd" . rand(0,1000);
 		$user->firstName = "Sigurd";
@@ -55,7 +55,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testUserAccess() {
-		$user1 = $this->getRandomUserObject();
+		$user1 = $this->getCleanUserObject();
 
 		$access = array(7,8,9,10);
 		$user1->access = $access;
