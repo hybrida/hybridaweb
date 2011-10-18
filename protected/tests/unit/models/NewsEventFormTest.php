@@ -38,5 +38,3 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	}
 
 }
-?>
-

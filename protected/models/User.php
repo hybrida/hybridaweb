@@ -44,18 +44,18 @@ class User extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('username, firstName, lastName, member', 'required'),
-				array('specialization, imageId, phoneNumber', 'numerical', 'integerOnly' => true),
-				array('username, cardinfo', 'length', 'max' => 10),
-				array('firstName, middleName, lastName', 'length', 'max' => 75),
-				array('graduationYear', 'length', 'max' => 4),
-				array('member', 'length', 'max' => 5),
-				array('gender', 'length', 'max' => 7),
-				array('altEmail', 'length', 'max' => 255),
-				array('lastLogin, description, birthdate', 'safe'),
-				// The following rule is used by search().
-				// Please remove those attributes that should not be searched.
-				array('id, username, firstName, middleName, lastName, specialization, graduationYear, member, gender, imageId, phoneNumber, lastLogin, cardinfo, description, birthdate, altEmail', 'safe', 'on' => 'search'),
+		  array('username, firstName, lastName, member', 'required'),
+		  array('specialization, imageId, phoneNumber', 'numerical', 'integerOnly' => true),
+		  array('username, cardinfo', 'length', 'max' => 10),
+		  array('firstName, middleName, lastName', 'length', 'max' => 75),
+		  array('graduationYear', 'length', 'max' => 4),
+		  array('member', 'length', 'max' => 5),
+		  array('gender', 'length', 'max' => 7),
+		  array('altEmail', 'length', 'max' => 255),
+		  array('lastLogin, description, birthdate', 'safe'),
+		  // The following rule is used by search().
+		  // Please remove those attributes that should not be searched.
+		  array('id, username, firstName, middleName, lastName, specialization, graduationYear, member, gender, imageId, phoneNumber, lastLogin, cardinfo, description, birthdate, altEmail', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -74,28 +74,29 @@ class User extends CActiveRecord {
 	 */
 	public function attributeLabels() {
 		return array(
-				'id' => 'ID',
-				'username' => 'Username',
-				'firstName' => 'First Name',
-				'middleName' => 'Middle Name',
-				'lastName' => 'Last Name',
-				'specialization' => 'Specialization',
-				'graduationYear' => 'Graduation Year',
-				'member' => 'Member',
-				'gender' => 'Gender',
-				'imageId' => 'Image',
-				'phoneNumber' => 'Phone Number',
-				'lastLogin' => 'Last Login',
-				'cardinfo' => 'Cardinfo',
-				'description' => 'Description',
-				'birthdate' => 'Birthdate',
-				'altEmail' => 'Alt Email',
+		  'id' => 'ID',
+		  'username' => 'Username',
+		  'firstName' => 'First Name',
+		  'middleName' => 'Middle Name',
+		  'lastName' => 'Last Name',
+		  'specialization' => 'Specialization',
+		  'graduationYear' => 'Graduation Year',
+		  'member' => 'Member',
+		  'gender' => 'Gender',
+		  'imageId' => 'Image',
+		  'phoneNumber' => 'Phone Number',
+		  'lastLogin' => 'Last Login',
+		  'cardinfo' => 'Cardinfo',
+		  'description' => 'Description',
+		  'birthdate' => 'Birthdate',
+		  'altEmail' => 'Alt Email',
 		);
 	}
 
 	/**
 	 * Retrieves a list of models based on the current search/filter conditions.
-	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
+	 * @return CActiveDataProvider the data provider that can return the models
+	 * 		based on the search/filter conditions.
 	 */
 	public function search() {
 		// Warning: Please modify the following code to remove attributes that
@@ -121,8 +122,8 @@ class User extends CActiveRecord {
 		$criteria->compare('altEmail', $this->altEmail, true);
 
 		return new CActiveDataProvider($this, array(
-								'criteria' => $criteria,
-						));
+				  'criteria' => $criteria,
+				));
 	}
 
 	public function getAccess() {
@@ -134,36 +135,38 @@ class User extends CActiveRecord {
 	}
 
 	public function afterSave() {
-		$this->initAccess();
+		$this->saveAccess();
 		return parent::afterSave();
 	}
+	
+	private function saveAccess() {
+		foreach ($this->access as $access) {
+			$model = new MembershipAccess;;
+			$model->userId = $this->id;
+			$model->accessId = $access;
+			$model->insert();
+		}
+	}
+	
+	public function afterFind() {
+		$this->initAccess();
+		return parent::afterFind();
+	}
+	
 
 	private function initAccess() {
-		$access = array();
-		if (Yii::app()->user->isGuest) {
-			$access = $this->getGuestAccess();
-		} else {
-			$access = $this->getUserAccess();
-		}
-		$this->setAccess($access);
+		$this->access = $this->getUserAccess();
 	}
 
-	private function getGuestAccess() {
-		return $this->getAccessFromId(self::GUEST_ID);
-	}
-
-	private function getUserAccess() {
-		return $this->getAccessFromId($this->id);
-	}
-
-	private function getAccessFromId($id) {
-		$membershipAccessArray = MembershipAccess::model()->findAll("userId = :id", array(":id" => $id));
+	public function getUserAccess() {
+		$model = MembershipAccess::model()->findAll("userId = :id", array(":id" => $this->id));
 
 		$array = array();
 
-		foreach ($membershipAccessArray as $ar) {
-			$access[] = $ar->accessId;
+		foreach ($model as $membershipAccess) {
+			$array[] = $membershipAccess->accessId;
 		}
+
 		return $array;
 	}
 

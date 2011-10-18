@@ -6,9 +6,18 @@
 class UserTest extends PHPUnit_Framework_TestCase {
 
 	private $name = "sigurd";
-	
+
 	public function setUp() {
 		$this->deleteUserIfFound();
+	}
+
+	private function getRandomUserObject() {
+		$user = new User;
+		$user->username = "sigurd" . rand(0,1000);
+		$user->firstName = "Sigurd";
+		$user->lastName = "Holsen";
+		$user->member = false;
+		return $user;
 	}
 
 	private function deleteUserIfFound() {
@@ -22,7 +31,6 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$user = User::model()->find("username=:username", array(":username" => $this->name));
 		$this->assertEquals(null, $user);
 	}
-	
 
 	public function testUserIsCreated() {
 		$user = new User;
@@ -30,37 +38,47 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$user->firstName = "Sigurd";
 		$user->lastName = "Holsen";
 		$user->member = false;
-		
+
 		$user->insert();
 		$user->save();
 
 		$this->assertNotEquals(null, $user->id);
 	}
-	
+
 	public function testUserHasAccessProperty() {
 		$user = new User;
 		$this->assertTrue($user->hasProperty("access"));
 	}
-	
+
 	public function tearDown() {
 		$this->deleteUserIfFound();
-	
 	}
-	
-	public function testUserHasAccess() {
-		$user = new User;
-		$user->username = rand(0,10000);
-		$user->firstName = "dummy";
-		$user->lastName = "Please delete me";
-		$user->member = false;
+
+	public function testUserAccess() {
+		$user1 = $this->getRandomUserObject();
+
+		$access = array(7,8,9,10);
+		$user1->access = $access;
+		$user1->insert();
 		
-		$user->insert();
+		$user2 = User::model()->findByPk($user1->id);
 		
-		$this->assertNotEquals(null, $user->id);
-		$accessArray = array(1,2,3,4,5);
-		Access::insertAccessRelationArray("event", $user->id, $accessArray);
-		$this->assertEquals($accessArray, $user->access);
-		
+
+		$this->assertEquals($access, $user2->access);
+	}
+
+	public function testSetterAndGetterForAccessProperty() {
+		$model = new User;
+		$array = array(1, 2, 3);
+		$model->access = array(1, 2, 3);
+		$this->assertEquals($array, $model->access);
+	}
+
+	public function testSetterAndGetterForAccess() {
+		$model = new User;
+		$array = array(1, 2, 3);
+		$model->setAccess($array);
+		$this->assertEquals($array, $model->getAccess());
 	}
 
 }

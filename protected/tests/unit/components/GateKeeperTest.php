@@ -83,7 +83,6 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 
 		$this->post->insert();
 		$this->data[$type][$name] = $this->post->id;
-		//echo "data $type $name = {$this->post->id}" . PHP_EOL;
 
 
 		foreach ($access as $a) {
