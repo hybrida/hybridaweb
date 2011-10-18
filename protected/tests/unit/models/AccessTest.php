@@ -72,16 +72,14 @@ class AccessTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function testGetAccessRelation() {
 		// Remove the following lines when you implement this test.
-		Access::deleteAccessRelation("event", 2);
+		Access::deleteAllAccessRelation("event", 2);
 		Access::insertAccessRelation(2, 4, "event");
 		Access::insertAccessRelation(2, 5, "event");
 		Access::insertAccessRelation(2, 6, "event");
 		Access::insertAccessRelation(2, 7, "event");
-		//echo PHP_EOL;
-		print_r(Access::getAccessRelation(2, "event"));
-		echo "Test ikke skrevet ferdig";
 		
-		
+		$expected = array(4,5,6,7);
+		$this->assertEquals($expected, Access::getAccessRelation(2, "event"));
 	}
 
 	/**
