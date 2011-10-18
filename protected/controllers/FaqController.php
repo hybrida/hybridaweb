@@ -1,6 +1,6 @@
 <?php
 
-class FAQController extends Controller{
+class FaqController extends Controller{
     //put your code here
     public function actionIndex(){
         
@@ -10,4 +10,5 @@ class FAQController extends Controller{
         $this->render('view',$data);
     }
 }
+
 ?>

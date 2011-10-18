@@ -52,15 +52,20 @@
 				<img src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" align="left" alt="" />
 				<h1><?= CHtml::encode(Yii::app()->name) ?></h1>
 				<div class="searchWrap">
-					<form method='post' action='?site=search' id='searchForm'>
+                    <div class='search'><input type='text' />
+                        <ul>
+                            
+                        </ul>
+                    </div>
+					<!--<form method='post' action='?site=search' id='searchForm'>
 						<div class="searchBox">
 							<input type='text' id='activeSearchBox' />
 							<ul id="searchList"> 
-								<!-- Search Suggestions -->
+								<!-- Search Suggestions 
 							</ul>
 						</div>
 						<div class="searchImg"><input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' /></div>
-					</form>
+					</form>!-->
 				</div>
 			</div>
 			<div class="headerBottomStripe">
