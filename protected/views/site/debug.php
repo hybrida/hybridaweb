@@ -11,5 +11,15 @@
 
 <h2>Hardcore debugging</h2>
 <pre>
+<?
 
+		$user = new User;
+		$user->member = false;
+		$user->username = "fredrik";
+		$user->firstName = "Geir";
+		$user->lastName = "Hjelstend";
+		$user->insert();
+		
+		?>
+<h3>id: <?=$user->id?></h3>
 </pre>

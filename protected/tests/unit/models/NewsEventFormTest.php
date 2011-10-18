@@ -18,8 +18,10 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->model = new NewsEventForm($this->news);
 	}
 
-	protected function makeAdminUser() {
-		$this->markTestIncomplete();
+	public function testMakeAdminUser() {
+		$adminUser = User::model();
+		$adminUser->save();
+		$this->assertNotEquals(null,$adminUser->id);
 	}
 
 	public function testMakeNewNewsWithAdminPermissions() {
