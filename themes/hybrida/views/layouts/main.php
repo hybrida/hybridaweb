@@ -57,6 +57,7 @@
                             
                         </ul>
                     </div>
+                    <!--Gamle versjonen:-->
 					<!--<form method='post' action='?site=search' id='searchForm'>
 						<div class="searchBox">
 							<input type='text' id='activeSearchBox' />
