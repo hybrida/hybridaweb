@@ -10,7 +10,6 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	 * @var GateKeeper
 	 * 
 	 */
-	private $keep;
 	private $data = array();
 	private $post;
 	private $tables;
@@ -97,16 +96,14 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 		if ( Yii::app()->user->isGuest) 
 			return;
 		
-		$keep = new GateKeeper();
-
 		foreach ($this->tables as $type) {
-			$this->assertTrue($keep->check($type, $this->data[$type]["allow"]));
-			$this->assertFalse($keep->check($type, $this->data[$type]["deny"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
 
 
-			$this->assertTrue($keep->check($type, $this->data[$type]["52"]));
-			$this->assertTrue($keep->check($type, $this->data[$type]["52,56"]));
-			$this->assertFalse($keep->check($type, $this->data[$type]["52,1000"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
 		}
 	}
 
@@ -115,17 +112,15 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 			return;
 		}
 		
-		$keep = new GateKeeper();
-
 
 		foreach ($this->tables as $type) {
 
-			$this->assertTrue($keep->check($type, $this->data[$type]["allow"]));
-			$this->assertFalse($keep->check($type, $this->data[$type]["deny"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
 
-			$this->assertFalse($keep->check($type, $this->data[$type]["52"]));
-			$this->assertFalse($keep->check($type, $this->data[$type]["52,56"]));
-			$this->assertFalse($keep->check($type, $this->data[$type]["52,1000"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
 		}
 	}
 
