@@ -14,8 +14,8 @@ class EventController extends Controller {
 
 	public function actionView($id) {
 
-
-		$userHasAccesToEvent = GateKeeper::hasAccess('event', $id);
+        $gateKeeper = new GateKeeper();
+		$userHasAccesToEvent = $gateKeeper->hasAccess('event', $id);
 
 		if ($userHasAccesToEvent) {
 
