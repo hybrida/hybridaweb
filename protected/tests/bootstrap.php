@@ -10,7 +10,7 @@ require_once(dirname(__FILE__).'/WebTestCase.php');
 Yii::createWebApplication($config);
 
 // Login --------------------------
-
+/*
 $userIdentity = new InnsidaIdentity(381); // Sigurd
 $userIdentity->authenticate();
 Yii::app()->user->login($userIdentity);

@@ -18,11 +18,19 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	 * @var integer
 	 */
 	public function __construct() {
+		$this->initTables();
+		$this->printTestAssumptions();
+		$this->setUpOnce();
+		$this->initGateKeeper();
+	}
+
+	private function initTables() {
 		$this->tables = array(
 				"news", "event",
 		);
-		
-		$this->setUpOnce();
+	}
+
+	private function printTestAssumptions() {
 		if (Yii::app()->user->isGuest) {
 			echo "Tester for gjester" . PHP_EOL;
 		} else {
@@ -30,14 +38,18 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 			echo "VIKTIG: antar at brukeren kun har accesstilgang id 52 og 56" . PHP_EOL . PHP_EOL;
 		}
 	}
+	
+	private function initGateKeeper() {
+		$this->gatekeeper = new GateKeeper;
+	}
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */
 	public function setUpOnce() {
-		
-		
+
+
 		foreach ($this->tables as $type) {
 			$className = ucfirst($type);
 			$this->data[$type] = array();
@@ -91,36 +103,35 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 		Yii::app()->user->login($identity);
 	}
 
-
 	public function testLoggedIn() {
-		if ( Yii::app()->user->isGuest) 
+		if (Yii::app()->user->isGuest)
 			return;
-		
+
 		foreach ($this->tables as $type) {
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
+			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["allow"]));
+			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["deny"]));
 
 
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
+			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["52"]));
+			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["52,56"]));
+			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52,1000"]));
 		}
 	}
 
 	public function testLoggedOut() {
-		if (! Yii::app()->user->isGuest) {
+		if (!Yii::app()->user->isGuest) {
 			return;
 		}
-		
+
 
 		foreach ($this->tables as $type) {
 
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
+			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["allow"]));
+			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["deny"]));
 
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
+			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52"]));
+			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52,56"]));
+			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52,1000"]));
 		}
 	}
 

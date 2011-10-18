@@ -30,13 +30,13 @@ class GateKeeper {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 	}
 
-	public static function hasAccess($type, $id) {
+	public function hasAccess($type, $id) {
 		
 		$sql = "SELECT access 
 FROM  `access_relations` 
 WHERE  `id` = :id
 AND  `type` =  :type ";
-		$stmt =Yii::app()->db->getPdoInstance->prepare($sql);
+		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(":id",$id);
 		$stmt->bindValue(":type",$type);
 		$stmt->execute();
