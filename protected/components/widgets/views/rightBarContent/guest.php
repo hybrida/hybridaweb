@@ -1,1 +1,1 @@
-<?= CHtml::link("Logg inn",Yii::app()->getBaseUrl()."/site/login/?user=381&pass=2") ?>
+<?= CHtml::link("Logg inn",Yii::app()->getBaseUrl()."/site/login/381") ?>
