@@ -21,11 +21,10 @@ class NewsController extends Controller {
 	public function actionView($id) {
 
 
-		$sql = "SELECT title, n.imageId, content, firstName, middleName, sirName, timestamp
-				FROM news n, user_info u 
-				WHERE  n.author = u.userId 
-				AND n.id = :id 
-				ORDER BY timestamp DESC";
+		$sql = "SELECT title, n.imageId, content, firstName, middleName, lastName, timestamp
+				FROM news n, user_new u 
+				WHERE  n.author = u.id
+				AND n.id = :id ";
 		$query = Yii::app()->db->createCommand($sql);
 		$query2 = $query->query(array("id" => $id));
 		$data = $query2->read();

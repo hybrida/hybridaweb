@@ -29,7 +29,7 @@ class RightBarContent extends CWidget {
 	private function getImageId() {
 		$userId = Yii::app()->user->id;
 		//Setter profilbildet
-		$query = "SELECT imageId FROM user_info WHERE userId =?";
+		$query = "SELECT imageId FROM user_new WHERE id =?";
 		$command = Yii::app()->db->createCommand($query);
 		$query = $command->query(array($userId));
 		$data = $query->read();
@@ -37,7 +37,7 @@ class RightBarContent extends CWidget {
 	}
 
 	public function addActivities() {
-		$sql = "SELECT firstName, middleName, lastName FROM user_info WHERE userId = ?";
+		$sql = "SELECT firstName, middleName, lastName FROM user_new WHERE id = ?";
 		$command = Yii::app()->db->createCommand($sql);
 		$query = $command->query(array(Yii::app()->user->id));
 		$this->data = $query->read();
