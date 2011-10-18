@@ -105,27 +105,26 @@ class Group extends CActiveRecord {
 		$this->pdo = $pdo;
 	}
 
-	
-	  public function getTitle(){
-          $this->pdo = Yii::app()->db->getPdoInstance();
-          
-          if(!isset($this->groupId)){
-          $data = array(
-          'gID' => $this->id
-          );
+	public function getTitle() {
+		$this->pdo = Yii::app()->db->getPdoInstance();
 
-          $sql = "SELECT title FROM groups WHERE id = :gID";
-          $query = $this->pdo->prepare($sql);
-          $query->execute($data);
-          $data = $query->fetch();
+		if (!isset($this->groupId)) {
+			$data = array(
+					'gID' => $this->id
+			);
 
-          $this->groupId = $data['title'];
-          }
+			$sql = "SELECT title FROM groups WHERE id = :gID";
+			$query = $this->pdo->prepare($sql);
+			$query->execute($data);
+			$data = $query->fetch();
 
-          return $this->groupId;
-	  }
+			$this->groupId = $data['title'];
+		}
 
-/*
+		return $this->groupId;
+	}
+
+	/*
 	  public function getGroupByID($gID){
 	  $this->$groupId = $gID;
 	  }
@@ -159,24 +158,25 @@ class Group extends CActiveRecord {
 	  }
 	 * 
 	 */
-    public function isAdmin($userId){
-        $this->pdo = Yii::app()->db->getPdoInstance();
-        $data = array(
-            'gID' => $this->id,
-            'admin' => $userId
-        );
-        $sql = "SELECT COUNT(*) AS c FROM groups 
+
+	public function isAdmin($userId) {
+		$this->pdo = Yii::app()->db->getPdoInstance();
+		$data = array(
+				'gID' => $this->id,
+				'admin' => $userId
+		);
+		$sql = "SELECT COUNT(*) AS c FROM groups 
                 WHERE id = :gID AND admin = :admin";
-        $query = $this->pdo->prepare($sql);
-        $query->execute($data);
-        if($query->fetch(PDO::FETCH_ASSOC) < 1) {
-            return false;
-        }
-        return true;
-    }
-      
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
+		if ($query->fetch(PDO::FETCH_ASSOC) < 1) {
+			return false;
+		}
+		return true;
+	}
+
 	public function getMembers() {
-        $this->pdo = Yii::app()->db->getPdoInstance();
+		$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array(
 				'gID' => $this->id
@@ -194,7 +194,7 @@ class Group extends CActiveRecord {
 	}
 
 	public function addMember($userId, $comission) {
-        $this->pdo = Yii::app()->db->getPdoInstance();
+		$this->pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
 				'gID' => $this->id,
 				'uID' => $userId,
@@ -205,13 +205,13 @@ class Group extends CActiveRecord {
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
-		Access::insertMembership($this->id, $userId);
+		GroupMembership::insert($this->id, $userId);
 	}
 
 	public function removeMember($userId) {
 
-        $this->pdo = Yii::app()->db->getPdoInstance();
-        
+		$this->pdo = Yii::app()->db->getPdoInstance();
+
 		$data = array(
 				'gID' => $this->id,
 				'uID' => $userId
@@ -225,8 +225,8 @@ class Group extends CActiveRecord {
 	}
 
 	public function deleteGroup() {
-        $this->pdo = Yii::app()->db->getPdoInstance();
-        
+		$this->pdo = Yii::app()->db->getPdoInstance();
+
 		$dataGID = array(
 				'gId' => $this->id
 		);
@@ -270,7 +270,7 @@ class Group extends CActiveRecord {
 	}
 
 	public function createGroup($name, $adminId, $siteContents, $scFileArray) {
-        $this->pdo = Yii::app()->db->getPdoInstance();
+		$this->pdo = Yii::app()->db->getPdoInstance();
 		$this->article = new Article();
 
 		//Standardfaner for grupper
@@ -332,17 +332,16 @@ class Group extends CActiveRecord {
 		$articleId = $this->article->insert('Info', 'Informasjon om gruppen', 327);
 		$this->updateArticle($articleId, $siteId);
 	}
-    
-    public function insert($attributes = null) {
-        $this->pdo = Yii::app()->db->getPdoInstance();
-        parent::insert($attributes);
-        
-        // ACCESS
-        
-    }
+
+	public function insert($attributes = null) {
+		$this->pdo = Yii::app()->db->getPdoInstance();
+		parent::insert($attributes);
+
+		// ACCESS
+	}
 
 	public function updateArticle($articleId, $siteId) {
-        $this->pdo = Yii::app()->db->getPdoInstance();
+		$this->pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
 				'aID' => $articleId,
 				'gID' => $this->id,
@@ -360,9 +359,9 @@ class Group extends CActiveRecord {
 	}
 
 	public function getAdminMenu() {
-        $this->pdo = Yii::app()->db->getPdoInstance();
-		
-        $data = array(
+		$this->pdo = Yii::app()->db->getPdoInstance();
+
+		$data = array(
 				'gID' => $this->id
 		);
 		//Eksempel:
@@ -391,41 +390,41 @@ class Group extends CActiveRecord {
 		$result = $query->fetchAll(PDO::FETCH_ASSOC);
 
 		//print_r($result);
-        return $result;
+		return $result;
 	}
 
-    public function setTabPrivate($siteId){
-        Access::deleteAllAccessRelation('site', $siteId);
-        $groupAccess = Access::getAccessDefinition($this->getTitle());
-        Access::insertAccessRelation($siteId, $groupAccess, 'site');
-    }
-    
-    public function setTabOpen($siteId){
-        Access::deleteAllAccessRelation('site', $siteId);
-        
-        $groupAccess = Access::getAccessDefinition($this->getTitle());
-        Access::insertAccessRelation($siteId, $groupAccess, 'site');
-        
-        $loggedInAccess = Access::getAccessDefinition("logged_in");
-        Access::insertAccessRelation($siteId, $loggedInAccess, 'site');
-    }
-    
-    public function setTabPublic($siteId){
-        Access::deleteAllAccessRelation('site', $siteId);
-        
-        $groupAccess = Access::getAccessDefinition($this->getTitle());
-        Access::insertAccessRelation($siteId, $groupAccess, 'site');
-        
-        $loggedInAccess = Access::getAccessDefinition("logged_in");
-        Access::insertAccessRelation($siteId, $loggedInAccess, 'site');
-        
-        $allAccess = Access::getAccessDefinition("all");
-        Access::insertAccessRelation($siteId, $allAccess, 'site');
-    }
+	public function setTabPrivate($siteId) {
+		Access::deleteAllAccessRelation('site', $siteId);
+		$groupAccess = Access::getAccessDefinition($this->getTitle());
+		Access::insertAccessRelation('site', $siteId, $groupAccess);
+	}
+
+	public function setTabOpen($siteId) {
+		Access::deleteAllAccessRelation('site', $siteId);
+
+		$groupAccess = Access::getAccessDefinition($this->getTitle());
+		Access::insertAccessRelation('site', $siteId, $groupAccess);
+
+		$loggedInAccess = Access::getAccessDefinition("logged_in");
+		Access::insertAccessRelation('site', $siteId, $loggedInAccess);
+	}
+
+	public function setTabPublic($siteId) {
+		Access::deleteAllAccessRelation('site', $siteId);
+
+		$groupAccess = Access::getAccessDefinition($this->getTitle());
+		Access::insertAccessRelation('site', $siteId, $groupAccess);
+
+		$loggedInAccess = Access::getAccessDefinition("logged_in");
+		Access::insertAccessRelation('site', $siteId, $loggedInAccess);
+
+		$allAccess = Access::getAccessDefinition("all");
+		Access::insertAccessRelation('site', $siteId, $allAccess);
+	}
 
 	//Hente ut id til siteContent
 	private function getSCId($var) {
-        $this->pdo = Yii::app()->db->getPdoInstance();
+		$this->pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
 				'var' => $var
 		);

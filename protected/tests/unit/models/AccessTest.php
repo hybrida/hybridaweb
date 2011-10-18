@@ -6,17 +6,12 @@
  */
 class AccessTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * @var Access
-	 */
-	protected $object;
 
 	/**
 	 * Sets up the fixture, for example, opens a network connection.
 	 * This method is called before a test is executed.
 	 */
 	protected function setUp() {
-		$this->object = new Access;
 	}
 
 	/**
@@ -67,19 +62,16 @@ class AccessTest extends PHPUnit_Framework_TestCase {
 		);
 	}
 
-	/**
-	 * @todo Implement testGetAccessRelation().
-	 */
 	public function testGetAccessRelation() {
-		// Remove the following lines when you implement this test.
 		Access::deleteAllAccessRelation("event", 2);
-		Access::insertAccessRelation(2, 4, "event");
-		Access::insertAccessRelation(2, 5, "event");
-		Access::insertAccessRelation(2, 6, "event");
-		Access::insertAccessRelation(2, 7, "event");
+		Access::insertAccessRelation( "event", 2, 4);
+		Access::insertAccessRelation( "event", 2, 5);
+		Access::insertAccessRelation( "event", 2, 6);
+		Access::insertAccessRelation( "event", 2, 7);
 		
 		$expected = array(4,5,6,7);
-		$this->assertEquals($expected, Access::getAccessRelation(2, "event"));
+		$this->assertEquals($expected, Access::getAccessRelation( "event",2));
+		Access::deleteAllAccessRelation("event", 2);
 	}
 
 	/**
@@ -113,5 +105,3 @@ class AccessTest extends PHPUnit_Framework_TestCase {
 	}
 
 }
-
-?>
