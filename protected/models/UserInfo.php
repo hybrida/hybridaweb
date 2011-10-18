@@ -7,7 +7,7 @@
  * @property integer $userId
  * @property string $firstName
  * @property string $middleName
- * @property string $sirName
+ * @property string $lastName
  * @property integer $specialization
  * @property string $graduationYear
  * @property string $member
@@ -48,19 +48,18 @@ class UserInfo extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('userId, firstName, sirName, member, imageId, cardinfo, description, birthdate, altEmail', 'required'),
+			array('userId', 'required'),
 			array('userId, specialization, access, imageId, phoneNumber', 'numerical', 'integerOnly'=>true),
-			array('firstName, middleName, sirName', 'length', 'max'=>30),
+			array('firstName, middleName, lastName', 'length', 'max'=>75),
 			array('graduationYear', 'length', 'max'=>4),
 			array('member', 'length', 'max'=>5),
 			array('gender', 'length', 'max'=>7),
 			array('cardinfo', 'length', 'max'=>10),
-			array('description', 'length', 'max'=>500),
-			array('altEmail', 'length', 'max'=>25),
-			array('lastLogin', 'safe'),
+			array('altEmail', 'length', 'max'=>255),
+			array('lastLogin, description, birthdate', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('userId, firstName, middleName, sirName, specialization, graduationYear, member, gender, access, imageId, phoneNumber, lastLogin, cardinfo, description, birthdate, altEmail', 'safe', 'on'=>'search'),
+			array('userId, firstName, middleName, lastName, specialization, graduationYear, member, gender, access, imageId, phoneNumber, lastLogin, cardinfo, description, birthdate, altEmail', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -84,7 +83,7 @@ class UserInfo extends CActiveRecord
 			'userId' => 'User',
 			'firstName' => 'First Name',
 			'middleName' => 'Middle Name',
-			'sirName' => 'Sir Name',
+			'lastName' => 'Last Name',
 			'specialization' => 'Specialization',
 			'graduationYear' => 'Graduation Year',
 			'member' => 'Member',
@@ -114,7 +113,7 @@ class UserInfo extends CActiveRecord
 		$criteria->compare('userId',$this->userId);
 		$criteria->compare('firstName',$this->firstName,true);
 		$criteria->compare('middleName',$this->middleName,true);
-		$criteria->compare('sirName',$this->sirName,true);
+		$criteria->compare('lastName',$this->lastName,true);
 		$criteria->compare('specialization',$this->specialization);
 		$criteria->compare('graduationYear',$this->graduationYear,true);
 		$criteria->compare('member',$this->member,true);
