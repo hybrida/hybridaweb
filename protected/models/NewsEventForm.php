@@ -21,21 +21,36 @@ class NewsEventForm extends CFormModel {
 	private $eventModel;
 	private $signupModel;
 
-	public function __construct($scenario=' ') {
+	public function __construct(CActiveRecord $model, $scenario=' ') {
 		parent::__construct($scenario);
 
-		$this->initializeModels();
+		$this->initModels();
+		$this->initModel($model);
 
-		$this->setNewsModel($news);
-		$this->setEventModel($event);
-		$this->updateSignupModel();
-		$this->updateModelAttributes();
+		$this->initSignupModel();
+		$this->initModelAttributes();
 	}
 
-	private function initializeModels() {
+	private function initModels() {
+		$this->setDefaultModelValues();
+	}
+
+	private function setDefaultModelValues() {
 		$this->newsModel = News::model();
 		$this->eventModel = Event::model();
 		$this->signupModel = Signup::model();
+	}
+
+	private function initModel($model) {
+		if ($model instanceof Event) {
+			$this->setEventModel($model);
+		} else if ($model instanceof News) {
+			$this->setNewsModel($model);
+		} else {
+			throw new Exception("Modellen er ikke støttet.  Sendte inn " . get_class($model)
+							. ", og dette er hverken en News eller en Event"
+			);
+		}
 	}
 
 	private function setNewsModel(News $news) {
@@ -52,13 +67,13 @@ class NewsEventForm extends CFormModel {
 		$this->eventModel = $event;
 	}
 
-	private function updateSignupModel() {
+	private function initSignupModel() {
 		if ($this->eventModel->hasSignup()) {
 			$this->signupModel = $this->eventModel->getSignup();
 		}
 	}
 
-	private function updateModelAttributes(News $news, Event $event) {
+	private function initModelAttributes() {
 		$this->news = $this->newsModel->attributes;
 		$this->event = $this->eventModel->attributes;
 		$this->signup = $this->signupModel->attributes;
@@ -120,16 +135,16 @@ class NewsEventForm extends CFormModel {
 
 	public function testInput() {
 		?>
-<h1>testInput</h1>
-<pre>
-		<strong>news</strong> <? print_r($this->news) ?>
-		event: <? print_r($this->event) ?>
-		signup: <? print_r($this->signup) ?>
-		hasEvent: <? print_r($this->hasEvent) ?>
-		hasNews: <? print_r($this->hasNews) ?>
-		hasSignup: <? print_r($this->hasSignup) ?>
-																												
-</pre>
+		<h1>testInput</h1>
+		<pre>
+						<strong>news</strong> <? print_r($this->news) ?>
+						event: <? print_r($this->event) ?>
+						signup: <? print_r($this->signup) ?>
+						hasEvent: <? print_r($this->hasEvent) ?>
+						hasNews: <? print_r($this->hasNews) ?>
+						hasSignup: <? print_r($this->hasSignup) ?>
+																																
+		</pre>
 		<?
 	}
 

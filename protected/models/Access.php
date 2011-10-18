@@ -8,30 +8,7 @@ class Access {
 		self::$pdo = Yii::app()->db->getPdoInstance();
 	}
 
-	public static function insertMembership($groupId, $userId) {
-		$data = array(
-				'gID' => $groupId,
-				'uID' => $userId
-		);
-
-		$sql = "INSERT INTO membership_access VALUES (
-            (SELECT ad.id FROM access_definition AS ad WHERE description = (SELECT title FROM groups WHERE id=:gID)),:uID)";
-		$query = self::$pdo->prepare($sql);
-		$query->execute($data);
-	}
-
-	public static function deleteMembership($groupId, $userId) {
-		$data = array(
-				'gID' => $groupId,
-				'uID' => $userId
-		);
-
-		$sql = "DELETE FROM membership_access WHERE accessId = 
-            (SELECT ad.id FROM access_definition AS ad WHERE description = (SELECT title FROM groups WHERE id=:gID))
-            AND userId = :uID";
-		$query = self::$pdo->prepare($sql);
-		$query->execute($data);
-	}
+	
 
 	//Slette tilgangsnivåer til gruppen
     public static function deleteAccessRelation($type, $id, $access){

@@ -31,6 +31,7 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	private function printTestAssumptions() {
+		echo "GateKeeperTest: ";
 		if (Yii::app()->user->isGuest) {
 			echo "Tester for gjester" . PHP_EOL;
 		} else {
