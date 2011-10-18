@@ -36,7 +36,7 @@ class GroupController extends Controller {
 		$this->render("index", $data);
 	}
 
-	public function actionView($id) {
+	public function actionView($id, $sub) {
 
 		$data = array();
 

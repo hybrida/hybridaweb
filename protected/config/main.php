@@ -7,7 +7,6 @@
 return array(
 		'theme' => 'classic',
 		'theme' => 'hybrida',
-		
 		'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 		'name' => 'Hyb-Yii',
 		// preloading 'log' component
@@ -39,7 +38,7 @@ return array(
 						'urlFormat' => 'path',
 						'showScriptName' => false,
 						'rules' => array(
-                                'faq' => 'site/faq',
+								'group/view/<id:\d+>/<sub:\w+>' => 'group/view',
 								'<controller:\w+>/<id:\d+>' => '<controller>/view',
 								'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 								'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
