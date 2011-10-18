@@ -53,7 +53,6 @@ class Access {
 		$stmt->bindParam("type",$type);
 		$stmt->bindParam("id",$id);
 		$stmt->bindParam("access",$access);
-		print "ID: $id";
 		
 		foreach ($array as $access) {
 			$stmt->execute();
