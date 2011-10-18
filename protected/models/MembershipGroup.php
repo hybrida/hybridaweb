@@ -10,7 +10,7 @@
  *
  * @author sigurd
  */
-class GroupMembership {
+class MembershipGroup {
 	
 	
 	public static function insert($groupId, $userId) {
