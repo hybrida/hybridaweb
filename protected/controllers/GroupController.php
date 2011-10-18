@@ -55,7 +55,7 @@ class GroupController extends Controller {
 	}
     
     public function actionEdit($id){
-        $group = Groups::model()->findByPk($id);
+        $group = Group::model()->findByPk($id);
         $data['title'] = $group->getTitle();
         $data['groups'] = $group->getAdminMenu();
         $data['members'] = $group->getMembers();

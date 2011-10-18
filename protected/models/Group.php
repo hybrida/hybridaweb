@@ -10,7 +10,7 @@
  * @property integer $admin
  * @property string $committee
  */
-class Groups extends CActiveRecord {
+class Group extends CActiveRecord {
 
 	/**
 	 * Returns the static model of the specified AR class.
