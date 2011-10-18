@@ -1,6 +1,9 @@
-<? foreach($articles as $article) : ?>
+<ul>
+    F.A.Q
+    <? foreach($articles as $article) : ?>
 
-<?= $article['title']; ?>
+        <li><a href='/yii/article/<?= $article['id'] ?>'><?= $article['title']; ?> </a></li>
 
-<? endforeach; ?>
+    <? endforeach; ?>
 
+</ul>

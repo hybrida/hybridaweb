@@ -10,6 +10,8 @@
  */
 class Article extends CActiveRecord
 {
+    private $pdo;
+    
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Article the static model class
