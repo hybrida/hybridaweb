@@ -1,4 +1,48 @@
-<?php
+<?php /*
+Hva som maa testes
+
+SetUp
+=====
+
+Lager bruker aa teste mot
+Lage gruppe og teste mot
+
+Tester
+======
+
+Lagring opp mot database
+========================
+
+* Sjekke at den kaster exceptions
+* Den lagrer riktig naar:
+	bare news
+	bare event
+	bare event og news
+	alle tre
+
+* ikke lagrer
+	event naar hasEvent = 0
+	news naar hasNews = 0
+	signup naar hasSignup = 0
+	signup naar hasEvent = 0
+
+Tilganger
+=================
+* Laster dem opp
+
+* Forskjellige tilganger til forskjellige brukere
+	Admin
+		All tilgang
+	Gruppesjef
+		All tilgang paa gruppen
+		Legge ut paa hovedsiden
+		Redigere sine egne
+	Bruker:
+		Legge ut paa gruppesider
+		Redigere sine egne paa gruppesider
+
+*/
+
 
 class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
