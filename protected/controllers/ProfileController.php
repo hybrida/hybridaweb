@@ -18,7 +18,7 @@ class ProfileController extends Controller{
             //$rbc->setUserImage($id);
         
         if(Yii::app()->user->isGuest){
-            $this->render('view/guest');
+            $this->render('guest');
         }
         else 
         {

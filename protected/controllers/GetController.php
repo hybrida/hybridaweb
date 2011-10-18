@@ -209,6 +209,54 @@ class GetController extends Controller{
         }
         $this->renderPartial('group');
     }
+    public function actionSearch(){
+            $split = '~%~';
+            $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
+            
+            if(strlen($_GET['q']) < 1) {
+                die("");
+            }
+            
+			$searchArray = preg_split( '/ /', $_GET['q'] );
+			$searchString = "";
+            $data = array();
+            
+            for( $i = 0; $i < count( $searchArray ); $i++ ) {
+				if( $i > 0 ) $searchString .= " AND";
+				$search = $searchArray[$i];
+				$searchString .= " (ui.firstName LIKE :search".$i." OR ui.middleName LIKE :search".$i." OR ui.lastName LIKE :search".$i.")";
+                $data['search' . $i] = $search . "%";
+			}
+            
+			//Søke på brukere
+			$sql = "SELECT DISTINCT ui.userId, ui.firstName, ui.middleName, ui.lastName 
+                    FROM user_info AS ui WHERE " . $searchString;
+            
+			$query = $this->pdo->prepare($sql);
+            $query->execute($data);
+            
+            $result['users'] = $query->fetchAll(PDO::FETCH_ASSOC);
+            $result['split'] = $split;
+
+			//Søke på nyheter
+            $data = array(
+                'userId' => Yii::app()->user->id,
+                'type'   => 'news',
+                'search' => $search
+            );
+            
+			$sql = "SELECT id, parentId, parentType, title, timestamp 
+			FROM news n 
+			RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
+			WHERE n.title REGEXP :search
+			ORDER BY timestamp DESC";
+            
+			$query = $this->pdo->prepare($sql);
+            $query->execute($data);
+            $result['newsList'] = $query->fetchAll(PDO::FETCH_ASSOC);
+            
+            $this->renderPartial('search',$result);
+    }
     
     public function actionIndex() {
 	
@@ -284,44 +332,6 @@ class GetController extends Controller{
 			echo ("</table>");
 			break;
 			
-	
-		
-		case "all":
-			$searchArray = preg_split( '/ /', $_GET['q'] );
-			$searchString = "";
-			for( $i = 0; $i < count( $searchArray ); $i++ ) {
-				if( $i > 0 ) $searchString .= " AND";
-				$search = clean($searchArray[$i]);
-				$searchString .= " (firstName LIKE '$search%' OR middleName LIKE '$search%' OR lastName LIKE '$search%')";
-			}
-			//Søke på brukere
-			$query = "SELECT DISTINCT ui.userId, ui.firstName, ui.middleName, ui.lastName 
-			FROM user_info AS ui,membership_access AS ma WHERE ma.accessId != 0 AND ma.userId=$selfId AND $searchString $limit";
-			$result = mysql_query( $query ) or die(mysql_error());
-			while( $row = mysql_fetch_array( $result ) ) {
-				echo ("<a href='?site=profile&id=" . $row['userId'] . "'>" . $row['firstName'] . " " . $row['middleName'] . " " . $row['lastName'] . "</a>");
-				echo ( $split );
-			}
-			//Søke på nyheter
-			$query = "SELECT id, parentId, parentType, title, timestamp 
-			FROM news n 
-			RIGHT JOIN ".accessId('news',$selfId)." = n.id 
-			WHERE n.title REGEXP '$search'
-			ORDER BY timestamp DESC $limit";
-			$result = mysql_query( $query ) or die(mysql_error());
-			while( $row = mysql_fetch_array( $result ) ) {
-				if($row[parentType]==NULL) {
-					$parentType = "news";
-					echo ("<a title='$row[title] $row[timestamp]' href='?site=$parentType&id=$row[parentId]'>$row[title]</a>");
-				} else {
-					$parentType = $row['parentType'];
-					echo ("<a title='$row[title], Dato: $row[timestamp]' href='?site=$parentType&id=$row[parentId]'>$row[title]</a>");
-				} 
-			}
-			
-			echo ("<a href='#'><i>Avansert søk</i></a>");
-			break;
-		
 		case "calender":
 			$firstDay = date("N", mktime(0, 0, 0, $_GET['month'], 0, $_GET['year']));
 			$lastDay = date("j", mktime(0, 0, 0, $_GET['month']+1, 0, $_GET['year']));
