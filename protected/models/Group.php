@@ -201,7 +201,7 @@ class Group extends CActiveRecord {
 				'comission' => $comission
 		);
 
-		$sql = "INSERT INTO membership_group VALUES (:gID,:uID,:comission)";
+		$sql = "INSERT INTO membership_group (groupId, userId, comission) VALUES (:gID,:uID,:comission)";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
@@ -283,7 +283,8 @@ class Group extends CActiveRecord {
 		);
 
 		//Oppretter gruppen
-		$sql = "INSERT INTO groups VALUES (null ,  0,  :name,  :adminId,  'false')";
+		$sql = "INSERT INTO group  (`id` ,`title` ,`content` ,`author` ,`timestamp`) 
+				VALUES (null ,  0,  :name,  :adminId,  'false')";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
@@ -293,7 +294,7 @@ class Group extends CActiveRecord {
 		$accessDefID = $this->access->insertAccessDefinition($this->getGroupName());
 
 		//echo  count($siteContent);
-		$i = 0;
+		$sortOrder = 0;
 		foreach ($scFileArray as $sc) {
 
 			$subId = $this->getSCId($sc);
@@ -303,7 +304,8 @@ class Group extends CActiveRecord {
 			);
 
 			echo "SubID:" . $subId;
-			$sql = "INSERT INTO site VALUES (null, :sc,'group',:subID)";
+			$sql = "INSERT INTO site (`siteId` ,`title` ,`path` ,`id` ,`subId`) 
+				VALUES (null, :sc,'group',:subID)";
 			$query = $this->pdo->prepare($sql);
 			$query->execute($data);
 
@@ -311,10 +313,11 @@ class Group extends CActiveRecord {
 			$data = array(
 					'gID' => $this->id,
 					'sID' => $siteId,
-					'i' => $i++
+					'i' => $sortOrder++
 			);
 
-			$sql = "INSERT INTO menu_group VALUES (:gID, :sID,null,:i)";
+			$sql = "INSERT INTO menu_group(`group` ,`site` ,`contentId` ,`sort`)	
+					VALUES (:gID, :sID,null,:i)";
 			$query = $this->pdo->prepare($sql);
 			$query->execute($data);
 
