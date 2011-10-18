@@ -19,8 +19,11 @@ class GroupMembership {
 				'uID' => $userId
 		);
 
-		$sql = "INSERT INTO membership_access VALUES (
-            (SELECT ad.id FROM access_definition AS ad WHERE description = (SELECT title FROM groups WHERE id=:gID)),:uID)";
+		$sql = "INSERT INTO membership_access(`accessId` ,`userId`)
+			VALUES (
+			(SELECT ad.id FROM access_definition AS ad WHERE description = (SELECT title FROM groups WHERE id=:gID)),
+			:uID
+		)";
 		$query = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$query->execute($data);
 	}
