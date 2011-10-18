@@ -35,8 +35,7 @@ class InnsidaIdentity extends CUserIdentity {
 
 
 		// UserInfo
-		$userInfoModel = UserInfo::model()->find("userId = :id", array(":id" => $this->_id));
-		$userInfo = $userInfoModel->getAttributes();
+		$userInfo = $user->getAttributes();
 
 		//$this->setState("",$userInfo['']);
 		$this->setState("firstName", $userInfo['firstName']);
