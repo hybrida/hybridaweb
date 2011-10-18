@@ -18,7 +18,7 @@
 		$user->username = "fredrik";
 		$user->firstName = "Geir";
 		$user->lastName = "Hjelstend";
-		$user->insert();
+		$user->save();
 		
 		?>
 <h3>id: <?=$user->id?></h3>

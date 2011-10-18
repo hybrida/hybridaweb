@@ -3,6 +3,11 @@
 class Access {
 
 	private static $pdo;
+	
+	const MEMBER = 3;
+	const MALE = 4;
+	const FEMALE = 5;
+	
 
 	public function __construct() {
 		self::$pdo = Yii::app()->db->getPdoInstance();
