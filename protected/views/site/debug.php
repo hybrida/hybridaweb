@@ -14,7 +14,7 @@
 <?
 
 		$user = new User;
-		$user->member = false;
+		$user->member = 0;
 		$user->username = "fredrik";
 		$user->firstName = "Geir";
 		$user->lastName = "Hjelstend";
