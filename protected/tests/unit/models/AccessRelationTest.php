@@ -109,6 +109,46 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(array(1, 2, 3, 8), $access->get());
 	}
+	
+	public function test_insert_makeAccessRelationOnNewRecord_throwsNothing() {
+		$array = array(1,2,3);
+		$news = new News;
+		$access = new AccessRelation($news);
+		$access->set($array);
+		$news->save();
+		$access->save();
+	}
+	
+	public function test_insert_EmptyArray_doesNothing() {
+		$news = new News;
+		$news->save();
+		$access = new AccessRelation($news);
+		$access->set(array());
+		$access->save();
+		
+		$news2 = News::model()->findByPk($news->id);
+		$access = new AccessRelation($news2);
+		$this->assertEquals(array(),$access->get());
+
+	}
+
+	public function test_save_nonEmptyAccess_deleteOld() {
+		$news = new News;
+		$news->save();
+		$access = new AccessRelation($news);
+		$access->set(array(1, 2, 3, 4));
+		$access->save();
+		$array = array(5, 8);
+		$access->set($array);
+		$access->save();
+
+
+		$news2 = News::model()->findByPk($news->id);
+		$access2 = new AccessRelation($news2);
+
+		$this->assertEquals($array, $access2->get());
+	}
+
 
 	public function test_delete_deleteAllRows_GetsDeleted() {
 		$news = new News;

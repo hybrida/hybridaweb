@@ -6,11 +6,12 @@ class AccessRelation {
 	private $id;
 	private $type;
 	private $model;
-	private $access;
+	private $_access;
 
 	public function __construct($model) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 		$this->setModel($model);
+		$this->_access = array();
 	}
 
 	public function setModel($model) {
@@ -34,6 +35,10 @@ class AccessRelation {
 		$this->type = $this->getTypeFromModel($model);
 	}
 
+	private function updateId() {
+		$this->id = $this->model->id;
+	}
+
 	private function getTypeFromModel($model) {
 		if ($model instanceof News) {
 			return "news";
@@ -53,7 +58,15 @@ class AccessRelation {
 	}
 
 	public function set($accessArray) {
-		$this->access = $accessArray;
+		if (!is_array($accessArray)) {
+			throw new InvalidArgumentException("input must be an array");
+		}
+		$this->_access = $accessArray;
+	}
+
+	public function save() {
+		$this->delete();
+		$this->insert();
 	}
 
 	public function insert() {
@@ -64,25 +77,13 @@ class AccessRelation {
 			throw new BadMethodCallException("The model is not saved yet");
 		}
 	}
-	
-	private function updateId() {
-		if ($this->model->isNewRecord) {
-			$this->id = null;
-		} else {
-			$this->id = $this->model->id;
-		}
-	}
 
 	public function validates() {
-		if ($this->model->isNewRecord) {
-			return false;
-		}
-		return true;
+		return $this->id != null && $this->type != "";
 	}
 
 	private function insertIntoDatabase() {
 		$oldAccess = $this->get();
-		$accessArray = $this->access;
 		$sql = <<<SQL
 			INSERT INTO access_relations (id, access, type) 
 				VALUES
@@ -92,9 +93,9 @@ SQL;
 		$stmt->bindParam(":id", $this->id);
 		$stmt->bindParam(":type", $this->type);
 
-		$access = $accessArray[0];
+		$access = null;
 		$stmt->bindParam(":access", $access);
-		foreach ($accessArray as $access) {
+		foreach ($this->_access as $access) {
 			if (in_array($access, $oldAccess)) {
 				continue;
 			}

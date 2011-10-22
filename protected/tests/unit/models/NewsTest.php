@@ -23,11 +23,21 @@ class NewsTest extends PHPUnit_Framework_TestCase {
 	public function test_accessProperty() {
 		$news = new News();
 		$array = array(1, 2, 3, 4, 5);
-		$news->save();
 		$news->access = $array;
+		$news->save();
 
 		$news2 = News::model()->findByPk($news->id);
 		$this->assertEquals($array, $news2->access);
+	}
+	
+	public function test_accessIsLoadedOnFound() {
+		$news = new News;
+		$access = array(1,2,4,5);
+		$news->access = $access;
+		$news->save();
+		
+		$news2 = News::model()->findByPk($news->id);
+		$this->assertEquals($access, $news2->access);
 	}
 
 	public function test_save_noInput_idNotNull() {

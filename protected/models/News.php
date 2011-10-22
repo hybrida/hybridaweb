@@ -14,14 +14,13 @@
  * @property string $timestamp
  */
 class News extends CActiveRecord {
-	
+
 	private $_access;
 
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return News the static model class
 	 */
-
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
@@ -40,13 +39,13 @@ class News extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('parentId, imageId, author', 'numerical', 'integerOnly' => true),
-				array('parentType', 'length', 'max' => 7),
-				array('title', 'length', 'max' => 50),
-				array('content, timestamp', 'safe'),
-				// The following rule is used by search().
-				// Please remove those attributes that should not be searched.
-				array('id, parentId, parentType, title, imageId, content, author, timestamp', 'safe', 'on' => 'search'),
+		  array('parentId, imageId, author', 'numerical', 'integerOnly' => true),
+		  array('parentType', 'length', 'max' => 7),
+		  array('title', 'length', 'max' => 50),
+		  array('content, timestamp', 'safe'),
+		  // The following rule is used by search().
+		  // Please remove those attributes that should not be searched.
+		  array('id, parentId, parentType, title, imageId, content, author, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -65,14 +64,14 @@ class News extends CActiveRecord {
 	 */
 	public function attributeLabels() {
 		return array(
-				'id' => 'ID',
-				'parentId' => 'Parent',
-				'parentType' => 'Parent Type',
-				'title' => 'Title',
-				'imageId' => 'Image',
-				'content' => 'Content',
-				'author' => 'Author',
-				'timestamp' => 'Timestamp',
+		  'id' => 'ID',
+		  'parentId' => 'Parent',
+		  'parentType' => 'Parent Type',
+		  'title' => 'Title',
+		  'imageId' => 'Image',
+		  'content' => 'Content',
+		  'author' => 'Author',
+		  'timestamp' => 'Timestamp',
 		);
 	}
 
@@ -96,20 +95,20 @@ class News extends CActiveRecord {
 		$criteria->compare('timestamp', $this->timestamp, true);
 
 		return new CActiveDataProvider($this, array(
-								'criteria' => $criteria,
-		  ));
+				  'criteria' => $criteria,
+				));
 	}
-	
+
 	public function afterConstruct() {
 		$this->_access = new AccessRelation($this);
 	}
-	
+
 	public function afterFind() {
 		$this->afterConstruct();
 	}
 
 	public function getEventId() {
-		
+
 		if (!$this->parentIsEvent())
 			return false;
 
@@ -134,27 +133,29 @@ class News extends CActiveRecord {
 		$stmt->bindValue("id", $this->parentId);
 		$stmt->execute(PDO::FETCH_ASSOC);
 		$eventInfo = $stmt->fetch();
-		
+
 		return $eventInfo ? $eventInfo : null;
 	}
 	
 	private function parentIsEvent() {
 		return !$this->getIsNewRecord() && !$this->parentType == "event";
 	}
-	
+
 	public function setEventById($id) {
 		
 	}
-	
+
 	public function setAccess($array) {
 		$this->_access->set($array);
-		$this->_access->insert();
 	}
-	
+
 	public function getAccess() {
 		return $this->_access->get();
 	}
 	
-
+	public function afterSave() {
+		$this->_access->save();
+	}
 	
+
 }
