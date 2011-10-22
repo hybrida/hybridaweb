@@ -21,12 +21,6 @@ class News extends CActiveRecord {
 	 * Returns the static model of the specified AR class.
 	 * @return News the static model class
 	 */
-	
-	public function __construct($scenario='insert') {
-		parent::__construct($scenario);
-	}
-
-
 
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
@@ -103,7 +97,15 @@ class News extends CActiveRecord {
 
 		return new CActiveDataProvider($this, array(
 								'criteria' => $criteria,
-						));
+		  ));
+	}
+	
+	public function afterConstruct() {
+		$this->_access = new AccessRelation($this);
+	}
+	
+	public function afterFind() {
+		$this->afterConstruct();
 	}
 
 	public function getEventId() {
@@ -145,12 +147,11 @@ class News extends CActiveRecord {
 	}
 	
 	public function setAccess($array) {
-		$this->_access = new AccessRelation($this);
-		$this->_access->insert($array);
+		$this->_access->set($array);
+		$this->_access->insert();
 	}
 	
 	public function getAccess() {
-		$this->_access = new AccessRelation($this);
 		return $this->_access->get();
 	}
 	

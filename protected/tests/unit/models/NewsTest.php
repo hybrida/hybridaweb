@@ -35,5 +35,10 @@ class NewsTest extends PHPUnit_Framework_TestCase {
 		$news->save();
 		$this->assertNotEquals(null, $news->id);
 	}
+	
+	public function test_construct_noInput_idIsNull() {
+		$news = new News;
+		$this->assertEquals(null, $news->id);
+	}
 
 }

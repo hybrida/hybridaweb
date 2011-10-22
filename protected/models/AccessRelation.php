@@ -14,11 +14,11 @@ class AccessRelation {
 	}
 
 	public function setModel($model) {
-		$this->validateModelAndThrowsExceptions($model);
+		$this->validateModelAndThrowExceptions($model);
 		$this->init($model);
 	}
 
-	private function validateModelAndThrowsExceptions($model) {
+	private function validateModelAndThrowExceptions($model) {
 		if ($model == null) {
 			throw new NullPointerException();
 		}
@@ -29,9 +29,9 @@ class AccessRelation {
 	}
 
 	private function init($model) {
-		$this->id = $model->id;
-		$this->type = $this->getTypeFromModel($model);
 		$this->model = $model;
+		$this->updateId();
+		$this->type = $this->getTypeFromModel($model);
 	}
 
 	private function getTypeFromModel($model) {
@@ -52,11 +52,24 @@ class AccessRelation {
 		return $this->type;
 	}
 
-	public function insert($accessArray) {
+	public function set($accessArray) {
+		$this->access = $accessArray;
+	}
+
+	public function insert() {
+		$this->updateId();
 		if ($this->validates()) {
-			$this->insertIntoDatabase($accessArray);
+			$this->insertIntoDatabase();
 		} else {
-			throw new InvalidArgumentException();
+			throw new BadMethodCallException("The model is not saved yet");
+		}
+	}
+	
+	private function updateId() {
+		if ($this->model->isNewRecord) {
+			$this->id = null;
+		} else {
+			$this->id = $this->model->id;
 		}
 	}
 
@@ -67,8 +80,9 @@ class AccessRelation {
 		return true;
 	}
 
-	private function insertIntoDatabase($accessArray) {
+	private function insertIntoDatabase() {
 		$oldAccess = $this->get();
+		$accessArray = $this->access;
 		$sql = <<<SQL
 			INSERT INTO access_relations (id, access, type) 
 				VALUES
@@ -103,18 +117,13 @@ SQL;
 	}
 
 	public function delete() {
-		
-		$sql = <<<SQL
-		DELETE FROM access_relations
-			WHERE id = :id AND type = :type
-SQL;
+		$conditions = "id = :id AND type = :type";
+		$params = array(
+		  ":id" => $this->id,
+		  ":type" => $this->type,
+		);
 		$stmt = Yii::app()->db->createCommand()
-				->delete("access_relations","id = :id AND type = :type",
-				array(
-				  ":id" => $this->id,
-				  ":type" => $this->type,
-				));
-
+				->delete("access_relations", $conditions, $params);
 	}
 
 }
