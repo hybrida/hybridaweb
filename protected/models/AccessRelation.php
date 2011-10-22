@@ -46,7 +46,7 @@ class AccessRelation {
 
 	private function updateId() {
 		if ($this->model)
-			$this->id = $this->model->id;
+			$this->id = $this->model->primaryKey;
 	}
 
 	private function getTypeFromModel($model) {
@@ -56,6 +56,8 @@ class AccessRelation {
 			return "event";
 		} else if ($model instanceof Article) {
 			return "article";
+		} else if ($model instanceof Signup) {
+			return "signup";
 		}
 	}
 

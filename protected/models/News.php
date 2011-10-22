@@ -107,6 +107,18 @@ class News extends CActiveRecord {
 		$this->afterConstruct();
 	}
 
+	public function setAccess($array) {
+		$this->_access->set($array);
+	}
+
+	public function getAccess() {
+		return $this->_access->get();
+	}
+
+	public function afterSave() {
+		$this->_access->save();
+	}
+
 	public function getEventId() {
 
 		if (!$this->parentIsEvent())
@@ -136,26 +148,13 @@ class News extends CActiveRecord {
 
 		return $eventInfo ? $eventInfo : null;
 	}
-	
+
 	private function parentIsEvent() {
-		return !$this->getIsNewRecord() && !$this->parentType == "event";
+		return!$this->getIsNewRecord() && !$this->parentType == "event";
 	}
 
 	public function setEventById($id) {
 		
 	}
-
-	public function setAccess($array) {
-		$this->_access->set($array);
-	}
-
-	public function getAccess() {
-		return $this->_access->get();
-	}
-	
-	public function afterSave() {
-		$this->_access->save();
-	}
-	
 
 }

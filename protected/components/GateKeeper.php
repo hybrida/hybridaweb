@@ -32,9 +32,9 @@ class GateKeeper {
 
 	public function hasAccess($type, $id) {
 
-		$access = new AccessRelation($type, $id);
-		$typeAccess = $access->get();
-		foreach ($typeAccess as $ac) {
+		$accessRelation = new AccessRelation($type, $id);
+		$access = $accessRelation->get();
+		foreach ($access as $ac) {
 			if (! in_array($ac['access'], $this->access)) {
 				return false;				
 			}
