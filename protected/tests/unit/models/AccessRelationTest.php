@@ -44,6 +44,21 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals("article", $access->getType());
 	}
+	
+	public function test_constructor_TypeAndId_getType() {
+		$access = new AccessRelation("news",2);
+		$this->assertEquals("news",$access->getType());
+	}
+	
+	public function test_constructor_TypeAndIdInsert() {
+		$array = array(1,2,3,4);
+		$access = new AccessRelation("event",2);
+		$access->set($array);
+		$access->save();
+		
+		$access2 = new AccessRelation("event",2);
+		$this->assertEquals($array,$access2->get());
+	}
 
 	/**
 	 * @expectedException NullPointerException
@@ -159,5 +174,5 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$access->delete();
 		$this->assertEquals(array(), $access->get());
 	}
-
+	
 }

@@ -5,16 +5,16 @@ class NewsTest extends PHPUnit_Framework_TestCase {
 	public function test_insert_() {
 		$news = new News;
 		$array = array(1, 2, 3);
-		$news->save();
 		$news->setAccess($array);
+		$news->save();
 		$this->assertEquals($array, $news->getAccess());
 	}
 
 	public function test_accessGetterAndSetter_setAccess_inserted() {
-		$news = new News();
 		$array = array(1, 2, 3, 4, 5);
-		$news->save();
+		$news = new News();
 		$news->setAccess($array);
+		$news->save();
 
 		$news2 = News::model()->findByPk($news->id);
 		$this->assertEquals($array, $news2->getAccess());

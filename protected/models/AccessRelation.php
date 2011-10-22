@@ -8,15 +8,24 @@ class AccessRelation {
 	private $model;
 	private $_access;
 
-	public function __construct($model) {
+	public function __construct($modelOrType, $id=null) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
-		$this->setModel($model);
 		$this->_access = array();
+		if ($id) {
+			$this->initTypeId($modelOrType, $id);
+		} else {
+			$this->setModel($modelOrType);
+		}
+	}
+
+	private function initTypeId($type, $id) {
+		$this->type = $type;
+		$this->id = $id;
 	}
 
 	public function setModel($model) {
 		$this->validateModelAndThrowExceptions($model);
-		$this->init($model);
+		$this->initModel($model);
 	}
 
 	private function validateModelAndThrowExceptions($model) {
@@ -24,19 +33,20 @@ class AccessRelation {
 			throw new NullPointerException();
 		}
 		if (!$this->getTypeFromModel($model)) {
-			throw new IllegalArgumentException(
+			throw new InvalidArgumentException(
 					"Model must be an instance of Event, News or Article");
 		}
 	}
 
-	private function init($model) {
+	private function initModel($model) {
 		$this->model = $model;
 		$this->updateId();
 		$this->type = $this->getTypeFromModel($model);
 	}
 
 	private function updateId() {
-		$this->id = $this->model->id;
+		if ($this->model)
+			$this->id = $this->model->id;
 	}
 
 	private function getTypeFromModel($model) {
