@@ -45,40 +45,22 @@ Tilganger
 
 
 class NewsEventFormTest extends PHPUnit_Framework_TestCase {
-
-	protected $model;
-	private $adminUser;
-	private $groupLeader;
-	private $groupMember;
-
-	protected function setUp() {
-		$this->setUpEvent();
+	
+	public function test_constructor_NewsInput_ModelIsSet() {
+		$newsModel = new News;
+		$model = new NewsEventForm($newsModel);
+		$this->assertEquals($newsModel, $model->getNewsModel());
 	}
-
-	private function setUpEvent() {
-		$this->event = Event::model();
-		$this->model = new NewsEventForm($this->event);
+	
+	public function test_constructor_EventInput_ModelIsSet() {
+		$eventModel = new Event;
+		$model = new NewsEventForm($eventModel);
+		$this->assertEquals($eventModel, $model->getEventModel());
 	}
-
-	private function setUpNews() {
-		$this->news = News::model();
-		$this->model = new NewsEventForm($this->news);
+	
+	public function test_constructor_NewsInput_EventModelIsCreated () {
+		$newsModel = new News;
+		$model = new NewsEventForm($newsModel);
 	}
-
-	public function testMakeAdminUser() {
-		$this->adminUser = new User;
-		$this->adminUser->firstName = rand(0,100000);
-		$this->adminUser->lastName = rand(0,100000);
-		$this->adminUser->username = rand(0,100000);
-		$this->adminUser->member = true;
-		
-		$this->adminUser->save();
-		
-		$this->assertNotEquals(null,$this->adminUser->id);
-	}
-
-	public function testMakeNewNewsWithAdminPermissions() {
-		$this->markTestIncomplete();
-	}
-
+	
 }

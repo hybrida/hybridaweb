@@ -21,62 +21,15 @@ class NewsEventForm extends CFormModel {
 	private $eventModel;
 	private $signupModel;
 
-	public function __construct(CActiveRecord $model, $scenario=' ') {
+	public function __construct($model, $scenario=' ') {
 		parent::__construct($scenario);
-
-		$this->initModels();
-		$this->initModel($model);
-
-		$this->initSignupModel();
-		$this->initModelAttributes();
-	}
-
-	private function initModels() {
-		$this->setDefaultModelValues();
-	}
-
-	private function setDefaultModelValues() {
-		$this->newsModel = News::model();
-		$this->eventModel = Event::model();
-		$this->signupModel = Signup::model();
-	}
-
-	private function initModel($model) {
-		if ($model instanceof Event) {
-			$this->setEventModel($model);
-		} else if ($model instanceof News) {
-			$this->setNewsModel($model);
-		} else {
-			throw new Exception("Modellen er ikke støttet.  Sendte inn " . get_class($model)
-							. ", og dette er hverken en News eller en Event"
-			);
+		
+		if ($model instanceof News) {
+			$this->newsModel = $model;
+		} else if ( $model instanceof Event) {
+			$this->eventModel = $model;
 		}
-	}
 
-	private function setNewsModel(News $news) {
-		if ($news == null) {
-			throw new Exception("NullPointerException: News kan ikke være null");
-		}
-		$this->newsModel = $news;
-	}
-
-	private function setEventModel(Event $event) {
-		if ($event == null) {
-			throw new Exception("NullPointerException: Event kan ikke være null");
-		}
-		$this->eventModel = $event;
-	}
-
-	private function initSignupModel() {
-		if ($this->eventModel->hasSignup()) {
-			$this->signupModel = $this->eventModel->getSignup();
-		}
-	}
-
-	private function initModelAttributes() {
-		$this->news = $this->newsModel->attributes;
-		$this->event = $this->eventModel->attributes;
-		$this->signup = $this->signupModel->attributes;
 	}
 
 	public function rules() {
@@ -92,7 +45,24 @@ class NewsEventForm extends CFormModel {
 				array('signup[spots]', 'required'),
 		);
 	}
+	
+	public function getNewsModel() {
+		return $this->newsModel;
+	}
 
+	public function getEventModel() {
+		return $this->eventModel;
+	}
+
+	public function getSignupModel() {
+		return $this->signupModel;
+	}
+
+	/*
+	 * UTESTET DEL AV KODEN!!
+	 * LAGET 20. oktober 2011
+	 * SLETT OM DET ER GAMMELT
+	 * 
 	public function save() {
 		$this->saveEvent();
 		$this->saveSignup();
@@ -147,6 +117,5 @@ class NewsEventForm extends CFormModel {
 		</pre>
 		<?
 	}
-
+*/
 }
-?>
