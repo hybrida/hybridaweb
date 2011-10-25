@@ -14,11 +14,20 @@
  * @property string $timestamp
  */
 class News extends CActiveRecord {
+	
+	private $_access;
 
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return News the static model class
 	 */
+	
+	public function __construct($scenario='insert') {
+		parent::__construct($scenario);
+	}
+
+
+
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
@@ -134,5 +143,17 @@ class News extends CActiveRecord {
 	public function setEventById($id) {
 		
 	}
+	
+	public function setAccess($array) {
+		$this->_access = new AccessRelation($this);
+		$this->_access->insert($array);
+	}
+	
+	public function getAccess() {
+		$this->_access = new AccessRelation($this);
+		return $this->_access->get();
+	}
+	
 
+	
 }

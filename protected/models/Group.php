@@ -205,7 +205,7 @@ class Group extends CActiveRecord {
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
-		GroupMembership::insert($this->id, $userId);
+		MembershipGroup::insert($this->id, $userId);
 	}
 
 	public function removeMember($userId) {

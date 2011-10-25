@@ -11,5 +11,8 @@
 
 <h2>Hardcore debugging</h2>
 <pre>
+<?
 
+		
+		?>
 </pre>

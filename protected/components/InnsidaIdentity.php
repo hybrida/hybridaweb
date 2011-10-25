@@ -29,36 +29,20 @@ class InnsidaIdentity extends CUserIdentity {
 	public function update() {
 		
 
-		// User
 		$user = User::model()->find("id = :id", array(":id" => $this->_id));
 		$this->_userName = $user->username;
 
 
-		// UserInfo
 		$userInfo = $user->getAttributes();
 
-		//$this->setState("",$userInfo['']);
 		$this->setState("firstName", $userInfo['firstName']);
 		$this->setState("middleName", $userInfo['middleName']);
 		$this->setState("lastName", $userInfo['lastName']);
 		$this->setState("member", $userInfo['member']);
 		$this->setState("gender", $userInfo['gender']);
 		$this->setState("imageId", $userInfo['imageId']);
-
-
-
-
-
-
-		$access = MembershipAccess::model()->findAll("userId = :id", array(":id" => $this->_id));
-
-		$this->_access = array();
-
-		foreach ($access as $ar) {
-			$this->_access[] = $ar->accessId;
-		}
-
-		$this->setState("access", $this->_access);
+		
+		$this->setState("access", $user->access);
 	}
 
 	public function getName() {
