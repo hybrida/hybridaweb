@@ -13,13 +13,6 @@
 <pre>
 <?
 
-		$user = new User;
-		$user->member = 0;
-		$user->username = "fredrik";
-		$user->firstName = "Geir";
-		$user->lastName = "Hjelstend";
-		$user->save();
 		
 		?>
-<h3>id: <?=$user->id?></h3>
 </pre>
