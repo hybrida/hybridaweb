@@ -1,11 +1,11 @@
 <?php
 class ImageProcessor  {
     
-    function getFileExtension($src) {
+    public function getFileExtension($src) {
 		return substr(strrchr($src,'.'),1);
 	}
 
-	function resizeImage($src, $newWidth, $newHeight) {
+	public function resizeImage($src, $newWidth, $newHeight) {
 
 		list($oldWidth, $oldHeight) = getimagesize($src);
 		if( $oldWidth > $oldHeight ) {
@@ -37,6 +37,6 @@ class ImageProcessor  {
 	}
 
 	function createThumbnail($src,$x,$y,$dst){
-		imagejpeg(resizeImage($src, $x, $y), $dst);
+		imagejpeg($this->resizeImage($src, $x, $y), $dst);
 	}
 }
