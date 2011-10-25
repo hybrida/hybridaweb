@@ -366,5 +366,3 @@ class GetController extends Controller{
     }
     
 }
-
-?>

@@ -10,5 +10,3 @@ class FaqController extends Controller{
         $this->render('view',$data);
     }
 }
-
-?>
