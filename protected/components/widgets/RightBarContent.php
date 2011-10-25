@@ -9,14 +9,18 @@ class RightBarContent extends CWidget {
 	public function init() {
 		if (!Yii::app()->user->isGuest) {
 			$this->addActivities();
-			$this->getImageId();
 		}
 	}
 
 	public function run() {
+        
 		if (Yii::app()->user->isGuest) {
 			$this->render("rightBarContent/guest");
 		} else {
+            
+            if(!isset($this->data['imageId'])){
+                $this->data['imageId'] = $this->getImageId();
+            }
 			$this->render("rightBarContent/user",  $this->data);
 		}
 	}
