@@ -21,7 +21,6 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 		$this->initTables();
 		$this->printTestAssumptions();
 		$this->setUpOnce();
-		$this->initGateKeeper();
 	}
 
 	private function initTables() {
@@ -38,10 +37,6 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 			echo "Tester for bruker: " . Yii::app()->user->name . PHP_EOL;
 			echo "VIKTIG: antar at brukeren kun har accesstilgang id 52 og 56" . PHP_EOL . PHP_EOL;
 		}
-	}
-	
-	private function initGateKeeper() {
-		$this->gatekeeper = new GateKeeper;
 	}
 
 	/**
@@ -108,13 +103,13 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 			return;
 
 		foreach ($this->tables as $type) {
-			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["allow"]));
-			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["deny"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
 
 
-			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["52"]));
-			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["52,56"]));
-			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52,1000"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
 		}
 	}
 
@@ -126,12 +121,12 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 
 		foreach ($this->tables as $type) {
 
-			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["allow"]));
-			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["deny"]));
+			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
 
-			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52"]));
-			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52,56"]));
-			$this->assertFalse($this->gatekeeper->hasAccess($type, $this->data[$type]["52,1000"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
+			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
 		}
 	}
 

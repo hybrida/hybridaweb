@@ -12,31 +12,33 @@
  */
 class GateKeeper {
 
-	private $userId;
-	private $access;
-	private $pdo;
+	private static  $userId;
+	private static $access;
+	private static $pdo;
+	private static $isGuest;
 
-	public function __construct() {
+	private static function init() {
+		self::$isGuest = Yii::app()->user->isGuest;
+		self::$userId = 1;
+		self::$access = array();
 
-		$this->isGuest = Yii::app()->user->isGuest;
-		$this->userId = 1;
-		$this->access = array();
-
-		if ( ! $this->isGuest) {
-			$this->userId = Yii::app()->user->id;
-			$this->access = Yii::app()->user->access;
-			//print_r($this->access);
+		if ( ! self::$isGuest) {
+			self::$userId = Yii::app()->user->id;
+			self::$access = Yii::app()->user->access;
+			//print_r(self::$access);
 		}
-		$this->pdo = Yii::app()->db->getPdoInstance();
+		self::$pdo = Yii::app()->db->getPdoInstance();
+		
 	}
 
-	public function hasAccess($type, $id) {
+	public static function hasAccess($type, $id) {
+		self::init();
 		
 		$sql = "SELECT access 
 FROM  `access_relations` 
 WHERE  `id` = :id
 AND  `type` =  :type ";
-		$stmt = $this->pdo->prepare($sql);
+		$stmt = self::$pdo->prepare($sql);
 		$stmt->bindValue(":id",$id);
 		$stmt->bindValue(":type",$type);
 		$stmt->execute();
@@ -44,7 +46,7 @@ AND  `type` =  :type ";
 		$typeAccess = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		
 		foreach ($typeAccess as $ac) {
-			if (! in_array($ac['access'], $this->access)) {
+			if (! in_array($ac['access'], self::$access)) {
 				return false;				
 			}
 		}

@@ -12,7 +12,6 @@
 <h2>Hardcore debugging</h2>
 <pre>
 <?
-
-		
+throw new CExceptions("this i supposed to happend. Check views/site/debug.php");		
 		?>
 </pre>
