@@ -6,15 +6,24 @@ class AccessRelation {
 	private $id;
 	private $type;
 	private $model;
-	private $_access;
+	private $insertAccess;
+	private $access;
 
 	public function __construct($modelOrType, $id=null) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
-		$this->_access = array();
+		$this->insertAccess = array();
 		if ($id) {
 			$this->initTypeId($modelOrType, $id);
 		} else {
 			$this->setModel($modelOrType);
+		}
+		$this->initAccess();
+	}
+
+	private function initAccess() {
+		if ($this->validate()) {
+			$this->fetch();
+			$this->access = $this->insertAccess;
 		}
 	}
 
@@ -24,11 +33,11 @@ class AccessRelation {
 	}
 
 	public function setModel($model) {
-		$this->validateModelAndThrowExceptions($model);
+		$this->throwExceptionsIfNotValid($model);
 		$this->initModel($model);
 	}
 
-	private function validateModelAndThrowExceptions($model) {
+	private function throwExceptionsIfNotValid($model) {
 		if ($model == null) {
 			throw new NullPointerException();
 		}
@@ -73,29 +82,31 @@ class AccessRelation {
 		if (!is_array($accessArray)) {
 			throw new InvalidArgumentException("input must be an array");
 		}
-		$this->_access = $accessArray;
+		$this->insertAccess = $accessArray;
 	}
 
 	public function save() {
-		$this->delete();
+		$this->deleteAll();
 		$this->insert();
 	}
 
 	public function insert() {
 		$this->updateId();
-		if ($this->validates()) {
-			$this->insertIntoDatabase();
+		if ($this->validate()) {
+			$this->fetch();
+			$this->performInsert();
+			$this->insertAccess = array();
 		} else {
 			throw new BadMethodCallException("The model is not saved yet");
 		}
 	}
 
-	public function validates() {
+	public function validate() {
 		return $this->id != null && $this->type != "";
 	}
 
-	private function insertIntoDatabase() {
-		$oldAccess = $this->get();
+	private function performInsert() {
+		$access = null;
 		$sql = <<<SQL
 			INSERT INTO access_relations (id, access, type) 
 				VALUES
@@ -104,11 +115,10 @@ SQL;
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindParam(":id", $this->id);
 		$stmt->bindParam(":type", $this->type);
-
-		$access = null;
 		$stmt->bindParam(":access", $access);
-		foreach ($this->_access as $access) {
-			if (in_array($access, $oldAccess)) {
+
+		foreach ($this->insertAccess as $access) {
+			if (in_array($access, $this->access)) {
 				continue;
 			}
 			$stmt->execute();
@@ -116,6 +126,11 @@ SQL;
 	}
 
 	public function get() {
+		$this->fetch();
+		return $this->access;
+	}
+
+	public function fetch() {
 		$sql = <<<SQL
 SELECT access FROM access_relations
 	WHERE id = :id AND type = :type
@@ -126,17 +141,62 @@ SQL;
 		$stmt->execute();
 		$accessArray = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-		return $accessArray;
+		$this->access = $accessArray;
 	}
 
-	public function delete() {
-		$conditions = "id = :id AND type = :type";
+	public function deleteAll() {
+		$this->access = array();
+
+		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type";
 		$params = array(
 		  ":id" => $this->id,
 		  ":type" => $this->type,
 		);
-		$stmt = Yii::app()->db->createCommand()
-				->delete("access_relations", $conditions, $params);
+
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($params);
+	}
+
+	public function remove($access) {
+		$this->removeFromAccessField($access);
+		$this->removeFromInsertAccessField($access);
+		
+		if (is_array($access)) {
+			$this->performRemove($access);
+		} else {
+			$this->performRemove(array($access));
+		}
+		
+	}
+
+	private function performRemove($accessArray) {
+		$access = null;
+		
+		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type AND access = :access";
+		
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindParam(":id", $this->id);
+		$stmt->bindParam(":type", $this->type);
+		$stmt->bindParam(":access", $access);
+		foreach ($accessArray as $access) {
+			$stmt->execute();
+		}
+	}
+
+	private function removeFromInsertAccessField($access) {
+		foreach ($this->insertAccess as $key => $value) {
+			if ($value == $access) {
+				unset($this->insertAccess[$key]);
+			}
+		}
+	}
+
+	private function removeFromAccessField($access) {
+		foreach ($this->access as $key => $value) {
+			if ($value == $access) {
+				unset($this->access[$key]);
+			}
+		}
 	}
 
 }
