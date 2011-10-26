@@ -22,45 +22,6 @@ class AccessTest extends PHPUnit_Framework_TestCase {
 		
 	}
 
-	/**
-	 * @todo Implement testInsertMembership().
-	 */
-	public function testInsertMembership() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-						'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testDeleteMembership().
-	 */
-	public function testDeleteMembership() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-						'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testDeleteAccessRelation().
-	 */
-	public function testDeleteAccessRelation() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-						'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testInsertAccessRelation().
-	 */
-	public function testInsertAccessRelation() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-						'This test has not been implemented yet.'
-		);
-	}
 
 	public function testGetAccessRelation() {
 		Access::deleteAllAccessRelation("event", 2);
@@ -72,36 +33,6 @@ class AccessTest extends PHPUnit_Framework_TestCase {
 		$expected = array(4,5,6,7);
 		$this->assertEquals($expected, Access::getAccessRelation( "event",2));
 		Access::deleteAllAccessRelation("event", 2);
-	}
-
-	/**
-	 * @todo Implement testDeleteAccessDefinition().
-	 */
-	public function testDeleteAccessDefinition() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-						'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testInsertAccessDefinition().
-	 */
-	public function testInsertAccessDefinition() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-						'This test has not been implemented yet.'
-		);
-	}
-
-	/**
-	 * @todo Implement testInnerSQLAllowedTypeIds().
-	 */
-	public function testInnerSQLAllowedTypeIds() {
-		// Remove the following lines when you implement this test.
-		$this->markTestIncomplete(
-						'This test has not been implemented yet.'
-		);
 	}
 
 }

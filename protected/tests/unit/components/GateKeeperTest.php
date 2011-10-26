@@ -83,15 +83,10 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 
 		$this->post->insert();
 		$this->data[$type][$name] = $this->post->id;
+		$accessRelation = new AccessRelation($this->post);
+		$accessRelation->set($access);
+		$accessRelation->save();
 
-
-		foreach ($access as $a) {
-			$acs_bit = new AccessRelations;
-			$acs_bit->type = $type;
-			$acs_bit->id = $this->post->id;
-			$acs_bit->access = $a;
-			$acs_bit->insert();
-		}
 	}
 
 	public function login() {
@@ -104,8 +99,11 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function testLoggedIn() {
-		if (Yii::app()->user->isGuest)
+		if (Yii::app()->user->isGuest) {
+			$this->markTestIncomplete("Couldn't test becaus user was not logged in");
 			return;
+		}
+		
 
 		foreach ($this->tables as $type) {
 			$this->assertTrue($this->gatekeeper->hasAccess($type, $this->data[$type]["allow"]));
@@ -120,6 +118,7 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 
 	public function testLoggedOut() {
 		if (!Yii::app()->user->isGuest) {
+			$this->markTestIncomplete("Couldn't test because user was logged in");
 			return;
 		}
 

@@ -5,7 +5,7 @@
  *
  * @author sigurd
  */
-class NullPointerException extends Exception {
+class NullPointerException extends RuntimeException {
 	//put your code here
 }
 

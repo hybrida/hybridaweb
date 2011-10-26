@@ -31,19 +31,10 @@ class GateKeeper {
 	}
 
 	public function hasAccess($type, $id) {
-		
-		$sql = "SELECT access 
-FROM  `access_relations` 
-WHERE  `id` = :id
-AND  `type` =  :type ";
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->bindValue(":id",$id);
-		$stmt->bindValue(":type",$type);
-		$stmt->execute();
-		
-		$typeAccess = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		
-		foreach ($typeAccess as $ac) {
+
+		$accessRelation = new AccessRelation($type, $id);
+		$access = $accessRelation->get();
+		foreach ($access as $ac) {
 			if (! in_array($ac['access'], $this->access)) {
 				return false;				
 			}

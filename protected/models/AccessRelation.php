@@ -6,32 +6,56 @@ class AccessRelation {
 	private $id;
 	private $type;
 	private $model;
+	private $insertAccess;
 	private $access;
 
-	public function __construct($model) {
+	public function __construct($modelOrType, $id=null) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
-		$this->setModel($model);
+		$this->insertAccess = array();
+		if ($id) {
+			$this->initTypeId($modelOrType, $id);
+		} else {
+			$this->setModel($modelOrType);
+		}
+		$this->initAccess();
+	}
+
+	private function initAccess() {
+		if ($this->validate()) {
+			$this->fetch();
+			$this->access = $this->insertAccess;
+		}
+	}
+
+	private function initTypeId($type, $id) {
+		$this->type = $type;
+		$this->id = $id;
 	}
 
 	public function setModel($model) {
-		$this->validateModelAndThrowsExceptions($model);
-		$this->init($model);
+		$this->throwExceptionsIfNotValid($model);
+		$this->initModel($model);
 	}
 
-	private function validateModelAndThrowsExceptions($model) {
+	private function throwExceptionsIfNotValid($model) {
 		if ($model == null) {
 			throw new NullPointerException();
 		}
 		if (!$this->getTypeFromModel($model)) {
-			throw new IllegalArgumentException(
+			throw new InvalidArgumentException(
 					"Model must be an instance of Event, News or Article");
 		}
 	}
 
-	private function init($model) {
-		$this->id = $model->id;
-		$this->type = $this->getTypeFromModel($model);
+	private function initModel($model) {
 		$this->model = $model;
+		$this->updateId();
+		$this->type = $this->getTypeFromModel($model);
+	}
+
+	private function updateId() {
+		if ($this->model)
+			$this->id = $this->model->primaryKey;
 	}
 
 	private function getTypeFromModel($model) {
@@ -41,6 +65,8 @@ class AccessRelation {
 			return "event";
 		} else if ($model instanceof Article) {
 			return "article";
+		} else if ($model instanceof Signup) {
+			return "signup";
 		}
 	}
 
@@ -52,23 +78,35 @@ class AccessRelation {
 		return $this->type;
 	}
 
-	public function insert($accessArray) {
-		if ($this->validates()) {
-			$this->insertIntoDatabase($accessArray);
+	public function set($accessArray) {
+		if (!is_array($accessArray)) {
+			throw new InvalidArgumentException("input must be an array");
+		}
+		$this->insertAccess = $accessArray;
+	}
+
+	public function save() {
+		$this->deleteAll();
+		$this->insert();
+	}
+
+	public function insert() {
+		$this->updateId();
+		if ($this->validate()) {
+			$this->fetch();
+			$this->performInsert();
+			$this->insertAccess = array();
 		} else {
-			throw new InvalidArgumentException();
+			throw new BadMethodCallException("The model is not saved yet");
 		}
 	}
 
-	public function validates() {
-		if ($this->model->isNewRecord) {
-			return false;
-		}
-		return true;
+	public function validate() {
+		return $this->id != null && $this->type != "";
 	}
 
-	private function insertIntoDatabase($accessArray) {
-		$oldAccess = $this->get();
+	private function performInsert() {
+		$access = null;
 		$sql = <<<SQL
 			INSERT INTO access_relations (id, access, type) 
 				VALUES
@@ -77,11 +115,10 @@ SQL;
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindParam(":id", $this->id);
 		$stmt->bindParam(":type", $this->type);
-
-		$access = $accessArray[0];
 		$stmt->bindParam(":access", $access);
-		foreach ($accessArray as $access) {
-			if (in_array($access, $oldAccess)) {
+
+		foreach ($this->insertAccess as $access) {
+			if (in_array($access, $this->access)) {
 				continue;
 			}
 			$stmt->execute();
@@ -89,6 +126,11 @@ SQL;
 	}
 
 	public function get() {
+		$this->fetch();
+		return $this->access;
+	}
+
+	public function fetch() {
 		$sql = <<<SQL
 SELECT access FROM access_relations
 	WHERE id = :id AND type = :type
@@ -99,22 +141,62 @@ SQL;
 		$stmt->execute();
 		$accessArray = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-		return $accessArray;
+		$this->access = $accessArray;
 	}
 
-	public function delete() {
-		
-		$sql = <<<SQL
-		DELETE FROM access_relations
-			WHERE id = :id AND type = :type
-SQL;
-		$stmt = Yii::app()->db->createCommand()
-				->delete("access_relations","id = :id AND type = :type",
-				array(
-				  ":id" => $this->id,
-				  ":type" => $this->type,
-				));
+	public function deleteAll() {
+		$this->access = array();
 
+		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type";
+		$params = array(
+		  ":id" => $this->id,
+		  ":type" => $this->type,
+		);
+
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->execute($params);
+	}
+
+	public function remove($access) {
+		$this->removeFromAccessField($access);
+		$this->removeFromInsertAccessField($access);
+		
+		if (is_array($access)) {
+			$this->performRemove($access);
+		} else {
+			$this->performRemove(array($access));
+		}
+		
+	}
+
+	private function performRemove($accessArray) {
+		$access = null;
+		
+		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type AND access = :access";
+		
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindParam(":id", $this->id);
+		$stmt->bindParam(":type", $this->type);
+		$stmt->bindParam(":access", $access);
+		foreach ($accessArray as $access) {
+			$stmt->execute();
+		}
+	}
+
+	private function removeFromInsertAccessField($access) {
+		foreach ($this->insertAccess as $key => $value) {
+			if ($value == $access) {
+				unset($this->insertAccess[$key]);
+			}
+		}
+	}
+
+	private function removeFromAccessField($access) {
+		foreach ($this->access as $key => $value) {
+			if ($value == $access) {
+				unset($this->access[$key]);
+			}
+		}
 	}
 
 }

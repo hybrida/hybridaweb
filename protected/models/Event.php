@@ -14,14 +14,15 @@
  * @property string $content
  */
 class Event extends CActiveRecord {
+	
+	private $_access;
 
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Event the static model class
 	 */
-	
 	private $signupModel = null;
-	
+
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
@@ -40,13 +41,13 @@ class Event extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-				array('title, content', 'required'),
-				array('imageId', 'numerical', 'integerOnly' => true),
-				array('location, title', 'length', 'max' => 30),
-				array('start, end', 'safe'),
-				// The following rule is used by search().
-				// Please remove those attributes that should not be searched.
-				array('id, start, end, location, title, imageId, content', 'safe', 'on' => 'search'),
+		  array('title, content', 'required'),
+		  array('imageId', 'numerical', 'integerOnly' => true),
+		  array('location, title', 'length', 'max' => 30),
+		  array('start, end', 'safe'),
+		  // The following rule is used by search().
+		  // Please remove those attributes that should not be searched.
+		  array('id, start, end, location, title, imageId, content', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -65,13 +66,13 @@ class Event extends CActiveRecord {
 	 */
 	public function attributeLabels() {
 		return array(
-				'id' => 'ID',
-				'start' => 'Start',
-				'end' => 'End',
-				'location' => 'Location',
-				'title' => 'Title',
-				'imageId' => 'Image',
-				'content' => 'Content',
+		  'id' => 'ID',
+		  'start' => 'Start',
+		  'end' => 'End',
+		  'location' => 'Location',
+		  'title' => 'Title',
+		  'imageId' => 'Image',
+		  'content' => 'Content',
 		);
 	}
 
@@ -95,29 +96,47 @@ class Event extends CActiveRecord {
 		$criteria->compare('content', $this->content, true);
 
 		return new CActiveDataProvider($this, array(
-								'criteria' => $criteria,
-						));
+				  'criteria' => $criteria,
+				));
+	}
+
+	public function afterConstruct() {
+		$this->_access = new AccessRelation($this);
+	}
+
+	public function afterFind() {
+		$this->afterConstruct();
+	}
+
+	public function setAccess($array) {
+		$this->_access->set($array);
+	}
+
+	public function getAccess() {
+		return $this->_access->get();
+	}
+
+	public function afterSave() {
+		$this->_access->save();
 	}
 
 	public function getSignup() {
 		$this->setSignupIfIsNull();
-		return $this->signupModel;		
+		return $this->signupModel;
 	}
-	
+
 	public function hasSignup() {
 		$this->setSignupIfIsNull();
-		return $this->signupModel != null;		
+		return $this->signupModel != null;
 	}
-	
+
 	private function setSignupIfIsNull() {
 		if ($this->signupModel == null)
 			$this->setSignup();
 	}
-	
+
 	private function setSignup() {
 		$this->signupModel = Signup::model()->findByPk($this->id);
 	}
-	
-	
 
 }

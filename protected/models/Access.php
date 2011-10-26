@@ -3,11 +3,10 @@
 class Access {
 
 	private static $pdo;
-	
+
 	const MEMBER = 3;
 	const MALE = 4;
 	const FEMALE = 5;
-	
 
 	public function __construct() {
 		self::$pdo = Yii::app()->db->getPdoInstance();
@@ -17,9 +16,9 @@ class Access {
 	public static function deleteAccessRelation($type, $id, $access) {
 		self::$pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
-				'type' => $type,
-				'id' => $id,
-				'access' => $access
+		  'type' => $type,
+		  'id' => $id,
+		  'access' => $access
 		);
 
 		$sql = "DELETE FROM access_relations WHERE type = :type AND id = :id AND access = :access";
@@ -30,8 +29,8 @@ class Access {
 	public static function deleteAllAccessRelation($type, $id) {
 		self::$pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
-				'type' => $type,
-				'id' => $id,
+		  'type' => $type,
+		  'id' => $id,
 		);
 
 		$sql = "DELETE FROM access_relations WHERE type = :type AND id = :id";
@@ -40,23 +39,13 @@ class Access {
 	}
 
 	public static function insertAccessRelation($type, $id, $access) {
-		self::insertAccessRelationArray($type,$id, array($access));
+		self::insertAccessRelationArray($type, $id, array($access));
 	}
 
-	public static function insertAccessRelationArray($type, $id,$array) {
-		self::$pdo = Yii::app()->db->getPdoInstance();
-		$access = $array[0];
-
-		$sql = "INSERT INTO access_relations (id, access, type) VALUES (:id, :access, :type)";
-		$stmt = self::$pdo->prepare($sql);
-		
-		$stmt->bindParam("type",$type);
-		$stmt->bindParam("id",$id);
-		$stmt->bindParam("access",$access);
-		
-		foreach ($array as $access) {
-			$stmt->execute();
-		}
+	public static function insertAccessRelationArray($type, $id, $array) {
+		$access = new AccessRelation($type, $id);
+		$access->set($array);
+		$access->insert();
 	}
 
 	public static function getAccessRelation($type, $id) {
@@ -77,7 +66,7 @@ class Access {
 
 	public static function deleteAccessDefinition($description) {
 		$data = array(
-				'name' => $description
+		  'name' => $description
 		);
 
 		$sql = "DELETE FROM access_definition WHERE description = :name";
@@ -87,7 +76,7 @@ class Access {
 
 	public function insertAccessDefinition($description) {
 		$data = array(
-				'name' => $description
+		  'name' => $description
 		);
 
 		$sql = "INSERT INTO access_definition (id, description) VALUES (null, :name)";
@@ -99,7 +88,7 @@ class Access {
 
 	public static function getAccessDefinition($description) {
 		$data = array(
-				'name' => $description
+		  'name' => $description
 		);
 
 		$sql = "SELECT id from access_definition WHERE description = :name";
@@ -115,5 +104,3 @@ class Access {
 	}
 
 }
-
-?>

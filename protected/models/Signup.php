@@ -9,10 +9,11 @@
  * @property string $open
  * @property string $close
  * @property string $signoff
- * @property integer $active
  */
 class Signup extends CActiveRecord
 {
+	
+	private $_access;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Signup the static model class
@@ -38,12 +39,12 @@ class Signup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('spots, open, close, active', 'required'),
-			array('eventId, spots, active', 'numerical', 'integerOnly'=>true),
+			array('spots, open, close', 'required'),
+			array('eventId, spots', 'numerical', 'integerOnly'=>true),
 			array('signoff', 'length', 'max'=>5),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('eventId, spots, open, close, signoff, active', 'safe', 'on'=>'search'),
+			array('eventId, spots, open, close, signoff', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -94,5 +95,25 @@ class Signup extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function afterConstruct() {
+		$this->_access = new AccessRelation($this);
+	}
+
+	public function afterFind() {
+		$this->afterConstruct();
+	}
+
+	public function setAccess($array) {
+		$this->_access->set($array);
+	}
+
+	public function getAccess() {
+		return $this->_access->get();
+	}
+
+	public function afterSave() {
+		$this->_access->save();
 	}
 }
