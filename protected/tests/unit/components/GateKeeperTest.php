@@ -6,128 +6,77 @@
  */
 class GateKeeperTest extends PHPUnit_Framework_TestCase {
 
-	/**
-	 * @var GateKeeper
-	 * 
-	 */
-	private $data = array();
-	private $post;
-	private $tables;
+	private $userAccess = array(1, 10, 52, 56, 199);
 
-	/**
-	 * @var integer
-	 */
-	public function __construct() {
-		$this->initTables();
-		//$this->printTestAssumptions();
-		$this->setUpOnce();
+	private function assertHasAccessLoggedIn($expected, $array) {
+		$this->login();
+		$this->assertHasAccess($expected, $array);
 	}
 
-	private function initTables() {
-		$this->tables = array(
-				"news", "event",
-		);
+	private function assertHasAccessLoggedOut($expected, $array) {
+		$this->logout();
+		$this->assertHasAccess($expected, $array);
 	}
 
-	private function printTestAssumptions() {
-		echo "GateKeeperTest: ";
-		if (Yii::app()->user->isGuest) {
-			echo "Tester for gjester" . PHP_EOL;
-		} else {
-			echo "Tester for bruker: " . Yii::app()->user->name . PHP_EOL;
-			echo "VIKTIG: antar at brukeren kun har accesstilgang id 52 og 56" . PHP_EOL . PHP_EOL;
-		}
+	private function assertHasAccess($expected, $array) {
+		$news = new News;
+		$news->access = $array;
+		$news->save();
+
+		$actual = GateKeeper::hasAccess("news", $news->id);
+		$this->assertEquals($expected, $actual);
 	}
 
-	/**
-	 * Sets up the fixture, for example, opens a network connection.
-	 * This method is called before a test is executed.
-	 */
-	public function setUpOnce() {
+	private function login() {
+		$user = new User;
+		$user->username = "a" . rand(0, 1000000);
+		$user->firstName = "TestCase";
+		$user->lastName = "TestCase";
+		$user->member = "true";
 
+		$user->setAccess($this->userAccess);
+		$user->save();
 
-		foreach ($this->tables as $type) {
-			$className = ucfirst($type);
-			$this->data[$type] = array();
-			$this->insert($type, "allow", array());
-			$this->insert($type, "deny", array(
-					rand(0, 10000),
-					rand(0, 10000),
-					rand(0, 10000),
-					rand(0, 10000),
-					3238746,
-			));
-
-			$this->insert($type, "52", array(
-					52
-			));
-
-			$this->insert($type, "52,56", array(
-					52, 56
-			));
-
-			$this->insert($type, "52,1000", array(
-					52, 1000
-			));
-		}
+		$userIdentity = new InnsidaIdentity($user->id); // Sigurd
+		$userIdentity->authenticate();
+		Yii::app()->user->login($userIdentity);
 	}
 
-	public function insert($type, $name, array $access) {
-		$className = ucwords($type);
-		$this->post = new $className;
-
-		$this->post->insert();
-		$this->data[$type][$name] = $this->post->id;
-		$accessRelation = new AccessRelation($this->post);
-		$accessRelation->set($access);
-		$accessRelation->insert();
-
+	private function logout() {
+		Yii::app()->user->logout();
 	}
 
-	public function login() {
-		$user = 381;
-		$pass = null;
-		$identity = new InnsidaIdentity($user);
-
-		$identity->authenticate();
-		Yii::app()->user->login($identity);
-	}
-	
-	public function testLoggedIn() {
-		
-		if (Yii::app()->user->isGuest) {
-			$this->markTestIncomplete("Couldn't test because user was not logged in");
-			return;
-		}
-		
-
-		foreach ($this->tables as $type) {
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
-
-
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
-		}
+	public function test_hasAccess_LoggedIn_empty_true() {
+		$this->assertHasAccessLoggedIn(true, array());
 	}
 
-	public function testLoggedOut() {
-		if (!Yii::app()->user->isGuest) {
-			$this->markTestIncomplete("Couldn't test because user was logged in");
-			return;
-		}
-
-
-		foreach ($this->tables as $type) {
-
-			$this->assertTrue(GateKeeper::hasAccess($type, $this->data[$type]["allow"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["deny"]));
-
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,56"]));
-			$this->assertFalse(GateKeeper::hasAccess($type, $this->data[$type]["52,1000"]));
-		}
+	public function test_hasAccess_LoggedIn_someInSomeOut_false() {
+		$this->assertHasAccessLoggedIn(false, array(1, 2, 3));
 	}
+
+	public function test_hasAccess_LoggedIn_someIn_true() {
+		$this->assertHasAccessLoggedIn(true, array(1, 52));
+	}
+
+	public function test_hasAccess_LoggedIn_allIn_true() {
+		$this->assertHasAccessLoggedIn(true, $this->userAccess);
+	}
+
+	public function test_hasAccess_LoggedIn_someOut_false() {
+		$this->assertHasAccessLoggedIn(false, array(1000123, 123123));
+	}
+
+	public function test_hasAccess_LoggedIn_allInSomeOut_false() {
+		$this->assertHasAccessLoggedIn(false, array_merge($this->userAccess, array(1, 2, 3, 4, 5, 6, 7, 8)));
+	}
+
+	public function test_hasAccess_LoggedOut_empty_true() {
+		$this->assertHasAccessLoggedOut(true, array());
+	}
+
+	public function test_hasAccess_LoggedOut_someOut_false() {
+		$this->assertHasAccessLoggedOut(false, array(1));
+	}
+
 
 }

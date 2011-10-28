@@ -13,8 +13,8 @@ class UserTest extends PHPUnit_Framework_TestCase {
 	private function getCleanUserObject() {
 		$user = new User;
 		$user->username = "s" . rand(0, 100000);
-		$user->firstName = "Sigurd";
-		$user->lastName = "Holsen";
+		$user->firstName = "UserTest";
+		$user->lastName = "getCleanUserObject";
 		$user->member = "false";
 		return $user;
 	}
@@ -68,6 +68,17 @@ class UserTest extends PHPUnit_Framework_TestCase {
 		$array = array(1, 2, 3);
 		$model->setAccess($array);
 		$this->assertEquals($array, $model->getAccess());
+	}
+	
+	
+	public function test_setAccess_getAccess() {
+		$access = array(1,2,3,4);
+		$user = $this->getCleanUserObject();
+		$user->setAccess($access);
+		$user->save();
+		
+		$user2 = User::model()->findByPk($user->id);
+		$this->assertEquals($access, $user2->getAccess());
 	}
 
 }

@@ -25,7 +25,6 @@ class GateKeeper {
 		if ( ! self::$isGuest) {
 			self::$userId = Yii::app()->user->id;
 			self::$access = Yii::app()->user->access;
-			//print_r(self::$access);
 		}
 		self::$pdo = Yii::app()->db->getPdoInstance();
 		
@@ -37,7 +36,7 @@ class GateKeeper {
 		$accessRelation = new AccessRelation($type, $id);
 		$access = $accessRelation->get();
 		foreach ($access as $ac) {
-			if (! in_array($ac['access'], self::$access)) {
+			if (! in_array($ac, self::$access)) {
 				return false;				
 			}
 		}
