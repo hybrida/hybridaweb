@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -15,9 +14,9 @@ class NewsEventForm extends CFormModel {
 	public $hasNews;
 	public $hasSignup;
 	public $hasEvent;
-	public $news;
-	public $event;
-	public $signup;
+	public $news = array();
+	public $event = array();
+	public $signup = array();
 	private $newsModel;
 	private $eventModel;
 	private $signupModel;
@@ -34,15 +33,15 @@ class NewsEventForm extends CFormModel {
 
 	public function rules() {
 		return array(
-		  array('hasNews, hasSignup, hasEvent', 'boolean'),
-		  array(
-			'news[title], news[content], ' .
-			'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
-			'signup[spots], signup[open], signup[close], signup[signoff]',
-			'default'
-		  ),
-		  array('event[start], event[end], signup[open], signup[close]', 'date',),
-		  array('signup[spots]', 'required'),
+				array('hasNews, hasSignup, hasEvent', 'boolean'),
+				array(
+						'news[title], news[content], ' .
+						'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
+						'signup[spots], signup[open], signup[close], signup[signoff]',
+						'default'
+				),
+				array('event[start], event[end], signup[open], signup[close]', 'date',),
+				array('signup[spots]', 'required'),
 		);
 	}
 
@@ -74,19 +73,29 @@ class NewsEventForm extends CFormModel {
 
 	public function saveNews() {
 		if ($this->hasNews) {
-			$this->newsModel->attributes = $this->news;
-			$this->setAccessToModel($this->newsModel, $news);
+			$this->newsModel->setAttributes($this->news);
+			try {
+				if (array_key_exists("access", $this->news)) {
+					$this->newsModel->setAccess($this->news['access']);
+				}
+			} catch (InvalidArgumentException $e) {
+				;
+			}
 			$this->newsModel->save();
 			$this->saveNewsParent();
 		}
 	}
-	
-	private function setAccessToModel($model, $modelArray) {
-		
-	}
 
 	public function saveNewsParent() {
 		
+	}
+
+	public function setAttributes($values) {
+		foreach ($values as $key => $value) {
+			if (isset($this->$key)) {
+				$this->$key = $value;
+			}
+		}
 	}
 
 	/*
@@ -134,19 +143,18 @@ class NewsEventForm extends CFormModel {
 	  }
 	  }
 
-	  public function testInput() {
-	  ?>
-	  <h1>testInput</h1>
-	  <pre>
-	  <strong>news</strong> <? print_r($this->news) ?>
-	  event: <? print_r($this->event) ?>
-	  signup: <? print_r($this->signup) ?>
-	  hasEvent: <? print_r($this->hasEvent) ?>
-	  hasNews: <? print_r($this->hasNews) ?>
-	  hasSignup: <? print_r($this->hasSignup) ?>
-
-	  </pre>
-	  <?
-	  }
 	 */
+
+	public function printFields() {
+		?> 
+Felter for NewsEventForm
+news: <? print_r($this->news) ?> 
+event: <? print_r($this->event) ?> 
+signup: <? print_r($this->signup) ?> 
+hasEvent: <? print_r($this->hasEvent) ?> 
+hasNews: <? print_r($this->hasNews) ?> 
+hasSignup: <? print_r($this->hasSignup) ?> 
+		<?
+	}
+
 }

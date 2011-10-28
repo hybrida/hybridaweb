@@ -114,6 +114,6 @@ class Signup extends CActiveRecord
 	}
 
 	public function afterSave() {
-		$this->_access->save();
+		$this->_access->replace();
 	}
 }

@@ -117,7 +117,7 @@ class Event extends CActiveRecord {
 	}
 
 	public function afterSave() {
-		$this->_access->save();
+		$this->_access->replace();
 	}
 
 	public function getSignup() {

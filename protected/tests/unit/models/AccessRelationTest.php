@@ -44,10 +44,10 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals("article", $access->getType());
 	}
-	
+
 	public function test_constructor_TypeAndId_getType() {
-		$access = new AccessRelation("news",2);
-		$this->assertEquals("news",$access->getType());
+		$access = new AccessRelation("news", 2);
+		$this->assertEquals("news", $access->getType());
 	}
 
 	/**
@@ -113,37 +113,36 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(array(1, 2, 3, 8), $access->get());
 	}
-	
+
 	public function test_insert_makeAccessRelationOnNewRecord_throwsNothing() {
-		$array = array(1,2,3);
+		$array = array(1, 2, 3);
 		$news = new News;
 		$access = new AccessRelation($news);
 		$access->set($array);
 		$news->save();
-		$access->save();
+		$access->replace();
 	}
-	
+
 	public function test_insert_EmptyArray_doesNothing() {
 		$news = new News;
 		$news->save();
 		$access = new AccessRelation($news);
 		$access->set(array());
-		$access->save();
-		
+		$access->replace();
+
 		$news2 = News::model()->findByPk($news->id);
 		$access = new AccessRelation($news2);
-		$this->assertEquals(array(),$access->get());
-
+		$this->assertEquals(array(), $access->get());
 	}
-		
+
 	public function test_insert_constructedWithTypeAndId() {
-		$array = array(1,2,3,4);
-		$access = new AccessRelation("event",2);
+		$array = array(1, 2, 3, 4);
+		$access = new AccessRelation("event", 2);
 		$access->set($array);
 		$access->insert();
-		
-		$access2 = new AccessRelation("event",2);
-		$this->assertEquals($array,$access2->get());
+
+		$access2 = new AccessRelation("event", 2);
+		$this->assertEquals($array, $access2->get());
 	}
 
 	public function test_save_nonEmptyAccess_deleteOld() {
@@ -151,10 +150,10 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$news->save();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3, 4));
-		$access->save();
+		$access->replace();
 		$array = array(5, 8);
 		$access->set($array);
-		$access->save();
+		$access->replace();
 
 
 		$news2 = News::model()->findByPk($news->id);
@@ -163,46 +162,43 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($array, $access2->get());
 	}
 
-
-	public function test_deleteAll() {
+	public function test_removeAll() {
 		$news = new News;
 		$news->save();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3, 4));
 		$access->insert();
-		$access->deleteAll();
-		
+		$access->removeAll();
+
 		$access2 = new AccessRelation($news);
 		$this->assertEmpty($access->get());
 	}
-	
+
 	public function test_remove_oneInput() {
 		$news = new News;
 		$news->save();
 		$access = new AccessRelation($news);
-		$access->set(array(1,2,3));
-		$access->save();
+		$access->set(array(1, 2, 3));
+		$access->insert();
 		$access->remove(2);
-		$access->save();
+		$access->insert();
 		$this->assertEquals(array(1,3),$access->get());		
 	}
-	
+
 	public function test_remove_oneInputFromEarlierAccess() {
-		$array = array(10,11,12);
+		$array = array(10, 11, 12);
 		$news = new News;
 		$news->save();
 		$access = new AccessRelation($news);
 		$access->set($array);
-		$access->save();
-		
-		
+		$access->insert();
+
+
 		$access2 = new AccessRelation($news);
-		
+
 		$access2->remove(11);
-		$access2->save();
-		
-		$this->assertEquals(array(10,12), $access2->get());
+
+		$this->assertEquals(array(10, 12), $access2->get());
 	}
-	
-	
+
 }

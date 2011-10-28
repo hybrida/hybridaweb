@@ -19,7 +19,7 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function __construct() {
 		$this->initTables();
-		$this->printTestAssumptions();
+		//$this->printTestAssumptions();
 		$this->setUpOnce();
 	}
 
@@ -80,22 +80,23 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 		$this->data[$type][$name] = $this->post->id;
 		$accessRelation = new AccessRelation($this->post);
 		$accessRelation->set($access);
-		$accessRelation->save();
+		$accessRelation->insert();
 
 	}
 
 	public function login() {
 		$user = 381;
 		$pass = null;
-		$identity = new InnsidaIdentity($user, $pass);
+		$identity = new InnsidaIdentity($user);
 
 		$identity->authenticate();
 		Yii::app()->user->login($identity);
 	}
-
+	
 	public function testLoggedIn() {
+		
 		if (Yii::app()->user->isGuest) {
-			$this->markTestIncomplete("Couldn't test becaus user was not logged in");
+			$this->markTestIncomplete("Couldn't test because user was not logged in");
 			return;
 		}
 		

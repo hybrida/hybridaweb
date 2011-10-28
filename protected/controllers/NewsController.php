@@ -67,7 +67,7 @@ class NewsController extends Controller {
 		if (isset($_POST['NewsForm'])) {
 			$input = $_POST['NewsForm'];
 			$model->setAttributes($input,false);
-			$model->testInput();
+			$model->printFields();
 			
 		}
 

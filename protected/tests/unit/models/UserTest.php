@@ -12,7 +12,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
 	private function getCleanUserObject() {
 		$user = new User;
-		$user->username = "sigurd" . rand(0, 1000);
+		$user->username = "s" . rand(0, 100000);
 		$user->firstName = "Sigurd";
 		$user->lastName = "Holsen";
 		$user->member = "false";

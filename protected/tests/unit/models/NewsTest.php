@@ -50,5 +50,27 @@ class NewsTest extends PHPUnit_Framework_TestCase {
 		$news = new News;
 		$this->assertEquals(null, $news->id);
 	}
-
+	
+	public function test_setParent_getParentId_TypeAndID() {
+		$event = new Event;
+		$event->insert();
+		$news = new News;
+		$news->setParent("event",$event->getPrimaryKey());
+		$news->insert();
+		
+		$news2 = News::model()->findByPk($news->id);
+		
+		$this->assertEquals($event->getPrimaryKey(), $news2->getParentId());		
+	}
+	public function test_setParent_getParentType_TypeAndId() {
+		
+		$event = new Event;
+		$event->insert();
+		$news = new News;
+		$news->setParent("event",$event->getPrimaryKey());
+		$news->insert();
+		
+		$news2 = News::model()->findByPk($news->id);
+		$this->assertEquals("event", $news2->getParentTYpe());
+	}
 }

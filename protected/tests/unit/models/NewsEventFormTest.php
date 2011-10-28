@@ -47,13 +47,13 @@
 
 class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
-	public function test_constructor_NewsInput_ModelIsSet() {
+	public function test_constructor_NewsModel() {
 		$newsModel = new News;
 		$model = new NewsEventForm($newsModel);
 		$this->assertEquals($newsModel, $model->getNewsModel());
 	}
 
-	public function test_constructor_EventInput_ModelIsSet() {
+	public function test_constructor_EventModel() {
 		$eventModel = new Event;
 		$model = new NewsEventForm($eventModel);
 		$this->assertEquals($eventModel, $model->getEventModel());
@@ -72,22 +72,52 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEquals(null, $news->primaryKey);
 	}
 
-	public function test_saveNews_UnsavedNewsModelWitAccess_NewsIsCreated() {
+
+	public function test_saveNews_UnsavedNewsModelWitAccess() {
 		$title = $content = "dummy";
 		$access = array(1, 2, 3, 4);
 		$input = array(
-		  "news" => array(
-			"title" => $title,
-			"content" => $content,
-			"access" => $access,
-		  )
+				"news" => array(
+						"title" => $title,
+						"content" => $content,
+						"access" => $access,
+				)
 		);
 		$model = new NewsEventForm(new News);
 		$model->setAttributes($input);
+		$model->hasNews = true;
 		$model->saveNews();
+		$news = $model->getNewsModel();
+		
+		$this->assertEquals($title, $news->title);
+		$this->assertEquals($content, $news->content);
+		$this->assertEquals($access, $news->getAccess());
+	}
+
+	public function test_setAttributes_newsModel() {
+		$title = $content = "dummy";
+		$access = array(6, 7, 8,);
+		$input = array(
+				"news" => array(
+						"title" => $title,
+						"content" => $content,
+						"access" => $access,
+				),
+		);
+		
+		$model = new NewsEventForm(new News);
+		$model->setAttributes($input);
+		$model->hasNews = true;
+		$model->saveNews();
+		
 		$this->assertEquals($title, $model->getNewsModel()->title);
-		$this->assertEquals($contet, $model->getNewsModel()->content);
-		$this->assertEquals($access, $model->getNewsModel()->access);
+		$this->assertEquals($content, $model->getNewsModel()->content);
+	}
+	
+	public function test_dummy() {
+		$model = new NewsEventForm(new News);
+		$model->news['id'] = 2;
+		$model->news['content'] = "dummy innhold";
 	}
 
 }

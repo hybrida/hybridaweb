@@ -116,7 +116,7 @@ class News extends CActiveRecord {
 	}
 
 	public function afterSave() {
-		$this->_access->save();
+		$this->_access->replace();
 	}
 
 	public function getEventId() {
@@ -155,6 +155,19 @@ class News extends CActiveRecord {
 
 	public function setEventById($id) {
 		
+	}
+	
+	public function setParent($type,$id) {
+		$this->parentType = $type;
+		$this->parentId = $id;
+	}
+	
+	public function getParentType() {
+		return $this->parentType;
+	}
+	
+	public function getParentId() {
+		return $this->parentId;
 	}
 
 }

@@ -85,14 +85,14 @@ class AccessRelation {
 		$this->insertAccess = $accessArray;
 	}
 
-	public function save() {
-		$this->deleteAll();
+	public function replace() {
+		$this->removeAll();
 		$this->insert();
 	}
 
 	public function insert() {
 		$this->updateId();
-		if ($this->validate()) {
+		if ( $this->validate() ) {
 			$this->fetch();
 			$this->performInsert();
 			$this->insertAccess = array();
@@ -130,7 +130,7 @@ SQL;
 		return $this->access;
 	}
 
-	public function fetch() {
+	private  function fetch() {
 		$sql = <<<SQL
 SELECT access FROM access_relations
 	WHERE id = :id AND type = :type
@@ -144,7 +144,7 @@ SQL;
 		$this->access = $accessArray;
 	}
 
-	public function deleteAll() {
+	public function removeAll() {
 		$this->access = array();
 
 		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type";
@@ -169,20 +169,6 @@ SQL;
 		
 	}
 
-	private function performRemove($accessArray) {
-		$access = null;
-		
-		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type AND access = :access";
-		
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->bindParam(":id", $this->id);
-		$stmt->bindParam(":type", $this->type);
-		$stmt->bindParam(":access", $access);
-		foreach ($accessArray as $access) {
-			$stmt->execute();
-		}
-	}
-
 	private function removeFromInsertAccessField($access) {
 		foreach ($this->insertAccess as $key => $value) {
 			if ($value == $access) {
@@ -198,5 +184,20 @@ SQL;
 			}
 		}
 	}
+	
+	private function performRemove($accessArray) {
+		$access = null;
+		
+		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type AND access = :access";
+		
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindParam(":id", $this->id);
+		$stmt->bindParam(":type", $this->type);
+		$stmt->bindParam(":access", $access);
+		foreach ($accessArray as $access) {
+			$stmt->execute();
+		}
+	}
+
 
 }
