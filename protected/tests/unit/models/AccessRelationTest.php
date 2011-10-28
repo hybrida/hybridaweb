@@ -102,7 +102,7 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(array_merge($accessArray1, $accessArray2), $access->get());
 	}
 
-	public function test_instert_duplicatedInsertion_insertsOnce() {
+	public function test_insert_duplicatedInsertion_insertsOnce() {
 		$news = new News;
 		$news->save();
 		$access = new AccessRelation($news);
@@ -112,6 +112,34 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$access->insert();
 
 		$this->assertEquals(array(1, 2, 3, 8), $access->get());
+	}
+	
+	public function test_insert_duplicatedInsertionInSameSet_insertOnce() {
+		$news = new News;
+		$news->save();
+		$access = new AccessRelation($news);
+		$access->set(array(1, 2, 3,1,2));
+		$access->insert();
+		
+		$this->assertEquals(array(1,2,3),$access->get());
+	}
+	
+	public function test_insert_duplicatedInsertionSeparateObjects() {
+		$news = new News;
+		$news->save();
+		$access = new AccessRelation($news);
+		$access->set(array(1, 2, 3));
+		$access->insert();
+		
+		$news2 = News::model()->findByPk($news->id);
+		$access2 = new AccessRelation($news2);
+		$access2->set(array(1, 3, 8));
+		$access2->insert();
+		
+		$accessGet = new AccessRelation($news);
+
+		$this->assertEquals(array(1, 2, 3, 8), $accessGet->get());
+		
 	}
 
 	public function test_insert_makeAccessRelationOnNewRecord_throwsNothing() {

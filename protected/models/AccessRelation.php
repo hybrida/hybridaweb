@@ -117,7 +117,8 @@ SQL;
 		$stmt->bindParam(":type", $this->type);
 		$stmt->bindParam(":access", $access);
 
-		foreach ($this->insertAccess as $access) {
+		$insertArray = array_unique($this->insertAccess);
+		foreach ($insertArray as $access) {
 			if (in_array($access, $this->access)) {
 				continue;
 			}
