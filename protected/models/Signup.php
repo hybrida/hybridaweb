@@ -39,7 +39,7 @@ class Signup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('spots, open, close', 'required'),
+			array('eventId, spots, open, close', 'required'),
 			array('eventId, spots', 'numerical', 'integerOnly'=>true),
 			array('signoff', 'length', 'max'=>5),
 			// The following rule is used by search().

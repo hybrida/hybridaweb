@@ -24,24 +24,48 @@ class NewsEventForm extends CFormModel {
 	public function __construct($model, $scenario=' ') {
 		parent::__construct($scenario);
 
+		$this->initModel($model);
+	}
+
+	private function initModel($model) {
+		$this->initModels();
 		if ($model instanceof News) {
-			$this->newsModel = $model;
+			$this->initNewsModel($model);
 		} else if ($model instanceof Event) {
-			$this->eventModel = $model;
+			$this->initEventModel($model);
 		}
+	}
+
+	private function initModels() {
+		$this->newsModel = new News;
+		$this->eventModel = new Event;
+		$this->signupModel = new Signup;
+	}
+
+	private function initNewsModel($model) {
+		if (!$model->isNewRecord) {
+			if ($model->parentType == "event" && $model->parentId !== null) {
+				$this->eventModel = Event::model()->findByPk($model->parentId);
+			}
+		}
+		$this->newsModel = $model;
+	}
+
+	private function initEventModel($model) {
+		
 	}
 
 	public function rules() {
 		return array(
-				array('hasNews, hasSignup, hasEvent', 'boolean'),
-				array(
-						'news[title], news[content], ' .
-						'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
-						'signup[spots], signup[open], signup[close], signup[signoff]',
-						'default'
-				),
-				array('event[start], event[end], signup[open], signup[close]', 'date',),
-				array('signup[spots]', 'required'),
+			array('hasNews, hasSignup, hasEvent', 'boolean'),
+			array(
+				'news[title], news[content], ' .
+				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
+				'signup[spots], signup[open], signup[close], signup[signoff]',
+				'default'
+			),
+			array('event[start], event[end], signup[open], signup[close]', 'date',),
+			array('signup[spots]', 'required'),
 		);
 	}
 
@@ -64,29 +88,43 @@ class NewsEventForm extends CFormModel {
 	}
 
 	public function saveEvent() {
-		
+		if ($this->hasEvent) {
+			$this->eventModel->setAttributes($this->event);
+			if (array_key_exists("access", $this->event)) {
+				$this->eventModel->access = $this->event['access'];
+			}
+			$this->eventModel->save();
+		}
 	}
 
 	public function saveSignup() {
-		
+		if ($this->hasSignup && $this->hasEvent) {
+			$this->signupModel->setAttributes($this->signup);
+			if (array_key_exists("access", $this->signup)) {
+				$this->signupModel->access = $this->signup['access'];
+			}
+			$this->signupModel->eventId = $this->eventModel->id;
+			$this->signupModel->save();
+		}
 	}
 
 	public function saveNews() {
 		if ($this->hasNews) {
 			$this->newsModel->setAttributes($this->news);
-			try {
-				if (array_key_exists("access", $this->news)) {
-					$this->newsModel->setAccess($this->news['access']);
-				}
-			} catch (InvalidArgumentException $e) {
-				;
+
+			if (array_key_exists("access", $this->news)) {
+				$this->newsModel->access = $this->news['access'];
 			}
+
 			$this->newsModel->save();
-			$this->saveNewsParent();
+			$this->initNewsParent();
 		}
 	}
 
-	public function saveNewsParent() {
+	private function initNewsParent() {
+		if ($this->hasEvent) {
+			$this->newsModel->setParent("event",  $this->eventModel->id);
+		}
 		
 	}
 
@@ -147,13 +185,13 @@ class NewsEventForm extends CFormModel {
 
 	public function printFields() {
 		?> 
-Felter for NewsEventForm
-news: <? print_r($this->news) ?> 
-event: <? print_r($this->event) ?> 
-signup: <? print_r($this->signup) ?> 
-hasEvent: <? print_r($this->hasEvent) ?> 
-hasNews: <? print_r($this->hasNews) ?> 
-hasSignup: <? print_r($this->hasSignup) ?> 
+		Felter for NewsEventForm
+		news: <? print_r($this->news) ?> 
+		event: <? print_r($this->event) ?> 
+		signup: <? print_r($this->signup) ?> 
+		hasEvent: <? print_r($this->hasEvent) ?> 
+		hasNews: <? print_r($this->hasNews) ?> 
+		hasSignup: <? print_r($this->hasSignup) ?> 
 		<?
 	}
 

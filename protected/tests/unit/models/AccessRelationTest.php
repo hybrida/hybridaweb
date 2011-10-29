@@ -50,6 +50,11 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals("news", $access->getType());
 	}
 
+	public function test_get_NonExistingModel_emptyArray() {
+		$access = new AccessRelation("news", -142654);
+		$this->assertEquals(array(), $access->get());
+	}
+
 	/**
 	 * @expectedException NullPointerException
 	 */
@@ -113,33 +118,32 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(array(1, 2, 3, 8), $access->get());
 	}
-	
+
 	public function test_insert_duplicatedInsertionInSameSet_insertOnce() {
 		$news = new News;
 		$news->save();
 		$access = new AccessRelation($news);
-		$access->set(array(1, 2, 3,1,2));
+		$access->set(array(1, 2, 3, 1, 2));
 		$access->insert();
-		
-		$this->assertEquals(array(1,2,3),$access->get());
+
+		$this->assertEquals(array(1, 2, 3), $access->get());
 	}
-	
+
 	public function test_insert_duplicatedInsertionSeparateObjects() {
 		$news = new News;
 		$news->save();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3));
 		$access->insert();
-		
+
 		$news2 = News::model()->findByPk($news->id);
 		$access2 = new AccessRelation($news2);
 		$access2->set(array(1, 3, 8));
 		$access2->insert();
-		
+
 		$accessGet = new AccessRelation($news);
 
 		$this->assertEquals(array(1, 2, 3, 8), $accessGet->get());
-		
 	}
 
 	public function test_insert_makeAccessRelationOnNewRecord_throwsNothing() {
@@ -149,6 +153,10 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$access->set($array);
 		$news->save();
 		$access->replace();
+
+		// Hvis testen har kommet så langt 
+		//betyr det at den ikke har kastet none exception
+		$this->assertTrue(true);
 	}
 
 	public function test_insert_EmptyArray_doesNothing() {
@@ -210,7 +218,7 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$access->insert();
 		$access->remove(2);
 		$access->insert();
-		$this->assertEquals(array(1,3),$access->get());		
+		$this->assertEquals(array(1, 3), $access->get());
 	}
 
 	public function test_remove_oneInputFromEarlierAccess() {
