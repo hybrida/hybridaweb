@@ -58,17 +58,27 @@ class NewsController extends Controller {
 		$this->render("feed", array('data' => $data));
 	}
 
+	private function getNewsModel($id) {
+		$model = new News;
+		if ($id) {
+			$modelTemp = News::model()->findByPk($id);
+			if ($modelTemp) {
+				$model = $modelTemp;
+			}
+		}
+	}
+
 	public function actionEdit($id=null) {
 
-		$model = new NewsEventForm;
-		$isUpdated = false;
+		$newsModel = $this->getNewsModel($id);
 
+		$model = new NewsEventForm($newsModel);
+		$isUpdated = false;
 
 		if (isset($_POST['NewsForm'])) {
 			$input = $_POST['NewsForm'];
-			$model->setAttributes($input,false);
+			$model->setAttributes($input, false);
 			$model->printFields();
-			
 		}
 
 		$this->render("edit", array(
@@ -76,5 +86,4 @@ class NewsController extends Controller {
 				'updated' => $isUpdated,
 		));
 	}
-
 }
