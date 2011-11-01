@@ -67,7 +67,8 @@ class GateKeeperTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function test_hasAccess_LoggedIn_allInSomeOut_false() {
-		$this->assertHasAccessLoggedIn(false, array_merge($this->userAccess, array(1, 2, 3, 4, 5, 6, 7, 8)));
+		$actual = array_merge($this->userAccess, array(1, 2, 3, 4, 5, 6, 7, 8));
+		$this->assertHasAccessLoggedIn(false, $actual);
 	}
 
 	public function test_hasAccess_LoggedOut_empty_true() {
