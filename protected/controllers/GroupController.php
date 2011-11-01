@@ -17,7 +17,14 @@ class GroupController extends Controller {
 		$data = array();
 
 		// Henter kommiteer
-		$query = "SELECT id,title FROM groups WHERE committee = 'true'";
+		$query = "SELECT g.id, g.title, menu.title AS menuTitle FROM groups AS g
+                  LEFT JOIN 
+                  (SELECT s.title, mg.group 
+                  FROM menu_group AS mg 
+                  LEFT JOIN site AS s ON s.siteId = mg.site 
+                  WHERE mg.sort = (SELECT MIN(sort) FROM menu_group as mg)) AS menu
+                  ON menu.group = g.id
+                  WHERE committee = 'true'";
 
 		$command = $this->pdo->prepare($query);
 		$command->execute();
@@ -25,28 +32,48 @@ class GroupController extends Controller {
 		$data['committee'] = $command->fetchAll(PDO::FETCH_ASSOC);
 
 		// Henter grupper
-		$query = "SELECT id,title FROM groups WHERE committee = 'false'";
+		$query = "SELECT g.id, g.title, menu.title AS menuTitle FROM groups AS g
+                  LEFT JOIN 
+                  (SELECT s.title, mg.group 
+                  FROM menu_group AS mg 
+                  LEFT JOIN site AS s ON s.siteId = mg.site 
+                  WHERE mg.sort = (SELECT MIN(sort) FROM menu_group as mg)) AS menu
+                  ON menu.group = g.id
+                  WHERE committee = 'false'" ;
 
-
+        
 		$command = $this->pdo->prepare($query);
 		$command->execute();
 
+       
 		$data['groups'] = $command->fetchAll(PDO::FETCH_ASSOC);
 
 		$this->render("index", $data);
 	}
 
-	public function actionView($id, $sub) {
+	public function actionView($id, $title) {
 
 		$data = array();
-
-		$group = Groups::model()->findByPk($id);
+		$group = Group::model()->findByPk($id);
 		$data['model'] = $group;
         $data['title'] = $group->getTitle();
-		$this->render("view/comments", $data);
+        
+        $content = $group->getGroupContentType($title);
+        
+        if($content=="article"){
+           $data['content'] = $group->getArticle($title);
+        }
+        
+        if($content == "members"){
+            $data['content'] = $group->getMembers();
+        }
+        
+        if($content == "news"){
+            $data['id'] = $group->id;
+        }
+        
+        $this->render("view/" . $content, $data);
 	}
-
-
 
 	public function actions() {
 		return array(
@@ -59,9 +86,7 @@ class GroupController extends Controller {
         $data['title'] = $group->getTitle();
         $data['groups'] = $group->getAdminMenu();
         $data['members'] = $group->getMembers();
-        
         $this->render("edit",$data);
         
     }
-	
 }

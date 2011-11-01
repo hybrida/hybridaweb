@@ -1,1 +1,1 @@
-<?= CHtml::link("Logg inn",Yii::app()->getBaseUrl()."/site/login/381") ?>
+<?= CHtml::link("Logg inn","https://innsida.ntnu.no/sso/?target=hybridaweb") ?>

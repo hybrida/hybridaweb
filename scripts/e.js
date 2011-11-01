@@ -39,7 +39,7 @@ function XHR() {
 xhr = new XHR();
 xhr.request({
 	'type':'GET',
-	'url':'get.php?t=' + (Math.random()*10).toFixed(0)
+	'url':url+'?t=' + (Math.random()*10).toFixed(0)
 });
 
 function create(info) {
