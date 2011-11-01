@@ -55,10 +55,11 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 	public function test_constructor_EventModel() {
 		$eventModel = new Event;
+		$eventModel->title = "TestCase123";
 		$model = new NewsEventForm($eventModel);
 		$this->assertEquals($eventModel, $model->getEventModel());
 	}
-
+	
 	public function test_constructor_NewsInput_EventModelIsCreated() {
 		$newsModel = new News;
 		$eventModel = new Event;
@@ -70,6 +71,19 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertNotEquals(null, $model->getEventModel());
 		$this->assertEquals($eventModel->id, $model->getEventModel()->id);
+	}
+	
+	public function test_constructor_EventInput_NewsModelIsCreated() {
+		$newsModel = new News;
+		$eventModel = new Event;
+		$eventModel->content = $eventModel->title = "TestCase";
+		$eventModel->save();
+		$newsModel->setParent("event", $eventModel->getPrimaryKey());
+		$newsModel->save();
+		$model = new NewsEventForm($eventModel);
+		
+		$this->assertNotEquals(null,$model->getNewsModel());
+		$this->assertEquals($newsModel->id,$model->getNewsModel()->id);
 	}
 	
 	public function test_constructor_NewsInput_allModelsNotNull() {
@@ -154,7 +168,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($access, $model->getEventModel()->access);
 	}
 
-	public function test_setAttributes_eventModelSignupModel_checkTitleContentAccess() {
+	public function test_setAttributes_eventAndSignupModel_IDsAreTheSame() {
 		$title = $content = "dummy";
 		$access = array(1,6, 7, 8,);
 		$input = array(
@@ -169,7 +183,6 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 				"close" => '2009-12-12',
 				'access' => $access,
 			),
-			
 		);
 
 		$model = new NewsEventForm(new Event);
@@ -182,9 +195,5 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$signupId = $model->getSignupModel()->getPrimaryKey();
 		$eventId = $model->getEventModel()->getPrimaryKey();
 		$this->assertEquals($signupId,$eventId);
-
 	}
-	
-	
-
 }

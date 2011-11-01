@@ -28,7 +28,7 @@ class NewsEventForm extends CFormModel {
 	}
 
 	private function initModel($model) {
-		$this->initModels();
+		$this->initAllModelsBaseCase();
 		if ($model instanceof News) {
 			$this->initNewsModel($model);
 		} else if ($model instanceof Event) {
@@ -36,7 +36,7 @@ class NewsEventForm extends CFormModel {
 		}
 	}
 
-	private function initModels() {
+	private function initAllModelsBaseCase() {
 		$this->newsModel = new News;
 		$this->eventModel = new Event;
 		$this->signupModel = new Signup;
@@ -52,8 +52,17 @@ class NewsEventForm extends CFormModel {
 	}
 
 	private function initEventModel($model) {
-		
+		if (!$model->isNewRecord) {
+			// Find News if there exists a news with parentId = this->id and parentType = event
+			$sql = "SELECT * FROM news WHERE parentType = 'event' AND parentId = :eventId";
+			$news = News::model()->findBySql($sql,array(":eventId" => $model->id));
+			if ($news) {
+				$this->newsModel = $news;
+			}
+		}
+		$this->eventModel = $model;
 	}
+	
 
 	public function rules() {
 		return array(
