@@ -1,6 +1,12 @@
-<?= $title ?>
-<p>Statisk side: Kommentarer </p>
+<h1><?= $title ?></h1>
 
-<? /*$this->widget("GroupMenu",array(
-		"model" => $model,
-)) */?>
+<?php $this->renderPartial("menu"); ?>
+    
+<h2>Kommentarer:</h2>
+
+<div class='comment'>
+    <form>
+        <input type='text' />
+    </form>
+    <ul></ul>
+</div>	
