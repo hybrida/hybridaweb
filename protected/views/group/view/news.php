@@ -1,3 +1,5 @@
+<h1><?= $title ?></h1>
+
 <?php $this->renderPartial("menu"); ?>
 
 <!--<feed data-moreButton='true' data-type='news' data-id='<?= $id ?>' data-parentType='group'></feed>-->
