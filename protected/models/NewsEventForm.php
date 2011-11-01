@@ -11,9 +11,9 @@
  */
 class NewsEventForm extends CFormModel {
 
-	public $hasNews;
-	public $hasSignup;
-	public $hasEvent;
+	public $hasNews=0;
+	public $hasSignup=0;
+	public $hasEvent=0;
 	public $news = array();
 	public $event = array();
 	public $signup = array();
@@ -25,6 +25,7 @@ class NewsEventForm extends CFormModel {
 		parent::__construct($scenario);
 
 		$this->initModel($model);
+		$this->initFields();
 	}
 
 	private function initModel($model) {
@@ -63,6 +64,21 @@ class NewsEventForm extends CFormModel {
 		$this->eventModel = $model;
 	}
 	
+	private function initFields() {
+		$this->news = $this->newsModel->attributes;
+		$this->event = $this->eventModel->attributes;
+		$this->signup = $this->signupModel->attributes;
+		
+		$this->initAccessFields();
+	}
+	
+	private function initAccessFields() {
+		$this->news['access'] = $this->newsModel->access;
+		$this->event['access'] = $this->eventModel->access;
+		$this->signup['access'] = $this->signupModel->access;
+		
+	}
+	
 
 	public function rules() {
 		return array(
@@ -70,11 +86,11 @@ class NewsEventForm extends CFormModel {
 			array(
 				'news[title], news[content], ' .
 				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
-				'signup[spots], signup[open], signup[close], signup[signoff]',
+				'signup[spots], signup[open], signup[close], signup[signoff], '.
+				'hasEvent, hasNews, hasSignup',
 				'default'
 			),
 			array('event[start], event[end], signup[open], signup[close]', 'date',),
-			array('signup[spots]', 'required'),
 		);
 	}
 
@@ -194,13 +210,15 @@ class NewsEventForm extends CFormModel {
 
 	public function printFields() {
 		?> 
+		<pre>
 		Felter for NewsEventForm
 		news: <? print_r($this->news) ?> 
 		event: <? print_r($this->event) ?> 
 		signup: <? print_r($this->signup) ?> 
-		hasEvent: <? print_r($this->hasEvent) ?> 
+		hasEvent: <? echo ($this->hasEvent) ?> 
 		hasNews: <? print_r($this->hasNews) ?> 
 		hasSignup: <? print_r($this->hasSignup) ?> 
+		</pre>
 		<?
 	}
 
