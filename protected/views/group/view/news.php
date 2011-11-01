@@ -1,7 +1,5 @@
-<?php
+<?php $this->renderPartial("menu"); ?>
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+<!--<feed data-moreButton='true' data-type='news' data-id='<?= $id ?>' data-parentType='group'></feed>-->
+
+<div class='feed'></div>

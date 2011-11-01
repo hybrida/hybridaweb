@@ -210,6 +210,28 @@ class Group extends CActiveRecord {
         return $result['fileName'];
         
     }
+    
+    public function getArticle($title){
+        $data = array(
+            'title' => $title,
+            'id'    => $this->id
+        );
+        
+        $sql = "SELECT a.title, a.content, a.timestamp, un.firstName, un.middleName, un.lastName FROM 
+                menu_group AS mg
+                LEFT JOIN site AS s ON mg.site = s.siteId
+                LEFT JOIN site_content AS sc ON s.subId = sc.id
+                LEFT JOIN article AS a ON a.id = mg.contentId 
+                LEFT JOIN user_new AS un ON un.id = a.author
+                WHERE mg.group = :id AND sc.filename = 'article' AND s.title = :title";
+        
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        
+        return $query->fetch(PDO::FETCH_ASSOC);
+        
+        
+    }
 
 	public function addMember($userId, $comission) {
 		$this->pdo = Yii::app()->db->getPdoInstance();

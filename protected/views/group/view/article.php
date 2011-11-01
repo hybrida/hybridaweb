@@ -1,7 +1,10 @@
-<?php
+<h1>
+    <?= $title ?>
+</h1>
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+    <?php $this->renderPartial("menu"); ?>
+
+	
+	<p><?= $content['content'] ?></p>
+    
+	<p><i>skrevet av <?= $content['firstName'] ?> <?= $content['middleName'] ?> <?= $content['lastName'] ?> den <?= $content['timestamp'] ?></i></p>

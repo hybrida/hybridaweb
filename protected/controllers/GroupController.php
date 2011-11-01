@@ -39,15 +39,26 @@ class GroupController extends Controller {
 	public function actionView($id, $title) {
 
 		$data = array();
-
 		$group = Group::model()->findByPk($id);
 		$data['model'] = $group;
         $data['title'] = $group->getTitle();
         
-		$this->render("view/" . $group->getGroupContentType($title), $data);
+        $content = $group->getGroupContentType($title);
+        
+        if($content=="article"){
+           $data['content'] = $group->getArticle($title);
+        }
+        
+        if($content == "members"){
+            $data['content'] = $group->getMembers();
+        }
+        
+        if($content == "news"){
+            $data['id'] = $group->id;
+        }
+        
+        $this->render("view/" . $content, $data);
 	}
-
-
 
 	public function actions() {
 		return array(
