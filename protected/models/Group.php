@@ -192,9 +192,28 @@ class Group extends CActiveRecord {
 		$data = $query->fetchAll(PDO::FETCH_ASSOC);
 		return $data;
 	}
+    
+    public function getGroupContentType($title){
+        
+        $data = array(
+            'title' => $title
+        );
+        $sql = "SELECT sc.fileName FROM 
+                site AS s LEFT JOIN site_content AS sc 
+                ON s.subId = sc.id
+                WHERE s.title = :title";
+        
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        return $result['fileName'];
+        
+    }
 
 	public function addMember($userId, $comission) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
+        
 		$data = array(
 				'gID' => $this->id,
 				'uID' => $userId,
