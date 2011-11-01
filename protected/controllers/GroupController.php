@@ -40,7 +40,7 @@ class GroupController extends Controller {
 
 		$data = array();
 
-		$group = Groups::model()->findByPk($id);
+		$group = Group::model()->findByPk($id);
 		$data['model'] = $group;
         $data['title'] = $group->getTitle();
 		$this->render("view/comments", $data);
@@ -59,9 +59,7 @@ class GroupController extends Controller {
         $data['title'] = $group->getTitle();
         $data['groups'] = $group->getAdminMenu();
         $data['members'] = $group->getMembers();
-        
         $this->render("edit",$data);
         
     }
-	
 }

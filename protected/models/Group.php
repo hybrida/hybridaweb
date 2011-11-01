@@ -181,10 +181,10 @@ class Group extends CActiveRecord {
 		$data = array(
 				'gID' => $this->id
 		);
-		$sql = "SELECT ui.userId,ui.firstName,ui.middleName,ui.lastName,mg.comission 
-					FROM membership_group AS mg 
-					LEFT JOIN user_new AS ui ON mg.userId=ui.id
-					WHERE mg.groupId = :gID";
+		$sql = "SELECT ui.id,ui.firstName,ui.middleName,ui.lastName,mg.comission 
+                FROM membership_group AS mg 
+                LEFT JOIN user_new AS ui ON mg.userId=ui.id
+                WHERE mg.groupId = :gID";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
