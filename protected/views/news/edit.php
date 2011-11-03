@@ -1,25 +1,54 @@
 <div class="form">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var hasNewsButton = $("#NewsEventForm_hasNews")
+			var hasEventButton = $("#NewsEventForm_hasEvent")
+			var hasSignupButton = $("#NewsEventForm_hasSignup")
+			
+			hasNewsButton.attr('checked','checked');
+			hasEventButton.attr('checked','checked');
+			hasSignupButton.attr('checked','checked');
+			
+			var news = $(".news");
+			var event = $(".event");
+			var signup = $(".signup");
+			
+			hasNewsButton.click(function() {
+				news.toggle();
+			});
+			hasEventButton.click(function () {
+				event.toggle();
+			});
+			hasSignupButton.click(function (){
+				signup.toggle();
+			});
+			
+
+
+		});
+	</script>
 
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
-			'id' => 'news_edit-form',
-			'enableClientValidation' => true,
-			'clientOptions' => array(
-					'validateOnSubmit' => true,
-			),
-					));
+		'id' => 'news_edit-form',
+		//'enableAjaxValidation' => true,
+		'enableClientValidation' => true,
+		'clientOptions' => array(
+			'validateOnSubmit' => true,
+		),
+			));
 	?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-	
-	<?= $form->hiddenField($model,'news[id]')?>
-	
-	<?= $form->hiddenField($model,'event[id]')?>
-	
-	<?= $form->hiddenField($model,'signup[id]')?>
-	
+
+	<?= $form->hiddenField($model, 'news[id]') ?>
+
+	<?= $form->hiddenField($model, 'event[id]') ?>
+
+	<?= $form->hiddenField($model, 'signup[id]') ?>
+
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'hasNews'); ?>
@@ -54,7 +83,7 @@
 		</div>
 	</div>
 
-	<div>
+	<div class="event">
 		<h1>Hendelse</h1>
 
 		<div class="row">
@@ -93,7 +122,7 @@
 			<?php echo $form->error($model, 'event[content]'); ?>
 		</div>
 	</div>
-	<div>
+	<div class="signup">
 		<h1>Påmelding</h1>
 
 		<div class="row">

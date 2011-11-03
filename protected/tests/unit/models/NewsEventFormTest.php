@@ -85,13 +85,13 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEquals(null,$model->getNewsModel());
 		$this->assertEquals($newsModel->id,$model->getNewsModel()->id);
 	}
-	
+
 	public function test_constructor_NewsInput_allModelsNotNull() {
 		$model = new NewsEventForm(new News);
 		$news = $model->getNewsModel();
 		$event = $model->getEventModel();
 		$signup = $model->getSignupModel();
-		
+
 		$this->assertNotEquals(null, $news);
 		$this->assertNotEquals(null, $event);
 		$this->assertNotEquals(null, $signup);
@@ -170,7 +170,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 	public function test_setAttributes_eventAndSignupModel_IDsAreTheSame() {
 		$title = $content = "dummy";
-		$access = array(1,6, 7, 8,);
+		$access = array(1, 6, 7, 8,);
 		$input = array(
 			"event" => array(
 				"title" => $title,
@@ -195,5 +195,35 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$signupId = $model->getSignupModel()->getPrimaryKey();
 		$eventId = $model->getEventModel()->getPrimaryKey();
 		$this->assertEquals($signupId,$eventId);
+	}
+	
+	public function test_construct_newsModel_FieldsAreUpdated() {
+		$title = $content = "dummy";
+		$access = array(1,2,3,4,5);
+		$newsModel = new News;
+		$newsModel->title = $title;
+		$newsModel->content = $content;
+		$newsModel->access = $access;
+		$this->assertTrue($newsModel->save());
+		
+		$model = new NewsEventForm($newsModel);
+		$this->assertEquals($title, $model->news['title']);
+		$this->assertEquals($content, $model->news['content']);
+		$this->assertEquals($access, $model->news['access']);
+	}
+	
+	public function test_construct_eventModel_FieldsAreUpdated() {
+		$title = $content = "dummy";
+		$access = array(1,2,3,4,5);
+		$eventModel = new Event;
+		$eventModel->title = $title;
+		$eventModel->content = $content;
+		$eventModel->access = $access;
+		$this->assertTrue($eventModel->save());
+		
+		$model = new NewsEventForm($eventModel);
+		$this->assertEquals($title, $model->event['title']);
+		$this->assertEquals($content, $model->event['content']);
+		$this->assertEquals($access, $model->event['access']);
 	}
 }
