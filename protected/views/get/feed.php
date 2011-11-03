@@ -15,9 +15,8 @@
     <?= ($news['parentType'] == NULL) ? "<h1>" . $news['title'] . "</h1>" : ""  ?>
 
     <?= ($news['parentType'] != NULL) ? 
-        "<a href='
-            ?site=" . $news['parentType'] . 
-            "&id=" . $news['parentId'] . "'>
+        "<a href='" . Yii::app()->request->baseURL ."/". $news['parentType'] . 
+            "/" . $news['parentId'] . "'>
             <h1>" . $news['title'] . "</h1>
         </a>" : ""  ?>
 
@@ -25,7 +24,7 @@
     	<div class='articleContent'>
 
     <!--//Hvis nyheten har bilde-->
-    <?= (( $news['imageId']!=null) ? "<img src='" . Yii::app()->request->baseUrl ."/get/image/?id=" . $news['imageId'] . "&size=2' />" : "" );  ?>
+    <?= (( $news['imageId']!=null) ? "<img src='" . Yii::app()->request->baseUrl ."/image/view/id/" . $news['imageId'] . "/size/2' />" : "" );  ?>
     	
         <p>
 
@@ -33,8 +32,8 @@
     <?= ((strlen($news['content']) > $contentLength) ? 
             (substr($news['content'],0,$contentLength) .
             "... " .
-            "<a href='?site=" . ($news['parentType'] == NULL) ? "news" : $news['parentType'] . 
-            "&id=" . ($news['parentType'] == NULL) ? $news['id'] : $news['parentId'] . 
+            "<a href='" . Yii::app()->request->baseURL ."/". ($news['parentType'] == NULL) ? "news" : $news['parentType'] . 
+            "/" . ($news['parentType'] == NULL) ? $news['id'] : $news['parentId'] . 
             "'>Les mer</a>") : 
             $news['content']);   ?>
 
