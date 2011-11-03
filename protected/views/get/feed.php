@@ -42,7 +42,7 @@
 
     <!--//Printer dato og forfatter-->
     <div class='date'><?= $news['timestamp'] ?></div>
-    <div class='author'>skrevet av: <a href='<?= Yii::app()->request->baseUrl ?>/profile/id/<?= $news['userId'] ?>'><?= $news['firstName'] . " " . $news['middleName'] . " " . $news['lastName'] ?> </a></div>
+    <div class='author'>skrevet av: <a href='<?= Yii::app()->request->baseUrl ?>/profile/<?= $news['userId'] ?>'><?= $news['firstName'] . " " . $news['middleName'] . " " . $news['lastName'] ?> </a></div>
     </div>
     
 <? endforeach ?>
