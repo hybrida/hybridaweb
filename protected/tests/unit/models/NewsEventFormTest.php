@@ -59,7 +59,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$model = new NewsEventForm($eventModel);
 		$this->assertEquals($eventModel, $model->getEventModel());
 	}
-	
+
 	public function test_constructor_NewsInput_EventModelIsCreated() {
 		$newsModel = new News;
 		$eventModel = new Event;
@@ -72,7 +72,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEquals(null, $model->getEventModel());
 		$this->assertEquals($eventModel->id, $model->getEventModel()->id);
 	}
-	
+
 	public function test_constructor_EventInput_NewsModelIsCreated() {
 		$newsModel = new News;
 		$eventModel = new Event;
@@ -81,9 +81,9 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$newsModel->setParent("event", $eventModel->getPrimaryKey());
 		$newsModel->save();
 		$model = new NewsEventForm($eventModel);
-		
-		$this->assertNotEquals(null,$model->getNewsModel());
-		$this->assertEquals($newsModel->id,$model->getNewsModel()->id);
+
+		$this->assertNotEquals(null, $model->getNewsModel());
+		$this->assertEquals($newsModel->id, $model->getNewsModel()->id);
 	}
 
 	public function test_constructor_NewsInput_allModelsNotNull() {
@@ -96,12 +96,43 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEquals(null, $event);
 		$this->assertNotEquals(null, $signup);
 	}
+
 	/**
 	 * @expectedException NullPointerException
 	 */
 	public function test_constructor_nullInput_throwsException() {
 		$model = new NewsEventForm(null);
 		$this->assertTrue(false); // Hvis testen har kommet så langt burde den faile
+	}
+
+	public function test_construct_newsModel_FieldsAreUpdated() {
+		$title = $content = "dummy";
+		$access = array(1, 2, 3, 4, 5);
+		$newsModel = new News;
+		$newsModel->title = $title;
+		$newsModel->content = $content;
+		$newsModel->access = $access;
+		$this->assertTrue($newsModel->save());
+
+		$model = new NewsEventForm($newsModel);
+		$this->assertEquals($title, $model->news['title']);
+		$this->assertEquals($content, $model->news['content']);
+		$this->assertEquals($access, $model->news['access']);
+	}
+
+	public function test_construct_eventModel_FieldsAreUpdated() {
+		$title = $content = "dummy";
+		$access = array(1, 2, 3, 4, 5);
+		$eventModel = new Event;
+		$eventModel->title = $title;
+		$eventModel->content = $content;
+		$eventModel->access = $access;
+		$this->assertTrue($eventModel->save());
+
+		$model = new NewsEventForm($eventModel);
+		$this->assertEquals($title, $model->event['title']);
+		$this->assertEquals($content, $model->event['content']);
+		$this->assertEquals($access, $model->event['access']);
 	}
 
 	public function test_saveNews_UnsavedNewsModelWithoutAccess_NewsIsCreated() {
@@ -198,54 +229,24 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$model->hasSignup = true;
 		$model->saveEvent();
 		$model->saveSignup();
-		
+
 		$signupId = $model->getSignupModel()->getPrimaryKey();
 		$eventId = $model->getEventModel()->getPrimaryKey();
-		$this->assertEquals($signupId,$eventId);
+		$this->assertEquals($signupId, $eventId);
 	}
-	
-	public function test_construct_newsModel_FieldsAreUpdated() {
-		$title = $content = "dummy";
-		$access = array(1,2,3,4,5);
-		$newsModel = new News;
-		$newsModel->title = $title;
-		$newsModel->content = $content;
-		$newsModel->access = $access;
-		$this->assertTrue($newsModel->save());
-		
-		$model = new NewsEventForm($newsModel);
-		$this->assertEquals($title, $model->news['title']);
-		$this->assertEquals($content, $model->news['content']);
-		$this->assertEquals($access, $model->news['access']);
-	}
-	
-	public function test_construct_eventModel_FieldsAreUpdated() {
-		$title = $content = "dummy";
-		$access = array(1,2,3,4,5);
-		$eventModel = new Event;
-		$eventModel->title = $title;
-		$eventModel->content = $content;
-		$eventModel->access = $access;
-		$this->assertTrue($eventModel->save());
-		
-		$model = new NewsEventForm($eventModel);
-		$this->assertEquals($title, $model->event['title']);
-		$this->assertEquals($content, $model->event['content']);
-		$this->assertEquals($access, $model->event['access']);
-	}
-	
+
 	public function test_saveParent_newModel() {
 		$news = new News;
-		
+
 		$input = array(
 			'news' => array(
-				"title"=> "heisann",
+				"title" => "heisann",
 			),
 			"event" => array(
 				'title' => "hei",
 			)
 		);
-		
+
 		$model = new NewsEventForm($news);
 		$model->setAttributes(($input));
 		$model->hasNews = true;
@@ -253,6 +254,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$model->save();
 		$eventModel = $model->getEventModel();
 		$this->assertEquals($eventModel->id, $news->parentId);
-		$this->assertEquals('event',$news->parentType);
+		$this->assertEquals('event', $news->parentType);
 	}
+
 }
