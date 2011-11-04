@@ -24,6 +24,10 @@ class NewsEventForm extends CFormModel {
 	public function __construct($model, $scenario=' ') {
 		parent::__construct($scenario);
 
+		if ($model == null) {
+			throw new NullPointerException("Input have to be a valid News or Event-model");
+		}
+		
 		$this->initModel($model);
 		$this->initFields();
 	}

@@ -57,7 +57,11 @@ class NewsController extends Controller {
 
 		$this->render("feed", array('data' => $data));
 	}
-	
+
+	public function actionCreate() {
+		$this->forward("news/edit");
+	}
+
 	public function actionEdit($id=null) {
 
 		$newsModel = $this->getNewsModel($id);
@@ -71,27 +75,36 @@ class NewsController extends Controller {
 			$model->setAttributes($input, false);
 			$model->printFields();
 			$model->save();
+			echo "newsId: " . $model->getNewsModel()->id;
+			echo "eventId: " . $model->getEventModel()->id;
+			echo "signupId: " . $model->getSignupModel()->primaryKey;
+
 			$this->redirectAfterEdit($model);
 			return;
 		}
 
 		$this->render("edit", array(
-				'model' => $model,
-				'updated' => $isUpdated,
+			'model' => $model,
+			'updated' => $isUpdated,
 		));
 	}
-	
-	private function getNewsModel($id) {
-		$model = new News;
-		if ($id) {
-			$modelTemp = News::model()->findByPk($id);
-			if ($modelTemp) {
-				$model = $modelTemp;
-			}
+
+	public function getNewsModel($id) {
+		$model = News::model()->findByPk($id);
+		if ($model) {
+			return $model;
+		}
+		return new News;
+	}
+
+	private function redirectAfterEdit($model) {
+		$newsModel = $model->getNewsModel();
+		if (!$newsModel->isNewRecord) {
+			$this->redirect(array(
+				"news/view",
+				"id" => $newsModel->id
+			));
 		}
 	}
-	
-	private function redirectAfterEdit($model) {
-		
-	}
+
 }

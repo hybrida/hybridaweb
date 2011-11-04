@@ -96,6 +96,13 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEquals(null, $event);
 		$this->assertNotEquals(null, $signup);
 	}
+	/**
+	 * @expectedException NullPointerException
+	 */
+	public function test_constructor_nullInput_throwsException() {
+		$model = new NewsEventForm(null);
+		$this->assertTrue(false); // Hvis testen har kommet så langt burde den faile
+	}
 
 	public function test_saveNews_UnsavedNewsModelWithoutAccess_NewsIsCreated() {
 		$news = new News;
