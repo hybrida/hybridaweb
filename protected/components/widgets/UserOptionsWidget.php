@@ -10,7 +10,7 @@ class UserOptionsWidget extends CWidget {
 
 	public function run() {
         if (Yii::app()->user->isGuest) {
-			$this->render("UserOptionsWidget/guest");
+			$this->render("userOptionsWidget/guest");
         }else{
             
             $sql = "SELECT firstName, middleName, lastName FROM user_new WHERE id = ?";
@@ -18,7 +18,7 @@ class UserOptionsWidget extends CWidget {
             $query = $command->query(array(Yii::app()->user->id));
             $data = $query->read();
 
-			$this->render("UserOptionsWidget/user",  $data);
+			$this->render("userOptionsWidget/user",  $data);
 		}
 	}
 }
