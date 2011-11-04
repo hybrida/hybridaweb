@@ -3,16 +3,8 @@
 class ActiveForm extends CActiveForm {
 
 	public function textArea($model, $attribute, $htmlOptions=array()) {
-
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
-		//CHtml::clientChange('change', $htmlOptions);
-		if ($model->hasErrors($attribute))
-			CHtml::addErrorCss($htmlOptions);
 		$text = CHtml::resolveValue($model, $attribute);
-
-
-		$class = get_class($model);
-		$name = $class . "[" . $attribute . "]";
 
 		$this->widget('application.components.widgets.XHeditor', array(
 			'language' => 'en', //options are en, zh-cn, zh-tw
