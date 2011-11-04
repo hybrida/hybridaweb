@@ -226,4 +226,26 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($content, $model->event['content']);
 		$this->assertEquals($access, $model->event['access']);
 	}
+	
+	public function test_saveParent_newModel() {
+		$news = new News;
+		
+		$input = array(
+			'news' => array(
+				"title"=> "heisann",
+			),
+			"event" => array(
+				'title' => "hei",
+			)
+		);
+		
+		$model = new NewsEventForm($news);
+		$model->setAttributes(($input));
+		$model->hasNews = true;
+		$model->hasEvent = true;
+		$model->save();
+		$eventModel = $model->getEventModel();
+		$this->assertEquals($eventModel->id, $news->parentId);
+		$this->assertEquals('event',$news->parentType);
+	}
 }

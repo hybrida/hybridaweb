@@ -11,9 +11,9 @@
  */
 class NewsEventForm extends CFormModel {
 
-	public $hasNews=0;
-	public $hasSignup=0;
-	public $hasEvent=0;
+	public $hasNews = 0;
+	public $hasSignup = 0;
+	public $hasEvent = 0;
 	public $news = array();
 	public $event = array();
 	public $signup = array();
@@ -56,29 +56,28 @@ class NewsEventForm extends CFormModel {
 		if (!$model->isNewRecord) {
 			// Find News if there exists a news with parentId = this->id and parentType = event
 			$sql = "SELECT * FROM news WHERE parentType = 'event' AND parentId = :eventId";
-			$news = News::model()->findBySql($sql,array(":eventId" => $model->id));
+			$news = News::model()->findBySql($sql, array(":eventId" => $model->id));
 			if ($news) {
 				$this->newsModel = $news;
 			}
 		}
 		$this->eventModel = $model;
 	}
-	
+
 	private function initFields() {
 		$this->news = $this->newsModel->attributes;
 		$this->event = $this->eventModel->attributes;
 		$this->signup = $this->signupModel->attributes;
-		
+
+
 		$this->initAccessFields();
 	}
-	
+
 	private function initAccessFields() {
 		$this->news['access'] = $this->newsModel->access;
 		$this->event['access'] = $this->eventModel->access;
 		$this->signup['access'] = $this->signupModel->access;
-		
 	}
-	
 
 	public function rules() {
 		return array(
@@ -86,7 +85,7 @@ class NewsEventForm extends CFormModel {
 			array(
 				'news[title], news[content], ' .
 				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
-				'signup[spots], signup[open], signup[close], signup[signoff], '.
+				'signup[spots], signup[open], signup[close], signup[signoff], ' .
 				'hasEvent, hasNews, hasSignup',
 				'default'
 			),
@@ -118,7 +117,7 @@ class NewsEventForm extends CFormModel {
 			if (array_key_exists("access", $this->event)) {
 				$this->eventModel->access = $this->event['access'];
 			}
-			$this->eventModel->save();
+			$this->eventModel->insert();
 		}
 	}
 
@@ -129,7 +128,7 @@ class NewsEventForm extends CFormModel {
 				$this->signupModel->access = $this->signup['access'];
 			}
 			$this->signupModel->eventId = $this->eventModel->id;
-			$this->signupModel->save();
+			$this->signupModel->insert();
 		}
 	}
 
@@ -141,16 +140,15 @@ class NewsEventForm extends CFormModel {
 				$this->newsModel->access = $this->news['access'];
 			}
 
-			$this->newsModel->save();
 			$this->initNewsParent();
+			$this->newsModel->save();
 		}
 	}
 
 	private function initNewsParent() {
 		if ($this->hasEvent) {
-			$this->newsModel->setParent("event",  $this->eventModel->id);
+			$this->newsModel->setParent("event", $this->eventModel->id);
 		}
-		
 	}
 
 	public function setAttributes($values) {
@@ -161,65 +159,20 @@ class NewsEventForm extends CFormModel {
 		}
 	}
 
-	/*
-	 * UTESTET DEL AV KODEN!!
-	 * LAGET 20. oktober 2011
-	 * SLETT OM DET ER GAMMELT
-	 * 
-	  public function save() {
-	  $this->saveEvent();
-	  $this->saveSignup();
-	  $this->saveNews();
-	  }
-
-	  private function saveEvent() {
-	  if ($this->hasEvent) {
-	  $this->eventModel->attributes = $this->event;
-	  $this->eventModel->save();
-	  }
-	  }
-
-	  private function saveSignup() {
-
-
-	  if ($this->hasSignup) {
-	  $this->signupModel->attributes = $this->signup;
-	  $this->signupModel->id = $this->eventModel->id;
-	  }
-	  }
-
-	  private function saveNews() {
-	  if ($this->hasNews) {
-	  $this->NewsModel->attributes = $this->news;
-	  $this->newsModel->save();
-	  $this->saveNewsParent();
-	  }
-	  }
-
-	  private function saveNewsParent() {
-	  if ($this->hasEvent) {
-	  $this->newsModel->parentId = $this->eventModel->id;
-	  $this->newsModel->parentType = "event";
-	  } else if (!$this->hasEvent && $this->newsModel->parentType == "event") {
-	  $this->newsModel->parentId = null;
-	  $this->newsModel->parentType = null;
-	  }
-	  }
-
-	 */
-
 	public function printFields() {
 		?> 
 		<pre>
-		Felter for NewsEventForm
-		news: <? print_r($this->news) ?> 
-		event: <? print_r($this->event) ?> 
-		signup: <? print_r($this->signup) ?> 
-		hasEvent: <? echo ($this->hasEvent) ?> 
-		hasNews: <? print_r($this->hasNews) ?> 
-		hasSignup: <? print_r($this->hasSignup) ?> 
+				Felter for NewsEventForm
+				news: <? print_r($this->news) ?> 
+				event: <? print_r($this->event) ?> 
+				signup: <? print_r($this->signup) ?> 
+				hasEvent: <? echo ($this->hasEvent) ?> 
+				hasNews: <? print_r($this->hasNews) ?> 
+				hasSignup: <? print_r($this->hasSignup) ?> 
 		</pre>
-		<?
+			<?
+		}
+
 	}
 
-}
+	
