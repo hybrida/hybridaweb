@@ -1,7 +1,7 @@
 <h1>Nyhetsfeed</h1>
 
 <div class='menuPage'>
-<a href='?site=add&type=news'>Publiser</a>
+<a href='<?= Yii::app()->request->baseUrl ?>/news/edit'>Publiser</a>
 </div>
 
 

@@ -40,9 +40,14 @@ class EventController extends Controller {
 				$data['open'] = $dataSignup['open'];
 				$data['close'] = $dataSignup['close'];
 			}
+            
+            $this->render("view", $data);
 		}
+        else {
+            $this->render("../site/403");
+        }
 
-		$this->render("view", $data);
+		
 	}
 
 }

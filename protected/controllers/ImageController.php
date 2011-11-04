@@ -24,7 +24,7 @@ class ImageController extends Controller {
 
 
         ob_clean();
-        //header("Content-type: image/jpeg");
+        header("Content-type: image/jpeg");
         
         $this->pdo = Yii::app()->db->getPdoInstance();
 
@@ -49,8 +49,9 @@ class ImageController extends Controller {
             $data = array(
                 'imageId' => $imageId
             );
-            if(GateKeeper::hasAccess('image',$imageId)){
-                $sql = "SELECT  u.username
+            
+            /*if(GateKeeper::hasAccess('image',$imageId)){*/
+                $sql = "SELECT u.username
                         FROM image AS i LEFT JOIN user AS u ON i.userId = u.id
                         WHERE i.id = :imageId";
 
@@ -90,9 +91,10 @@ class ImageController extends Controller {
                 } else {
                     $this->unknown($size);
                 }
-            } else {
+            /*} else {
                 $this->unknown($size);
-            }
+                //echo "NOACCESS!";
+            }*/
         }
     }
     public function unknown($size) {
@@ -100,7 +102,7 @@ class ImageController extends Controller {
             case 1:
                 readfile($this->imagePath . "unknown_malefemale_profile.jpg");
             case 2:
-                //readfile($this->imagePath."unknown_malefemale_profile_small.jpg");
+                readfile($this->imagePath."unknown_malefemale_profile_small.jpg");
                 break;
             case 3:
                 readfile($this->imagePath . "unknown_malefemale_profile_micro.jpg");

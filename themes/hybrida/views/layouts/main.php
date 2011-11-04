@@ -53,10 +53,12 @@
 				<h1><?= CHtml::encode(Yii::app()->name) ?></h1>
 				<div class="searchWrap">
                     <div class='search'><input type='text' />
+                        <div class="searchImg"><input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' /></div>
                         <ul>
                             
                         </ul>
                     </div>
+                    
                     <!--Gamle versjonen:-->
 					<!--<form method='post' action='?site=search' id='searchForm'>
 						<div class="searchBox">
@@ -72,14 +74,26 @@
 			<div class="headerBottomStripe">
 				<div class="menu">
 					<nav>
-						<menu>
+                        <!--Hardkodet meny for visning på genfors -->
+                        <items>
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/news/'>Hjem</a></div> 
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/profile/'>Profil</a></div> 
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/group/'>Grupper</a></div>
+                            <div>Personer</div>
+                            <div>Om oss</div>
+                            <div class="last">Bedrift</div>
+                        </items>
+                        
+                        <!-- PHP generert GAMMEL meny: -->
+						<!--<menu>
 							<div>
 								<? $this->widget("application.components.widgets.TabNavigation") ?>
 							</div>
-						</menu> 
+						</menu> -->
+                        
 					</nav>
 
-					<div class="loggedIn"><? // TODO HEr var det en UserOptionsWidget, hent fra hybridaweb2 hvis vikgit ?></div>
+					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptionsWidget") ?> </div>
 
 				</div>
 			</div>
