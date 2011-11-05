@@ -1,6 +1,6 @@
 <?php
 
-class UserOptionsWidget extends CWidget {
+class UserOptions extends CWidget {
     
     public function init() {
 		/*if (!Yii::app()->user->isGuest) {
