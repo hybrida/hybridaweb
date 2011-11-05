@@ -10,28 +10,33 @@ class InnsidaIdentity extends CUserIdentity {
 	protected $_id;
 	protected $_userName;
 	protected $_access;
+	protected $so;
 
-	public function __construct($id) {
-		parent::__construct($id, null);
+	public function __construct($data, $sign, $target) {
+		parent::__construct(null, null);
 
-		$this->_id = $id;
+		$this->so = new SSOclient($data, $sign, $REMOTE_ADDR, $target);
+
+		$this->_id = -1;
 		$this->_access = array();
-		$this->_userName = $id;
+		$this->_userName = "";
 	}
 
 	public function authenticate() {
-		// kjører login-logikk
-
-		$this->update();
-		return true; // FIXME
+		if ($this->so->oklogin()) {
+			$this->update();
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public function update() {
-		
-
-		$user = User::model()->find("id = :id", array(":id" => $this->_id));
-		$this->_userName = $user->username;
-
+		$user = User::model()->find(
+				"username = :username", 
+				array(":username" => $this->_userName
+				));
+		$this->_id = $user->id;
 
 		$userInfo = $user->getAttributes();
 
@@ -41,8 +46,12 @@ class InnsidaIdentity extends CUserIdentity {
 		$this->setState("member", $userInfo['member']);
 		$this->setState("gender", $userInfo['gender']);
 		$this->setState("imageId", $userInfo['imageId']);
-		
+
 		$this->setState("access", $user->access);
+	}
+
+	public function getErrorMessage() {
+		return $this->so->reason();
 	}
 
 	public function getName() {
