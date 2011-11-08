@@ -28,7 +28,7 @@ class EventController extends Controller {
 			$data = $query->read();
 
 			// Henter Signup-info
-			$sql = "SELECT COUNT(eventId) AS c, spots, open, close FROM signup WHERE eventId=?";
+			$sql = "SELECT COUNT() AS c, spots, open, close FROM signup WHERE eventId = ?";
 			$command = Yii::app()->db->createCommand($sql);
 			$query = $command->query(array($id));
 			$dataSignup = $query->read();
