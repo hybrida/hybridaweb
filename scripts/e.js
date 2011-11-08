@@ -1,5 +1,5 @@
 console.log('start');
-
+var url = "/yii/get/";
 var split = '~%~';
 
 function XHR() {
@@ -82,7 +82,7 @@ function Search(dn) {
 		} else if(lastvalue != input.value) {
 			xhr.request({
 				'type': 'GET',
-				'url': 'search.php?q=' + input.value,
+				'url': url+'search/?q=' + input.value,
 				'functions': {
 					'onload': function() {
 						var response = this.responseText.split(split);
@@ -134,7 +134,7 @@ function Feed(dn) {
 	addElements = function() {
 		xhr.request({
 			'type':'GET',
-			'url':'feed.php?s='+start+'&l='+limit,
+			'url':url+'feed/?s='+start+'&l='+limit,
 			'functions': {
 				'onload': function(){
 					var response = this.responseText.split(split);
