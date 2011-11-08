@@ -5,45 +5,30 @@
  * It contains the authentication method that checks if the provided
  * data can identity the user.
  */
-class InnsidaIdentity extends CUserIdentity {
+class DefaultIdentity extends CUserIdentity {
 
 	protected $_id;
 	protected $_userName;
 	protected $_access;
-	protected $so;
-	const DATA_DELIMITER = ",";
 
-	public function __construct($data, $sign, $target) {
-		parent::__construct(null, null);
+	public function __construct($id) {
+		parent::__construct($id, null);
 
-		$this->so = new SSOclient($data, $sign, $REMOTE_ADDR, $target);
-
-		$this->_id = -1;
+		$this->_id = $id;
 		$this->_access = array();
-		$this->_userName = $this->getUsernameFromData($data);
-	}
-	
-	public static function getUsernameFromData($data) {
-		$ar = explode(self::DATA_DELIMITER, $data);
-		$index = array_search("username", $ar) + 1;
-		return $ar[$index];
+		$this->_userName = $id;
 	}
 
 	public function authenticate() {
-		if ($this->so->oklogin()) {
-			$this->update();
-			return true;
-		} else {
-			return false;
-		}
+		return $this->update(); //FIXME
 	}
 
 	public function update() {
-		$user = User::model()->find(
-				"username = :username", 
-				array(":username" => $this->_userName
-				));
-		$this->_id = $user->id;
+		$user = User::model()->find("id = :id", array(":id" => $this->_id));
+		if (!$user) {
+			return false;
+		}
+		$this->_userName = $user->username;
 
 		$userInfo = $user->getAttributes();
 
@@ -53,12 +38,9 @@ class InnsidaIdentity extends CUserIdentity {
 		$this->setState("member", $userInfo['member']);
 		$this->setState("gender", $userInfo['gender']);
 		$this->setState("imageId", $userInfo['imageId']);
-
+		
 		$this->setState("access", $user->access);
-	}
-
-	public function getErrorMessage() {
-		return $this->so->reason();
+		return true;
 	}
 
 	public function getName() {
