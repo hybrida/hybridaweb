@@ -5,3 +5,13 @@
 <div class='barText'>
 	<feed class='eventFeed' data-type='event' data-interval='3' data-more_button='false' data-title='Kommende hendingar'></feed>
 </div>
+		<table class='calendar'>
+			<tr><td></td><td colspan=5></td><td></td></tr>
+			<tr><td>M</td><td>T</td><td>O</td><td>T</td><td>F</td><td>L</td><td>S</td></tr>
+			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+			<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+		</table>

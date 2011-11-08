@@ -168,7 +168,7 @@ class GetController extends Controller{
         $query->execute($input);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         
-        if ($result['userId'] == Yii::app()->user->id ){
+        if ($result['userId'] != Yii::app()->user->id ){
             $data['signType'] = "on";
             $data['buttonText'] = "Meld meg på";
         }
