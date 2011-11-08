@@ -321,18 +321,22 @@ function Dropdown(dn) {
 }
 //needs work
 function Signup(dn) {
-	var form = domtb.getFirstElementChild(dn),
-		content = domtb.getLastElementChild(dn);
-	form.addEventListener('submit', function() {
+	var id = dn.getAttribute('data-id'),
+		button = domtb.getFirstElementChild(dn);
+	var fill = function() {
 		xhr.request({
-			'type': 'post',
-			'url': 'signup.php',
-			'data': xhrtb.urlEncodeForm(form),
+			'type': 'get',
+			'url': url+'signup/?id=' + id,
 			'functions': {
-				'onload': function() { content.innerHTML = this.responseText; }
+				'onload': function() { 
+					dn.innerHTML = this.responseText;
+					new Signup(dn, true);
+				}
 			}
 		});
-	});
+	};
+	if(button) button.addEventListener('click', fill);
+	else fill();
 }
 //-----
 function Calendar(dn) {
@@ -355,11 +359,11 @@ function Calendar(dn) {
 	update = function() {
 		xhr.request({
 			'type': 'GET',
-			'url': 'calendar.php?year='+year+'&month='+month,
+			'url': url+'calendar/?year='+year+'&month='+month,
 			'functions': {
 				'onload': function() {
 					monthDisplay.innerHTML = months[month];
-					var response = this.responseText.split('~%~');
+					var response = this.responseText.split(split);
 					for(var i = 0; i < response.length; i++) nodes[i].innerHTML = response[i];
 				}
 			}
@@ -639,9 +643,9 @@ function addAllNodes(nodeName, cls) {
 	for(var i = 0; i < nodes.length; i++) new cls(nodes[i]);
 }
 onload = function() {
-	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'menu': Menu, 'slideshow': SlideShow, 'dropdown': Dropdown, 'calendar': Calendar };
+	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'slideshow': SlideShow, 'dropdown': Dropdown, 'calendar': Calendar, 'signup': Signup };
 	for(var n in addables) addAllNodes(n, addables[n]);
-	document.getElementById('mask').style.display = 'none';
+	//document.getElementById('mask').style.display = 'none';
 }
 
 console.log('fin');
