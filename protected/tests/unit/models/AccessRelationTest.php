@@ -236,5 +236,19 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(array(10, 12), $access2->get());
 	}
-
+	
+	public function test_save_noInputIsJustLikeInsert() {
+		$array = array(1,2,3,4,5);
+		$news = new News;
+		$news->save();
+		
+		$access = new AccessRelation($news);
+		$access->set($array);
+		$access->save();
+		
+		$access2 = new AccessRelation($news);
+		$access2->save();
+		
+		$this->assertEquals($array, $access2->get());
+	}
 }

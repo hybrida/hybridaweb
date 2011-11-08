@@ -199,6 +199,12 @@ SQL;
 			$stmt->execute();
 		}
 	}
+	
+	public function save() {
+		if (! empty ($this->insertAccess)) {
+			$this->replace();
+		}
+	}
 
 
 }

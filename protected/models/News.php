@@ -40,13 +40,13 @@ class News extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		  array('parentId, imageId, author', 'numerical', 'integerOnly' => true),
-		  array('parentType', 'length', 'max' => 7),
-		  array('title', 'length', 'max' => 50),
-		  array('title, imageId, content, timestamp', 'safe'),
-		  // The following rule is used by search().
-		  // Please remove those attributes that should not be searched.
-		  array('id, parentId, parentType, title, imageId, author, timestamp', 'safe', 'on' => 'search'),
+			array('parentId, imageId, author', 'numerical', 'integerOnly' => true),
+			array('parentType', 'length', 'max' => 7),
+			array('title', 'length', 'max' => 50),
+			array('title, imageId, content, timestamp', 'safe'),
+			// The following rule is used by search().
+			// Please remove those attributes that should not be searched.
+			array('id, parentId, parentType, title, imageId, author, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -55,14 +55,14 @@ class News extends CActiveRecord {
 	 */
 	public function attributeLabels() {
 		return array(
-		  'id' => 'ID',
-		  'parentId' => 'Parent',
-		  'parentType' => 'Parent Type',
-		  'title' => 'Title',
-		  'imageId' => 'Image',
-		  'content' => 'Content',
-		  'author' => 'Author',
-		  'timestamp' => 'Timestamp',
+			'id' => 'ID',
+			'parentId' => 'Parent',
+			'parentType' => 'Parent Type',
+			'title' => 'Title',
+			'imageId' => 'Image',
+			'content' => 'Content',
+			'author' => 'Author',
+			'timestamp' => 'Timestamp',
 		);
 	}
 
@@ -86,16 +86,18 @@ class News extends CActiveRecord {
 		$criteria->compare('timestamp', $this->timestamp, true);
 
 		return new CActiveDataProvider($this, array(
-				  'criteria' => $criteria,
+					'criteria' => $criteria,
 				));
 	}
 
 	public function afterConstruct() {
 		$this->_access = new AccessRelation($this);
+		return parent::afterConstruct();
 	}
 
 	public function afterFind() {
 		$this->afterConstruct();
+		return parent::afterFind();
 	}
 
 	public function setAccess($array) {
@@ -108,8 +110,15 @@ class News extends CActiveRecord {
 
 	public function afterSave() {
 		$this->_access->replace();
+		return parent::afterSave();
 	}
 
+	public function beforeSave() {
+		//throw new UserNotLoggedInException;
+		$this->author = Yii::app()->user->id;
+		return parent::beforeSave();
+	}
+	
 	public function getEventId() {
 
 		if (!$this->parentIsEvent())
@@ -143,16 +152,16 @@ class News extends CActiveRecord {
 	private function parentIsEvent() {
 		return!$this->getIsNewRecord() && !$this->parentType == "event";
 	}
-	
-	public function setParent($type,$id) {
+
+	public function setParent($type, $id) {
 		$this->parentType = $type;
 		$this->parentId = $id;
 	}
-	
+
 	public function getParentType() {
 		return $this->parentType;
 	}
-	
+
 	public function getParentId() {
 		return $this->parentId;
 	}

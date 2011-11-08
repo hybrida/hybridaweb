@@ -12,7 +12,7 @@ class UserTest extends PHPUnit_Framework_TestCase {
 
 	private function getCleanUserObject() {
 		$user = new User;
-		$user->username = "s" . rand(0, 100000);
+		$user->username = "t".User::model()->count();
 		$user->firstName = "UserTest";
 		$user->lastName = "getCleanUserObject";
 		$user->member = "false";
