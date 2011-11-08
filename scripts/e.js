@@ -37,10 +37,10 @@ function XHR() {
 	this.request = request;
 }
 xhr = new XHR();
-xhr.request({
+/*xhr.request({
 	'type':'GET',
-	'url':'get.php?t=' + (Math.random()*10).toFixed(0)
-});
+	'url':url+'get.php?t=' + (Math.random()*10).toFixed(0)
+});*/
 
 function create(info) {
 	var element = document.createElement(info.type);
@@ -639,7 +639,7 @@ function addAllNodes(nodeName, cls) {
 	for(var i = 0; i < nodes.length; i++) new cls(nodes[i]);
 }
 onload = function() {
-	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'menu': Menu, 'slideshow': Slideshow, 'dropdown': Dropdown, 'calendar': Calendar };
+	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'menu': Menu, 'slideshow': SlideShow, 'dropdown': Dropdown, 'calendar': Calendar };
 	for(var n in addables) addAllNodes(n, addables[n]);
 	document.getElementById('mask').style.display = 'none';
 }
