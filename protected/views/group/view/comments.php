@@ -6,7 +6,7 @@
 
 <div class='comment'>
     <form>
-        <input type='text' />
+        <input type='text' name='content'/>
     </form>
     <ul></ul>
 </div>	
