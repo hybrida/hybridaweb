@@ -12,6 +12,7 @@
  * @property string $content
  * @property integer $author
  * @property string $timestamp
+ * @property array $access
  */
 class News extends CActiveRecord {
 
@@ -42,20 +43,10 @@ class News extends CActiveRecord {
 		  array('parentId, imageId, author', 'numerical', 'integerOnly' => true),
 		  array('parentType', 'length', 'max' => 7),
 		  array('title', 'length', 'max' => 50),
-		  array('content, timestamp', 'safe'),
+		  array('title, imageId, content, timestamp', 'safe'),
 		  // The following rule is used by search().
 		  // Please remove those attributes that should not be searched.
-		  array('id, parentId, parentType, title, imageId, content, author, timestamp', 'safe', 'on' => 'search'),
-		);
-	}
-
-	/**
-	 * @return array relational rules.
-	 */
-	public function relations() {
-		// NOTE: you may need to adjust the relation name and the related
-		// class name for the relations automatically generated below.
-		return array(
+		  array('id, parentId, parentType, title, imageId, author, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -151,10 +142,6 @@ class News extends CActiveRecord {
 
 	private function parentIsEvent() {
 		return!$this->getIsNewRecord() && !$this->parentType == "event";
-	}
-
-	public function setEventById($id) {
-		
 	}
 	
 	public function setParent($type,$id) {

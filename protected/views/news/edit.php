@@ -1,28 +1,41 @@
 <div class="form">
 	<script type="text/javascript">
 		$(document).ready(function(){
-			var hasNewsButton = $("#NewsEventForm_hasNews")
-			var hasEventButton = $("#NewsEventForm_hasEvent")
-			var hasSignupButton = $("#NewsEventForm_hasSignup")
+			//
 			
-			hasNewsButton.attr('checked','checked');
-			hasEventButton.attr('checked','checked');
-			hasSignupButton.attr('checked','checked');
+			var newsButton = $("#NewsEventForm_hasNews")
+			var eventButton = $("#NewsEventForm_hasEvent")
+			var signupButton = $("#NewsEventForm_hasSignup")
 			
 			var news = $(".news");
 			var event = $(".event");
 			var signup = $(".signup");
+
 			
-			hasNewsButton.click(function() {
-				news.toggle();
+			newsButton.click(function() {
+				if (newsButton.attr('checked')) {
+					news.show();
+				} else {
+					news.hide();
+				}
 			});
-			hasEventButton.click(function () {
-				event.toggle();
+			eventButton.click(function () {
+				if (eventButton.attr('checked')) {
+					event.show();
+				} else {
+					event.hide();
+					signup.hide();
+					si
+				}
 			});
-			hasSignupButton.click(function (){
-				signup.toggle();
+			signupButton.click(function (){
+				if (eventButton.attr('checked') && signupButton.attr('checked')) {
+					signup.show()
+				} else if (! signupButton.checked) {
+					signup.hide();
+				}
 			});
-			
+			/* */
 
 
 		});

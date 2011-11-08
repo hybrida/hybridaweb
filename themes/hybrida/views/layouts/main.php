@@ -93,7 +93,7 @@
                         
 					</nav>
 
-					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptionsWidget") ?> </div>
+					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptions") ?> </div>
 
 				</div>
 			</div>
