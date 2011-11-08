@@ -1,5 +1,5 @@
 console.log('start');
-var url = "/yii/get/";
+
 var split = '~%~';
 
 function XHR() {
@@ -39,7 +39,7 @@ function XHR() {
 xhr = new XHR();
 xhr.request({
 	'type':'GET',
-	'url':url+'?t=' + (Math.random()*10).toFixed(0)
+	'url':'get.php?t=' + (Math.random()*10).toFixed(0)
 });
 
 function create(info) {
@@ -82,7 +82,7 @@ function Search(dn) {
 		} else if(lastvalue != input.value) {
 			xhr.request({
 				'type': 'GET',
-				'url': url+'search/?q=' + input.value,
+				'url': 'search.php?q=' + input.value,
 				'functions': {
 					'onload': function() {
 						var response = this.responseText.split(split);
@@ -134,7 +134,7 @@ function Feed(dn) {
 	addElements = function() {
 		xhr.request({
 			'type':'GET',
-			'url':url+'feed/?s='+start+'&l='+limit,
+			'url':'feed.php?s='+start+'&l='+limit,
 			'functions': {
 				'onload': function(){
 					var response = this.responseText.split(split);
@@ -634,14 +634,13 @@ function ImageUploader(info) {
 function AlbumMaker() {
 	new Dialog();
 }
+function addAllNodes(nodeName, cls) {
+	var nodes = document.getElementsByClassName(nodeName);
+	for(var i = 0; i < nodes.length; i++) new cls(nodes[i]);
+}
 onload = function() {
-	new Feed(document.getElementsByClassName('feed')[0]);
-	new Search(document.getElementsByClassName('search')[0]);
-	new Comment(document.getElementsByClassName('comment')[0]);
-	new Menu(document.getElementsByClassName('menu')[0]);
-	new SlideShow(document.getElementsByClassName('slideshow')[0]);
-	new Dropdown(document.getElementsByClassName('dropdown')[0]);
-	new Calendar(document.getElementsByClassName('calendar')[0]);
+	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'menu': Menu, 'slideshow': Slideshow, 'dropdown': Dropdown, 'calendar': Calendar };
+	for(var n in addables) addAllNodes(n, addables[n]);
 	document.getElementById('mask').style.display = 'none';
 }
 
