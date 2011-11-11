@@ -6,8 +6,10 @@ class RightBarContent extends CWidget {
 	private $rImagePath = "images/unknown_malefemale_profile.jpg";
 	private $data;
     public $imageId;
+    private $pdo;
 
 	public function init() {
+        $this->pdo = Yii::app()->db->getPdoInstance();
         
 		if (!Yii::app()->user->isGuest) {
 			$this->addActivities();
@@ -43,7 +45,7 @@ class RightBarContent extends CWidget {
 		$userId = Yii::app()->user->id;
 		//Setter profilbildet
 		$sql = "SELECT imageId FROM user_new WHERE id = :userId";
-		$query = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$query = $this->pdo->prepare($sql);
 		$query->execute( array('userId' => $userId ) );
         
 		$result = $query->fetch(PDO::FETCH_ASSOC);
@@ -51,10 +53,21 @@ class RightBarContent extends CWidget {
 	}
 
 	public function addActivities() {
-		$sql = "SELECT firstName, middleName, lastName FROM user_new WHERE id = ?";
+        
+        $sql = "SELECT firstName, middleName, lastName FROM user_new WHERE id = ?";
 		$command = Yii::app()->db->createCommand($sql);
 		$query = $command->query(array(Yii::app()->user->id));
 		$this->data = $query->read();
+        
+		$sql = "SELECT e.id, e.title, e.start FROM 
+                event AS e RIGHT JOIN membership_signup AS ms 
+                ON ms.eventId= e.id 
+                WHERE ms.userId = :userId AND start > NOW()
+                ORDER BY start DESC ";
+		$query = $this->pdo->prepare($sql);
+		$query->execute(array('userId' => Yii::app()->user->id));
+		
+        $this->data['activities'] = $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 
 }

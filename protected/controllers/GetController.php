@@ -29,9 +29,29 @@ class GetController extends Controller{
         print_r($_GET);
     }
     
+    public function actionEventfeed(){
+        $limit  = (isset($_GET['s']) && isset($_GET['l']))  ? ' LIMIT ' . ( $_GET['s'] + 4 ) . ', 4 ' : '';
+       
+        $data = array(
+            'userId' => 327,  
+        );
+        
+        $sql = "SELECT e.id, e.title, e.start FROM 
+                event AS e RIGHT JOIN membership_signup AS ms 
+                ON ms.eventId= e.id 
+                WHERE ms.userId = :userId AND start > NOW()
+                ORDER BY start DESC " . $limit;
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+        $data['events'] = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        $this->renderPartial('eventfeed', $data);
+        
+    }
+    
     public function actionFeed(){
         $contentLength = 500;
-        $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
+        $limit  = (isset($_GET['s']) && isset($_GET['l']))  ? ' LIMIT ' . $_GET['s'] . ', ' . $_GET['l'] : ' ';
         
 
         //Feil å bruke parentType for selection. 
