@@ -69,11 +69,20 @@ class GetController extends Controller{
     
     public function actionComment(){
             $split = '~%~';
-			$pId = $_REQUEST['id'];
-			$pType = $_REQUEST['parentType'];
+			if( !isset($_REQUEST['post']) ) {
+                $pId = $_REQUEST['id'];
+                $pType = $_REQUEST['type'];
+
+                $data['id'] = $pId;
+                $data['html'] = $this->comment($pType,$pId,$split);
+                $this->renderPartial('comment',$data);
+            } else {               
+                //Noe feil her
+                //echo $_REQUEST['data-content'];
+                
+            }
+                
             
-			$data['html'] = $this->comment($pType,$pId,$split);	
-            $this->renderPartial('comment',$data);
     }
     
     //List nested comments
@@ -86,7 +95,6 @@ class GetController extends Controller{
             'id' => $pId,
             'pType' => $pType
         );
-        echo Yii::app()->user->name;
 
         $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
 
@@ -140,45 +148,66 @@ class GetController extends Controller{
     }
     
     public function actionSignup($id){
-        $split = '~%~';
-        $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
         
-        $input = array(
-            'userId' =>  Yii::app()->user->id,
-            'type' => 'event',
-            'id' => $_REQUEST['id']
-        );
- 
-        $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName 
-        FROM membership_signup AS ms LEFT JOIN user_info AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
-        RIGHT JOIN ". Access::innerSQLAllowedTypeIds() . " = e.id
-        WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
+        if(GateKeeper::hasAccess('event', $_REQUEST['id'])){
+            
+            //Hvis brukeren prøver å poste, legg til først for så å oppdatere
+            if(isset($_REQUEST['type'])) {               
+                $signup = $_REQUEST['type'] == "on" ? "false" : "true";
 
-        $query = $this->pdo->prepare($sql);
-        $query->execute($input);
-        
-        $data['list'] = $query->fetchAll(PDO::FETCH_ASSOC);
-        $data['id'] = $id;
-        
-        $input = array(
-            'id' => $_REQUEST['id']
-        );
-        $sql = "SELECT userId FROM membership_signup WHERE eventId = :id";
-        $query = $this->pdo->prepare($sql);
-        $query->execute($input);
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        
-        if ($result['userId'] != Yii::app()->user->id ){
-            $data['signType'] = "on";
-            $data['buttonText'] = "Meld meg på";
+                $data = array(
+                    'id' => $_REQUEST['id'],
+                    'selfId' => Yii::app()->user->id,
+                    'signupId' => $signup
+                );
+                $sql = "INSERT INTO membership_signup VALUES( :id, :selfId, :signupId ) ON DUPLICATE KEY UPDATE signedOff = :signupId";
+                $query = $this->pdo->prepare($sql);
+                $query->execute($data); 
+            }
+            
+            
+            
+            $split = '~%~';
+            $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
+
+            $input = array(
+                'userId' =>  Yii::app()->user->id,
+                'type' => 'event',
+                'id' => $_REQUEST['id']
+            );
+
+            $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName 
+            FROM membership_signup AS ms LEFT JOIN user_info AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
+            RIGHT JOIN ". Access::innerSQLAllowedTypeIds() . " = e.id
+            WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
+
+            $query = $this->pdo->prepare($sql);
+            $query->execute($input);
+
+            $data['list'] = $query->fetchAll(PDO::FETCH_ASSOC);
+            $data['id'] = $id;
+
+            $input = array(
+                'id' => $_REQUEST['id'],
+                'userId' => Yii::app()->user->id
+            );
+            $sql = "SELECT userId, signedOff FROM membership_signup WHERE eventId = :id AND userId = :userId";
+            $query = $this->pdo->prepare($sql);
+            $query->execute($input);
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+
+            if ($result['userId'] == Yii::app()->user->id && $result['signedOff']=="false"){
+                $data['signType'] = "off";
+                $data['buttonText'] = "Meld meg av";
+            }
+            else
+            {
+                $data['signType'] = "on";
+                $data['buttonText'] = "Meld meg på";
+            }
+
+            $this->renderPartial('signup',$data);
         }
-        else
-        {
-            $data['signType'] = "off";
-            $data['buttonText'] = "Meld meg av";
-        }
-        
-        $this->renderPartial('signup',$data);
     }
     
     public function actionGroup(){

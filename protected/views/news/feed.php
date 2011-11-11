@@ -5,4 +5,4 @@
 </div>
 
 
-<div class='feed'></div>
+<div class='feed' data-src='feed'></div>

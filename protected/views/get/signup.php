@@ -1,7 +1,4 @@
-<? /*($signType == "off" /*&& $row['signoff'] == "false" )*/ ?>
-
-<button data-id='<?= $id ?>'><?= $buttonText ?></button>
-
+<button data-id='<?= $id ?>' data-type='<?= $signType ?>'><?= $buttonText ?></button>
 <dropdown data-title='påmeldte'>
 <ul>
 <? foreach($list as $row) : ?>
@@ -11,6 +8,5 @@
             </li>
 
 <? endforeach; ?>
-<?=  rand(0,10) ?>
 </ul></dropdown>
 

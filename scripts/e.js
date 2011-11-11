@@ -21,7 +21,7 @@ function XHR() {
 					for(var f in request.functions) o[f] = request.functions[f];
 				for(var uf in request.uploadFunctions) o.upload[uf] = request.uploadFunctions[uf];
 					for(var h in request.headers) o.setRequestHeader(h, request.headers[h]);
-					o.addEventListener('load', function(){objects[i] = null; next();});
+					o.addEventListener('load', function(){objects[i] = null;next();});
 					o.open(request.type, request.url, true);
 					o.send(request.data);
 					break;
@@ -67,8 +67,8 @@ function Search(dn) {
 	});
 	dropdown.appendChild(advanced);
 	
-	input.onblur = function() { dropdown.style.display = 'none'; }
-	input.onfocus = function() { dropdown.style.display = 'block'; }
+	input.onblur = function() {dropdown.style.display = 'none';}
+	input.onfocus = function() {dropdown.style.display = 'block';}
 
 	input.onkeyup = function(e) {
 		if(e.keyCode == 27) {
@@ -114,7 +114,11 @@ function Feed(dn) {
 	var start = 0,
 		limit = 10,
 		moreButton,
-		addElements;
+		addElements,
+        id = dn.getAttribute('data-id'),
+        type = dn.getAttribute('data-type'),
+        src = dn.getAttribute('data-src');
+        
 	
 	moreButton = create({
 		'type': 'li',
@@ -129,12 +133,15 @@ function Feed(dn) {
 			}
 		}
 	});
+    
+    console.log(moreButton);
+    console.log(dn);
 	dn.appendChild(moreButton);
 	
 	addElements = function() {
 		xhr.request({
 			'type':'GET',
-			'url':url+'feed/?s='+start+'&l='+limit,
+			'url':url+src+'/?s='+start+'&l='+limit+'&id='+id+'&type='+type,
 			'functions': {
 				'onload': function(){
 					var response = this.responseText.split(split);
@@ -161,12 +168,14 @@ xhrtb = {
 }
 
 function Comment(dn) {
-	var form = dn.firstChild,
-		comment = new Feed(dn.lastChild);
+	var form = domtb.getFirstElementChild(dn),
+        id = dn.getAttribute('data-id'),
+        type = dn.getAttribute('data-type'),
+		comment = new Feed(domtb.getLastElementChild(dn));
 	form.onsubmit = function() {
 		xhr.request({
 			'type': 'POST',
-			'url': 'comment.php',
+			'url': url+'comment/?post=true&type='+type+'&id='+id,
 			'data': xhrtb.urlEncodeForm(form),
 			'functions': {
 				'onload': function(){
@@ -250,14 +259,14 @@ function Slider(dn) {
 			move(n);
 		}
 	}
-	stop = function() { clearInterval(timer); }
+	stop = function() {clearInterval(timer);}
 	this.move = move;
 	this.stop = stop;
 }
 function SlideShow(dn) {
 	var slider = new Slider(dn),
-		timer = setInterval(function() { slider.move('next'); }, 4000),
-		stop = function() { clearInterval(timer); }
+		timer = setInterval(function() {slider.move('next');}, 4000),
+		stop = function() {clearInterval(timer);}
 	this.stop = stop;
 }
 function Menu(dn) {
@@ -282,14 +291,14 @@ function Dialog(text) {
 		},
 		node = create({
 			'type': 'div',
-			'attributes': { 'class': 'dialog' },
+			'attributes': {'class': 'dialog'},
 			'children': {
 				0: {
 					'type': 'span',
 					'innerHTML': text
 				},1: {
 					'type': 'input',
-					'attributes': { 'class': 'right', 'type': 'image', 'src': 'exit.png' },
+					'attributes': {'class': 'right', 'type': 'image', 'src': 'exit.png'},
 					'functions': {
 						'click': hide
 					}
@@ -311,7 +320,7 @@ function Dropdown(dn) {
 
 	button.addEventListener('click', function() {
 		if(toggle) {
-			animtb.ease(content, 'height', 0, 200, function() { content.style.display = 'none'; });
+			animtb.ease(content, 'height', 0, 200, function() {content.style.display = 'none';});
 		} else {
 			content.style.display = 'block';
 			animtb.ease(content, 'height', height, 200);
@@ -322,11 +331,12 @@ function Dropdown(dn) {
 //needs work
 function Signup(dn) {
 	var id = dn.getAttribute('data-id'),
-		button = domtb.getFirstElementChild(dn);
+        signupURL = url+'signup/?id=' + id,
+		button = domtb.getFirstElementChild(dn);    
 	var fill = function() {
 		xhr.request({
 			'type': 'get',
-			'url': url+'signup/?id=' + id,
+			'url': signupURL,
 			'functions': {
 				'onload': function() { 
 					dn.innerHTML = this.responseText;
@@ -335,7 +345,11 @@ function Signup(dn) {
 			}
 		});
 	};
-	if(button) button.addEventListener('click', fill);
+	if(button) { 
+        var type = button.getAttribute('data-type'),
+         signupURL = signupURL + '&type='+type;
+         
+        button.addEventListener('click', fill); }
 	else fill();
 }
 //-----
@@ -369,8 +383,8 @@ function Calendar(dn) {
 			}
 		});
 	}
-	previous.addEventListener('click', function() { month--; if(month < 0) {month = 12; year--} update(); });
-	next.addEventListener('click', function() { month++; if(month > 11) {month = 0; year++} update(); });
+	previous.addEventListener('click', function() {month--;if(month < 0) {month = 12;year--}update();});
+	next.addEventListener('click', function() {month++;if(month > 11) {month = 0;year++}update();});
 	update();
 }
 
@@ -422,12 +436,12 @@ function FileUploader(info) {
 		uploadId = 0,
 		menu = create({
 			'type': 'div',
-			'attributes': { 'class': 'menu' },
+			'attributes': {'class': 'menu'},
 			'children': {
 				0: {
 					'type': 'input',
-					'attributes': { 'type': 'file', 'multiple': 'multiple' },
-					'functions': { 'change': function() { addFiles(this.files); } }
+					'attributes': {'type': 'file', 'multiple': 'multiple'},
+					'functions': {'change': function() {addFiles(this.files);}}
 				}
 			}
 		}),
@@ -442,19 +456,19 @@ function FileUploader(info) {
 							'children': {
 								0: {
 									'type': 'th',
-									'attributes': { 'colspan': '4' },
+									'attributes': {'colspan': '4'},
 									'children': {
 										0: {
 											'type': 'div',
-											'attributes': { 'class': 'asd' },
+											'attributes': {'class': 'asd'},
 											'children': {
 												0: {
 													'type': 'div',
-													'attributes': { 'class': 'progressBar' },
+													'attributes': {'class': 'progressBar'},
 													'storeAs': nodes.progressBar = {}
 												}, 1: {
 													'type': 'div',
-													'attributes': { 'class': 'progressName' },
+													'attributes': {'class': 'progressName'},
 													'innerHTML': '0B / 0B',
 													'storeAs': nodes.totalPercent = {}
 												}
@@ -485,19 +499,19 @@ function FileUploader(info) {
 							'children': {
 								0: {
 									'type': 'th',
-									'attributes': { 'colspan': '4' },
+									'attributes': {'colspan': '4'},
 									'children': { 
 										0: {
 											'type': 'div',
-											'attributes': { 'class': 'asd' },
+											'attributes': {'class': 'asd'},
 											'children': {
 												0: {
 													'type': 'div',
-													'attributes': { 'class': 'progressBar' },
+													'attributes': {'class': 'progressBar'},
 													'storeAs': nodes.fileProgressBar = {}
 												}, 1: {
 													'type': 'div',
-													'attributes': { 'class': 'progressName' },
+													'attributes': {'class': 'progressName'},
 													'innerHTML': '-',
 													'storeAs': nodes.fileName = {}
 												}
@@ -516,11 +530,11 @@ function FileUploader(info) {
 							'children': {
 								0: {
 									'type': 'td',
-									'attributes': { 'colspan': '4' },
+									'attributes': {'colspan': '4'},
 									'children': {
 										0: {
 											'type': 'div',
-											'attributes': { 'class': 'scrolltable' },
+											'attributes': {'class': 'scrolltable'},
 											'children': {
 												0: {
 													'type': 'table',
@@ -600,9 +614,9 @@ function FileUploader(info) {
 						'children': {
 							0: {
 								'type': 'input',
-								'attributes': { 'type': 'button' },
+								'attributes': {'type': 'button'},
 								'functions': {
-									'click': (function(file) { return function() {
+									'click': (function(file) {return function() {
 										var id = files.indexOf(file);
 										for(var i = id; i < files.length; i++) files[i].nodes.id.innerHTML = i;
 										nodes.table.removeChild(file.element);
@@ -643,7 +657,7 @@ function addAllNodes(nodeName, cls) {
 	for(var i = 0; i < nodes.length; i++) new cls(nodes[i]);
 }
 onload = function() {
-	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'slideshow': SlideShow, 'dropdown': Dropdown, 'calendar': Calendar, 'signup': Signup };
+	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'slideshow': SlideShow, 'dropdown': Dropdown, 'calendar': Calendar, 'signup': Signup};
 	for(var n in addables) addAllNodes(n, addables[n]);
 	//document.getElementById('mask').style.display = 'none';
 }

@@ -55,6 +55,7 @@ class GroupController extends Controller {
 
 		$data = array();
 		$group = Group::model()->findByPk($id);
+        $data['id'] = $id;
 		$data['model'] = $group;
         $data['title'] = $group->getTitle();
         

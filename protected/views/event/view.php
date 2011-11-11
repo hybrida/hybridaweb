@@ -21,9 +21,7 @@
 <? if ($hasSignup): ?>
 
     Påmelding:
-	<div class="signup" data-id='<?=$id?>'>
-    
-    </div>
+	<div class="signup" data-id='<?= $id ?>'></div>
 
     <div class='clear'>
         <b>Plasser: </b><i><?= $spots ?></i>
