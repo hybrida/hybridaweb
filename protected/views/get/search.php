@@ -1,7 +1,7 @@
 <? foreach($users as $user) : ?>
 
 			
-<a href='?site=profile&id=<?= $user['userId'] ?>'><?= $user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'] ?></a>
+<a href='<?= Yii::app()->baseUrl ?>/profile/<?= $user['userId'] ?>'><?= $user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'] ?></a>
 <?= $split ?>
 			            
 <? endforeach ?>

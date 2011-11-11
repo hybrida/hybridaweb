@@ -61,13 +61,13 @@ function Search(dn) {
 		lastvalue = '',
 		nodes = [];
 	
-	advanced = create({
+	/*advanced = create({
 		'type': 'li',
 		'innerHTML': 'Avansert sok'
 	});
-	dropdown.appendChild(advanced);
+	dropdown.appendChild(advanced);*/
 	
-	input.onblur = function() {dropdown.style.display = 'none';}
+	//input.onblur = function() {dropdown.style.display = 'none';}
 	input.onfocus = function() {dropdown.style.display = 'block';}
 
 	input.onkeyup = function(e) {
@@ -149,7 +149,7 @@ function Feed(dn) {
 						var newNode = document.createElement('li');
 						newNode.innerHTML = response[i];
 						dn.insertBefore(newNode, moreButton);
-						start++;
+						start += limit;
 					}
 				}
 			}

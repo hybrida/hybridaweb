@@ -1,0 +1,30 @@
+ul#hintList {
+	position: relative;
+	float: right;
+	width: 220px;
+	margin-top: 0px;
+	margin-right: -1px;
+	padding: 0;
+	list-style: none;
+	border: 1px solid #10336A;
+	border-top: none;
+	background-color: #FFFFFF;
+    z-index:2;
+    display:none;
+}
+
+ul#hintList li {
+	border-top: 1px solid #10336A;
+}
+
+ul#hintList li a {
+	text-decoration:none;
+	color:#000000;
+	display: list-item;
+	padding: 2px 5px;
+}
+
+ul#hintList li.highlight a {
+	background-color: #87ADEA;
+	text-decoration:underline;
+}
