@@ -79,8 +79,10 @@
                             <div><a href='<?= Yii::app()->request->baseUrl ?>/news/'>Hjem</a></div> 
                             <div><a href='<?= Yii::app()->request->baseUrl ?>/profile/'>Profil</a></div> 
                             <div><a href='<?= Yii::app()->request->baseUrl ?>/group/'>Grupper</a></div>
+                            
                             <div>Personer</div>
-                            <div>Om oss</div>
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/article/1'>Hybrida</a></div>
+                            
                             <div class="last">Bedrift</div>
                         </items>
                         

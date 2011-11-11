@@ -11,7 +11,8 @@ class InnsidaIdentity extends CUserIdentity {
 	protected $_userName;
 	protected $_access;
 	protected $so;
-	const DATA_DELIMITER = ",";
+    
+	const DATA_DELIMITER = ',';
 
 	public function __construct($data, $sign, $target) {
 		parent::__construct(null, null);
