@@ -1,6 +1,6 @@
 <?php
 class ProfileController extends Controller{
-    
+    public $imageId;
     
     public function actionIndex(){
         $this->actionView(Yii::app()->user->id);
@@ -23,9 +23,9 @@ class ProfileController extends Controller{
         else 
         {
             $profile = new Profile();
-            $data['info'] = $profile->info($id);
+            $data = $profile->info($id);
             $data['id'] = $id;
-            
+            $this->imageId = $data['imageId'];
             $this->render('index',$data);
         }
     }

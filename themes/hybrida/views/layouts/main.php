@@ -93,7 +93,8 @@
                         
 					</nav>
 
-					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptions") ?> </div>
+					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptions") ?> 
+                    </div>
 
 				</div>
 			</div>
@@ -113,7 +114,15 @@
 			</div>
 
 			<div class="rightBar">
-				<? $this->widget("application.components.widgets.RightBarContent"); ?>
+				<? if(isset($this->imageId)) {
+                    
+                    $this->widget("application.components.widgets.RightBarContent", array(
+                            'imageId' => $this->imageId,
+                    ));
+                }
+                else {
+                    $this->widget("application.components.widgets.RightBarContent");
+                }?>
 			</div>
 		</div>
 

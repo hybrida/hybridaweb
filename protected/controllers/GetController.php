@@ -13,6 +13,7 @@
 
 class GetController extends Controller{
     //put your code here
+    private $split = "~%~";
     
     private function albumList() {
         $result = query("SELECT id, title, imageId FROM album AS a 
@@ -287,6 +288,51 @@ class GetController extends Controller{
             $this->renderPartial('search',$result);
     }
     
+    
+    public function actionCalendar(){
+
+			$firstDay = date("N", mktime(0, 0, 0, $_GET['month'], 0, $_GET['year']));
+			$lastDay = date("j", mktime(0, 0, 0, $_GET['month']+1, 0, $_GET['year']));
+			$iterate= ($firstDay + $lastDay >= 35 ? 42 : 35) - $firstDay;
+		
+            $data = array(
+                'userId' => Yii::app()->user->id,
+                'type' => 'event',
+                'year' => $_GET['year'],
+                'month' => $_GET['month']
+            );
+            
+			$sql = "SELECT e.title, e.id, DAY(e.start) AS day, DATE_FORMAT(e.start, '%k:%i') AS time 
+			FROM event AS e 
+			RIGHT JOIN  " . Access::innerSQLAllowedTypeIds() ." = e.id
+			WHERE YEAR(e.start) = :year AND MONTH(e.start) = :month 
+			ORDER BY DAY(e.start)";
+            
+			$query = $this->pdo->prepare($sql);
+			$query->execute($data);
+            
+			$result = $query->fetch(PDO::FETCH_ASSOC);
+            
+            for( $i = -$firstDay + 1; $i < $iterate; $i++ ) {
+				if( $i > 0 && $i <= $lastDay ) {
+					if( $i == $result['day'] ) {
+						echo ("<a title='" . $result['title'] . " kl " . $result['time'] . "' href='" . Yii::app()->request->baseUrl ."/event/" . $result['id'] ."'>" . $i . "</a>");
+						$result = $query->fetch(PDO::FETCH_ASSOC);
+                        //$row = mysql_fetch_array( $result );
+					} else {
+						echo ($i);
+					}
+				}
+				echo ( $this->split );
+			}
+
+    }
+    
+    
+    
+    
+    
+    
     public function actionIndex() {
 	
 	$split = "¤¤";
@@ -361,37 +407,7 @@ class GetController extends Controller{
 			echo ("</table>");
 			break;
 			
-		case "calender":
-			$firstDay = date("N", mktime(0, 0, 0, $_GET['month'], 0, $_GET['year']));
-			$lastDay = date("j", mktime(0, 0, 0, $_GET['month']+1, 0, $_GET['year']));
-			$iterate= ($firstDay + $lastDay >= 35 ? 42 : 35) - $firstDay;
-		
-			$query = "SELECT e.title, e.id, DAY(e.start) day, DATE_FORMAT(e.start, '%k:%i') time 
-			FROM event AS e 
-			RIGHT JOIN  ".accessId('event',$selfId)." = e.id
-			WHERE YEAR(e.start)=$_GET[year] AND MONTH(e.start)=$_GET[month] 
-			ORDER BY DAY(e.start)";
-			$result = mysql_query( $query ) or die(mysql_error()); 
-			
-			$row = mysql_fetch_array( $result );
-
-			for( $i = -$firstDay + 1; $i < $iterate; $i++ ) {
-				if( $i > 0 && $i <= $lastDay ) {
-					if( $i == $row['day'] ) {
-						echo ("<a title='$row[title] kl $row[time]' href='?site=event&id=$row[id]'>$i</a>");
-						$row = mysql_fetch_array( $result );
-					} else {
-						echo ($i);
-					}
-				}
-				echo ( $split );
-			}
-		
-			
-			
-	}
-
-
+    	}
     }
     
 }

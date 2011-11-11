@@ -39,13 +39,14 @@ class ImageController extends Controller {
 
     public function actionIndex() {
         $file = $this->imagePath . "unknown_malefemale_profile.jpg";
-        readile($file);
+        readfile($file);
     }
 
     public function actionView($id, $size) {
         $imageId = $id;
 
-        if (preg_match("/^([0-9]*)$/", $imageId)) {
+        
+        //if (preg_match("/^([-1-9]*)$/", $imageId)) {
             $data = array(
                 'imageId' => $imageId
             );
@@ -95,7 +96,7 @@ class ImageController extends Controller {
                 $this->unknown($size);
                 //echo "NOACCESS!";
             }*/
-        }
+        //}
     }
     public function unknown($size) {
         switch ($size) {
