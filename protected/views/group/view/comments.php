@@ -1,6 +1,6 @@
 <h1><?= $title ?></h1>
 
-<?php $this->renderPartial("menu"); ?>
+    <?php $this->renderPartial("menu", $menu); ?>
     
 <h2>Kommentarer:</h2>
 

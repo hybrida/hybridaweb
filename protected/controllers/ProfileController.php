@@ -34,4 +34,8 @@ class ProfileController extends Controller{
         $this->render('comment');
     }
     
+    public function actionEdit(){
+        $this->render('edit');
+    }
+    
 }

@@ -169,7 +169,8 @@ class Group extends CActiveRecord {
                 WHERE id = :gID AND admin = :admin";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
-		if ($query->fetch(PDO::FETCH_ASSOC) < 1) {
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+        if($result['c'] < 1){
 			return false;
 		}
 		return true;
@@ -511,7 +512,11 @@ class Group extends CActiveRecord {
 
 		$com->execute();
 
-		$data = $com->fetchAll(PDO::FETCH_ASSOC);
+		$data['menuelements'] = $com->fetchAll(PDO::FETCH_ASSOC);
+        $data['id'] = $this->id;
+        $data['isAdmin'] = $this->isAdmin(Yii::app()->user->id);
+        
+        return $data;
 	}
 
 }

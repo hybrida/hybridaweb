@@ -24,8 +24,8 @@
 <? foreach ($members as $member): ?>
     
     <li>
-        <a href='/profile/<?= $member['userId'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['lastName'] ?></a> <?= $member['comission'] ?>
-        <a href='/yii/get/group/?gId=<?= $group['id'] ?>&userId=<?= $member['userId'] ?>&type=delMember'>Slett</a> 
+        <a href='/profile/<?= $member['id'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['lastName'] ?></a> <?= $member['comission'] ?>
+        <a href='/yii/get/group/?gId=<?= $group['id'] ?>&userId=<?= $member['id'] ?>&type=delMember'>Slett</a> 
     </li>
         
 <? endforeach ?>

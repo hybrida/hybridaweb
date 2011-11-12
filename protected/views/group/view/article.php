@@ -1,8 +1,9 @@
 <h1>
     <?= $title ?>
 </h1>
-
-    <?php $this->renderPartial("menu"); ?>
+    
+    
+    <?php $this->renderPartial("menu", $menu); ?>
 
 	
 	<p><?= $content['content'] ?></p>

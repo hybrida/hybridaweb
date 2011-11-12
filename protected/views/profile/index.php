@@ -1,4 +1,8 @@
-		<h1> <?= $firstName ." ". $middleName ." ". $lastName ?> </h1>
+<div id='edit'>
+    <a href='<?= Yii::app()->baseURL ?>/profile/edit'>endre</a>
+</div>
+
+<h1> <?= $firstName ." ". $middleName ." ". $lastName ?> </h1>
         
 		<div class='menuPage'>
 		<a href='<?= $id ?>/sub/0'>Kommentarer</a>

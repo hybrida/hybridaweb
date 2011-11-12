@@ -58,6 +58,7 @@ class GroupController extends Controller {
         $data['id'] = $id;
 		$data['model'] = $group;
         $data['title'] = $group->getTitle();
+        $data['menu'] = $group->getMenu();
         
         $content = $group->getGroupContentType($title);
         
@@ -73,6 +74,8 @@ class GroupController extends Controller {
             $data['id'] = $group->id;
         }
         
+        
+                
         $this->render("view/" . $content, $data);
 	}
 

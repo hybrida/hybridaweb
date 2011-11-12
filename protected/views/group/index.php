@@ -1,6 +1,6 @@
 <h1>Komiteer og grupper</h1>
 <div class='menuPage'>
-	<a href='?site=group&type=add'>create new</a>
+	<a href='<?= Yii::app()->baseURL ?>/group/add'>Opprett ny</a>
 	<!--//Dette burde lage et popupvindu med muligheten til � fylle inn navn og egenskaper osv. -->
 </div>
 
