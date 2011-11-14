@@ -12,23 +12,25 @@ class InnsidaIdentity extends CUserIdentity {
 	protected $_access;
 	protected $so;
     
-	const DATA_DELIMITER = ',';
+	//const DATA_DELIMITER = ',';
 
 	public function __construct($data, $sign, $target) {
 		parent::__construct(null, null);
 
-		$this->so = new SSOclient($data, $sign, $REMOTE_ADDR, $target);
+		$this->so = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR'], $target);
 
 		$this->_id = -1;
 		$this->_access = array();
-		$this->_userName = $this->getUsernameFromData($data);
+        $this->_userName = $this->so->loginvalues['username'];
+        
+		//$this->_userName = $this->getUsernameFromData($data);
 	}
 	
-	public static function getUsernameFromData($data) {
+	/*public static function getUsernameFromData($data) {
 		$ar = explode(self::DATA_DELIMITER, $data);
 		$index = array_search("username", $ar) + 1;
 		return $ar[$index];
-	}
+	}*/
 
 	public function authenticate() {
 		if ($this->so->oklogin()) {
