@@ -1,1 +1,1 @@
-<?= $firstName ?> <?= $middleName ?> <?= $lastName ?>
+<a href='<?= Yii::app()->baseURL ?>/site/logout'><?= $firstName ?> <?= $middleName ?> <?= $lastName ?></a>

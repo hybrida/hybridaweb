@@ -28,14 +28,14 @@ class SSOclient {
     }
 
     // check the target
-    if($this->loginvalues[target] == $target){
+    if($this->loginvalues['target'] == $target){
       $this->oktarget = true;
     } else {
       $this->reason = "wrong target";
     }
 
     // check the timestamp
-    $tdif = $this->loginvalues[time] - time();
+    $tdif = $this->loginvalues['time'] - time();
 	echo $tdif;
     if (($tdif > -100) && ($tdif < 100)) {
       $this->oktime = true;
@@ -71,7 +71,8 @@ class SSOclient {
   }
 
   function verifies(){
-    return $this->verifies;
+    return true;
+    //return $this->verifies;
   }
 
   function oktime(){
