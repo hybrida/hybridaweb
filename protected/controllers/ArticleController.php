@@ -11,7 +11,7 @@ class ArticleController extends Controller {
 		}
 	}
     public function actionEdit($id){
-        
+        $this->render('edit');
     }
 
 }
