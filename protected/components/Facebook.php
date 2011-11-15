@@ -41,7 +41,7 @@ public function authLink(){ //Returnerer link til authentication
 
 public function authLinkForPage(){ //Returnerer link til authentication av en page
 	$app_id = '202808609747231';
-	$my_url = 'http://www.appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side
+	$my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side
 	$dir = '../../images/facebookconnectlogo.jpg';
 	$permissions = 'manage_pages,publish_actions,offline_access';
 	
