@@ -31,20 +31,11 @@ public function getProfilePicture(){
 }
 
 public function authLink(){ //Returnerer link til authentication
+	$userId = Yii::app()->user->id;
 	$app_id = '202808609747231';
 	$my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side 
 	$dir = Yii::app()->baseURL . '/images/facebookconnectlogo.jpg';
 	$permissions = 'publish_actions,offline_access';
-	
-	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
-}
-
-public function authLinkForPage(){ //Returnerer link til authentication av en page
-	$app_id = '202808609747231';
-	$my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side
-	$dir = '../../images/facebookconnectlogo.jpg';
-	$permissions = 'manage_pages,publish_actions,offline_access';
-	
 	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
 }
 
@@ -98,9 +89,9 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 		'<meta property="fb:app_id"      content="202808609747231" />'."\n".
 		'<meta property="og:type"        content="lfhybrida:company_presentation" />'."\n".
 		'<meta property="og:url"         content="'.$urlEventPage.'" />'."\n".
-		'<meta property="og:title"       content="'.$eventName.'" />';//."\n".
+		'<meta property="og:title"       content="'.$eventName.'" /></head>';//."\n".
 		//'<meta property="og:description" content="'.$eventDesc.'" />';."\n".
-		//'<meta property="og:image"       content="'.$linkImage.'" /></head>';  
+		//'<meta property="og:image"       content="'.$linkImage.'" />';  
 	return $metaData;
 }
 
@@ -111,6 +102,27 @@ public function createObject(){ //Kalles i body p� eventsiden. Lager eventobje
             'status:true, xfbml:true, oauth:true }); </script>'."\n".
 			'<fb:add-to-timeline></fb:add-to-timeline>';
 	return $object;
+}
+
+public function createObjectNew($eventName, $urlEventPage){
+	$appId='202808609747231';
+	$type = 'lfhybrida:company_presentation';
+	$postUrl = 'http://ogp.me/ns/fb/lfhybrida#';
+	$data = array(
+		'app_id' => $appId, 
+		'type' => $type,
+		'url' => $urlEventPage,
+		'title' => $eventName
+	);
+	$ch = curl_init();
+	
+	curl_setopt($ch, CURLOPT_URL, $postUrl);
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    $out = curl_exec($ch);
+	
+    curl_close($ch);
 }
 
 public function publishAtFanpage(){

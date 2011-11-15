@@ -8,7 +8,7 @@ class FacebookController extends Controller {
         
         $code = $_REQUEST['code'];
 
-        $userId = 327;//Yii::app()->user->id;
+        $userId = Yii::app()->user->id;
         $app_id = '202808609747231';
         $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
         $my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //url til fila som skal lese inn code
