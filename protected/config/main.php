@@ -5,6 +5,7 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
+		'theme' => 'classic',
 		'theme' => 'hybrida',
 		'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 		'name' => 'Hyb-Yii',
@@ -14,16 +15,18 @@ return array(
 		'import' => array(
 				'application.models.*',
 				'application.components.*',
+				'application.exceptions.*',
 		),
 		'modules' => array(
 				// uncomment the following to enable the Gii tool
 
 				'gii' => array(
 						'class' => 'system.gii.GiiModule',
-						'password' => 'manuel',
+						'password' => 'gii',
 				// If removed, Gii defaults to localhost only. Edit carefully to taste.
 				//'ipFilters'=>array('127.0.0.1','::1'),
 				),
+				'admin',
 		),
 		// application components
 		'components' => array(
@@ -37,6 +40,7 @@ return array(
 						'urlFormat' => 'path',
 						'showScriptName' => false,
 						'rules' => array(
+								'group/view/<id:\d+>/<title:\w+>' => 'group/view',
 								'<controller:\w+>/<id:\d+>' => '<controller>/view',
 								'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 								'<controller:\w+>/<action:\w+>' => '<controller>/<action>',

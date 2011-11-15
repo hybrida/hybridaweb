@@ -20,7 +20,22 @@ class NewsController extends Controller {
 
 	public function actionView($id) {
 
-		$this->render("view", $a);
+
+		$sql = "SELECT title, n.imageId, content, firstName, middleName, lastName, timestamp
+				FROM news n, user_new u 
+				WHERE  n.author = u.id
+				AND n.id = :id ";
+		$query = Yii::app()->db->createCommand($sql);
+		$query2 = $query->query(array("id" => $id));
+		$data = $query2->read();
+
+		if ($data == array()) {
+			throw new CHttpException("Nyheten finnes ikke");
+		}
+
+
+
+		$this->render("view", $data);
 	}
 
 	public function actionFeed() {
@@ -43,23 +58,53 @@ class NewsController extends Controller {
 		$this->render("feed", array('data' => $data));
 	}
 
-	public function actionCreate($id=null) {
-		$model = News::model()->findByPk($id);
+	public function actionCreate() {
+		$this->forward("news/edit");
+	}
 
-		if (!isset($_POST['news'])) {
-			
-		} else {
-			foreach ($_POST['news'] as $key => $value) {
-				$model->$key = $value;
-			}
+	public function actionEdit($id=null) {
+
+		$newsModel = $this->getNewsModel($id);
+
+		$model = new NewsEventForm($newsModel);
+		$isUpdated = false;
+
+		if (isset($_POST['NewsEventForm'])) {
+			$input = $_POST['NewsEventForm'];
+			print_r($input);
+			$model->setAttributes($input, false);
+			$model->printFields();
 			$model->save();
+			echo "newsId: " . $model->getNewsModel()->id;
+			echo "eventId: " . $model->getEventModel()->id;
+			echo "signupId: " . $model->getSignupModel()->primaryKey;
+
+			$this->redirectAfterEdit($model);
+			return;
+		}
+
+		$this->render("edit", array(
+			'model' => $model,
+			'updated' => $isUpdated,
+		));
+	}
+
+	public function getNewsModel($id) {
+		$model = News::model()->findByPk($id);
+		if ($model) {
+			return $model;
+		}
+		return new News;
+	}
+
+	private function redirectAfterEdit($model) {
+		$newsModel = $model->getNewsModel();
+		if (!$newsModel->isNewRecord) {
+			$this->redirect(array(
+				"news/view",
+				"id" => $newsModel->id
+			));
 		}
 	}
 
-	public function actionUpdate($id) {
-		$model = News::model()->findByPk($id);
-	}
-
 }
-
-?>

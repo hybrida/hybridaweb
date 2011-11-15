@@ -29,14 +29,16 @@ abstract class Edit {
 	/** ErrorHandler */
 	protected $err;
 
+	/** PDO instance */
+	protected $pdo;
+
 	/** The default access that should be set if not specified */
-	
 
 
 	public function __construct() {
 
 		$this->pdo = Yii::app()->db->getPdoInstance();
-		$this->err = $this->con->getErrorHandler();
+		// $this->err = $this->con->getErrorHandler();
 	}
 
 
@@ -72,11 +74,17 @@ abstract class Edit {
 			
 		}
 
-		$sql = "SELECT $scope FROM {$this->tableName} WHERE {$this->idName} = '$id'";
+		$sql = "SELECT $scope 
+			FROM {$this->tableName} 
+			WHERE :idName = '$id'";
 
-		$result = $this->con->query($sql);
+		$stmt = $this->pdo->prepare($sql);
 
-		$table = $this->con->fetch($result);
+		$stmt->execute(array(
+				"idName" =>  $this->idName)
+		);
+		$table = $stmt->fetch(PDO::FETCH_ASSOC);
+
 		if ($table) {
 
 			foreach ($table as $key => $value) {
@@ -115,16 +123,25 @@ abstract class Edit {
 		if ($this->fields[$this->idName] == null)
 			return;
 
-		$sql = "UPDATE {$this->tableName} SET ";
+		$key = "";
+		$value = "";
+		
+		$sql = "UPDATE {$this->tableName}
+			SET :key = :value
+			WHERE {$this->idName} = :id";
+		
+		$command = $this->pdo->prepare($sql);
+		$command->bindParam('key',$key);
+		$command->bindParam('value',$value);
+		$command->bindParam('idName',  $this->idName);;
+		$command->bindParam('id', $this->fields[$this->idName]);
+		
+
 		foreach ($this->fields as $key => $value) {
 			if ($value !== null && !in_array($key, $this->updateFilter)) {
-				$sql .= "$key =  '$value' ,";
+				$command->execute();				
 			}
 		}
-		$sql = substr($sql, 0, -1);
-		$sql .= " WHERE {$this->idName} = " . $this->fields[$this->idName];
-
-		$this->con->query($sql, "{$this->tableName}->update()");
 
 		$this->updateAccess();
 	}
@@ -173,78 +190,17 @@ abstract class Edit {
 	/** Makes a new post in access_relations. */
 	public function pushAccess() {
 		foreach ($this->access as $value) {
-			$sql = "INSERT INTO access_relations VALUES (
-				{$this->fields[$this->idName]} ,
-				$value ,
-				'{$this->tableName}'
-			);";
-
-			$this->con->query($sql, "access.{$this->tableName}");
+			Access::insertAccessRelation($this->getId(), $value, $this->tableName);
 		}
 	}
-
-	/** Edits the access_relations posts for this element */
+	
 	public function updateAccess() {
-		$id = $this->getId();
-
-		foreach ($this->access as $newAccess) {
-			$funnet = false;
-			foreach ($this->oldAccess as $oldAccess) {
-				if ($newAccess == $oldAccess) {
-					$funnet = true;
-					break;
-				}
-			}
-			if ($funnet) {
-				continue;
-			}
-			$sql = "INSERT INTO access_relations VALUES (
-				$id , $newAccess , '{$this->tableName}'
-			);";
-
-			$this->con->query($sql, "access.{$this->tableName}");
-		}
-
-		foreach ($this->oldAccess as $oldAccess) {
-			$funnet = false;
-			foreach ($this->access as $newAccess) {
-				if ($newAccess == $oldAccess) {
-					$funnet = true;
-					break;
-				}
-			}
-			if ($funnet) {
-				continue;
-			}
-			$sql = "DELETE FROM `hybrida`.`access_relations` WHERE
-				`access_relations`.`id` = $id AND
-				`access_relations`.`access` = $oldAccess AND
-				`access_relations`.`type` = '{$this->tableName}'";
-
-			$this->con->query($sql, "access.{$this->tableName}");
-		}
-		echo "\n";
+		Access::deleteAccessRelation($this->tableName, $this->getId());
+		$this->pushAccess();		
 	}
 
-	/**
-	 * Returns the set of access'
-	 * @return array
-	 */
 	public function fetchAccess() {
-		$sql = "SELECT access FROM access_relations " .
-			" WHERE id = '" . $this->getId() .
-			"' AND type = '{$this->tableName}'";
-
-		$result = $this->con->query($sql);
-
-		$tmp = $this->con->fetch($result);
-
-
-		while ($tmp) {
-			$this->access[] = $tmp['access'];
-			$tmp = $this->con->fetch($result);
-		}
-		$this->err->message("Access burde ha vært funnet nå, med èn fetch-error");
+		Access::getAccessRelation($this->idName, $this->tableName);
 	}
 
 	/**

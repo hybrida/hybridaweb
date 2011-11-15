@@ -7,16 +7,16 @@ class SiteController extends Controller {
 	 */
 	public function actions() {
 		return array(
-				// captcha action renders the CAPTCHA image displayed on the contact page
-				'captcha' => array(
-						'class' => 'CCaptchaAction',
-						'backColor' => 0xFFFFFF,
-				),
-				// page action renders "static" pages stored under 'protected/views/site/pages'
-				// They can be accessed via: index.php?r=site/page&view=FileName
-				'page' => array(
-						'class' => 'CViewAction',
-				),
+			// captcha action renders the CAPTCHA image displayed on the contact page
+			'captcha' => array(
+				'class' => 'CCaptchaAction',
+				'backColor' => 0xFFFFFF,
+			),
+			// page action renders "static" pages stored under 'protected/views/site/pages'
+			// They can be accessed via: index.php?r=site/page&view=FileName
+			'page' => array(
+				'class' => 'CViewAction',
+			),
 		);
 	}
 
@@ -26,9 +26,12 @@ class SiteController extends Controller {
 	 */
 	public function actionIndex() {
 		$this->render('index');
-		
-		
 	}
+
+	/*
+	  public function actionFaq() {
+	  $this->render('faq');
+	  } */
 
 	/**
 	 * This is the action to handle external exceptions.
@@ -62,18 +65,16 @@ class SiteController extends Controller {
 	/**
 	 * Displays the login page
 	 */
-	public function actionLogin() {
-		$user = $_REQUEST['user'];
-		$pass = $_REQUEST['pass'];
-		$identity = new UserIdentity($user,$pass);
-		
+	public function actionLogin($data, $sign, $target) {
+
+		$identity = new InnsidaIdentity($data, $sign, $target);
+
 		if ($identity->authenticate()) {
 			Yii::app()->user->login($identity);
-			$this->render("login");
+			$this->redirect(Yii::app()->user->returnUrl);
 		} else {
-			$this->render("403",array('msg' => $identity->errorMessage()));
+			$this->render("403", array('msg' => $identity->errorMessage));
 		}
-
 	}
 
 	/**
@@ -82,6 +83,22 @@ class SiteController extends Controller {
 	public function actionLogout() {
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	public function actionDebug() {
+		if (Yii::app()->user->isGuest) {
+			$this->render("403", array("msg" => "Du må være logget inn!"));
+		} else {
+
+			$user = Yii::app()->user;
+
+			$data = array();
+			$data['username'] = $user->name;
+			$data['id'] = $user->id;
+			$data['access'] = $user->access;
+
+			$this->render("debug", $data);
+		}
 	}
 
 }

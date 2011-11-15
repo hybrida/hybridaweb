@@ -5,11 +5,15 @@
 		<title><?= CHtml::encode(Yii::app()->name) ?></title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
-		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/eScript2.js'></script>
+		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/e.js'></script>
 
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/style.css" />
+        <link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/hintList.css" />
+        
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/layout.css" />
 		<link rel = 'stylesheet' type = 'text/css' href = '<?= Yii::app()->request->baseUrl ?>/style/destroy.css'/>
+		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl ?>/css/form.css" />
+
 
 
 		<style type = 'text/css'>
@@ -40,88 +44,6 @@
 			menu slider div div div div {
 				width: auto;
 			}
-
-			.portlet
-			{
-				float: right;
-				display:block;
-
-			}
-
-			.portlet-decoration
-			{
-				padding: 3px 8px;
-				background: #B7D6E7;
-				border-left: 5px solid #6FACCF;
-			}
-
-			.portlet-title
-			{
-				font-size: 12px;
-				font-weight: bold;
-				padding: 0;
-				margin: 0;
-				color: #298dcd;
-			}
-
-			.portlet-content
-			{
-				font-size:0.9em;
-				margin: 0 0 15px 0;
-				padding: 5px 8px;
-				background:#EFFDFF;
-			}
-
-			.portlet-content ul
-			{
-				list-style-image:none;
-				list-style-position:outside;
-				list-style-type:none;
-				margin: 0;
-				padding: 0;
-			}
-
-			.portlet-content li
-			{
-				padding: 2px 0 4px 0px;
-			}
-
-			.operations
-			{
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-
-			.operations li
-			{
-				padding-bottom: 2px;
-			}
-
-			.operations li a
-			{
-				font: bold 12px Arial;
-				color: #0066A4;
-				display: block;
-				padding: 2px 0 2px 8px;
-				line-height: 15px;
-				text-decoration: none;
-			}
-
-			.operations li a:visited
-			{
-				color: #0066A4;
-			}
-
-			.operations li a:hover
-			{
-				background: #80CFFF;
-			}
-
-			#sidebar
-			{
-				padding: 20px 20px 20px 0;
-			}
 		</style>
 
 	</head>
@@ -132,28 +54,51 @@
 				<img src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" align="left" alt="" />
 				<h1><?= CHtml::encode(Yii::app()->name) ?></h1>
 				<div class="searchWrap">
-					<form method='post' action='?site=search' id='searchForm'>
+                    <div class='search'><input type='text' />
+                        <div class="searchImg"><input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' /></div>
+                        <ul id="hintList">
+                            
+                        </ul>
+                    </div>
+                    
+                    <!--Gamle versjonen:-->
+					<!--<form method='post' action='?site=search' id='searchForm'>
 						<div class="searchBox">
 							<input type='text' id='activeSearchBox' />
 							<ul id="searchList"> 
-								<!-- Search Suggestions -->
+								<!-- Search Suggestions 
 							</ul>
 						</div>
 						<div class="searchImg"><input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' /></div>
-					</form>
+					</form>!-->
 				</div>
 			</div>
 			<div class="headerBottomStripe">
 				<div class="menu">
 					<nav>
-						<menu>
+                        <!--Hardkodet meny for visning på genfors -->
+                        <items>
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/news/'>Hjem</a></div> 
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/profile/'>Profil</a></div> 
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/group/'>Grupper</a></div>
+                            
+                            <div>Personer</div>
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/article/1'>Hybrida</a></div>
+                            
+                            <div class="last">Bedrift</div>
+                        </items>
+                        
+                        <!-- PHP generert GAMMEL meny: -->
+						<!--<menu>
 							<div>
-								<? $this->widget("TabNavigation") ?>
+								<? $this->widget("application.components.widgets.TabNavigation") ?>
 							</div>
-						</menu> 
+						</menu> -->
+                        
 					</nav>
 
-					<div class="loggedIn"><? //$this->widget("UserOptions") ?></div>
+					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptions") ?> 
+                    </div>
 
 				</div>
 			</div>
@@ -173,7 +118,15 @@
 			</div>
 
 			<div class="rightBar">
-				<? $this->widget("RightBarContent"); ?>
+				<? if(isset($this->imageId)) {
+                    
+                    $this->widget("application.components.widgets.RightBarContent", array(
+                            'imageId' => $this->imageId,
+                    ));
+                }
+                else {
+                    $this->widget("application.components.widgets.RightBarContent");
+                }?>
 			</div>
 		</div>
 

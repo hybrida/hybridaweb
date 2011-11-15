@@ -14,44 +14,49 @@ class EventController extends Controller {
 
 	public function actionView($id) {
 
-		$eventId = $_GET['id'];
-		$selfId = $_SESSION['self_id'];
-
-		// DEtte er en sjekk om  personen har tillgang. GateKeeper skal ta seg av dette senere
-		/*$sql = "SELECT id
-	FROM event AS e 
-	LEFT JOIN  " . accessId('event', $selfId) . " = e.id
-	WHERE e.id='$eventId'";
-		*/
-		
-		$userHasAccesToEvent = true; //GateKeeper::check(array());
+        $gateKeeper = new GateKeeper();
+		$userHasAccesToEvent = $gateKeeper->hasAccess('event', $id);
 
 		if ($userHasAccesToEvent) {
 
 			// Henter Event-info
 			$sql = "SELECT id, title, start, end, imageId, location, content 
 		FROM event AS e WHERE id=?";
-			
+
 			$command = Yii::app()->db->createCommand($sql);
 			$query = $command->query(array($id));
 			$data = $query->read();
-			
-			// Henter Signup-info
-			$sql = "SELECT eventId FROM signup WHERE eventId=?";
-			$command = Yii::app()->db->createCommand($sql);
-			$query = $command->query(array($id));
-			$dataSignup = $query->read();
-			
-			$data['hasSignup'] = false;
-			if (count($dataSignup) > 0 ) {
-				$data['hasSignup'] = true;
-			}
-		}
-		
-		$this->render("view",$data);
-			
+
+            $data['hasSignup'] = false;
+            
+            $array = array(
+                'eID' => $id
+            );
+            
+            $sql = "SELECT COUNT(*) AS c FROM signup WHERE eventId = :eID";
+            $query = Yii::app()->db->getPdoInstance()->prepare($sql);
+            $query->execute($array);
+            $result = $query->fetch(PDO::FETCH_ASSOC);
+            
+            if($result['c'] > 0) {
+                // Henter Signup-info
+                $sql = "SELECT spots, open, close FROM signup WHERE eventId = :eID";
+                $query = Yii::app()->db->getPdoInstance()->prepare($sql);
+                $query->execute($array);
+
+                $result = $query->fetch(PDO::FETCH_ASSOC);
+
+
+                $data['hasSignup'] = true;
+                $data['spots'] = $result['spots'];
+                $data['open'] = $result['open'];
+                $data['close'] = $result['close'];
+            }
+
+            $this->render("view", $data);
+        }
+        else {
+            $this->render("../site/403");
+        }
 	}
-
 }
-
-?>

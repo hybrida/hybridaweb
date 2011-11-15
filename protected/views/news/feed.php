@@ -1,10 +1,8 @@
 <h1>Nyhetsfeed</h1>
 
 <div class='menuPage'>
-<a href='?site=add&type=news'>Publiser</a>
+<a href='<?= Yii::app()->request->baseUrl ?>/news/edit'>Publiser</a>
 </div>
 
 
-<feed data-moreButton='true' data-type='news' data-id='" . $id . "' data-parentType='" . $site . "'></feed>
-
-<? //<feed class='newsFeed' data-type='news' data-parentId='".$id."' data-parentType='".$site."'></feed>"; ?>
+<div class='feed' data-src='feed'></div>

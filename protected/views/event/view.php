@@ -3,7 +3,7 @@
 </div>
 
 <div class='container'>
-	<img src='php/image.php?id=<?= $imageId ?>&size=2' />
+	<img src='/get/image/<?= $imageId ?>/?size=2' />
 </div>
 
 <div class='right'>
@@ -20,6 +20,14 @@
 
 <? if ($hasSignup): ?>
 
-	<signup data-id='<?=$id?>'></signup>
-	
+    Påmelding:
+	<div class="signup" data-id='<?= $id ?>'></div>
+
+    <div class='clear'>
+        <b>Plasser: </b><i><?= $spots ?></i>
+        <b>Åpner: </b><i><?= $open ?></i>
+        <b>Stenger: </b><i><?= $close ?></i>
+        
+    </div>
+
 <?	endif; ?>

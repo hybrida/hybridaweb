@@ -76,6 +76,12 @@ div.searchBox{
 	width: 1000px;
 	color: #FFFFFF;
 }
+.menu a:visited {
+    color:#FFFFFF;
+}
+.menu a:link {
+    color:#FFFFFF;
+} 
 
 .block{
 	display: block;
