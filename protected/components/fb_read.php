@@ -13,9 +13,9 @@ if(isset($code)){
 	$access = file_get_contents($token_url);
 	$params = null;
      	parse_str($access, $params);
-	$access_token = $params['access_token'];
+	$accessToken = $params['access_token'];
 	
-	$array=array('uID' => $userId, 'aToken' => $accesToken);
+	$array=array('uID' => $userId, 'aToken' => $accessToken);
 	
 	//Sett $access_token inn i db
 	$sql = 'INSERT INTO user_facebook VALUES :uID :aToken)';
