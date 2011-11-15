@@ -26,14 +26,14 @@ public function getProfilePicture(){
 	$userId = Yii::app()->user->id;
 	$username = getUsername($userId);
 
-	//Skriver ut profilbildet vha username (200piksler bred, variabel høyde)
-	return '<img src="https://graph.facebook.com/'.$username.'/picture?type=large"/>'; //linken bør lagres i databasen, hvis vi vil unngå å hente ut facebook-brukernavnet hele tiden
+	//Skriver ut profilbildet vha username (200piksler bred, variabel hï¿½yde)
+	return '<img src="https://graph.facebook.com/'.$username.'/picture?type=large"/>'; //linken bï¿½r lagres i databasen, hvis vi vil unngï¿½ ï¿½ hente ut facebook-brukernavnet hele tiden
 }
 
 public function authLink(){ //Returnerer link til authentication
 	$app_id = '202808609747231';
-	$my_url = 'http://www.appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side 
-	$dir = '../../images/facebookconnectlogo.jpg';
+	$my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side 
+	$dir = Yii::app()->baseURL . '/images/facebookconnectlogo.jpg';
 	$permissions = 'publish_actions,offline_access';
 	
 	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
@@ -67,7 +67,7 @@ public function setAttending($urlEventPage){
     curl_close($ch);
 }
 
-//removeAttending trenger ID'n returnert av setAttending (altså variabelen: $out)
+//removeAttending trenger ID'n returnert av setAttending (altsï¿½ variabelen: $out)
 /* public function removeAttending($eventName){
 	$userId = Yii::app()->user->id;
 	$accessToken = getAccessToken($userId);
@@ -93,7 +93,7 @@ public function setAttending($urlEventPage){
 	return $out;
 } */
 
-public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen skal kalles og skrives ut i head på eventsidene
+public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen skal kalles og skrives ut i head pï¿½ eventsidene
 	$metaData = '<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#">'."\n".
 		'<meta property="fb:app_id"      content="202808609747231" />'."\n".
 		'<meta property="og:type"        content="lfhybrida:company_presentation" />'."\n".
@@ -104,7 +104,7 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 	return $metaData;
 }
 
-public function createObject(){ //Kalles i body på eventsiden. Lager eventobjektet på facebook
+public function createObject(){ //Kalles i body pï¿½ eventsiden. Lager eventobjektet pï¿½ facebook
 	$appId = '202808609747231';
 	$object = '<script src="http://connect.facebook.net/en_US/all.js"></script>'."\n".
 			'<script> FB.init({ appId:'.$appId.', cookie:true,'."\n".
@@ -114,18 +114,18 @@ public function createObject(){ //Kalles i body på eventsiden. Lager eventobjekt
 }
 
 public function publishAtFanpage(){
-	$accessToken = ;//statisk access token for hybrida fanpage
+	$accessToken = '';//statisk access token for hybrida fanpage
 	
 }
 
-// function updateAttending($userId, $eventName, $link){ //$link er en peker til event-siden. Denne er utdatert med tanke på facebook timeline
+// function updateAttending($userId, $eventName, $link){ //$link er en peker til event-siden. Denne er utdatert med tanke pï¿½ facebook timeline
 	// $access_token = getAccessToken($userId);
 	// $username = getUsername($userId);
 
 	// $post_url = 'https://graph.facebook.com/'.$username.'/feed';
 	
 	// $data['access_token'] = $access_token;
-	// $data['message'] = utf8_encode('deltar på '.$eventName);
+	// $data['message'] = utf8_encode('deltar pï¿½ '.$eventName);
 	// $data['link'] = $link;	
         
 	// $ch = curl_init();
