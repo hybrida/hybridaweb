@@ -35,7 +35,10 @@ class ProfileController extends Controller{
     }
     
     public function actionEdit(){
-        $this->render('edit');
+        $fb = new Facebook();
+        $data['fb'] = $fb->authLink();
+        
+        $this->render('edit',$data);
     }
     
 }
