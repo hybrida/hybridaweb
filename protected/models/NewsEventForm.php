@@ -155,7 +155,7 @@ class NewsEventForm extends CFormModel {
 		}
 	}
 
-	public function setAttributes($values) {
+	public function setAttributes($values, $safeOnly=true) {
 		foreach ($values as $key => $value) {
 			if (isset($this->$key)) {
 				$this->$key = $value;
