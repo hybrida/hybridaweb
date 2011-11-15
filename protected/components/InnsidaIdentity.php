@@ -34,12 +34,7 @@ class InnsidaIdentity extends CUserIdentity {
 	}
 
 	public function authenticate() {
-		if ($this->so->oklogin()) {
-			$this->update();
-			return true;
-		} else {
-			return false;
-		}
+		return $this->so->oklogin() && $this->update();
 	}
 
 	public function update() {
@@ -47,6 +42,9 @@ class InnsidaIdentity extends CUserIdentity {
 				"username = :username", 
 				array(":username" => $this->_userName
 				));
+		if (! $user) {
+			return false;
+		}
 		$this->_id = $user->id;
 
 		$userInfo = $user->getAttributes();
@@ -59,6 +57,7 @@ class InnsidaIdentity extends CUserIdentity {
 		$this->setState("imageId", $userInfo['imageId']);
 
 		$this->setState("access", $user->access);
+		return true;
 	}
 
 	public function getErrorMessage() {
