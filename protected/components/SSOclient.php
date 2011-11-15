@@ -36,7 +36,6 @@ class SSOclient {
 
     // check the timestamp
     $tdif = $this->loginvalues['time'] - time();
-	echo $tdif;
     if (($tdif > -100) && ($tdif < 100)) {
       $this->oktime = true;
     } else {
@@ -101,5 +100,4 @@ class SSOclient {
     else
       return false;
   }
-} // class
-?>
+}
