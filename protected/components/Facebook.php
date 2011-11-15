@@ -35,22 +35,7 @@ public function authLink(){ //Returnerer link til authentication
 	$app_id = '202808609747231';
 	$my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side 
 	$dir = Yii::app()->baseURL . '/images/facebookconnectlogo.jpg';
-	
-	
-	if($admin){
-		$permissions = 'manage_pages,publish_actions,offline_access';
-	}else{
 	$permissions = 'publish_actions,offline_access';
-	}
-	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
-}
-
-public function authLinkForPage(){ //Returnerer link til authentication av en page
-	$app_id = '202808609747231';
-	$my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side
-	$dir = '../../images/facebookconnectlogo.jpg';
-	$permissions = 
-	
 	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
 }
 
