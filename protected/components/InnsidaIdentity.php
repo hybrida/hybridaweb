@@ -13,7 +13,7 @@ class InnsidaIdentity extends CUserIdentity {
 	protected $_access;
 	protected $so;
     
-	//const DATA_DELIMITER = ',';
+	const DATA_DELIMITER = ',';
 
 	public function __construct($data, $sign, $target) {
 		parent::__construct(null, null);
@@ -27,11 +27,11 @@ class InnsidaIdentity extends CUserIdentity {
 		//$this->_userName = $this->getUsernameFromData($data);
 	}
 	
-	/*public static function getUsernameFromData($data) {
+	public static function getUsernameFromData($data) {
 		$ar = explode(self::DATA_DELIMITER, $data);
 		$index = array_search("username", $ar) + 1;
 		return $ar[$index];
-	}*/
+	}
 
 	public function authenticate() {
 		if ($this->so->oklogin()) {
