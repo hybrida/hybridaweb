@@ -67,6 +67,7 @@ class SiteController extends Controller {
 	 */
 	public function actionLogin($data, $sign, $target) {
 
+        ob_clean();
 		$identity = new InnsidaIdentity($data, $sign, $target);
 
 		if ($identity->authenticate()) {

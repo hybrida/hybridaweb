@@ -4,7 +4,7 @@ class Facebook{
 public function getAccessToken(){
 	$userId = Yii::app()->user->id;
 	$array = array( 'uID' => $userId );
-	$sql = "SELECT fb_token FROM user_facebook WHERE userId = :uID";
+	$sql = "SELECT fb_token FROM fb_user WHERE userId = :uID";
 	$query = Yii::app()->db->getPdoInstance()->prepare($sql);
 	$query->execute($array);
 	$result = $query->fetch(PDO::FETCH_ASSOC);
