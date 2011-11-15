@@ -1,13 +1,13 @@
 .calendar table {
 	text-align: center;
 	margin: 0;
-	padding: 0;
-    
+	padding: 0; 
 }
 
 .calendar a {
 	display: block;
 }
+
 .calendar img {
 	width: auto;
 	height: auto;
@@ -16,14 +16,17 @@
 .calendar table#days {
 	margin-top: -2px;
 }
+
 .calendar #days td:hover {
 	background-color: #F1F3F5;
 }
+
 .calendar #days a {
 	color: #FFFFFF;
 	background-color: #335FA5;
 	border: none;
 }
+
 .calendar #days a:hover {
 	color: #000000;
 	background-color: #87ADEA;
@@ -33,7 +36,7 @@
 
 .calendar td {
 	line-height: 25px;
-	width: 30px;
+	width: 33px;
 	height: 25px;
 	border: none;
 	margin: 0;
