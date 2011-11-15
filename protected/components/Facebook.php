@@ -93,22 +93,22 @@ public function setAttending($urlEventPage){
 	return $out;
 } */
 
-public function metaDataEvent($eventName, $eventDesc, $urlEventPage, $linkImage){ //Denne funksjonen skal kalles og skrives ut i head på eventsidene
+public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen skal kalles og skrives ut i head på eventsidene
 	$metaData = '<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#">'."\n".
 		'<meta property="fb:app_id"      content="202808609747231" />'."\n".
 		'<meta property="og:type"        content="lfhybrida:company_presentation" />'."\n".
 		'<meta property="og:url"         content="'.$urlEventPage.'" />'."\n".
-		'<meta property="og:title"       content="'.$eventName.'" />'."\n".
-		'<meta property="og:description" content="'.$eventDesc.'" />'."\n".
-		'<meta property="og:image"       content="'.$linkImage.'" /></head>';  
+		'<meta property="og:title"       content="'.$eventName.'" />';//."\n".
+		//'<meta property="og:description" content="'.$eventDesc.'" />';."\n".
+		//'<meta property="og:image"       content="'.$linkImage.'" /></head>';  
 	return $metaData;
 }
 
 public function createObject(){ //Kalles i body på eventsiden. Lager eventobjektet på facebook
 	$appId = '202808609747231';
-	$object = '<script src="http://connect.facebook.net/en_US/all.js"></script>'\
-			'<script> FB.init({ appId:'.$appId.', cookie:true,'\
-            'status:true, xfbml:true, oauth:true }); </script>'\
+	$object = '<script src="http://connect.facebook.net/en_US/all.js"></script>'."\n".
+			'<script> FB.init({ appId:'.$appId.', cookie:true,'."\n".
+            'status:true, xfbml:true, oauth:true }); </script>'."\n".
 			'<fb:add-to-timeline></fb:add-to-timeline>';
 	return $object;
 }
