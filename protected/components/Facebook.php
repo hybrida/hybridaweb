@@ -54,7 +54,7 @@ public function setAttending($urlEventPage){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $out = curl_exec($ch);
-	
+	echo $out;
     curl_close($ch);
 }
 

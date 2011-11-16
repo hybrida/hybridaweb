@@ -184,9 +184,10 @@ class GetController extends Controller{
                 $sql = "INSERT INTO membership_signup VALUES( :id, :selfId, :signupId ) ON DUPLICATE KEY UPDATE signedOff = :signupId";
                 $query = $this->pdo->prepare($sql);
                 $query->execute($data); 
+                
+                $fb = new Facebook();
+                $fb->setAttending($_REQUEST['id']);
             }
-            
-            
             
             $split = '~%~';
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
