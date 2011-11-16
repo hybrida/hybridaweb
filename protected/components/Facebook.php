@@ -13,7 +13,7 @@ public function getAccessToken(){
 
 public function getUsername(){
 	$userId = Yii::app()->user->id;
-	$access_token = getAccessToken($userId);
+	$access_token = $this->getAccessToken($userId);
 	$url = 'https://graph.facebook.com/me?access_token='.$access_token;
 	$content = file_get_contents($url);
 	$content = explode('"',$content);
@@ -39,9 +39,10 @@ public function authLink(){ //Returnerer link til authentication
 	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
 }
 
-public function setAttending($urlEventPage){
+public function setAttending($id){
 	$userId = Yii::app()->user->id;
-	$accessToken = getAccessToken($userId);
+    $urlEventPage = 'http://appletini.ivt.ntnu.no/yii/facebook/view/' . $id;
+	$accessToken = $this->getAccessToken($userId);
 	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
 		'access_token' => $accessToken, 
