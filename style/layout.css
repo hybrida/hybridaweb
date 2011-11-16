@@ -130,7 +130,7 @@ div.searchBox{
 }
 
 .articleContent p {
-	font-family: "Gill Sans";
+	font-family: "Gill";
 	font-weight: lighter;
 	text-align: left;
 	margin-top: 0;
@@ -174,7 +174,7 @@ div.searchBox{
 .topBar h1 {
 	color: #0062C4;
 	text-transform: uppercase;
-	font: 25px 'DIN-Medium';
+	font: 25px 'Din';
 	margin-top: 5px;
 }
 
@@ -186,7 +186,7 @@ div.searchBox{
 
 nav items div {
 	height: 25px;
-	font: 20px 'Gill Sans';
+	font: 20px 'Gill';
 	font-weight: lighter;
 	float: left;
 	border-style: solid;
@@ -228,7 +228,7 @@ nav slider div div div div {
 
 .loggedIn{
 	height: 25px;
-	font: 20px 'Gill Sans';
+	font: 20px 'Gill';
 	font-weight: lighter;
 	float: right;
 	padding: 0px 2px 0px 0px;
