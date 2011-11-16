@@ -43,7 +43,7 @@ public function setAttending($id){
 	$userId = Yii::app()->user->id;
     $urlEventPage = 'http://appletini.ivt.ntnu.no/yii/event/' . $id;
 	$accessToken = $this->getAccessToken($userId);
-	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend?';
+	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
 		'access_token' => $accessToken, 
 		'company_presentation' => $urlEventPage, 
