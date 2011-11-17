@@ -124,7 +124,7 @@ class NewsEventForm extends CFormModel {
 			if (array_key_exists("access", $this->event)) {
 				$this->eventModel->access = $this->event['access'];
 			}
-			$this->eventModel->insert();
+			$this->eventModel->save();
 		}
 	}
 
@@ -135,7 +135,7 @@ class NewsEventForm extends CFormModel {
 				$this->signupModel->access = $this->signup['access'];
 			}
 			$this->signupModel->eventId = $this->eventModel->id;
-			$this->signupModel->insert();
+			$this->signupModel->save();
 		}
 	}
 
