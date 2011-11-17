@@ -25,21 +25,22 @@ class NewsControllerTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($news->id, $controller->getNewsModel($news->id)->id);
 	}
 	
+	/** 
+	 * @expectedException CHttpException
+	 */
 	public function test_getNewsModel_idDoesNotExist() {
 		$news = new News;
 		
 		$controller = new NewsController(2);
 		$nonExistingId = 214234;
-		$this->assertNotNull($controller->getNewsModel($nonExistingId));
+		$controller->getNewsModel($nonExistingId);
 	}
 	
+	/** 
+	 * @expectedException CHttpException
+	 */
 	public function test_getNewsModel_idIsNull() {
 		$controller = new NewsController(2);
-		$this->assertNotNull($controller->getNewsModel(null));
+		$controller->getNewsModel(null);
 	}
-	
-	
-	
 }
-
-?>

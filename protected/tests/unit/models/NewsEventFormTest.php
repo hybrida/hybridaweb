@@ -256,5 +256,18 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($eventModel->id, $news->parentId);
 		$this->assertEquals('event', $news->parentType);
 	}
+	
+	public function test_attributesGetsLoaded() {
+		$title = "TiTLE";
+		$content = "CONTENT";
+		$news = new News;
+		$news->title=$title;
+		$news->content=$content;
+		$news->save();
+		
+		$model = new NewsEventForm($news);
+		$this->assertEquals($title, $model->news['title']);
+		$this->assertEquals($content, $model->news['content']);
+	}
 
 }
