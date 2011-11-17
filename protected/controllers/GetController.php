@@ -190,6 +190,12 @@ class GetController extends Controller{
             $split = '~%~';
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
 
+            $input = array(
+                'userId' =>  Yii::app()->user->id,
+                'type' => 'event',
+                'id' => $_REQUEST['id']
+            );
+            
             $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName 
             FROM membership_signup AS ms LEFT JOIN user_info AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
             RIGHT JOIN ". Access::innerSQLAllowedTypeIds() . " = e.id
