@@ -65,9 +65,12 @@ class SiteController extends Controller {
 	/**
 	 * Displays the login page
 	 */
-	public function actionLogin($data, $sign, $target) {
+	public function actionLogin($data=null, $sign=null, $target=null) {
+		if ($data == null && $sign == null && $target == null) {
+			$this->redirect("https://innsida.ntnu.no/sso/?target=hybridaweb");
+		}
 
-        ob_clean();
+		ob_clean();
 		$identity = new InnsidaIdentity($data, $sign, $target);
 
 		if ($identity->authenticate()) {

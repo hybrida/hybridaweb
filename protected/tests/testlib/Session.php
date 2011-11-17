@@ -50,7 +50,7 @@ class Session {
 	public function logout() {
 		Yii::app()->user->logout();
 		if (!Yii::app()->user->isGuest) {
-			throw new Exception("Illegal state");
+			throw new Exception("Brukeren burde vært logget ut, men er det ikke");
 		}
 	}
 
