@@ -96,7 +96,15 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 	return $metaData;
 }
 
-public function createObject(){ //Kalles i body p� eventsiden. Lager eventobjektet p� facebook
+public function publishAtFanpage(){
+	$accessToken = 'AAACEdEose0cBANrT5wjP2mTcWF75HCWQGdsIDobTvDavx6RBt0FUFSfjdg2yMoDB1pJH6IYISeiLnG7GB66bNdoRL9iBZAVyieDGO7oP6s20ZCqagb';//statisk access token for hybrida fanpage
+	
+}
+
+
+
+// DETTE ER BÆRRE DRIIIT!!! hilsen Ole
+/* public function createObject(){ //Kalles i body p� eventsiden. Lager eventobjektet p� facebook
 	$appId = '202808609747231';
 	$object = '<script src="http://connect.facebook.net/en_US/all.js"></script>'."\n".
 			'<script> FB.init({ appId:'.$appId.', cookie:true,'."\n".
@@ -124,12 +132,7 @@ public function createObjectNew($eventName, $urlEventPage){
     $out = curl_exec($ch);
 	
     curl_close($ch);
-}
-
-public function publishAtFanpage(){
-	$accessToken = '';//statisk access token for hybrida fanpage
-	
-}
+} */
 
 // function updateAttending($userId, $eventName, $link){ //$link er en peker til event-siden. Denne er utdatert med tanke p� facebook timeline
 	// $access_token = getAccessToken($userId);
