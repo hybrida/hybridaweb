@@ -18,7 +18,7 @@ class EventController extends Controller {
 		$userHasAccesToEvent = $gateKeeper->hasAccess('event', $id);
 
 		/*if ($userHasAccesToEvent) {*/
-
+        //Fjernet inntill gjest kan ha access
 			// Henter Event-info
 			$sql = "SELECT id, title, start, end, imageId, location, content 
 		FROM event AS e WHERE id=?";
