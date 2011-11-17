@@ -46,7 +46,7 @@ public function setAttending($id){
 	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
 		'access_token' => $accessToken, 
-		'company_presentation' => $urlEventPage, 
+		'event' => $urlEventPage, 
 	);
 	$ch = curl_init();
 	
@@ -88,7 +88,7 @@ public function setAttending($id){
 public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen skal kalles og skrives ut i head p� eventsidene
 	$metaData = '<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#">'."\n".
 		'<meta property="fb:app_id"      content="202808609747231" />'."\n".
-		'<meta property="og:type"        content="lfhybrida:company_presentation" />'."\n".
+		'<meta property="og:type"        content="lfhybrida:event" />'."\n".
 		'<meta property="og:url"         content="'.$urlEventPage.'" />'."\n".
 		'<meta property="og:title"       content="'.$eventName.'" /></head>';//."\n".
 		//'<meta property="og:description" content="'.$eventDesc.'" />';."\n".
@@ -112,27 +112,7 @@ public function publishAtFanpage(){
 			'<fb:add-to-timeline></fb:add-to-timeline>';
 	return $object;
 }
-
-public function createObjectNew($eventName, $urlEventPage){
-	$appId='202808609747231';
-	$type = 'lfhybrida:company_presentation';
-	$postUrl = 'http://ogp.me/ns/fb/lfhybrida#';
-	$data = array(
-		'app_id' => $appId, 
-		'type' => $type,
-		'url' => $urlEventPage,
-		'title' => $eventName
-	);
-	$ch = curl_init();
-	
-	curl_setopt($ch, CURLOPT_URL, $postUrl);
-    curl_setopt($ch, CURLOPT_POST, 1);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-    $out = curl_exec($ch);
-	
-    curl_close($ch);
-} */
+*/
 
 // function updateAttending($userId, $eventName, $link){ //$link er en peker til event-siden. Denne er utdatert med tanke p� facebook timeline
 	// $access_token = getAccessToken($userId);
