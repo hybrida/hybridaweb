@@ -25,7 +25,7 @@ class ActiveForm extends CActiveForm {
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
 		$text = CHtml::resolveValue($model, $attribute);
 
-		$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+		$this->widget('application.extensions.timepicker.EJuiDateTimePicker', array(
 			'name' => $htmlOptions['name'], 
 			'value' => $text,
 			'id' => $htmlOptions['id'],
