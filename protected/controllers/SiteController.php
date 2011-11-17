@@ -67,7 +67,7 @@ class SiteController extends Controller {
 	 */
 	public function actionLogin($data=null, $sign=null, $target=null) {
 		if ($data == null && $sign == null && $target == null) {
-			$this->redirect("https://innsida.ntnu.no/sso/?target=hybridaweb");
+			$this->redirect("https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=sighol.no-ip.org/yii/site/login");
 		}
 
 		ob_clean();
