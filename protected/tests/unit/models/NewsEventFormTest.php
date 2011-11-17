@@ -47,6 +47,21 @@
 
 class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
+	private $session;
+
+	private function login() {
+		if (!$this->session)
+			$this->session = new Session();
+		$this->session->loginNewUser();
+	}
+	
+	private function logout() {
+		if (!$this->session) {
+			$this->session = new Session();
+		}
+		$this->session->logout();
+	}
+
 	public function test_constructor_NewsModel() {
 		$newsModel = new News;
 		$model = new NewsEventForm($newsModel);
@@ -236,6 +251,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function test_saveParent_newModel() {
+		$this->login();
 		$news = new News;
 
 		$input = array(
@@ -256,18 +272,45 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals($eventModel->id, $news->parentId);
 		$this->assertEquals('event', $news->parentType);
 	}
-	
+
 	public function test_attributesGetsLoaded() {
 		$title = "TiTLE";
 		$content = "CONTENT";
 		$news = new News;
-		$news->title=$title;
-		$news->content=$content;
+		$news->title = $title;
+		$news->content = $content;
 		$news->save();
-		
+
 		$model = new NewsEventForm($news);
 		$this->assertEquals($title, $model->news['title']);
 		$this->assertEquals($content, $model->news['content']);
+	}
+
+	/**
+	 * @expectedException CHttpException
+	 */
+	public function test_saveWhenNotLoggedIn_AccessRestrictionError() {
+		$this->logout();
+				$news = new News;
+
+		$input = array(
+			'news' => array(
+				"title" => "heisann",
+			),
+			"event" => array(
+				'title' => "hei",
+			)
+		);
+
+		$model = new NewsEventForm($news);
+		$model->setAttributes(($input));
+		$model->hasNews = true;
+		$model->hasEvent = true;
+		$model->save();
+		$eventModel = $model->getEventModel();
+		$this->assertEquals($eventModel->id, $news->parentId);
+		$this->assertEquals('event', $news->parentType);
+		
 	}
 
 }

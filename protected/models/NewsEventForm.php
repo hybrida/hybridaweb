@@ -27,7 +27,7 @@ class NewsEventForm extends CFormModel {
 		if ($model == null) {
 			throw new NullPointerException("Input have to be a valid News or Event-model");
 		}
-		
+
 		$this->initModel($model);
 		$this->initFields();
 	}
@@ -110,6 +110,9 @@ class NewsEventForm extends CFormModel {
 	}
 
 	public function save() {
+		if (Yii::app()->user->isGuest) {
+			throw new CHttpException("Du må være logget inn for å lage en nyhet");
+		}
 		$this->saveEvent();
 		$this->saveSignup();
 		$this->saveNews();
@@ -166,17 +169,16 @@ class NewsEventForm extends CFormModel {
 	public function printFields() {
 		?> 
 		<pre>
-				Felter for NewsEventForm
-				news: <? print_r($this->news) ?> 
-				event: <? print_r($this->event) ?> 
-				signup: <? print_r($this->signup) ?> 
-				hasEvent: <? echo ($this->hasEvent) ?> 
-				hasNews: <? print_r($this->hasNews) ?> 
-				hasSignup: <? print_r($this->hasSignup) ?> 
+						Felter for NewsEventForm
+						news: <? print_r($this->news) ?> 
+						event: <? print_r($this->event) ?> 
+						signup: <? print_r($this->signup) ?> 
+						hasEvent: <? echo ($this->hasEvent) ?> 
+						hasNews: <? print_r($this->hasNews) ?> 
+						hasSignup: <? print_r($this->hasSignup) ?> 
 		</pre>
-			<?
-		}
-
+		<?
 	}
-
 	
+}
+
