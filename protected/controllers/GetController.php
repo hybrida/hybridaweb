@@ -231,6 +231,8 @@ class GetController extends Controller{
             $this->renderPartial('../site/403');
         }
         
+        ob_end_flush();
+        flush();
         
         if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {
             $fb = new Facebook();
