@@ -17,7 +17,7 @@ class EventController extends Controller {
         $gateKeeper = new GateKeeper();
 		$userHasAccesToEvent = $gateKeeper->hasAccess('event', $id);
 
-		if ($userHasAccesToEvent) {
+		/*if ($userHasAccesToEvent) {*/
 
 			// Henter Event-info
 			$sql = "SELECT id, title, start, end, imageId, location, content 
@@ -46,7 +46,6 @@ class EventController extends Controller {
 
                 $result = $query->fetch(PDO::FETCH_ASSOC);
 
-
                 $data['hasSignup'] = true;
                 $data['spots'] = $result['spots'];
                 $data['open'] = $result['open'];
@@ -54,9 +53,9 @@ class EventController extends Controller {
             }
 
             $this->render("view", $data);
-        }
+        /*}
         else {
             $this->render("../site/403");
-        }
+        }*/
 	}
 }
