@@ -16,7 +16,19 @@ class NewsController extends Controller {
 		$this->actionFeed();
 	}
 
-	//put your code here
+	public function filters() {
+		return array(
+			'accessControl',
+		);
+	}
+
+	public function accessRules() {
+		return array(
+			array('deny',
+				'actions' => array("view"),
+			),
+		);
+	}
 
 	public function actionView($id) {
 		$sql = "SELECT title, n.imageId, content, firstName, middleName, lastName, timestamp
@@ -30,9 +42,6 @@ class NewsController extends Controller {
 		if ($data == array()) {
 			throw new CHttpException("Nyheten finnes ikke");
 		}
-
-
-
 		$this->render("view", $data);
 	}
 
@@ -75,7 +84,9 @@ class NewsController extends Controller {
 
 		if (isset($_POST['NewsEventForm'])) {
 			$input = $_POST['NewsEventForm'];
-			echo "<pre>";print_r($input); echo "</pre>";
+			echo "<pre>";
+			print_r($input);
+			echo "</pre>";
 			$model->setAttributes($input);
 			$model->printFields();
 			$model->save();
@@ -83,7 +94,7 @@ class NewsController extends Controller {
 			echo "eventId: " . $model->getEventModel()->id;
 			echo "signupId: " . $model->getSignupModel()->primaryKey;
 
-			//$this->redirectAfterEdit($model);
+			$this->redirectAfterEdit($model);
 			return;
 		}
 
