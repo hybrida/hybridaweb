@@ -18,7 +18,6 @@ class EventController extends Controller {
 		$userHasAccesToEvent = $gateKeeper->hasAccess('event', $id);
 
 		/*if ($userHasAccesToEvent) {*/
-        //Fjernet inntill gjest kan ha access
 			// Henter Event-info
 			$sql = "SELECT id, title, start, end, imageId, location, content 
 		FROM event AS e WHERE id=?";
@@ -58,4 +57,15 @@ class EventController extends Controller {
             $this->render("../site/403");
         }*/
 	}
+    
+    public function actionFacebook( $id ) {
+        $sql = "SELECT id, title, start, end, imageId, location, content 
+		FROM event AS e WHERE id = ?";
+
+        $command = Yii::app()->db->createCommand($sql);
+        $query = $command->query(array($id));
+        $data = $query->read();
+
+        $this->renderPartial('fbmetadata',$data);
+    }
 }
