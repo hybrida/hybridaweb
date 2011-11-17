@@ -1,1 +1,1 @@
-<?= CHtml::link("Logg inn",array("site/login")) ?>
+<?= CHtml::link("Logg inn","https://innsida.ntnu.no/sso/?target=hybridaweb") ?>
