@@ -170,7 +170,7 @@ class GetController extends Controller{
     
     public function actionSignup($id){
         
-        /*if(GateKeeper::hasAccess('event', $_REQUEST['id'])){*/
+        if(GateKeeper::hasAccess('event', $_REQUEST['id'])){
             
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
             if(isset($_REQUEST['type'])) {               
@@ -229,7 +229,7 @@ class GetController extends Controller{
             }
 
             $this->renderPartial('signup',$data);
-        //}
+        }
     }
     
     public function actionGroup(){
