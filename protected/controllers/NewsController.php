@@ -23,7 +23,6 @@ class NewsController extends Controller {
 	}
 
 	public function accessRules() {
-		echo "AccessRules";
 		return array(
 			array('deny',
 				'actions' => array("view"),
