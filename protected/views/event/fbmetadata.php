@@ -8,5 +8,5 @@
       
 
 <script type="text/javascript">
-    window.location = "http://appletini.ivt.ntnu.no<?= Yii::app()->baseURL ?>/event/facebook/<?= $id ?>"
+    window.location = "http://appletini.ivt.ntnu.no<?= Yii::app()->baseURL ?>/event/view/<?= $id ?>"
 </script>
