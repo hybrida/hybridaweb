@@ -22,13 +22,9 @@ class ActiveForm extends CActiveForm {
 	}
 
 	public function dateField($model, $attribute, $htmlOptions=array()) {
-		CHtml::resolveNameID($model, $attribute, $htmlOptions);
-		$text = CHtml::resolveValue($model, $attribute);
-
 		$this->widget('application.extensions.timepicker.EJuiDateTimePicker', array(
-			'name' => $htmlOptions['name'],
-			'value' => $text,
-			'id' => $htmlOptions['id'],
+			'model' => $model,
+			'attribute' => $attribute,
 			'options' => array(
 				'dateFormat' => "yy-mm-dd",
 				'timeFormat' => "hh:mm:ss",
