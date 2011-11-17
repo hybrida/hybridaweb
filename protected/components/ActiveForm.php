@@ -21,6 +21,17 @@ class ActiveForm extends CActiveForm {
 		return false;
 	}
 
+	public function dateField($model, $attribute, $htmlOptions=array()) {
+		CHtml::resolveNameID($model, $attribute, $htmlOptions);
+		$text = CHtml::resolveValue($model, $attribute);
+
+		$this->widget('zii.widgets.jui.CJuiDatePicker', array(
+			'name' => $htmlOptions['name'], 
+			'value' => $text,
+			'id' => $htmlOptions['id'],
+		));
+	}
+
 }
 
 ?>

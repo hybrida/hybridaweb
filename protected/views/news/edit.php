@@ -101,13 +101,13 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model, 'event[start]'); ?>
-			<?php echo $form->textField($model, 'event[start]'); ?>
+			<?php echo $form->dateField($model, 'event[start]'); ?>
 			<?php echo $form->error($model, 'event[start]'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($model, 'event[end]'); ?>
-			<?php echo $form->textField($model, 'event[end]'); ?>
+			<?php echo $form->dateField($model, 'event[end]'); ?>
 			<?php echo $form->error($model, 'event[end]'); ?>
 		</div>
 
@@ -146,13 +146,13 @@
 
 		<div class="row">
 			<?php echo $form->labelEx($model, 'signup[open]'); ?>
-			<?php echo $form->textField($model, 'signup[open]'); ?>
+			<?php echo $form->dateField($model, 'signup[open]'); ?>
 			<?php echo $form->error($model, 'signup[open]'); ?>
 		</div>
 
 		<div class="row">
 			<?php echo $form->labelEx($model, 'signup[close]'); ?>
-			<?php echo $form->textField($model, 'signup[close]'); ?>
+			<?php echo $form->dateField($model, 'signup[close]'); ?>
 			<?php echo $form->error($model, 'signup[close]'); ?>
 		</div>
 
