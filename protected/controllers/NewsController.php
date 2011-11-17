@@ -24,8 +24,13 @@ class NewsController extends Controller {
 
 	public function accessRules() {
 		return array(
+			array('allow',
+				'actions' => array("view"),
+				'users' => array('@'),
+			),
 			array('deny',
 				'actions' => array("view"),
+				'users' => array('*')
 			),
 		);
 	}
