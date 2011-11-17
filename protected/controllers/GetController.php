@@ -170,6 +170,11 @@ class GetController extends Controller{
     
     public function actionSignup($id){
         
+        ob_end_clean();
+        header("Connection: close");
+        ob_start();
+        
+        
         if(GateKeeper::hasAccess('event', $_REQUEST['id'])){
             
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
