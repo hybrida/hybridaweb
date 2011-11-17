@@ -1,7 +1,7 @@
 <?php
 class SSOclient {
   var $loginvalues;
-  var $crtfile = "/var/www/innsida.crt";
+  var $crtfile = "/var/www/yii/innsida.crt";
   var $verifies;
   var $oktime;
   var $reason;
