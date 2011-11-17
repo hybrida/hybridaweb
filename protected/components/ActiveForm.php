@@ -30,9 +30,12 @@ class ActiveForm extends CActiveForm {
 			'value' => $text,
 			'id' => $htmlOptions['id'],
 			'options' => array(
-				'dateFormat' => "yy-m-d",
-				'timeFormat' => "h:m:s",
-			)));
+				'dateFormat' => "yy-mm-dd",
+				'timeFormat' => "hh:mm:ss",
+				'stepMinute' => 5,
+				'stepHour' => 1,
+			),
+		));
 	}
 
 }
