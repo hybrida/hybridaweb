@@ -26,10 +26,13 @@ class ActiveForm extends CActiveForm {
 		$text = CHtml::resolveValue($model, $attribute);
 
 		$this->widget('application.extensions.timepicker.EJuiDateTimePicker', array(
-			'name' => $htmlOptions['name'], 
+			'name' => $htmlOptions['name'],
 			'value' => $text,
 			'id' => $htmlOptions['id'],
-		));
+			'options' => array(
+				'dateFormat' => "yy-m-d",
+				'timeFormat' => "h:m:s",
+			)));
 	}
 
 }
