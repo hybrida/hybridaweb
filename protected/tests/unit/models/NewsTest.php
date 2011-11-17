@@ -124,5 +124,19 @@ class NewsTest extends PHPUnit_Framework_TestCase {
 		$news->parentType = '12345678';
 		$this->assertFalse($news->save());
 	}
-
+	
+	public function test_authorIsNotSetOnUpdate() {
+		$this->login();
+		$news = new News;
+		$news->title = "title";
+		$news->save();
+		$author = $news->author;
+		$this->assertNotNUll($author);
+		
+		$this->login();
+		$news2 = News::model()->findByPk($news->id);
+		$news2->content = "content";
+		$news2->save();
+		$this->assertEquals($news->author,$news2->author);
+	}
 }

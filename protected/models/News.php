@@ -115,10 +115,12 @@ class News extends CActiveRecord {
 
 	public function beforeSave() {
 		//throw new UserNotLoggedInException;
-		$this->author = Yii::app()->user->id;
+		if ($this->isNewRecord) {
+			$this->author = Yii::app()->user->id;
+		}
 		return parent::beforeSave();
 	}
-	
+
 	public function getEventId() {
 
 		if (!$this->parentIsEvent())
