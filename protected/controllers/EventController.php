@@ -17,7 +17,7 @@ class EventController extends Controller {
         $gateKeeper = new GateKeeper();
 		$userHasAccesToEvent = $gateKeeper->hasAccess('event', $id);
 
-		/*if ($userHasAccesToEvent) {*/
+		if ($userHasAccesToEvent) {
 			// Henter Event-info
 			$sql = "SELECT id, title, start, end, imageId, location, content 
 		FROM event AS e WHERE id=?";
@@ -52,10 +52,10 @@ class EventController extends Controller {
             }
 
             $this->render("view", $data);
-        /*}
+        }
         else {
             $this->render("../site/403");
-        }*/
+        }
 	}
     
     public function actionFacebook( $id ) {

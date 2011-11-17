@@ -6,3 +6,7 @@
       <meta property="og:description" content="<?= $content ?>" /> 
       <meta property="og:image"       content="https://s-static.ak.fbcdn.net/images/devsite/attachment_blank.png" />
       
+
+<script type="text/javascript">
+    window.location = "http://appletini.ivt.ntnu.no<?= Yii::app()->baseURL ?>/event/facebook/<?= $id ?>"
+</script>

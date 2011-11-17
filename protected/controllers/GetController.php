@@ -170,6 +170,11 @@ class GetController extends Controller{
     
     public function actionSignup($id){
         
+        ob_end_clean();
+        header("Connection: close");
+        ob_start();
+        
+        
         if(GateKeeper::hasAccess('event', $_REQUEST['id'])){
             
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
@@ -184,9 +189,7 @@ class GetController extends Controller{
                 $sql = "INSERT INTO membership_signup VALUES( :id, :selfId, :signupId ) ON DUPLICATE KEY UPDATE signedOff = :signupId";
                 $query = $this->pdo->prepare($sql);
                 $query->execute($data); 
-                
-                $fb = new Facebook();
-                $fb->setAttending($_REQUEST['id']);
+               
             }
             
             $split = '~%~';
@@ -197,7 +200,7 @@ class GetController extends Controller{
                 'type' => 'event',
                 'id' => $_REQUEST['id']
             );
-
+            
             $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName 
             FROM membership_signup AS ms LEFT JOIN user_info AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
             RIGHT JOIN ". Access::innerSQLAllowedTypeIds() . " = e.id
@@ -229,6 +232,16 @@ class GetController extends Controller{
             }
 
             $this->renderPartial('signup',$data);
+        }else{
+            $this->renderPartial('../site/403');
+        }
+        
+        ob_end_flush();
+        flush();
+        
+        if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {
+            $fb = new Facebook();
+            $fb->setAttending($_REQUEST['id']);                
         }
     }
     
