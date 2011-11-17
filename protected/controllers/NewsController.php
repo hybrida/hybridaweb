@@ -19,8 +19,6 @@ class NewsController extends Controller {
 	//put your code here
 
 	public function actionView($id) {
-
-
 		$sql = "SELECT title, n.imageId, content, firstName, middleName, lastName, timestamp
 				FROM news n, user_new u 
 				WHERE  n.author = u.id
@@ -39,11 +37,7 @@ class NewsController extends Controller {
 	}
 
 	public function actionFeed() {
-
 		$selfId = Yii::app()->session['self_id'];
-
-
-
 
 		$query = "SELECT ma.userId FROM groups AS g  
 	LEFT JOIN access_definition AS ad ON g.title = ad.description  
@@ -59,27 +53,37 @@ class NewsController extends Controller {
 	}
 
 	public function actionCreate() {
-		$this->forward("news/edit");
+		$this->renderNewsEventForm(New News);
 	}
 
-	public function actionEdit($id=null) {
+	public function actionEdit($id) {
+		$model = $this->getNewsModel($id);
+		$this->renderNewsEventForm($model);
+	}
 
-		$newsModel = $this->getNewsModel($id);
+	public function getNewsModel($id) {
+		$model = News::model()->findByPk($id);
+		if ($model)
+			return $model;
+		else
+			throw new CHttpException("Nyheten finnes ikke");
+	}
 
-		$model = new NewsEventForm($newsModel);
+	private function renderNewsEventForm($inputModel) {
+		$model = new NewsEventForm($inputModel);
 		$isUpdated = false;
 
 		if (isset($_POST['NewsEventForm'])) {
 			$input = $_POST['NewsEventForm'];
-			print_r($input);
-			$model->setAttributes($input, false);
+			echo "<pre>";print_r($input); echo "</pre>";
+			$model->setAttributes($input);
 			$model->printFields();
 			$model->save();
 			echo "newsId: " . $model->getNewsModel()->id;
 			echo "eventId: " . $model->getEventModel()->id;
 			echo "signupId: " . $model->getSignupModel()->primaryKey;
 
-			$this->redirectAfterEdit($model);
+			//$this->redirectAfterEdit($model);
 			return;
 		}
 
@@ -87,14 +91,6 @@ class NewsController extends Controller {
 			'model' => $model,
 			'updated' => $isUpdated,
 		));
-	}
-
-	public function getNewsModel($id) {
-		$model = News::model()->findByPk($id);
-		if ($model) {
-			return $model;
-		}
-		return new News;
 	}
 
 	private function redirectAfterEdit($model) {
