@@ -196,14 +196,11 @@ class GetController extends Controller{
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
 
             $input = array(
-                'userId' =>  Yii::app()->user->id,
-                'type' => 'event',
                 'id' => $_REQUEST['id']
             );
             
             $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName 
             FROM membership_signup AS ms LEFT JOIN user_info AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
-            RIGHT JOIN ". Access::innerSQLAllowedTypeIds() . " = e.id
             WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
 
             $query = $this->pdo->prepare($sql);
@@ -232,16 +229,16 @@ class GetController extends Controller{
             }
 
             $this->renderPartial('signup',$data);
+        
+            ob_end_flush();
+            flush();
+
+            if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {
+                $fb = new Facebook();
+                $fb->setAttending($_REQUEST['id']);                
+            }
         }else{
             $this->renderPartial('../site/403');
-        }
-        
-        ob_end_flush();
-        flush();
-        
-        if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {
-            $fb = new Facebook();
-            $fb->setAttending($_REQUEST['id']);                
         }
     }
     
