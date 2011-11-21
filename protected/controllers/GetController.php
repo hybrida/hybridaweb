@@ -30,7 +30,7 @@ class GetController extends Controller{
     }
     
     public function actionEventfeed(){
-        $limit  = (isset($_GET['s']) && isset($_GET['l']))  ? ' LIMIT ' . ( $_GET['s'] + 4 ) . ', 4 ' : '';
+        $limit  = (isset($_GET['s']) && isset($_GET['l']))  ? ' LIMIT ' . ( $_GET['s'] ) . ', ' .( $_GET['s'] + 4) : '';
        
         $data = array(
             'userId' => 327,  
