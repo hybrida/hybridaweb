@@ -3,7 +3,7 @@
 </div>
 
 <div class='container'>
-	<img src='/get/image/<?= $imageId ?>/?size=2' />
+	<img src='/get/image/view/id/<?= $imageId ?>/size/2' />
 </div>
 
 <div class='right'>

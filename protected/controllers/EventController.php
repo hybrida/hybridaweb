@@ -1,15 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of EventController
- *
- * @author sigurd
- */
 class EventController extends Controller {
 
 	public function actionView($id) {
