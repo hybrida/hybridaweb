@@ -25,7 +25,8 @@ class SiteController extends Controller {
 	 * when an action is not explicitly requested by users.
 	 */
 	public function actionIndex() {
-		$this->render('index');
+		//$this->render('index');
+        $this->render('../news/feed');
 	}
 
 	/*

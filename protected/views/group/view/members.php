@@ -8,7 +8,7 @@
 <? foreach($content as $user) : ?>
 
     <li>
-        <img src='php/image/id/<?= $user['imageId'] ?>/size/3'>
+        <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'>
             <a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?> </a> 
             <?= $user['comission'] ?>
     </li>

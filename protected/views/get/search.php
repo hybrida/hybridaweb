@@ -9,7 +9,7 @@
 
 <? foreach($newsList as $news) : ?>
 
-    <a title='<?= $news['title'] ." ". $news['timestamp']?>' href='?site=<?= ($news['parentType']==NULL) ? "news" : $news['parentType'] ?>&id=<?= $news['parentId'] ?>'>
+    <a title='<?= $news['title'] ." ". $news['timestamp']?>' href='<?= Yii::app()->baseURL . ($news['parentType']==NULL) ? "news" : $news['parentType'] ?>/<?= $news['parentId'] ?>'>
     <?= $news['title'] ?></a>
 
 <? endforeach ?>
