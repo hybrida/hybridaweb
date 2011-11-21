@@ -3,7 +3,7 @@
 </div>
 
 <div class='container'>
-	<img src='/get/image/view/id/<?= $imageId ?>/size/2' />
+	<img src='<?= Yii::app()->baseURL ?>/image/view/id/<?= $imageId ?>/size/2' />
 </div>
 
 <div class='right'>
@@ -17,6 +17,9 @@
 <div class='clear'>
 	<?= $content ?>
 </div>
+
+
+
 
 <? if ($hasSignup): ?>
 
