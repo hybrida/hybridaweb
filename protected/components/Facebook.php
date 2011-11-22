@@ -13,7 +13,7 @@ public function getAccessToken(){
 
 public function getUsername(){
 	$userId = Yii::app()->user->id;
-	$access_token = $this->getAccessToken($userId);
+	$access_token = $this->getAccessToken();
 	$url = 'https://graph.facebook.com/me?access_token='.$access_token;
 	$content = file_get_contents($url);
 	$content = explode('"',$content);
@@ -24,7 +24,7 @@ public function getUsername(){
 
 public function getProfilePicture(){
 	$userId = Yii::app()->user->id;
-	$username = getUsername($userId);
+	$username = getUsername();
 
 	//Skriver ut profilbildet vha username (200piksler bred, variabel h�yde)
 	return '<img src="https://graph.facebook.com/'.$username.'/picture?type=large"/>'; //linken b�r lagres i databasen, hvis vi vil unng� � hente ut facebook-brukernavnet hele tiden
@@ -42,7 +42,7 @@ public function authLink(){ //Returnerer link til authentication
 public function setAttending($id){
 	$userId = Yii::app()->user->id;
     $urlEventPage = 'http://appletini.ivt.ntnu.no/yii/event/facebook/' . $id;
-	$accessToken = $this->getAccessToken($userId);
+	$accessToken = $this->getAccessToken();
 	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
 		'access_token' => $accessToken, 
@@ -96,9 +96,23 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 	return $metaData;
 }
 
-public function publishAtFanpage(){
+public function publishAtFanpage($id){
 	$accessToken = 'AAACEdEose0cBANrT5wjP2mTcWF75HCWQGdsIDobTvDavx6RBt0FUFSfjdg2yMoDB1pJH6IYISeiLnG7GB66bNdoRL9iBZAVyieDGO7oP6s20ZCqagb';//statisk access token for hybrida fanpage
+	$urlEventPage = 'http://appletini.ivt.ntnu.no/yii/event/facebook/' . $id;
+        $postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
+	$data = array(
+		'access_token' => $accessToken, 
+		'event' => $urlEventPage, 
+	);
+	$ch = curl_init();
 	
+	curl_setopt($ch, CURLOPT_URL, $postUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $out = curl_exec($ch);
+	echo $out;
+        curl_close($ch);
 }
 
 
