@@ -13,7 +13,7 @@ public function getAccessToken(){
 
 public function getUsername(){
 	$userId = Yii::app()->user->id;
-	$access_token = $this->getAccessToken($userId);
+	$access_token = $this->getAccessToken();
 	$url = 'https://graph.facebook.com/me?access_token='.$access_token;
 	$content = file_get_contents($url);
 	$content = explode('"',$content);
@@ -24,7 +24,7 @@ public function getUsername(){
 
 public function getProfilePicture(){
 	$userId = Yii::app()->user->id;
-	$username = getUsername($userId);
+	$username = getUsername();
 
 	//Skriver ut profilbildet vha username (200piksler bred, variabel h�yde)
 	return '<img src="https://graph.facebook.com/'.$username.'/picture?type=large"/>'; //linken b�r lagres i databasen, hvis vi vil unng� � hente ut facebook-brukernavnet hele tiden
@@ -42,7 +42,7 @@ public function authLink(){ //Returnerer link til authentication
 public function setAttending($id){
 	$userId = Yii::app()->user->id;
     $urlEventPage = 'http://appletini.ivt.ntnu.no/yii/event/facebook/' . $id;
-	$accessToken = $this->getAccessToken($userId);
+	$accessToken = $this->getAccessToken();
 	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
 		'access_token' => $accessToken, 
