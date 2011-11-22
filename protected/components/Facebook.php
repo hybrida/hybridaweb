@@ -96,9 +96,23 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 	return $metaData;
 }
 
-public function publishAtFanpage(){
+public function publishAtFanpage($id){
 	$accessToken = 'AAACEdEose0cBANrT5wjP2mTcWF75HCWQGdsIDobTvDavx6RBt0FUFSfjdg2yMoDB1pJH6IYISeiLnG7GB66bNdoRL9iBZAVyieDGO7oP6s20ZCqagb';//statisk access token for hybrida fanpage
+	$urlEventPage = 'http://appletini.ivt.ntnu.no/yii/event/facebook/' . $id;
+        $postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
+	$data = array(
+		'access_token' => $accessToken, 
+		'event' => $urlEventPage, 
+	);
+	$ch = curl_init();
 	
+	curl_setopt($ch, CURLOPT_URL, $postUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $out = curl_exec($ch);
+	echo $out;
+        curl_close($ch);
 }
 
 
