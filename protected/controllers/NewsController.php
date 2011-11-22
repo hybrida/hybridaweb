@@ -89,11 +89,7 @@ class NewsController extends Controller {
 
 		if (isset($_POST['NewsEventForm'])) {
 			$input = $_POST['NewsEventForm'];
-			echo "<pre>";
-			print_r($input);
-			echo "</pre>";
 			$model->setAttributes($input);
-			$model->printFields();
 			$model->save();
 			echo "newsId: " . $model->getNewsModel()->id;
 			echo "eventId: " . $model->getEventModel()->id;

@@ -182,20 +182,4 @@ class NewsEventForm extends CFormModel {
 			}
 		}
 	}
-
-	public function printFields() {
-		?> 
-		<pre>
-												Felter for NewsEventForm
-												news: <? print_r($this->news) ?> 
-												event: <? print_r($this->event) ?> 
-												signup: <? print_r($this->signup) ?> 
-												hasEvent: <? echo ($this->hasEvent) ?> 
-												hasNews: <? print_r($this->hasNews) ?> 
-												hasSignup: <? print_r($this->hasSignup) ?> 
-		</pre>
-		<?
-	}
-
 }
-
