@@ -23,12 +23,14 @@ public function getUsername(){
 	return $username;
 }
 
-public function getProfilePicture(){
+public function retrieveProfilePicture(){
 	$userId = Yii::app()->user->id;
 	$username = getUsername();
 
 	//Skriver ut profilbildet vha username (200piksler bred, variabel h�yde)
-	return '<img src="https://graph.facebook.com/'.$username.'/picture?type=large"/>'; //linken b�r lagres i databasen, hvis vi vil unng� � hente ut facebook-brukernavnet hele tiden
+	$data = file_get_contents('https://graph.facebook.com/'.$username.'/picture?type=large');
+        $file = new File;
+        $file->put_image($data, '.jpg', $userId);
 }
 
 public function authLink(){ //Returnerer link til authentication
@@ -100,10 +102,11 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 public function publishAtFanpage($id){
 	$accessToken = 'AAACEdEose0cBANrT5wjP2mTcWF75HCWQGdsIDobTvDavx6RBt0FUFSfjdg2yMoDB1pJH6IYISeiLnG7GB66bNdoRL9iBZAVyieDGO7oP6s20ZCqagb';//statisk access token for hybrida fanpage
 	$urlEventPage = $url . Yii::app()->baseURL . '/event/facebook/' . $id;
-        $postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
+        $postUrl = 'https://graph.facebook.com/hybrida/feed';
 	$data = array(
 		'access_token' => $accessToken, 
-		'event' => $urlEventPage, 
+		'link' => $urlEventPage, 
+                'message' => utf8_encode('har opprettet et arrangement')
 	);
 	$ch = curl_init();
 	
