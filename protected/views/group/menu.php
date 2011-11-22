@@ -1,13 +1,9 @@
-<? foreach($menuelements as $element) : ?>
+<div id='groupNavigation'>
+    <? foreach($menuelements as $element) : ?>
+    <a class='groupNavigationItem' href='<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/<?= $element['title'] ?>'><?= $element['title']?></a>
+    <? endforeach; ?>
 
-<a href='<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/<?= $element['title'] ?>'><?= $element['title']?></a>
-
-<? endforeach; ?>
-
-<? if($isAdmin) : ?>
-
-<a href='<?= Yii::app()->baseUrl ?>/group/edit/<?= $id ?>'>endre</a>
-
-<? endif; ?>
-
-
+    <? if($isAdmin) : ?>
+    <a class='groupNavigationItem' href='<?= Yii::app()->baseUrl ?>/group/edit/<?= $id ?>'>endre</a>
+    <? endif; ?>
+</div>

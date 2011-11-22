@@ -14,51 +14,6 @@
 		<link rel = 'stylesheet' type = 'text/css' href = '<?= Yii::app()->request->baseUrl ?>/style/destroy.css'/>
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl ?>/css/form.css" />
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
-
-
-
-
-		<style type = 'text/css'>
-
-			/* 
-			* Beklager søling på designfilen.
-			* Dette er en liten snutt for at datepickern som brukes i datoredigering
-			* ikke skal bli gigansisk.
-			* Jeg aner ikke hvor jeg skal puttet den.
-			* Putt den på riktig sted
-			*/
-			div.ui-datepicker{ 
-				font-size:12px;
-			}
-			menu items div {
-				width: 148px;
-				align: center;
-				border: 1px solid;
-				background: #BBF;
-				float: left;
-			}
-			menu slider div {
-				clear: both;
-				overflow: hidden;
-				width: 450px;
-				position: relative;
-			}
-			menu slider div div {
-				width: 1350px;
-				float: left;
-				background: #EEE;
-			}
-			menu slider div div div {
-				left: 0px;
-				clear: none;
-				width: 450px;
-				text-align: justify;
-			}
-			menu slider div div div div {
-				width: auto;
-			}
-		</style>
-
 	</head>
 
 	<body>
