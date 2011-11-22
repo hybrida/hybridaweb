@@ -91,9 +91,6 @@ class NewsController extends Controller {
 			$input = $_POST['NewsEventForm'];
 			$model->setAttributes($input);
 			$model->save();
-			echo "newsId: " . $model->getNewsModel()->id;
-			echo "eventId: " . $model->getEventModel()->id;
-			echo "signupId: " . $model->getSignupModel()->primaryKey;
 
 			$this->redirectAfterEdit($model);
 			return;
