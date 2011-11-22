@@ -1,80 +1,89 @@
 /* @group Teodor */
 
 html{
-	height: 100%;
-	background-color: #DDE8F3;
+    height: 100%;
+    background-color: #DDE8F3;
+
+
+    /* Gill standard, ikke serif */
+    font-family: "Gill";
+    font-weight: lighter;
 }
 
 body, .mainWrap, .bodyWrap{
-	padding: 0px;
-	margin: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.ui-datepicker{ 
+    font-size:12px;
 }
 
 .headerStripe{
-	height: 130px;
-	background-color: #0062C4;
+    height: 130px;
+    background-color: #0062C4;
 }
 
 .headerBottomStripe{
-	background-image:url('../images/black_trans_25.png');
-	background-repeat:repeat-x;
-	height: 25px;
+    background-image:url('../images/black_trans_25.png');
+    background-repeat:repeat-x;
+    height: 25px;
 }
 
 .mainContainer{
 }
 
 .mainWrap, .bodyWrap{
-	margin-left: auto; 
-	margin-right: auto;
-	width: 1000px;
+    margin-left: auto; 
+    margin-right: auto;
+    width: 1000px;
 }
 
 .header{
-	margin-left: auto; 
-	margin-right: auto;
-	width: 1000px;
-	height: 105px;
+    margin-left: auto; 
+    margin-right: auto;
+    width: 1000px;
+    height: 105px;
 }
 
 .header h1 {
-	float: left;
-	width: 450px;
-	height: 105px;
-	color: #FFFFFF;
-	text-transform: uppercase;
-	font: 90px 'DIN-Medium';
-	margin-top: 0px;
-	margin-bottom: 0px;
-	margin-left: 15px;
+    float: left;
+    width: 450px;
+    height: 105px;
+    color: #FFFFFF;
+    text-transform: uppercase;
+    font: 90px 'DIN-Medium';
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 15px;
 }
 
 .searchWrap{
-	vertical-align: top; 
-	display: inline;
-	width: 184px;
-	height: 50px;
-	float: right;
-	margin-top: 65px;
-	padding: 0px 2px 0px 0px;
+    vertical-align: top; 
+    display: inline;
+    width: 184px;
+    height: 50px;
+    float: right;
+    margin-top: 65px;
+    padding: 0px 2px 0px 0px;
 }
 
 div.searchImg{
-	width: 24px;
-	padding-top: 1px;
-	float: right;
+    width: 24px;
+    padding-top: 1px;
+    float: right;
 }
 
 div.searchBox{
-	width: 155px;
-	float: left;
+    width: 155px;
+    float: left;
 }
 
 .menu{
-	margin-left: auto; 
-	margin-right: auto;
-	width: 1000px;
-	color: #FFFFFF;
+    margin-left: auto; 
+    margin-right: auto;
+    width: 1000px;
+    color: #FFFFFF;
 }
 .menu a:visited {
     color:#FFFFFF;
@@ -84,152 +93,128 @@ div.searchBox{
 } 
 
 .block{
-	display: block;
-	padding: 0px;
-	margin: 0px;
-	vertical-align: bottom;
+    display: block;
+    padding: 0px;
+    margin: 0px;
+    vertical-align: bottom;
 }
 
 .barTitle{
-	height: 25px;
-	background-color: #79A2CE;
-	color: #FFFFFF;
+    height: 25px;
+    background-color: #79A2CE;
+    color: #FFFFFF;
 }
 
 .barText{
 }
 
 .content{
-	padding: 30px 7px 30px 7px;
-	float: left;
-	width: 736px;
-	background-color: #FFFFFF;
+    padding: 30px 7px 30px 7px;
+    float: left;
+    width: 736px;
+    background-color: #FFFFFF;
 }
 
 .rightBar{
-	float: right;
-	width: 248px;
-	background-color: #FFFFFF;
-	border-style: solid;
-	border-color: #79A2CE;
-	border-left-width: 1px;
-	border-right-width: 1px;
-	border-top-width: 0px;
-	border-bottom-width: 2px;
+    float: right;
+    width: 248px;
+    background-color: #FFFFFF;
+    border-style: solid;
+    border-color: #79A2CE;
+    border-left-width: 1px;
+    border-right-width: 1px;
+    border-top-width: 0px;
+    border-bottom-width: 2px;
 }
 
 /* @end */
 
 .contentItem{
-	width: 736px;
+    width: 736px;
 }
 
 .articleContent {
-	margin-top: 5px;
-	margin-left: 33px;
+    margin-top: 5px;
+    margin-left: 33px;
 }
 
 .articleContent p {
-	font-family: "Gill";
-	font-weight: lighter;
-	text-align: left;
-	margin-top: 0;
+    font-family: "Gill";
+    font-weight: lighter;
+    text-align: left;
+    margin-top: 0;
 }
 
 .articleContent img.smallImg {
-	float: left;
-	width: 150px;
-	margin-top: 3px;
-	height: 150px;
-	margin-bottom: 10px;
-	margin-right: 10px;
+    float: left;
+    width: 150px;
+    margin-top: 3px;
+    height: 150px;
+    margin-bottom: 10px;
+    margin-right: 10px;
 }
 
 .articleContent img.bigImg {
-	margin-top: 3px;
-	height: 150px;
-	margin-bottom: 10px;
-	width: 703px;
-	margin-right: 0;
+    margin-top: 3px;
+    height: 150px;
+    margin-bottom: 10px;
+    width: 703px;
+    margin-right: 0;
 }
 
 .blueBox {
-	width: 33px;
-	float: left;
+    width: 33px;
+    float: left;
 }
 
 .blueBoxItem {
-	background-color: #0062C4;
-	width: 26px;
-	height: 50px;
+    background-color: #0062C4;
+    width: 26px;
+    height: 50px;
 }
 
 
 .topBar {
-	background-color: #ffffff;
-	height: 50px;
-	margin-left: 33px;
+    background-color: #ffffff;
+    height: 50px;
+    margin-left: 33px;
 }
 
 .topBar h1 {
-	color: #0062C4;
-	text-transform: uppercase;
-	font: 25px 'Din';
-	margin-top: 5px;
+    color: #0062C4;
+    text-transform: uppercase;
+    font: 25px 'Din';
+    margin-top: 5px;
 }
 
 .topBarItem {
-	width: 100%;
-	height: 20px;
-	background: url(../images/stripe.png) repeat;
+    width: 100%;
+    height: 20px;
+    background: url(../images/stripe.png) repeat;
 }
 
 nav items div {
-	height: 25px;
-	font: 20px 'Gill';
-	font-weight: lighter;
-	float: left;
-	border-style: solid;
-	border-color: #FFFFFF;
-	border-top-width: 0px;
-	border-bottom-width: 0px;
-	border-left-width: 0px;
-	border-right-width: 1px;
-	padding: 0px 11px 0px 10px;
+    height: 25px;
+    font: 20px 'Gill';
+    font-weight: lighter;
+    float: left;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 1px;
+    padding: 0px 11px 0px 10px;
 }
 
 nav items div.last {
-	border-right-style: none;
-}
-
-nav slider div {
-	clear: both;
-	overflow: hidden;
-	width: 750px;
-	position: relative;
-}
-
-nav slider div div {
-	float: left;
-	background-image:url('black_trans_25.png');
-	background-repeat:repeat-x;
-}
-
-nav slider div div div {
-	left: 0px;
-	clear: none;
-	width: 750px;
-	text-align: justify;
-}
-
-nav slider div div div div {
-	width: auto;
+    border-right-style: none;
 }
 
 .loggedIn{
-	height: 25px;
-	font: 20px 'Gill';
-	font-weight: lighter;
-	float: right;
-	padding: 0px 2px 0px 0px;
+    height: 25px;
+    font: 20px 'Gill';
+    font-weight: lighter;
+    float: right;
+    padding: 0px 2px 0px 0px;
 }
