@@ -1,6 +1,8 @@
-<h1><?= $title ?></h1>
+<?php $this->renderPartial("menu", $menu); ?>
 
-    <?php $this->renderPartial("menu", $menu); ?>
+<h1>
+    <?= $title ?>
+</h1>
     
 <h2>Kommentarer:</h2>
 
@@ -9,4 +11,4 @@
         <input type='text' name='data-content'/>
     </form>
     <ul data-id='<?= $id ?>' data-type='group' data-src='comment'></ul>
-</div>	
+</div>
