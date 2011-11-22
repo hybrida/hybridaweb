@@ -109,7 +109,7 @@ div.searchBox{
 }
 
 .content{
-    padding: 30px 7px 30px 7px;
+    padding: 0 7px 30px 7px;
     float: left;
     width: 736px;
     background-color: #FFFFFF;
