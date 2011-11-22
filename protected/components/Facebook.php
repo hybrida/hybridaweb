@@ -1,6 +1,7 @@
 <?php
 class Facebook{
-
+    public $url = "appletini.ivt.ntnu.no";
+    
 public function getAccessToken(){
 	$userId = Yii::app()->user->id;
 	$array = array( 'uID' => $userId );
@@ -33,7 +34,7 @@ public function getProfilePicture(){
 public function authLink(){ //Returnerer link til authentication
 	$userId = Yii::app()->user->id;
 	$app_id = '202808609747231';
-	$my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //oppdater path til endelig side 
+	$my_url = $url . Yii::app()->baseURL . '/facebook/'; //oppdater path til endelig side 
 	$dir = Yii::app()->baseURL . '/images/facebookconnectlogo.jpg';
 	$permissions = 'publish_actions,offline_access';
 	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
@@ -41,7 +42,7 @@ public function authLink(){ //Returnerer link til authentication
 
 public function setAttending($id){
 	$userId = Yii::app()->user->id;
-    $urlEventPage = 'http://appletini.ivt.ntnu.no/yii/event/facebook/' . $id;
+    $urlEventPage = $url . Yii::app()->baseURL . 'event/facebook/' . $id;
 	$accessToken = $this->getAccessToken();
 	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
@@ -98,7 +99,7 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 
 public function publishAtFanpage($id){
 	$accessToken = 'AAACEdEose0cBANrT5wjP2mTcWF75HCWQGdsIDobTvDavx6RBt0FUFSfjdg2yMoDB1pJH6IYISeiLnG7GB66bNdoRL9iBZAVyieDGO7oP6s20ZCqagb';//statisk access token for hybrida fanpage
-	$urlEventPage = 'http://appletini.ivt.ntnu.no/yii/event/facebook/' . $id;
+	$urlEventPage = $url . Yii::app()->baseURL . '/event/facebook/' . $id;
         $postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
 		'access_token' => $accessToken, 

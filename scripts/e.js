@@ -1,5 +1,5 @@
 console.log('start');
-var url = "/yii/get/";
+var url = "get/";
 var split = '~%~';
 
 function XHR() {
