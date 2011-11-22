@@ -40,5 +40,8 @@ class ProfileController extends Controller{
         
         $this->render('edit',$data);
     }
+    public function actionAll(){
+        $this->render('all',$data);
+    }
     
 }
