@@ -1,4 +1,4 @@
-<!--<?= CHtml::link("Logg inn","https://innsida.ntnu.no/sso/?target=hybridaweb") ?>-->
+<!--<?= CHtml::link("Logg inn","https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=dev.hybrida.no/site/login") ?>-->
 
 <table class='calendar'>
     <tr>
