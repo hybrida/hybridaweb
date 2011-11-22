@@ -10,38 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/layout.css" />
 	<link rel = 'stylesheet' type = 'text/css' href = '<?=Yii::app()->request->baseUrl?>/style/destroy.css'/>
-
-	
-	<style type = 'text/css'>
-		menu items div {
-			width: 148px;
-			align: center;
-			border: 1px solid;
-			background: #BBF;
-			float: left;
-		}
-		menu slider div {
-			clear: both;
-			overflow: hidden;
-			width: 450px;
-			position: relative;
-		}
-		menu slider div div {
-			width: 1350px;
-			float: left;
-			background: #EEE;
-		}
-		menu slider div div div {
-			left: 0px;
-			clear: none;
-			width: 450px;
-			text-align: justify;
-		}
-		menu slider div div div div {
-			width: auto;
-		}
-	</style>
-
+	<link rel = 'stylesheet' type = 'text/css' href="<?=Yii::app()->request->baseUrl?>/style/pageContent.css" />
 </head>
 
 <body>

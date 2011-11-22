@@ -14,6 +14,7 @@
 		<link rel = 'stylesheet' type = 'text/css' href = '<?= Yii::app()->request->baseUrl ?>/style/destroy.css'/>
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl ?>/css/form.css" />
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
+		<link rel = 'stylesheet' type = 'text/css' href="<?=Yii::app()->request->baseUrl?>/style/pageContent.css" />
 	</head>
 
 	<body>
@@ -28,17 +29,6 @@
 
                         </ul>
                     </div>
-
-                    <!--Gamle versjonen:-->
-					<!--<form method='post' action='?site=search' id='searchForm'>
-						<div class="searchBox">
-							<input type='text' id='activeSearchBox' />
-							<ul id="searchList"> 
-					<!-- Search Suggestions 
-				</ul>
-			</div>
-			<div class="searchImg"><input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' /></div>
-		</form>!-->
 				</div>
 			</div>
 			<div class="headerBottomStripe">
@@ -55,14 +45,6 @@
 
                             <div class="last">Bedrift</div>
                         </items>
-
-                        <!-- PHP generert GAMMEL meny: -->
-						<!--<menu>
-							<div>
-						<? $this->widget("application.components.widgets.TabNavigation") ?>
-							</div>
-						</menu> -->
-
 					</nav>
 
 					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptions") ?> 
@@ -97,8 +79,6 @@
                 }?>
 			</div>
 		</div>
-
-
 
 	</body>
 
