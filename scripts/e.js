@@ -1,5 +1,5 @@
 console.log('start');
-var url = "get/";
+var url = "/get/";
 var split = '~%~';
 
 function XHR() {
