@@ -78,7 +78,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_constructor_NewsInput_EventModelIsCreated() {
 		$newsModel = new News;
 		$eventModel = new Event;
-		$eventModel->content = $eventModel->title = "TestCase";
+		$eventModel->title = "TestCase";
 		$eventModel->save();
 		$newsModel->setParent("event", $eventModel->id);
 		$newsModel->save();
@@ -91,7 +91,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_constructor_EventInput_NewsModelIsCreated() {
 		$newsModel = new News;
 		$eventModel = new Event;
-		$eventModel->content = $eventModel->title = "TestCase";
+		$eventModel->title = "TestCase";
 		$eventModel->save();
 		$newsModel->setParent("event", $eventModel->getPrimaryKey());
 		$newsModel->save();
@@ -144,17 +144,15 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function test_construct_eventModel_FieldsAreUpdated() {
-		$title = $content = "dummy";
+		$title = "dummy";
 		$access = array(1, 2, 3, 4, 5);
 		$eventModel = new Event;
 		$eventModel->title = $title;
-		$eventModel->content = $content;
 		$eventModel->access = $access;
 		$this->assertTrue($eventModel->save());
 
 		$model = new NewsEventForm($eventModel);
 		$this->assertEquals($title, $model->event['title']);
-		$this->assertEquals($content, $model->event['content']);
 		$this->assertEquals($access, $model->event['access']);
 	}
 
@@ -209,12 +207,11 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function test_setAttributes_eventModel_checkTitleContentAccess() {
-		$title = $content = "dummy";
+		$title = "dummy";
 		$access = array(6, 7, 8,);
 		$input = array(
 			"event" => array(
 				"title" => $title,
-				"content" => $content,
 				"access" => $access,
 			),
 		);
@@ -225,7 +222,6 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$model->saveEvent();
 
 		$this->assertEquals($title, $model->getEventModel()->title);
-		$this->assertEquals($content, $model->getEventModel()->content);
 		$this->assertEquals($access, $model->getEventModel()->access);
 	}
 
@@ -235,7 +231,6 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$input = array(
 			"event" => array(
 				"title" => $title,
-				"content" => $content,
 				"access" => $access,
 			),
 			"signup" => array(
@@ -331,7 +326,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	
 	public function test_getNewsModel_newsSetParentEvent_eventInput() {
 		$event = new Event;
-		$event->title = $event->content = "TestCase";
+		$event->title = "TestCase";
 		
 		$event->save();
 		$this->assertFalse($event->isNewRecord, "Event should not be newRecords");
@@ -363,7 +358,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_has_formByNews() {
 		$news = new News;
 		$event = new Event;
-		$event->title = $event->content = "TestCase";
+		$event->title = "TestCase";
 		$event->save();
 		$news->setParent("event", $event->id);
 		$news->save();
@@ -376,7 +371,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_has_formByEvent() {
 		$news = new News;
 		$event = new Event;
-		$event->title = $event->content = "TestCase";
+		$event->title = "TestCase";
 		$event->save();
 		$news->setParent("event", $event->id);
 		$news->save();

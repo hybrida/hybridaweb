@@ -29,7 +29,6 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 	public function test_constructor_EventModel_getType() {
 		$event = new Event;
 		$event->title = "dummy";
-		$event->content = "dummy";
 		$event->save();
 		$access = new AccessRelation($event);
 		$this->assertEquals("event", $access->getType());
