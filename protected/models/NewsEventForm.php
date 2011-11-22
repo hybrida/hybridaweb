@@ -20,6 +20,20 @@ class NewsEventForm extends CFormModel {
 	private $newsModel;
 	private $eventModel;
 	private $signupModel;
+	
+	public function rules() {
+		return array(
+			array('hasNews, hasSignup, hasEvent', 'boolean'),
+			array(
+				'news[title], news[content], ' .
+				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
+				'signup[spots], signup[open], signup[close], signup[signoff], ' .
+				'hasEvent, hasNews, hasSignup',
+				'default'
+			),
+			array('event[start], event[end], signup[open], signup[close]', 'date',),
+		);
+	}
 
 	public function __construct($model, $scenario=' ') {
 		parent::__construct($scenario);
@@ -98,20 +112,6 @@ class NewsEventForm extends CFormModel {
 		$this->hasNews = $this->newsModel->isNewRecord ? 0 : 1;
 		$this->hasEvent = $this->eventModel->isNewRecord ? 0 : 1;
 		$this->hasSignup = $this->signupModel->isNewRecord ? 0 : 1;
-	}
-
-	public function rules() {
-		return array(
-			array('hasNews, hasSignup, hasEvent', 'boolean'),
-			array(
-				'news[title], news[content], ' .
-				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
-				'signup[spots], signup[open], signup[close], signup[signoff], ' .
-				'hasEvent, hasNews, hasSignup',
-				'default'
-			),
-			array('event[start], event[end], signup[open], signup[close]', 'date',),
-		);
 	}
 
 	public function getNewsModel() {
