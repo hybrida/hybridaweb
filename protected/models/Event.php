@@ -41,13 +41,13 @@ class Event extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		  array('title, content', 'required'),
+		  array('title', 'required'),
 		  array('imageId', 'numerical', 'integerOnly' => true),
 		  array('location, title', 'length', 'max' => 30),
 		  array('start, end', 'safe'),
 		  // The following rule is used by search().
 		  // Please remove those attributes that should not be searched.
-		  array('id, start, end, location, title, imageId, content', 'safe', 'on' => 'search'),
+		  array('id, start, end, location, title, imageId', 'safe', 'on' => 'search'),
 		);
 	}
 

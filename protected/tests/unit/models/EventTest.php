@@ -4,7 +4,7 @@ class EventTest extends PHPUnit_Framework_TestCase {
 	
 	public function getEventObject() {
 		$event = new Event;
-		$event->content = $event->title = "dummy, delete if found";
+		$event->title ="TestCase";
 		return $event;
 	}
 
