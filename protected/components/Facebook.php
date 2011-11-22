@@ -100,13 +100,33 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 }
 
 public function publishAtFanpage($id){
-	$accessToken = 'AAACEdEose0cBANrT5wjP2mTcWF75HCWQGdsIDobTvDavx6RBt0FUFSfjdg2yMoDB1pJH6IYISeiLnG7GB66bNdoRL9iBZAVyieDGO7oP6s20ZCqagb';//statisk access token for hybrida fanpage
+	$accessToken = 'AAAC4dA8kMR8BAJNCZBZASqncTWux3A6lJRgoLmGoDVvnt5CEb4fZCHDp6ZAvu2PVPchKZCl1HHV5bJyhY2bkqYbRSNC3rEAQipRyhhzzo96pm8h37ZB7rq';//statisk access token for hybrida fanpage
 	$urlEventPage = $url . Yii::app()->baseURL . '/event/facebook/' . $id;
         $postUrl = 'https://graph.facebook.com/hybrida/feed';
 	$data = array(
 		'access_token' => $accessToken, 
 		'link' => $urlEventPage, 
                 'message' => utf8_encode('har opprettet et arrangement')
+	);
+	$ch = curl_init();
+	
+	curl_setopt($ch, CURLOPT_URL, $postUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        $out = curl_exec($ch);
+	echo $out;
+        curl_close($ch);
+}
+
+public function publishNews($message){
+        $accessToken = 'AAAC4dA8kMR8BAJNCZBZASqncTWux3A6lJRgoLmGoDVvnt5CEb4fZCHDp6ZAvu2PVPchKZCl1HHV5bJyhY2bkqYbRSNC3rEAQipRyhhzzo96pm8h37ZB7rq';//statisk access token for hybrida fanpage
+	$urlNewsPage = $url . Yii::app()->baseURL . 'insert link' . $id;    //obs obs
+        $postUrl = 'https://graph.facebook.com/hybrida/feed';
+	$data = array(
+		'access_token' => $accessToken, 
+		'link' => $urlEventPage, 
+                'message' => utf8_encode($message)
 	);
 	$ch = curl_init();
 	
