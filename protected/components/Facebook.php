@@ -102,7 +102,7 @@ public function metaDataEvent($eventName, $urlEventPage){ //Denne funksjonen ska
 public function publishAtFanpage($id){
 	$accessToken = 'AAAC4dA8kMR8BAJNCZBZASqncTWux3A6lJRgoLmGoDVvnt5CEb4fZCHDp6ZAvu2PVPchKZCl1HHV5bJyhY2bkqYbRSNC3rEAQipRyhhzzo96pm8h37ZB7rq';//statisk access token for hybrida fanpage
 	$urlEventPage = $url . Yii::app()->baseURL . '/event/facebook/' . $id;
-        $postUrl = 'https://graph.facebook.com/hybrida/feed';
+        $postUrl = 'https://graph.facebook.com/218073661595571/feed';
 	$data = array(
 		'access_token' => $accessToken, 
 		'link' => $urlEventPage, 
@@ -122,7 +122,7 @@ public function publishAtFanpage($id){
 public function publishNews($message){
         $accessToken = 'AAAC4dA8kMR8BAJNCZBZASqncTWux3A6lJRgoLmGoDVvnt5CEb4fZCHDp6ZAvu2PVPchKZCl1HHV5bJyhY2bkqYbRSNC3rEAQipRyhhzzo96pm8h37ZB7rq';//statisk access token for hybrida fanpage
 	$urlNewsPage = $url . Yii::app()->baseURL . 'insert link' . $id;    //obs obs
-        $postUrl = 'https://graph.facebook.com/hybrida/feed';
+        $postUrl = 'https://graph.facebook.com/218073661595571/feed';
 	$data = array(
 		'access_token' => $accessToken, 
 		'link' => $urlEventPage, 
