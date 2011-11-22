@@ -129,11 +129,6 @@
 			<?php echo $form->error($model, 'event[imageId]'); ?>
 		</div>
 
-		<div class="row">
-			<?php echo $form->labelEx($model, 'event[content]'); ?>
-			<?php echo $form->textArea($model, 'event[content]'); ?>
-			<?php echo $form->error($model, 'event[content]'); ?>
-		</div>
 	</div>
 	<div class="signup">
 		<h1>Påmelding</h1>
