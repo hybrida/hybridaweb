@@ -16,5 +16,16 @@ class File{
 			}
 		}
     }
+    
+    public function put_image($data, $extension, $userId) {
+	$image = new Image;
+        $image->userId=$userId;
+	$image->save();
+        $url = '/yii/upc/images/'.$image->id . $extension;
+        file_put_contents($url, $data);
+	$image->url =$url;
+	$image->save();
+    }
+
 }
 ?>
