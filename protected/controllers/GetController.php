@@ -1,16 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of GetController
- *
- * @author Media
- */
-
 class GetController extends Controller{
     //put your code here
     private $split = "~%~";
@@ -321,43 +310,59 @@ class GetController extends Controller{
     
     
     public function actionCalendar(){
+        $firstDay = date("N", mktime(0, 0, 0, $_GET['month'], 0, $_GET['year']));
+        $lastDay = date("j", mktime(0, 0, 0, $_GET['month']+1, 0, $_GET['year']));
+        $iterate= ($firstDay + $lastDay >= 35 ? 42 : 35) - $firstDay;
 
-			$firstDay = date("N", mktime(0, 0, 0, $_GET['month'], 0, $_GET['year']));
-			$lastDay = date("j", mktime(0, 0, 0, $_GET['month']+1, 0, $_GET['year']));
-			$iterate= ($firstDay + $lastDay >= 35 ? 42 : 35) - $firstDay;
-		
-            $data = array(
-                'userId' => Yii::app()->user->id,
-                'type' => 'event',
-                'year' => $_GET['year'],
-                'month' => $_GET['month']
-            );
-            
-			$sql = "SELECT e.title, e.id, DAY(e.start) AS day, DATE_FORMAT(e.start, '%k:%i') AS time 
-			FROM event AS e 
-			RIGHT JOIN  " . Access::innerSQLAllowedTypeIds() ." = e.id
-			WHERE YEAR(e.start) = :year AND MONTH(e.start) = :month 
-			ORDER BY DAY(e.start)";
-            
-			$query = $this->pdo->prepare($sql);
-			$query->execute($data);
-            
-			$result = $query->fetch(PDO::FETCH_ASSOC);
-            
-            for( $i = -$firstDay + 1; $i < $iterate; $i++ ) {
-				if( $i > 0 && $i <= $lastDay ) {
-					if( $i == $result['day'] ) {
-						echo ("<a title='" . $result['title'] . " kl " . $result['time'] . "' href='" . Yii::app()->request->baseUrl ."/event/" . $result['id'] ."'>" . $i . "</a>");
-						$result = $query->fetch(PDO::FETCH_ASSOC);
-                        //$row = mysql_fetch_array( $result );
-					} else {
-						echo ($i);
-					}
-				}
-				echo ( $this->split );
-			}
+        $data = array(
+            'userId' => Yii::app()->user->id,
+            'type' => 'event',
+            'year' => $_GET['year'],
+            'month' => $_GET['month']
+        );
+
+        $sql = "SELECT e.title, e.id, DAY(e.start) AS day, DATE_FORMAT(e.start, '%k:%i') AS time 
+        FROM event AS e 
+        RIGHT JOIN  " . Access::innerSQLAllowedTypeIds() ." = e.id
+        WHERE YEAR(e.start) = :year AND MONTH(e.start) = :month 
+        ORDER BY DAY(e.start)";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+
+        for( $i = -$firstDay + 1; $i < $iterate; $i++ ) {
+            if( $i > 0 && $i <= $lastDay ) {
+                if( $i == $result['day'] ) {
+                    echo ("<a title='" . $result['title'] . " kl " . $result['time'] . "' href='" . Yii::app()->request->baseUrl ."/event/" . $result['id'] ."'>" . $i . "</a>");
+                    $result = $query->fetch(PDO::FETCH_ASSOC);
+                    //$row = mysql_fetch_array( $result );
+                } else {
+                    echo ($i);
+                }
+            }
+            echo ( $this->split );
+        }
+    }
+    
+    public function actionFileUpload(){
 
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     
@@ -440,5 +445,4 @@ class GetController extends Controller{
 			
     	}
     }
-    
 }
