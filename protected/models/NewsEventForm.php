@@ -11,9 +11,9 @@
  */
 class NewsEventForm extends CFormModel {
 
-	public $hasNews = 0;
-	public $hasSignup = 0;
-	public $hasEvent = 0;
+	public $hasNews;
+	public $hasSignup;
+	public $hasEvent;
 	public $news = array();
 	public $event = array();
 	public $signup = array();
@@ -47,40 +47,57 @@ class NewsEventForm extends CFormModel {
 		$this->signupModel = new Signup;
 	}
 
-	private function initNewsModel($model) {
-		if (!$model->isNewRecord) {
-			if ($model->parentType == "event" && $model->parentId !== null) {
-				$this->eventModel = Event::model()->findByPk($model->parentId);
-			}
+	private function initNewsModel($news) {
+		$this->newsModel = $news;
+		if (!$news->isNewRecord) {
+			$this->initEventByNews();
 		}
-		$this->newsModel = $model;
 	}
 
-	private function initEventModel($model) {
-		if (!$model->isNewRecord) {
-			// Find News if there exists a news with parentId = this->id and parentType = event
-			$sql = "SELECT * FROM news WHERE parentType = 'event' AND parentId = :eventId";
-			$news = News::model()->findBySql($sql, array(":eventId" => $model->id));
-			if ($news) {
-				$this->newsModel = $news;
-			}
+	private function initEventByNews() {
+		$news = $this->getNewsModel();
+		if ($news->parentType == "event" && $news->parentId !== null) {
+			$this->eventModel = Event::model()->findByPk($news->parentId);
 		}
-		$this->eventModel = $model;
+	}
+
+	private function initEventModel($event) {
+		$this->eventModel = $event;
+		if (!$event->isNewRecord) {
+			$this->initNewsByEvent();
+		}
+	}
+
+	private function initNewsByEvent() {
+		$sql = "SELECT * FROM news WHERE parentType = 'event' AND parentId = :eventId";
+		$news = News::model()->findBySql($sql, array("eventId" => $this->getEventModel()->id));
+		if ($news) {
+			$this->newsModel = $news;
+		}
 	}
 
 	private function initFields() {
+		$this->initModelAttributes();
+		$this->initAccessFields();
+		$this->initHasFields();
+	}
+
+	private function initModelAttributes() {
 		$this->news = $this->newsModel->attributes;
 		$this->event = $this->eventModel->attributes;
 		$this->signup = $this->signupModel->attributes;
-
-
-		$this->initAccessFields();
 	}
 
 	private function initAccessFields() {
 		$this->news['access'] = $this->newsModel->access;
 		$this->event['access'] = $this->eventModel->access;
 		$this->signup['access'] = $this->signupModel->access;
+	}
+
+	private function initHasFields() {
+		$this->hasNews = $this->newsModel->isNewRecord ? 0 : 1;
+		$this->hasEvent = $this->eventModel->isNewRecord ? 0 : 1;
+		$this->hasSignup = $this->signupModel->isNewRecord ? 0 : 1;
 	}
 
 	public function rules() {
@@ -169,16 +186,16 @@ class NewsEventForm extends CFormModel {
 	public function printFields() {
 		?> 
 		<pre>
-						Felter for NewsEventForm
-						news: <? print_r($this->news) ?> 
-						event: <? print_r($this->event) ?> 
-						signup: <? print_r($this->signup) ?> 
-						hasEvent: <? echo ($this->hasEvent) ?> 
-						hasNews: <? print_r($this->hasNews) ?> 
-						hasSignup: <? print_r($this->hasSignup) ?> 
+												Felter for NewsEventForm
+												news: <? print_r($this->news) ?> 
+												event: <? print_r($this->event) ?> 
+												signup: <? print_r($this->signup) ?> 
+												hasEvent: <? echo ($this->hasEvent) ?> 
+												hasNews: <? print_r($this->hasNews) ?> 
+												hasSignup: <? print_r($this->hasSignup) ?> 
 		</pre>
 		<?
 	}
-	
+
 }
 

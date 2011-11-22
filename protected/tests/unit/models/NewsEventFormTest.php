@@ -111,13 +111,21 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertNotEquals(null, $event);
 		$this->assertNotEquals(null, $signup);
 	}
+	
+	public function test_constructor_EventInput_allModelsNotNull() {
+		$model = new NewsEventForm(new Event);
+		
+		$this->assertNotNull($model->getNewsModel(),"News should not be null");
+		$this->assertNotNull($model->getEventModel(),"Event should not be null");
+		$this->assertNotNull($model->getSignupModel(),"Signup should not be null");
+	}
 
 	/**
 	 * @expectedException NullPointerException
 	 */
 	public function test_constructor_nullInput_throwsException() {
 		$model = new NewsEventForm(null);
-		$this->assertTrue(false); // Hvis testen har kommet så langt burde den faile
+		$this->fail("Did not throw NullPointerException");
 	}
 
 	public function test_construct_newsModel_FieldsAreUpdated() {
@@ -265,8 +273,8 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$model = new NewsEventForm($news);
 		$model->setAttributes(($input));
-		$model->hasNews = true;
-		$model->hasEvent = true;
+		$model->hasNews = 1;
+		$model->hasEvent = 1;
 		$model->save();
 		$eventModel = $model->getEventModel();
 		$this->assertEquals($eventModel->id, $news->parentId);
@@ -310,7 +318,72 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$eventModel = $model->getEventModel();
 		$this->assertEquals($eventModel->id, $news->parentId);
 		$this->assertEquals('event', $news->parentType);
-		
 	}
-
+	
+	public function test_getEventModel_newsSetParentEvent_newsInput() {
+		$event = new Event;
+		$event->save();
+		$news = new News;
+		$news->setParent("event",$event->id);
+		$model = new NewsEventForm($news);
+		$this->assertEquals($event->id, $model->getEventModel()->id);
+	}
+	
+	public function test_getNewsModel_newsSetParentEvent_eventInput() {
+		$event = new Event;
+		$event->title = $event->content = "TestCase";
+		
+		$event->save();
+		$this->assertFalse($event->isNewRecord, "Event should not be newRecords");
+		$news = new News;
+		$news->setParent("event", $event->id);
+		$news->save();
+		$this->assertFalse($news->isNewRecord, "News should not be newRecord");
+		$model = new NewsEventForm($event);
+		$this->assertEquals($news->id, $model->getNewsModel()->id);
+	}
+	
+	public function test_hasNews_newRecord() {
+		$model = new NewsEventForm(new News);
+		$this->assertEquals(0,$model->hasNews);
+	}
+	
+	public function test_hasEvent_newRecord() {
+		$model = new NewsEventForm(new News);
+		$this->assertEquals(0,$model->hasEvent);
+	}
+	
+	public function test_hasNews_oldRecord() {
+		$news = new News;
+		$news->save();
+		$model = new NewsEventForm($news);
+		$this->assertEquals(1,$model->hasNews);
+	}
+	
+	public function test_has_formByNews() {
+		$news = new News;
+		$event = new Event;
+		$event->title = $event->content = "TestCase";
+		$event->save();
+		$news->setParent("event", $event->id);
+		$news->save();
+		$model = new NewsEventForm($news);
+		$this->assertEquals(1, $model->hasNews,"hasNews should be 1");
+		$this->assertEquals(1, $model->hasEvent,"hasEvent should be 1");
+		$this->assertEquals(0, $model->hasSignup,"hasSignup should be 0");
+	}
+	
+	public function test_has_formByEvent() {
+		$news = new News;
+		$event = new Event;
+		$event->title = $event->content = "TestCase";
+		$event->save();
+		$news->setParent("event", $event->id);
+		$news->save();
+		$model = new NewsEventForm($event);
+		
+		$this->assertEquals(1, $model->hasNews,"hasNews should be 1");
+		$this->assertEquals(1, $model->hasEvent,"hasEvent should be 1");
+		$this->assertEquals(0, $model->hasSignup,"hasSignup should be 0");
+	}
 }
