@@ -24,8 +24,7 @@ class SiteController extends Controller {
 			$returnargs = Yii::app()->user->returnUrl;
 			$redirect = "https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs="
 					. $returnargs;
-			echo $redirect;
-//			$this->redirect($redirect);
+			$this->redirect($redirect);
 			return;
 		}
 
