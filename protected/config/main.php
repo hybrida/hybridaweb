@@ -8,7 +8,7 @@ return array(
 		'theme' => 'classic',
 		'theme' => 'hybrida',
 		'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
-		'name' => 'Hybrida',
+	'name' => 'Hybrida',
 		// preloading 'log' component
 		'preload' => array('log'),
 		// autoloading model and component classes
@@ -33,6 +33,7 @@ return array(
 				'user' => array(
 						// enable cookie-based authentication
 						'allowAutoLogin' => true,
+			'loginUrl' => array("site/login"),
 				),
 				// uncomment the following to enable URLs in path-format
 
@@ -79,7 +80,7 @@ return array(
 		// application-level parameters that can be accessed
 		// using Yii::app()->params['paramName']
 		'params' => array(
-				// this is used in contact page
-				'adminEmail' => 'webmaster@example.com',
+		'baseUrl' => "http://localhost",
+		'baseUrl' => "http://dev.hybrida.no",
 		),
 );

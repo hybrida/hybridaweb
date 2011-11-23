@@ -4,7 +4,7 @@ class SiteController extends Controller {
 
 	public function actionIndex() {
 		//$this->render('index');
-        $this->render('../news/feed');
+		$this->render('../news/feed');
 	}
 
 	/**
@@ -21,7 +21,12 @@ class SiteController extends Controller {
 
 	public function actionLogin($data=null, $sign=null, $target=null) {
 		if ($data == null && $sign == null && $target == null) {
-			$this->redirect("https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=/site/login");
+			$returnargs = Yii::app()->user->returnUrl;
+			$redirect = "https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs="
+					. $returnargs;
+			echo $redirect;
+//			$this->redirect($redirect);
+			return;
 		}
 
 		ob_clean();
@@ -39,4 +44,4 @@ class SiteController extends Controller {
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
- }
+}
