@@ -80,7 +80,7 @@ return array(
 		// application-level parameters that can be accessed
 		// using Yii::app()->params['paramName']
 		'params' => array(
-		'baseUrl' => "http://localhost",
-		'baseUrl' => "http://dev.hybrida.no",
+		'baseUrl' => "localhost",
+		'baseUrl' => "dev.hybrida.no",
 		),
 );
