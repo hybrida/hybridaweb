@@ -2,6 +2,8 @@
 
 class SiteController extends Controller {
 
+	private static $innsidaLink = "https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=";
+
 	public function actionIndex() {
 		//$this->render('index');
 		$this->render('../news/feed');
@@ -19,15 +21,7 @@ class SiteController extends Controller {
 		}
 	}
 
-	public function actionLogin($data=null, $sign=null, $target=null) {
-		if ($data == null && $sign == null && $target == null) {
-			$returnargs = Yii::app()->user->returnUrl;
-			$redirect = "https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs="
-					. $returnargs;
-			$this->redirect($redirect);
-			return;
-		}
-
+	public function actionInnsidaLogin($data, $sign, $target) {
 		ob_clean();
 		$identity = new InnsidaIdentity($data, $sign, $target);
 
@@ -37,6 +31,13 @@ class SiteController extends Controller {
 		} else {
 			$this->render("403", array('msg' => $identity->errorMessage));
 		}
+	}
+
+	public function actionLogin() {
+		$returnargs = Yii::app()->user->returnUrl;
+		$redirect = self::$innsidaLink . $returnargs;
+		$this->redirect($redirect);
+		return;
 	}
 
 	public function actionLogout() {
