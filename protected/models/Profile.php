@@ -10,7 +10,7 @@ class Profile {
             'id' => $id
         );
         
-        $sql = "SELECT un.firstName, un.middleName, un.lastName, un.username, un.phoneNumber, un.specialization, un.graduationYear, un.imageId, un.member FROM user_new un WHERE u.id = :id";
+        $sql = "SELECT un.firstName, un.middleName, un.lastName, un.username, un.phoneNumber, un.specialization, un.graduationYear, un.imageId, un.member FROM user_new un WHERE un.id = :id";
 		$query = $this->pdo->prepare($sql);
         $query->execute($data);
         
