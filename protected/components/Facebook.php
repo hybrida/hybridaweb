@@ -44,7 +44,7 @@ public function authLink(){ //Returnerer link til authentication
 
 public function setAttending($id){
 	$userId = Yii::app()->user->id;
-    $urlEventPage = $this->url . Yii::app()->baseURL . 'event/facebook/' . $id;
+    $urlEventPage = $this->url . Yii::app()->baseURL . '/event/facebook/' . $id;
 	$accessToken = $this->getAccessToken();
 	$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 	$data = array(
