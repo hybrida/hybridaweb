@@ -26,7 +26,7 @@ class Profile {
         );
         
         $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName, ui.imageId
-                FROM user_info AS ui WHERE graduationYear = :year";
+                FROM user_new AS ui WHERE graduationYear = :year";
 		$query = $this->pdo->prepare($sql);
         $query->execute($data);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
