@@ -43,7 +43,7 @@
                             <div><a href='<?= Yii::app()->request->baseUrl ?>/article/1'>Hybrida</a></div>
 
                             <div class="last">
-                                <a href='<?= Yii::app()->request->baseUrl ?>/article/1'>Bedrift</a>
+                                <a href='<?= Yii::app()->request->baseUrl ?>/article/2'>Bedrift</a>
                             </div>
                         </items>
 					</nav>
