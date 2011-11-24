@@ -4,10 +4,10 @@
 
 <h1> <?= $firstName ." ". $middleName ." ". $lastName ?> </h1>
         
-		<div class='menuPage'>
-		<a href='<?= $id ?>/sub/0'>Kommentarer</a>
-        <a href='<?= $id ?>/sub/1'>Info</a>
-		<a href='<?= $id ?>/sub/2'>Annet</a>
+		<div id='groupNavigation'>
+		<a class='groupNavigationItem' href='<?= $id ?>/sub/0'>Kommentarer</a>
+        <a class='groupNavigationItem' href='<?= $id ?>/sub/1'>Info</a>
+		<a class='groupNavigationItem' href='<?= $id ?>/sub/2'>Annet</a>
 		</div>
 
         

@@ -40,8 +40,10 @@ class ProfileController extends Controller{
         
         $this->render('edit',$data);
     }
-    public function actionAll(){
+    public function actionAll($id){
+        $profile = new Profile();
+        $data['users'] = $profile->displayMembers($id);
+        $data['now'] = date("Y");
         $this->render('all',$data);
     }
-    
 }
