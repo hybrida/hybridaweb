@@ -373,7 +373,7 @@ function Calendar(dn) {
 	update = function() {
 		xhr.request({
 			'type': 'GET',
-			'url': url+'calendar/?year='+year+'&month='+month+1,
+			'url': url+'calendar/?year='+year+'&month='+(month+1),
 			'functions': {
 				'onload': function() {
 					monthDisplay.innerHTML = months[month] + ' ' + year;
