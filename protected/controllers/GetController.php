@@ -51,7 +51,7 @@ class GetController extends Controller{
                         ORDER BY timestamp DESC " . $limit;
             
             $data = array(
-                'userId' => 327,
+                'userId' => Yii::app()->user->id,
                 'type' => 'news'
                     
         );
@@ -109,7 +109,7 @@ class GetController extends Controller{
         $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
 
         $sql = "SELECT u.imageId, c.id, c.content, c.timestamp, u.firstName, u.middleName, u.lastName 
-        FROM comment AS c JOIN user_new AS u ON c.author = u.userId
+        FROM comment AS c JOIN user_new AS u ON c.author = u.id
         RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = c.id
         WHERE c.parentType = :pType AND c.parentId = :id 
         ORDER BY c.timestamp DESC " . $limit;
