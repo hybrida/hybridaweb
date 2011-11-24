@@ -160,7 +160,8 @@ class GetController extends Controller{
     public function actionSignup($id){
         
         ob_end_clean();
-        header("Connection: close");
+        header("Connection: close\r\n");
+        header("Content-Encoding: none\r\n");
         ob_start();
         
         
@@ -219,8 +220,11 @@ class GetController extends Controller{
 
             $this->renderPartial('signup',$data);
         
+            $size = ob_get_length();
+            header("Content-Length: " . $size);
             ob_end_flush();
             flush();
+            ob_end_clean();
 
             if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {
                 $fb = new Facebook();

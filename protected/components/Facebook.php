@@ -58,7 +58,7 @@ public function setAttending($id){
     curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     $out = curl_exec($ch);
-	echo $out;
+	echo "<!--" . $out . "-->";
     curl_close($ch);
 }
 
