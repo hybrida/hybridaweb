@@ -159,20 +159,21 @@ class GetController extends Controller{
     
     public function actionSignup($id){
         
+        $eId = $_REQUEST['id'];
         ob_end_clean();
         header("Connection: close\r\n");
         header("Content-Encoding: none\r\n");
         ob_start();
         
         
-        if(GateKeeper::hasAccess('event', $_REQUEST['id'])){
+        if(GateKeeper::hasAccess('event', $eId)){
             
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
             if(isset($_REQUEST['type'])) {               
                 $signup = $_REQUEST['type'] == "on" ? "false" : "true";
 
                 $data = array(
-                    'id' => $_REQUEST['id'],
+                    'id' => $eId,
                     'selfId' => Yii::app()->user->id,
                     'signupId' => $signup
                 );
@@ -190,7 +191,7 @@ class GetController extends Controller{
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
 
             $input = array(
-                'id' => $_REQUEST['id']
+                'id' => $eId
             );
             
             $sql = "SELECT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName, ui.imageId 
@@ -204,7 +205,7 @@ class GetController extends Controller{
             $data['id'] = $id;
 
             $input = array(
-                'id' => $_REQUEST['id'],
+                'id' => $eId,
                 'userId' => Yii::app()->user->id
             );
             $sql = "SELECT userId, signedOff FROM membership_signup WHERE eventId = :id AND userId = :userId";
@@ -232,7 +233,7 @@ class GetController extends Controller{
 
             if($facebook){
                 $fb = new Facebook();
-                $fb->setAttending($_REQUEST['id']);                
+                $fb->setAttending($eId);                
             }
         }else{
             $this->renderPartial('../site/403');
