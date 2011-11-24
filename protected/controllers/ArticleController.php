@@ -11,7 +11,16 @@ class ArticleController extends Controller {
 		}
 	}
     public function actionEdit($id){
-        $this->render('edit');
+		$model = $this->getArticleModel($id);
+		
+        $this->render('edit',$model);
     }
-
+    
+    public function getArticleModel($id) {
+        $model = Article::model()->findByPk($id);
+        if ($model)
+            return $model;
+        else
+            throw new CHttpException("Artikkelen finnes ikke");
+	}
 }

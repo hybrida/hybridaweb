@@ -10,8 +10,7 @@
 			var news = $(".news");
 			var event = $(".event");
 			var signup = $(".signup");
-
-			
+            
 			newsButton.click(function() {
 				if (newsButton.attr('checked')) {
 					news.show();
@@ -35,6 +34,9 @@
 					signup.hide();
 				}
 			});
+            
+            event.hide();
+            signup.hide();
 			/* */
 
 
@@ -63,17 +65,11 @@
 	<?= $form->hiddenField($model, 'signup[id]') ?>
 
 
-	<div class="row">
+	<!--<div class="row">
 		<?php echo $form->labelEx($model, 'hasNews'); ?>
 		<?php echo $form->checkBox($model, 'hasNews'); ?>
 		<?php echo $form->error($model, 'hasNews'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model, 'hasSignup'); ?>
-		<?php echo $form->checkBox($model, 'hasSignup'); ?>
-		<?php echo $form->error($model, 'hasSignup'); ?>
-	</div>
+	</div>-->
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'hasEvent'); ?>
@@ -81,6 +77,12 @@
 		<?php echo $form->error($model, 'hasEvent'); ?>
 	</div>
 
+    <div class="row">
+		<?php echo $form->labelEx($model, 'hasSignup'); ?>
+		<?php echo $form->checkBox($model, 'hasSignup'); ?>
+		<?php echo $form->error($model, 'hasSignup'); ?>
+	</div>
+    
 	<div class="news">
 		<h1>News</h1>
 		<div class="row">

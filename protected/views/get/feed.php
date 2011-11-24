@@ -11,7 +11,7 @@
     		<div class='topBarItem'>
     		</div>
 
-    <!--//Printer overskrift som link hvis event eller lenger nyhet-->
+    <!--Printer overskrift som link hvis event eller lenger nyhet-->
     <?= ($news['parentType'] == NULL) ? "<h1>" . $news['title'] . "</h1>" : ""  ?>
 
     <?= ($news['parentType'] != NULL) ? 
@@ -19,9 +19,19 @@
             "/" . $news['parentId'] . "'>
             <h1>" . $news['title'] . "</h1>
         </a>" : ""  ?>
+    
 
-    	</div>
+    
+        </div>
     	<div class='articleContent'>
+            
+        <? if(1==1) : ?>
+            <div align="right">
+                <a href='<?= Yii::app()->request->baseURL ?>/news/edit/<?= $news['id'] ?>'>
+                    <img src='<?= Yii::app()->baseURL ?>/images/icons/edit.png' height='20'></img>
+                </a>
+            </div>
+        <? endif; ?>
 
     <!--//Hvis nyheten har bilde-->
     <?= (( $news['imageId']!=null) ? "<img src='" . Yii::app()->request->baseUrl ."/image/view/id/" . $news['imageId'] . "/size/2' />" : "" );  ?>
