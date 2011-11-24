@@ -28,7 +28,7 @@ class GetController extends Controller{
         $sql = "SELECT e.id, e.title, e.start FROM 
                 event AS e RIGHT JOIN membership_signup AS ms 
                 ON ms.eventId= e.id 
-                WHERE ms.userId = :userId AND start > NOW()
+                WHERE ms.userId = :userId AND signedOff = 'false' AND start > NOW()
                 ORDER BY start DESC " . $limit;
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
