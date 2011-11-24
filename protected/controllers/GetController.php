@@ -188,7 +188,7 @@ class GetController extends Controller{
                 'id' => $_REQUEST['id']
             );
             
-            $sql = "SELECT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName 
+            $sql = "SELECT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName, ui.imageId 
             FROM membership_signup AS ms LEFT JOIN user_new AS ui ON ms.userId = ui.id LEFT JOIN event as e ON e.id=ms.eventId
             WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
 
