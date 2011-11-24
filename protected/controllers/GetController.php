@@ -22,7 +22,7 @@ class GetController extends Controller{
         $limit  = (isset($_GET['s']) && isset($_GET['l']))  ? ' LIMIT ' . ( $_GET['s'] ) . ', ' .( $_GET['s'] + 4) : '';
        
         $data = array(
-            'userId' => 327,  
+            'userId' => Yii::app()->user->id,  
         );
         
         $sql = "SELECT e.id, e.title, e.start FROM 

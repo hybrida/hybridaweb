@@ -1,3 +1,4 @@
+<?php $this->renderPartial("menu", $menu); ?>
 
 <?= $title ?>
 

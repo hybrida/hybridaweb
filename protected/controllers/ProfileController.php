@@ -13,7 +13,7 @@ public function filters() {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("index","view"),
+				'actions' => array("index","view","edit","all"),
 				'users' => array('@')
 			),
 			array('deny'),
