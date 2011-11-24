@@ -11,7 +11,7 @@ class FacebookController extends Controller {
         $userId = Yii::app()->user->id;
         $app_id = '202808609747231';
         $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
-        $my_url = 'http://appletini.ivt.ntnu.no/yii/facebook/'; //url til fila som skal lese inn code
+        $my_url = 'http://dev.hybrida.no/facebook/'; //url til fila som skal lese inn code
 
         if(isset($_REQUEST['error'])){
 

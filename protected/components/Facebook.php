@@ -1,6 +1,6 @@
 <?php
 class Facebook{
-    public $url = "appletini.ivt.ntnu.no";
+    public $url = "http://dev.hybrida.no";
     
 public function getAccessToken(){
 	$userId = Yii::app()->user->id;
@@ -36,7 +36,7 @@ public function retrieveProfilePicture(){
 public function authLink(){ //Returnerer link til authentication
 	$userId = Yii::app()->user->id;
 	$app_id = '202808609747231';
-	$my_url = $url . Yii::app()->baseURL . '/facebook/'; //oppdater path til endelig side 
+	$my_url = $this->url . Yii::app()->baseURL . '/facebook/'; //oppdater path til endelig side 
 	$dir = Yii::app()->baseURL . '/images/facebookconnectlogo.jpg';
 	$permissions = 'publish_actions,offline_access';
 	return '<a href="https://www.facebook.com/dialog/oauth?client_id='.$app_id.'&redirect_uri='.$my_url.'&scope='.$permissions.'"><img src="'.$dir.'"></a>';
