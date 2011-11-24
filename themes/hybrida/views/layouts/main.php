@@ -39,10 +39,12 @@
                             <div><a href='<?= Yii::app()->request->baseUrl ?>/profile/'>Profil</a></div> 
                             <div><a href='<?= Yii::app()->request->baseUrl ?>/group/'>Grupper</a></div>
 
-                            <div>Personer</div>
+                            <div><a href='<?= Yii::app()->request->baseUrl ?>/profile/all/2016'>Personer</a></div>
                             <div><a href='<?= Yii::app()->request->baseUrl ?>/article/1'>Hybrida</a></div>
 
-                            <div class="last">Bedrift</div>
+                            <div class="last">
+                                <a href='<?= Yii::app()->request->baseUrl ?>/article/1'>Bedrift</a>
+                            </div>
                         </items>
 					</nav>
 
