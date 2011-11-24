@@ -163,6 +163,7 @@ class GetController extends Controller{
         ob_end_clean();
         header("Connection: close\r\n");
         header("Content-Encoding: none\r\n");
+        ignore_user_abort(true);
         ob_start();
         
         
