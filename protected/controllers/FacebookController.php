@@ -33,7 +33,7 @@ class FacebookController extends Controller {
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
 
-            Header("Location: " . Yii::app()->baseURL ); //redirect tilbake til forsiden
+            Header("Location: http://dev.hybrida.no"); //redirect tilbake til forsiden
         }
     }
 }
