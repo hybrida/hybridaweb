@@ -182,6 +182,10 @@ class GetController extends Controller{
                
             }
             
+            if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {
+                $facebook = true;
+            }
+            
             $split = '~%~';
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
 
@@ -226,7 +230,7 @@ class GetController extends Controller{
             flush();
             ob_end_clean();
 
-            if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {
+            if($facebook){
                 $fb = new Facebook();
                 $fb->setAttending($_REQUEST['id']);                
             }
