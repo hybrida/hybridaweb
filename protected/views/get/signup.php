@@ -4,7 +4,8 @@
 <? foreach($list as $row) : ?>
 
             <li>
-                <a href='?site=profile&id=<?= $row['userId'] ?>'><?= $row['firstName'] ." ". $row['middleName'] . " " . $row['lastName'] ?></a>
+                <img src='<?= Yii::app()->baseURL ?>/image/view/id/<?= $user['imageId'] ?>/size/3 '></img>
+                <a href='<?= Yii::app()->baseURL ?>/profile/<?= $row['userId'] ?>'><?= $row['firstName'] ." ". $row['middleName'] . " " . $row['lastName'] ?></a>
             </li>
 
 <? endforeach; ?>
