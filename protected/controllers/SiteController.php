@@ -28,6 +28,7 @@ class SiteController extends Controller {
 		if ($identity->authenticate()) {
 			user()->login($identity);
 			//$this->redirect(user()->returnUrl);
+			$this->redirect(array("site"));
 		} else {
 			throw new CHttpException("Logg inn ikke vellykket"
 					.$identity->errorMessage);
