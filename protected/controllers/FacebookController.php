@@ -33,7 +33,7 @@ class FacebookController extends Controller {
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
 
-            Header("Location: http://appletini.ivt.ntnu.no/yii"); //redirect tilbake til forsiden
+            Header("Location: " . Yii::app()->baseURL ); //redirect tilbake til forsiden
         }
     }
 }
