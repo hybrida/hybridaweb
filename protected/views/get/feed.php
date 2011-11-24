@@ -29,13 +29,16 @@
         <p>
 
     <!--//Hvis nyheten er for lang hvis en les mer link-->
-    <?= ((strlen($news['content']) > $contentLength) ? 
-            (substr($news['content'],0,$contentLength) .
-            "... " .
-            "<a href='" . Yii::app()->request->baseURL ."/". ($news['parentType'] == NULL) ? "news" : $news['parentType'] . 
-            "/" . ($news['parentType'] == NULL) ? $news['id'] : $news['parentId'] . 
-            "'>Les mer</a>") : 
-            $news['content']);   ?>
+    <? if(strlen($news['content']) > $contentLength) : ?>
+    
+            <?= substr($news['content'],0,$contentLength) ?>...
+            <a href='<?= Yii::app()->request->baseURL ?>/<?= ($news['parentType'] == NULL) ? "news" : $news['parentType'] ?>/<?= ($news['parentType'] == NULL) ? $news['id'] : $news['parentId'] ?>'>
+                Les mer
+            </a>
+            
+    <? else : ?>
+            <?= $news['content'] ?>
+    <? endif; ?>
 
 
     </p>
