@@ -279,7 +279,7 @@ class GetController extends Controller{
 			}
             
 			//Søke på brukere
-			$sql = "SELECT DISTINCT ui.userId, ui.firstName, ui.middleName, ui.lastName 
+			$sql = "SELECT DISTINCT ui.id, ui.firstName, ui.middleName, ui.lastName 
                     FROM user_new AS ui WHERE " . $searchString;
             
 			$query = $this->pdo->prepare($sql);
