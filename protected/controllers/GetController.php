@@ -45,8 +45,8 @@ class GetController extends Controller{
 
         //Feil å bruke parentType for selection. 
         if ( !isset($_GET['parentType'])) {			
-            $sql = "SELECT DISTINCT ui.userId AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp 
-                        FROM news n JOIN user_new ui ON n.author = ui.userId 
+            $sql = "SELECT DISTINCT ui.id AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp 
+                        FROM news n JOIN user_new ui ON n.author = ui.id 
                         RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
                         ORDER BY timestamp DESC " . $limit;
             
@@ -57,11 +57,11 @@ class GetController extends Controller{
         );
         }
         else {
-            $sql = "SELECT DISTINCT ui.userId AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp FROM news n
+            $sql = "SELECT DISTINCT ui.id AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp FROM news n
                         RIGHT JOIN (SELECT ar.id AS accessId, ma.userId FROM membership_access ma LEFT JOIN access_relations ar ON ma.accessId=ar.access WHERE ar.type='news' AND ma.userId = 327) AS a ON a.accessId = n.id 
                         RIGHT JOIN tag AS t ON t.id = n.id 
                         LEFT JOIN groups AS g ON g.id = t.ownerId 
-                        LEFT JOIN user_new ui ON n.author = ui.userId
+                        LEFT JOIN user_new ui ON n.author = ui.id
                         WHERE g.id = :id AND t.contentType = 'news' AND t.tagType = 'group'";
             
             $data = array(
@@ -188,8 +188,8 @@ class GetController extends Controller{
                 'id' => $_REQUEST['id']
             );
             
-            $sql = "SELECT ui.userId, ui.firstName, ui.middleName, ui.lastName 
-            FROM membership_signup AS ms LEFT JOIN user_new AS ui ON ms.userId = ui.userId LEFT JOIN event as e ON e.id=ms.eventId
+            $sql = "SELECT ui.id, ui.firstName, ui.middleName, ui.lastName 
+            FROM membership_signup AS ms LEFT JOIN user_new AS ui ON ms.userId = ui.id LEFT JOIN event as e ON e.id=ms.eventId
             WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
 
             $query = $this->pdo->prepare($sql);
