@@ -363,7 +363,7 @@ function Calendar(dn) {
 		months = ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Desember'],
 		temp3 = new Date(),
 		year = temp3.getFullYear(),
-		month = temp3.getMonth()+1,     //Viser en måned for tidlig
+		month = temp3.getMonth(),     //Viser en måned for tidlig
 		nodes = [], 
 		update;
 	for(var i = 2; i <= 7; i++) {
@@ -373,7 +373,7 @@ function Calendar(dn) {
 	update = function() {
 		xhr.request({
 			'type': 'GET',
-			'url': url+'calendar/?year='+year+'&month='+month,
+			'url': url+'calendar/?year='+year+'&month='+month+1,
 			'functions': {
 				'onload': function() {
 					monthDisplay.innerHTML = months[month] + ' ' + year;
