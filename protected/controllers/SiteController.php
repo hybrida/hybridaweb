@@ -27,7 +27,7 @@ class SiteController extends Controller {
 
 		if ($identity->authenticate()) {
 			user()->login($identity);
-			$this->redirect(user()->returnUrl);
+			//$this->redirect(user()->returnUrl);
 		} else {
 			throw new CHttpException("Logg inn ikke vellykket"
 					.$identity->errorMessage);
@@ -35,12 +35,12 @@ class SiteController extends Controller {
 	}
 
 	public function actionLogin() {
-		$redirect = $this->getLoginReturnargs();
+		$redirect = $this->getLoginRedirect();
 		$this->redirect($redirect);
 		return;
 	}
 	
-	public function getLoginReturnargs() {
+	public function getLoginRedirect() {
 		$returnUrl = user()->returnUrl;
 		$returnUrl = ''; // Fix. Sjekker om dette fjerner redirecthelvete
 		
