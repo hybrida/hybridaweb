@@ -74,7 +74,7 @@
 
 	<div class="news">
 		<div class="formHeader">
-				<h1>News</h1>
+				<h1>Nyhet</h1>
 		</div>
 		
 		<div class="formElement">
