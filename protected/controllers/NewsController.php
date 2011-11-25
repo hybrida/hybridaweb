@@ -40,7 +40,7 @@ class NewsController extends Controller {
 	}
 
 	public function actionView($id) {
-		$sql = "SELECT title, n.imageId, content, firstName, middleName, lastName, timestamp
+		$sql = "SELECT n.id, title, n.imageId, content, firstName, middleName, lastName, timestamp
 				FROM news n, user_new u 
 				WHERE  n.author = u.id
 				AND n.id = :id ";
