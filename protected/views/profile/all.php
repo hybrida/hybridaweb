@@ -2,7 +2,7 @@
 	<?for ($i  = 1; $i <= 5; $i++): ?>
 		<?= CHtml::link(
 				"$i. klasse",
-				array("profile/all", 'id' => ($now + $i)),
+				array("profile/all", 'id' => ($now + 6-$i)),
 				array('class' => 'groupNavigationItem')); 
 		?>
 	<?endfor; ?>
