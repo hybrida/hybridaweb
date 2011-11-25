@@ -160,11 +160,13 @@ class GetController extends Controller{
     public function actionSignup($id){
         
         $eId = $_REQUEST['id'];
-        ob_end_clean();
+        
+		/*ob_end_clean();
         header("Connection: close\r\n");
         header("Content-Encoding: none\r\n");
         ignore_user_abort(true);
         ob_start();
+		*/
         
         
         if(GateKeeper::hasAccess('event', $eId)){
@@ -226,11 +228,11 @@ class GetController extends Controller{
 
             $this->renderPartial('signup',$data);
         
-            $size = ob_get_length();
+            /* $size = ob_get_length();
             header("Content-Length: " . $size);
             ob_end_flush();
             flush();
-            ob_end_clean();
+            ob_end_clean(); */
 
             if($facebook){
                 $fb = new Facebook();
