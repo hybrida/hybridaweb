@@ -2,7 +2,7 @@
 
 function endRequest($event) {
 	$app = Yii::app();
-	$ajaxRegList = array('/get/', '/post$/');
+	$ajaxRegList = array('/get/', '/post$/','/image/');
 	$ajaxRequest = false;
 	foreach ($ajaxRegList as $bad) {
 		$ajaxRequest |= preg_match($bad, $app->request->getUrl());
