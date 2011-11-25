@@ -26,6 +26,7 @@ return array(
 		//'ipFilters'=>array('127.0.0.1','::1'),
 		),
 		'admin',
+		'ajax',
 	),
 	'components' => array(
 		'user' => array(
@@ -37,6 +38,7 @@ return array(
 			'urlFormat' => 'path',
 			'showScriptName' => false,
 			'rules' => array(
+				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
