@@ -72,14 +72,6 @@
 
 	<?= $form->hiddenField($model, 'signup[id]') ?>
 
-
-	<!--<div class="row">
-	<?php echo $form->labelEx($model, 'hasNews'); ?>
-	<?php echo $form->checkBox($model, 'hasNews'); ?>
-	<?php echo $form->error($model, 'hasNews'); ?>
-	</div>-->
-
-
 	<div class="news">
 		<div class="formHeader">
 			<h1>Nyhet</h1>

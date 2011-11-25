@@ -41,7 +41,6 @@ class Event extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		  array('title', 'required'),
 		  array('imageId', 'numerical', 'integerOnly' => true),
 		  array('location, title', 'length', 'max' => 30),
 		  array('start, end', 'safe'),
