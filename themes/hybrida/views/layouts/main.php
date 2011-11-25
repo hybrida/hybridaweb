@@ -53,7 +53,6 @@
 					?><!-- breadcrumbs -->
 				<?php endif ?>
 				<?= $content ?>
-				<b>Lastetid: </b><?= Yii::getLogger()->getExecutionTime() ?>
 			</div>
 
 			<div class="rightBar">
