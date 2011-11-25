@@ -3,40 +3,48 @@
 		$(document).ready(function(){
 			//
 			
-			var newsButton = $("#NewsEventForm_hasNews")
+			/*var newsButton = $("#NewsEventForm_hasNews")*/
 			var eventButton = $("#NewsEventForm_hasEvent")
 			var signupButton = $("#NewsEventForm_hasSignup")
 			
-			var news = $(".news");
+			/*var news = $(".news");*/
 			var event = $(".event");
 			var signup = $(".signup");
-            
-			newsButton.click(function() {
+			
+			/*function updateNews() {
 				if (newsButton.attr('checked')) {
 					news.show();
 				} else {
 					news.hide();
 				}
-			});
-			eventButton.click(function () {
+			}*/
+			
+            function updateEvent () {
 				if (eventButton.attr('checked')) {
 					event.show();
 				} else {
 					event.hide();
-					signup.hide();
-					si
+					signupButton.attr('checked', false);
+					updateSignup();
 				}
-			});
-			signupButton.click(function (){
+			}
+			
+			function updateSignup (){
 				if (eventButton.attr('checked') && signupButton.attr('checked')) {
 					signup.show()
 				} else if (! signupButton.checked) {
 					signup.hide();
 				}
-			});
-            
-            event.hide();
-            signup.hide();
+			}
+			
+			/*newsButton.click(updateNews);*/
+			eventButton.click(updateEvent);
+			signupButton.click(updateSignup);
+			
+			updateSignup();
+			updateEvent();
+			/*updateNews();*/
+
 			/* */
 
 
@@ -66,35 +74,35 @@
 
 
 	<!--<div class="row">
-		<?php echo $form->labelEx($model, 'hasNews'); ?>
-		<?php echo $form->checkBox($model, 'hasNews'); ?>
-		<?php echo $form->error($model, 'hasNews'); ?>
+	<?php echo $form->labelEx($model, 'hasNews'); ?>
+	<?php echo $form->checkBox($model, 'hasNews'); ?>
+	<?php echo $form->error($model, 'hasNews'); ?>
 	</div>-->
 
 
 	<div class="news">
 		<div class="formHeader">
-				<h1>Nyhet</h1>
+			<h1>Nyhet</h1>
 		</div>
-		
+
 		<div class="formElement">
 			<div class="formLabel">
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[title]'); ?></div>
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[content]'); ?></div>
 			</div>
-			
+
 			<div class="formBox">
 				<div class="formBoxRow">
 					<?php echo $form->textField($model, 'news[title]'); ?>
 					<?php echo $form->error($model, 'news[title]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->textArea($model, "news[content]"); ?>
 					<?php echo $form->error($model, 'news[content]'); ?>				
 				</div>
 			</div>
-			
+
 			<div class="rowCheck">
 				<?php echo $form->labelEx($model, 'hasEvent'); ?>
 				<?php echo $form->checkBox($model, 'hasEvent'); ?>
@@ -102,8 +110,8 @@
 			</div>
 		</div>
 	</div>
-	
-		
+
+
 
 	<div class="event">
 		<div class="formHeader">
@@ -118,35 +126,35 @@
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[title]'); ?></div>
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[imageId]'); ?></div>
 			</div>
-			
+
 			<div class="formBox">
 				<div class="formBoxRow">
 					<?php echo $form->dateField($model, 'event[start]'); ?>
 					<?php echo $form->error($model, 'event[start]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->dateField($model, 'event[end]'); ?>
 					<?php echo $form->error($model, 'event[end]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->textField($model, 'event[location]'); ?>
 					<?php echo $form->error($model, 'event[location]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->textField($model, 'event[title]'); ?>
 					<?php echo $form->error($model, 'event[title]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->textField($model, 'event[imageId]'); ?>
 					<?php echo $form->error($model, 'event[imageId]'); ?>				
 				</div>
 			</div>
 
-		    <div class="rowCheck">
+			<div class="rowCheck">
 				<?php echo $form->labelEx($model, 'hasSignup'); ?>
 				<?php echo $form->checkBox($model, 'hasSignup'); ?>
 				<?php echo $form->error($model, 'hasSignup'); ?>
@@ -157,7 +165,7 @@
 		<div class="formHeader">
 			<h1>Påmelding</h1>
 		</div>
-		
+
 		<div class="formElement">
 			<div class="formLabel">
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'signup[spots]'); ?></div>
@@ -165,23 +173,23 @@
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'signup[close]'); ?></div>
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'signup[signoff]'); ?></div>
 			</div>
-			
+
 			<div class="formBox">
 				<div class="formBoxRow">
 					<?php echo $form->textField($model, 'signup[spots]'); ?>
 					<?php echo $form->error($model, 'signup[spots]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->dateField($model, 'signup[open]'); ?>
 					<?php echo $form->error($model, 'signup[open]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->dateField($model, 'signup[close]'); ?>
 					<?php echo $form->error($model, 'signup[close]'); ?>				
 				</div>
-				
+
 				<div class="formBoxRow">
 					<?php echo $form->textField($model, 'signup[signoff]'); ?>
 					<?php echo $form->error($model, 'signup[signoff]'); ?>				
@@ -192,7 +200,7 @@
 
 	<div class="formElement">
 		<div class="formSubmit">
-			<?php echo CHtml::submitButton('Submit'); ?>
+			<?php echo CHtml::submitButton('Lagre'); ?>
 		</div>
 	</div>
 

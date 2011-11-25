@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -20,7 +21,7 @@ class NewsEventForm extends CFormModel {
 	private $newsModel;
 	private $eventModel;
 	private $signupModel;
-	
+
 	public function rules() {
 		return array(
 			array('hasNews, hasSignup, hasEvent', 'boolean'),
@@ -32,6 +33,24 @@ class NewsEventForm extends CFormModel {
 				'default'
 			),
 			array('event[start], event[end], signup[open], signup[close]', 'date',),
+		);
+	}
+
+	public function attributeLabels() {
+		return array(
+			'news[title]' => 'Tittel',
+			'news[content]' => 'Innhold',
+			'event[start]' => 'Start',
+			'event[end]' => 'Slutt',
+			'event[location]' => 'Location',
+//			'event[]' => '',
+			'signup[spots]' => 'Antall plasser',
+			'signup[open]' => 'Starter',
+			'signup[close]' => 'Slutter',
+			'signup[signoff]' => 'Tillat avmelding',
+			
+			'hasEvent' => 'Dette er en hendelse',
+			'hasSignup' => 'Ta med påmelding',
 		);
 	}
 
@@ -182,4 +201,5 @@ class NewsEventForm extends CFormModel {
 			}
 		}
 	}
+
 }

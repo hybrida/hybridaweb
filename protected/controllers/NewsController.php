@@ -26,11 +26,15 @@ class NewsController extends Controller {
 		return array(
 			array('allow',
 				'actions' => array("view"),
-				'users' => array('@'),
+				'users' => array('*'),
 			),
 			array('deny',
-				'actions' => array("view"),
-				'users' => array('*')
+				'actions' => array("edit", "create"),
+				'users' => array('?'),
+			),
+			array('allow',
+				'actions' => array("edit", "create"),
+				'users' => array('@'),
 			),
 		);
 	}
