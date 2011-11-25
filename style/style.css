@@ -44,11 +44,43 @@
     background-color: #E1E3E5;
 }
 
+.form{
+	height: 750px;
+}
+
 .formHeader{
 	padding-left: 4px;
 	background-color: #E1E3E5;
 }
 
 .formElement{
-	padding-left: 4px;	
+	padding-left: 4px;
+	padding-right: 4px;
+}
+
+.formLabel{
+	width: 105px;
+	float: left;
+}
+
+.formBox{
+}
+
+.formLabelRow{
+	padding-bottom: 6px;
+}
+
+.formBoxRow{
+	width: 500px;
+	padding-bottom: 4px;
+}
+
+.rowCheck{
+	clear: both;
+	padding-top: 15px;	
+}
+
+.formSubmit{
+	clear:both;
+	padding-top: 20px;
 }
