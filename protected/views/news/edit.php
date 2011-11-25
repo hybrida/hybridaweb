@@ -1,23 +1,11 @@
 <div class="form">
 	<script type="text/javascript">
 		$(document).ready(function(){
-			//
-			
-			/*var newsButton = $("#NewsEventForm_hasNews")*/
 			var eventButton = $("#NewsEventForm_hasEvent")
 			var signupButton = $("#NewsEventForm_hasSignup")
 			
-			/*var news = $(".news");*/
 			var event = $(".event");
 			var signup = $(".signup");
-			
-			/*function updateNews() {
-				if (newsButton.attr('checked')) {
-					news.show();
-				} else {
-					news.hide();
-				}
-			}*/
 			
             function updateEvent () {
 				if (eventButton.attr('checked')) {
@@ -37,17 +25,11 @@
 				}
 			}
 			
-			/*newsButton.click(updateNews);*/
 			eventButton.click(updateEvent);
 			signupButton.click(updateSignup);
 			
 			updateSignup();
 			updateEvent();
-			/*updateNews();*/
-
-			/* */
-
-
 		});
 	</script>
 
@@ -59,7 +41,7 @@
 		'clientOptions' => array(
 			'validateOnSubmit' => true,
 		),
-			));
+	));
 	?>
 
 	<!--<p class="note">Fields with <span class="required">*</span> are required.</p>-->
@@ -90,7 +72,7 @@
 				</div>
 
 				<div class="formBoxRow">
-					<?php echo $form->textArea($model, "news[content]"); ?>
+					<?php echo $form->textArea($model, "news[content]",array()); ?>
 					<?php echo $form->error($model, 'news[content]'); ?>				
 				</div>
 			</div>
@@ -115,8 +97,7 @@
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[start]'); ?></div>
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[end]'); ?></div>
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[location]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[title]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[imageId]'); ?></div>
+<!--				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[imageId]'); ?></div>-->
 			</div>
 
 			<div class="formBox">
@@ -135,15 +116,10 @@
 					<?php echo $form->error($model, 'event[location]'); ?>				
 				</div>
 
-				<div class="formBoxRow">
-					<?php echo $form->textField($model, 'event[title]'); ?>
-					<?php echo $form->error($model, 'event[title]'); ?>				
-				</div>
-
-				<div class="formBoxRow">
+<!--				<div class="formBoxRow">
 					<?php echo $form->textField($model, 'event[imageId]'); ?>
 					<?php echo $form->error($model, 'event[imageId]'); ?>				
-				</div>
+				</div>-->
 			</div>
 
 			<div class="rowCheck">
