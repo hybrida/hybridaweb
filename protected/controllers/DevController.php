@@ -15,8 +15,8 @@ class DevController extends CController {
 	public function actionLogin($id) {
 		$identity = new DefaultIdentity($id);
 		if ($identity->authenticate()) {
-			Yii::app()->user->login($identity);
-			$this->redirect(Yii::app()->user->returnUrl);
+			user()->login($identity);
+			$this->redirect(user()->returnUrl);
 		}
 	}
 

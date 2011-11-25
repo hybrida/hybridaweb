@@ -28,13 +28,5 @@ class Controller extends CController {
 	public function __construct($id, $module=null) {
 		parent::__construct($id, $module);
 		$this->pdo = Yii::app()->db->getPdoInstance();
-		$this->initReturnUrl();
-	}
-
-	private function initReturnUrl() {
-		$app = Yii::app();
-		if ($app->user->isGuest) {
-			$app->user->setReturnUrl($app->params['baseUrl'] . $app->request->getUrl());
-		}
 	}
 }

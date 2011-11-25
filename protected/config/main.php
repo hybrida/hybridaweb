@@ -1,10 +1,14 @@
 <?php
 
-// uncomment the following to define a path alias
-// Yii::setPathOfAlias('local','path/to/local-folder');
-// This is the main Web application configuration. Any writable
-// CWebApplication properties can be configured here.
+function endRequest($event)
+{
+    $app=Yii::app();
+    if($app->createUrl($app->user->loginUrl[0])!=$app->request->getUrl())
+        $app->user->setReturnUrl($app->request->getUrl());
+}
+
 return array(
+	'onEndRequest' => 'endRequest',
 	'theme' => 'hybrida',
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'Hybrida',
