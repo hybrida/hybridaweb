@@ -26,17 +26,21 @@ class NewsController extends Controller {
 		return array(
 			array('allow',
 				'actions' => array("view"),
-				'users' => array('@'),
+				'users' => array('*'),
 			),
 			array('deny',
-				'actions' => array("view"),
-				'users' => array('*')
+				'actions' => array("edit", "create"),
+				'users' => array('?'),
+			),
+			array('allow',
+				'actions' => array("edit", "create"),
+				'users' => array('@'),
 			),
 		);
 	}
 
 	public function actionView($id) {
-		$sql = "SELECT title, n.imageId, content, firstName, middleName, lastName, timestamp
+		$sql = "SELECT n.id, title, n.imageId, content, firstName, middleName, lastName, timestamp
 				FROM news n, user_new u 
 				WHERE  n.author = u.id
 				AND n.id = :id ";

@@ -47,19 +47,7 @@
 			<div class="headerBottomStripe">
 				<div class="menu">
 					<nav>
-                        <!--Hardkodet meny for visning på genfors -->
-                        <items>
-                            <div><a href='<?= Yii::app()->request->baseUrl ?>/news/'>Hjem</a></div> 
-                            <div><a href='<?= Yii::app()->request->baseUrl ?>/profile/'>Profil</a></div> 
-                            <div><a href='<?= Yii::app()->request->baseUrl ?>/group/'>Grupper</a></div>
-
-                            <div><a href='<?= Yii::app()->request->baseUrl ?>/profile/all/2016'>Personer</a></div>
-                            <div><a href='<?= Yii::app()->request->baseUrl ?>/article/1'>Hybrida</a></div>
-
-                            <div class="last">
-                                <a href='<?= Yii::app()->request->baseUrl ?>/article/2'>Bedrift</a>
-                            </div>
-                        </items>
+						<? $this->widget("application.components.widgets.TabNavigation"); ?>
 					</nav>
 
 					<div class="loggedIn"> <? $this->widget("application.components.widgets.UserOptions") ?> 
@@ -79,7 +67,6 @@
 					?><!-- breadcrumbs -->
 				<?php endif ?>
 				<?= $content ?>
-				<b>Lastetid: </b><?= Yii::getLogger()->getExecutionTime() ?>
 			</div>
 
 			<div class="rightBar">

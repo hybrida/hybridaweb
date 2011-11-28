@@ -1,4 +1,5 @@
 <?php
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -11,7 +12,6 @@
  */
 class NewsEventForm extends CFormModel {
 
-	public $hasNews;
 	public $hasSignup;
 	public $hasEvent;
 	public $news = array();
@@ -20,18 +20,36 @@ class NewsEventForm extends CFormModel {
 	private $newsModel;
 	private $eventModel;
 	private $signupModel;
-	
+
 	public function rules() {
 		return array(
-			array('hasNews, hasSignup, hasEvent', 'boolean'),
+			array('hasSignup, hasEvent', 'boolean'),
 			array(
 				'news[title], news[content], ' .
 				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
 				'signup[spots], signup[open], signup[close], signup[signoff], ' .
-				'hasEvent, hasNews, hasSignup',
+				'hasEvent, hasSignup',
 				'default'
 			),
 			array('event[start], event[end], signup[open], signup[close]', 'date',),
+		);
+	}
+
+	public function attributeLabels() {
+		return array(
+			'news[title]' => 'Tittel',
+			'news[content]' => 'Innhold',
+			'event[start]' => 'Start',
+			'event[end]' => 'Slutt',
+			'event[location]' => 'Location',
+//			'event[]' => '',
+			'signup[spots]' => 'Antall plasser',
+			'signup[open]' => 'Starter',
+			'signup[close]' => 'Slutter',
+			'signup[signoff]' => 'Tillat avmelding',
+			
+			'hasEvent' => 'Dette er en hendelse',
+			'hasSignup' => 'Ta med påmelding',
 		);
 	}
 
@@ -109,7 +127,6 @@ class NewsEventForm extends CFormModel {
 	}
 
 	private function initHasFields() {
-		$this->hasNews = $this->newsModel->isNewRecord ? 0 : 1;
 		$this->hasEvent = $this->eventModel->isNewRecord ? 0 : 1;
 		$this->hasSignup = $this->signupModel->isNewRecord ? 0 : 1;
 	}
@@ -157,7 +174,6 @@ class NewsEventForm extends CFormModel {
 	}
 
 	public function saveNews() {
-		if ($this->hasNews) {
 			$this->newsModel->setAttributes($this->news);
 
 			if (array_key_exists("access", $this->news)) {
@@ -166,7 +182,6 @@ class NewsEventForm extends CFormModel {
 
 			$this->initNewsParent();
 			$this->newsModel->save();
-		}
 	}
 
 	private function initNewsParent() {

@@ -1,1 +1,1 @@
-<?= CHtml::link("Logg inn",array("site/login")) ?>
+<?= CHtml::link("Logg inn",user()->loginUrl) ?>

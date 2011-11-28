@@ -12,11 +12,11 @@ class ActiveForm extends CActiveForm {
 				'id' => $htmlOptions['id'],
 				'name' => $htmlOptions['name'],
 				'tools' => 'mini', // mini, simple, full or from XHeditor::$_tools, tool names are case sensitive
-				'width' => '70%',
+				'width' => '100%',
 			//see XHeditor::$_configurableAttributes for more
 			),
 			'contentValue' => $text, // default value displayed in textarea/wysiwyg editor field
-			'htmlOptions' => array('rows' => 5, 'cols' => 10), // to be applied to textarea
+			'htmlOptions' => array('rows' => 50, 'cols' => 15), // to be applied to textarea
 		));
 		return false;
 	}

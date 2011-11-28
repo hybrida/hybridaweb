@@ -24,7 +24,6 @@
 
  * ikke lagrer
   event naar hasEvent = 0
-  news naar hasNews = 0
   signup naar hasSignup = 0
   signup naar hasEvent = 0
 
@@ -54,7 +53,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 			$this->session = new Session();
 		$this->session->loginNewUser();
 	}
-	
+
 	private function logout() {
 		if (!$this->session) {
 			$this->session = new Session();
@@ -84,7 +83,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$newsModel->save();
 		$model = new NewsEventForm($newsModel);
 
-		$this->assertNotEquals(null, $model->getEventModel());
+		$this->assertNotNull($model->getEventModel());
 		$this->assertEquals($eventModel->id, $model->getEventModel()->id);
 	}
 
@@ -97,7 +96,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$newsModel->save();
 		$model = new NewsEventForm($eventModel);
 
-		$this->assertNotEquals(null, $model->getNewsModel());
+		$this->assertNotNull($model->getNewsModel());
 		$this->assertEquals($newsModel->id, $model->getNewsModel()->id);
 	}
 
@@ -107,17 +106,17 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$event = $model->getEventModel();
 		$signup = $model->getSignupModel();
 
-		$this->assertNotEquals(null, $news);
-		$this->assertNotEquals(null, $event);
-		$this->assertNotEquals(null, $signup);
+		$this->assertNotNull($news);
+		$this->assertNotNull($event);
+		$this->assertNotNull($signup);
 	}
-	
+
 	public function test_constructor_EventInput_allModelsNotNull() {
 		$model = new NewsEventForm(new Event);
-		
-		$this->assertNotNull($model->getNewsModel(),"News should not be null");
-		$this->assertNotNull($model->getEventModel(),"Event should not be null");
-		$this->assertNotNull($model->getSignupModel(),"Signup should not be null");
+
+		$this->assertNotNull($model->getNewsModel(), "News should not be null");
+		$this->assertNotNull($model->getEventModel(), "Event should not be null");
+		$this->assertNotNull($model->getSignupModel(), "Signup should not be null");
 	}
 
 	/**
@@ -159,9 +158,16 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_saveNews_UnsavedNewsModelWithoutAccess_NewsIsCreated() {
 		$news = new News;
 		$model = new NewsEventForm($news);
-		$model->hasNews = true;
 		$model->saveNews();
-		$this->assertNotEquals(null, $news->getPrimaryKey());
+		$this->assertNotNull($news->getPrimaryKey());
+	}
+
+	public function test_newsSave() {
+		$this->login();
+		$news = new News;
+		$model = new NewsEventForm($news);
+		$model->save();
+		$this->assertFalse($model->getNewsModel()->isNewRecord);
 	}
 
 	public function test_saveNews_UnsavedNewsModelWitAccess() {
@@ -176,7 +182,6 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		);
 		$model = new NewsEventForm(new News);
 		$model->setAttributes($input);
-		$model->hasNews = true;
 		$model->saveNews();
 		$news = $model->getNewsModel();
 
@@ -198,7 +203,6 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$model = new NewsEventForm(new News);
 		$model->setAttributes($input);
-		$model->hasNews = true;
 		$model->saveNews();
 
 		$this->assertEquals($title, $model->getNewsModel()->title);
@@ -267,13 +271,40 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		);
 
 		$model = new NewsEventForm($news);
-		$model->setAttributes(($input));
-		$model->hasNews = 1;
+		$model->setAttributes($input);
 		$model->hasEvent = 1;
 		$model->save();
 		$eventModel = $model->getEventModel();
 		$this->assertEquals($eventModel->id, $news->parentId);
 		$this->assertEquals('event', $news->parentType);
+	}
+
+	public function test_saveParent_oldModel() {
+		$this->login();
+		$news = new News;
+		$news->title = $news->content = __METHOD__;
+		$news->save();
+
+		$input = array(
+			'news' => array(
+				'title' => __CLASS__,
+			),
+			'event' => array(
+				'location' => "hei på deg"
+			),
+			'hasEvent' => 1,
+			'hasSignup' => 0,
+		);
+
+		$model = new NewsEventForm($news);
+		$model->setAttributes($input);
+		$model->save();
+		$event = $model->getEventModel();
+		$news2 = $model->getNewsModel();
+		$this->assertEquals($event->id, $news2->parentId);
+		$this->assertEquals('event', $news2->parentType);
+		$this->assertFalse($news->isNewRecord, "Event kan ikke være en new record");
+		$this->assertFalse($event->isNewRecord, "News kan ikke være en new record");
 	}
 
 	public function test_attributesGetsLoaded() {
@@ -294,7 +325,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	 */
 	public function test_saveWhenNotLoggedIn_AccessRestrictionError() {
 		$this->logout();
-				$news = new News;
+		$news = new News;
 
 		$input = array(
 			'news' => array(
@@ -307,27 +338,27 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$model = new NewsEventForm($news);
 		$model->setAttributes(($input));
-		$model->hasNews = true;
 		$model->hasEvent = true;
 		$model->save();
 		$eventModel = $model->getEventModel();
 		$this->assertEquals($eventModel->id, $news->parentId);
 		$this->assertEquals('event', $news->parentType);
 	}
-	
+
 	public function test_getEventModel_newsSetParentEvent_newsInput() {
 		$event = new Event;
 		$event->save();
 		$news = new News;
-		$news->setParent("event",$event->id);
+		$news->setParent("event", $event->id);
+		$news->save();
 		$model = new NewsEventForm($news);
 		$this->assertEquals($event->id, $model->getEventModel()->id);
 	}
-	
+
 	public function test_getNewsModel_newsSetParentEvent_eventInput() {
 		$event = new Event;
 		$event->title = "TestCase";
-		
+
 		$event->save();
 		$this->assertFalse($event->isNewRecord, "Event should not be newRecords");
 		$news = new News;
@@ -337,24 +368,12 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$model = new NewsEventForm($event);
 		$this->assertEquals($news->id, $model->getNewsModel()->id);
 	}
-	
-	public function test_hasNews_newRecord() {
-		$model = new NewsEventForm(new News);
-		$this->assertEquals(0,$model->hasNews);
-	}
-	
+
 	public function test_hasEvent_newRecord() {
 		$model = new NewsEventForm(new News);
-		$this->assertEquals(0,$model->hasEvent);
+		$this->assertEquals(0, $model->hasEvent);
 	}
-	
-	public function test_hasNews_oldRecord() {
-		$news = new News;
-		$news->save();
-		$model = new NewsEventForm($news);
-		$this->assertEquals(1,$model->hasNews);
-	}
-	
+
 	public function test_has_formByNews() {
 		$news = new News;
 		$event = new Event;
@@ -363,11 +382,10 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$news->setParent("event", $event->id);
 		$news->save();
 		$model = new NewsEventForm($news);
-		$this->assertEquals(1, $model->hasNews,"hasNews should be 1");
-		$this->assertEquals(1, $model->hasEvent,"hasEvent should be 1");
-		$this->assertEquals(0, $model->hasSignup,"hasSignup should be 0");
+		$this->assertEquals(1, $model->hasEvent, "hasEvent should be 1");
+		$this->assertEquals(0, $model->hasSignup, "hasSignup should be 0");
 	}
-	
+
 	public function test_has_formByEvent() {
 		$news = new News;
 		$event = new Event;
@@ -376,9 +394,9 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$news->setParent("event", $event->id);
 		$news->save();
 		$model = new NewsEventForm($event);
-		
-		$this->assertEquals(1, $model->hasNews,"hasNews should be 1");
-		$this->assertEquals(1, $model->hasEvent,"hasEvent should be 1");
-		$this->assertEquals(0, $model->hasSignup,"hasSignup should be 0");
+
+		$this->assertEquals(1, $model->hasEvent, "hasEvent should be 1");
+		$this->assertEquals(0, $model->hasSignup, "hasSignup should be 0");
 	}
+
 }

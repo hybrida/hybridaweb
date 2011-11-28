@@ -90,6 +90,7 @@ class GroupController extends Controller {
         $data['title'] = $group->getTitle();
         $data['groups'] = $group->getAdminMenu();
         $data['members'] = $group->getMembers();
+		$data['menu'] = $group->getMenu();
         $this->render("edit",$data);
         
     }
