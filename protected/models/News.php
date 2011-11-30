@@ -114,9 +114,9 @@ class News extends CActiveRecord {
 	}
 
 	public function beforeSave() {
-		//throw new UserNotLoggedInException;
 		if ($this->isNewRecord) {
 			$this->author = Yii::app()->user->id;
+			$this->timestamp = new CDbExpression('NOW()');
 		}
 		return parent::beforeSave();
 	}
