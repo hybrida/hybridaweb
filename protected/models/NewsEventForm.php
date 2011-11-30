@@ -47,7 +47,6 @@ class NewsEventForm extends CFormModel {
 			'signup[open]' => 'Starter',
 			'signup[close]' => 'Slutter',
 			'signup[signoff]' => 'Tillat avmelding',
-			
 			'hasEvent' => 'Dette er en hendelse',
 			'hasSignup' => 'Ta med påmelding',
 		);
@@ -83,6 +82,7 @@ class NewsEventForm extends CFormModel {
 		$this->newsModel = $news;
 		if (!$news->isNewRecord) {
 			$this->initEventByNews();
+			$this->initSignupByEvent();
 		}
 	}
 
@@ -98,6 +98,7 @@ class NewsEventForm extends CFormModel {
 		if (!$event->isNewRecord) {
 			$this->initNewsByEvent();
 		}
+		$this->initSignupByEvent();
 	}
 
 	private function initNewsByEvent() {
@@ -105,6 +106,13 @@ class NewsEventForm extends CFormModel {
 		$news = News::model()->findBySql($sql, array("eventId" => $this->getEventModel()->id));
 		if ($news) {
 			$this->newsModel = $news;
+		}
+	}
+	
+	private function initSignupByEvent() {
+		$signup = Signup::model()->findByPk($this->eventModel->primaryKey);
+		if ($signup) {
+			$this->signupModel = $signup;
 		}
 	}
 
@@ -174,14 +182,14 @@ class NewsEventForm extends CFormModel {
 	}
 
 	public function saveNews() {
-			$this->newsModel->setAttributes($this->news);
+		$this->newsModel->setAttributes($this->news);
 
-			if (array_key_exists("access", $this->news)) {
-				$this->newsModel->access = $this->news['access'];
-			}
+		if (array_key_exists("access", $this->news)) {
+			$this->newsModel->access = $this->news['access'];
+		}
 
-			$this->initNewsParent();
-			$this->newsModel->save();
+		$this->initNewsParent();
+		$this->newsModel->save();
 	}
 
 	private function initNewsParent() {
