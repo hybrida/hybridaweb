@@ -7,61 +7,56 @@
  */
 class InnsidaIdentity extends CUserIdentity {
 
- 
 	protected $_id;
 	protected $_userName;
 	protected $_access;
-	protected $so;
-    
-	const DATA_DELIMITER = ',';
-
-	public function __construct($data, $sign, $target) {
-		parent::__construct(null, null);
-
-		$this->so = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR'], $target);
-
-		$this->_id = -1;
-		$this->_access = array();
-        $this->_userName = $this->so->loginvalues['username'];
-        
-		//$this->_userName = $this->getUsernameFromData($data);
-	}
+	protected $sso;
+	protected $user;
 	
-	public static function getUsernameFromData($data) {
-		$ar = explode(self::DATA_DELIMITER, $data);
-		$index = array_search("username", $ar) + 1;
-		return $ar[$index];
+	protected $userExists;
+
+	public function __construct($ssoClient) {
+		parent::__construct(null, null);
+		$this->sso = $ssoClient;
+		$this->_userName = $this->sso->loginvalues['username'];
+		$this->initUserModel();
+		if (!$this->userExists()) {
+			return;
+		}
+		$this->initStates();
+		$this->_id = $this->user->id;
 	}
 
 	public function authenticate() {
-		return $this->so->oklogin() && $this->update();
+		return $this->sso->oklogin() && $this->userExists();
 	}
 
-	public function update() {
-		$user = User::model()->find(
-				"username = :username", 
-				array(":username" => $this->_userName
-				));
-		if (! $user) {
-			return false;
-		}
-		$this->_id = $user->id;
-
-		$userInfo = $user->getAttributes();
-
-		$this->setState("firstName", $userInfo['firstName']);
-		$this->setState("middleName", $userInfo['middleName']);
-		$this->setState("lastName", $userInfo['lastName']);
-		$this->setState("member", $userInfo['member']);
-		$this->setState("gender", $userInfo['gender']);
-		$this->setState("imageId", $userInfo['imageId']);
-
-		$this->setState("access", $user->access);
+	private function initStates() {
+		$this->initUserStates();
+		$this->setState("access", $this->user->access);
 		return true;
 	}
 
+	private function initUserModel() {
+		$user = User::model()->find(
+				"username = :username", 
+				array(":username" => $this->_userName)
+		);
+		$this->user = $user;
+	}
+
+	private function initUserStates() {
+		$info = $this->user->getAttributes();
+		$this->setState("firstName", $info['firstName']);
+		$this->setState("middleName", $info['middleName']);
+		$this->setState("lastName", $info['lastName']);
+		$this->setState("member", $info['member']);
+		$this->setState("gender", $info['gender']);
+		$this->setState("imageId", $info['imageId']);
+	}
+
 	public function getErrorMessage() {
-		return $this->so->reason();
+		return $this->sso->reason();
 	}
 
 	public function getName() {
@@ -70,6 +65,10 @@ class InnsidaIdentity extends CUserIdentity {
 
 	public function getId() {
 		return $this->_id;
+	}
+	
+	private function userExists() {
+		return $this->user != null;
 	}
 
 }
