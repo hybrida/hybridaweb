@@ -19,6 +19,16 @@ class DevController extends CController {
 			$this->redirect(user()->returnUrl);
 		}
 	}
+	
+	public function actionDumpNews() {
+		$lipsum = new LoremIpsumGenerator();
+		for ($i = 0; $i < 150; $i++) {
+			$news = new News;
+			$news->title = "Lipsum $i";
+			$news->content = $lipsum->getContent(rand(100, 700));
+			$news->save();
+		}
+	}
 
 }
 

@@ -20,12 +20,22 @@ class TestLib {
 				TRUNCATE `user_new`;";
 		Yii::app()->db->getPdoInstance()->prepare($sql)->execute();
 	}
-	
+
+	public static function truncateDatabase() {
+		$sql = "TRUNCATE `access_relations`;
+				TRUNCATE `event`;
+				TRUNCATE `membership_access`;
+				TRUNCATE `membership_signup`;
+				TRUNCATE `news`;
+				TRUNCATE `signup`;";
+		Yii::app()->db->getPdoInstance()->prepare($sql)->execute();
+	}
+
 	public static function deleteDummyData() {
 		self::deleteDummyDataFromNews();
 		self::deleteDummyDataFromEvent();
 	}
-	
+
 	public static function deleteDummyDataFromNews() {
 		$sql = "delete from news where 
 				timestamp is null 
@@ -41,7 +51,7 @@ class TestLib {
 		$command = Yii::app()->db->createCommand($sql);
 		$command->execute();
 	}
-	
+
 	public static function deleteDummyDataFromEvent() {
 		$sql = "delete from event where 
 				title is null 
