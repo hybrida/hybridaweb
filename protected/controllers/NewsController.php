@@ -69,6 +69,31 @@ class NewsController extends Controller {
 
 		$this->render("feed", array('data' => $data));
 	}
+	
+	public function actionFeed2() {
+
+		$feedElements = $this->getFeedElements();
+		
+		$this->render("feed2",array('models' => $feedElements));
+	}
+	
+	private function getFeedElements() {
+		$criteria = new CDbCriteria;
+		$criteria->select = "*";
+		$criteria->order = "timestamp DESC";
+		$criteria->limit = 15;
+		
+		
+		$feedElements = News::model()->findAll($criteria);
+		$ret = array();
+		foreach ($feedElements as $e) {
+			if (GateKeeper::hasAccess('news', $e->id)) {
+				$ret[] = $e;
+			}
+		}
+		
+		return $ret;
+	}
 
 	public function actionCreate() {
 		$this->renderNewsEventForm(New News);
