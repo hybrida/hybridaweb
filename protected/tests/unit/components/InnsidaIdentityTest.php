@@ -90,7 +90,6 @@ class SSOMock {
 		$dataar = explode(",", $data);
 		while ($k = array_shift($dataar)) {
 			$this->loginvalues[$k] = array_shift($dataar);
-			echo $this->loginvalues[$k];
 			// if this value is a list
 			if (strstr($this->loginvalues[$k], ":")) {
 				$this->loginvalues[$k] = explode(":", $this->loginvalues[$k]);
