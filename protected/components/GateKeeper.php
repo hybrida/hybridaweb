@@ -1,39 +1,60 @@
 <?php
 
 class GateKeeper {
-	private static $userId;
-	private static $access;
-	private static $isGuest;
 
-	private static function init() {
-		self::$isGuest = Yii::app()->user->isGuest;
-		self::initLoggedOut();
-		self::initLoggedInn();
-	}
+	private $userId;
+	private $access;
+	private $isGuest;
 
-	private static function initLoggedOut() {
-		if (self::$isGuest) {
-			self::$userId = 1;
-			self::$access = array();
+	public function __construct() {
+		$this->isGuest = Yii::app()->user->isGuest;
+		if ($this->isGuest) {
+			$this->initLoggedOut();
+		} else {
+			$this->initLoggedInn();
 		}
 	}
 
-	private static function initLoggedInn() {
-		if (!self::$isGuest) {
-			self::$userId = Yii::app()->user->id;
-			self::$access = Yii::app()->user->access;
-		}
+	private function initLoggedOut() {
+		$this->userId = null;
+		$this->access = array();
 	}
 
-	public static function hasAccess($type, $id) {
-		self::init();
-		$accessRelation = new AccessRelation($type, $id);
-		$access = $accessRelation->get();
-		foreach ($access as $ac) {
-			if (!in_array($ac, self::$access)) {
-				return false;
-			}
+	private function initLoggedInn() {
+		$this->userId = Yii::app()->user->id;
+		$this->access = Yii::app()->user->access;
+		sort($this->access);
+	}
+
+	public function hasAccess($type, $id) {
+		$access = $this->getAccessRelations($type, $id);
+		
+		if (empty ($access)) {
+			return true;
+		}
+		
+		$union = array_intersect($this->access,$access);
+		if (empty($union)) {
+			return false;
 		}
 		return true;
 	}
+	
+	private function getAccessRelations($type,$id) {
+		$accessRelation = new AccessRelation($type, $id);
+		return $accessRelation->get();
+	}
+	
+	public function isGuest() {
+		return $this->isGuest;
+	}
+	
+	public function getUserAccess() {
+		return $this->access;
+	}
+	
+	public function getUserId() {
+		return $this->userId;
+	}
+
 }
