@@ -36,8 +36,8 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 
 	public function test_constructor_ArticleModel_getType() {
 		$article = new Article;
-		$article->title = "halla,o";
-		$article->content = "contetn WOHWO";
+		$article->title = "title";
+		$article->content = "content";
 		$article->save();
 		$access = new AccessRelation($article);
 
