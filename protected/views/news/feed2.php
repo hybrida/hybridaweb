@@ -4,6 +4,7 @@
 
 <div class="feed">
 	<? foreach ($models as $model): ?>
+	
 		<div class="contentItem">
 			<div class="blueBox">
 				<div class="blueBoxItem"></div>
@@ -19,9 +20,11 @@
 						<img height='20' src="/images/icons/edit.png"/>
 					</a>
 				</div>
-				<?= substr($model->content, 0,15000) ?>
+				<?= $model->content?>
 				<div class="date">Dato: <?= $model->timestamp ?></div>
-				<div class="author"><a href="#">Link til skribent</a></div>
+				<div class="author"><?=
+					CHtml::link($model->authorName,array("profile","id" => $model->author))
+				?></div>
 			</div>
 		</div>
 	<? endforeach ?>

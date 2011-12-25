@@ -167,5 +167,14 @@ class News extends CActiveRecord {
 	public function getParentId() {
 		return $this->parentId;
 	}
+	
+	public function getAuthorName() {
+		$author = User::model()->findByPk($this->author);
+		$name = "";
+		if ($author) {
+			$name = $author->firstName." ".$author->middleName." ".$author->lastName;
+		}
+		return $name;
+	}
 
 }
