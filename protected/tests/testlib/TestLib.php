@@ -47,6 +47,7 @@ class TestLib {
 				or title = 'TestCase'
 				or content = 'TestCase'
 				or title = 'NewsEventFormTest'
+				or title Like 'Lipsum%'
 				";
 		$command = Yii::app()->db->createCommand($sql);
 		$command->execute();

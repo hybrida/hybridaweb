@@ -29,7 +29,11 @@ class DevController extends CController {
 			$news->save();
 		}
 	}
+	
+	public function actionCleanDB() {
+		Yii::import('application.tests.testlib.*');
+		TestLib::deleteDummyData();
+		echo "Database is cleaned";
+	}
 
 }
-
-?>
