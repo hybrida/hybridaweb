@@ -14,15 +14,6 @@ class TestLib {
 
 	public static function truncateDatabase() {
 		$sql = "TRUNCATE `access_relations`;
-				TRUNCATE `membership_access`;
-				TRUNCATE `news`;
-				TRUNCATE `signup`;
-				TRUNCATE `user_new`;";
-		Yii::app()->db->getPdoInstance()->prepare($sql)->execute();
-	}
-
-	public static function truncateDatabase() {
-		$sql = "TRUNCATE `access_relations`;
 				TRUNCATE `event`;
 				TRUNCATE `membership_access`;
 				TRUNCATE `membership_signup`;
