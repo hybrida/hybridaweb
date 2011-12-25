@@ -33,6 +33,7 @@ return array(
 		),
 		'admin',
 		'ajax',
+		'dev',
 	),
 	'components' => array(
 		'user' => array(
