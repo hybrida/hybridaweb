@@ -86,8 +86,9 @@ class NewsController extends Controller {
 		
 		$feedElements = News::model()->findAll($criteria);
 		$ret = array();
+		$gatekeeper = new GateKeeper;
 		foreach ($feedElements as $e) {
-			if (GateKeeper::hasAccess('news', $e->id)) {
+			if ($gatekeeper->hasAccess('news', $e->id)) {
 				$ret[] = $e;
 			}
 		}
