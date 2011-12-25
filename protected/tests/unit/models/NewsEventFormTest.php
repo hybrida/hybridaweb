@@ -389,5 +389,17 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals(1, $model->hasEvent, "hasEvent should be 1");
 		$this->assertEquals(0, $model->hasSignup, "hasSignup should be 0");
 	}
+	
+	public function test_NewsHasNonExistingParents_actLikeNewsHasNoParents() {
+		$news = new News;
+		$news->title="title";
+		$news->content="content";
+		$news->author=381;
+		$news->setParent("event", 98765);
+		$news->save();
+		
+		$model = new NewsEventForm($news);
+		// Should not throw Exception
+	}
 
 }
