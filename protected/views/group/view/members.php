@@ -6,18 +6,36 @@
 
 <h2>Medlemmer </h2>
 
-<table>
-    <? foreach($content as $user) : ?>
-
+<div id="membertable">
+    <table>
+        
         <tr>
-            <td>
-            <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'>
-                <a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?> </a>
-            </td>
-            <td>
-                <?= $user['comission'] ?>
-            </td>
+            <th></th><th>Navn</th><th>Stilling</th><th>Brukernavn</th><th>Telefonnummer</th><th>Sist innlogget</th>
         </tr>
+        
+        <? foreach($content as $user) : ?>
 
-    <? endforeach ?>
-</table>
+            <tr>
+                <td>
+                    <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'>
+                </td>
+                <td>
+                    <a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?> </a>
+                </td>
+                <td>
+                    <?= $user['commission'] ?>
+                </td>
+                <td>
+                    <?= $user['username'] ?>
+                </td>
+                <td>
+                    <?= $user['phoneNumber'] ?>
+                </td>
+                <td>
+                    <?= $user['lastLogin'] ?>
+                </td>
+            </tr>
+
+        <? endforeach ?>
+    </table>
+</div>
