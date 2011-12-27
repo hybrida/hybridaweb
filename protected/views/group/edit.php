@@ -4,6 +4,7 @@
     <?= $title ?>
 </h1>
 
+<p>
 <table>
     <? foreach ($groups as $group): ?>
         <tr>
@@ -21,9 +22,11 @@
 
     <? endforeach ?>
 </table>
+</p>
 
 <? $counter = 1; ?>
 
+<p>
 <div id="membertable">
     <table>
         <? foreach ($members as $member): ?>
@@ -44,3 +47,4 @@
         <? endforeach ?>
     </table>
 </div>
+</p>
