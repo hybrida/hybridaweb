@@ -11,6 +11,8 @@
  * @author sigurd
  */
 class NewsController extends Controller {
+	
+	private $feedLimit = 5;
 
 	public function actionIndex() {
 		$this->actionFeed();
@@ -71,18 +73,30 @@ class NewsController extends Controller {
 	}
 	
 	public function actionFeed2() {
-
 		$feedElements = $this->getFeedElements();
-		
-		$this->render("feed2",array('models' => $feedElements));
+		$this->render("feed2",array(
+			'models' => $feedElements,
+			'index' => 0,
+			'limit'=> $this->feedLimit,
+		));
 	}
 	
-	private function getFeedElements() {
+	public function actionFeedField($offset=0) {
+		$feedElements = $this->getFeedElements($offset);
+		$offset += count($feedElements);
+		$this->renderPartial('_feed',array(
+			'models' => $feedElements,
+			'index' => $offset,
+			'limit' => $this->feedLimit,
+		));
+	}
+	
+	private function getFeedElements($offset=0) {
 		$criteria = new CDbCriteria;
 		$criteria->select = "*";
 		$criteria->order = "timestamp DESC";
-		$criteria->limit = 15;
-		
+		$criteria->limit = $this->feedLimit;
+		$criteria->offset = $offset;
 		
 		$feedElements = News::model()->findAll($criteria);
 		$ret = array();
@@ -92,7 +106,6 @@ class NewsController extends Controller {
 				$ret[] = $e;
 			}
 		}
-		
 		return $ret;
 	}
 

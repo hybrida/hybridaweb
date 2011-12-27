@@ -1,31 +1,42 @@
 <h1>NewsFeed</h1>
 
-<?=CHtml::link("Publiser",array("news/create"))?>
+<?= CHtml::link("Publiser", array("news/create")) ?>
 
-<div class="feed">
-	<? foreach ($models as $model): ?>
-	
-		<div class="contentItem">
-			<div class="blueBox">
-				<div class="blueBoxItem"></div>
-			</div>
-			<div class="topBar">
-				<div class="topBarItem"></div>
-				<h1><?= $model->title ?></h1>
-			</div>
-			<div class="articleContent">
-				<div align="right">
-					<? $url = $this->createUrl("news/edit", array("id" => $model->id)); ?>
-					<a href="<?= $url ?>">
-						<img height='20' src="/images/icons/edit.png"/>
-					</a>
-				</div>
-				<?= $model->content?>
-				<div class="date">Dato: <?= $model->timestamp ?></div>
-				<div class="author"><?=
-					CHtml::link($model->authorName,array("profile","id" => $model->author))
-				?></div>
-			</div>
-		</div>
-	<? endforeach ?>
+<div class="feeds">
+	<?
+	$this->renderPartial("_feed", array(
+		'models' => $models,
+	));
+	$index += count($models);
+	?>
+</div>
+<div class="rowbuttons">
+	<?=
+	CHtml::button('Mer', array(
+		'class' => 'fetchNews'
+	))
+	?>
+<? app()->clientScript->registerCoreScript("jquery") ?>
+	<script>
+		var count = <?=$index?>;
+		$(".fetchNews").click(function(){
+
+			$.ajax({
+				success: function(html){
+					$(".feeds").append(html);
+				},
+				type: 'get',
+				url: '<?php echo $this->createUrl("feedField",array(
+					'offset' => ''
+					)) ?>' + count,
+				data: {
+					index: $(".feeds li").size()
+				},
+				cache: false,
+				dataType: 'html'
+			});
+			count += <?= $limit ?>;
+		});
+
+	</script>
 </div>
