@@ -21,7 +21,7 @@ function XHR() {
 					for(var f in request.functions) o[f] = request.functions[f];
 				for(var uf in request.uploadFunctions) o.upload[uf] = request.uploadFunctions[uf];
 					for(var h in request.headers) o.setRequestHeader(h, request.headers[h]);
-					o.addEventListener('load', function(){objects[i] = null;next();});
+					o.addEventListener('load', function(){objects[i] = null;next();},false);
 					o.open(request.type, request.url, true);
 					o.send(request.data);
 					break;
@@ -57,6 +57,8 @@ function Search(dn) {
 		limit = 10,
 		input = domtb.getFirstElementChild(dn),
 		dropdown = domtb.getLastElementChild(dn),
+                responseURL = dn.getAttribute('data-type'),
+                file = dn.getAttribute('data-url'),
 		advanced,
 		lastvalue = '',
 		nodes = [];
@@ -82,7 +84,7 @@ function Search(dn) {
 		} else if(lastvalue != input.value) {
 			xhr.request({
 				'type': 'GET',
-				'url': url+'search/?q=' + input.value,
+				'url': url+file+'/?q=' + input.value + "&response=" + responseURL,
 				'functions': {
 					'onload': function() {
 						var response = this.responseText.split(split);
