@@ -13,29 +13,26 @@
             <th></th><th>Navn</th><th>Stilling</th><th>Brukernavn</th><th>Telefonnummer</th><th>Sist innlogget</th>
         </tr>
         
+        <? $counter = 1; ?>
+        
         <? foreach($content as $user) : ?>
-
-            <tr>
-                <td>
-                    <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'>
-                </td>
-                <td>
-                    <a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?> </a>
-                </td>
-                <td>
-                    <?= $user['commission'] ?>
-                </td>
-                <td>
-                    <?= $user['username'] ?>
-                </td>
-                <td>
-                    <?= $user['phoneNumber'] ?>
-                </td>
-                <td>
-                    <?= $user['lastLogin'] ?>
-                </td>
+           
+            <? if($counter % 2){ ?>
+                <tr bgcolor='#CCFFFF'>
+            <?	}else{ ?>
+                <tr bgcolor='#FFFFFF'>
+            <? } ?>
+                    
+                <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'/></td>
+                <td><a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?></a></td>
+                <td><?= $user['comission'] ?></td>
+                <td><?= $user['username'] ?></td>
+                <td><?= $user['phoneNumber'] ?></td>
+                <td><?= $user['lastLogin'] ?></td>
             </tr>
 
+            <? $counter++; ?>
+            
         <? endforeach ?>
     </table>
 </div>
