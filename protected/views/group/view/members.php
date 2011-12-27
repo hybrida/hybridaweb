@@ -6,13 +6,18 @@
 
 <h2>Medlemmer </h2>
 
+<table>
+    <? foreach($content as $user) : ?>
 
-<? foreach($content as $user) : ?>
+        <tr>
+            <td>
+            <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'>
+                <a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?> </a>
+            </td>
+            <td>
+                <?= $user['comission'] ?>
+            </td>
+        </tr>
 
-    <li>
-        <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'>
-            <a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?> </a> 
-            <?= $user['comission'] ?>
-    </li>
-
-<? endforeach ?>
+    <? endforeach ?>
+</table>
