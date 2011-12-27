@@ -335,7 +335,7 @@ class GetController extends Controller{
     
     public function actionUserSearch(){
         $split = '~%~';
-        $result['users'] = searchUsers();
+        $result['users'] = $this->searchUsers();
         $result['split'] = $split;
         $result['url'] = Yii::app()->baseUrl . "/" . $_REQUEST['response'] . "&userId=" ;
         $this->renderPartial('search',$result);
