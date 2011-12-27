@@ -1,33 +1,46 @@
 <?php $this->renderPartial("menu", $menu); ?>
 
-<?= $title ?>
+<h1>
+    <?= $title ?>
+</h1>
 
-<ul>
-<? foreach ($groups as $group): ?>
-    <li>
-        <?= $group['titleMenu'] ?> |
+<table>
+    <? foreach ($groups as $group): ?>
+        <tr>
+            <td><?= $group['titleMenu'] ?></td>
+            
+            <td><?= $group['openGroup'] == 1 ? "Åpen" : "Privat" ?></td>
+            <td><?= $group['publicGroup'] == 1 ? "Gjester" : "Innlogget" ?></td>
+            
+            <td><a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=public'>Public</a></td>
+            <td><a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=open'>Innloggede</a></td>
+            <td><a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=private'>Privat</a></td>  
+            <td><a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=open'>Slett</a></td>
 
-        <?= $group['openGroup'] == 1 ? "Åpen" : "Privat" ?>
-        <?= $group['publicGroup'] == 1 ? "Gjester" : "Innlogget" ?>
+        </tr>
 
-        <a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=public'>Public</a>
-        <a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=open'>Innloggede</a>
-        <a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=private'>Privat</a>   
-        <a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&siteId=<?= $group['siteId'] ?>&type=modTabAccess&access=open'>Slett</a>
-        
-    </li>
+    <? endforeach ?>
+</table>
 
-<? endforeach ?>
-</ul>
+<? $counter = 1; ?>
 
+<div id="membertable">
+    <table>
+        <? foreach ($members as $member): ?>
 
-<ul>
-<? foreach ($members as $member): ?>
-    
-    <li>
-        <a href='<?= Yii::app()->baseURL ?>/profile/<?= $member['id'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['lastName'] ?></a> <?= $member['comission'] ?>
-        <a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&userId=<?= $member['id'] ?>&type=delMember'>Slett</a> 
-    </li>
-        
-<? endforeach ?>
-</ul>
+            <? if($counter % 2){ ?>
+                <tr bgcolor='#CCFFFF'>
+            <?	}else{ ?>
+                <tr bgcolor='#FFFFFF'>
+            <? } ?>
+                    
+                <td><a href='<?= Yii::app()->baseURL ?>/profile/<?= $member['id'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['lastName'] ?></a></td>
+                <td><?= $member['comission'] ?></td>
+                <td><a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&userId=<?= $member['id'] ?>&type=delMember'>Slett</a></td>
+            </tr>
+            
+            <? $counter++; ?>
+
+        <? endforeach ?>
+    </table>
+</div>
