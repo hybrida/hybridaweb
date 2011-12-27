@@ -131,12 +131,19 @@ class NewsTest extends PHPUnit_Framework_TestCase {
 		$news->title = "title";
 		$news->save();
 		$author = $news->author;
-		$this->assertNotNUll($author);
+		$this->assertNotNull($author);
 		
 		$this->login();
 		$news2 = News::model()->findByPk($news->id);
 		$news2->content = "content";
 		$news2->save();
 		$this->assertEquals($news->author,$news2->author);
+	}
+	
+	public function test_timestampSetOnCreate() {
+		$this->login();
+		$news = new News;
+		$news->save();
+		$this->assertNotNull($news->timestamp);
 	}
 }
