@@ -15,8 +15,7 @@
 <h2>Alumni</h2>
 
 <p>
-    Alumnilisten er listen over alle studenter som er uteksaminert fra Ingeniørvitenskap og IKT, og hvor de har blitt ansatt rett etter studiet.</br>
-    Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
+    Alumnilisten er listen over alle studenter som er uteksaminert fra Ingeniørvitenskap og IKT, og hvor de har blitt ansatt rett etter studiet. Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
 </p>
 
 <p><h3>Statistikk:</h3>
