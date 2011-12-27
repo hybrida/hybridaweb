@@ -9,7 +9,7 @@ Endre profil
     <form action="" method="post">
     
     Ferdig utdannet år: 
-    <input type="text" name="graduationYear" size="3" value="<?= /**/ ?>" /><br/>
+    <input type="text" name="graduationYear" size="3" value="" /><br/>
     
     Studieretning: 
     <select name="specialization">
@@ -24,24 +24,24 @@ Endre profil
     
     Født:<br /><br />
     År: 
-    <input value="<?= /**/ ?>" size="4" name="born_year" type="text">
+    <input value="" size="4" name="born_year" type="text">
     Måned: 
-    <input value="<?= /**/ ?>" size="2" name="born_month" type="text">
+    <input value="" size="2" name="born_month" type="text">
     Dag: 
-    <input value="<?= /**/ ?>" size="2" name="born_day" type="text">
+    <input value="" size="2" name="born_day" type="text">
     
     <span style="font-size: 80%"><em>Du kan la datoen stå tom hvis du ikke ønsker at alle skal se den</em></span>
     
     
-    Privat epostadresse: <input value="<?= /**/ ?>" size="30" name="email" type="text">
+    Privat epostadresse: <input value="" size="30" name="email" type="text">
     <br />Det hjelper ikke å skrive inn @stud.ntnu.no adressen din her. 
     Dette er for at vi skal få tak i deg etter at du har gått ut fra NTNU og da mister du epostadressen fra ntnu.
     
-    Jobb: <input value="<?= /**/?> " size="30" name="work" type="text">
+    Jobb: <input value="" size="30" name="work" type="text">
     
     <br />
     
-    Kortnummer: <input value="<?= /**/ ?>" size="10" name="cardnr" type="text"><br/>
+    Kortnummer: <input value="" size="10" name="cardnr" type="text"><br/>
     <span style="font-size: 80%"><em>Brukes for å komme inn på Hybridas bedriftspresentasjoner.<br />
     
             <a href="/bilder/kort.jpg" target="_blank">Hvor finner jeg kortnummeret?</a></em></span>

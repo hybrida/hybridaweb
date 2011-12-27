@@ -324,8 +324,8 @@ class GetController extends Controller{
         
         $split = '~%~';
         
-        $result['users'] = searchUsers();
-        $result['newsList'] = searchNews();
+        $result['users'] = $this->searchUsers();
+        $result['newsList'] = $this->searchNews();
         $result['url'] = Yii::app()->baseUrl . "/profile/";
         $result['split'] = $split;
         
