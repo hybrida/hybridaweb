@@ -271,54 +271,76 @@ class GetController extends Controller{
         }
         $this->renderPartial('group');
     }
-    public function actionSearch(){
-            $split = '~%~';
+    
+    private function searchUsers(){
+            
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
             
             if(strlen($_GET['q']) < 1) {
                 die("");
             }
             
-			$searchArray = preg_split( '/ /', $_GET['q'] );
-			$searchString = "";
+            $searchArray = preg_split( '/ /', $_GET['q'] );
+            $searchString = "";
             $data = array();
             
             for( $i = 0; $i < count( $searchArray ); $i++ ) {
-				if( $i > 0 ) $searchString .= " AND";
-				$search = $searchArray[$i];
-				$searchString .= " (ui.firstName LIKE :search".$i." OR ui.middleName LIKE :search".$i." OR ui.lastName LIKE :search".$i.")";
+                if( $i > 0 ) $searchString .= " AND";
+                $search = $searchArray[$i];
+                $searchString .= " (ui.firstName LIKE :search".$i." OR ui.middleName LIKE :search".$i." OR ui.lastName LIKE :search".$i.")";
                 $data['search' . $i] = $search . "%";
-			}
+            }
             
-			//Søke på brukere
-			$sql = "SELECT DISTINCT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName 
-                    FROM user_new AS ui WHERE " . $searchString;
+            //Søke på brukere
+            $sql = "SELECT DISTINCT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName 
+            FROM user_new AS ui WHERE " . $searchString;
             
-			$query = $this->pdo->prepare($sql);
+            $query = $this->pdo->prepare($sql);
             $query->execute($data);
             
-            $result['users'] = $query->fetchAll(PDO::FETCH_ASSOC);
-            $result['split'] = $split;
-
-			//Søke på nyheter
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+    }
+    private function searchNews(){
+   
+            //Søke på nyheter
             $data = array(
                 'userId' => Yii::app()->user->id,
                 'type'   => 'news',
                 'search' => $search
             );
             
-			$sql = "SELECT id, parentId, parentType, title, timestamp 
-			FROM news n 
-			RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
-			WHERE n.title REGEXP :search
-			ORDER BY timestamp DESC";
+            $sql = "SELECT id, parentId, parentType, title, timestamp 
+            FROM news n 
+            RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
+            WHERE n.title REGEXP :search
+            ORDER BY timestamp DESC";
             
-			$query = $this->pdo->prepare($sql);
+            $query = $this->pdo->prepare($sql);
             $query->execute($data);
-            $result['newsList'] = $query->fetchAll(PDO::FETCH_ASSOC);
-            
-            $this->renderPartial('search',$result);
+            return $query->fetchAll(PDO::FETCH_ASSOC);
     }
+    
+    public function actionSearch(){
+        
+        $split = '~%~';
+        
+        $result['users'] = searchUsers();
+        $result['newsList'] = searchNews();
+        $result['url'] = Yii::app()->baseUrl . "/profile/";
+        $result['split'] = $split;
+        
+        $this->renderPartial('search',$result);
+        
+    }
+    
+    public function actionUserSearch(){
+        $split = '~%~';
+        $result['users'] = searchUsers();
+        $result['split'] = $split;
+        $result['url'] = Yii::app()->baseUrl . "/" . $_REQUEST['response'] . "&userId=" ;
+        $this->renderPartial('search',$result);
+    }
+
     
     
     public function actionCalendar(){
@@ -361,23 +383,7 @@ class GetController extends Controller{
     public function actionFileUpload(){
 
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
     
     

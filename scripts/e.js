@@ -84,7 +84,7 @@ function Search(dn) {
 		} else if(lastvalue != input.value) {
 			xhr.request({
 				'type': 'GET',
-				'url': url+file+'/?q=' + input.value + "&response=" + responseURL,
+				'url': url+file+'/?q=' + input.value + "&type=" + responseURL,
 				'functions': {
 					'onload': function() {
 						var response = this.responseText.split(split);

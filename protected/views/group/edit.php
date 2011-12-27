@@ -30,4 +30,15 @@
     </li>
         
 <? endforeach ?>
+    
+    <div class='search' data-url='userSearch' data-type='get/group/?gId=<?= $group['id'] ?>&type=addMember&comission='>
+        <input type='text' />
+        <div class="searchImg">
+                <input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' />
+        </div>
+        <ul id="hintList">
+
+        </ul>
+    </div>
+    
 </ul>
