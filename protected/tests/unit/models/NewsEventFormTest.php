@@ -306,6 +306,41 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse($news->isNewRecord, "Event kan ikke være en new record");
 		$this->assertFalse($event->isNewRecord, "News kan ikke være en new record");
 	}
+	
+	public function test_hasSignup_signupsIsFoundOnCreate() {
+		$this->login();
+		// Lage ny post;
+		$model = new NewsEventForm(new News);
+		$input = array(
+			'news' => array(
+				'title' => 'News Title',
+			),
+			'event' => array(
+				'begin' => '2011-11-30 20:55:26',
+				'end' => '2011-11-30 20:55:26',
+			),
+			'signup' => array(
+				'spots' => 100,
+				'open' => '2011-11-30 20:55:26',
+				'close' => '2011-11-30 20:55:26',
+			),
+			'hasEvent' => 1,
+			'hasSignup' => 1,
+		);
+		$model->attributes = $input;
+		$model->save();
+		
+		// De ble lagret
+		$this->assertFalse($model->getEventModel()->isNewRecord);
+		$this->assertFalse($model->getNewsModel()->isNewRecord);
+		$this->assertFalse($model->getSignupModel()->isNewRecord);
+		
+		// De ble hentet riktig
+		$model2 = new NewsEventForm($model->getNewsModel());
+		$this->assertFalse($model2->getEventModel()->isNewRecord);
+		$this->assertFalse($model2->getNewsModel()->isNewRecord);
+		$this->assertFalse($model2->getSignupModel()->isNewRecord);
+	}
 
 	public function test_attributesGetsLoaded() {
 		$title = "TiTLE";

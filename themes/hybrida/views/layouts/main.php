@@ -14,6 +14,21 @@
 		<link rel='stylesheet' type='text/css' href='<?=Yii::app()->request->baseUrl ?>/style/destroy.css'/>
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
 		<link rel='stylesheet' type='text/css' href="<?=Yii::app()->request->baseUrl ?>/style/pageContent.css" />
+                <link rel='stylesheet' type='text/css' href="<?=Yii::app()->request->baseUrl ?>/style/BK/BK-companyoverview-style.css" />
+        <!-- google analytics -->
+        <script type="text/javascript">
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-27346572-1']);
+          _gaq.push(['_setDomainName', 'hybrida.no']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+        </script>
 	</head>
 
 	<body>

@@ -182,7 +182,7 @@ class Group extends CActiveRecord {
 		$data = array(
 				'gID' => $this->id
 		);
-		$sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission 
+		$sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
                 FROM membership_group AS mg 
                 LEFT JOIN user_new AS un ON mg.userId = un.id
                 WHERE mg.groupId = :gID";

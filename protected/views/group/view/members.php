@@ -6,13 +6,33 @@
 
 <h2>Medlemmer </h2>
 
+<div id="membertable">
+    <table>
+        
+        <tr>
+            <th></th><th>Navn</th><th>Stilling</th><th>Brukernavn</th><th>Telefonnummer</th><th>Sist innlogget</th>
+        </tr>
+        
+        <? $counter = 1; ?>
+        
+        <? foreach($content as $user) : ?>
+           
+            <? if($counter % 2){ ?>
+                <tr bgcolor='#CCFFFF'>
+            <?	}else{ ?>
+                <tr bgcolor='#FFFFFF'>
+            <? } ?>
+                    
+                <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'/></td>
+                <td><a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?></a></td>
+                <td><?= $user['comission'] ?></td>
+                <td><?= $user['username'] ?></td>
+                <td><?= $user['phoneNumber'] ?></td>
+                <td><?= $user['lastLogin'] ?></td>
+            </tr>
 
-<? foreach($content as $user) : ?>
-
-    <li>
-        <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'>
-            <a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?> </a> 
-            <?= $user['comission'] ?>
-    </li>
-
-<? endforeach ?>
+            <? $counter++; ?>
+            
+        <? endforeach ?>
+    </table>
+</div>

@@ -1,0 +1,44 @@
+/*********************||| Frans Erstad, 2011 |||*****************************/
+
+
+/* stil for bedriftsoversikten */
+	
+#BK-companyoverview-container table{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-collapse: separate;
+	}
+	
+#BK-companyoverview-container td{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+#BK-companyoverview-container th{
+	text-align: left;
+	border-width: 2px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	}
+	
+/*Følgende gjelder kun for hovedtabellen*/
+
+#BK-companyoverview-maintable tr:hover {
+	background-color: #CCFFFF;
+	}
+	
+#BK-companyoverview-maintable{
+	width: 100%;
+	}
+
+/*Følgende gjelder kun for tabellen med statistikk*/
+	
+#BK-companyoverview-statisticstable{
+	width: 20%;
+}
