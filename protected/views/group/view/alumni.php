@@ -85,7 +85,7 @@
 
                 $this->pdo = Yii::app()->db->getPdoInstance();
 
-                $yearsum = 0;
+                $yearsum = array();
                 $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new WHERE graduationYear <= now()";
                     
                 $query = $this->pdo->prepare($sql);
