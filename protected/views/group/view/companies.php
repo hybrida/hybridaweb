@@ -16,6 +16,7 @@
 
 <p>Bedriftsoversikten er oversikten over alle bedrifter som Hybrida Bedriftskomité er, og har vært, i kontakt med.</p>
 
+<div id="BK-companyoverview-container">
 <p>
     <table id="BK-companyoverview-supporttable">
         <tr>
@@ -52,3 +53,4 @@
         </tr>
     </table>
 </p>
+</div>
