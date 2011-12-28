@@ -68,6 +68,7 @@
                         <? $counter++; ?>
 
                     <? endforeach ?>
+                </table>
             </div>
         </td>
 					
@@ -81,7 +82,7 @@
         <th id="BK-alumnilist-leftcolumn">
              <?
                 // henter ut den totale summen alumnistudenter for alle årstrinn
-
+/***
                 $this->pdo = Yii::app()->db->getPdoInstance();
 
                 $yearsum = array();
@@ -91,8 +92,9 @@
                 $query->execute($yearsum);
 
                 $yearsum = $query->fetchAll(PDO::FETCH_ASSOC);
+ * 
+ */
             ?>
-            Sum alumnistudenter: <?= $yearsum['sum'] ?>
         </th>
 					
 	<th id="BK-alumnilist-rightcolumn">
