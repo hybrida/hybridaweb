@@ -42,7 +42,11 @@
 	width: 100%;
 }
 
-#BK-companyoverview-supporttable th td{
+#BK-companyoverview-supporttable th{
+        padding: 0% 10%;
+}
+
+#BK-companyoverview-supporttable td{
         padding: 0% 10%;
 }
 

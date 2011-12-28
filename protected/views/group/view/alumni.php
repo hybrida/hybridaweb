@@ -43,7 +43,7 @@
     $this->pdo = Yii::app()->db->getPdoInstance();
 
     $alumnies = array();
-    $sql = "SELECT firstName, middleName, lastName, graduationYear, workDescription FROM user_new 
+    $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription FROM user_new 
     WHERE graduationYear <= now()";
 
     $query = $this->pdo->prepare($sql);
