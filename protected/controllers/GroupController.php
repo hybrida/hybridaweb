@@ -71,13 +71,14 @@ class GroupController extends Controller {
             
             //Henter ut alle tidligere medlemmer av gruppen siden 2003
             //Bør gjøres ved hjelp av feed med en egen stil
-            
+            $former = array();
             for( $year = 0; $year > 2003; $year--){
                 for( $s = 1; $s <= 2; $s++ ) {
                     $former[] = $group->getFormerMembers($year,$s);
                 }
             }
             $data['former'] = $former;
+            print_r($former);
         }
         
         if($content == "news"){
