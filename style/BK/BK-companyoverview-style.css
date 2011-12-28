@@ -1,6 +1,3 @@
-/*********************||| Frans Erstad, 2011 |||*****************************/
-
-
 /* stil for bedriftsoversikten */
 	
 #BK-companyoverview-container table{
@@ -27,7 +24,7 @@
 	background-color: white;
 	}
 	
-/*Følgende gjelder kun for hovedtabellen*/
+/*Fï¿½lgende gjelder kun for hovedtabellen*/
 
 #BK-companyoverview-maintable tr:hover {
 	background-color: #CCFFFF;
@@ -37,7 +34,7 @@
 	width: 100%;
 	}
 
-/*Følgende gjelder kun for tabellen med statistikk*/
+/*Fï¿½lgende gjelder kun for tabellen med statistikk*/
 	
 #BK-companyoverview-statisticstable{
 	width: 20%;
