@@ -254,7 +254,7 @@ class GetController extends Controller{
                 $group->removeMember( $_REQUEST['userId'] );
             }
             if($type == 'addMember'){
-                $comission = (isset($_REQUEST['commission'])) ? $_REQUEST['commission'] : "";
+                $comission = (isset($_REQUEST['commission'])) ? $_REQUEST['commission'] : "Member";
                 $group->addMember( $_REQUEST['userId'] , $comission );
             }
             

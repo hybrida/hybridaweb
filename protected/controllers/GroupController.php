@@ -53,9 +53,9 @@ class GroupController extends Controller {
 
 	public function actionView($id, $title) {
 
-		$data = array();
-		$group = Group::model()->findByPk($id);
-        $data['id'] = $id;
+            $data = array();
+            $group = Group::model()->findByPk($id);
+            $data['id'] = $id;
 		$data['model'] = $group;
         $data['title'] = $group->getTitle();
         $data['menu'] = $group->getMenu();
@@ -68,6 +68,16 @@ class GroupController extends Controller {
         
         if($content == "members"){
             $data['content'] = $group->getMembers();
+            
+            //Henter ut alle tidligere medlemmer av gruppen siden 2003
+            //Bør gjøres ved hjelp av feed med en egen stil
+            
+            for( $year = 0; $year > 2003; $year--){
+                for( $s = 1; $s <= 2; $s++ ) {
+                    $former[] = $group->getFormerMembers($year,$s);
+                }
+            }
+            $data['former'] = $former;
         }
         
         if($content == "news"){

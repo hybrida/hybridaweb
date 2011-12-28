@@ -176,23 +176,57 @@ class Group extends CActiveRecord {
 		return true;
 	}
 
-	public function getMembers() {
-		$this->pdo = Yii::app()->db->getPdoInstance();
+    public function getMembers() {
 
-		$data = array(
-				'gID' => $this->id
-		);
-		$sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
+
+        $data = array(
+                        'gID' => $this->id
+        );
+        
+        $sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
+        FROM membership_group AS mg 
+        LEFT JOIN user_new AS un ON mg.userId = un.id
+        WHERE mg.groupId = :gID
+        AND (mg.end > NOW() OR mg.end = NULL)";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
+
+    public function getFormerMembers($year,$semester){
+        
+        //Definerer vår-/høstsemester.
+        if ($semester == 1){
+            $start = "02";
+            $end = "03";
+        }
+        else
+        {
+            $start = "08";
+            $end = "09";
+        }
+        $data = array(
+                'gID' => $this->id,
+                'year' => $year,
+                'start' => $start,
+                'end' => $end
+        );
+
+        $sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
                 FROM membership_group AS mg 
                 LEFT JOIN user_new AS un ON mg.userId = un.id
-                WHERE mg.groupId = :gID";
+                WHERE mg.groupId = :gID
+                AND mg.start > :year-:start-15 mg.end < :year-:end-15";
 
-		$query = $this->pdo->prepare($sql);
-		$query->execute($data);
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
 
-		$data = $query->fetchAll(PDO::FETCH_ASSOC);
-		return $data;
-	}
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        return $data;
+    }
     
     public function getGroupContentType($title){
         
@@ -243,7 +277,7 @@ class Group extends CActiveRecord {
 				'comission' => $comission
 		);
 
-		$sql = "INSERT INTO membership_group (groupId, userId, comission) VALUES (:gID,:uID,:comission)";
+		$sql = "INSERT INTO membership_group (groupId, userId, comission, start) VALUES (:gID,:uID,:comission,Now())";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
@@ -259,7 +293,8 @@ class Group extends CActiveRecord {
 				'uID' => $userId
 		);
 
-		$sql = "DELETE FROM membership_group WHERE groupId = :gID AND userId = :uID";
+		$sql = "UPDATE membership_group WHERE groupId = :gID AND userId = :uID 
+                        SET end = NOW()";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 

@@ -35,4 +35,19 @@
             
         <? endforeach ?>
     </table>
+    
+    <h2>Tidligere medlemmer</h2>
+    <table>
+        
+        <? foreach($former as $user) : ?>  
+
+            <tr>
+                <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'/></td>
+                <td><a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?></a></td>
+                <td><?= $user['comission'] ?></td>
+            </tr>
+            
+        <? endforeach ?>
+            
+    </table>
 </div>
