@@ -333,11 +333,11 @@ class GetController extends Controller{
         
     }
     
-    public function actionUserSearch(){
+    public function actionAddUserGroupSearch(){
         $split = '~%~';
         $result['users'] = $this->searchUsers();
         $result['split'] = $split;
-        $result['url'] = Yii::app()->baseUrl . "/" . $_REQUEST['response'] . "&userId=" ;
+        $result['url'] = Yii::app()->baseUrl . "/" . $_REQUEST['response'] . "&type=addMember&comission=&userId=" ;
         $this->renderPartial('search',$result);
     }
 
