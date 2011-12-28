@@ -187,7 +187,7 @@ class Group extends CActiveRecord {
         FROM membership_group AS mg 
         LEFT JOIN user_new AS un ON mg.userId = un.id
         WHERE mg.groupId = :gID
-        AND (mg.end > NOW() OR mg.end = NULL)";
+        AND (mg.end > (DATE(NOW()) OR mg.end = '0000-00-00')";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
