@@ -254,7 +254,8 @@ class GetController extends Controller{
                 $group->removeMember( $_REQUEST['userId'] );
             }
             if($type == 'addMember'){
-                $group->addMember( $_REQUEST['userId'] , $_REQUEST['commission'] );
+                $comission = (isset($_REQUEST['commission'])) ? $_REQUEST['commission'] : "";
+                $group->addMember( $_REQUEST['userId'] , $comission );
             }
             
             if($type == 'modTabAccess'){
