@@ -51,25 +51,25 @@ class GroupController extends Controller {
 		$this->render("index", $data);
 	}
 
-	public function actionView($id, $title) {
+    public function actionView($id, $title) {
 
-            $data = array();
-            $group = Group::model()->findByPk($id);
-            $data['id'] = $id;
-		$data['model'] = $group;
+        $data = array();
+        $group = Group::model()->findByPk($id);
+        $data['id'] = $id;
+        $data['model'] = $group;
         $data['title'] = $group->getTitle();
         $data['menu'] = $group->getMenu();
-        
+
         $content = $group->getGroupContentType($title);
-        
+
         if($content=="article"){
            $data['content'] = $group->getArticle($title);
         }
-        
+
         if($content == "members"){
             $data['content'] = $group->getMembers();
             $data['date'] = date('Y');
-            
+
             //Henter ut alle tidligere medlemmer av gruppen siden 2003
             //Bør gjøres ved hjelp av feed med en egen stil
             $former = array();
@@ -78,25 +78,25 @@ class GroupController extends Controller {
                     $former[] = $group->getFormerMembers($year,$s);
                 }
             }
-            
+
             $data['former'] = $former;
             print_r($former);
         }
-        
+
         if($content == "news"){
             $data['id'] = $group->id;
         }
-        
-        
-                
-        $this->render("view/" . $content, $data);
-	}
 
-	public function actions() {
-		return array(
-						//'view' => 'application.controllers.group.ViewAction',
-		);
-	}
+
+
+        $this->render("view/" . $content, $data);
+    }
+
+    public function actions() {
+            return array(
+                                            //'view' => 'application.controllers.group.ViewAction',
+            );
+    }
     
     public function actionEdit($id){
         $group = Group::model()->findByPk($id);
