@@ -1,0 +1,132 @@
+/*********************||| Frans Erstad, 2011 |||*****************************/
+
+
+
+/*stil for siden med alumnilisten*/
+
+/*stil for hovedtabellen*/
+
+#BK-alumnilist-maintable{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	width: 100%;
+	}
+	
+#BK-alumnilist-maintable td{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+#BK-alumnilist-maintable th{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	}
+	
+/*stil for støttetabellen og kolonnene som holder statistikken på plass*/
+
+#BK-alumnilist-supporttable{
+	width: 80%;
+	}
+	
+#BK-alumnilist-leftcolumn{
+	border-width: 2px;
+	background-color: white;
+	padding: 1px;
+	border-style: outset;
+	border-color: gray;
+	vertical-align: text-top;
+	text-align: left;
+	width: 30%;
+}
+
+#BK-alumnilist-centercolumn{
+	width: 10%;
+	background-color: #D8D8D8;
+}
+
+#BK-alumnilist-rightcolumn{
+	border-width: 2px;
+	padding: 1px;
+	border-style: outset;
+	border-color: gray;
+	width: 60%;
+	background-color: white;
+	vertical-align: text-top;
+	text-align: left;
+}
+
+/*stil for boksen som inneholder statistikk for årskullene*/
+
+#BK-alumnilist-yearbox{
+	height: 150px;
+	overflow-y: scroll;
+	}
+	
+#BK-alumnilist-yeartable{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	width: 100%;
+	}
+	
+#BK-alumnilist-yeartable td{
+	text-align: center;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+#BK-alumnilist-yeartable th{
+	text-align: center;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	}
+
+/*stil for boksen som inneholder statistikk for bedriftene*/
+
+#BK-alumnilist-companybox{
+	height: 150px;
+	overflow-y: scroll;
+	}
+	
+#BK-alumnilist-companytable{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	width: 100%;
+	}
+	
+#BK-alumnilist-companytable td{
+	text-align: center;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+#BK-alumnilist-companytable th{
+	text-align: center;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	}
