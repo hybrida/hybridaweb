@@ -121,17 +121,19 @@
 ?>
 
 <p>
+<table id="BK-alumnilist-maintable">
+    <tr>
+         <th>Navn</th>
+        <th>Uteksamineringsår</th>
+        <th>Bedrift</th>
+        <th>Stillingsbeskrivelse</th>
+        <th>Arbeidssted</th>
+        <th>Rediger</th>
+    </tr>
+</table>
+
 <div id="BK-alumnilist-alumnilistbox">
-    <table id="BK-alumnilist-maintable">
-        <tr>
-            <th>Navn</th>
-            <th>Uteksamineringsår</th>
-            <th>Bedrift</th>
-            <th>Stillingsbeskrivelse</th>
-            <th>Arbeidssted</th>
-            <th>Rediger</th>
-        </tr>
-        
+<table id="BK-alumnilist-maintable">
          <? $counter = 1; ?>
         
         <? foreach($alumnies as $alumni) : ?>
