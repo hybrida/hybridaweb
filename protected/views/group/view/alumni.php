@@ -94,7 +94,7 @@
                 $yearsum = $query->fetchAll(PDO::FETCH_ASSOC);
                 
             ?>
-            Sum alumnistudenter: <?= $yearsum ?>
+            Sum alumnistudenter: <?= $yearsum['sum'] ?>
         </th>
 					
 	<th id="BK-alumnilist-rightcolumn">
@@ -121,7 +121,7 @@
 ?>
 
 <p>
-<div id='BK-alumnilist-alumnilistbox'>
+<div id="BK-alumnilist-alumnilistbox">
     <table id="BK-alumnilist-maintable">
         <tr>
             <th>Navn</th>
