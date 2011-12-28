@@ -48,3 +48,14 @@
     </table>
 </div>
 </p>
+    
+    <div class='search' data-url='addUserGroupSearch' data-type='get/group/?gId=<?= $group['id'] ?>'>
+        <input type='text' />
+        <div class="searchImg">
+                <input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' />
+        </div>
+        <ul id="hintList">
+
+        </ul>
+    </div>
+    
