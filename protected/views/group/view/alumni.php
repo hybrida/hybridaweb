@@ -25,10 +25,51 @@
     <tr>
 	<td id="BK-alumnilist-leftcolumn">
             <div id="BK-alumnilist-yearbox">
+                <?
+                    // henter ut statistikk for hvert årstrinn
+
+                    $this->pdo = Yii::app()->db->getPdoInstance();
+
+                    $years = array();
+                    $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user_new WHERE graduationYear <= now()
+                    GROUP BY graduationYear ORDER BY graduationYear DESC";
+                    
+                    $query = $this->pdo->prepare($sql);
+                    $query->execute($years);
+
+                    $years = $query->fetchAll(PDO::FETCH_ASSOC);
+                ?>
+                
+                <table id="BK-alumnilist-yeartable">
+                    <tr>
+                        <th>
+                            Årstall
+                        </th>
+                        <th>
+                            Antall alumnistudenter
+                        </th>
+                    </tr>
+                    
+                     <? $counter = 1; ?>
+        
+                    <? foreach($years as $year) : ?>
+
+                        <? if($counter % 2){ ?>
+                            <tr bgcolor='#CCFFFF'>
+                        <?	}else{ ?>
+                            <tr bgcolor='#FFFFFF'>
+                        <? } ?>
+
+        
+                            <td><?= $year['graduationYear'] ?></td>
+                            <td><?= $year['sum'] ?></td>
+                        </tr>
+
+                        <? $counter++; ?>
+
+                    <? endforeach ?>
             </div>
         </td>
-					
-	<td id="BK-alumnilist-centercolumn"></td>
 					
 	<td id="BK-alumnilist-rightcolumn">
             <div id="BK-alumnilist-companybox">
@@ -38,9 +79,21 @@
         
     <tr>
         <th id="BK-alumnilist-leftcolumn">
+             <?
+                // henter ut den totale summen alumnistudenter for alle årstrinn
+
+                $this->pdo = Yii::app()->db->getPdoInstance();
+
+                $yearsum = array();
+                $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new WHERE graduationYear <= now()";
+                    
+                $query = $this->pdo->prepare($sql);
+                $query->execute($yearsum);
+
+                $yearsum = $query->fetchAll(PDO::FETCH_ASSOC);
+            ?>
+            Sum alumnistudenter: <?= $yearsum['sum'] ?>
         </th>
-					
-	<th id="BK-alumnilist-centercolumn"></th>
 					
 	<th id="BK-alumnilist-rightcolumn">
         </th>

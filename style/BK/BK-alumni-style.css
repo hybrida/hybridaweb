@@ -8,7 +8,7 @@
 
 #BK-alumnilist-alumnilistbox{
         width: 100%;
-	height: 200%;
+	height: 1200px;
 	overflow-y: scroll;
 	}
 
@@ -53,11 +53,6 @@
 	vertical-align: text-top;
 	text-align: left;
 	width: 30%;
-}
-
-#BK-alumnilist-centercolumn{
-	width: 10%;
-	background-color: #D8D8D8;
 }
 
 #BK-alumnilist-rightcolumn{
