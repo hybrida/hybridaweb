@@ -16,7 +16,21 @@
 
 <p>Bedriftsoversikten er oversikten over alle bedrifter som Hybrida Bedriftskomité er, og har vært, i kontakt med.</p>
 
-<div id="BK-companyoverview-container">
+<?
+    // henter ut statistikken tilknyttet bedriftsoversikten
+
+    $this->pdo = Yii::app()->db->getPdoInstance();
+
+    $statistics = array();
+    $sql = "SELECT status, COUNT(DISTINCT companyName) AS sum FROM company GROUP BY status";
+
+    $query = $this->pdo->prepare($sql);
+    $query->execute($statistics);
+
+    $statistics = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+
 <p>
     <table id="BK-companyoverview-supporttable">
         <tr>
@@ -25,9 +39,40 @@
         </tr>
         <tr>
             <td>
+                <div id="BK-companyoverview-container">
                 <table id="BK-companyoverview-statisticstable">
+                    
+                    <? $sum = 0; ?>
+                    
+                     <? foreach($statistics as $stat) : ?>
+           
+                        <? switch ($stat['status']){
+                                case "Aktuell senere": ?>
+                                    <tr bgcolor="yellow">
+                        <?          break;
+                                case "Blir kontaktet": ?>
+                                    <tr bgcolor="#00CC00">
+                        <?          break;
+                                case "Ikke kontaktet": ?>
+                                    <tr bgcolor='#FFFFFF'>
+                        <?          break;
+                                case "Uaktuell": ?>
+                                    <tr bgcolor="#FF0033">
+                        <?          break;
+                                default: ?>
+                                    <tr bgcolor='#FFFFFF'>
+                        <? } ?>
 
+                            <td><?= $stat['sum'] ?> <?= $stat['status'] ?></td>
+                        </tr>
+                        
+                        <? $sum = $sum + $stat['sum']; ?>
+                    <? endforeach ?>
+                        
+                    <tr><th><?= $sum ?> Bedrifter totalt</th></tr>
                 </table>
+                </div>
+                
             </td>
             <td>
                 <table id="BK-companyoverview-selectiontable">
@@ -43,6 +88,8 @@
 <p><h3>Bedrifter:</h3></p>
 
 <?
+    // henter ut informasjon om hver enkelt av bedriftene
+
     $this->pdo = Yii::app()->db->getPdoInstance();
 
     $companies = array();
@@ -55,6 +102,7 @@
     $companies = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<div id="BK-companyoverview-container">
 <p>
     <table id="BK-companyoverview-maintable">
         <tr>
@@ -62,28 +110,33 @@
             <th>Status</th>
             <th>Kontaktet av</th>
             <th>Dato lagt til</th>
-            <th>Lagt til av</th>
         </tr>
-        
-        <? $counter = 1; ?>
-        
+      
         <? foreach($companies as $company) : ?>
            
-            <? if($counter % 2){ ?>
-                <tr bgcolor='#CCFFFF'>
-            <?	}else{ ?>
-                <tr bgcolor='#FFFFFF'>
+            <? switch ($company['status']){
+                    case "Aktuell senere": ?>
+                        <tr bgcolor="yellow">
+            <?          break;
+                    case "Blir kontaktet": ?>
+                        <tr bgcolor="#00CC00">
+            <?          break;
+                    case "Ikke kontaktet": ?>
+                        <tr bgcolor='#FFFFFF'>
+            <?          break;
+                    case "Uaktuell": ?>
+                        <tr bgcolor="#FF0033">
+            <?          break;
+                    default: ?>
+                        <tr bgcolor='#FFFFFF'>
             <? } ?>
-                    
+ 
                 <td><?= $company['companyName'] ?></td>
                 <td><?= $company['status'] ?></td>
                 <td><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></td>
                 <td><?= $company['dateAdded'] ?></td>
-                <td></td>
             </tr>
 
-            <? $counter++; ?>
-            
         <? endforeach ?>
     </table>
 </p>

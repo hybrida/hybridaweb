@@ -34,8 +34,32 @@
 	width: 100%;
 	}
 
-/*F�lgende gjelder kun for tabellen med statistikk*/
+/*F�lgende gjelder kun for støttetabellen*/
+	
+#BK-companyoverview-supporttable{
+        vertical-align: top;
+        text-align: left;
+	width: 100%;
+}
+
+#BK-companyoverview-supporttable th{
+        padding: 0% 10%;
+}
+
+#BK-companyoverview-supporttable td{
+        padding: 0% 10%;
+}
+
+/*F�lgende gjelder kun for statistikktabellen*/
 	
 #BK-companyoverview-statisticstable{
-	width: 20%;
+	width: 100%;
+}
+
+/*F�lgende gjelder kun for statistikktabellen*/
+	
+#BK-companyoverview-selectiontable{
+        vertical-align: top;
+        text-align: left;
+	width: 100%;
 }
