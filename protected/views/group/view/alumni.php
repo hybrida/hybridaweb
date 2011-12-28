@@ -82,19 +82,19 @@
         <th id="BK-alumnilist-leftcolumn">
              <?
                 // henter ut den totale summen alumnistudenter for alle årstrinn
-/***
+
                 $this->pdo = Yii::app()->db->getPdoInstance();
 
-                $yearsum = array();
+                $yearsum = 0;
                 $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new WHERE graduationYear <= now()";
                     
                 $query = $this->pdo->prepare($sql);
                 $query->execute($yearsum);
 
                 $yearsum = $query->fetchAll(PDO::FETCH_ASSOC);
- * 
- */
+                
             ?>
+            Sum alumnistudenter: <?= $yearsum ?>
         </th>
 					
 	<th id="BK-alumnilist-rightcolumn">
