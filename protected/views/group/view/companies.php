@@ -30,7 +30,7 @@
     $statistics = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<div id="BK-companyoverview-container">
+
 <p>
     <table id="BK-companyoverview-supporttable">
         <tr>
@@ -39,6 +39,7 @@
         </tr>
         <tr>
             <td>
+                <div id="BK-companyoverview-container">
                 <table id="BK-companyoverview-statisticstable">
                     
                     <? $sum = 0; ?>
@@ -70,6 +71,7 @@
                         
                     <tr><th><?= $sum ?> Bedrifter totalt</th></tr>
                 </table>
+                </div>
                 
             </td>
             <td>
@@ -100,6 +102,7 @@
     $companies = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
+<div id="BK-companyoverview-container">
 <p>
     <table id="BK-companyoverview-maintable">
         <tr>
