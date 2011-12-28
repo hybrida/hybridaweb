@@ -21,20 +21,33 @@
 <p><h3>Statistikk:</h3>
 
 <p>
-    <table id="BK-alumnilist-supporttable">
-        <tr>
-            <td>Årsstatistikk</td>
-            <td>Ansettelsesstatistikk</td>
-            <td>Valg</td>
-        </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td>Legg til alumni</td>
-        </tr>
-    </table>
+<table id="BK-alumnilist-supporttable">
+    <tr>
+	<td id="BK-alumnilist-leftcolumn">
+            <div id="BK-alumnilist-yearbox">
+            </div>
+        </td>
+					
+	<td id="BK-alumnilist-centercolumn"></td>
+					
+	<td id="BK-alumnilist-rightcolumn">
+            <div id="BK-alumnilist-companybox">
+            </div>
+	</td>
+    </tr>
+        
+    <tr>
+        <th id="BK-alumnilist-leftcolumn">
+        </th>
+					
+	<th id="BK-alumnilist-centercolumn"></th>
+					
+	<th id="BK-alumnilist-rightcolumn">
+        </th>
+    </tr>
+</table>
 </p>
-
+				
 <p><h3>Alumnistudenter:</h3>
 
 <?
@@ -53,6 +66,7 @@
 ?>
 
 <p>
+<div id='BK-alumnilist-alumnilistbox'>
     <table id="BK-alumnilist-maintable">
         <tr>
             <th>Navn</th>
@@ -86,4 +100,5 @@
         <? endforeach ?>
         
     </table>
+</div>
 </p>

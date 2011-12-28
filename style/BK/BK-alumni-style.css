@@ -6,6 +6,12 @@
 
 /*stil for hovedtabellen*/
 
+#BK-alumnilist-alumnilistbox{
+        width: 100%;
+	height: 200%;
+	overflow-y: scroll;
+	}
+
 #BK-alumnilist-maintable{
 	border-width: 1px;
 	border-spacing: 2px;
@@ -32,7 +38,7 @@
 	background-color: white;
 	}
 	
-/*stil for støttetabellen og kolonnene som holder statistikken på plass*/
+/*stil for stï¿½ttetabellen og kolonnene som holder statistikken pï¿½ plass*/
 
 #BK-alumnilist-supporttable{
 	width: 80%;
@@ -65,7 +71,7 @@
 	text-align: left;
 }
 
-/*stil for boksen som inneholder statistikk for årskullene*/
+/*stil for boksen som inneholder statistikk for ï¿½rskullene*/
 
 #BK-alumnilist-yearbox{
 	height: 150px;

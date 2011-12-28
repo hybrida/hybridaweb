@@ -59,5 +59,7 @@
 /*F�lgende gjelder kun for statistikktabellen*/
 	
 #BK-companyoverview-selectiontable{
+        vertical-align: top;
+        text-align: left;
 	width: 100%;
 }
