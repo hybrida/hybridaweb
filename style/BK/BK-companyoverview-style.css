@@ -37,8 +37,13 @@
 /*F�lgende gjelder kun for støttetabellen*/
 	
 #BK-companyoverview-supporttable{
+        vertical-align: top;
         text-align: left;
 	width: 100%;
+}
+
+#BK-companyoverview-supporttable th td{
+        padding: 0% 10%;
 }
 
 /*F�lgende gjelder kun for statistikktabellen*/

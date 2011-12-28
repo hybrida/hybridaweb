@@ -37,6 +37,21 @@
 
 <p><h3>Alumnistudenter:</h3>
 
+<?
+    // henter ut informasjon om alumnistudentene
+
+    $this->pdo = Yii::app()->db->getPdoInstance();
+
+    $alumnies = array();
+    $sql = "SELECT firstName, middleName, lastName, graduationYear, workDescription FROM user_new 
+    WHERE graduationYear <= now()";
+
+    $query = $this->pdo->prepare($sql);
+    $query->execute($alumnies);
+
+    $alumnies = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <p>
     <table id="BK-alumnilist-maintable">
         <tr>
@@ -46,5 +61,29 @@
             <th>Stillingsbeskrivelse</th>
             <th>Arbeidssted</th>
             <th>Rediger</th>
+        </tr>
+        
+         <? $counter = 1; ?>
+        
+        <? foreach($alumnies as $alumni) : ?>
+           
+            <? if($counter % 2){ ?>
+                <tr bgcolor='#CCFFFF'>
+            <?	}else{ ?>
+                <tr bgcolor='#FFFFFF'>
+            <? } ?>
+                    
+                <td><a href='/profile/<?= $alumni['id'] ?>'> <?= $alumni['firstName'] ?> <?= $alumni['middleName'] ?> <?= $alumni['lastName'] ?></a></td>
+                <td><?= $alumni['graduationYear'] ?></td>
+                <td></td>
+                <td><?= $alumni['workDescription'] ?></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            <? $counter++; ?>
+            
+        <? endforeach ?>
+        
     </table>
 </p>
