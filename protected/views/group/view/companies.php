@@ -62,28 +62,33 @@
             <th>Status</th>
             <th>Kontaktet av</th>
             <th>Dato lagt til</th>
-            <th>Lagt til av</th>
         </tr>
-        
-        <? $counter = 1; ?>
-        
+      
         <? foreach($companies as $company) : ?>
            
-            <? if($counter % 2){ ?>
-                <tr bgcolor='#CCFFFF'>
-            <?	}else{ ?>
-                <tr bgcolor='#FFFFFF'>
+            <? switch ($company['status']){
+                    case "Aktuell senere": ?>
+                        <tr bgcolor="yellow">
+            <?          break;
+                    case "Blir kontaktet": ?>
+                        <tr bgcolor="#00CC00">
+            <?          break;
+                    case "Ikke kontaktet": ?>
+                        <tr bgcolor='#FFFFFF'>
+            <?          break;
+                    case "Uaktuell": ?>
+                        <tr bgcolor="#FF0033">
+            <?          break;
+                    default: ?>
+                        <tr bgcolor='#FFFFFF'>
             <? } ?>
-                    
+ 
                 <td><?= $company['companyName'] ?></td>
                 <td><?= $company['status'] ?></td>
                 <td><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></td>
                 <td><?= $company['dateAdded'] ?></td>
-                <td></td>
             </tr>
 
-            <? $counter++; ?>
-            
         <? endforeach ?>
     </table>
 </p>
