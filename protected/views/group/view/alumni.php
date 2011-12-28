@@ -41,9 +41,7 @@
     <table id="BK-alumnilist-maintable">
         <tr>
             <th>Navn</th>
-            <th>Privatmail</th>
             <th>Uteksamineringsår</th>
-            <th>Studieretning</th>
             <th>Bedrift</th>
             <th>Stillingsbeskrivelse</th>
             <th>Arbeidssted</th>

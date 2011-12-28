@@ -15,6 +15,7 @@
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
 		<link rel='stylesheet' type='text/css' href="<?=Yii::app()->request->baseUrl ?>/style/pageContent.css" />
                 <link rel='stylesheet' type='text/css' href="<?=Yii::app()->request->baseUrl ?>/style/BK/BK-companyoverview-style.css" />
+                <link rel='stylesheet' type='text/css' href="<?=Yii::app()->request->baseUrl ?>/style/BK/BK-alumni-style.css" />
         <!-- google analytics -->
         <script type="text/javascript">
           var _gaq = _gaq || [];
