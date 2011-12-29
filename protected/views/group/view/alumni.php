@@ -74,6 +74,19 @@
 					
 	<td id="BK-alumnilist-rightcolumn">
             <div id="BK-alumnilist-companybox">
+                <table id="BK-alumnilist-companytable">
+                    <tr>
+                        <th>
+                            Nr.
+                        </th>
+                        <th>
+                            Bedrift
+                        </th>
+                        <th>
+                            Antall ansatte alumnistudenter
+                        </th>
+                    </tr>
+                </table>
             </div>
 	</td>
     </tr>
@@ -150,7 +163,7 @@
                 <td></td>
                 <td><?= $alumni['workDescription'] ?></td>
                 <td></td>
-                <td></td>
+                <td>Rediger</td>
             </tr>
 
             <? $counter++; ?>

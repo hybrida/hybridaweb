@@ -104,6 +104,8 @@
 
 <div id="BK-companyoverview-container">
 <p>
+<div id="BK-companyoverview-maintablebox">
+
     <table id="BK-companyoverview-maintable">
         <tr>
             <th>Bedrift</th>
@@ -139,5 +141,7 @@
 
         <? endforeach ?>
     </table>
+
+</div>
 </p>
 </div>
