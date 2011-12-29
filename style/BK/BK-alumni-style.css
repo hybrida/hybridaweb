@@ -50,7 +50,7 @@
 	padding: 1px;
 	border-style: outset;
 	border-color: gray;
-	vertical-align: text-top;
+	vertical-align: top;
 	text-align: left;
 	width: 50%;
 }
@@ -62,7 +62,7 @@
 	border-color: gray;
 	width: 50%;
 	background-color: white;
-	vertical-align: text-top;
+	vertical-align: top;
 	text-align: left;
 }
 
