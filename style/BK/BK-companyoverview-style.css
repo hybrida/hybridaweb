@@ -48,12 +48,14 @@
 }
 
 #BK-companyoverview-supporttable th{
+        
         vertical-align: top;
         padding: 0% 10%;
 }
 
 #BK-companyoverview-supporttable td{
         vertical-align: top;
+        text-align: left;
         padding: 0% 10%;
 }
 

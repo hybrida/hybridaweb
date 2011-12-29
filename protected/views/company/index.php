@@ -1,3 +1,5 @@
+<?php $this->renderPartial("menu", $menu); ?>
+
 <?
     /**
      * Side for hver enkelt bedrift
