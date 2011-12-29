@@ -93,7 +93,7 @@
     $this->pdo = Yii::app()->db->getPdoInstance();
 
     $companies = array();
-    $sql = "SELECT companyName, status, firstName, middleName, lastName, dateAdded FROM company 
+    $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
     LEFT JOIN user_new ON contactorID = id";
 
     $query = $this->pdo->prepare($sql);
@@ -132,10 +132,10 @@
                     default: ?>
                         <tr bgcolor='#FFFFFF'>
             <? } ?>
- 
-                <td><?= $company['companyName'] ?></td>
-                <td><?= $company['status'] ?></td>
-                <td><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></td>
+                
+                <td><a href='/company/<?= $company['companyID'] ?>'><?= $company['companyName'] ?></a></td>
+                <td><?= $company['status'] ?></td> 
+                <td><a href='/profile/<?= $company['id'] ?>'><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></a></td>
                 <td><?= $company['dateAdded'] ?></td>
             </tr>
 
