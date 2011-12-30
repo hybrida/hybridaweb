@@ -16,18 +16,12 @@
 
 <?
     // henter ut informasjon om innlogging
-
-    $this->pdo = Yii::app()->db->getPdoInstance();
-
-    $loginInfo = array(
-        'id' => $this->id
-    );
-    $sql = "SELECT lastLogin FROM user_new WHERE id = :id";
-                    
-    $query = $this->pdo->prepare($sql);
-    $query->execute($loginInfo);
-
-    $loginInfo = $query->fetchAll(PDO::FETCH_ASSOC);
+    
+    $sql = "SELECt lastLogin FROM user_new WHERE id = ?";
+    $command = Yii::app()->db->createCommand($sql);
+    $query = $command->query(array(Yii::app()->user->id));
+    $loginInfo = $query->read();
+    
 ?>
 
 <? foreach($loginInfo as $info) : ?>
@@ -39,6 +33,7 @@
 <p>Fjern valgte elementer, velg alle</p>
 
 <p>
+<div id="BK-updatedelements-maintablebox">
 <table id="BK-updatedelements-maintable">
     <tr>
         <th>Merk</th>
@@ -48,4 +43,5 @@
         <th>Oppdatert av</th>
     </tr>
 </table>
+</divZ
 </p>
