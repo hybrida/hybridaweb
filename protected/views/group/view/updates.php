@@ -16,11 +16,18 @@
 
 <?
     // henter ut informasjon om innlogging
+
+    $this->pdo = Yii::app()->db->getPdoInstance();
     
-    $sql = "SELECt lastLogin FROM user_new WHERE id = ?";
-    $command = Yii::app()->db->createCommand($sql);
-    $query = $command->query(array(Yii::app()->user->id));
-    $loginInfo = $query->read();
+    $userID = Yii::app()->user->id;
+    
+    $loginInfo = array();
+    $sql = "SELECT lastLogin FROM user_new WHERE id = :userID";
+
+    $query = $this->pdo->prepare($sql);
+    $query->execute($loginInfo);
+    
+    $loginInfo = $query->fetchAll(PDO::FETCH_ASSOC);
     
 ?>
 
@@ -43,5 +50,5 @@
         <th>Oppdatert av</th>
     </tr>
 </table>
-</divZ
+</div>
 </p>
