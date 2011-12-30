@@ -30,8 +30,8 @@
     $loginInfo = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
-<? foreach($yearsum as $aYearSum) : ?>
-    <p>Sist innlogget: <?= $loginInfo['lastLogin'] ?></p>
+<? foreach($loginInfo as $info) : ?>
+    <p>Sist innlogget: <?= $info['lastLogin'] ?></p>
 <? endforeach ?>
 
 <p>Sist oppdatert:</p>
