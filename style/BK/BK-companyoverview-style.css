@@ -65,7 +65,13 @@
 	width: 100%;
 }
 
-/*F�lgende gjelder kun for statistikktabellen*/
+/*F�lgende gjelder kun for valgtabellen*/
+
+#BK-companyoverview-selectiontable{
+        vertical-align: top;
+        text-align: left;
+	width: 100%;
+}
 	
 #BK-companyoverview-selectiontable td{
         vertical-align: top;

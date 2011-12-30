@@ -14,7 +14,25 @@
 
 <h2>Oppdaterte elementer</h2>
 
-<p>Sist innlogget:</p>
+<?
+    // henter ut informasjon om innlogging
+
+    $this->pdo = Yii::app()->db->getPdoInstance();
+
+    $loginInfo = array(
+        'id' => $this->id
+    );
+    $sql = "SELECT lastLogin FROM user_new WHERE id = :id";
+                    
+    $query = $this->pdo->prepare($sql);
+    $query->execute($loginInfo);
+
+    $loginInfo = $query->fetchAll(PDO::FETCH_ASSOC);
+?>
+
+<? foreach($yearsum as $aYearSum) : ?>
+    <p>Sist innlogget: <?= $loginInfo['lastLogin'] ?></p>
+<? endforeach ?>
 
 <p>Sist oppdatert:</p>
 
