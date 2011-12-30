@@ -1,0 +1,61 @@
+/*********************||| Frans Erstad, 2011 |||*****************************/
+
+
+
+/*stil for siden med oppdaterte elementer*/
+
+/*stil for hovedtabellen*/
+
+#BK-updatedelements-maintablebox{
+	width: 100%;
+	height: 1000px;
+	overflow-y: scroll;
+	}
+
+#BK-updatedelements-maintable{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	width: 100%;
+	}
+	
+#BK-updatedelements-maintable td{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+#BK-updatedelements-maintable th{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	}
+	
+#BK-updatedelements-maintable td input[type=checkbox] { 
+	display: block;
+	position: center; 
+	margin-left:auto; 
+	margin-right:auto;
+	}
+	
+/*stil for tabellen med valgmuligheter*/
+
+#BK-updatedelements-selectiontable{
+	text-align: left;
+	width: 25%;
+	}
+	
+#BK-updatedelements-selectiontable td{
+	vertical-align: text-top;
+	}
+	
+#BK-updatedelements-selectiontable input[type=submit] { 
+	font-weight: bolder;
+	}
