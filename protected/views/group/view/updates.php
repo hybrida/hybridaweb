@@ -19,9 +19,9 @@
 
     $this->pdo = Yii::app()->db->getPdoInstance();
     
-    $userID = Yii::app()->user->id;
-    
-    $loginInfo = array();
+    $loginInfo = array(
+        'userID' => Yii::app()->user->id
+    );
     $sql = "SELECT lastLogin FROM user_new WHERE id = :userID";
 
     $query = $this->pdo->prepare($sql);
