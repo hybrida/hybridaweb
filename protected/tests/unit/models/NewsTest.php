@@ -146,4 +146,26 @@ class NewsTest extends PHPUnit_Framework_TestCase {
 		$news->save();
 		$this->assertNotNull($news->timestamp);
 	}
+	
+	public function test_getUrl_News() {
+		$news = new News;
+		$news->title = "title";
+		$news->content = "content";
+		$news->save();
+		
+		$expectedUrl = Yii::app()->createUrl("news/view",array("id" => $news->id));
+		$actual = $news->getViewUrl();
+		$this->assertEquals($expectedUrl, $actual);
+	}
+	
+	public function test_getUrl_Event() {
+		$event = new Event;
+		$event->save(false);
+		$news = new News;
+		$news->setParent("event", $event->id);
+		$news->save();
+		
+		$url = Yii::app()->createUrl("event/view",array("id" => $event->id));
+		$this->assertEquals($url,$news->getViewUrl());
+	}
 }

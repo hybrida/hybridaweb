@@ -176,5 +176,20 @@ class News extends CActiveRecord {
 		}
 		return $name;
 	}
-
+	
+	public function getViewUrl() {
+		if ($this->parentId && $this->parentType === "event") {
+			return $this->getEventViewUrl();
+		} else {
+			return $this->getNewsViewUrl();
+		}
+	}
+	
+	private function getEventViewUrl() {
+		return Yii::app()->createUrl("event/view",array("id" => $this->parentId));
+	}
+	private function getNewsViewUrl() {
+		return Yii::app()->createUrl("news/view",array("id" => $this->id));
+	}
+	
 }
