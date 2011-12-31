@@ -16,10 +16,10 @@
     <tr><td>Alternativ-Epost:   </td><td> <a href='mailto:<?= $altEmail ?>' ><?= $altEmail ?></a></td></tr>
     <tr><td>Hjemmeside:         </td><td> <a href='http://folk.ntnu.no/<?= $username ?>'>http://folk.ntnu.no/<?= $username ?></a>
     <tr><td>Telefon:            </td><td> <?= $phoneNumber ?></td></tr>
-    <tr><td>                    </td><td></td></tr>
+    <tr><td>                    </td><td> </td></tr>
     <tr><td>Kjønn:              </td><td> <?= $gender ?></td></tr>
-    <tr><td>Fødselsdato:        </td><td> <?= $birthdate ?></td></tr>
-    <tr><td>                    </td><td></td></tr>
+    <tr><td>Fødselsdato:        </td><td> <?= ($birthdate == 0000-00-00 ? " " : $birthdate) ?></td></tr>
+    <tr><td>                    </td><td> </td></tr>
     <tr><td>Spesialisering:     </td><td> <a href='<?= Yii::app()->baseURL ?>/#'><?= ( !$name ? " " : $name ) ?></td></tr>
     <tr><td>Avgangsår:          </td><td> <a href='<?= Yii::app()->baseURL ?>/profile/all/<?= $graduationYear ?>'><?= $graduationYear ?></td></tr>
     <tr><td>Medlemskap:         </td><td> <?= ($member ? "Medlem" : "Ikke Medlem") ?></td></tr>
