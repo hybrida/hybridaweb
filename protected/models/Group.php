@@ -220,7 +220,7 @@ class Group extends CActiveRecord {
                 FROM membership_group AS mg 
                 LEFT JOIN user_new AS un ON mg.userId = un.id
                 WHERE mg.groupId = :gID
-                AND mg.start <= ':year1-:start-15' AND mg.end >= ':year2-:end-15'";
+                AND mg.start <= (:year1-:start-15) AND mg.end >= (:year2-:end-15)";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
