@@ -25,8 +25,8 @@ class Profile {
             'year' => $year
         );
         
-        $sql = "SELECT ui.id, ui.firstName, ui.middleName, ui.lastName, ui.imageId
-                FROM user_new AS ui WHERE graduationYear = :year";
+        $sql = "SELECT ui.id, ui.firstName, ui.middleName, ui.lastName, ui.imageId, ui.member, siteId, name
+                FROM user_new AS ui WHERE graduationYear = :year LEFT JOIN spesialization ON specialization = specialization.id";
 		$query = $this->pdo->prepare($sql);
         $query->execute($data);
         $result = $query->fetchAll(PDO::FETCH_ASSOC);
