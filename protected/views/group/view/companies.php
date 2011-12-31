@@ -133,7 +133,7 @@
                         <tr bgcolor='#FFFFFF'>
             <? } ?>
                 
-                <td><a href="<?= Yii::app()->baseUrl ?>/BK/company/<?= $company['companyID'] ?>"><?= $company['companyName'] ?></a></td>
+                <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $company['companyID'] ?>"><?= $company['companyName'] ?></a></td>
                 <td><?= $company['status'] ?></td> 
                 <td><a href='/profile/<?= $company['id'] ?>'><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></a></td>
                 <td><?= $company['dateAdded'] ?></td>
