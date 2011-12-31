@@ -183,9 +183,9 @@ class Group extends CActiveRecord {
                         'gID' => $this->id
         );
         
-        $sql = "(SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin, admin
-        FROM membership_group AS mg LEFT JOIN user_new AS un ON mg.userId = un.id) LEFT JOIN groups ON groups.id = :gID
-        WHERE mg.groupId = :gID AND (mg.end > DATE(NOW()) OR mg.end = '0000-00-00')";
+        $sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin, admin
+                FROM membership_group AS mg LEFT JOIN user_new AS un ON mg.userId = un.id LEFT JOIN groups ON groups.id = :gID 
+                WHERE mg.groupId = :gID AND (mg.end > DATE(NOW()) OR mg.end = '0000-00-00')";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

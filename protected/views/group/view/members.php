@@ -29,7 +29,7 @@
                 <td><?= $user['username'] ?></td>
                 <td><?= $user['phoneNumber'] ?></td>
                 <td><?= $user['lastLogin'] ?></td>
-                <td><?= $user['admin'] ?></td>
+                <td><?= ($user['admin'] = $user['id'] ? "Admin" : " ") ?></td>
             </tr>
 
             <? $counter++; ?>
