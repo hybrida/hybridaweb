@@ -10,7 +10,7 @@
     <table>
         
         <tr>
-            <th></th><th>Navn</th><th>Stilling</th><th>Brukernavn</th><th>Telefonnummer</th><th>Sist innlogget</th>
+            <th></th><th>Navn</th><th>Stilling</th><th>Brukernavn</th><th>Telefonnummer</th><th>Sist innlogget</th><th>Admin</th>
         </tr>
         
         <? $counter = 1; ?>
@@ -29,6 +29,7 @@
                 <td><?= $user['username'] ?></td>
                 <td><?= $user['phoneNumber'] ?></td>
                 <td><?= $user['lastLogin'] ?></td>
+                <td><?= $user['admin'] ?></td>
             </tr>
 
             <? $counter++; ?>
