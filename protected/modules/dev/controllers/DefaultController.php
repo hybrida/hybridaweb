@@ -1,16 +1,10 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of LocalLogin
- *
- * @author sigurd
- */
-class DevController extends CController {
+class DefaultController extends Controller {
+	
+	public function actionIndex() {
+		$this->render('index');
+	}
 
 	public function actionLogin($id) {
 		$identity = new DefaultIdentity($id);
@@ -22,12 +16,14 @@ class DevController extends CController {
 	
 	public function actionDumpNews() {
 		$lipsum = new LoremIpsumGenerator();
+		$i = 0;
 		for ($i = 0; $i < 150; $i++) {
 			$news = new News;
 			$news->title = "Lipsum $i";
 			$news->content = $lipsum->getContent(rand(100, 700));
 			$news->save();
 		}
+		echo "Suksess: Laget $i nye dummy-elementer";
 	}
 	
 	public function actionCleanDB() {
