@@ -18,7 +18,7 @@
 		</div>
 		<div class="topBar">
 			<div class="topBarItem"></div>
-			<h1><?= $model->title ?></h1>
+			<h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
 		</div>
 		<div class="articleContent">
 			<div align="right">
