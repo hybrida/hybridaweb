@@ -91,6 +91,9 @@ class NewsEventForm extends CFormModel {
 		if ($news->parentType == "event" && $news->parentId !== null) {
 			$this->eventModel = Event::model()->findByPk($news->parentId);
 		}
+		if (!$this->eventModel) {
+			$this->eventModel = new Event;
+		}
 	}
 
 	private function initEventModel($event) {

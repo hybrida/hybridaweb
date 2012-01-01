@@ -1,49 +1,5 @@
 <?php
 
-/*
-  Hva som maa testes
-
-  SetUp
-  =====
-
-  Lager bruker aa teste mot
-  Lage gruppe og teste mot
-
-  Tester
-  ======
-
-  Lagring opp mot database
-  ========================
-
- * Sjekke at den kaster exceptions
- * Den lagrer riktig naar:
-  bare news
-  bare event
-  bare event og news
-  alle tre
-
- * ikke lagrer
-  event naar hasEvent = 0
-  signup naar hasSignup = 0
-  signup naar hasEvent = 0
-
-  Tilganger
-  =================
- * Laster dem opp
-
- * Forskjellige tilganger til forskjellige brukere
-  Admin
-  All tilgang
-  Gruppesjef
-  All tilgang paa gruppen
-  Legge ut paa hovedsiden
-  Redigere sine egne
-  Bruker:
-  Legge ut paa gruppesider
-  Redigere sine egne paa gruppesider
-
- */
-
 class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 	private $session;
@@ -69,7 +25,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 	public function test_constructor_EventModel() {
 		$eventModel = new Event;
-		$eventModel->title = "TestCase123";
+		$eventModel->title = "title";
 		$model = new NewsEventForm($eventModel);
 		$this->assertEquals($eventModel, $model->getEventModel());
 	}
@@ -77,7 +33,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_constructor_NewsInput_EventModelIsCreated() {
 		$newsModel = new News;
 		$eventModel = new Event;
-		$eventModel->title = "TestCase";
+		$eventModel->title = "title";
 		$eventModel->save();
 		$newsModel->setParent("event", $eventModel->id);
 		$newsModel->save();
@@ -90,7 +46,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_constructor_EventInput_NewsModelIsCreated() {
 		$newsModel = new News;
 		$eventModel = new Event;
-		$eventModel->title = "TestCase";
+		$eventModel->title = "title";
 		$eventModel->save();
 		$newsModel->setParent("event", $eventModel->getPrimaryKey());
 		$newsModel->save();
@@ -263,10 +219,10 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$input = array(
 			'news' => array(
-				"title" => "heisann",
+				"title" => "title",
 			),
 			"event" => array(
-				'title' => "hei",
+				'title' => "title",
 			)
 		);
 
@@ -287,10 +243,10 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$input = array(
 			'news' => array(
-				'title' => __CLASS__,
+				'title' => 'title',
 			),
 			'event' => array(
-				'location' => "hei på deg"
+				'location' => "location"
 			),
 			'hasEvent' => 1,
 			'hasSignup' => 0,
@@ -313,7 +269,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 		$model = new NewsEventForm(new News);
 		$input = array(
 			'news' => array(
-				'title' => 'News Title',
+				'title' => 'title',
 			),
 			'event' => array(
 				'begin' => '2011-11-30 20:55:26',
@@ -343,7 +299,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	}
 
 	public function test_attributesGetsLoaded() {
-		$title = "TiTLE";
+		$title = "title";
 		$content = "CONTENT";
 		$news = new News;
 		$news->title = $title;
@@ -364,10 +320,10 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$input = array(
 			'news' => array(
-				"title" => "heisann",
+				"title" => "title",
 			),
 			"event" => array(
-				'title' => "hei",
+				'title' => "title",
 			)
 		);
 
@@ -412,7 +368,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_has_formByNews() {
 		$news = new News;
 		$event = new Event;
-		$event->title = "TestCase";
+		$event->title = "title";
 		$event->save();
 		$news->setParent("event", $event->id);
 		$news->save();
@@ -424,7 +380,7 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 	public function test_has_formByEvent() {
 		$news = new News;
 		$event = new Event;
-		$event->title = "TestCase";
+		$event->title = "title";
 		$event->save();
 		$news->setParent("event", $event->id);
 		$news->save();
@@ -432,6 +388,18 @@ class NewsEventFormTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertEquals(1, $model->hasEvent, "hasEvent should be 1");
 		$this->assertEquals(0, $model->hasSignup, "hasSignup should be 0");
+	}
+	
+	public function test_NewsHasNonExistingParents_actLikeNewsHasNoParents() {
+		$news = new News;
+		$news->title="title";
+		$news->content="content";
+		$news->author=381;
+		$news->setParent("event", 98765);
+		$news->save();
+		
+		$model = new NewsEventForm($news);
+		// Should not throw Exception
 	}
 
 }

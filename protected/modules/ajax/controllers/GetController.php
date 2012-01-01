@@ -168,8 +168,8 @@ class GetController extends Controller{
         ob_start();
 		*/
         
-        
-        if(GateKeeper::hasAccess('event', $eId)){
+        $gatekeeper = new GateKeeper;
+        if($gatekeeper->hasAccess('event', $eId)){
             
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
             if(isset($_REQUEST['type'])) {               
