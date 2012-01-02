@@ -122,13 +122,21 @@
 <p><h3>Alumnistudenter:</h3>
 
 <?
+    //sorterer etter uteksamineringsår som standard
+    $_SESSION['orderBy'] = 'graduationYear';
+    
+    //denne if-setningen lytter til om variabelen som siden skal sorteres etter endres
+    if (isset($_GET['orderBy'])) { 
+	$_SESSION['orderBy'] = $_GET['orderBy'];
+    }
+    
     // henter ut informasjon om alumnistudentene
 
     $this->pdo = Yii::app()->db->getPdoInstance();
 
     $alumnies = array();
     $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription FROM user_new 
-    WHERE graduationYear <= now()";
+    WHERE graduationYear <= now() ORDER BY ".$_SESSION['orderBy']." DESC, graduationYear DESC";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($alumnies);
@@ -140,8 +148,8 @@
 <div id="BK-alumnilist-alumnilistbox">
 <table id="BK-alumnilist-maintable">
     <tr>
-         <th>Navn</th>
-        <th>Uteksamineringsår</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=firstName">Navn</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=graduationYear">Uteksamineringsår</th>
         <th>Bedrift</th>
         <th>Stillingsbeskrivelse</th>
         <th>Arbeidssted</th>
