@@ -102,14 +102,13 @@
     
     $companies = array();
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
-    LEFT JOIN user_new ON contactorID = id ORDER BY ".$_SESSION['orderBy']." ASC";
+    LEFT JOIN user_new ON contactorID = id ORDER BY ".$_SESSION['orderBy']." ASC, companyName ASC";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($companies);
 
     $companies = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<?= $_SESSION['orderBy'] ?>
 
 <div id="BK-companyoverview-container">
 <p>
