@@ -23,7 +23,9 @@ class SiteController extends Controller {
 
 	public function actionInnsidaLogin($data, $sign, $target) {
 		ob_clean();
-		$identity = new InnsidaIdentity($data, $sign, $target);
+		
+		$SSOclient = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR'], $target);
+		$identity = new InnsidaIdentity($SSOclient);
 
 		if ($identity->authenticate()) {
 			user()->login($identity);

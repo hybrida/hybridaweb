@@ -121,40 +121,6 @@ class News extends CActiveRecord {
 		return parent::beforeSave();
 	}
 
-	public function getEventId() {
-
-		if (!$this->parentIsEvent())
-			return false;
-
-		$sql = "SELECT * FROM event WHERE id = :id";
-		$stmt = Yii::app()->db->getPdoInstance->prepare($sql);
-		$stmt->bindValue("id", $this->parentId);
-		$stmt->execute(PDO::FETCH_ASSOC);
-		$eventInfo = $stmt->fetch();
-
-		if ($eventInfo) {
-			return $eventInfo['id'];
-		}
-		return false;
-	}
-
-	function getEvent() {
-		if (!$this->parentIsEvent())
-			return null;
-
-		$sql = "SELECT * FROM event WHERE id = :id";
-		$stmt = Yii::app()->db->getPdoInstance->prepare($sql);
-		$stmt->bindValue("id", $this->parentId);
-		$stmt->execute(PDO::FETCH_ASSOC);
-		$eventInfo = $stmt->fetch();
-
-		return $eventInfo ? $eventInfo : null;
-	}
-
-	private function parentIsEvent() {
-		return!$this->getIsNewRecord() && !$this->parentType == "event";
-	}
-
 	public function setParent($type, $id) {
 		$this->parentType = $type;
 		$this->parentId = $id;
