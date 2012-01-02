@@ -119,8 +119,8 @@
         <tr>
             <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=companyName">Bedrift</th>
             <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=status">Status</th>
-            <th>Kontaktet av</th>
-            <th>Dato lagt til</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=firstName">Kontaktet av</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=dateAdded">Dato lagt til</th>
         </tr>
       
         <? foreach($companies as $company) : ?>
