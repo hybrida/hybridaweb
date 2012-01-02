@@ -116,7 +116,7 @@
 
     <table id="BK-companyoverview-maintable">
         <tr>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $this->groupId ?>/Bedrifter?orderBy=companyName">Bedrift</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $group->id ?>/Bedrifter?orderBy=companyName">Bedrift</th>
             <th>Status</th>
             <th>Kontaktet av</th>
             <th>Dato lagt til</th>
