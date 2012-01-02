@@ -88,9 +88,6 @@
 <p><h3>Bedrifter:</h3></p>
 
 <?
-    //sorterer etter bedriftsnavn som standard
-    $orderBy = 'firstName';
-
     //denne if-setningen lytter til om variabelen som tabellen skal sorteres etter endres
     if (isset($orderBy)) { 
 	$orderBy = $_GET['orderBy'];
@@ -99,8 +96,11 @@
     // henter ut informasjon om hver enkelt av bedriftene 
 
     $this->pdo = Yii::app()->db->getPdoInstance();
-
-    $companies = array();
+    
+    //sorterer etter bedriftsnavn som standard
+    $companies = array(
+        'orderBy' => firstName
+    );
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
     LEFT JOIN user_new ON contactorID = id ORDER BY :orderBy ASC, firstName ASC";
 
