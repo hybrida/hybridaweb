@@ -10,7 +10,7 @@
     <table>
         
         <tr>
-            <th></th><th>Navn</th><th>Stilling</th><th>Brukernavn</th><th>Telefonnummer</th><th>Sist innlogget</th><th>Admin</th>
+            <th></th><th>Navn</th><th>Stilling</th><th>Brukernavn</th><th>Telefonnummer</th><th>Sist innlogget</th><th></th>
         </tr>
         
         <? $counter = 1; ?>

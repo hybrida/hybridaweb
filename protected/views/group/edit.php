@@ -29,6 +29,11 @@
 <p>
 <div id="membertable">
     <table>
+        
+        <tr>
+            <th></th><th>Navn</th><th>Stilling</th><th>Medlem siden</th><th></th>
+        </tr>
+        
         <? foreach ($members as $member): ?>
 
             <? if($counter % 2){ ?>
@@ -36,9 +41,11 @@
             <?	}else{ ?>
                 <tr bgcolor='#FFFFFF'>
             <? } ?>
-                    
+                
+                <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $member['imageId'] ?>/size/3'/></td>
                 <td><a href='<?= Yii::app()->baseURL ?>/profile/<?= $member['id'] ?>'> <?= $member['firstName'] . " " . $member['middleName'] . " " . $member['lastName'] ?></a></td>
                 <td><?= $member['comission'] ?></td>
+                <td><?= $member['start'] ?></td>
                 <td><a href='<?= Yii::app()->baseURL ?>/get/group/?gId=<?= $group['id'] ?>&userId=<?= $member['id'] ?>&type=delMember'>Slett</a></td>
             </tr>
             
