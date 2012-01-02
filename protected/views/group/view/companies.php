@@ -88,13 +88,13 @@
 <p><h3>Bedrifter:</h3></p>
 
 <?
-    // henter ut informasjon om hver enkelt av bedriftene
+    // henter ut informasjon om hver enkelt av bedriftene, sorterer etter bedriftsnavn som standard
 
     $this->pdo = Yii::app()->db->getPdoInstance();
 
     $companies = array();
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
-    LEFT JOIN user_new ON contactorID = id";
+    LEFT JOIN user_new ON contactorID = id ORDER BY :orderBy ASC, firstName ASC";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($companies);
@@ -108,7 +108,7 @@
 
     <table id="BK-companyoverview-maintable">
         <tr>
-            <th>Bedrift</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $group->id ?>/Bedrifter?orderBy=companyName">Bedrift</th>
             <th>Status</th>
             <th>Kontaktet av</th>
             <th>Dato lagt til</th>

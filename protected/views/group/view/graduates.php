@@ -83,7 +83,7 @@
                             Bedrift
                         </th>
                         <th>
-                            Antall ansatte alumnistudenter
+                            Antall registrert ansatte alumnistudenter
                         </th>
                     </tr>
                 </table>
@@ -113,7 +113,7 @@
         </th>
 					
 	<th id="BK-alumnilist-rightcolumn">
-            Sum ansatte alumnistudenter:
+            Sum registrert ansatte alumnistudenter:
         </th>
     </tr>
 </table>

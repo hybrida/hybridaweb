@@ -1,5 +1,5 @@
 <div id='edit'>
-    <a href='<?= Yii::app()->baseURL ?>/profile/edit'>endre</a>
+    <a href='<?= Yii::app()->baseURL ?>/profile/edit'>Endre</a>
 </div>
 
 <h1> <?= $firstName ." ". $middleName ." ". $lastName ?> </h1>
