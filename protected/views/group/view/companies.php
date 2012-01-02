@@ -91,20 +91,25 @@
     //sorterer etter bedriftsnavn som standard
     $_SESSION['orderBy'] = 'companyName';
     
+    //denne if-setningen lytter til om variabelen som siden skal sorteres etter endres
+    if (isset($_GET['orderBy'])) { 
+	$_SESSION['orderBy'] = $_GET['orderBy'];
+    }
+    
     // henter ut informasjon om hver enkelt av bedriftene 
 
     $this->pdo = Yii::app()->db->getPdoInstance();
     
     $companies = array();
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
-    LEFT JOIN user_new ON contactorID = id ORDER BY ".$_GET['orderBy']." ASC";
+    LEFT JOIN user_new ON contactorID = id ORDER BY ".$_SESSION['orderBy']." ASC";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($companies);
 
     $companies = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<?= $_GET['orderBy'] ?>
+<?= $_SESSION['orderBy'] ?>
 
 <div id="BK-companyoverview-container">
 <p>
