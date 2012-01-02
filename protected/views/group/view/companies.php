@@ -102,10 +102,10 @@
         
         //denne if-setnigen sjekker hvilken rekkefølge siden skal sorteres i
         if ($_GET['order'] == 'ASC') {
-            $_SESSION['order'] = 'ASC';
+            $_SESSION['order'] = 'DESC';
         }
         else{
-            $_SESSION['order'] = 'DESC';
+            $_SESSION['order'] = 'ASC';
         }
     }
     
