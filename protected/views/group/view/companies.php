@@ -99,7 +99,7 @@
     
     //sorterer etter bedriftsnavn som standard
     $companies = array(
-        'orderBy' => $_SESSION['orderBy']
+        'orderBy' => $_GET['orderBy']
     );
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
     LEFT JOIN user_new ON contactorID = id ORDER BY :orderBy ASC, firstName ASC";
