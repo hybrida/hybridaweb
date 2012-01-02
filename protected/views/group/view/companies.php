@@ -88,11 +88,13 @@
 <p><h3>Bedrifter:</h3></p>
 
 <?
+    //sorterer etter bedriftsnavn som standard
+    $_SESSION['orderBy'] = 'companyName';
+    
     // henter ut informasjon om hver enkelt av bedriftene 
 
     $this->pdo = Yii::app()->db->getPdoInstance();
     
-    //sorterer etter bedriftsnavn som standard
     $companies = array();
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
     LEFT JOIN user_new ON contactorID = id ORDER BY ".$_GET['orderBy']." ASC";
