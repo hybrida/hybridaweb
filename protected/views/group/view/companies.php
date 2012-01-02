@@ -89,8 +89,8 @@
 
 <?
     //denne if-setningen lytter til om variabelen som tabellen skal sorteres etter endres
-    if (isset($orderBy)) { 
-	$orderBy = $_GET['orderBy'];
+    if (isset($_GET['orderBy'])) { 
+	$_SESSION['orderBy'] = $_GET['orderBy'];
     }
 
     // henter ut informasjon om hver enkelt av bedriftene 
@@ -99,7 +99,7 @@
     
     //sorterer etter bedriftsnavn som standard
     $companies = array(
-        'orderBy' => $_GET['orderBy']
+        'orderBy' => $_SESSION['orderBy']
     );
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
     LEFT JOIN user_new ON contactorID = id ORDER BY :orderBy ASC, firstName ASC";
