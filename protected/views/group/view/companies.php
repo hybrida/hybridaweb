@@ -129,10 +129,10 @@
 
     <table id="BK-companyoverview-maintable">
         <tr>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=companyName&order=<?= $_SESSION['order'] ?>">Bedrift</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=status&order=<?= $_SESSION['order'] ?>">Status</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=firstName&order=<?= $_SESSION['order'] ?>">Kontaktet av</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=dateAdded&order=<?= $_SESSION['order'] ?>">Dato lagt til</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=companyName&order=<?= $_GET['order'] ?>">Bedrift</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=status&order=<?= $_GET['order'] ?>">Status</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=firstName&order=<?= $_GET['order'] ?>">Kontaktet av</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=dateAdded&order=<?= $_GET['order'] ?>">Dato lagt til</th>
         </tr>
       
         <? foreach($companies as $company) : ?>
