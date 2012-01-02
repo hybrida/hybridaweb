@@ -109,7 +109,7 @@
 
     $companies = $query->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<?= $orderBy ?>
+<?= $_GET['orderBy'] ?>
 
 <div id="BK-companyoverview-container">
 <p>
