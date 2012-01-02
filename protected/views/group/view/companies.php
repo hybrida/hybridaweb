@@ -88,7 +88,15 @@
 <p><h3>Bedrifter:</h3></p>
 
 <?
-    // henter ut informasjon om hver enkelt av bedriftene, sorterer etter bedriftsnavn som standard
+    //sorterer etter bedriftsnavn som standard
+    $orderBy = 'firstName';
+
+    //denne if-setningen lytter til om variabelen som tabellen skal sorteres etter endres
+    if (isset($orderBy)) { 
+	$orderBy = $_GET['orderBy'];
+    }
+
+    // henter ut informasjon om hver enkelt av bedriftene 
 
     $this->pdo = Yii::app()->db->getPdoInstance();
 
