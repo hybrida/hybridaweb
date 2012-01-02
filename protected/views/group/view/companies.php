@@ -98,11 +98,9 @@
     $this->pdo = Yii::app()->db->getPdoInstance();
     
     //sorterer etter bedriftsnavn som standard
-    $companies = array(
-        'orderBy' => $_GET['orderBy']
-    );
+    $companies = array();
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
-    LEFT JOIN user_new ON contactorID = id ORDER BY :orderBy ASC";
+    LEFT JOIN user_new ON contactorID = id ORDER BY ".$_GET['orderBy']." ASC";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($companies);
