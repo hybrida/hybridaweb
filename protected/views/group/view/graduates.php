@@ -122,9 +122,9 @@
 <p><h3>Alumnistudenter:</h3>
 
 <?
-    //sorterer etter uteksamineringsår i synkende rekkefølge som standard
-    $_SESSION['orderBy'] = 'graduationYear';
-    $_SESSION['order'] = 'DESC';
+    //sorterer etter fornavn i stigende rekkefølge som standard
+    $_SESSION['orderBy'] = 'firstName';
+    $_SESSION['order'] = 'ASC';
     
     //denne if-setningen lytter til om variabelen som siden skal sorteres etter endres
     if (isset($_GET['orderBy'])) { 
