@@ -102,7 +102,7 @@
         'orderBy' => $_GET['orderBy']
     );
     $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
-    LEFT JOIN user_new ON contactorID = id ORDER BY :orderBy ASC, firstName ASC";
+    LEFT JOIN user_new ON contactorID = id ORDER BY :orderBy ASC";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($companies);
@@ -118,7 +118,7 @@
     <table id="BK-companyoverview-maintable">
         <tr>
             <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=companyName">Bedrift</th>
-            <th>Status</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=status">Status</th>
             <th>Kontaktet av</th>
             <th>Dato lagt til</th>
         </tr>
