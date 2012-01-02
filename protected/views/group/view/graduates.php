@@ -136,7 +136,7 @@
 
     $alumnies = array();
     $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription FROM user_new 
-    WHERE graduationYear <= now() ORDER BY ".$_SESSION['orderBy']." DESC, graduationYear DESC";
+    WHERE graduationYear <= now() ORDER BY ".$_SESSION['orderBy']." ASC, graduationYear DESC";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($alumnies);
