@@ -86,6 +86,41 @@
                             Antall registrert ansatte alumnistudenter
                         </th>
                     </tr>
+                    <?
+                        // henter ut statistikk for hver bedrift
+
+                        $this->pdo = Yii::app()->db->getPdoInstance();
+
+                        $companies = array();
+                        $sql = "SELECT companyName, COUNT(DISTINCT id) AS sum FROM user_new, company 
+                                WHERE companyID = workCompanyID GROUP BY companyName
+                                ORDER BY sum DESC, companyName ASC";
+
+                        $query = $this->pdo->prepare($sql);
+                        $query->execute($companies);
+
+                        $companies = $query->fetchAll(PDO::FETCH_ASSOC);
+                    ?>
+                
+                    <? $counter = 1; ?>
+        
+                    <? foreach($companies as $company) : ?>
+
+                        <? if($counter % 2){ ?>
+                            <tr bgcolor='#CCFFFF'>
+                        <?	}else{ ?>
+                            <tr bgcolor='#FFFFFF'>
+                        <? } ?>
+
+                            <td><?= $counter ?></td>
+                            <td><?= $company['companyName'] ?></td>
+                            <td><?= $company['sum'] ?></td>
+                        </tr>
+
+                        <? $counter++; ?>
+
+                    <? endforeach ?>
+                    
                 </table>
             </div>
 	</td>
@@ -113,7 +148,23 @@
         </th>
 					
 	<th id="BK-alumnilist-rightcolumn">
-            Sum registrert ansatte alumnistudenter:
+             <?
+                // henter ut den totale summen registrert ansatte alumnistudenter
+
+                $this->pdo = Yii::app()->db->getPdoInstance();
+
+                $companysum = array();
+                $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new, company WHERE companyID = workCompanyID";
+                    
+                $query = $this->pdo->prepare($sql);
+                $query->execute($companysum);
+
+                $companysum = $query->fetchAll(PDO::FETCH_ASSOC);
+                
+            ?>
+            <? foreach($companysum as $aCompanySum) : ?>
+                Sum registrert ansatte alumnistudenter: <?= $aCompanySum['sum'] ?>
+            <? endforeach ?>
         </th>
     </tr>
 </table>
@@ -148,8 +199,9 @@
     $this->pdo = Yii::app()->db->getPdoInstance();
 
     $alumnies = array();
-    $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription FROM user_new 
-    WHERE graduationYear <= now() ORDER BY ".$_SESSION['orderBy']." ".$_SESSION['order']."";
+    $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM user_new 
+            LEFT JOIN company ON companyID = workCompanyID
+            WHERE graduationYear <= now() ORDER BY ".$_SESSION['orderBy']." ".$_SESSION['order']."";
 
     $query = $this->pdo->prepare($sql);
     $query->execute($alumnies);
@@ -163,9 +215,9 @@
     <tr>
         <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=firstName&order=<?= $_SESSION['order'] ?>">Navn</th>
         <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=graduationYear&order=<?= $_SESSION['order'] ?>">Uteksamineringsår</th>
-        <th>Bedrift</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=companyName&order=<?= $_SESSION['order'] ?>">Bedrift</th>
         <th>Stillingsbeskrivelse</th>
-        <th>Arbeidssted</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=workPlace&order=<?= $_SESSION['order'] ?>">Arbeidssted</th>
         <th>Rediger</th>
     </tr>
 
@@ -181,9 +233,9 @@
                     
                 <td><a href='/profile/<?= $alumni['id'] ?>'> <?= $alumni['firstName'] ?> <?= $alumni['middleName'] ?> <?= $alumni['lastName'] ?></a></td>
                 <td><?= $alumni['graduationYear'] ?></td>
-                <td></td>
+                <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $alumni['companyID'] ?>"><?= $alumni['companyName'] ?></a></td>
                 <td><?= $alumni['workDescription'] ?></td>
-                <td></td>
+                <td><?= $alumni['workPlace'] ?></td>
                 <td>Rediger</td>
             </tr>
 
