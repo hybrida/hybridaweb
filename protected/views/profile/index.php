@@ -23,7 +23,7 @@
     <tr><td>Spesialisering:     </td><td> <a href='<?= Yii::app()->baseURL ?>/#'><?= ( !$name ? " " : $name ) ?></td></tr>
     <tr><td>Avgangsår:          </td><td> <a href='<?= Yii::app()->baseURL ?>/profile/all/<?= $graduationYear ?>'><?= $graduationYear ?></td></tr>
     <tr><td>Medlemskap:         </td><td> <?= ($member ? "Medlem" : "Ikke Medlem") ?></td></tr>
-    <tr><td>NTNU-Kortnummer:    </td><td> <?= $cardinfo ?></td></tr>
+    <tr><td>NTNU-Kortnummer:    </td><td> <?= ($cardinfo == 0 ? " " : $cardinfo) ?></td></tr>
     <tr><td>Beskrivelse:        </td><td> <?= $description ?></td></tr>
 </table>
         
