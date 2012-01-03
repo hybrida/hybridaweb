@@ -1,6 +1,6 @@
 <?php
 
-class GateKeeperTest extends PHPUnit_Framework_TestCase {
+class GateKeeperTest extends CTestCase {
 
 	private $userAccess = array(1, 10, 52, 56, 199);
 	private $session;

@@ -1,6 +1,6 @@
 <?php
 
-class SignupTest extends PHPUnit_Framework_TestCase {
+class SignupTest extends CTestCase {
 	
 	public function getSignupObject() {
 		$signup = new Signup;

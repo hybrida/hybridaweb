@@ -1,6 +1,6 @@
 <?php
 
-class NewsTest extends PHPUnit_Framework_TestCase {
+class NewsTest extends CTestCase {
 
 	private $session;
 
