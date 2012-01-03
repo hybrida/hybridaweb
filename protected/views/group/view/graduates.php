@@ -113,7 +113,7 @@
                         <? } ?>
 
                             <td><?= $counter ?></td>
-                            <td><?= $company['companyName'] ?></td>
+                            <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $company['companyID'] ?>"><?= $company['companyName'] ?></a></td>
                             <td><?= $company['sum'] ?></td>
                         </tr>
 
