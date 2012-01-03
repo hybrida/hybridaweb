@@ -1,16 +1,6 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of AccessRelation
- *
- * @author sigurd
- */
-class AccessRelationTest extends PHPUnit_Framework_TestCase {
+class AccessRelationTest extends CTestCase {
 
 	public function test_constructor_NewsModel_GetId() {
 		$news = new News;

@@ -1,6 +1,6 @@
 <?php
 
-class InnsidaIdentityTest extends PHPUnit_Framework_TestCase {
+class InnsidaIdentityTest extends CTestCase {
 	
 	private $user;
 	
