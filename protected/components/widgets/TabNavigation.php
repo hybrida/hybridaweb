@@ -16,6 +16,4 @@ class TabNavigation extends CWidget {
 		$this->render('tabNavigation',array('model' => $model, 'data'=>$data));
 	}
 
-	
-
 }
