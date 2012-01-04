@@ -34,6 +34,7 @@ return array(
 		'admin',
 		'ajax',
 		'dev',
+                'bk'
 	),
 	'components' => array(
 		'user' => array(

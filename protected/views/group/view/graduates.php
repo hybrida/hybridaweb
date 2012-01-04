@@ -92,7 +92,7 @@
                         $this->pdo = Yii::app()->db->getPdoInstance();
 
                         $companies = array();
-                        $sql = "SELECT companyName, COUNT(DISTINCT id) AS sum FROM user_new, company 
+                        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user_new, company 
                                 WHERE companyID = workCompanyID GROUP BY companyName
                                 ORDER BY sum DESC, companyName ASC";
 
