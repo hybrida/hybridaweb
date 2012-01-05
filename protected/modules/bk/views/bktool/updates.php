@@ -6,23 +6,6 @@
 
 <h2>Oppdaterte elementer</h2>
 
-<?
-    // henter ut informasjon om innlogging
-
-    $this->pdo = Yii::app()->db->getPdoInstance();
-    
-    $loginInfo = array(
-        'userID' => Yii::app()->user->id
-    );
-    $sql = "SELECT lastLogin FROM user_new WHERE id = :userID";
-
-    $query = $this->pdo->prepare($sql);
-    $query->execute($loginInfo);
-    
-    $loginInfo = $query->fetchAll(PDO::FETCH_ASSOC);
-    
-?>
-
 <? foreach($loginInfo as $info) : ?>
     <p>Sist innlogget: <?= $info['lastLogin'] ?></p>
 <? endforeach ?>

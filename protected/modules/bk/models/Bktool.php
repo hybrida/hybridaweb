@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of BkDefault
- *
- * @author frans
- */
 class BkTool {
         
     public function getCompanyOverview(){
@@ -107,6 +97,22 @@ class BkTool {
         $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM user_new 
                 LEFT JOIN company ON companyID = workCompanyID
                 WHERE graduationYear <= now()";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
+    
+    public function getLastLoginCurrentUser(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'userID' => Yii::app()->user->id
+        );
+        $sql = "SELECT lastLogin FROM user_new WHERE id = :userID";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

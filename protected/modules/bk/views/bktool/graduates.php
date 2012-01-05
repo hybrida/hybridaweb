@@ -16,16 +16,11 @@
 <p>
 <table id="BK-alumnilist-supporttable">
     <tr>
-	<td id="BK-alumnilist-leftcolumn">
+	<td>
             <div id="BK-alumnilist-yearbox">  
                 <table id="BK-alumnilist-yeartable">
                     <tr>
-                        <th>
-                            Årstall
-                        </th>
-                        <th>
-                            Antall alumnistudenter
-                        </th>
+                        <th>Årstall</th><th>Antall alumnistudenter</th>
                     </tr>
                     
                      <? $counter = 1; ?>
@@ -37,8 +32,7 @@
                         <?	}else{ ?>
                             <tr bgcolor='#FFFFFF'>
                         <? } ?>
-
-        
+                                
                             <td><?= $year['graduationYear'] ?></td>
                             <td><?= $year['sum'] ?></td>
                         </tr>
@@ -49,20 +43,26 @@
                 </table>
             </div>
         </td>
-					
-	<td id="BK-alumnilist-rightcolumn">
+    </tr>
+        
+    <tr>
+        <th id="BK-alumnilist-cumulationrow">
+            <? foreach($yearsum as $aYearSum) : ?>
+                Sum alumnistudenter: <?= $aYearSum['sum'] ?>
+            <? endforeach ?>
+        </th>
+    </tr>
+</table>
+</p>
+
+<p>
+<table id="BK-alumnilist-supporttable">
+    <tr>
+	<td>
             <div id="BK-alumnilist-companybox">
                 <table id="BK-alumnilist-companytable">
                     <tr>
-                        <th>
-                            Nr.
-                        </th>
-                        <th>
-                            Bedrift
-                        </th>
-                        <th>
-                            Antall registrert ansatte alumnistudenter
-                        </th>
+                        <th>Nr.</th><th>Bedrift</th><th>Antall registrert ansatte alumnistudenter</th>
                     </tr>
     
                     <? $counter = 1; ?>
@@ -88,15 +88,8 @@
             </div>
 	</td>
     </tr>
-        
     <tr>
-        <th id="BK-alumnilist-leftcolumn">
-            <? foreach($yearsum as $aYearSum) : ?>
-                Sum alumnistudenter: <?= $aYearSum['sum'] ?>
-            <? endforeach ?>
-        </th>
-					
-	<th id="BK-alumnilist-rightcolumn">
+	<th id="BK-alumnilist-cumulationrow">
             <? foreach($companysum as $aCompanySum) : ?>
                 Sum registrert ansatte alumnistudenter: <?= $aCompanySum['sum'] ?>
             <? endforeach ?>

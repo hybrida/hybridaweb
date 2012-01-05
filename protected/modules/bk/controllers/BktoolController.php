@@ -13,7 +13,11 @@ class BktoolController extends Controller {
 	}
 
 	public function actionUpdates() {
-		$this->render('updates');
+                $bkTool = new Bktool();
+		$data = array();
+                $data['loginInfo'] = $bkTool->getLastLoginCurrentUser();
+                
+		$this->render('updates', $data);
 	}
 
 	public function actionCompanyOverview() {
