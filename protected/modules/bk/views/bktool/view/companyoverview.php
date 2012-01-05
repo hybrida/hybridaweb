@@ -87,52 +87,16 @@
 
 <p><h3>Bedrifter:</h3></p>
 
-<?
-    //sorterer etter bedriftsnavn i stigende rekkefølge som standard
-    $_SESSION['orderBy'] = 'companyName';
-    $_SESSION['order'] = 'ASC';
-    
-    //denne if-setningen lytter til om variabelen som siden skal sorteres etter endres
-    if (isset($_GET['orderBy'])) { 
-	$_SESSION['orderBy'] = $_GET['orderBy'];
-    }
-    
-    //denne if-setningen lytter til om rekkefølgen som siden skal sorteres etter endres
-    if (isset($_GET['order'])) {
-        
-        //denne if-setnigen sjekker hvilken rekkefølge siden skal sorteres i
-        if ($_GET['order'] == 'ASC') {
-            $_SESSION['order'] = 'DESC';
-        }
-        else{
-            $_SESSION['order'] = 'ASC';
-        }
-    }
-    
-    // henter ut informasjon om hver enkelt av bedriftene 
-
-    $this->pdo = Yii::app()->db->getPdoInstance();
-    
-    $companies = array();
-    $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
-    LEFT JOIN user_new ON contactorID = id ORDER BY ".$_SESSION['orderBy']." ".$_SESSION['order']."";
-
-    $query = $this->pdo->prepare($sql);
-    $query->execute($companies);
-
-    $companies = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
-
 <div id="BK-companyoverview-container">
 <p>
 <div id="BK-companyoverview-maintablebox">
 
     <table id="BK-companyoverview-maintable">
         <tr>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=companyName&order=<?= $_SESSION['order'] ?>">Bedrift</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=status&order=<?= $_SESSION['order'] ?>">Status</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=firstName&order=<?= $_SESSION['order'] ?>">Kontaktet av</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=dateAdded&order=<?= $_SESSION['order'] ?>">Dato lagt til</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=companyName">Bedrift</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=status&order">Status</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=firstName">Kontaktet av</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=dateAdded">Dato lagt til</th>
         </tr>
       
         <? foreach($companies as $company) : ?>

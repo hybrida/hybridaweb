@@ -1,6 +1,6 @@
 <?php
 
-class DefaultController extends Controller
+class BkToolController extends Controller
 {
         protected $title = 'Hybrida Bedriftskomité';
         
@@ -21,7 +21,11 @@ class DefaultController extends Controller
         
         public function actionCompanyOverview()
 	{
-            $this->render('view/companyoverview');
+            $bkTool = new BkTool();
+            $data = array();
+            $data['companies'] = $bkTool->getCompanyOverview();
+            
+            $this->render('view/companyoverview', $data);
 	}
         
         public function actionGraduates()
