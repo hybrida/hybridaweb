@@ -35,8 +35,73 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user_new WHERE graduationYear <= now()
+        $sql = "SELECT DISTINCT graduationYear FROM user_new WHERE graduationYear <= now() ORDER BY graduationYear DESC";
+                    
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
+    
+    public function getAllGraduationYearStudents(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array();
+        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user_new 
+                WHERE graduationYear <= now() GROUP BY graduationYear ORDER BY graduationYear DESC";
+                    
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;     
+    }
+    
+    public function getAllEmployedGraduationYearStudents(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array();
+        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user_new, company 
+                WHERE graduationYear <= now() AND workCompanyID = companyID 
                 GROUP BY graduationYear ORDER BY graduationYear DESC";
+                    
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;          
+    }
+    
+    public function getGraduationCompaniesByYear($year){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'graduationYear' => $year
+        );
+        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user_new, company 
+                WHERE companyID = workCompanyID AND graduationYear = :graduationYear GROUP BY companyName
+                ORDER BY sum DESC, companyName ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;    
+    }
+    
+    public function getGraduationCompaniesByYearSum($year){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'graduationYear' => $year
+        );
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new, company 
+                WHERE companyID = workCompanyID AND graduationYear = :graduationYear";
                     
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

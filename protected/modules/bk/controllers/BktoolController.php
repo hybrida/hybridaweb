@@ -34,6 +34,8 @@ class BktoolController extends Controller {
 		$bkTool = new Bktool();
 		$data = array();
 		$data['years'] = $bkTool->getAllGraduationYears();
+                $data['yearstudents'] = $bkTool->getAllGraduationYearStudents();
+                $data['yearemployees'] = $bkTool->getAllEmployedGraduationYearStudents();
 		$data['yearsum'] = $bkTool->getAllGraduationYearsSum();
 		$data['companies'] = $bkTool->getAllGraduationCompanies();
 		$data['companysum'] = $bkTool->getAllGraduationCompaniesSum();
@@ -55,4 +57,18 @@ class BktoolController extends Controller {
 		$this->render('presentations');
 	}
 
+        public function actionGraduationyear($graduationYear) {
+                $bkTool = new Bktool();
+		$data = array();
+		$data['years'] = $bkTool->getAllGraduationYears();
+                $data['yearstudents'] = $bkTool->getAllGraduationYearStudents();
+                $data['yearemployees'] = $bkTool->getAllEmployedGraduationYearStudents();
+		$data['yearsum'] = $bkTool->getAllGraduationYearsSum();
+		$data['companies'] = $bkTool->getAllGraduationCompanies();
+		$data['companysum'] = $bkTool->getAllGraduationCompaniesSum();
+		$data['yearcompanies'] = $bkTool->getGraduationCompaniesByYear($graduationYear);
+                $data['yearcompanysum'] = $bkTool->getGraduationCompaniesByYearSum($graduationYear);
+                
+		$this->render('graduationyear', $data);
+	}
 }

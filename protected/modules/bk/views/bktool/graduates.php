@@ -20,7 +20,7 @@
             <div id="BK-alumnilist-yearbox">  
                 <table id="BK-alumnilist-yeartable">
                     <tr>
-                        <th>Årstall</th><th>Antall alumnistudenter</th>
+                        <th>Årstall</th><th>Antall alumnistudenter</th><th>Antall registrert ansatte alumnistudenter</th>
                     </tr>
                     
                      <? $counter = 1; ?>
@@ -33,8 +33,21 @@
                             <tr bgcolor='#FFFFFF'>
                         <? } ?>
                                 
-                            <td><?= $year['graduationYear'] ?></td>
-                            <td><?= $year['sum'] ?></td>
+                            <td><?=CHtml::link($year['graduationYear'], array('graduationyear'), array('graduationYear' => $year['graduationYear']))?></td>
+                            <td>
+                                <? foreach($yearstudents as $yearstudent) : ?>
+                                    <? if($yearstudent['graduationYear'] == $year['graduationYear']){ ?>
+                                        <?= $yearstudent['sum'] ?>
+                                    <? } ?>
+                                <? endforeach ?>
+                            </td>
+                            <td>
+                                <? foreach($yearemployees as $yearemployee) : ?>
+                                    <? if($yearemployee['graduationYear'] == $year['graduationYear']){ ?>
+                                        <?= $yearemployee['sum'] ?>
+                                    <? } ?>
+                                <? endforeach ?>
+                            </td>
                         </tr>
 
                         <? $counter++; ?>
@@ -123,7 +136,7 @@
             <? } ?>
                     
                 <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
-                <td><?= $graduate['graduationYear'] ?></td>
+                <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear'), array('graduationYear' => $graduate['graduationYear']))?></td>
                 <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $graduate['companyID'] ?>"><?= $graduate['companyName'] ?></a></td>
                 <td><?= $graduate['workDescription'] ?></td>
                 <td><?= $graduate['workPlace'] ?></td>
