@@ -1,4 +1,4 @@
-<?php $this->renderPartial("menu", $menu); ?>
+<?php $this->renderPartial("menu", array()); ?>
 
 <?
     /**
@@ -9,7 +9,7 @@
 ?>
 
 <h1>
-    <?= $title ?>
+    <?= $this->title ?>
 </h1>
 
 <h2>Oppdaterte elementer</h2>

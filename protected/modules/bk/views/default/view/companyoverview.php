@@ -1,4 +1,4 @@
-<?php $this->renderPartial("menu", $menu); ?>
+<?php $this->renderPartial("menu", array()); ?>
 
 <?
     /**
@@ -9,7 +9,7 @@
 ?>
 
 <h1>
-    <?= $title ?>
+    <?= $this->title ?>
 </h1>
 
 <h2>Bedriftsoversikt</h2>
@@ -129,10 +129,10 @@
 
     <table id="BK-companyoverview-maintable">
         <tr>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=companyName&order=<?= $_SESSION['order'] ?>">Bedrift</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=status&order=<?= $_SESSION['order'] ?>">Status</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=firstName&order=<?= $_SESSION['order'] ?>">Kontaktet av</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Bedrifter?orderBy=dateAdded&order=<?= $_SESSION['order'] ?>">Dato lagt til</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=companyName&order=<?= $_SESSION['order'] ?>">Bedrift</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=status&order=<?= $_SESSION['order'] ?>">Status</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=firstName&order=<?= $_SESSION['order'] ?>">Kontaktet av</th>
+            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=dateAdded&order=<?= $_SESSION['order'] ?>">Dato lagt til</th>
         </tr>
       
         <? foreach($companies as $company) : ?>

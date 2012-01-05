@@ -1,4 +1,4 @@
-<?php $this->renderPartial("menu", $menu); ?>
+<?php $this->renderPartial("menu", array()); ?>
 
 <?
     /**
@@ -9,7 +9,7 @@
 ?>
 
 <h1>
-    <?= $title ?>
+    <?= $this->title ?>
 </h1>
 
 <h2>Alumni</h2>
@@ -213,11 +213,11 @@
 <div id="BK-alumnilist-alumnilistbox">
 <table id="BK-alumnilist-maintable">
     <tr>
-        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=firstName&order=<?= $_SESSION['order'] ?>">Navn</th>
-        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=graduationYear&order=<?= $_SESSION['order'] ?>">Uteksamineringsår</th>
-        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=companyName&order=<?= $_SESSION['order'] ?>">Bedrift</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Alumni?orderBy=firstName&order=<?= $_SESSION['order'] ?>">Navn</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Alumni?orderBy=graduationYear&order=<?= $_SESSION['order'] ?>">Uteksamineringsår</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Alumni?orderBy=companyName&order=<?= $_SESSION['order'] ?>">Bedrift</th>
         <th>Stillingsbeskrivelse</th>
-        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/<?= $id ?>/Alumni?orderBy=workPlace&order=<?= $_SESSION['order'] ?>">Arbeidssted</th>
+        <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Alumni?orderBy=workPlace&order=<?= $_SESSION['order'] ?>">Arbeidssted</th>
         <th>Rediger</th>
     </tr>
 

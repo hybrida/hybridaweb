@@ -13,4 +13,29 @@ class DefaultController extends Controller
 	{
             $this->render('view/calendar');
 	}
+        
+        public function actionUpdates()
+	{
+            $this->render('view/updates');
+	}
+        
+        public function actionCompanyOverview()
+	{
+            $this->render('view/companyoverview');
+	}
+        
+        public function actionGraduates()
+	{
+            $this->render('view/graduates');
+	}
+        
+        public function actionCompanyDistribution()
+	{
+            $this->render('view/companydistribution');
+	}
+        
+        public function actionPresentations()
+	{
+            $this->render('view/presentations');
+	}
 }
