@@ -1,12 +1,4 @@
-<?php $this->renderPartial("menu", array()); ?>
-
-<?
-    /**
-     * Side for oppdaterte elementer
-     *
-     * @author frans
-     */
-?>
+<?php $this->renderPartial("_menu", array()); ?>
 
 <h1>
     <?= $this->title ?>

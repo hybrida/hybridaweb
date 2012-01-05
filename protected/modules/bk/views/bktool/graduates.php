@@ -1,12 +1,5 @@
-<?php $this->renderPartial("menu", array()); ?>
+<?php $this->renderPartial("_menu", array()); ?>
 
-<?
-    /**
-     * Side for alumni
-     *
-     * @author frans
-     */
-?>
 
 <h1>
     <?= $this->title ?>

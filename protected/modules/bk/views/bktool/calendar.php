@@ -1,12 +1,4 @@
-<?php $this->renderPartial("menu", array()); ?>
-
-<?
-    /**
-     * Side for google calendar
-     *
-     * @author frans
-     */
-?>
+<?php $this->renderPartial("_menu", array()); ?>
 
 <h1>
     <h1><?= $this->title ?></h1>
