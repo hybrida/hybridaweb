@@ -3,6 +3,7 @@
 class BktoolController extends Controller {
 
 	protected $title = 'Hybrida Bedriftskomité';
+        protected $BkGroupId = 57;
 
 	public function actionIndex() {
 		$this->render('index');
@@ -42,7 +43,12 @@ class BktoolController extends Controller {
 	}
 
 	public function actionCompanyDistribution() {
-		$this->render('companydistribution');
+                $bkTool = new Bktool();
+		$data = array();
+                $data['members'] = $bkTool->getContactingMembersByStatus('Blir kontaktet');
+                $data['membercompanies'] = $bkTool->getMemberCompaniesByStatus('Blir kontaktet');
+               
+		$this->render('companydistribution', $data);
 	}
 
 	public function actionPresentations() {

@@ -121,4 +121,39 @@ class BkTool {
         
         return $data;
     }
+    
+    public function getContactingMembersByStatus($status){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'status' => $status
+        );
+        $sql = "SELECT DISTINCT user_new.id, firstName, middleName, lastName, image.id AS imageId
+                FROM company, user_new LEFT JOIN image ON userId = user_new.id 
+                WHERE contactorID = user_new.id AND status = :status ORDER BY firstName ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
+    
+    public function getMemberCompaniesByStatus($status){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'status' => $status
+        );
+        $sql = "SELECT id, companyID, companyName, status, dateAssigned, dateUpdated FROM user_new LEFT JOIN company 
+                ON id = contactorID WHERE status = :status ORDER BY firstName ASC, companyName ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;    
+    }
 }
