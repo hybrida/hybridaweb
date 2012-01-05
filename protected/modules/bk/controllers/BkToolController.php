@@ -21,7 +21,7 @@ class BkToolController extends Controller
         
         public function actionCompanyOverview()
 	{
-            $bkTool = new BkTool();
+            $bkTool = new Bktool();
             $data = array();
             $data['companies'] = $bkTool->getCompanyOverview();
             $data['statistics'] = $bkTool->getCompanyOverviewStatistics();
@@ -31,7 +31,7 @@ class BkToolController extends Controller
         
         public function actionGraduates()
 	{
-            $bkTool = new BkTool();
+            $bkTool = new Bktool();
             $data = array();
             $data['years'] = $bkTool->getAllGraduationYears();
             $data['yearsum'] = $bkTool->getAllGraduationYearsSum();
