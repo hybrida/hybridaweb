@@ -26,4 +26,18 @@ class BkTool {
         
         return $data;
     }
+    
+    public function getCompanyOverviewStatistics(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array();
+        $sql = "SELECT status, COUNT(DISTINCT companyName) AS sum FROM company GROUP BY status";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
 }

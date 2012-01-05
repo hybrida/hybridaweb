@@ -24,6 +24,7 @@ class BkToolController extends Controller
             $bkTool = new BkTool();
             $data = array();
             $data['companies'] = $bkTool->getCompanyOverview();
+            $data['statistics'] = $bkTool->getCompanyOverviewStatistics();
             
             $this->render('view/companyoverview', $data);
 	}

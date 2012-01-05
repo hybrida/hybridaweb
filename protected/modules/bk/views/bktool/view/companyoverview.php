@@ -16,21 +16,6 @@
 
 <p>Bedriftsoversikten er oversikten over alle bedrifter som Hybrida Bedriftskomité er, og har vært, i kontakt med.</p>
 
-<?
-    // henter ut statistikken tilknyttet bedriftsoversikten
-
-    $this->pdo = Yii::app()->db->getPdoInstance();
-
-    $statistics = array();
-    $sql = "SELECT status, COUNT(DISTINCT companyName) AS sum FROM company GROUP BY status";
-
-    $query = $this->pdo->prepare($sql);
-    $query->execute($statistics);
-
-    $statistics = $query->fetchAll(PDO::FETCH_ASSOC);
-?>
-
-
 <p>
     <table id="BK-companyoverview-supporttable">
         <tr>
@@ -76,7 +61,6 @@
             </td>
             <td>
                 <table id="BK-companyoverview-selectiontable">
-                    <tr><td>Fordeling av bedrifter</td></tr>
                     <tr><td>Legg til bedrift</td></tr>
                     <tr><td>Legg til bedriftspresentasjon</td></tr>
                 </table>
@@ -93,10 +77,10 @@
 
     <table id="BK-companyoverview-maintable">
         <tr>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=companyName">Bedrift</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=status&order">Status</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=firstName">Kontaktet av</th>
-            <th><a href="<?= Yii::app()->baseUrl ?>/group/view/Bedrifter?orderBy=dateAdded">Dato lagt til</th>
+            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Bedrift</th>
+            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Status</th>
+            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Kontaktet av</th>
+            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Dato lagt til</th>
         </tr>
       
         <? foreach($companies as $company) : ?>
