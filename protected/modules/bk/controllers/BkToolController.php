@@ -31,7 +31,15 @@ class BkToolController extends Controller
         
         public function actionGraduates()
 	{
-            $this->render('view/graduates');
+            $bkTool = new BkTool();
+            $data = array();
+            $data['years'] = $bkTool->getAllGraduationYears();
+            $data['yearsum'] = $bkTool->getAllGraduationYearsSum();
+            $data['companies'] = $bkTool->getAllGraduationCompanies();
+            $data['companysum'] = $bkTool->getAllGraduationCompaniesSum();
+            $data['graduates'] = $bkTool->getAllGraduates();
+            
+            $this->render('view/graduates', $data);
 	}
         
         public function actionCompanyDistribution()
