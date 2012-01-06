@@ -75,4 +75,13 @@ class BktoolController extends Controller {
                 
 		$this->render('graduationyear', $data);
 	}
+        
+        public function actionCompany($id){
+                $bkTool = new Bktool();
+		$data = array();
+                $data['companyId'] = $id;
+                $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
+                
+                $this->render('company', $data);
+        }
 }

@@ -30,7 +30,7 @@
                 <? if($company['id'] == $member['id']){ ?>
                     <tr bgcolor="#00CC00">
                         <td><?= $counter ?></td>
-                        <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $company['companyID'] ?>"><?= $company['companyName'] ?></a></td>
+                        <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                         <td><?= $company['status'] ?></td>
                         <td><?= $company['dateAssigned'] ?></td>
                         <td><?= $company['dateUpdated'] ?></td>

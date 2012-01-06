@@ -258,4 +258,21 @@ class BkTool {
         
         return $data;    
     }
+    
+    public function getCompanyContactInfoById($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT companyName, adress, phoneNumber, homepage, mail, postbox, postnumber, postplace
+                FROM company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;     
+    }
 }

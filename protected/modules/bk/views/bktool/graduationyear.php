@@ -92,7 +92,7 @@
                         <? } ?>
 
                             <td><?= $counter ?></td>
-                            <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $company['companyID'] ?>"><?= $company['companyName'] ?></a></td>
+                            <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                             <td><?= $company['sum'] ?></td>
                         </tr>
 
@@ -141,7 +141,7 @@
                         <? } ?>
 
                             <td><?= $counter ?></td>
-                            <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $company['companyID'] ?>"><?= $company['companyName'] ?></a></td>
+                            <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                             <td><?= $company['sum'] ?></td>
                         </tr>
 
@@ -187,7 +187,7 @@
                 <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $graduate['imageId'] ?>/size/3'/></td>
                 <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
                 <td><?= $graduate['name'] ?></td>
-                <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $graduate['companyID'] ?>"><?= $graduate['companyName'] ?></a></td>
+                <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
                 <td><?= $graduate['workDescription'] ?></td>
                 <td><?= $graduate['workPlace'] ?></td>
             </tr>
