@@ -5,6 +5,8 @@ class BktoolController extends Controller {
 	protected $title = 'Hybrida Bedriftskomité';
         protected $lineOfStudy = 'Ingeniørvitenskap og IKT';
         protected $bkGroupId = 57;
+        protected $oddRowColour = '#CCFFFF';
+        protected $evenRowColour = '#FFFFFF';
 
 	public function actionIndex() {
 		$this->render('index');
@@ -81,6 +83,8 @@ class BktoolController extends Controller {
 		$data = array();
                 $data['companyId'] = $id;
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
+                $data['employedGraduates'] = $bkTool->getEmployedGraduatesByCompanyId($id);
+                $data['employedGraduatesSum'] = $bkTool->getSumOfEmployedGraduatesByCompanyId($id);
                 
                 $this->render('company', $data);
         }

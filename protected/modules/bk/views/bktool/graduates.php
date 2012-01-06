@@ -28,11 +28,11 @@
         
                     <? foreach($graduationYears as $year) : ?>
 
-                        <? if($counter % 2){ ?>
-                            <tr bgcolor='#CCFFFF'>
-                        <?	}else{ ?>
-                            <tr bgcolor='#FFFFFF'>
-                        <? } ?>
+                    <? if($counter % 2){ ?>
+                        <tr bgcolor='<?= $this->oddRowColour ?>'>
+                    <?	}else{ ?>
+                        <tr bgcolor='<?= $this->evenRowColour ?>'>
+                    <? } ?>
                                 
                             <td><?=CHtml::link($year['graduationYear'], array('graduationyear?id='.$year['graduationYear']))?></td>
                             <td>
@@ -83,11 +83,11 @@
         
                     <? foreach($employingCompanies as $company) : ?>
 
-                        <? if($counter % 2){ ?>
-                            <tr bgcolor='#CCFFFF'>
-                        <?	}else{ ?>
-                            <tr bgcolor='#FFFFFF'>
-                        <? } ?>
+                    <? if($counter % 2){ ?>
+                        <tr bgcolor='<?= $this->oddRowColour ?>'>
+                    <?	}else{ ?>
+                        <tr bgcolor='<?= $this->evenRowColour ?>'>
+                    <? } ?>
 
                             <td><?= $counter ?></td>
                             <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
@@ -131,9 +131,9 @@
         <? foreach($graduates as $graduate) : ?>
            
             <? if($counter % 2){ ?>
-                <tr bgcolor='#CCFFFF'>
+                <tr bgcolor='<?= $this->oddRowColour ?>'>
             <?	}else{ ?>
-                <tr bgcolor='#FFFFFF'>
+                <tr bgcolor='<?= $this->evenRowColour ?>'>
             <? } ?>
                     
                 <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>

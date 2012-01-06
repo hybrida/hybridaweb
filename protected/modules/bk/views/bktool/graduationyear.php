@@ -30,11 +30,11 @@
         
                     <? foreach($graduationYears as $year) : ?>
 
-                        <? if($counter % 2){ ?>
-                            <tr bgcolor='#CCFFFF'>
-                        <?	}else{ ?>
-                            <tr bgcolor='#FFFFFF'>
-                        <? } ?>
+                    <? if($counter % 2){ ?>
+                        <tr bgcolor='<?= $this->oddRowColour ?>'>
+                    <?	}else{ ?>
+                        <tr bgcolor='<?= $this->evenRowColour ?>'>
+                    <? } ?>
                                 
                             <td><?=CHtml::link($year['graduationYear'], array('graduationyear?id='.$year['graduationYear']))?></td>
                             <td>
@@ -85,11 +85,11 @@
         
                     <? foreach($employingCompanies as $company) : ?>
 
-                        <? if($counter % 2){ ?>
-                            <tr bgcolor='#CCFFFF'>
-                        <?	}else{ ?>
-                            <tr bgcolor='#FFFFFF'>
-                        <? } ?>
+                    <? if($counter % 2){ ?>
+                        <tr bgcolor='<?= $this->oddRowColour ?>'>
+                    <?	}else{ ?>
+                        <tr bgcolor='<?= $this->evenRowColour ?>'>
+                    <? } ?>
 
                             <td><?= $counter ?></td>
                             <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
@@ -134,11 +134,11 @@
         
                     <? foreach($employingCompaniesByYear as $company) : ?>
 
-                        <? if($counter % 2){ ?>
-                            <tr bgcolor='#CCFFFF'>
-                        <?	}else{ ?>
-                            <tr bgcolor='#FFFFFF'>
-                        <? } ?>
+                    <? if($counter % 2){ ?>
+                        <tr bgcolor='<?= $this->oddRowColour ?>'>
+                    <?	}else{ ?>
+                        <tr bgcolor='<?= $this->evenRowColour ?>'>
+                    <? } ?>
 
                             <td><?= $counter ?></td>
                             <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
@@ -179,9 +179,9 @@
         <? foreach($graduatelistByYear as $graduate) : ?>
            
             <? if($counter % 2){ ?>
-                <tr bgcolor='#CCFFFF'>
+                <tr bgcolor='<?= $this->oddRowColour ?>'>
             <?	}else{ ?>
-                <tr bgcolor='#FFFFFF'>
+                <tr bgcolor='<?= $this->evenRowColour ?>'>
             <? } ?>
                 
                 <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $graduate['imageId'] ?>/size/3'/></td>

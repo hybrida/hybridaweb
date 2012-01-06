@@ -275,4 +275,38 @@ class BkTool {
         
         return $data;     
     }
+    
+    public function getEmployedGraduatesByCompanyId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, s.name, un.graduationYear FROM user_new AS un
+                LEFT JOIN spesialization AS s ON un.specialization = s.id
+                WHERE un.workCompanyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;     
+    }
+    
+    public function getSumOfEmployedGraduatesByCompanyId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new WHERE workCompanyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;     
+    }
 }

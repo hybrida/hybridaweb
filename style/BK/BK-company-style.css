@@ -1,13 +1,22 @@
-#BK-company-table{
+#BK-company-informationtable{
 	border-width: 1px;
 	border-spacing: 2px;
 	border-style: outset;
 	border-color: gray;
 	border-collapse: separate;
-	width: 60%;
+	width: 100%;
 	}
 	
-#BK-company-table td{
+#BK-company-informationtable td{
+	text-align: left;
+	width: 50%;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+
+#BK-company-informationtable th{
 	text-align: left;
 	width: 50%;
 	border-width: 1px;
@@ -19,60 +28,38 @@
 /* hovedtabellen som plasserer alle elementene*/
 	
 #BK-company-maintable{
-        vertical-align: text-top;
 	width: 100%;
 	}
         
 #BK-company-maintable td{
+        vertical-align: text-top;
 	border-width: 2px;
 	border-spacing: 2px;
 	border-style: outset;
 	border-color: gray;
-	background-color: white;
 	width: 50%;
 	}
-	
-/* bredden p� kolonnene er spesifisert nedenfor*/
-	
-#BK-company-supporttable{
-	text-align: left;
-	width: 100%;
-	}
-	
-#BK-company-leftcolumn{
-	border-width: 2px;
-	background-color: white;
-	padding: 1px;
-	border-style: outset;
-	border-color: gray;
-	vertical-align: text-top;
-	width: 60%;
-}
-
-#BK-company-leftcolumn:hover textarea{
+        
+#BK-company-maintable:hover textarea{
 	height: 150px;
 	width: 100%;
 	max-width: 100%;
 	}
 	
-#BK-company-leftcolumn input[type=submit] { 
+#BK-company-maintable input[type=submit] { 
 	font-weight: bolder;
 	}
-
-#BK-company-centercolumn{
-	width: 10%;
-	background-color: #D8D8D8;
-}
-
-#BK-company-rightcolumn{
-	border-width: 2px;
-	padding: 1px;
-	border-style: outset;
-	border-color: gray;
-	width: 30%;
-	background-color: white;
-	vertical-align: text-top;
-}
+        
+#BK-company-scrollcontainer{
+        height: 500px;
+	overflow-y: scroll;
+	}
+        
+/* kolonnene med redigeringslinker*/
+	
+#BK-company-editinglinks{
+        text-align: center;
+	}
 	
 /* tabellen som inneholder kommentarene*/
 
@@ -95,23 +82,31 @@
 	border-color: gray;
 	}
 
-/* tabellen som inneholder alumnistudentene*/
+/* tabellen som inneholder alumnistudentene og bedriftspresentasjoner*/
 
-#BK-company-alumnitable{
+#BK-company-listtable{
 	border-width: 1px;
 	border-spacing: 2px;
 	border-style: outset;
 	border-color: gray;
-	background-color: white;
 	border-collapse: separate;
 	width: 100%;
 	}
 	
-#BK-company-alumnitable td{
-	text-align: left;
+#BK-company-listtable td{
+	text-align: center;
 	border-width: 1px;
-	border-bottom: 3px;
-	padding: 5px;
+	border-bottom: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+        
+#BK-company-listtable th{
+	text-align: center;
+	border-width: 1px;
+	border-bottom: 1px;
+	padding: 1px;
 	border-style: inset;
 	border-color: gray;
 	}
