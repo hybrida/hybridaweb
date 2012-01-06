@@ -13,7 +13,7 @@
 </p>
 
 <p>
-    <? foreach($members as $member) : ?>
+    <? foreach($contactingMembers as $member) : ?>
         <h3><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $member['imageId'] ?>/size/3'/>
         <a href='/profile/<?= $member['id'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></h3>
         
@@ -26,14 +26,14 @@
             
             <? $counter = 1; ?>
             
-            <? foreach($membercompanies as $membercompany) : ?>
-                <? if($membercompany['id'] == $member['id']){ ?>
+            <? foreach($contactedCompanies as $company) : ?>
+                <? if($company['id'] == $member['id']){ ?>
                     <tr bgcolor="#00CC00">
                         <td><?= $counter ?></td>
-                        <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $membercompany['companyID'] ?>"><?= $membercompany['companyName'] ?></a></td>
-                        <td><?= $membercompany['status'] ?></td>
-                        <td><?= $membercompany['dateAssigned'] ?></td>
-                        <td><?= $membercompany['dateUpdated'] ?></td>
+                        <td><a href="<?= Yii::app()->baseUrl ?>/company/<?= $company['companyID'] ?>"><?= $company['companyName'] ?></a></td>
+                        <td><?= $company['status'] ?></td>
+                        <td><?= $company['dateAssigned'] ?></td>
+                        <td><?= $company['dateUpdated'] ?></td>
                     </tr>
                     
                     <? $counter++; ?>

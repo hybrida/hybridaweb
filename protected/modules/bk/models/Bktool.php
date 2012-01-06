@@ -45,7 +45,7 @@ class BkTool {
         return $data;
     }
     
-    public function getAllGraduationYearStudents(){
+    public function getNumberOfGraduatesGroupedByYear(){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
@@ -60,7 +60,7 @@ class BkTool {
         return $data;     
     }
     
-    public function getAllEmployedGraduationYearStudents(){
+    public function getNumberOfEmployedGraduatesGroupedByYear(){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
@@ -76,7 +76,7 @@ class BkTool {
         return $data;          
     }
     
-    public function getGraduationCompaniesByYear($year){
+    public function getEmployingCompaniesByYear($year){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
@@ -94,7 +94,7 @@ class BkTool {
         return $data;    
     }
     
-    public function getGraduationCompaniesByYearSum($year){
+    public function getSumOfEmployedGraduatesByYear($year){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
@@ -111,7 +111,7 @@ class BkTool {
         return $data;
     }
     
-    public function getAllGraduationCompanies(){
+    public function getAllEmployingCompanies(){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
@@ -127,7 +127,7 @@ class BkTool {
         return $data;
     }
     
-    public function getAllGraduationYearsSum(){
+    public function getSumOfAllGraduates(){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
@@ -141,7 +141,7 @@ class BkTool {
         return $data;
     }
     
-    public function getAllGraduationCompaniesSum(){
+    public function getSumOfAllEmployedGraduates(){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
@@ -171,6 +171,43 @@ class BkTool {
         return $data;
     }
     
+    public function getGraduatesByYear($year){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'graduationyear' => $year
+        );
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.workDescription, un.workPlace, c.companyName, c.companyID,
+                i.id AS imageId, s.name FROM user_new AS un 
+                LEFT JOIN company AS c ON c.companyID = un.workCompanyID 
+                LEFT JOIN image AS i ON un.id = i.userId
+                LEFT JOIN spesialization AS s ON un.specialization = s.id
+                WHERE graduationYear = :graduationyear";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;     
+    }
+    
+    public function getSumOfGraduatesByYear($year){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'graduationyear' => $year
+        );
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new WHERE graduationYear = :graduationyear";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;         
+    }
+    
     public function getLastLoginCurrentUser(){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
@@ -187,7 +224,7 @@ class BkTool {
         return $data;
     }
     
-    public function getContactingMembersByStatus($status){
+    public function getMembersByContactingStatus($status){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array(
@@ -205,7 +242,7 @@ class BkTool {
         return $data;
     }
     
-    public function getMemberCompaniesByStatus($status){
+    public function getCompaniesByContactingStatus($status){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array(

@@ -6,14 +6,15 @@
 <h2>Om</h2>
 
 <p>
-Denne modulen på HybridaWeb er et administrasjonsverktøy for <?= $this->title ?>. Verktøyet er laget for modellere sammenhengen mellom
-bedrifter og studenter for å hjelpe <?= $this->title ?> i dets arbeid. Verktøyet er modellert som en egen modul under HybridaWeb for enkelhets skyld.
+Denne modulen på nettsiden <?= Yii::app()->name ?> er et administrasjonsverktøy for <?= $this->title ?>. Verktøyet er laget for modellere sammenhengen mellom
+bedrifter og studenter for å hjelpe <?= $this->title ?> i dets arbeid. Verktøyet er modellert som en egen modul under nettsiden <?= Yii::app()->name ?> 
+for enkelhets skyld.
 </p>
 <p>
     <b>Virkemåten til verktøyet:</b>
     <ul>
-        <li>Kun medlemmer av gruppen til <?= $this->title ?> på HybridaWeb har tilgang til dette verktøyet. Medlemmer administreres på gruppesiden
-            som andre grupper.</li>
+        <li>Kun medlemmer av gruppen til <?= $this->title ?> på nettsiden <?= Yii::app()->name ?> har tilgang til dette verktøyet. 
+            Medlemmer administreres på gruppesiden som andre grupper.</li>
         <li>Alle med tilgang til denne modulen kan redigere, legge til og fjerne elementer.</li>
         <li>Alle endringer i modulen blir sporet og kommer som oppdateringer i feeden under <b>Oppdateringer</b> for hvert enkelt medlem.</li>
         <li>Hvis et medlem slettes fra gruppen til <?= $this->title ?>, blir bedriftene som er under kontakt av denne personen automatisk satt til

@@ -3,7 +3,8 @@
 class BktoolController extends Controller {
 
 	protected $title = 'Hybrida Bedriftskomité';
-        protected $BkGroupId = 57;
+        protected $lineOfStudy = 'Ingeniørvitenskap og IKT';
+        protected $bkGroupId = 57;
 
 	public function actionIndex() {
 		$this->render('index');
@@ -33,12 +34,12 @@ class BktoolController extends Controller {
 	public function actionGraduates() {
 		$bkTool = new Bktool();
 		$data = array();
-		$data['years'] = $bkTool->getAllGraduationYears();
-                $data['yearstudents'] = $bkTool->getAllGraduationYearStudents();
-                $data['yearemployees'] = $bkTool->getAllEmployedGraduationYearStudents();
-		$data['yearsum'] = $bkTool->getAllGraduationYearsSum();
-		$data['companies'] = $bkTool->getAllGraduationCompanies();
-		$data['companysum'] = $bkTool->getAllGraduationCompaniesSum();
+		$data['graduationYears'] = $bkTool->getAllGraduationYears();
+                $data['graduatesByYear'] = $bkTool->getNumberOfGraduatesGroupedByYear();
+                $data['employeesByYear'] = $bkTool->getNumberOfEmployedGraduatesGroupedByYear();
+		$data['graduatesSum'] = $bkTool->getSumOfAllGraduates();
+		$data['employingCompanies'] = $bkTool->getAllEmployingCompanies();
+		$data['employeesSum'] = $bkTool->getSumOfAllEmployedGraduates();
 		$data['graduates'] = $bkTool->getAllGraduates();
 
 		$this->render('graduates', $data);
@@ -47,8 +48,8 @@ class BktoolController extends Controller {
 	public function actionCompanyDistribution() {
                 $bkTool = new Bktool();
 		$data = array();
-                $data['members'] = $bkTool->getContactingMembersByStatus('Blir kontaktet');
-                $data['membercompanies'] = $bkTool->getMemberCompaniesByStatus('Blir kontaktet');
+                $data['contactingMembers'] = $bkTool->getMembersByContactingStatus('Blir kontaktet');
+                $data['contactedCompanies'] = $bkTool->getCompaniesByContactingStatus('Blir kontaktet');
                
 		$this->render('companydistribution', $data);
 	}
@@ -57,17 +58,20 @@ class BktoolController extends Controller {
 		$this->render('presentations');
 	}
 
-        public function actionGraduationyear($graduationYear) {
+        public function actionGraduationyear($id) {
                 $bkTool = new Bktool();
 		$data = array();
-		$data['years'] = $bkTool->getAllGraduationYears();
-                $data['yearstudents'] = $bkTool->getAllGraduationYearStudents();
-                $data['yearemployees'] = $bkTool->getAllEmployedGraduationYearStudents();
-		$data['yearsum'] = $bkTool->getAllGraduationYearsSum();
-		$data['companies'] = $bkTool->getAllGraduationCompanies();
-		$data['companysum'] = $bkTool->getAllGraduationCompaniesSum();
-		$data['yearcompanies'] = $bkTool->getGraduationCompaniesByYear($graduationYear);
-                $data['yearcompanysum'] = $bkTool->getGraduationCompaniesByYearSum($graduationYear);
+		$data['graduationYears'] = $bkTool->getAllGraduationYears();
+                $data['graduatesByYear'] = $bkTool->getNumberOfGraduatesGroupedByYear();
+                $data['employeesByYear'] = $bkTool->getNumberOfEmployedGraduatesGroupedByYear();
+		$data['graduatesSum'] = $bkTool->getSumOfAllGraduates();
+		$data['employingCompanies'] = $bkTool->getAllEmployingCompanies();
+		$data['employeesSum'] = $bkTool->getSumOfAllEmployedGraduates();
+		$data['employingCompaniesByYear'] = $bkTool->getEmployingCompaniesByYear($id);
+                $data['employeesSumByYear'] = $bkTool->getSumOfEmployedGraduatesByYear($id);
+                $data['graduatelistByYear'] = $bkTool->getGraduatesByYear($id);
+                $data['graduatesSumByYear'] = $bkTool->getSumOfGraduatesByYear($id);
+                $data['graduationyear'] = $id;
                 
 		$this->render('graduationyear', $data);
 	}

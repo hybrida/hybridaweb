@@ -6,7 +6,7 @@
 
 <h2>Bedriftsoversikt</h2>
 
-<p>Bedriftsoversikten er oversikten over alle bedrifter som Hybrida Bedriftskomité er, og har vært, i kontakt med.</p>
+<p>Bedriftsoversikten er oversikten over alle bedrifter som <?= $this->title ?> er, og har vært, i kontakt med.</p>
 
 <p>
     <table id="BK-companyoverview-supporttable">

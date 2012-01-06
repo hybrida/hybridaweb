@@ -8,7 +8,8 @@
 <h2>Alumniliste</h2>
 
 <p>
-    Alumnilisten er listen over alle studenter som er uteksaminert fra Ingeniørvitenskap og IKT, og hvor de har blitt ansatt rett etter studiet. Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
+    Alumnilisten er listen over alle studenter som er uteksaminert fra <?= $this->lineOfStudy ?>, og hvor de har blitt ansatt rett etter studiet. 
+    Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
 </p>
 
 <p><h3>Statistikk:</h3>
@@ -25,7 +26,7 @@
                     
                      <? $counter = 1; ?>
         
-                    <? foreach($years as $year) : ?>
+                    <? foreach($graduationYears as $year) : ?>
 
                         <? if($counter % 2){ ?>
                             <tr bgcolor='#CCFFFF'>
@@ -33,18 +34,18 @@
                             <tr bgcolor='#FFFFFF'>
                         <? } ?>
                                 
-                            <td><?=CHtml::link($year['graduationYear'], array('graduationyear'), array('graduationYear' => $year['graduationYear']))?></td>
+                            <td><?=CHtml::link($year['graduationYear'], array('graduationyear?id='.$year['graduationYear']))?></td>
                             <td>
-                                <? foreach($yearstudents as $yearstudent) : ?>
-                                    <? if($yearstudent['graduationYear'] == $year['graduationYear']){ ?>
-                                        <?= $yearstudent['sum'] ?>
+                                <? foreach($graduatesByYear as $graduate) : ?>
+                                    <? if($graduate['graduationYear'] == $year['graduationYear']){ ?>
+                                        <?= $graduate['sum'] ?>
                                     <? } ?>
                                 <? endforeach ?>
                             </td>
                             <td>
-                                <? foreach($yearemployees as $yearemployee) : ?>
-                                    <? if($yearemployee['graduationYear'] == $year['graduationYear']){ ?>
-                                        <?= $yearemployee['sum'] ?>
+                                <? foreach($employeesByYear as $employee) : ?>
+                                    <? if($employee['graduationYear'] == $year['graduationYear']){ ?>
+                                        <?= $employee['sum'] ?>
                                     <? } ?>
                                 <? endforeach ?>
                             </td>
@@ -60,8 +61,8 @@
         
     <tr>
         <th id="BK-alumnilist-cumulationrow">
-            <? foreach($yearsum as $aYearSum) : ?>
-                Sum alumnistudenter: <?= $aYearSum['sum'] ?>
+            <? foreach($graduatesSum as $graduateSum) : ?>
+                Sum alumnistudenter: <?= $graduateSum['sum'] ?>
             <? endforeach ?>
         </th>
     </tr>
@@ -80,7 +81,7 @@
     
                     <? $counter = 1; ?>
         
-                    <? foreach($companies as $company) : ?>
+                    <? foreach($employingCompanies as $company) : ?>
 
                         <? if($counter % 2){ ?>
                             <tr bgcolor='#CCFFFF'>
@@ -103,8 +104,8 @@
     </tr>
     <tr>
 	<th id="BK-alumnilist-cumulationrow">
-            <? foreach($companysum as $aCompanySum) : ?>
-                Sum registrert ansatte alumnistudenter: <?= $aCompanySum['sum'] ?>
+            <? foreach($employeesSum as $employeeSum) : ?>
+                Sum registrert ansatte alumnistudenter: <?= $employeeSum['sum'] ?>
             <? endforeach ?>
         </th>
     </tr>
