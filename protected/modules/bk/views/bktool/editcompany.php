@@ -239,7 +239,7 @@
 		</th>
             </tr>
             <tr>
-                <th>Kontaktet av</th>
+                <th>Kontaktet av</br>(Man kan kun velge personer som er medlemmer av gruppen til <?= $this->title ?>)</th>
 		<th>
 						<?php /*
 							//henter ut antall medlemmer i databasen

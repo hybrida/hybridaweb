@@ -40,10 +40,14 @@
 	width: 50%;
 	}
         
-#BK-company-maintable:hover textarea{
+#BK-company-maintable textarea:hover {
 	height: 150px;
-	width: 100%;
-	max-width: 100%;
+	width: 95%;
+	max-width: 95%;
+	}
+        
+#BK-company-maintable textarea{
+	width: 95%;
 	}
 	
 #BK-company-maintable input[type=submit] { 

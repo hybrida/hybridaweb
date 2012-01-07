@@ -110,6 +110,17 @@
         </td>
         <td>
             <h3>Kommentarer</h3>
+                <form name='addcommentform' method='post' action=''>
+                    <textarea name='comment' value='' rows='1'>
+                    <? /*
+                        if($_SESSION['addedcomment'] == '' || $_SESSION['addedcomment'] == 'Kommentar mangler'){
+                            echo $_SESSION['addedcomment'];
+			} */ 
+                    ?>
+                    </textarea>
+							
+                    <p align="center"><input type='submit' name='Submit' value='Legg til kommentar' /></p>
+                </form>
             <div id="BK-company-scrollcontainer">
                 <table id="BK-company-commenttable">
                     <tr>
