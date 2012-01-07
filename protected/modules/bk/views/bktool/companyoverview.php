@@ -53,8 +53,7 @@
             </td>
             <td>
                 <table id="BK-companyoverview-selectiontable">
-                    <tr><td>Legg til bedrift</td></tr>
-                    <tr><td>Legg til bedriftspresentasjon</td></tr>
+                    <tr><td><?=CHtml::link('Legg til bedrift', array('addcompany'))?></td></tr>
                 </table>
             </td>
         </tr>

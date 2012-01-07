@@ -141,7 +141,7 @@
                 <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
                 <td><?= $graduate['workDescription'] ?></td>
                 <td><?= $graduate['workPlace'] ?></td>
-                <td>Rediger</td>
+                <td><?=CHtml::link('Rediger', array('editgraduate?id='.$graduate['id']))?></td>
             </tr>
 
             <? $counter++; ?>

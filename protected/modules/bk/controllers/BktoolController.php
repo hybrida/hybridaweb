@@ -88,4 +88,22 @@ class BktoolController extends Controller {
                 
                 $this->render('company', $data);
         }
+        
+        public function actionEditcompany($id){
+                $bkTool = new Bktool();
+		$data = array();            
+                
+                $this->render('editcompany', $data);
+        }
+        
+        public function actionAddcompany(){
+                $this->render('addcompany'); 
+        }
+
+        public function actionEditgraduate($id){
+                $bkTool = new Bktool();
+		$data = array();            
+                
+                $this->render('editgraduate', $data); 
+        }
 }

@@ -121,7 +121,7 @@
     </tr>
     <tr id="BK-company-editinglinks">
         <td>
-            <h4>Rediger bedrift</h4>
+            <h4><?=CHtml::link('Rediger bedrift', array('editcompany?id='.$companyId))?></h4>
         <td>
             <h4>Fjern bedrift</h4>
         </td>    

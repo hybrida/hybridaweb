@@ -5,8 +5,4 @@
     <?= $this->title ?>
 </h1>
 
-<h2>Bedriftspresentasjoner</h2>
-
-<p>
-    Valg: Legg til bedriftspresentasjon
-</p>
+<h2>Legg til bedrift</h2>

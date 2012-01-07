@@ -284,7 +284,7 @@ class BkTool {
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, s.name, un.graduationYear FROM user_new AS un
                 LEFT JOIN spesialization AS s ON un.specialization = s.id
-                WHERE un.workCompanyID = :companyId";
+                WHERE un.workCompanyID = :companyId ORDER BY un.graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
