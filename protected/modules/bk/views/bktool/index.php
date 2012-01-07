@@ -29,8 +29,8 @@ for enkelhets skyld.
                 som har ansvar for å legge til denne bedriften og linke studenten til denne.</li></p>
         <p><li>Bedrifter og bedriftspresentasjoner blir linket sammen basert på bedriftsnavn og ikke bedriftsId. Dette er fordi bedriftspresentasjoner
                 kan bli lagt til av andre linjeforeninger via The Bedpres Central og dermed vil det ikke nødvendigvis være en bedrift som finnes i vår database.
-                Alle bedriftspresentasjoner vil uansett publiseres under <?=CHtml::link('Presentasjoner', array('presentations')) ?>, men kun presentasjoner med bedriftsnavn som tilsvarer et 
-                bedriftsnavn vi har i databasen vil kunne linkes til en bedrift.</li></p>
+                Alle bedriftspresentasjoner vil uansett publiseres under <?=CHtml::link('Presentasjoner', array('presentations')) ?>, 
+                men kun presentasjoner med bedriftsnavn som tilsvarer et bedriftsnavn vi har i databasen vil kunne linkes til en bedrift.</li></p>
         <p><li>Statistikk over lønn til alumnistudenter har ikke blitt implementert i skrivende stund, selv om dette burde gjennomføres.</li></p>
     </ul>
 </p>
