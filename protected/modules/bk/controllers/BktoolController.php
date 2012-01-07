@@ -20,6 +20,9 @@ class BktoolController extends Controller {
                 $bkTool = new Bktool();
 		$data = array();
                 $data['loginInfo'] = $bkTool->getLastLoginCurrentUser();
+                $data['lastUpdateInfo'] = $bkTool->getLatestUpdateTimeStamp();
+                $data['relevantUpdatesInfo'] = $bkTool->getSumOfUpdatesRelevantForCurrentUser();
+                $data['relevantUpdates'] = $bkTool->getAllUpdatesRelevantForCurrentUser();
                 
 		$this->render('updates', $data);
 	}

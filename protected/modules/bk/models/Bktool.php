@@ -309,4 +309,53 @@ class BkTool {
         
         return $data;     
     }
+    
+    public function getLatestUpdateTimeStamp(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT MAX(dateAdded) AS latesttimestamp FROM bk_company_update";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
+    
+    public function getSumOfUpdatesRelevantForCurrentUser(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'userID' => Yii::app()->user->id
+        );
+        $sql = "SELECT COUNT(DISTINCT updateId) AS sum FROM bk_company_update
+                WHERE relevantForUserId = :userID";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
+    
+    public function getAllUpdatesRelevantForCurrentUser(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'userID' => Yii::app()->user->id
+        );
+        $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id
+                FROM bk_company_update AS cu, user_new AS un, company AS c
+                WHERE cu.relevantForUserId = :userID AND cu.addedById = un.id AND cu.companyId = c.companyID";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
 }
