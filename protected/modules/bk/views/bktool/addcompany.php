@@ -281,7 +281,7 @@
                 <th>Status</br>("Ikke kontaktet" er standardvalg)</th>
                 <th>
                     <select name="status" size="4">	
-                        <option value="Aktuelt senere" style="background:yellow;"
+                        <option value="Aktuell senere" style="background:yellow;"
 							<?php /*
 								if($_SESSION['status'] == 'Aktuelt senere')
 								{

@@ -20,7 +20,7 @@ class BktoolController extends Controller {
                 $bkTool = new Bktool();
 		$data = array();
                 $data['loginInfo'] = $bkTool->getLastLoginCurrentUser();
-                $data['lastUpdateInfo'] = $bkTool->getLatestUpdateTimeStamp();
+                $data['lastUpdateInfo'] = $bkTool->getLatestUpdateTimeStampRelevantForCurrentUser();
                 $data['relevantUpdatesInfo'] = $bkTool->getSumOfUpdatesRelevantForCurrentUser();
                 $data['relevantUpdates'] = $bkTool->getAllUpdatesRelevantForCurrentUser();
                 
@@ -88,6 +88,16 @@ class BktoolController extends Controller {
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
                 $data['employedGraduates'] = $bkTool->getEmployedGraduatesByCompanyId($id);
                 $data['employedGraduatesSum'] = $bkTool->getSumOfEmployedGraduatesByCompanyId($id);
+                $data['parentCompanyName'] = $bkTool->getParentCompanyBySubCompanyId($id);
+                $data['relevantSpecializations'] = $bkTool->getRelevantSpecializationsByCompanyId($id);
+                $data['timestamps'] = $bkTool->getAllCompanyTimestampsByCompanyId($id);
+                $data['status'] = $bkTool->getStatusByCompanyId($id);
+                $data['status'] = $bkTool->getStatusByCompanyId($id);
+                $data['contactor'] = $bkTool->getContactorByCompanyId($id);
+                $data['updater'] = $bkTool->getPersonWhichUpdatedLastByCompanyId($id);
+                $data['adder'] = $bkTool->getPersonWhichAddedCompanyByCompanyId($id);
+                $data['commentsSum'] = $bkTool->getSumOfAllCommentsByCompanyId($id);
+                $data['comments'] = $bkTool->getAllCommentsByCompanyId($id);
                 
                 $this->render('company', $data);
         }
@@ -105,7 +115,11 @@ class BktoolController extends Controller {
 
         public function actionEditgraduate($id){
                 $bkTool = new Bktool();
-		$data = array();            
+		$data = array();
+                $data['specializationNames'] = $bkTool->getAllSpecializationNames();
+                $data['specializationNamesSum'] = $bkTool->getSumOfAllDistinctSpecializationNames();
+                $data['graduationYears'] = $bkTool->getAllSelectableGraduationYears();
+                $data['graduateInfo'] = $bkTool->getGraduateInfoByUserId($id);
                 
                 $this->render('editgraduate', $data); 
         }

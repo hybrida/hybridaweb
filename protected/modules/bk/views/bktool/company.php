@@ -65,11 +65,19 @@
                 </tr>
                 <tr>
                     <th>Undergruppe av</th>
-                    <td></td>
+                    <td>
+                        <? foreach($parentCompanyName as $info) : ?>
+                            <?= CHtml::link($info['companyName'], array('company?id='.$info['companyID'])) ?>
+                        <? endforeach ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>Relevant for studieretning</th>
-                    <td></td>
+                    <td>
+                        <? foreach($relevantSpecializations as $specialization) : ?>
+                            <?= $specialization['name'] ?><br/>
+                        <? endforeach ?>
+                    </td>
                 </tr>
             </table>
             </p>
@@ -78,54 +86,103 @@
             <table id="BK-company-informationtable">
                 <tr>
                     <th>Kontaktet av</th>
-                    <td></td>
+                    <td>
+                        <? foreach($contactor as $info) : ?>
+                            <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+                        <? endforeach ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>Sist tildelt bedriftskontakt</th>
-                    <td></td>
+                    <td>
+                        <? foreach($timestamps as $timestamp) : ?>
+                            <?= $timestamp['dateAssigned'] ?>
+                        <? endforeach ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>Sist oppdatert</th>
-                    <td></td>
+                    <td>
+                        <? foreach($timestamps as $timestamp) : ?>
+                            <?= $timestamp['dateUpdated'] ?>
+                        <? endforeach ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>Sist oppdatert av</th>
-                    <td></td>
+                    <td>
+                        <? foreach($updater as $info) : ?>
+                            <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+                        <? endforeach ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>Status</th>
-                    <td></td>
+                    <? foreach($status as $info) : ?>
+           
+                        <? switch ($info['status']){
+                                case "Aktuell senere": ?>
+                                    <td bgcolor="yellow">
+                        <?          break;
+                                case "Blir kontaktet": ?>
+                                    <td bgcolor="#00CC00">
+                        <?          break;
+                                case "Ikke kontaktet": ?>
+                                    <td bgcolor='#FFFFFF'>
+                        <?          break;
+                                case "Uaktuell": ?>
+                                    <td bgcolor="#FF0033">
+                        <?          break;
+                                default: ?>
+                                    <td bgcolor='#FFFFFF'>
+                        <? } ?>
+                
+                        <?= $info['status'] ?></td>
+                    <? endforeach ?>
                 </tr>
                 <tr>
                     <th>Dato lagt til</th>
-                    <td></td>
+                    <td>
+                        <? foreach($timestamps as $timestamp) : ?>
+                            <?= $timestamp['dateAdded'] ?>
+                        <? endforeach ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>Lagt til av</th>
-                    <td></td>
+                    <td>
+                        <? foreach($adder as $info) : ?>
+                            <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+                        <? endforeach ?>
+                    </td>
                 </tr>
             </table>
             </p>
             
         </td>
         <td>
-            <h3>Kommentarer</h3>
+            <? foreach($commentsSum as $info) : ?>
+                <h3>Kommentarer (<?= $info['sum'] ?>)</h3>
+            <? endforeach ?>
                 <form name='addcommentform' method='post' action=''>
-                    <textarea name='comment' value='' rows='1'>
-                    <? /*
+                    <textarea name='comment' value='' rows='1'><? /*
                         if($_SESSION['addedcomment'] == '' || $_SESSION['addedcomment'] == 'Kommentar mangler'){
                             echo $_SESSION['addedcomment'];
 			} */ 
-                    ?>
-                    </textarea>
+                    ?></textarea>
 							
                     <p align="center"><input type='submit' name='Submit' value='Legg til kommentar' /></p>
                 </form>
             <div id="BK-company-scrollcontainer">
                 <table id="BK-company-commenttable">
-                    <tr>
-                        
-                    </tr>
+                    <? foreach($comments as $comment) : ?>
+                        <tr>
+                            <td>
+                                <p><i><?= $comment['firstName'] ?> <?= $comment['middleName'] ?> <?= $comment['lastName'] ?>, <?= $comment['timestamp'] ?></i></p>
+                                <?= $comment['content'] ?>
+                            </td>
+                        </tr>
+                    <? endforeach ?>
                 </table>
             </div>
         </td>
