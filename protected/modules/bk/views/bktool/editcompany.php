@@ -93,233 +93,65 @@
 		</th>
             </tr>
             <tr>
-		<th>Relevant for studieretning</br>(Valg av "Alle" overskriver de andre valgene)</th>
+		<th>Relevant for studieretning</th>
 		<th>
-                    <input type="checkbox" name="specialication[]" value="Alle"
-						<?php /*
-							if(!empty($_SESSION['specialication']))
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Alle')
-									{
-										echo "checked";
-										$alle = true;
-									}
-								}
-								unset($name);
-							} */ ?> 
-                    />Alle<br />
-                    <input type="checkbox" name="specialication[]" value="Geomatikk" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Geomatikk')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Geomatikk<br />
-                    <input type="checkbox" name="specialication[]" value="Integrerte operasjoner" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Integrerte operasjoner')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Integrerte operasjoner<br />
-                    <input type="checkbox" name="specialication[]" value="Konstruksjonsteknikk" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Konstruksjonsteknikk')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Konstruksjonsteknikk<br />
-                    <input type="checkbox" name="specialication[]" value="Marin teknikk" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Marin teknikk')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Marin teknikk<br />
-                    <input type="checkbox" name="specialication[]" value="Petroleumsfag" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Petroleumsfag')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Petroleumsfag<br />
-                    <input type="checkbox" name="specialication[]" value="Produksjon og ledelse" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Produksjon og ledelse')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Produksjon og ledelse<br />
-                    <input type="checkbox" name="specialication[]" value="Produkt og prosess"
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Produkt og prosess')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */ ?> 
-                    />Produkt og prosess<br />
-                    <input type="checkbox" name="specialication[]" value="Produktutvikling og materialer" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Produktutvikling og materialer')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Produktutvikling og materialer<br />
-                    <input type="checkbox" name="specialication[]" value="Varme- og strømningsteknikk" 
-						<?php /*
-							if(!empty($_SESSION['specialication']) && !$alle)
-							{
-								foreach($_SESSION['specialication'] as $name)
-								{
-									if($name == 'Varme- og strømningsteknikk')
-									{
-										echo "checked";
-									}
-								}
-								unset($name);
-							} */?> 
-                    />Varme- og strømningsteknikk<br />
+                    <? foreach($specializationNames as $name) : ?>
+                        <input type="checkbox" name="specialization[]" value="<?= $name['id'] ?>"
+                                        
+                            <? foreach($relevantSpecializations as $specialization) : ?>
+                                <?= ($name['id'] == $specialization['specializationId'] ? "checked" : ""); ?>
+                            <? endforeach ?>
+                                        
+                        /><?= $name['name'] ?><br/>
+                    <? endforeach ?> 
 		</th>
             </tr>
             <tr>
                 <th>Kontaktet av</br>(Man kan kun velge personer som er medlemmer av gruppen til <?= $this->title ?>)</th>
 		<th>
-						<?php /*
-							//henter ut antall medlemmer i databasen
-							$query  = "SELECT COUNT(DISTINCT Personnavn) AS Sum FROM Person";
-							$result = mysql_query($query);
-							$row = mysql_fetch_assoc($result);
-							
-							echo "<select name='contactedby' size='".$row['Sum']."'>";
-						
-							//frigjør informasjonen knyttet til forrige resultater for å gjøre plass til ny spørring
-							mysql_free_result($result);
-							
-							//henter ut navnene på alle medlemmene i databasen
-							$query  = "SELECT Personnavn FROM Person ORDER BY Personnavn";
-							$result = mysql_query($query);
-							
-							while($row = mysql_fetch_assoc($result))
-							{
-								echo "<option value='".$row['Personnavn']."' ";
-								
-									//hvis det er blitt valgt en person og en feilmelding oppstår, sørger denne if-setningen for at valget blir husket
-									if($row['Personnavn'] == $_SESSION['contactedby'])
-									{
-										echo "selected";
-									}
-								echo ">";
-									echo $row['Personnavn'];
-								echo "</option>";
-							}
-							
-							//frigjør informasjonen knyttet til forrige resultater for å gjøre plass til ny spørring
-							mysql_free_result($result);
-							
-							echo "</select>";
-					*/	?>
+                    <? foreach($membersSum as $info) : ?>
+                        <select name="status" size="<?= $info['sum'] ?>">
+                            
+                            <? foreach($members as $member) : ?>
+                                <option value="<?= $member['id'] ?>"
+                                        
+                                    <? foreach($contactor as $info) : ?>
+                                        <?= ($member['id'] == $info['id'] ? "selected" : ""); ?>
+                                    <? endforeach ?>
+                                        
+                                ><?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></option>
+                            <? endforeach ?> 
+                                
+                    <? endforeach ?>
+                        </select>
                 </th>
             </tr>
             <tr>
-                <th>Status</br>("Ikke kontaktet" er standardvalg)</th>
+                <th>Status</br>("Ikke kontaktet" er standardvalg i databasen)</th>
                 <th>
                     <select name="status" size="4">	
                         <option value="Aktuell senere" style="background:yellow;"
-							<?php /*
-								if($_SESSION['status'] == 'Aktuelt senere')
-								{
-									echo "selected";
-								}
-							*/?>
-                                                        
-                            >Aktuelt senere
+                            <? foreach($status as $info) : ?>
+                                <?= ("Aktuell senere" == $info['status'] ? "selected" : ""); ?>
+                            <? endforeach ?>
+                            >Aktuell senere
 			</option>
 			<option value="Blir kontaktet" style="background:#00CC00;"
-							<?php /*
-								if($_SESSION['status'] == 'Blir kontaktet')
-								{
-									echo "selected";
-								} */
-							?>
+                            <? foreach($status as $info) : ?>
+                                <?= ("Blir kontaktet" == $info['status'] ? "selected" : ""); ?>
+                            <? endforeach ?>
                             >Blir kontaktet
 			</option>				
 			<option value="Ikke kontaktet" style="background:white;" 
-							<?php /*
-								if($_SESSION['status'] == 'Ikke kontaktet')
-								{
-									echo "selected";
-								}
-								if(!isset($_SESSION['status']))
-								{
-									echo "selected";
-								} */
-							?>
+                            <? foreach($status as $info) : ?>
+                                <?= ("Ikke kontaktet" == $info['status'] ? "selected" : ""); ?>
+                            <? endforeach ?>
                             >Ikke kontaktet
 			</option>	
 			<option value="Uaktuell" style="background:#FF0033;"
-							<?php /*
-								if($_SESSION['status'] == 'Uaktuell')
-								{
-									echo "selected";
-								} */
-							?>
+                            <? foreach($status as $info) : ?>
+                                <?= ("Uaktuell" == $info['status'] ? "selected" : ""); ?>
+                            <? endforeach ?>
                             >Uaktuell
 			</option>					
                     </select>

@@ -92,7 +92,6 @@ class BktoolController extends Controller {
                 $data['relevantSpecializations'] = $bkTool->getRelevantSpecializationsByCompanyId($id);
                 $data['timestamps'] = $bkTool->getAllCompanyTimestampsByCompanyId($id);
                 $data['status'] = $bkTool->getStatusByCompanyId($id);
-                $data['status'] = $bkTool->getStatusByCompanyId($id);
                 $data['contactor'] = $bkTool->getContactorByCompanyId($id);
                 $data['updater'] = $bkTool->getPersonWhichUpdatedLastByCompanyId($id);
                 $data['adder'] = $bkTool->getPersonWhichAddedCompanyByCompanyId($id);
@@ -104,13 +103,26 @@ class BktoolController extends Controller {
         
         public function actionEditcompany($id){
                 $bkTool = new Bktool();
-		$data = array();            
+		$data = array();
+                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
+                $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
+                $data['parentCompanyName'] = $bkTool->getParentCompanyBySubCompanyId($id);
+                $data['relevantSpecializations'] = $bkTool->getRelevantSpecializationsByCompanyId($id);
+                $data['status'] = $bkTool->getStatusByCompanyId($id);
+                $data['contactor'] = $bkTool->getContactorByCompanyId($id);
+                $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 
                 $this->render('editcompany', $data);
         }
         
         public function actionAddcompany(){
-                $this->render('addcompany'); 
+                $bkTool = new Bktool();
+		$data = array();
+                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
+                $data['specializationNames'] = $bkTool->getAllSpecializationNames();
+                $this->render('addcompany', $data); 
         }
 
         public function actionEditgraduate($id){

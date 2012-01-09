@@ -520,7 +520,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT DISTINCT name FROM Spesialization ORDER BY name";
+        $sql = "SELECT DISTINCT id, name FROM spesialization ORDER BY name";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -534,7 +534,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT COUNT(DISTINCT name) AS sum FROM Spesialization";
+        $sql = "SELECT COUNT(DISTINCT name) AS sum FROM spesialization";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -549,7 +549,7 @@ class BkTool {
     
         $data = array();
         $sql = "SELECT DISTINCT graduationYear FROM user_new
-                WHERE graduationYear <= DATE(NOW()) ORDER BY graduationYear DESC";
+                WHERE graduationYear IS NOT NULL ORDER BY graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -585,11 +585,29 @@ class BkTool {
         $data = array(
             'groupId' => $id
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.altEmail, s.name, un.imageId,
-                c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM user_new AS un 
-                LEFT JOIN company AS c ON un.workCompanyID = c.companyID
-                LEFT JOIN Spesialization AS s ON s.id = un.specialization
-                WHERE un.id = :userId";
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName
+                FROM user_new AS un, membership_group AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId
+                AND mg.end <= now() ORDER BY un.firstname ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getSumOfAllActiveMembersByGroupId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'groupId' => $id
+        );
+        $sql = "SELECT COUNT(DISTINCT un.id) AS sum
+                FROM user_new AS un, membership_group AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId
+                AND mg.end <= now()";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

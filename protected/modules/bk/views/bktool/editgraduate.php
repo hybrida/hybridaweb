@@ -34,15 +34,13 @@
                         <select name="status" size="<?= $info['sum'] ?>">
                             
                             <? foreach($specializationNames as $name) : ?>
-                                <option value="<?= $name['name'] ?>" "
+                                <option value="<?= $name['id'] ?>"
                                         
                                     <? foreach($graduateInfo as $info) : ?>
-                                        <? if($name['name'] == $info['name']){ ?>
-                                            selected
-                                        <?  } ?>
+                                        <?= ($name['name'] == $info['name'] ? "selected" : ""); ?>
                                     <? endforeach ?>
                                         
-                                "><?= $name['name'] ?></option>
+                                ><?= $name['name'] ?></option>
                             <? endforeach ?> 
                                 
                     <? endforeach ?>
@@ -86,17 +84,16 @@
             <tr>
                 <th>Uteksamineringsår</th>
                 <th>
-                    <select name="status" size="5"> 
+                    <select name="status" size="10"> 
                         <? foreach($graduationYears as $year) : ?>
-                            <option value="<?= $year['graduationYear'] ?>" align="center" "
+                            <option value="<?= $year['graduationYear'] ?>" align="center"
                                     
                                 <? foreach($graduateInfo as $info) : ?>
-                                    <? if($year['graduationYear'] == $info['graduationYear']){ ?>
-                                          selected
-                                    <?  } ?>
+                                    <?= ($year['graduationYear'] == $info['graduationYear'] ? "selected" : ""); ?>
+
                                 <? endforeach ?>
                                             
-                            "><?= $year['graduationYear'] ?></option>
+                            ><?= $year['graduationYear'] ?></option>
                         <? endforeach ?>
                     </select>                    
                 </th>
