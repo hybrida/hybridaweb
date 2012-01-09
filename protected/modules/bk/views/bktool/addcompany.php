@@ -71,7 +71,7 @@
             <tr>
 		<th>Poststed</th>
 		<th>
-                    <input name="postlocation" type="text" class="textfield" value='<?php /* echo $_SESSION['postlocation']; */ ?>' maxlength="255" /> Characters (255)
+                    <input name="postplace" type="text" class="textfield" value='<?php /* echo $_SESSION['postlocation']; */ ?>' maxlength="255" /> Characters (255)
 		</th>
             </tr>
             <tr>

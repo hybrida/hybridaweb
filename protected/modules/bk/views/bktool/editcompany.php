@@ -17,78 +17,97 @@
             <tr>
 		<th>Bedriftsnavn*</th>
 		<th>
-                    <input type='text' name='addedcompany' value='<?php /* echo $_SESSION['addedcompany']; */?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input type='text' name='addedcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
 			<?php /*
                             if($_SESSION['POSTEDaddedcompany'] != $_SESSION['addedcompany'] || $_SESSION['addedcompany'] == 'Bedriftsnavnet mangler' || $_SESSION['addedcompany'] == 'Bedriften finnes allerede i databasen'){
 				echo "style='color: #FF0000;'";
 				?> onclick="this.value=''; this.style.color = '#000000';" <?php
 				} */
 			?> /> Characters (255)
+                    <? endforeach ?>
 		</th>
             </tr>
             <tr>
 		<th>Mailadresse</th>
 		<th>
-                    <input name="mailadress" type="text" class="textfield" value='<?php /* echo $_SESSION['mailadress']; */?>' maxlength="255" /> Characters (255)
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input name="mailadress" type="text" class="textfield" value='<?= $info['mail'] ?>' maxlength="255" /> Characters (255)
+                    <? endforeach ?>
 		</th>
             </tr>
             <tr>
 		<th>Telefonnummer</th>
 		<th>
-                    <input name='phonenumber' type="text" value='<?php /* echo $_SESSION['phonenumber']; */ ?>' maxlength="11" class="textfield" id="phonenumber"
-                    <?php /*
-			if($_SESSION['POSTEDphonenumber'] != $_SESSION['phonenumber'] || $_SESSION['phonenumber'] == 'Ugyldig telefonnummer'){
-                            echo "style='color: #FF0000;'";
-                    ?> onclick="this.value=''; this.style.color = '#000000';" <?php
-                    } */
-                    ?> /> Integer > 0 (11)
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input name='phonenumber' type="text" value='<?= $info['phoneNumber'] ?>' maxlength="11" class="textfield"
+                        <?php /*
+                            if($_SESSION['POSTEDphonenumber'] != $_SESSION['phonenumber'] || $_SESSION['phonenumber'] == 'Ugyldig telefonnummer'){
+                                echo "style='color: #FF0000;'";
+                        ?> onclick="this.value=''; this.style.color = '#000000';" <?php
+                        } */
+                        ?> /> Integer > 0 (11)
+                    <? endforeach ?>
 		</th>                
             </tr>
             <tr>
 		<th>Adresse</th>
 		<th>
-                    <input name="adress" type="text" class="textfield" value='<?php /*echo $_SESSION['adress']; */?>' maxlength="255" /> Characters (255)
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input name="adress" type="text" class="textfield" value='<?= $info['adress'] ?>' maxlength="255" /> Characters (255)
+                    <? endforeach ?>
 		</th>
             </tr>
             <tr>
                 <th>Postboks</th>
 		<th>
-                    <input name="postbox" type="text" class="textfield" value='<?php /* echo $_SESSION['postbox']; */ ?>' maxlength="255" /> Characters (255)
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input name="postbox" type="text" class="textfield" value='<?= $info['postbox'] ?>' maxlength="255" /> Characters (255)
+                    <? endforeach ?>
 		</th>
             </tr>
             <tr>
 		<th>Postnummer</th>
 		<th>
-                    <input name='postnumber' type="text" value='<?php /* echo $_SESSION['postnumber']; */ ?>' maxlength="11" class="textfield"
-                    <?php /*
-                        if($_SESSION['POSTEDpostnumber'] != $_SESSION['postnumber'] || $_SESSION['postnumber'] == 'Ugyldig postnummer')	{
-                            echo "style='color: #FF0000;'";
-			?> onclick="this.value=''; this.style.color = '#000000';" <?php	
-                        } */
-			?> /> Integer > 0 (11)
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input name='postnumber' type="text" value='<?= $info['postnumber'] ?>' maxlength="11" class="textfield"
+                        <?php /*
+                            if($_SESSION['POSTEDpostnumber'] != $_SESSION['postnumber'] || $_SESSION['postnumber'] == 'Ugyldig postnummer')	{
+                                echo "style='color: #FF0000;'";
+                            ?> onclick="this.value=''; this.style.color = '#000000';" <?php	
+                            } */
+                            ?> /> Integer > 0 (11)
+                    <? endforeach ?>
 		</th>
             </tr>
             <tr>
 		<th>Poststed</th>
 		<th>
-                    <input name="postlocation" type="text" class="textfield" value='<?php /* echo $_SESSION['postlocation']; */ ?>' maxlength="255" /> Characters (255)
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input name="postplace" type="text" class="textfield" value='<?= $info['postplace'] ?>' maxlength="255" /> Characters (255)
+                    <? endforeach ?>
 		</th>
             </tr>
             <tr>
                 <th>Hjemmeside</th>
                 <th>
-                    <input name="homepage" type="text" class="textfield" value='<?php /* echo $_SESSION['homepage']; */?>' maxlength="255" /> Characters (255)
+                    <? foreach($companyContactInfo as $info) : ?>
+                        <input name="homepage" type="text" class="textfield" value='<?= $info['homepage'] ?>' maxlength="255" /> Characters (255)
+                    <? endforeach ?>
 		</th>
             </tr>
             <tr>
                 <th>Undergruppe av</br>(Man kan kun velge bedrifter som allerede finnes i databasen)</th>
                 <th>
-                    <input type='text' name='subgroup' value='<?php /* echo $_SESSION['subgroup']; */?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)"
-                    <?php /*
-			if($_SESSION['POSTEDsubgroup'] != $_SESSION['subgroup'] || $_SESSION['subgroup'] == 'Bedriften finnes ikke i databasen'){
-                            echo "style='color: #FF0000;'";
-                    ?> onclick="this.value=''; this.style.color = '#000000';" <?php
-                    } */
+                    <input type='text' name='subgroup' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
+                        <? foreach($parentCompanyName as $info) : ?>           
+                            value='<?= $info['companyName'] ?>'
+                        <? endforeach ?>
+                        <?php /*
+                            if($_SESSION['POSTEDsubgroup'] != $_SESSION['subgroup'] || $_SESSION['subgroup'] == 'Bedriften finnes ikke i databasen'){
+                                echo "style='color: #FF0000;'";
+                        ?> onclick="this.value=''; this.style.color = '#000000';" <?php
+                        } */
                     ?>/>  Characters (255)
 		</th>
             </tr>

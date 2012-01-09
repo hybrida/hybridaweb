@@ -367,7 +367,7 @@ class BkTool {
         $data = array(
             'subCompanyId' => $id
         );
-        $sql = "SELECT companyID, companyName FROM company WHERE companyID = 
+        $sql = "SELECT parent.companyID, parent.companyName FROM company AS parent WHERE parent.companyID = 
                 (SELECT subgroupOfID FROM company WHERE companyID = :subCompanyId)";
 
         $query = $this->pdo->prepare($sql);
@@ -568,7 +568,7 @@ class BkTool {
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.altEmail, s.name, un.imageId,
                 c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM user_new AS un 
                 LEFT JOIN company AS c ON un.workCompanyID = c.companyID
-                LEFT JOIN Spesialization AS s ON s.id = un.specialization
+                LEFT JOIN spesialization AS s ON s.id = un.specialization
                 WHERE un.id = :userId";
 
         $query = $this->pdo->prepare($sql);
