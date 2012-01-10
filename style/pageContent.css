@@ -104,3 +104,24 @@ nav items div.last {
     float: right;
     padding: 0px 2px 0px 0px;
 }
+
+.formSection {
+    clear: both;
+    margin-bottom: 1.5em;
+}
+
+.formSection > .fieldDefinition {
+    width: 30%;
+    float: left;
+}
+
+.formSection > .fieldInput {
+    width: 70%;
+    float: right;
+}
+
+.formSection > .fieldExplanation {
+    clear: both;
+    font-size: 90%;
+    font-style: italic;
+}
