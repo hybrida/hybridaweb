@@ -48,7 +48,7 @@ class BkModule extends CWebModule {
 		$cs->registerScriptFile($am->publish($url . 'ajax-dynamic-list.js'));
 	}
 
-	public function getAssetsDir() {
+        public function getAssetsDir() {
 		return Yii::getPathOfAlias($this->_assetsDir);
 	}
 

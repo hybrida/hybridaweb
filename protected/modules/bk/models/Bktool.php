@@ -6,7 +6,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM company 
+        $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM bk_company 
         LEFT JOIN user_new ON contactorID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -21,7 +21,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT status, COUNT(DISTINCT companyName) AS sum FROM company GROUP BY status";
+        $sql = "SELECT status, COUNT(DISTINCT companyName) AS sum FROM bk_company GROUP BY status";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -64,7 +64,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user_new, company 
+        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user_new, bk_company 
                 WHERE graduationYear <= now() AND workCompanyID = companyID 
                 GROUP BY graduationYear ORDER BY graduationYear DESC";
                     
@@ -82,7 +82,7 @@ class BkTool {
         $data = array(
             'graduationYear' => $year
         );
-        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user_new, company 
+        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user_new, bk_company 
                 WHERE companyID = workCompanyID AND graduationYear = :graduationYear GROUP BY companyName
                 ORDER BY sum DESC, companyName ASC";
 
@@ -100,7 +100,7 @@ class BkTool {
         $data = array(
             'graduationYear' => $year
         );
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new, company 
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new, bk_company 
                 WHERE companyID = workCompanyID AND graduationYear = :graduationYear";
                     
         $query = $this->pdo->prepare($sql);
@@ -115,7 +115,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user_new, company 
+        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user_new, bk_company 
                 WHERE companyID = workCompanyID GROUP BY companyName
                 ORDER BY sum DESC, companyName ASC";
 
@@ -145,7 +145,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new, company WHERE companyID = workCompanyID";
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user_new, bk_company WHERE companyID = workCompanyID";
                     
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -160,7 +160,7 @@ class BkTool {
 
         $data = array();
         $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM user_new 
-                LEFT JOIN company ON companyID = workCompanyID
+                LEFT JOIN bk_company ON companyID = workCompanyID
                 WHERE graduationYear <= now()";
 
         $query = $this->pdo->prepare($sql);
@@ -179,7 +179,7 @@ class BkTool {
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.workDescription, un.workPlace, c.companyName, c.companyID,
                 un.imageId, s.name FROM user_new AS un 
-                LEFT JOIN company AS c ON c.companyID = un.workCompanyID 
+                LEFT JOIN bk_company AS c ON c.companyID = un.workCompanyID 
                 LEFT JOIN spesialization AS s ON un.specialization = s.id
                 WHERE graduationYear = :graduationyear";
 
@@ -230,7 +230,7 @@ class BkTool {
             'status' => $status
         );
         $sql = "SELECT DISTINCT id, imageId, firstName, middleName, lastName
-                FROM company, user_new 
+                FROM bk_company, user_new 
                 WHERE contactorID = id AND status = :status ORDER BY firstName ASC";
 
         $query = $this->pdo->prepare($sql);
@@ -247,7 +247,7 @@ class BkTool {
         $data = array(
             'status' => $status
         );
-        $sql = "SELECT id, companyID, companyName, status, dateAssigned, dateUpdated FROM user_new LEFT JOIN company 
+        $sql = "SELECT id, companyID, companyName, status, dateAssigned, dateUpdated FROM user_new LEFT JOIN bk_company 
                 ON id = contactorID WHERE status = :status ORDER BY firstName ASC, companyName ASC";
 
         $query = $this->pdo->prepare($sql);
@@ -265,7 +265,7 @@ class BkTool {
             'companyId' => $id
         );
         $sql = "SELECT companyName, adress, phoneNumber, homepage, mail, postbox, postnumber, postplace
-                FROM company WHERE companyID = :companyId";
+                FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -350,7 +350,7 @@ class BkTool {
             'currentUserID' => Yii::app()->user->id
         );
         $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id
-                FROM bk_company_update AS cu, user_new AS un, company AS c
+                FROM bk_company_update AS cu, user_new AS un, bk_company AS c
                 WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID";
 
         $query = $this->pdo->prepare($sql);
@@ -367,8 +367,8 @@ class BkTool {
         $data = array(
             'subCompanyId' => $id
         );
-        $sql = "SELECT parent.companyID, parent.companyName FROM company AS parent WHERE parent.companyID = 
-                (SELECT subgroupOfID FROM company WHERE companyID = :subCompanyId)";
+        $sql = "SELECT parent.companyID, parent.companyName FROM bk_company AS parent WHERE parent.companyID = 
+                (SELECT subgroupOfID FROM bk_company WHERE companyID = :subCompanyId)";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -384,7 +384,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT s.name FROM company AS c, spesialization AS s, bk_company_specialization AS cs
+        $sql = "SELECT s.name FROM bk_company AS c, spesialization AS s, bk_company_specialization AS cs
                 WHERE c.companyID = cs.companyId AND c.companyID = :companyId
                 AND cs.specializationId = s.id ORDER BY name ASC";
 
@@ -402,7 +402,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT dateAdded, dateUpdated, dateAssigned FROM company WHERE companyID = :companyId";
+        $sql = "SELECT dateAdded, dateUpdated, dateAssigned FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -418,7 +418,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT status FROM company WHERE companyID = :companyId";
+        $sql = "SELECT status FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -434,7 +434,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM company, user_new
+        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, user_new
                 WHERE companyID = :companyId AND contactorID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -451,7 +451,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM company, user_new
+        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, user_new
                 WHERE companyID = :companyId AND updatedByID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -468,7 +468,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM company, user_new
+        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, user_new
                 WHERE companyID = :companyId AND addedByID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -485,7 +485,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM comment AS cmt, company AS cmp
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM comment AS cmt, bk_company AS cmp
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
                 AND cmp.companyID = cmt.parentId";
 
@@ -504,7 +504,7 @@ class BkTool {
             'companyId' => $id
         );
         $sql = "SELECT un.firstName, un.middleName, un.lastName, cmt.timestamp, cmt.content 
-                FROM comment AS cmt, company AS cmp, user_new AS un
+                FROM comment AS cmt, bk_company AS cmp, user_new AS un
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
                 AND cmp.companyID = cmt.parentId AND cmt.author = un.id";
 
@@ -567,7 +567,7 @@ class BkTool {
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.altEmail, s.name, un.imageId,
                 c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM user_new AS un 
-                LEFT JOIN company AS c ON un.workCompanyID = c.companyID
+                LEFT JOIN bk_company AS c ON un.workCompanyID = c.companyID
                 LEFT JOIN spesialization AS s ON s.id = un.specialization
                 WHERE un.id = :userId";
 

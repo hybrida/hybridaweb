@@ -27,7 +27,7 @@ Owner of DHTMLgoodies.com
 
 	var ajaxBox_offsetX = 0;
 	var ajaxBox_offsetY = 0;
-	var ajax_list_externalFile = 'ajax-list-countries.php';	// Path to external file
+	var ajax_list_externalFile = 'getcompanies.php';	// Path to external file
 	var minimumLettersBeforeLookup = 1;	// Number of letters entered before a lookup is performed.
 
 	var ajax_list_objects = new Array();
