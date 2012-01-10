@@ -24,6 +24,11 @@ class BkModule extends CWebModule {
 	}
 
 	private function initAssets() {
+		$this->initCssAssets();
+		$this->initScriptAssets();
+	}
+	
+	private function initCssAssets() {
 		$url = $this->getAssetsDir() . "/css/";
 		$cs = Yii::app()->getClientScript();
 		$am = Yii::app()->getAssetManager();
@@ -33,6 +38,14 @@ class BkModule extends CWebModule {
 		$cs->registerCssFile($am->publish($url . 'companydistribution-style.css'));
 		$cs->registerCssFile($am->publish($url . 'companyoverview-style.css'));
 		$cs->registerCssFile($am->publish($url . 'updatedelements-style.css'));
+	}
+	
+	private function initScriptAssets() {
+		$url = $this->getAssetsDir() . "/scripts/";
+		$cs = Yii::app()->getClientScript();
+		$am = Yii::app()->getAssetManager();
+		$cs->registerScriptFile($am->publish($url . 'ajax.js'));
+		$cs->registerScriptFile($am->publish($url . 'ajax-dynamic-list.js'));
 	}
 
 	public function getAssetsDir() {

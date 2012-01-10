@@ -14,6 +14,15 @@ class DefaultController extends Controller {
 		}
 	}
 	
+	public function actionAccess() {
+		for ($i = 2008; $i <= 2020; $i++) {
+			$a = new AccessDefinition();
+			$a->id = $i;
+			$a->description = "avgangskull_$i";
+			$a->save();
+		}
+	}
+	
 	public function actionDumpNews() {
 		$lipsum = new LoremIpsumGenerator();
 		$i = 0;
