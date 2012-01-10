@@ -189,7 +189,10 @@ class Group {
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
-		MembershipGroup::insert($this->id, $userId);
+		$membership = new MembershipGroup;
+		$membership->groupId = $this->id;
+		$membership->userId = $userId;
+		$membership->save();
 	}
 
 	public function removeMember($userId) {
