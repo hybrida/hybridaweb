@@ -4,6 +4,7 @@ class BktoolController extends Controller {
 
 	protected $title = 'Hybrida Bedriftskomité';
         protected $lineOfStudy = 'Ingeniørvitenskap og IKT';
+        protected $organisationName = 'Hybrida';
         protected $bkGroupId = 57;
         protected $oddRowColour = '#CCFFFF';
         protected $evenRowColour = '#FFFFFF';
@@ -26,6 +27,10 @@ class BktoolController extends Controller {
                 
 		$this->render('updates', $data);
 	}
+        
+        public function actionDeleteupdateform(){
+                $this->actionUpdates();
+        }
 
 	public function actionCompanyOverview() {
 		$bkTool = new Bktool();
@@ -101,6 +106,27 @@ class BktoolController extends Controller {
                 $this->render('company', $data);
         }
         
+        public function actionAddcommentform($id){
+                $bkForms = new Bkforms();
+		$data = array();
+                
+                if($bkForms->isCompanyCommentEmpty($_POST['comment'])){
+                    $this->actionCompany($id);
+                }
+                else{
+                    $bkForms->addCompanyComment($_POST['comment'], $id);
+                    
+                    $bkTool = new Bktool();
+                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                    foreach ($data['members'] as $member) :
+                        $bkForms->addCompanyCommentUpdate($id, $member['id']);
+                    endforeach;
+                    
+                    $this->actionCompany($id);
+                }
+        }
+
+
         public function actionEditcompany($id){
                 $bkTool = new Bktool();
 		$data = array();
@@ -116,6 +142,11 @@ class BktoolController extends Controller {
                 $this->render('editcompany', $data);
         }
         
+        public function actionEditcompanyform($id){
+                
+                $this->actionCompany($id);
+        }
+        
         public function actionAddcompany(){
                 $bkTool = new Bktool();
 		$data = array();
@@ -123,6 +154,11 @@ class BktoolController extends Controller {
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 $this->render('addcompany', $data); 
+        }
+        
+        public function actionAddcompanyform(){
+                
+                $this->actionCompanyOverview();
         }
 
         public function actionEditgraduate($id){
@@ -134,5 +170,9 @@ class BktoolController extends Controller {
                 $data['graduateInfo'] = $bkTool->getGraduateInfoByUserId($id);
                 
                 $this->render('editgraduate', $data); 
+        }
+        
+        public function actionEditgraduateform(){
+                $this->actionGraduates();
         }
 }

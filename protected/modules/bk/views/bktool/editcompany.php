@@ -12,7 +12,11 @@
 
 <p>
 <div id="BK-add-container">
-    <form name="editcompanyform" method="post" action="">
+    <form name="editcompanyform" method="post"
+        <? foreach($companyContactInfo as $info) : ?>
+            action="editcompanyform?id=<?= $info['companyID'] ?>"
+        <? endforeach ?>
+        >
 	<table>
             <tr>
 		<th>Bedriftsnavn*</th>

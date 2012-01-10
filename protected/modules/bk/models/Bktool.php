@@ -264,7 +264,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT companyName, adress, phoneNumber, homepage, mail, postbox, postnumber, postplace
+        $sql = "SELECT companyID, companyName, adress, phoneNumber, homepage, mail, postbox, postnumber, postplace
                 FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
@@ -351,7 +351,8 @@ class BkTool {
         );
         $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id
                 FROM bk_company_update AS cu, user_new AS un, bk_company AS c
-                WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID";
+                WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID
+                ORDER BY dateAdded DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -506,7 +507,8 @@ class BkTool {
         $sql = "SELECT un.firstName, un.middleName, un.lastName, cmt.timestamp, cmt.content 
                 FROM comment AS cmt, bk_company AS cmp, user_new AS un
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
-                AND cmp.companyID = cmt.parentId AND cmt.author = un.id";
+                AND cmp.companyID = cmt.parentId AND cmt.author = un.id
+                ORDER BY cmt.timestamp DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

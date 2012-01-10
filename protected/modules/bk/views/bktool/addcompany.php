@@ -12,7 +12,7 @@
 
 <p>
 <div id="BK-add-container">
-    <form name="addcompanyform" method="post" action="">
+    <form name="addcompanyform" method="post" action="addcompanyform">
 	<table>
             <tr>
 		<th>Bedriftsnavn*</th>

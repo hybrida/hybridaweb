@@ -11,6 +11,8 @@
 <p>
 <table id="BK-company-maintable">
     <tr>
+        <table id="BK-company-maintable">
+        <tr>
         <td>
             <h3>Informasjon</h3>
             <p>
@@ -160,11 +162,21 @@
             </p>
             
         </td>
+        </tr>
+        </table>
+    </tr>
+    <tr>
+        <table id="BK-company-maintable">
+        <tr>
         <td>
             <? foreach($commentsSum as $info) : ?>
                 <h3>Kommentarer (<?= $info['sum'] ?>)</h3>
             <? endforeach ?>
-                <form name='addcommentform' method='post' action=''>
+                <form name='addcommentform' method='post'
+                    <? foreach($companyContactInfo as $info) : ?>
+                        action='addcommentform?id=<?= $info['companyID'] ?>'
+                    <? endforeach ?>
+                    >
                     <textarea name='comment' value='' rows='1'><? /*
                         if($_SESSION['addedcomment'] == '' || $_SESSION['addedcomment'] == 'Kommentar mangler'){
                             echo $_SESSION['addedcomment'];
@@ -186,24 +198,32 @@
                 </table>
             </div>
         </td>
-    </tr>
-    <tr id="BK-company-editinglinks">
-        <td>
-            <h4><?=CHtml::link('Rediger bedrift', array('editcompany?id='.$companyId))?></h4>
-        <td>
-            <h4>Fjern bedrift</h4>
-        </td>    
+        </tr>
+        </table>
     </tr>
     <tr>
-        <td>
-            <h3>Registrerte bedriftspresentasjoner</h3>
-            <div id="BK-company-scrollcontainer">
-                <table id="BK-company-listtable">
-                    <tr><th>Dato</th></tr>
-                </table>
-            </div>
-        </td>
-        <td>
+        <table id="BK-company-maintable">
+            <tr id="BK-company-editinglinks">
+                <td>
+                    <h4><?=CHtml::link('Rediger bedrift', array('editcompany?id='.$companyId))?></h4>
+                <td>
+                    <h4>Fjern bedrift</h4>
+                </td>    
+            </tr>
+        </table>
+    </tr>
+    <tr>
+        <table id="BK-company-maintable">
+            <tr>
+            <td>
+                <h3>Registrerte bedriftspresentasjoner</h3>
+                <div id="BK-company-scrollcontainer">
+                    <table id="BK-company-listtable">
+                        <tr><th>Dato</th></tr>
+                    </table>
+                </div>
+            </td>
+            <td>
             <? foreach($employedGraduatesSum as $info) : ?>
                 <h3>Registrerte alumnistudenter (<?= $info['sum'] ?>)</h3>
             <? endforeach ?>
@@ -230,7 +250,9 @@
                     <? endforeach ?>
                 </table>
             </div>
-        </td>
+            </td>
+            </tr>
+        </table>
     </tr>
 </table>
 </p>

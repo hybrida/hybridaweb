@@ -25,7 +25,7 @@
     <? endforeach ?>
 </p>
 
-<form name='deleteupdateform' method='post' action=''>
+<form name='deleteupdateform' method='post' action='deleteupdateform'>
 <p> 
     <table id='BK-updatedelements-selectiontable'>
         <tr>

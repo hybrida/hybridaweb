@@ -17,7 +17,7 @@
 
 <p>
 <div id="BK-add-container">
-    <form name="editgraduateform" method="post" action="">
+    <form name="editgraduateform" method="post" action="editgraduateform">
         <table>
             <tr>
                 <th>Alternativ-Email</th>
