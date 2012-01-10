@@ -1,5 +1,6 @@
 <?php
 
+Yii::import('application.controllers.NewsController');
 class NewsControllerTest extends CTestCase {
 	
 	public function __construct() {
