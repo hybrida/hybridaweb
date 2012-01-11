@@ -6,24 +6,16 @@ class AccessRelation {
 	private $id;
 	private $type;
 	private $model;
-	private $insertAccess;
-	private $access;
+	private $insertAccessGroups;
+	private $accessGroups;
 
-	public function __construct($modelOrType, $id=null) {
+	public function __construct($modelOrType, $id = null) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
-		$this->insertAccess = array();
+		$this->insertAccessGroups = array();
 		if ($id) {
 			$this->initTypeId($modelOrType, $id);
 		} else {
 			$this->setModel($modelOrType);
-		}
-		$this->initAccess();
-	}
-
-	private function initAccess() {
-		if ($this->validate()) {
-			$this->fetch();
-			$this->access = $this->insertAccess;
 		}
 	}
 
@@ -32,7 +24,7 @@ class AccessRelation {
 		$this->id = $id;
 	}
 
-	public function setModel($model) {
+	private function setModel($model) {
 		$this->throwExceptionsIfNotValid($model);
 		$this->initModel($model);
 	}
@@ -43,7 +35,7 @@ class AccessRelation {
 		}
 		if (!$this->getTypeFromModel($model)) {
 			throw new InvalidArgumentException(
-					"Model must be an instance of Event, News or Article");
+					"Model must be an instance of Event, News or Article or Signup");
 		}
 	}
 
@@ -54,8 +46,9 @@ class AccessRelation {
 	}
 
 	private function updateId() {
-		if ($this->model)
+		if ($this->model) {
 			$this->id = $this->model->primaryKey;
+		}
 	}
 
 	private function getTypeFromModel($model) {
@@ -82,7 +75,14 @@ class AccessRelation {
 		if (!is_array($accessArray)) {
 			throw new InvalidArgumentException("input must be an array");
 		}
-		$this->insertAccess = $accessArray;
+
+		if (!empty($accessArray)) {
+			if (is_array($accessArray[0])) {
+				$this->insertAccessGroups = $accessArray;
+			} else {
+				$this->insertAccessGroups = array($accessArray);
+			}
+		}
 	}
 
 	public function replace() {
@@ -92,10 +92,10 @@ class AccessRelation {
 
 	public function insert() {
 		$this->updateId();
-		if ( $this->validate() ) {
+		if ($this->validate()) {
 			$this->fetch();
 			$this->performInsert();
-			$this->insertAccess = array();
+			$this->insertAccessGroups = array(array());
 		} else {
 			throw new BadMethodCallException("The model is not saved yet");
 		}
@@ -106,21 +106,37 @@ class AccessRelation {
 	}
 
 	private function performInsert() {
-		$access = null;
-		$sql = <<<SQL
-			INSERT INTO access_relations (id, access, type) 
-				VALUES
-				( :id, :access, :type)
-SQL;
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->bindParam(":id", $this->id);
-		$stmt->bindParam(":type", $this->type);
-		$stmt->bindParam(":access", $access);
+		$insertAccess = $this->insertAccessGroups;
+		$stmt = $this->getInsertPdoStatement();
+		if ($insertAccess == array()) {
+			return;
+		}
 
-		$insertArray = array_unique($this->insertAccess);
+		foreach ($insertAccess as $key => $accessGroup) {
+			$this->performInsertGroup($accessGroup, $stmt, $key);
+		}
+	}
+
+	private function getInsertPdoStatement() {
+		$sql = "INSERT INTO access_relations (id, access, type, sub_id) 
+				VALUES	( :id, :access, :type, :sub_id)";
+		$stmt = $this->pdo->prepare($sql);
+		$stmt->bindValue(":id", $this->id);
+		$stmt->bindValue(":type", $this->type);
+		$stmt->bindValue(":sub_id", 1);
+		return $stmt;
+	}
+
+	private function performInsertGroup($insertAccess, $stmt, $key) {
+		$access = null;
+		$stmt->bindParam(':access', $access);
+		$stmt->bindParam(':sub_id', $key);
+		$insertArray = array_unique($insertAccess);
 		foreach ($insertArray as $access) {
-			if (in_array($access, $this->access)) {
-				continue;
+			if (key_exists($key, $this->accessGroups)) {
+				if (in_array($access, $this->accessGroups[$key])) {
+					continue;
+				}
 			}
 			$stmt->execute();
 		}
@@ -128,83 +144,51 @@ SQL;
 
 	public function get() {
 		$this->fetch();
-		return $this->access;
+		if (count($this->accessGroups) == 1) {
+			return $this->accessGroups[0];
+		}
+		return $this->accessGroups;
 	}
 
-	private  function fetch() {
-		$sql = <<<SQL
-SELECT access FROM access_relations
-	WHERE id = :id AND type = :type
-SQL;
+	private function fetch() {
+		$sql = "SELECT access, sub_id FROM access_relations
+					WHERE id = :id AND type = :type";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindParam(":id", $this->id);
 		$stmt->bindParam(":type", $this->type);
 		$stmt->execute();
-		$accessArray = $stmt->fetchAll(PDO::FETCH_COLUMN);
+		$accessArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+		$this->accessGroups = $this->putIntoGroupsFromFetchAssoc($accessArray);
+		return;
+	}
 
-		$this->access = $accessArray;
+	private function putIntoGroupsFromFetchAssoc($accessArray) {
+		$accessGroups = array();
+		foreach ($accessArray as $access) {
+			$group = $access['sub_id'];
+			$value = $access['access'];
+			$accessGroups[$group][] = $value;
+		}
+		return $accessGroups;
 	}
 
 	public function removeAll() {
-		$this->access = array();
+		$this->accessGroups = array();
 
 		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type";
 		$params = array(
-		  ":id" => $this->id,
-		  ":type" => $this->type,
+			":id" => $this->id,
+			":type" => $this->type,
 		);
 
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->execute($params);
 	}
 
-	public function remove($access) {
-		$this->removeFromAccessField($access);
-		$this->removeFromInsertAccessField($access);
-		
-		if (is_array($access)) {
-			$this->performRemove($access);
-		} else {
-			$this->performRemove(array($access));
-		}
-		
-	}
-
-	private function removeFromInsertAccessField($access) {
-		foreach ($this->insertAccess as $key => $value) {
-			if ($value == $access) {
-				unset($this->insertAccess[$key]);
-			}
-		}
-	}
-
-	private function removeFromAccessField($access) {
-		foreach ($this->access as $key => $value) {
-			if ($value == $access) {
-				unset($this->access[$key]);
-			}
-		}
-	}
-	
-	private function performRemove($accessArray) {
-		$access = null;
-		
-		$sql = "DELETE FROM access_relations WHERE id = :id AND type = :type AND access = :access";
-		
-		$stmt = $this->pdo->prepare($sql);
-		$stmt->bindParam(":id", $this->id);
-		$stmt->bindParam(":type", $this->type);
-		$stmt->bindParam(":access", $access);
-		foreach ($accessArray as $access) {
-			$stmt->execute();
-		}
-	}
-	
 	public function save() {
-		if (! empty ($this->insertAccess)) {
+		if (!empty($this->insertAccessGroups)) {
 			$this->replace();
 		}
 	}
-
 
 }
