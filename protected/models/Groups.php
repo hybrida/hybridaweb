@@ -1,21 +1,20 @@
 <?php
 
 /**
- * This is the model class for table "membership_group".
+ * This is the model class for table "groups".
  *
- * The followings are the available columns in table 'membership_group':
+ * The followings are the available columns in table 'groups':
  * @property integer $id
- * @property integer $groupId
- * @property integer $userId
- * @property string $comission
- * @property string $start
- * @property string $end
+ * @property integer $menu
+ * @property string $title
+ * @property integer $admin
+ * @property string $committee
  */
-class MembershipGroup extends CActiveRecord
+class Groups extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return MembershipGroup the static model class
+	 * @return Groups the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +26,7 @@ class MembershipGroup extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'membership_group';
+		return 'groups';
 	}
 
 	/**
@@ -38,13 +37,13 @@ class MembershipGroup extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			//array('id, comission, end', 'required'),
-			array('userId', 'numerical', 'integerOnly'=>true),
-			array('comission', 'length', 'max'=>30),
-			array('start', 'safe'),
+			array('title', 'required'),
+			array('menu, admin', 'numerical', 'integerOnly'=>true),
+			array('title', 'length', 'max'=>50),
+			array('committee', 'length', 'max'=>5),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('groupId, userId, comission, start, end', 'safe', 'on'=>'search'),
+			array('id, menu, title, admin, committee', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,11 +64,11 @@ class MembershipGroup extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'groupId' => 'Group',
-			'userId' => 'User',
-			'comission' => 'Comission',
-			'start' => 'Start',
-			'end' => 'End',
+			'id' => 'ID',
+			'menu' => 'Menu',
+			'title' => 'Title',
+			'admin' => 'Admin',
+			'committee' => 'Committee',
 		);
 	}
 
@@ -85,14 +84,21 @@ class MembershipGroup extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('groupId',$this->groupId);
-		$criteria->compare('userId',$this->userId);
-		$criteria->compare('comission',$this->comission,true);
-		$criteria->compare('start',$this->start,true);
-		$criteria->compare('end',$this->end,true);
+		$criteria->compare('menu',$this->menu);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('admin',$this->admin);
+		$criteria->compare('committee',$this->committee,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public function addMember($userId, $commission=null) {
+		$ms = new MembershipGroup;
+		$ms->groupId = $this->id;
+		$ms->userId = $userId;
+		$ms->comission = $commission;
+		return $ms->save();
 	}
 }

@@ -54,7 +54,7 @@ class GroupController extends Controller {
     public function actionView($id, $title) {
 
         $data = array();
-        $group = Group::model()->findByPk($id);
+        $group = new Group($id);
         $data['id'] = $id;
         $data['model'] = $group;
         $data['title'] = $group->getTitle();
@@ -99,7 +99,7 @@ class GroupController extends Controller {
     }
     
     public function actionEdit($id){
-        $group = Group::model()->findByPk($id);
+        $group = new Group($id);
         $data['title'] = $group->getTitle();
         $data['groups'] = $group->getAdminMenu();
         $data['members'] = $group->getMembers();

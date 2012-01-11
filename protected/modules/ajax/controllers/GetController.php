@@ -248,7 +248,7 @@ class GetController extends Controller{
         $type = $_REQUEST['type'];
         
         
-        $group = Group::model()->findByPk($gId);
+        $group = new Group($gId);
         if($group->isAdmin( Yii::app()->user->id )){
             if ($type == 'delMember'){
                 $group->removeMember( $_REQUEST['userId'] );

@@ -2,80 +2,131 @@
 
 class UserTest extends CTestCase {
 
-	private $name = "sigurd";
-
-	public function setUp() {
-	}
-
-	private function getCleanUserObject() {
+	private function getNewUser() {
 		$user = new User;
-		$user->username = "t".User::model()->count();
+		$user->username = "t" . User::model()->count();
 		$user->firstName = "UserTest";
 		$user->lastName = "getCleanUserObject";
-		$user->member = "false";
+		$user->member = "true";
+		$this->assertTrue($user->save());
 		return $user;
 	}
 
 	public function testUserIsCreatedWithInsert() {
-		$user = $this->getCleanUserObject();
-		$user->insert();
+		$user = $this->getNewUser();
+		$user->save();
 
 		$this->assertNotEquals(null, $user->id);
 	}
-	
+
 	public function testUserIsCreatedWithSave() {
-		$user = $this->getCleanUserObject();
+		$user = $this->getNewUser();
 		$user->save();
-		
+
 		$this->assertNotEquals(null, $user->id);
 	}
-	
+
 	public function testUserIsValidated() {
-		$user = $this->getCleanUserObject();
+		$user = $this->getNewUser();
 		$this->assertTrue($user->validate());
 	}
 
-	public function testUserHasAccessProperty() {
-		$user = new User;
-		$this->assertTrue($user->hasProperty("access"));
+	public function test_access_gender_male() {
+		$user = $this->getNewUser();
+		$user->gender = "male";
+		$user->save();
+
+		$user = User::model()->findByPk($user->id);
+
+		$this->assertContains(Access::MALE, $user->access);
+		$this->assertNotContains(Access::FEMALE, $user->access);
 	}
 
-	public function testUserAccess() {
-		$user1 = $this->getCleanUserObject();
+	public function test_access_gender_female() {
+		$user = $this->getNewUser();
+		$user->gender = "female";
+		$user->save();
+		$user = User::model()->findByPk($user->id);
 
-		$access = array(7, 8, 9, 10);
-		$user1->access = $access;
-		$user1->insert();
-
-		$user2 = User::model()->findByPk($user1->id);
-
-
-		$this->assertEquals($access, $user2->access);
+		$this->assertNotContains(Access::MALE, $user->access);
+		$this->assertContains(Access::FEMALE, $user->access);
 	}
 
-	public function testSetterAndGetterForAccessProperty() {
-		$model = new User;
-		$array = array(1, 2, 3);
-		$model->access = array(1, 2, 3);
-		$this->assertEquals($array, $model->access);
+	public function test_access_group_oneGroup() {
+		$user = $this->getNewUser();
+		$user->save();
+		$groupId = 32;
+		$groupAccessId = Access::GROUP_START + $groupId;
+		$ms = new MembershipGroup;
+		$ms->groupId = $groupId;
+		$ms->userId = $user->id;
+		$this->assertTrue($ms->save());
+
+		$this->assertContains($groupAccessId, $user->access);
 	}
 
-	public function testSetterAndGetterForAccess() {
-		$model = new User;
-		$array = array(1, 2, 3);
-		$model->setAccess($array);
-		$this->assertEquals($array, $model->getAccess());
+	public function test_access_group_twoGroups() {
+		$user = $this->getNewUser();
+		$group1 = $this->getNewGroup();
+		$group2 = $this->getNewGroup();
+		$this->addGroupToUser($group1, $user);
+		$this->addGroupToUser($group2, $user);
+		
+		$this->assertContains(Access::GROUP_START + $group1->id, $user->access);
+		$this->assertContains(Access::GROUP_START + $group2->id, $user->access);
+	}
+
+	private function getNewGroup() {
+		$group = new Groups;
+		$group->title = "g" . Groups::model()->count();
+		$group->menu = 123;
+		return $group;
 	}
 	
+	private function addGroupToUser($group, $user) {
+		$ms = new MembershipGroup;
+		$ms->groupId = $group->id;
+		$ms->userId = $user->id;
+		$this->assertTrue($ms->save(),"Membership burde vært lagret");
+	}
 	
-	public function test_setAccess_getAccess() {
-		$access = array(1,2,3,4);
-		$user = $this->getCleanUserObject();
-		$user->setAccess($access);
+	public function test_access_graduationYear() {
+		$user = $this->getNewUser();
+		$user->graduationYear = 2012;
 		$user->save();
 		
-		$user2 = User::model()->findByPk($user->id);
-		$this->assertEquals($access, $user2->getAccess());
+		$this->assertContains(2012, $user->access);
 	}
-
+	
+	public function test_access_specialization() {
+		$user = $this->getNewUser();
+		$spec = 15;
+		$user->specialization = $spec;
+		$user->save();
+		
+		$this->assertContains(Access::SPECIALIZATION_START + $spec, $user->access);
+	}
+	
+	public function test_access_general_registered() {
+		$user = $this->getNewUser();
+		
+		$this->assertContains(Access::REGISTERED, $user->access);
+	}
+	
+	public function test_access_general_member_true() {
+		$user = $this->getNewUser();
+		$user->member = "true";
+		$user->save();
+		
+		$this->assertContains(Access::MEMBER, $user->access);
+	}
+	
+	public function test_access_general_member_false() {
+		$user = $this->getNewUser();
+		$user->member = "false";
+		$user->save();
+		
+		$this->assertNotContains(Access::MEMBER, $user->access);
+	}
+	
 }
