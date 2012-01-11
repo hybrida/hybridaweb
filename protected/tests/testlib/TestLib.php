@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of TestLib
- *
- * @author sigurd
- */
 class TestLib {
 
 	public static function truncateDatabase() {
@@ -57,6 +47,16 @@ class TestLib {
 				";
 		$command = Yii::app()->db->createCommand($sql);
 		$command->execute();
+	}
+	
+	public static function trace($name, $value) {
+		$len = strlen($name);
+		echo "\n\n$name\n";
+		for ($i = 0; $i < $len; $i++) {
+			echo "=";
+		}
+		echo "\n";
+		print_r($value);
 	}
 
 }
