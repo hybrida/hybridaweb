@@ -248,5 +248,17 @@ class AccessRelationTest extends CTestCase {
 		$ar->save();
 		$this->assertEquals($postAccess, $ar->get());
 	}
+	
+	public function test_save_emptySubGroups() {
+		$postAccess = array(
+			array(),
+			array(),
+		);
+		$news = $this->getNewNews();
+		$ar = new AccessRelation($news);
+		$ar->set($postAccess);
+		$ar->save();
+		$this->assertEquals(array(), $ar->get());
+	}
 
 }

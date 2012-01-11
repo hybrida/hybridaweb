@@ -26,13 +26,25 @@ class GateKeeper {
 		$this->userId = $this->user->id;
 		$this->access = $this->user->access;
 	}
-
+	
 	public function hasAccess($type, $id) {
-		$userAccess = $this->separateAccess($this->access);
-
-		$postAccess = $this->getAccessRelations($type, $id);
-		$postAccess = $this->separateAccess($postAccess);
+		$userAccess = $this->separateInGroups($this->access);
 		
+		$postAccess = $this->getAccessRelations($type, $id);
+		if (!empty( $postAccess)) {
+			if (is_array($postAccess[0])) {
+				$success = false;
+				foreach ($postAccess as $postAccessSubGroup) {
+					$success = $success 
+							|| $this->hasAccess2($userAccess, $postAccessSubGroup);
+				}
+				return $success;
+			} return $this->hasAccess2($userAccess, $postAccess);
+		} return true;
+	}
+	
+	public function hasAccess2($userAccess, $postAccess) {
+		$postAccess = $this->separateInGroups($postAccess);
 		$success = true;
 		foreach ($postAccess as $groupKey => $postAccessGroup) {
 			if (!array_key_exists($groupKey, $userAccess)) {
@@ -52,7 +64,7 @@ class GateKeeper {
 		return ! empty($union);
 	}
 	
-	private function separateAccess($access) {
+	private function separateInGroups($access) {
 		$array = array();
 		foreach ($access as $id) {
 			$i = floor($id / 1000);
