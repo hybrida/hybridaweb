@@ -1,5 +1,7 @@
 <?php
 
+Yii::import('application.tests.mocks.GateKeeperMock');
+
 class GateKeeperTest extends CTestCase {
 
 	private $userAccess = array(1, 10, 52, 56, 199);
@@ -11,12 +13,11 @@ class GateKeeperTest extends CTestCase {
 	}
 	
 	public function setUp() {
-		$this->gatekeeper = new GateKeeper;
+		$this->gatekeeper = new GateKeeperMock;
 	}
 
 	private function assertHasAccessLoggedIn($expected, $array) {
-		$this->session->loginNewUser($this->userAccess);
-		$this->setUp();
+		$this->gatekeeper->setAccess($this->userAccess);
 		$this->assertHasAccess($expected, $array);
 	}
 
@@ -72,13 +73,6 @@ class GateKeeperTest extends CTestCase {
 		$this->session->loginNewUser();
 		$gk = new GateKeeper;
 		$this->assertFalse($gk->isGuest());
-	}
-	
-	public function test_loggedIn_access() {
-		$access = array(1,27,54);
-		$this->session->loginNewUser($access);
-		$gk = new GateKeeper;
-		$this->assertEquals($access, $gk->getUserAccess());
 	}
 	
 	public function test_loggedOut_isGuest() {
