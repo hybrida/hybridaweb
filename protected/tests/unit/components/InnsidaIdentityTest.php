@@ -1,16 +1,16 @@
 <?php
 
 class InnsidaIdentityTest extends CTestCase {
-	
+
 	private $user;
-	
+
 	public function setUp() {
 		$this->user = $this->getNewUser();
 	}
-	
+
 	private function getNewUser() {
 		$user = new User;
-		$user->username = 'sh'. User::model()->count();
+		$user->username = 'sh' . User::model()->count();
 		$user->lastName = 'TestCase';
 		$user->firstName = 'TestCase';
 		$user->member = "false";
@@ -25,7 +25,7 @@ class InnsidaIdentityTest extends CTestCase {
 		$identity = new InnsidaIdentity($sso);
 		return $identity;
 	}
-	
+
 	public function test_mockObject() {
 		$username = $this->user->username;
 		$data = "id,23,username,$username";
@@ -38,22 +38,22 @@ class InnsidaIdentityTest extends CTestCase {
 		$name = $identity->getName();
 		$this->assertEquals("sigurhol", $name);
 	}
-	
+
 	public function test_getStates() {
 		$user = $this->user;
 		$username = $this->user->username;
 		$data = "username,$username";
 		$mock = new SSOMock($data);
 		$identity = new InnsidaIdentity($mock);
-		
-		$this->assertEquals($user->firstName,$identity->getState('firstName'));
-		$this->assertEquals($user->middleName,$identity->getState('middleName'));
-		$this->assertEquals($user->lastName,$identity->getState('lastName'));
-		$this->assertEquals($user->member,$identity->getState('member'));
-		$this->assertEquals($user->gender,$identity->getState('gender'));
-		$this->assertEquals($user->imageId,$identity->getState('imageId'));
+
+		$this->assertEquals($user->firstName, $identity->getState('firstName'));
+		$this->assertEquals($user->middleName, $identity->getState('middleName'));
+		$this->assertEquals($user->lastName, $identity->getState('lastName'));
+		$this->assertEquals($user->member, $identity->getState('member'));
+		$this->assertEquals($user->gender, $identity->getState('gender'));
+		$this->assertEquals($user->imageId, $identity->getState('imageId'));
 	}
-	
+
 	public function test_getId() {
 		$user = $this->user;
 		$data = "username,$user->username";
@@ -61,14 +61,14 @@ class InnsidaIdentityTest extends CTestCase {
 		$identity = new InnsidaIdentity($mock);
 		$this->assertEquals($user->id, $identity->getId());
 	}
-	
+
 	public function test_nonExistingUser() {
 		$data = "username,arst1234";
 		$mock = new SSOMock($data);
 		$identity = new InnsidaIdentity($mock);
 		$this->assertFalse($identity->authenticate());
 	}
-	
+
 	public function test_existingUser() {
 		$data = "username,{$this->user->username}";
 		$mock = new SSOMock($data);
@@ -76,12 +76,29 @@ class InnsidaIdentityTest extends CTestCase {
 		$this->assertTrue($identity->authenticate());
 	}
 
+	public function test_lastLoginIsUpdated() {
+		$user = $this->getNewUser();
+		
+		$data = "username,{$user->username}";
+		$mock = new SSOMock($data);
+
+		$user->lastLogin = '';
+		$user->save();
+		$user2 = User::model()->findByPk($user->id);
+		$old = $user2->lastLogin;
+
+		$identity = new InnsidaIdentity($mock);
+		$this->assertTrue($identity->authenticate());
+		
+		$new = User::model()->findByPk($user->id)->lastLogin;
+		$this->assertNotEquals($old, $new);
+	}
+
 }
 
 class SSOMock {
 
 	public $loginvalues;
-
 
 	function __construct($data) {
 		$this->loginvalues = array();
