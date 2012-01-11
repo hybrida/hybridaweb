@@ -1,0 +1,80 @@
+/* stil for bedriftsoversikten */
+	
+#BK-companyoverview-container table{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-collapse: separate;
+	}
+	
+#BK-companyoverview-container td{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+#BK-companyoverview-container th{
+	text-align: left;
+	border-width: 2px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	}
+	
+/*F�lgende gjelder kun for hovedtabellen*/
+
+#BK-companyoverview-maintable tr:hover {
+	background-color: #CCFFFF;
+	}
+	
+#BK-companyoverview-maintable{
+	width: 100%;
+	}
+        
+#BK-companyoverview-maintablebox{
+	width: 100%;
+	height: 1000px;
+	overflow-y: scroll;
+	}
+
+/*F�lgende gjelder kun for støttetabellen*/
+	
+#BK-companyoverview-supporttable{
+        text-align: left;
+	width: 100%;
+}
+
+#BK-companyoverview-supporttable th{
+        
+        vertical-align: top;
+        padding: 0% 10%;
+}
+
+#BK-companyoverview-supporttable td{
+        vertical-align: top;
+        text-align: left;
+        padding: 0% 10%;
+}
+
+/*F�lgende gjelder kun for statistikktabellen*/
+	
+#BK-companyoverview-statisticstable{
+	width: 100%;
+}
+
+/*F�lgende gjelder kun for valgtabellen*/
+
+#BK-companyoverview-selectiontable{
+        vertical-align: top;
+        text-align: left;
+	width: 100%;
+}
+	
+#BK-companyoverview-selectiontable td{
+        vertical-align: top;
+        text-align: left;
+	width: 100%;
+}

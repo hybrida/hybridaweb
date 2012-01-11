@@ -1,0 +1,116 @@
+#BK-company-informationtable{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	width: 100%;
+	}
+	
+#BK-company-informationtable td{
+	text-align: left;
+	width: 50%;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+
+#BK-company-informationtable th{
+	text-align: left;
+	width: 50%;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+/* hovedtabellen som plasserer alle elementene*/
+	
+#BK-company-maintable{
+	width: 100%;
+	}
+        
+#BK-company-maintable td{
+        vertical-align: text-top;
+	border-width: 2px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	width: 50%;
+	}
+        
+#BK-company-maintable textarea:hover {
+	height: 150px;
+	width: 100%;
+	max-width: 100%;
+	}
+        
+#BK-company-maintable textarea{
+	width: 100%;
+	}
+	
+#BK-company-maintable input[type=submit] { 
+	font-weight: bolder;
+	}
+        
+#BK-company-scrollcontainer{
+        height: 500px;
+	overflow-y: scroll;
+	}
+        
+/* kolonnene med redigeringslinker*/
+	
+#BK-company-editinglinks{
+        text-align: center;
+	}
+	
+/* tabellen som inneholder kommentarene*/
+
+#BK-company-commenttable{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	background-color: white;
+	width: 100%;
+	}
+	
+#BK-company-commenttable td{
+	text-align: left;
+	border-width: 1px;
+	border-bottom: 3px;
+	padding: 5px;
+	border-style: inset;
+	border-color: gray;
+	}
+
+/* tabellen som inneholder alumnistudentene og bedriftspresentasjoner*/
+
+#BK-company-listtable{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	width: 100%;
+	}
+	
+#BK-company-listtable td{
+	text-align: center;
+	border-width: 1px;
+	border-bottom: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+        
+#BK-company-listtable th{
+	text-align: center;
+	border-width: 1px;
+	border-bottom: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}

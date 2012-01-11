@@ -1,16 +1,14 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+class AccessRelationTest extends CTestCase {
 
-/**
- * Description of AccessRelation
- *
- * @author sigurd
- */
-class AccessRelationTest extends PHPUnit_Framework_TestCase {
+	private function getNewNews() {
+		$news = new News;
+		$news->title = "title";
+		$news->content = "content";
+		$news->save();
+		return $news;
+	}
 
 	public function test_constructor_NewsModel_GetId() {
 		$news = new News;
@@ -154,7 +152,7 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$access->replace();
 
 		// Hvis testen har kommet så langt 
-		//betyr det at den ikke har kastet none exception
+		// betyr det at den ikke har kastet none exception
 		$this->assertTrue(true);
 	}
 
@@ -190,7 +188,6 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$access->set($array);
 		$access->replace();
 
-
 		$news2 = News::model()->findByPk($news->id);
 		$access2 = new AccessRelation($news2);
 
@@ -209,45 +206,59 @@ class AccessRelationTest extends PHPUnit_Framework_TestCase {
 		$this->assertEmpty($access->get());
 	}
 
-	public function test_remove_oneInput() {
-		$news = new News;
-		$news->save();
-		$access = new AccessRelation($news);
-		$access->set(array(1, 2, 3));
-		$access->insert();
-		$access->remove(2);
-		$access->insert();
-		$this->assertEquals(array(1, 3), $access->get());
-	}
-
-	public function test_remove_oneInputFromEarlierAccess() {
-		$array = array(10, 11, 12);
-		$news = new News;
-		$news->save();
-		$access = new AccessRelation($news);
-		$access->set($array);
-		$access->insert();
-
-
-		$access2 = new AccessRelation($news);
-
-		$access2->remove(11);
-
-		$this->assertEquals(array(10, 12), $access2->get());
-	}
-	
 	public function test_save_noInputIsJustLikeInsert() {
-		$array = array(1,2,3,4,5);
+		$array = array(1, 2, 3, 4, 5);
 		$news = new News;
 		$news->save();
-		
+
 		$access = new AccessRelation($news);
 		$access->set($array);
 		$access->save();
-		
+
 		$access2 = new AccessRelation($news);
 		$access2->save();
-		
+
 		$this->assertEquals($array, $access2->get());
 	}
+
+	public function test_save_twoAccessSubGroups() {
+		$postAccess = array(
+			array(2, 3, 1001),
+			array(2, 3, 2012),
+		);
+		$news = $this->getNewNews();
+		$ar = new AccessRelation($news);
+		$ar->set($postAccess);
+		$ar->save();
+
+		$ar2 = new AccessRelation($news);
+		$this->assertEquals($postAccess, $ar->get(), "he");
+	}
+
+	public function test_save_threeAccessSubGroups() {
+		$postAccess = array(
+			array(1, 2, 15, 4000),
+			array(1, 2, 15, 4000),
+			array(2, 3, 2012),
+		);
+
+		$news = $this->getNewNews();
+		$ar = new AccessRelation($news);
+		$ar->set($postAccess);
+		$ar->save();
+		$this->assertEquals($postAccess, $ar->get());
+	}
+	
+	public function test_save_emptySubGroups() {
+		$postAccess = array(
+			array(),
+			array(),
+		);
+		$news = $this->getNewNews();
+		$ar = new AccessRelation($news);
+		$ar->set($postAccess);
+		$ar->save();
+		$this->assertEquals(array(), $ar->get());
+	}
+
 }

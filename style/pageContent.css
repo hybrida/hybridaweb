@@ -1,3 +1,5 @@
+/* Usikker paa hvordan det blir med denne menyen naar vi
+faar en undermeny i tillegg til gruppenavigasjon. */
 #groupNavigation {
     font-size: 1em;
     clear: both;
@@ -14,6 +16,7 @@
 #groupNavigation > .groupNavigationItem:hover{
     background-color: black;
 }
+/* Denne menyen ^^ */
 
 .contentItem{
     width: 736px;
@@ -103,4 +106,25 @@ nav items div.last {
     font-weight: lighter;
     float: right;
     padding: 0px 2px 0px 0px;
+}
+
+.formSection {
+    clear: both;
+    margin-bottom: 1.5em;
+}
+
+.formSection > .fieldDefinition {
+    width: 30%;
+    float: left;
+}
+
+.formSection > .fieldInput {
+    width: 70%;
+    float: right;
+}
+
+.formSection > .fieldExplanation {
+    clear: both;
+    font-size: 90%;
+    font-style: italic;
 }

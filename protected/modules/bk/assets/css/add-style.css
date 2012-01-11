@@ -1,0 +1,97 @@
+/*stil for alle filer som har grensesnitt for � legge til elementer*/
+
+#BK-add-container table{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	background-color: white;
+	width: 100%;
+	}
+	
+#BK-add-container td{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	width: 50%;
+	}
+	
+#BK-add-container th{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	width: 50%;
+	}
+	
+#BK-add-container select {
+	width: 100%;
+	}
+	
+#BK-add-container option[selected] { 
+	background: white; 
+	}
+	
+#BK-add-container input[type=text] { 
+	width: 50%; 
+	background-color: #FFFF66;
+	}
+        
+#BK-add-container input[type=textarea] { 
+	width: 100%; 
+        height: 150px;
+	}
+	
+#BK-add-container input[type=checkbox] { 
+	margin: 5px;
+	}
+	
+#BK-add-container input[type=submit] { 
+	height: 100px;
+	width: 162px;
+	border: gray 2px outset;
+	font-weight: bolder;
+	}
+	
+#BK-add-container textarea{
+	height: 150px;
+	width: 100%;
+	max-width: 100%;
+	}
+	
+/* Big box with list of options */
+#ajax_listOfOptions{
+	position:absolute;	/* Never change this one */
+	width: 250px;	/* Width of box */
+	min-height:250px;	/* Height of box */
+	overflow:auto;	/* Scrolling features */
+	border:1px solid black;	/* Black border */
+	background-color:#FFF;	/* White background color */
+	text-align:left;
+	z-index:100;
+	}
+	
+#ajax_listOfOptions div{	/* General rule for both .optionDiv and .optionDivSelected */
+	margin:1px;		
+	padding:1px;
+	cursor:pointer;
+	}
+
+#ajax_listOfOptions .optionDiv{	/* Div for each item in list */
+	
+}
+
+#ajax_listOfOptions .optionDivSelected{ /* Selected item in the list */
+	background-color:#0066CC;
+	color:#FFF;
+	}
+
+#ajax_listOfOptions_iframe{
+	background-color:#F00;
+	position:absolute;
+	z-index:5;
+}

@@ -2,6 +2,7 @@
 
 class GateKeeper {
 
+	private $user;
 	private $userId;
 	private $access;
 	private $isGuest;
@@ -16,28 +17,60 @@ class GateKeeper {
 	}
 
 	private function initLoggedOut() {
-		$this->userId = null;
 		$this->access = array();
+		$this->userId = null;
 	}
 
 	private function initLoggedInn() {
-		$this->userId = Yii::app()->user->id;
-		$this->access = Yii::app()->user->access;
-		sort($this->access);
+		$this->user = User::model()->findByPk(user()->id);
+		$this->userId = $this->user->id;
+		$this->access = $this->user->access;
 	}
-
+	
 	public function hasAccess($type, $id) {
-		$access = $this->getAccessRelations($type, $id);
+		$userAccess = $this->separateInGroups($this->access);
 		
-		if (empty ($access)) {
+		$postAccess = $this->getAccessRelations($type, $id);
+		if (!empty( $postAccess)) {
+			if (is_array($postAccess[0])) {
+				$success = false;
+				foreach ($postAccess as $postAccessSubGroup) {
+					$success = $success 
+							|| $this->hasAccess2($userAccess, $postAccessSubGroup);
+				}
+				return $success;
+			} return $this->hasAccess2($userAccess, $postAccess);
+		} return true;
+	}
+	
+	public function hasAccess2($userAccess, $postAccess) {
+		$postAccess = $this->separateInGroups($postAccess);
+		$success = true;
+		foreach ($postAccess as $groupKey => $postAccessGroup) {
+			if (!array_key_exists($groupKey, $userAccess)) {
+				return false;
+			}
+			$success = $success && $this->hasAccessOneGroup($userAccess[$groupKey], $postAccessGroup);
+		}
+		return $success == true;
+	}
+	
+	private function hasAccessOneGroup($userAccess, $postAccess) {
+		if (empty ($postAccess)) {
 			return true;
 		}
 		
-		$union = array_intersect($this->access,$access);
-		if (empty($union)) {
-			return false;
+		$union = array_intersect($postAccess,$userAccess);
+		return ! empty($union);
+	}
+	
+	private function separateInGroups($access) {
+		$array = array();
+		foreach ($access as $id) {
+			$i = floor($id / 1000);
+			$array[$i][] = $id;
 		}
-		return true;
+		return $array;
 	}
 	
 	private function getAccessRelations($type,$id) {
@@ -55,6 +88,10 @@ class GateKeeper {
 	
 	public function getUserId() {
 		return $this->userId;
+	}
+	
+	protected function setAccess($access) {
+		$this->access = $access;
 	}
 
 }

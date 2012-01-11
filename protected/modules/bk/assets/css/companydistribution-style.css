@@ -1,0 +1,31 @@
+/* stil for siden med fordeling av bedrifter */
+	
+#BK-companydistribution-container table{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	width: 100%;
+	}
+	
+#BK-companydistribution-container td{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	}
+	
+#BK-companydistribution-container th{
+	text-align: left;
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: white;
+	}
+	
+#BK-companydistribution-container tr:hover {
+	background-color: #CCFFFF;
+	}

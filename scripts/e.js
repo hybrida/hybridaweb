@@ -57,6 +57,8 @@ function Search(dn) {
 		limit = 10,
 		input = domtb.getFirstElementChild(dn),
 		dropdown = domtb.getLastElementChild(dn),
+                responseURL = dn.getAttribute('data-type'),
+                file = dn.getAttribute('data-url'),
 		advanced,
 		lastvalue = '',
 		nodes = [];
@@ -82,7 +84,7 @@ function Search(dn) {
 		} else if(lastvalue != input.value) {
 			xhr.request({
 				'type': 'GET',
-				'url': url+'search/?q=' + input.value,
+				'url': url+file+'/?q=' + input.value + "&response=" + responseURL,
 				'functions': {
 					'onload': function() {
 						var response = this.responseText.split(split);

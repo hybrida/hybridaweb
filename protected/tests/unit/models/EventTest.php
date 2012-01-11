@@ -1,6 +1,6 @@
 <?php
 
-class EventTest extends PHPUnit_Framework_TestCase {
+class EventTest extends CTestCase {
 	
 	public function getEventObject() {
 		$event = new Event;

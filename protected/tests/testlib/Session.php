@@ -36,7 +36,7 @@ class Session {
 		$user->lastName = "TestCase";
 		$user->member = "true";
 
-		$user->setAccess($access);
+		//$user->setAccess($access);
 		$user->save();
 
 		$userIdentity = new DefaultIdentity($user->id); // Sigurd

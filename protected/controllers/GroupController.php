@@ -51,46 +51,59 @@ class GroupController extends Controller {
 		$this->render("index", $data);
 	}
 
-	public function actionView($id, $title) {
+    public function actionView($id, $title) {
 
-		$data = array();
-		$group = Group::model()->findByPk($id);
+        $data = array();
+        $group = new Group($id);
         $data['id'] = $id;
-		$data['model'] = $group;
+        $data['model'] = $group;
         $data['title'] = $group->getTitle();
         $data['menu'] = $group->getMenu();
-        
+
         $content = $group->getGroupContentType($title);
-        
+
         if($content=="article"){
            $data['content'] = $group->getArticle($title);
         }
-        
+
         if($content == "members"){
             $data['content'] = $group->getMembers();
+            $data['date'] = date('Y');
+
+            //Henter ut alle tidligere medlemmer av gruppen siden 2003
+            //Bør gjøres ved hjelp av feed med en egen stil
+            $former = array();
+            for( $year = date('Y'); $year > 2003; $year--){
+                for( $s = 1; $s <= 2; $s++ ) { 
+                    $former[] = $group->getFormerMembers($year,$s);
+                }
+            }
+
+            $data['former'] = $former;
+            print_r($former);
         }
-        
+
         if($content == "news"){
             $data['id'] = $group->id;
         }
-        
-        
-                
-        $this->render("view/" . $content, $data);
-	}
 
-	public function actions() {
-		return array(
-						//'view' => 'application.controllers.group.ViewAction',
-		);
-	}
+
+
+        $this->render("view/" . $content, $data);
+    }
+
+    public function actions() {
+            return array(
+                                            //'view' => 'application.controllers.group.ViewAction',
+            );
+    }
     
     public function actionEdit($id){
-        $group = Group::model()->findByPk($id);
+        $group = new Group($id);
         $data['title'] = $group->getTitle();
         $data['groups'] = $group->getAdminMenu();
         $data['members'] = $group->getMembers();
-		$data['menu'] = $group->getMenu();
+        $data['menu'] = $group->getMenu();
         $this->render("edit",$data);
         
     }

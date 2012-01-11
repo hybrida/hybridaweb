@@ -4,6 +4,6 @@
     <? endforeach; ?>
 
     <? if($isAdmin) : ?>
-    <a class='groupNavigationItem' href='<?= Yii::app()->baseUrl ?>/group/edit/<?= $id ?>'>endre</a>
+    <a class='groupNavigationItem' href='<?= Yii::app()->baseUrl ?>/group/edit/<?= $id ?>'>Endre</a>
     <? endif; ?>
 </div>

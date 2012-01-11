@@ -24,6 +24,7 @@ class NewsEventForm extends CFormModel {
 	public function rules() {
 		return array(
 			array('hasSignup, hasEvent', 'boolean'),
+			array('news[title], news[content]', 'required'),
 			array(
 				'news[title], news[content], ' .
 				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
@@ -91,6 +92,9 @@ class NewsEventForm extends CFormModel {
 		if ($news->parentType == "event" && $news->parentId !== null) {
 			$this->eventModel = Event::model()->findByPk($news->parentId);
 		}
+		if (!$this->eventModel) {
+			$this->eventModel = new Event;
+		}
 	}
 
 	private function initEventModel($event) {
@@ -108,7 +112,7 @@ class NewsEventForm extends CFormModel {
 			$this->newsModel = $news;
 		}
 	}
-	
+
 	private function initSignupByEvent() {
 		$signup = Signup::model()->findByPk($this->eventModel->primaryKey);
 		if ($signup) {
