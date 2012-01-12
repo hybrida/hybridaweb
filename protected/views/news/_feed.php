@@ -5,13 +5,7 @@
 <? return; ?>
 <? endif; ?>
 
-<? $gk = new GateKeeper ?>
 <? foreach ($models as $model): ?>
-	<?
-		if (!$gk->hasAccess('news', $model->id))
-			continue;
-	?>
-
 	<div class="contentItem">
 		<div class="blueBox">
 			<div class="blueBoxItem"></div>

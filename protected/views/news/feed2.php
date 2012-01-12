@@ -26,7 +26,7 @@
 					$(".feeds").append(html);
 				},
 				type: 'get',
-				url: '<?php echo $this->createUrl("feedField",array(
+				url: '<?php echo $this->createUrl("feedAjax",array(
 					'offset' => ''
 					)) ?>' + count,
 				data: {

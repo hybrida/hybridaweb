@@ -11,8 +11,8 @@
  * @author sigurd
  */
 class NewsController extends Controller {
-	
-	private $feedLimit = 5;
+
+	private $feedLimit = 10;
 
 	public function actionIndex() {
 		$this->actionFeed();
@@ -42,49 +42,36 @@ class NewsController extends Controller {
 	}
 
 	public function actionView($id) {
-		$sql = "SELECT n.id, title, n.imageId, content, firstName, middleName, lastName, timestamp
-				FROM news n, user_new u 
-				WHERE  n.author = u.id
-				AND n.id = :id ";
-		$query = Yii::app()->db->createCommand($sql);
-		$query2 = $query->query(array("id" => $id));
-		$data = $query2->read();
-
-		if ($data == array()) {
+		$news = News::model()->findByPk($id);
+		if (!$news) {
 			throw new CHttpException("Nyheten finnes ikke");
 		}
-		$this->render("view", $data);
+		if ($news->getParentType() === 'event') {
+			$this->forward('/event/view/',array($id => $news->parentId));
+			return;
+		}
+		
+		
+		$data = $news->attributes;
+		$this->render('view', array(
+			'model' => $news,
+		));
+
 	}
 
 	public function actionFeed() {
-		$selfId = Yii::app()->session['self_id'];
-
-		$query = "SELECT ma.userId FROM groups AS g  
-	LEFT JOIN access_definition AS ad ON g.title = ad.description  
-	LEFT JOIN membership_access AS ma ON ma.accessId = ad.id 
-	WHERE ma.userId = :selfId";
-
-		$command = Yii::app()->db->createCommand($query);
-		$command->bindParam(':selfId', $selfId);
-		$reader = $command->query();
-		$data = $reader->readAll();
-
-		$this->render("feed", array('data' => $data));
-	}
-	
-	public function actionFeed2() {
 		$feedElements = $this->getFeedElements();
-		$this->render("feed2",array(
+		$this->render("feed2", array(
 			'models' => $feedElements,
 			'index' => 0,
-			'limit'=> $this->feedLimit,
+			'limit' => $this->feedLimit,
 		));
 	}
-	
-	public function actionFeedField($offset=0) {
+
+	public function actionFeedAjax($offset = 0) {
 		$feedElements = $this->getFeedElements($offset);
 		$offset += count($feedElements);
-		$this->renderPartial('_feed',array(
+		$this->renderPartial('_feed', array(
 			'models' => $feedElements,
 			'index' => $offset,
 			'limit' => $this->feedLimit,
@@ -92,21 +79,8 @@ class NewsController extends Controller {
 	}
 	
 	private function getFeedElements($offset=0) {
-		$criteria = new CDbCriteria;
-		$criteria->select = "*";
-		$criteria->order = "timestamp DESC";
-		$criteria->limit = $this->feedLimit;
-		$criteria->offset = $offset;
-		
-		$feedElements = News::model()->findAll($criteria);
-		$ret = array();
-		$gatekeeper = new GateKeeper;
-		foreach ($feedElements as $e) {
-			if ($gatekeeper->hasAccess('news', $e->id)) {
-				$ret[] = $e;
-			}
-		}
-		return $ret;
+		$feed = new NewsFeed($this->feedLimit, $offset);
+		return $feed->getElements();
 	}
 
 	public function actionCreate() {

@@ -2,19 +2,19 @@
 	'News',
 );?>
 
-<h1><?=$title?></h1>
+<h1><?=$model->title?></h1>
 
-<b>Skribent:</b> <?=$firstName." ".$middleName." ".$lastName?>
+<b>Skribent:</b> <?=$model->authorName?>
 
-		<? if ($imageId): ?>
-<br><img src='php/image.php?id=<?=$imageId?>&size=2' />
+		<? if ($model->imageId): ?>
+<br><img src='php/image.php?id=<?=$model->imageId?>&size=2' />
 <? endif; ?>
 
 <p>
-<?=$content?>
+<?=$model->content?>
 </p>
 
 
 <? if (!user()->isGuest): ?>
-<p><?= CHtml::link("Rediger",array("news/edit",'id' => $id)); ?></p>
+<p><?= CHtml::link("Rediger",array("news/edit",'id' => $model->id)); ?></p>
 <? endif; ?>
