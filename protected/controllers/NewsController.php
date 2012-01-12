@@ -1,15 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of NewsController
- *
- * @author sigurd
- */
 class NewsController extends Controller {
 
 	private $feedLimit = 10;
@@ -61,7 +51,7 @@ class NewsController extends Controller {
 
 	public function actionFeed() {
 		$feedElements = $this->getFeedElements();
-		$this->render("feed2", array(
+		$this->render("feed", array(
 			'models' => $feedElements,
 			'index' => 0,
 			'limit' => $this->feedLimit,
