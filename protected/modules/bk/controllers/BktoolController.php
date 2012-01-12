@@ -29,7 +29,23 @@ class BktoolController extends Controller {
 	}
         
         public function actionDeleteupdateform(){
-                $this->actionUpdates();
+               $bkForms = new Bkforms();
+               
+               if(isset($_POST['selectedupdates'])){
+                   if(in_array('deleteall', $_POST['selectedupdates'])){
+                        $bkForms->deleteAllUpdatesRelevantToCurrentUser();
+                        $this->actionUpdates();
+                   }
+                   else{
+                        foreach ($_POST['selectedupdates'] as $updateId) :
+                            $bkForms->deleteUpdateByUpdateId($updateId);
+                        endforeach;
+                        $this->actionUpdates();
+                   } 
+               }
+               else{
+                   $this->actionUpdates();
+               }
         }
 
 	public function actionCompanyOverview() {
@@ -110,7 +126,7 @@ class BktoolController extends Controller {
                 $bkForms = new Bkforms();
 		$data = array();
                 
-                if($bkForms->isCompanyCommentEmpty($_POST['comment'])){
+                if($bkForms->isInputFieldEmpty($_POST['comment'])){
                     $this->actionCompany($id);
                 }
                 else{
@@ -161,18 +177,51 @@ class BktoolController extends Controller {
                 $this->actionCompanyOverview();
         }
 
-        public function actionEditgraduate($id){
+        public function actionEditgraduate($id, $errordata=null){
+
                 $bkTool = new Bktool();
 		$data = array();
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 $data['specializationNamesSum'] = $bkTool->getSumOfAllDistinctSpecializationNames();
                 $data['graduationYears'] = $bkTool->getAllSelectableGraduationYears();
                 $data['graduateInfo'] = $bkTool->getGraduateInfoByUserId($id);
+                $data['errordata'] = $errordata;
                 
                 $this->render('editgraduate', $data); 
         }
         
-        public function actionEditgraduateform(){
-                $this->actionGraduates();
+        public function actionEditgraduateform($id){
+                $bkForms = new Bkforms();
+		$errordata = array();
+                
+                if(!$bkForms->isInputFieldEmpty($_POST['workcompany'])){
+                    if(!$bkForms->isCompanyInDatabase($_POST['workcompany'])){
+                        $errordata['error'] = true;
+                        $errordata['workcompanyerror'] = 'Bedriften finnes ikke i databasen';
+                    }
+                }
+                
+                if(isset($errordata['error'])){ 
+                    $this->actionEditgraduate($id, $errordata);
+                }
+                else{
+                    $bkForms->updateGraduateAltEmail($id, $_POST['altemail']);
+                    $bkForms->updateGraduateSpecialization($id, $_POST['specialization']);
+                    $bkForms->updateGraduateWorkDescription($id, $_POST['workdescription']);
+                    $bkForms->updateGraduateWorkPlace($id, $_POST['workplace']);
+                    $bkForms->updateGraduateGraduationYear($id, $_POST['graduationyear']);
+                    
+                    if($bkForms->hasGraduateWorkCompanyChanged($id, $_POST['workcompany'])){
+                        $bkForms->updateGraduateWorkCompany($id, $_POST['workcompany']);
+                        
+                        $bkTool = new Bktool();
+                        $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                        foreach ($data['members'] as $member) :
+                            $bkForms->addCompanyGraduateUpdate($member['id'], $_POST['workcompany']);
+                        endforeach;
+                    }
+                    
+                    $this->actionGraduates();
+                }
         }
 }

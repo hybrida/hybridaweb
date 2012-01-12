@@ -17,7 +17,11 @@
 
 <p>
 <div id="BK-add-container">
-    <form name="editgraduateform" method="post" action="editgraduateform">
+    <form name="editgraduateform" method="post"
+        <? foreach($graduateInfo as $info) : ?>
+            action="editgraduateform?id=<?= $info['id'] ?>"
+        <? endforeach ?>
+        >
         <table>
             <tr>
                 <th>Alternativ-Email</th>
@@ -31,7 +35,7 @@
                 <th>Spesialisering</th>
                 <th>
                     <? foreach($specializationNamesSum as $info) : ?>
-                        <select name="status" size="<?= $info['sum'] ?>">
+                        <select name="specialization" size="<?= $info['sum'] ?>">
                             
                             <? foreach($specializationNames as $name) : ?>
                                 <option value="<?= $name['id'] ?>"
@@ -51,13 +55,8 @@
                 <th>Bedrift</br>(Man kan kun velge bedrifter som allerede finnes i databasen)</th>
                 <th>
                     <? foreach($graduateInfo as $info) : ?>
-                        <input type='text' name='workcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)"
-                        <?php /*
-                            if($_SESSION['POSTEDsubgroup'] != $_SESSION['subgroup'] || $_SESSION['subgroup'] == 'Bedriften finnes ikke i databasen'){
-                                echo "style='color: #FF0000;'";
-                        ?> onclick="this.value=''; this.style.color = '#000000';" <?php
-                        } */
-                        ?>/>  Characters (255)
+                        <input type='text' name='workcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)"> 
+                        Characters (255)<br/><div id="BK-add-errormessage"><i><u><?= $errordata['workcompanyerror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>
             </tr>
@@ -65,11 +64,7 @@
                 <th>Stillingsbeskrivelse</th>
                 <th>
                     <? foreach($graduateInfo as $info) : ?>
-                        <textarea name='workdescription' ><?= $info['workDescription'] ?><? /*
-                            if($_SESSION['addedcomment'] == '' || $_SESSION['addedcomment'] == 'Kommentar mangler'){
-                                echo $_SESSION['addedcomment'];
-                            } */ 
-                        ?></textarea>
+                        <textarea name='workdescription' ><?= $info['workDescription'] ?></textarea>
                     <? endforeach ?>
                 </th>
             </tr>
@@ -84,7 +79,7 @@
             <tr>
                 <th>Uteksamineringsår</th>
                 <th>
-                    <select name="status" size="10"> 
+                    <select name="graduationyear" size="10"> 
                         <? foreach($graduationYears as $year) : ?>
                             <option value="<?= $year['graduationYear'] ?>" align="center"
                                     
