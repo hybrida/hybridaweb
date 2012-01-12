@@ -618,4 +618,20 @@ class BkTool {
         
         return $data; 
     }
+    
+    public function getCompanyIdByCompanyName($companyName){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyName' => $companyName
+        );
+        $sql = "SELECT companyID FROM bk_company WHERE companyName = :companyName";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
 }
