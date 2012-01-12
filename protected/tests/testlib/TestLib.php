@@ -57,6 +57,7 @@ class TestLib {
 		}
 		echo "\n";
 		print_r($value);
+		echo "\n";
 	}
 
 }
