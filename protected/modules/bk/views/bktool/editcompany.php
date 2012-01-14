@@ -22,13 +22,8 @@
 		<th>Bedriftsnavn*</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input type='text' name='addedcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
-			<?php /*
-                            if($_SESSION['POSTEDaddedcompany'] != $_SESSION['addedcompany'] || $_SESSION['addedcompany'] == 'Bedriftsnavnet mangler' || $_SESSION['addedcompany'] == 'Bedriften finnes allerede i databasen'){
-				echo "style='color: #FF0000;'";
-				?> onclick="this.value=''; this.style.color = '#000000';" <?php
-				} */
-			?> /> Characters (255)
+                        <input type='text' name='editedcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" /> Characters (255)<br/>
+                        <div id="BK-add-errormessage"><i><u><?= $errordata['editedcompanyerror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>
             </tr>
@@ -44,13 +39,8 @@
 		<th>Telefonnummer</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name='phonenumber' type="text" value='<?= $info['phoneNumber'] ?>' maxlength="11" class="textfield"
-                        <?php /*
-                            if($_SESSION['POSTEDphonenumber'] != $_SESSION['phonenumber'] || $_SESSION['phonenumber'] == 'Ugyldig telefonnummer'){
-                                echo "style='color: #FF0000;'";
-                        ?> onclick="this.value=''; this.style.color = '#000000';" <?php
-                        } */
-                        ?> /> Integer > 0 (11)
+                        <input name='phonenumber' type="text" value='<?= $info['phoneNumber'] ?>' maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
+                        <div id="BK-add-errormessage"><i><u><?= $errordata['phonenumbererror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>                
             </tr>
@@ -74,13 +64,8 @@
 		<th>Postnummer</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name='postnumber' type="text" value='<?= $info['postnumber'] ?>' maxlength="11" class="textfield"
-                        <?php /*
-                            if($_SESSION['POSTEDpostnumber'] != $_SESSION['postnumber'] || $_SESSION['postnumber'] == 'Ugyldig postnummer')	{
-                                echo "style='color: #FF0000;'";
-                            ?> onclick="this.value=''; this.style.color = '#000000';" <?php	
-                            } */
-                            ?> /> Integer > 0 (11)
+                        <input name='postnumber' type="text" value='<?= $info['postnumber'] ?>' maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
+                        <div id="BK-add-errormessage"><i><u><?= $errordata['postnumbererror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>
             </tr>
@@ -107,12 +92,8 @@
                         <? foreach($parentCompanyName as $info) : ?>           
                             value='<?= $info['companyName'] ?>'
                         <? endforeach ?>
-                        <?php /*
-                            if($_SESSION['POSTEDsubgroup'] != $_SESSION['subgroup'] || $_SESSION['subgroup'] == 'Bedriften finnes ikke i databasen'){
-                                echo "style='color: #FF0000;'";
-                        ?> onclick="this.value=''; this.style.color = '#000000';" <?php
-                        } */
-                    ?>/>  Characters (255)
+                    />  Characters (255)<br/>
+                    <div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
 		</th>
             </tr>
             <tr>

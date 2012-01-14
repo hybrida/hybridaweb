@@ -143,7 +143,7 @@ class BktoolController extends Controller {
         }
 
 
-        public function actionEditcompany($id){
+        public function actionEditcompany($id, $errordata=null){
                 $bkTool = new Bktool();
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
@@ -154,13 +154,126 @@ class BktoolController extends Controller {
                 $data['status'] = $bkTool->getStatusByCompanyId($id);
                 $data['contactor'] = $bkTool->getContactorByCompanyId($id);
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
+                $data['errordata'] = $errordata;
                 
                 $this->render('editcompany', $data);
         }
         
         public function actionEditcompanyform($id){
+                $bkForms = new Bkforms();
+                $bkTool = new Bktool();
+		$errordata = array();
+                $phonenumber;
+                $postnumber;
+                $parentCompanyId;
+                $companyName;
                 
-                $this->actionCompany($id);
+                $data['thiscompany'] = $bkTool->getCompanyNameByCompanyId($id);
+                    
+                foreach ($data['thiscompany'] as $company) :
+                    $companyName = $company['companyName'];
+                endforeach;
+                
+                if($bkForms->isInputFieldEmpty($_POST['editedcompany'])){
+                    $errordata['error'] = true;
+                    $errordata['editedcompanyerror'] = 'Bedriftsnavnet mangler';
+                }
+                else{
+                    if($bkForms->isCompanyInDatabase($_POST['editedcompany']) && $companyName != $_POST['editedcompany']){
+                        $errordata['error'] = true;
+                        $errordata['addedcompanyerror'] = 'Bedriften finnes allerede i databasen';
+                    }
+                }
+                
+                if(!$bkForms->isInputFieldEmpty($_POST['phonenumber'])){
+                    (int) $phonenumber = intval($_POST['phonenumber']);
+                    if((int) $phonenumber <= (int) 0){
+                        $errordata['error'] = true;
+                        $errordata['phonenumbererror'] = 'Ugyldig telefonnummer';
+                    }
+                }
+                
+                if(!$bkForms->isInputFieldEmpty($_POST['postnumber'])){
+                    (int) $postnumber = intval($_POST['postnumber']);
+                    if((int) $postnumber <= (int) 0){
+                        $errordata['error'] = true;
+                        $errordata['postnumbererror'] = 'Ugyldig postnummer';
+                    }
+                }
+                
+                if(!$bkForms->isInputFieldEmpty($_POST['parentcompany'])){
+                    if($bkForms->isCompanyInDatabase($_POST['parentcompany'])){
+                        
+                        $data['parentcompany'] = $bkTool->getCompanyIdByCompanyName($_POST['parentcompany']);
+                        
+                        foreach ($data['parentcompany'] as $company) :
+                            $parentCompanyId = $company['companyID'];
+                        endforeach;
+                    }
+                    else{
+                        $errordata['error'] = true;
+                        $errordata['parentcompanyerror'] = 'Bedriften finnes ikke i databasen';
+                    }
+                }
+                
+                if(isset($errordata['error'])){
+                    $this->actionEditcompany($id, $errordata);
+                }
+                else{
+                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                    foreach ($data['members'] as $member) :
+
+                        if($bkForms->hasCompanyNameChanged($id, $_POST['editedcompany'])){
+                            $bkForms->addCompanyNameUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyStatusChanged($id, $_POST['status'])){
+                            $bkForms->addCompanyNameUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyPhoneNumberChanged(id, $_POST['phonenumber'])){
+                            $bkForms->addCompanyPhonenumberUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyAdressChanged($id, $_POST['adress'])){
+                            $bkForms->addCompanyAdressUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyPostboxChanged($id, $_POST['postbox'])){
+                            $bkForms->addCompanyPostboxUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyPostnumberChanged($id, $_POST['postnumber'])){
+                            $bkForms->addCompanyPostnumberUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyPostplaceChanged($id, $_POST['postplace'])){
+                            $bkForms->addCompanyPostplaceUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyHomepageChanged($id, $_POST['homepage'])){
+                            $bkForms->addCompanyHomepageUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyParentCompanyChanged($id, $_POST['parentcompany'])){
+                            $bkForms->addCompanyParentCompanyUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
+                            $bkForms->addCompanyContactorUpdate($member['id'], $id);
+                        }
+                        if($bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
+                            $bkForms->addCompanySpecializationUpdate($member['id'], $id);
+                        }
+                    endforeach;
+                    
+                    if($bkForms->hasCompanyContactorChanged($id, $_POST['contactor']) && isset($_POST['contactor'])){
+                        $bkForms->updateCompanyContactor($companyId, $_POST['contactor']);
+                    }
+                    if($bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations']) && isset($_POST['specializations'])){
+                        $bkForms->deleteAllCompanySpecializationsByCompanyId($id);
+                        
+                        foreach ($_POST['specializations'] as $specializationId) :
+                            $bkForms->insertCompanySpecialization($companyId, $specializationId);
+                        endforeach;
+                    }
+                    
+                    $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['adress'], 
+                                $_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status']);
+                    
+                    $this->actionCompany($id);
+                }
         }
         
         public function actionAddcompany($errordata=null){
@@ -282,7 +395,7 @@ class BktoolController extends Controller {
                             $bkForms->addCompanyContactorUpdate($member['id'], $companyId);
                         }
                         if(isset($_POST['specializations'])){
-                            $bkForms->addCompanySpecializationUpdate($$member['id'], $companyId);
+                            $bkForms->addCompanySpecializationUpdate($member['id'], $companyId);
                         }
                     endforeach;
                     

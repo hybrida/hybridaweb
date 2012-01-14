@@ -194,7 +194,7 @@ class Bkforms {
     }
     
     public function insertCompanyInformation($companyName, $mail, $phonenumber, $adress, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
-                $this->pdo = Yii::app()->db->getPdoInstance();
+        $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
             'companyName' => $companyName,
@@ -418,6 +418,305 @@ class Bkforms {
         );
         $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
 		VALUES (:relevantUserId, :companyId, 'En spesialisering har blitt knyttet til bedriften', :currentUserId, now())";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
+    public function updateCompanyInformation($companyId, $companyName, $mail, $phonenumber, $adress, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
+                $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId,
+            'companyName' => $companyName,
+            'mail' => $mail,
+            'phonenumber' => $phonenumber,
+            'adress' => $adress,
+            'postbox' => $postbox,
+            'postnumber' => $postnumber,
+            'postplace' => $postplace,
+            'homepage' => $homepage,
+            'parentCompanyId' => $parentCompanyId,
+            'status' => $status,
+            'updatedById' => Yii::app()->user->id
+        );
+        $sql = "UPDATE bk_company SET companyName = :companyName, mail = :mail, phoneNumber = :phonenumber, adress = :adress, postbox = :postbox
+                postnumber = :postnumber, postplace = :postplace, homepage = :homepage, subgroupOfID = :parentCompanyId, status = :status,
+                updatedByID = :updatedById, dateUpdated = now() WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
+    public function hasCompanyContactorChanged($companyId, $contactorId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT contactorID FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['contactorID'] != $contactorId){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanySpecializationsChanged($companyId, $specializations){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT specializationId FROM bk_company_update WHERE companyId = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        $bool = true;
+        
+        foreach ($data as $company) :
+            foreach ($specializations as $specialization) :
+                if($company['specializationId'] == $specialization){
+                    $bool = false;
+                    break;
+                }
+            endforeach;
+        endforeach;
+        
+        return $bool;
+    }
+    
+    public function hasCompanyNameChanged($companyId, $companyName){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT contactorName FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['contactorName'] != $companyName){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyMailChanged($companyId, $mail){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT mail FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['mail'] != $mail){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyPhoneNumberChanged($companyId, $phonenumber){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT phoneNumber FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['phoneNumber'] != $phonenumber){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyAdressChanged($companyId, $adress){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT adress FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['adress'] != $adress){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyPostboxChanged($companyId, $postbox){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT postbox FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['postbox'] != $postbox){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyPostnumberChanged($companyId, $postnumber){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT postnumber FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['postnumber'] != $postnumber){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyPostplaceChanged($companyId, $postplace){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT postplace FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['postplace'] != $postplace){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyHomepageChanged($companyId, $homepage){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT homepage FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['homepage'] != $homepage){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyParentCompanyChanged($companyId, $parentCompanyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT subgroupOfID FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['subgroupOfID'] != $parentCompanyId){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function hasCompanyStatusChanged($companyId, $status){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "SELECT status FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        foreach ($data as $company) :
+            if($company['status'] != $status){
+                return true;
+            }
+        endforeach;
+    }
+    
+    public function addCompanyNameUpdate($relevantUserId, $companyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId,
+            'currentUserId' => Yii::app()->user->id,
+            'relevantUserId' => $relevantUserId
+        );
+        $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
+		VALUES (:relevantUserId, :companyId, 'Bedriftens navn har blitt oppdatert', :currentUserId, now())";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
+    public function deleteAllCompanySpecializationsByCompanyId($companyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId,
+        );
+        $sql = "DELETE FROM bk_company_specialization WHERE companyId = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
