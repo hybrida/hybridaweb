@@ -31,7 +31,7 @@
 		<th>Mailadresse</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name="mailadress" type="text" class="textfield" value='<?= $info['mail'] ?>' maxlength="255" /> Characters (255)
+                        <input name="mail" type="text" class="textfield" value='<?= $info['mail'] ?>' maxlength="255" /> Characters (255)
                     <? endforeach ?>
 		</th>
             </tr>
@@ -39,7 +39,13 @@
 		<th>Telefonnummer</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name='phonenumber' type="text" value='<?= $info['phoneNumber'] ?>' maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
+                        <input name='phonenumber' type="text"
+                               
+                            <? if($info['phoneNumber'] != 0){ ?>
+                                value='<?= $info['phoneNumber'] ?>'
+                            <? } ?>
+                                
+                        maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['phonenumbererror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>                
@@ -64,7 +70,13 @@
 		<th>Postnummer</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name='postnumber' type="text" value='<?= $info['postnumber'] ?>' maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
+                        <input name='postnumber' type="text" 
+                               
+                            <? if($info['postnumber'] != 0){ ?>
+                                value='<?= $info['postnumber'] ?>' 
+                            <? } ?>
+                               
+                        maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['postnumbererror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>
@@ -88,7 +100,7 @@
             <tr>
                 <th>Undergruppe av</br>(Man kan kun velge bedrifter som allerede finnes i databasen)</th>
                 <th>
-                    <input type='text' name='subgroup' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
+                    <input type='text' name='parentcompany' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
                         <? foreach($parentCompanyName as $info) : ?>           
                             value='<?= $info['companyName'] ?>'
                         <? endforeach ?>
@@ -100,7 +112,7 @@
 		<th>Relevant for studieretning</th>
 		<th>
                     <? foreach($specializationNames as $name) : ?>
-                        <input type="checkbox" name="specialization[]" value="<?= $name['id'] ?>"
+                        <input type="checkbox" name="specializations[]" value="<?= $name['id'] ?>"
                                         
                             <? foreach($relevantSpecializations as $specialization) : ?>
                                 <?= ($name['id'] == $specialization['specializationId'] ? "checked" : ""); ?>
@@ -111,10 +123,10 @@
 		</th>
             </tr>
             <tr>
-                <th>Kontaktet av</br>(Man kan kun velge personer som er medlemmer av gruppen til <?= $this->title ?>)</th>
+                <th>Kontaktet av</br>(Man kan kun velge personer som er aktive medlemmer av gruppen til <?= $this->title ?>)</th>
 		<th>
                     <? foreach($membersSum as $info) : ?>
-                        <select name="status" size="<?= $info['sum'] ?>">
+                        <select name="contactor" size="<?= $info['sum'] ?>">
                             
                             <? foreach($members as $member) : ?>
                                 <option value="<?= $member['id'] ?>"

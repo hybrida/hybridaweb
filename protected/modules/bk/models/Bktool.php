@@ -385,7 +385,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT s.name FROM bk_company AS c, spesialization AS s, bk_company_specialization AS cs
+        $sql = "SELECT cs.specializationId, s.name FROM bk_company AS c, spesialization AS s, bk_company_specialization AS cs
                 WHERE c.companyID = cs.companyId AND c.companyID = :companyId
                 AND cs.specializationId = s.id ORDER BY name ASC";
 

@@ -71,7 +71,7 @@
 		</th>
             </tr>
             <tr>
-                <th>Kontaktet av</br>(Man kan kun velge personer som er medlemmer av gruppen til <?= $this->title ?>)</th>
+                <th>Kontaktet av</br>(Man kan kun velge personer som er aktive medlemmer av gruppen til <?= $this->title ?>)</th>
 		<th>
                     <? foreach($membersSum as $info) : ?>
                         <select name="contactor" size="<?= $info['sum'] ?>">

@@ -163,9 +163,13 @@ class BktoolController extends Controller {
                 $bkForms = new Bkforms();
                 $bkTool = new Bktool();
 		$errordata = array();
+                $errordata['editedcompanyerror'] = '';
+                $errordata['phonenumbererror'] = '';
+                $errordata['postnumbererror'] = '';
+                $errordata['parentcompanyerror'] = '';
                 $phonenumber;
                 $postnumber;
-                $parentCompanyId;
+                $parentCompanyId = 0;
                 $companyName;
                 
                 $data['thiscompany'] = $bkTool->getCompanyNameByCompanyId($id);
@@ -220,6 +224,12 @@ class BktoolController extends Controller {
                     $this->actionEditcompany($id, $errordata);
                 }
                 else{
+                    $data['parentcompany'] = $bkTool->getCompanyIdByCompanyName($_POST['parentcompany']);
+                    
+                    foreach ($data['parentcompany'] as $company) :
+                        $parentCompanyId = $company['companyID'];
+                    endforeach;
+                    
                     $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
                     foreach ($data['members'] as $member) :
 
@@ -227,9 +237,12 @@ class BktoolController extends Controller {
                             $bkForms->addCompanyNameUpdate($member['id'], $id);
                         }
                         if($bkForms->hasCompanyStatusChanged($id, $_POST['status'])){
-                            $bkForms->addCompanyNameUpdate($member['id'], $id);
+                            $bkForms->addCompanyStatusUpdate($member['id'], $id);
                         }
-                        if($bkForms->hasCompanyPhoneNumberChanged(id, $_POST['phonenumber'])){
+                        if($bkForms->hasCompanyMailChanged($id, $_POST['mail'])){
+                            $bkForms->addCompanyMailUpdate($member['id'], $id);
+                        }
+                        if($_POST['phonenumber'] > 0 && $bkForms->hasCompanyPhoneNumberChanged($id, $_POST['phonenumber'])){
                             $bkForms->addCompanyPhonenumberUpdate($member['id'], $id);
                         }
                         if($bkForms->hasCompanyAdressChanged($id, $_POST['adress'])){
@@ -238,7 +251,7 @@ class BktoolController extends Controller {
                         if($bkForms->hasCompanyPostboxChanged($id, $_POST['postbox'])){
                             $bkForms->addCompanyPostboxUpdate($member['id'], $id);
                         }
-                        if($bkForms->hasCompanyPostnumberChanged($id, $_POST['postnumber'])){
+                        if($_POST['postnumber'] > 0 && $bkForms->hasCompanyPostnumberChanged($id, $_POST['postnumber'])){
                             $bkForms->addCompanyPostnumberUpdate($member['id'], $id);
                         }
                         if($bkForms->hasCompanyPostplaceChanged($id, $_POST['postplace'])){
@@ -247,25 +260,25 @@ class BktoolController extends Controller {
                         if($bkForms->hasCompanyHomepageChanged($id, $_POST['homepage'])){
                             $bkForms->addCompanyHomepageUpdate($member['id'], $id);
                         }
-                        if($bkForms->hasCompanyParentCompanyChanged($id, $_POST['parentcompany'])){
+                        if($bkForms->hasCompanyParentCompanyChanged($id, $parentCompanyId)){
                             $bkForms->addCompanyParentCompanyUpdate($member['id'], $id);
                         }
-                        if($bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
-                            $bkForms->addCompanyContactorUpdate($member['id'], $id);
+                        if(isset($_POST['contactor']) && $bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
+                            $bkForms->addCompanyContactorUpdate($member['id'], $id);         
                         }
-                        if($bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
+                        if(isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
                             $bkForms->addCompanySpecializationUpdate($member['id'], $id);
                         }
                     endforeach;
                     
-                    if($bkForms->hasCompanyContactorChanged($id, $_POST['contactor']) && isset($_POST['contactor'])){
-                        $bkForms->updateCompanyContactor($companyId, $_POST['contactor']);
+                    if(isset($_POST['contactor']) && $bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
+                        $bkForms->updateCompanyContactor($id, $_POST['contactor']);
                     }
-                    if($bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations']) && isset($_POST['specializations'])){
+                    if(isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
                         $bkForms->deleteAllCompanySpecializationsByCompanyId($id);
                         
                         foreach ($_POST['specializations'] as $specializationId) :
-                            $bkForms->insertCompanySpecialization($companyId, $specializationId);
+                            $bkForms->insertCompanySpecialization($id, $specializationId);
                         endforeach;
                     }
                     
@@ -291,9 +304,13 @@ class BktoolController extends Controller {
                 $bkForms = new Bkforms();
                 $bkTool = new Bktool();
 		$errordata = array();
+                $errordata['addedcompanyerror'] = '';
+                $errordata['phonenumbererror'] = '';
+                $errordata['postnumbererror'] = '';
+                $errordata['parentcompanyerror'] = '';
                 $phonenumber;
                 $postnumber;
-                $parentCompanyId;
+                $parentCompanyId = 0;
                 $companyId;
                 
                 if($bkForms->isInputFieldEmpty($_POST['addedcompany'])){
@@ -418,7 +435,10 @@ class BktoolController extends Controller {
         
         public function actionEditgraduateform($id){
                 $bkForms = new Bkforms();
+                $bkTool = new Bktool();
+		$data = array();
 		$errordata = array();
+                $companyId = 0;
                 
                 if(!$bkForms->isInputFieldEmpty($_POST['workcompany'])){
                     if(!$bkForms->isCompanyInDatabase($_POST['workcompany'])){
@@ -437,14 +457,22 @@ class BktoolController extends Controller {
                     $bkForms->updateGraduateWorkPlace($id, $_POST['workplace']);
                     $bkForms->updateGraduateGraduationYear($id, $_POST['graduationyear']);
                     
+                    $data['thiscompany'] = $bkTool->getCompanyIdByCompanyName($_POST['workcompany']);
+                    
+                    foreach ($data['thiscompany'] as $company) :
+                        $companyId = $company['companyID'];
+                    endforeach;
+                    
                     if($bkForms->hasGraduateWorkCompanyChanged($id, $_POST['workcompany'])){
-                        $bkForms->updateGraduateWorkCompany($id, $_POST['workcompany']);
+                    
+                        $bkForms->updateGraduateWorkCompany($id, $companyId);
                         
-                        $bkTool = new Bktool();
-                        $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
-                        foreach ($data['members'] as $member) :
-                            $bkForms->addCompanyGraduateUpdate($member['id'], $_POST['workcompany']);
-                        endforeach;
+                        if($companyId != 0){
+                            $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                            foreach ($data['members'] as $member) :
+                                $bkForms->addCompanyGraduateUpdate($member['id'], $companyId);
+                            endforeach;
+                        }
                     }
                     
                     $this->actionGraduates();

@@ -29,7 +29,9 @@
                     <th>Telefonnummer</th>
                     <td>
                         <? foreach($companyContactInfo as $info) : ?>
-                            <?= $info['phoneNumber'] ?>
+                            <? if($info['phoneNumber'] != 0){ ?>
+                                <?= $info['phoneNumber'] ?>
+                            <? } ?>
                         <? endforeach ?>
                     </td>
                 </tr>
@@ -53,7 +55,10 @@
                     <th>Postnr./Poststed</th>
                     <td>
                         <? foreach($companyContactInfo as $info) : ?>
-                            <?= $info['postnumber'] ?> <?= $info['postplace'] ?>
+                            <? if($info['postnumber'] != 0){ ?>
+                                <?= $info['postnumber'] ?>
+                            <? } ?>
+                            <?= $info['postplace'] ?>
                         <? endforeach ?>
                     </td>
                 </tr>

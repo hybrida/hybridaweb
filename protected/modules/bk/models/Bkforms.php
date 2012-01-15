@@ -149,14 +149,14 @@ class Bkforms {
         $data = array(
             'graduateId' => $id
         );
-        $sql = "SELECT companyName FROM bk_company, user_new 
-                WHERE id = :graduateId AND workCompanyID = companyID";
+        $sql = "SELECT companyName FROM bk_company 
+                RIGHT JOIN user_new ON workCompanyID = companyID WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
 
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        
+
         foreach ($data as $company) :
             if($company['companyName'] != $companyName){
                 return true;
@@ -164,30 +164,29 @@ class Bkforms {
         endforeach;
     }
     
-    public function updateGraduateWorkCompany($id, $companyName){
+    public function updateGraduateWorkCompany($id, $companyId){
         $this->pdo = Yii::app()->db->getPdoInstance();
         
         $data = array(
             'graduateId' => $id,
-            'companyName' => $companyName
+            'companyId' => $companyId
         );
-        $sql = "UPDATE user_new SET workCompanyID = companyID WHERE id = :graduateId AND companyName = :companyName";
+        $sql = "UPDATE user_new SET workCompanyID = :companyId WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
     }
     
-    public function addCompanyGraduateUpdate($relevantUserId, $companyName){
+    public function addCompanyGraduateUpdate($relevantUserId, $companyId){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
-            'companyName' => $companyName,
+            'companyId' => $companyId,
             'currentUserId' => Yii::app()->user->id,
             'relevantUserId' => $relevantUserId
         );
         $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
-		VALUES (:relevantUserId, companyID, 'En alumnistudent er knyttet til om bedriften', :currentUserId, now())
-                FROM bk_company WHERE companyName = :companyName";
+		VALUES (:relevantUserId, :companyId, 'En alumnistudent er knyttet til om bedriften', :currentUserId, now())";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -387,7 +386,7 @@ class Bkforms {
             'relevantUserId' => $relevantUserId
         );
         $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
-		VALUES (:relevantUserId, :companyId, 'Bedriftens har blitt satt som en undergruppe', :currentUserId, now())";
+		VALUES (:relevantUserId, :companyId, 'Bedriften har blitt satt som en undergruppe', :currentUserId, now())";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -440,7 +439,7 @@ class Bkforms {
             'status' => $status,
             'updatedById' => Yii::app()->user->id
         );
-        $sql = "UPDATE bk_company SET companyName = :companyName, mail = :mail, phoneNumber = :phonenumber, adress = :adress, postbox = :postbox
+        $sql = "UPDATE bk_company SET companyName = :companyName, mail = :mail, phoneNumber = :phonenumber, adress = :adress, postbox = :postbox,
                 postnumber = :postnumber, postplace = :postplace, homepage = :homepage, subgroupOfID = :parentCompanyId, status = :status,
                 updatedByID = :updatedById, dateUpdated = now() WHERE companyID = :companyId";
 
@@ -474,25 +473,31 @@ class Bkforms {
         $data = array(
             'companyId' => $companyId
         );
-        $sql = "SELECT specializationId FROM bk_company_update WHERE companyId = :companyId";
+        $sql = "SELECT specializationId FROM bk_company_specialization, spesialization 
+                WHERE id = specializationId AND companyId = :companyId ORDER BY name ASC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
 
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         
-        $bool = true;
+        $edited = 0;
+        $original = 0;
         
-        foreach ($data as $company) :
-            foreach ($specializations as $specialization) :
-                if($company['specializationId'] == $specialization){
-                    $bool = false;
-                    break;
-                }
-            endforeach;
+        foreach ($specializations as $specialization) :
+            $edited.=$specialization;
         endforeach;
         
-        return $bool;
+        foreach ($data as $company) :
+            $original.=$company['specializationId'];
+        endforeach;
+        
+        print_r("original: ".$original);
+        print_r(" edited:".$edited);
+        
+        if($original != $edited || ($edited == '' && $original != '') || ($edited != '' && $original == '')){
+            return true;
+        }
     }
     
     public function hasCompanyNameChanged($companyId, $companyName){
@@ -501,7 +506,7 @@ class Bkforms {
         $data = array(
             'companyId' => $companyId
         );
-        $sql = "SELECT contactorName FROM bk_company WHERE companyID = :companyId";
+        $sql = "SELECT companyName FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -509,7 +514,7 @@ class Bkforms {
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($data as $company) :
-            if($company['contactorName'] != $companyName){
+            if($company['companyName'] != $companyName){
                 return true;
             }
         endforeach;
