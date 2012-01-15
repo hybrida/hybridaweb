@@ -39,7 +39,11 @@
 <div id="BK-updatedelements-maintablebox">
 <table id="BK-updatedelements-maintable">
     <tr>
-        <th>Merk</th><th>Tidspunkt</th><th>Beskrivelse</th><th>Oppdatert bedrift</th><th>Oppdatert av</th>
+        <th>Merk</th>
+        <th><?=CHtml::link('Tidspunkt', array('updates?orderby=dateAdded')) ?></th>
+        <th><?=CHtml::link('Beskrivelse', array('updates?orderby=description')) ?></th>
+        <th><?=CHtml::link('Oppdatert bedrift', array('updates?orderby=companyName')) ?></th>
+        <th><?=CHtml::link('Oppdatert av', array('updates?orderby=firstName')) ?></th>
     </tr>
     <? $counter = 1; ?>
         

@@ -68,10 +68,10 @@
 
     <table id="BK-companyoverview-maintable">
         <tr>
-            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Bedrift</th>
-            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Status</th>
-            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Kontaktet av</th>
-            <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/companyoverview'>Dato lagt til</th>
+            <th><?=CHtml::link('Bedrift', array('companyoverview?orderby=companyName&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Status', array('companyoverview?orderby=status&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Kontaktet av', array('companyoverview?orderby=firstName&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Dato lagt til', array('companyoverview?orderby=dateAdded&order='.$_SESSION['order'])) ?></th>
         </tr>
       
         <? foreach($companies as $company) : ?>

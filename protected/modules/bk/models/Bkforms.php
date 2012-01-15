@@ -492,10 +492,7 @@ class Bkforms {
             $original.=$company['specializationId'];
         endforeach;
         
-        print_r("original: ".$original);
-        print_r(" edited:".$edited);
-        
-        if($original != $edited || ($edited == '' && $original != '') || ($edited != '' && $original == '')){
+        if($original != $edited){
             return true;
         }
     }

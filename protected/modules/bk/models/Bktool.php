@@ -1,13 +1,13 @@
 <?php
 
 class BkTool {
-        
-    public function getCompanyOverview(){
+
+    public function getCompanyOverview($orderBy, $order){
         $this->pdo = Yii::app()->db->getPdoInstance();
-    
+
         $data = array();
         $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM bk_company 
-        LEFT JOIN user_new ON contactorID = id";
+        LEFT JOIN user_new ON contactorID = id ORDER BY ".$orderBy." ".$order."";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -155,13 +155,13 @@ class BkTool {
         return $data;
     }
     
-    public function getAllGraduates(){
+    public function getAllGraduates($orderBy, $order){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
         $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM user_new 
                 LEFT JOIN bk_company ON companyID = workCompanyID
-                WHERE graduationYear <= now()";
+                WHERE graduationYear <= now() ORDER BY ".$orderBy." ".$order."";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

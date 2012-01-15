@@ -117,11 +117,11 @@
 <div id="BK-alumnilist-alumnilistbox">
 <table id="BK-alumnilist-maintable">
     <tr>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Navn</th>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Uteksamineringsår</th>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Bedrift</th>
+        <th><?=CHtml::link('Navn', array('graduates?orderby=firstName&order='.$_SESSION['order'])) ?></th>
+        <th><?=CHtml::link('Uteksamineringsår', array('graduates?orderby=graduationYear&order='.$_SESSION['order'])) ?></th>
+        <th><?=CHtml::link('Bedrift', array('graduates?orderby=companyName&order='.$_SESSION['order'])) ?></th>
         <th>Stillingsbeskrivelse</th>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Arbeidssted</th>
+        <th><?=CHtml::link('Arbeidssted', array('graduates?orderby=workPlace&order='.$_SESSION['order'])) ?></th>
         <th>Rediger</th>
     </tr>
 

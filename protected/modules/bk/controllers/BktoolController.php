@@ -20,6 +20,7 @@ class BktoolController extends Controller {
 	public function actionUpdates() {
                 $bkTool = new Bktool();
 		$data = array();
+                
                 $data['loginInfo'] = $bkTool->getLastLoginCurrentUser();
                 $data['lastUpdateInfo'] = $bkTool->getLatestUpdateTimeStampRelevantForCurrentUser();
                 $data['relevantUpdatesInfo'] = $bkTool->getSumOfUpdatesRelevantForCurrentUser();
@@ -51,7 +52,41 @@ class BktoolController extends Controller {
 	public function actionCompanyOverview() {
 		$bkTool = new Bktool();
 		$data = array();
-		$data['companies'] = $bkTool->getCompanyOverview();
+                
+                if(!isset($_GET['orderby'])){
+                    $_GET['orderby'] = 'companyName';
+                }
+                if(!isset($_GET['order'])){
+                    $_GET['order'] = 'DESC';
+                } 
+                
+                switch($_GET['orderby']){
+                    case 'status':
+                        $_SESSION['orderby'] = 'status';
+                        break;
+                    case 'firstName':
+                        $_SESSION['orderby'] = 'firstName';
+                        break;
+                    case 'dateAdded':
+                        $_SESSION['orderby'] = 'dateAdded';
+                        break;
+                    default:
+                        $_SESSION['orderby'] = 'companyName';
+                        break;
+                }
+                switch($_GET['order']){
+                    case 'ASC':
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                    case 'DESC':
+                        $_SESSION['order'] = 'ASC';
+                        break;
+                    default:
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                }
+
+		$data['companies'] = $bkTool->getCompanyOverview($_SESSION['orderby'], $_SESSION['order']);
 		$data['statistics'] = $bkTool->getCompanyOverviewStatistics();
 
 		$this->render('companyoverview', $data);
@@ -60,13 +95,48 @@ class BktoolController extends Controller {
 	public function actionGraduates() {
 		$bkTool = new Bktool();
 		$data = array();
+                
+                if(!isset($_GET['orderby'])){
+                    $_GET['orderby'] = 'firstName';
+                }
+                if(!isset($_GET['order'])){
+                    $_GET['order'] = 'DESC';
+                } 
+                
+                switch($_GET['orderby']){
+                    case 'graduationYear':
+                        $_SESSION['orderby'] = 'graduationYear';
+                        break;
+                    case 'workPlace':
+                        $_SESSION['orderby'] = 'workPlace';
+                        break;
+                    case 'companyName':
+                        $_SESSION['orderby'] = 'companyName';
+                        break;
+                    default:
+                        $_SESSION['orderby'] = 'firstName';
+                        break;
+                }
+                switch($_GET['order']){
+                    case 'ASC':
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                    case 'DESC':
+                        $_SESSION['order'] = 'ASC';
+                        break;
+                    default:
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                }
+                
+                
 		$data['graduationYears'] = $bkTool->getAllGraduationYears();
                 $data['graduatesByYear'] = $bkTool->getNumberOfGraduatesGroupedByYear();
                 $data['employeesByYear'] = $bkTool->getNumberOfEmployedGraduatesGroupedByYear();
 		$data['graduatesSum'] = $bkTool->getSumOfAllGraduates();
 		$data['employingCompanies'] = $bkTool->getAllEmployingCompanies();
 		$data['employeesSum'] = $bkTool->getSumOfAllEmployedGraduates();
-		$data['graduates'] = $bkTool->getAllGraduates();
+		$data['graduates'] = $bkTool->getAllGraduates($_SESSION['orderby'], $_SESSION['order']);
 
 		$this->render('graduates', $data);
 	}
@@ -280,6 +350,9 @@ class BktoolController extends Controller {
                         foreach ($_POST['specializations'] as $specializationId) :
                             $bkForms->insertCompanySpecialization($id, $specializationId);
                         endforeach;
+                    }
+                    if(!isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, array())){
+                        $bkForms->deleteAllCompanySpecializationsByCompanyId($id);
                     }
                     
                     $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['adress'], 
