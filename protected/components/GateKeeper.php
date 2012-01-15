@@ -36,14 +36,14 @@ class GateKeeper {
 				$success = false;
 				foreach ($postAccess as $postAccessSubGroup) {
 					$success = $success 
-							|| $this->hasAccess2($userAccess, $postAccessSubGroup);
+							|| $this->subGroupHasAccess($userAccess, $postAccessSubGroup);
 				}
 				return $success;
-			} return $this->hasAccess2($userAccess, $postAccess);
+			} return $this->subGroupHasAccess($userAccess, $postAccess);
 		} return true;
 	}
 	
-	public function hasAccess2($userAccess, $postAccess) {
+	private function subGroupHasAccess($userAccess, $postAccess) {
 		$postAccess = $this->separateInGroups($postAccess);
 		$success = true;
 		foreach ($postAccess as $groupKey => $postAccessGroup) {
