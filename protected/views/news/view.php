@@ -4,7 +4,7 @@
 
 <h1><?=$model->title?></h1>
 
-<b>Skribent:</b> <?=$model->authorName?>
+<b>Skribent:</b> <?= CHtml::link($model->authorName, '/profile/view/'.$model->author)?>
 
 		<? if ($model->imageId): ?>
 <br><img src='php/image.php?id=<?=$model->imageId?>&size=2' />
