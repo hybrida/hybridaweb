@@ -33,7 +33,13 @@ class ActiveForm extends CActiveForm {
 			),
 		));
 	}
+	
+	public function accessField($model, $attribute, $htmlOptions=array()) {
+		$this->widget('application.components.widgets.AccessField', array(
+			'model' => $model,
+			'attribute' => $attribute,
+			'options' => $htmlOptions,
+		));
+	}
 
 }
-
-?>
