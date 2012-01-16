@@ -25,9 +25,6 @@ if(isset($code)){
 	Header("Location: http://www.appletini.ivt.ntnu.no/yii"); //redirect tilbake til forsiden
 }elseif(isset($error)){
 
-	echo 'En feil har oppstått. Vennligst prøv igjen';
+	echo 'En feil har oppstï¿½tt. Vennligst prï¿½v igjen';
 
 }
-
-
-?>

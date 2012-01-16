@@ -8,5 +8,3 @@
 class NullPointerException extends RuntimeException {
 	//put your code here
 }
-
-?>

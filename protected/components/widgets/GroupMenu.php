@@ -28,5 +28,3 @@ class GroupMenu extends CWidget {
 	}
 	
 }
-
-?>

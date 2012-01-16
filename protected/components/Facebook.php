@@ -178,4 +178,3 @@ public function publishNews($message, $id){
         // return $out;   
 //}
 }
-?>

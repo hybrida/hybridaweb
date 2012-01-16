@@ -21,5 +21,5 @@ class UserOptions extends CWidget {
 			$this->render("userOptionsWidget/user",  $data);
 		}
 	}
+
 }
-?>
