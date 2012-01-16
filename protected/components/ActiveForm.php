@@ -6,7 +6,7 @@ class ActiveForm extends CActiveForm {
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
 		$text = CHtml::resolveValue($model, $attribute);
 
-		$this->widget('application.components.widgets.XHeditor', array(
+		$this->widget('ext.xheditor.XHeditor', array(
 			'language' => 'en', //options are en, zh-cn, zh-tw
 			'config' => array(
 				'id' => $htmlOptions['id'],
