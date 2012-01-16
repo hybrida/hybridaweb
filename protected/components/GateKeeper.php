@@ -78,6 +78,10 @@ class GateKeeper {
 		return $accessRelation->get();
 	}
 	
+	public function hasAccessToGroup($groupId) {
+		return in_array(Access::GROUP_START + $groupId, $this->access);
+	}
+	
 	public function isGuest() {
 		return $this->isGuest;
 	}

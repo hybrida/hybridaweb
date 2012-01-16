@@ -177,27 +177,27 @@ class GateKeeperTest extends CTestCase {
 		);
 		$this->assertHasAccess(true, $userAccess, $postAccess);
 	}
-	
+
 	public function test_hasAccess_allSubGroupsOut_false() {
-		$userAccess = array(1,1000,1200);
+		$userAccess = array(1, 1000, 1200);
 		$postAccess = array(
 			array(2),
-			array(4,1001),
+			array(4, 1001),
 			array(2013),
-			array(1000,1200,1,3000),
+			array(1000, 1200, 1, 3000),
 		);
 		$this->assertHasAccess(false, $userAccess, $postAccess);
 	}
-	
+
 	// Sjekker om 1000 og 1005 er i samme accessGruppe, slik de skal.
 	public function test_hasAccess_accessIdsDivisibleBy1000_true() {
 		$userAccess = array(1005);
 		$postAccess = array(
-			array(1005,1000)
+			array(1005, 1000)
 		);
 		$this->assertHasAccess(true, $userAccess, $postAccess);
 	}
-	
+
 	public function test_hasAccess_UserInput_true() {
 		$user = $this->getNewUser();
 		$user->gender = "male";
@@ -207,4 +207,35 @@ class GateKeeperTest extends CTestCase {
 		);
 		$this->assertHasAccess(true, $user->access, $postAccess);
 	}
+
+	private function assertHasAccessToGroup($user, $group) {
+		$this->gatekeeper->setAccess($user->access);
+		$this->assertTrue($this->gatekeeper->hasAccessToGroup($group));
+	}
+
+	private function assertHasNotAccessToGroup($user, $group) {
+		$this->gatekeeper->setAccess($user->access);
+		$this->assertFalse($this->gatekeeper->hasAccessToGroup($group->id));
+	}
+
+	public function test_hasAccessToGroup_oneGroup_true() {
+		$user = $this->getNewUser();
+		$group = $this->getNewGroup();
+		$group->addMember($user->id);
+		$this->assertHasAccessToGroup($user, $group->id);
+	}
+
+	private function getNewGroup() {
+		$group = new Groups;
+		$group->title = "s" . Groups::model()->count();
+		$group->save();
+		return $group;
+	}
+
+	public function test_hasAccessToGroup_oneGroup_false() {
+		$group = $this->getNewGroup();
+		$user = $this->getNewUser();
+		$this->assertHasNotAccessToGroup($user, $group);
+	}
+
 }
