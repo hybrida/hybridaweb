@@ -80,6 +80,7 @@ class UserTest extends CTestCase {
 		$group = new Groups;
 		$group->title = "g" . Groups::model()->count();
 		$group->menu = 123;
+		$group->save();
 		return $group;
 	}
 	
