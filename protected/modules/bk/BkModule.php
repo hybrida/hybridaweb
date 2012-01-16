@@ -3,6 +3,7 @@
 class BkModule extends CWebModule {
 
 	private $_assetsDir = "bk.assets";
+	private $groupId = 57;
 
 	public function init() {
 		// this method is called when the module is being created
@@ -17,10 +18,19 @@ class BkModule extends CWebModule {
 	public function beforeControllerAction($controller, $action) {
 		if (parent::beforeControllerAction($controller, $action)) {
 			$this->initAssets();
+			$this->throwErrorIfNotBedkomMember();
 			return true;
 		}
 		else
 			return false;
+	}
+	
+	private function throwErrorIfNotBedkomMember() {
+		$gk = new GateKeeper;
+		$isBedkomMember = $gk->hasAccessToGroup($this->groupId);
+		if (!$isBedkomMember) {
+			throw new CHttpException("Kunn for bedkom-medlemmer");
+		}
 	}
 
 	private function initAssets() {
