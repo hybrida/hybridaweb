@@ -2,13 +2,15 @@
 
 function endRequest($event) {
 	$app = Yii::app();
-	$ajaxRegList = array('/get/', '/post$/','/image/');
-	$ajaxRequest = false;
+	$ajaxRegList = array(
+		'/get/', '/post$/', '/image/'
+	);
+	$isAjaxRequest = Yii::app()->request->isAjaxRequest;
 	foreach ($ajaxRegList as $bad) {
-		$ajaxRequest |= preg_match($bad, $app->request->getUrl());
+		$isAjaxRequest |= preg_match($bad, $app->request->getUrl());
 	}
 	$notLoginUrl = $app->createUrl($app->user->loginUrl[0]) != $app->request->getUrl();
-	if ($notLoginUrl && !$ajaxRequest) {
+	if ($notLoginUrl && !$isAjaxRequest) {
 		$app->user->setReturnUrl($app->request->getUrl());
 	}
 }
