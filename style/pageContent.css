@@ -110,21 +110,40 @@ nav items div.last {
 
 .formSection {
     clear: both;
-    margin-bottom: 1.5em;
+    margin: 1.5em;
+    padding: 2em;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.08);
 }
 
-.formSection > .fieldDefinition {
+.formSection > * {
+    margin-bottom: 0.25em;
+}
+
+.formSection .fieldDefinition {
     width: 30%;
     float: left;
+    clear: left;
 }
 
-.formSection > .fieldInput {
+.formSection .fieldInput {
     width: 70%;
     float: right;
+    clear: right;
 }
 
-.formSection > .fieldExplanation {
+.formSection .inputGoup :focus {
+    box-shadow: 0 0 10px black;
+}
+
+.formSection .fieldExplanation {
     clear: both;
+    float: none;
     font-size: 90%;
     font-style: italic;
+    padding-top: .4em;
+}
+
+.formSection textarea {
+    resize: none;
 }
