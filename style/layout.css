@@ -106,6 +106,7 @@ div.searchBox{
 #edit {
     float: right;
     background-color: rgb(0, 73, 147);
+    margin-top: 5px;
 }
 
 #edit :hover {
