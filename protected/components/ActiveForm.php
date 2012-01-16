@@ -6,7 +6,7 @@ class ActiveForm extends CActiveForm {
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
 		$text = CHtml::resolveValue($model, $attribute);
 
-		$this->widget('application.components.widgets.XHeditor', array(
+		$this->widget('ext.xheditor.XHeditor', array(
 			'language' => 'en', //options are en, zh-cn, zh-tw
 			'config' => array(
 				'id' => $htmlOptions['id'],
@@ -33,7 +33,13 @@ class ActiveForm extends CActiveForm {
 			),
 		));
 	}
+	
+	public function accessField($model, $attribute, $htmlOptions=array()) {
+		$this->widget('application.components.widgets.AccessField', array(
+			'model' => $model,
+			'attribute' => $attribute,
+			'options' => $htmlOptions,
+		));
+	}
 
 }
-
-?>

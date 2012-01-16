@@ -63,6 +63,7 @@
 			<div class="formLabel">
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[title]'); ?></div>
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[content]'); ?></div>
+				<div class="formLabelRow"><?= $form->labelEx($model, 'news[access]') ?> </div>
 			</div>
 
 			<div class="formBox">
@@ -74,6 +75,10 @@
 				<div class="formBoxRow">
 					<?php echo $form->textArea($model, "news[content]",array()); ?>
 					<?php echo $form->error($model, 'news[content]'); ?>				
+				</div>
+				<div class="formBoxRow">
+					<?php echo $form->accessField($model, "news[access]"); ?>
+					<?php echo $form->error($model, 'news[acces]'); ?>				
 				</div>
 			</div>
 
