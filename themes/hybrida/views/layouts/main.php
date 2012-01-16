@@ -2,7 +2,7 @@
 <html>
 
 	<head>
-		<title><?= CHtml::encode(Yii::app()->name) ?></title>
+		<title><?=$this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 
 		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/e.js'></script>
