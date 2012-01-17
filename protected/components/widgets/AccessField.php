@@ -76,7 +76,15 @@ class AccessField extends CWidget {
 	}
 
 	private function getSpecialisations() {
-		return array();
+		$stmt = app()->db->createCommand()
+				->select('id, name')
+				->from('spesialization')
+				->queryAll();
+		$specs = array();
+		foreach ($stmt as $spec) {
+			$specs[$spec['name']] = $spec['id'];
+		}
+		return $specs;
 	}
 
 }
