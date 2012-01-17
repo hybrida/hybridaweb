@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2012 at 10:58 AM
+-- Generation Time: Jan 17, 2012 at 11:49 AM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -294,6 +294,48 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`) VALUES
 (55, 0, 'Webkom', 326, 'true'),
 (56, 0, 'Styret', 363, 'false'),
 (57, 0, 'Hybrida Bedriftskomité', 293, 'true');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hyb_gallery`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_gallery` (
+  `id` int(11) NOT NULL auto_increment,
+  `title` varchar(30) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `hyb_gallery`
+--
+
+INSERT INTO `hyb_gallery` (`id`, `title`) VALUES
+(1, 'index slide');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hyb_gallery_item`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_gallery_item` (
+  `id` int(11) NOT NULL auto_increment,
+  `slideshowId` int(11) NOT NULL,
+  `imageId` int(11) NOT NULL,
+  `message` varchar(200) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `hyb_gallery_item`
+--
+
+INSERT INTO `hyb_gallery_item` (`id`, `slideshowId`, `imageId`, `message`) VALUES
+(1, 1, 1, 'Slide 1'),
+(2, 1, 1, 'Postmann Pat, Postmann Pat,  med sin svarte og hvite katt Alltid tidlig ute  på sin postmanns rute  har han all posten med seg i sin bil'),
+(3, 1, 1, 'BLABLALBA');
 
 -- --------------------------------------------------------
 
@@ -772,48 +814,6 @@ INSERT INTO `site_content` (`id`, `filename`, `description`) VALUES
 (6, 'companies', 'Side med bedrifter'),
 (7, 'graduates', 'Alumniside'),
 (8, 'updates', 'Side med oppdateringer');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `slide`
---
-
-CREATE TABLE IF NOT EXISTS `slide` (
-  `id` int(11) NOT NULL auto_increment,
-  `slideshowId` int(11) NOT NULL,
-  `imageId` int(11) NOT NULL,
-  `message` varchar(200) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `slide`
---
-
-INSERT INTO `slide` (`id`, `slideshowId`, `imageId`, `message`) VALUES
-(1, 1, 1, 'Slide 1'),
-(2, 1, 1, 'Postmann Pat, Postmann Pat,  med sin svarte og hvite katt Alltid tidlig ute  på sin postmanns rute  har han all posten med seg i sin bil'),
-(3, 1, 1, 'BLABLALBA');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `slideshow`
---
-
-CREATE TABLE IF NOT EXISTS `slideshow` (
-  `id` int(11) NOT NULL auto_increment,
-  `title` varchar(30) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `slideshow`
---
-
-INSERT INTO `slideshow` (`id`, `title`) VALUES
-(1, 'index slide');
 
 -- --------------------------------------------------------
 
