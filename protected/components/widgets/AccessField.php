@@ -10,8 +10,15 @@ class AccessField extends CWidget {
 	public function init() {
 		CHtml::resolveNameID($this->model, $this->attribute, $this->options);
 		$this->initAccess();
+		$this->initAssets();
 	}
-
+	
+	public function initAssets() {
+		$cssDir = Yii::getPathOfAlias('application.components.widgets.assets.accessField.css') . "/access.css";
+		$am = Yii::app()->getAssetManager();
+		$cs = Yii::app()->getClientScript();
+		$cs->registerCssFile($am->publish($cssDir));
+	}
 	public function initAccess() {
 		$path = explode('[', str_replace("]", "", $this->attribute));
 		$access = $this->model->getAttributes();
@@ -43,6 +50,7 @@ class AccessField extends CWidget {
 			),
 			'Kjønn' => array(
 				'Mann' => Access::MALE,
+				'Kvinne' => Access::FEMALE,
 			),
 			'Utgangsår' => $this->getYears(),
 			'Grupper' => $this->getGroups(),
