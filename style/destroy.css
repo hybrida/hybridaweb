@@ -1,3 +1,6 @@
+/* @override 
+	http://dev.hybrida.no/style/destroy.css */
+
 div, input, body, table, thead, tbody, tr, td {
 	position: relative;
 	padding: 0px;
@@ -77,10 +80,10 @@ div.table {
 }
 
 div.table_head {
-	background: #00509e;
 	width: 100%;
 	height: 20px;
 	color: #ffffff;
+	background-color: #0062c4;
 }
 
 div.filename {

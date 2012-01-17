@@ -1,8 +1,6 @@
 /* @override 
 	http://dev.hybrida.no/style/layout.css */
 
-/* @group Teodor */
-
 html{
     height: 100%;
     background-color: #DDE8F3;
@@ -134,18 +132,22 @@ div.searchBox{
 
 .block{
     display: block;
-    padding: 0px;
-    margin: 0px;
+	margin: 0px;
     vertical-align: bottom;
 }
 
 .barTitle{
     height: 25px;
-    background-color: #004993 /* #79A2CE */;
+    background-color: #0062c4;
     color: #FFFFFF;
+	vertical-align: middle;
+	display: table-cell;
+	width: 250px;
+	padding-left: 5px;
 }
 
 .barText{
+	
 }
 
 .content{

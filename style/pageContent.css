@@ -1,6 +1,5 @@
-/* @override 
-	http://dev.hybrida.no/style/pageContent.css
-	http://dev.hybrida.no/style/layout.css */
+/* @override
+	http://dev.hybrida.no/style/pageContent.css */
 
 /* Usikker paa hvordan det blir med denne menyen naar vi
 faar en undermeny i tillegg til gruppenavigasjon. */
@@ -15,9 +14,9 @@ faar en undermeny i tillegg til gruppenavigasjon. */
     clear: both;
     background-color: #0062c4;
     padding: 5px;
-	text-align: center;
 	margin-right: -7px;
 	margin-left: -7px;
+	text-align: center;
 }
 
 #groupNavigation > .groupNavigationItem {
@@ -34,12 +33,12 @@ faar en undermeny i tillegg til gruppenavigasjon. */
 
 .contentItem{
     width: 736px;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .articleContent {
-    margin-top: 5px;
+    margin-top: 12px;
     margin-left: 33px;
 }
 
@@ -48,6 +47,23 @@ faar en undermeny i tillegg til gruppenavigasjon. */
     font-weight: lighter;
     text-align: left;
     margin-top: 0;
+	margin-bottom: 7px;
+}
+
+div.articleContent div.date {
+	font-size: 0.79em;
+	float: right;
+	clear: right;
+}
+
+div.articleContent div.author {
+	font-size: 0.79em;
+	clear: left;
+}
+
+div.articleContent div.author a {
+	color: #0062c4;
+	text-decoration: none;
 }
 
 .articleContent img.smallImg {
@@ -86,10 +102,14 @@ faar en undermeny i tillegg til gruppenavigasjon. */
 }
 
 .topBar h1 {
-    color: #0062C4;
-    text-transform: uppercase;
-    font: 25px 'Din';
-    margin-top: 5px;
+    color: #000000;
+	font: 27px 'Din';
+    margin-top: 0;
+}
+
+.topBar h1 a {
+	text-decoration: none;
+	color: #000000;
 }
 
 .topBarItem {
@@ -97,6 +117,8 @@ faar en undermeny i tillegg til gruppenavigasjon. */
     height: 20px;
     background: url(../images/stripe.png) repeat;
 }
+
+
 
 nav items div {
     height: 25px;
