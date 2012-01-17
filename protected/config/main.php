@@ -15,8 +15,15 @@ function endRequest($event) {
 	}
 }
 
+function beginRequest() {
+	$cs = Yii::app()->getClientScript();
+	$cs->registerScriptFile("http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js");
+	$cs->registerScriptFile("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js");
+}
+
 return array(
 	'onEndRequest' => 'endRequest',
+	'onBeginRequest' => 'beginRequest',
 	'theme' => 'hybrida',
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'Hybrida',
@@ -85,7 +92,10 @@ return array(
 			),
 		),
 		'clientScript' => array(
-			'scriptMap' => false,
+			'scriptMap' => array(
+				'jquery.js' => false,
+				'jquery-ui.css' => false,
+			),
 		),
 	),
 	'params' => array(
