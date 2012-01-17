@@ -1,3 +1,6 @@
+/* @override 
+	http://dev.hybrida.no/style/layout.css */
+
 /* @group Teodor */
 
 html{
@@ -53,8 +56,8 @@ div.ui-datepicker{
     color: #FFFFFF;
     text-transform: uppercase;
     font: 90px 'DIN-Medium';
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: 20px;
+    margin-bottom: -20px;
     margin-left: 15px;
 }
 
