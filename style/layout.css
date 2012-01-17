@@ -103,14 +103,23 @@ div.searchBox{
     text-decoration: underline;
 }
 
-#edit {
-    float: right;
+.button {
+    padding: 5px;
     background-color: rgb(0, 73, 147);
-    margin-top: 5px;
+    color: white;
+    
+    /* And for overriding input */
+    border: none;
+    text-decoration: underline;
 }
 
-#edit :hover {
+.button :hover, input.button :hover {
     background-color: black;
+}
+
+.buttonRightSide {
+    float: right;
+    margin-top: 5px;
 }
 
 #edit a {

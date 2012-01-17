@@ -89,7 +89,7 @@
             <div class="fieldInput"><input value="" size="30" name="cardnr" type="text"></div>
 
             <div class="fieldExplanation">
-                Brukes for å komme inn på Hybridas bedriftspresentasjoner. <a href="/bilder/kort.jpg" target="_blank">Hvor finner jeg kortnummeret?</a>
+                For eksempel "NTNU123456" (uten ""). Brukes for å komme inn på Hybridas bedriftspresentasjoner. <a href="/bilder/kort.jpg" target="_blank">Hvor finner jeg kortnummeret?</a>
             </div>
         </div>
     </div>
@@ -106,11 +106,56 @@
             </div>
         </div>
     </div>
+    
+    <div class="formSection">
+        <div class="inputGoup">
+            <div class="fieldDefinition">Jobber i bedrift:</div>
+            <div class="fieldInput"><input value="" size="30" name="company" type="text"></div>
+            <div class="fieldExplanation">
+                Navnet på bedriften du har blitt ansatt i. Hvis bedriften ikke finnes i databasen,
+                si ifra i stillingsbeskrivelsen, så blir bedriften blir lagt til av Bedkom.
+            </div>
+        </div>
 
+        <div class="inputGoup">
+            <div class="fieldDefinition">Stillingsbeskrivelse:</div>
+            <div class="fieldInput"><textarea cols="45" rows="6" wrap="soft" name="workDescription"></textarea></div>
+            <div class="fieldExplanation">
+                Hva jobber du med? For eksempel offshore konstruksjoner eller NX.
+            </div>
+        </div>
+            
+        <div class="inputGoup">
+            <div class="fieldDefinition">Arbeidssted</div>
+            <div class="fieldInput"><input value="" size="30" name="workPlace" type="text"></div>
+            <div class="fieldExplanation">
+                Hvor du jobber (for eksempel Oslo).
+            </div>
+        </div>
 
+        <div class="fieldExplanation">
+            Statistikken fra denne undersølsen publiseres i <a href="#">Aluminilisten</a>.
+        </div>
+
+    </div>
+
+    <div class="formSection">
+        <div class="inputGoup">
+            <div class="fieldDefinition">Last opp bilde:</div>
+            
+            <div class="fieldInput">
+                <input type="file" name="user_image">
+            </div>
+            
+            <div class="fieldExplanation">
+                Du må kanskje oppdatere siden for at det nye bildet skal vises.
+            </div>
+        </div>
+    </div>
+    
 </form>
-<!--
 
+<!--
 <div style="margin: 1em 0; padding: 2em; border: dotted 1px red">
     <b>Last opp bilde</b>
     <div class="bildetips"><big>Tips</big> 
