@@ -13,7 +13,7 @@ class UserOptions extends CWidget {
 			$this->render("userOptionsWidget/guest");
         }else{
             
-            $sql = "SELECT firstName, middleName, lastName FROM user_new WHERE id = ?";
+            $sql = "SELECT firstName, middleName, lastName FROM hyb_user WHERE id = ?";
             $command = Yii::app()->db->createCommand($sql);
             $query = $command->query(array(Yii::app()->user->id));
             $data = $query->read();

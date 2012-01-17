@@ -108,7 +108,7 @@ class Article extends CActiveRecord {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array('aId' => $aId);
-		$sql = "SELECT a.title, a.content, ui.firstName, ui.middleName, ui.lastName, a.timestamp FROM article AS a LEFT JOIN user_new AS ui ON a.author = ui.id
+		$sql = "SELECT a.title, a.content, ui.firstName, ui.middleName, ui.lastName, a.timestamp FROM article AS a LEFT JOIN hyb_user AS ui ON a.author = ui.id
                 WHERE a.id=:aId";
 		$query = $this->$pdo->prepare($sql);
 		$query->execute($data);
@@ -126,7 +126,7 @@ class Article extends CActiveRecord {
 		);
 		$sql = "SELECT a.id,a.title FROM article AS a 
                 RIGHT JOIN tag AS t ON t.id = a.id
-                LEFT JOIN user_new AS ui ON a.author = ui.id
+                LEFT JOIN hyb_user AS ui ON a.author = ui.id
                 WHERE t.contentType = 'article' AND t.tagType = :tag";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);

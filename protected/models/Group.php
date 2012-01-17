@@ -93,7 +93,7 @@ class Group {
         );
         
         $sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName, mg.comission, mg.start, mg.end, un.username, un.phoneNumber, un.lastLogin, admin
-                FROM membership_group AS mg LEFT JOIN user_new AS un ON mg.userId = un.id LEFT JOIN groups ON groups.id = :gID 
+                FROM membership_group AS mg LEFT JOIN hyb_user AS un ON mg.userId = un.id LEFT JOIN groups ON groups.id = :gID 
                 WHERE mg.groupId = :gID AND (mg.end > DATE(NOW()) OR mg.end = '0000-00-00')";
 
         $query = $this->pdo->prepare($sql);
@@ -125,7 +125,7 @@ class Group {
 
         $sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
                 FROM membership_group AS mg 
-                LEFT JOIN user_new AS un ON mg.userId = un.id
+                LEFT JOIN hyb_user AS un ON mg.userId = un.id
                 WHERE mg.groupId = :gID
                 AND mg.start <= (:year1-:start-15) AND mg.end >= (:year2-:end-15)";
 
@@ -165,7 +165,7 @@ class Group {
                 LEFT JOIN site AS s ON mg.site = s.siteId
                 LEFT JOIN site_content AS sc ON s.subId = sc.id
                 LEFT JOIN article AS a ON a.id = mg.contentId 
-                LEFT JOIN user_new AS un ON un.id = a.author
+                LEFT JOIN hyb_user AS un ON un.id = a.author
                 WHERE mg.group = :id AND sc.filename = 'article' AND s.title = :title";
         
         $query = $this->pdo->prepare($sql);

@@ -85,7 +85,7 @@ class Bkforms {
             'graduateId' => $id,
             'altEmail' => $altEmail
         );
-        $sql = "UPDATE user_new SET altEmail = :altEmail WHERE id = :graduateId";
+        $sql = "UPDATE hyb_user SET altEmail = :altEmail WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -98,7 +98,7 @@ class Bkforms {
             'graduateId' => $id,
             'specializationId' => $specializationId
         );
-        $sql = "UPDATE user_new SET specialization = :specializationId WHERE id = :graduateId";
+        $sql = "UPDATE hyb_user SET specialization = :specializationId WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -111,7 +111,7 @@ class Bkforms {
             'graduateId' => $id,
             'workDescription' => $workDescription
         );
-        $sql = "UPDATE user_new SET workDescription = :workDescription WHERE id = :graduateId";
+        $sql = "UPDATE hyb_user SET workDescription = :workDescription WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -124,7 +124,7 @@ class Bkforms {
             'graduateId' => $id,
             'workPlace' => $workPlace
         );
-        $sql = "UPDATE user_new SET workPlace = :workPlace WHERE id = :graduateId";
+        $sql = "UPDATE hyb_user SET workPlace = :workPlace WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -137,7 +137,7 @@ class Bkforms {
             'graduateId' => $id,
             'graduationYear' => $graduationYear
         );
-        $sql = "UPDATE user_new SET graduationYear = :graduationYear WHERE id = :graduateId";
+        $sql = "UPDATE hyb_user SET graduationYear = :graduationYear WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -150,7 +150,7 @@ class Bkforms {
             'graduateId' => $id
         );
         $sql = "SELECT companyName FROM bk_company 
-                RIGHT JOIN user_new ON workCompanyID = companyID WHERE id = :graduateId";
+                RIGHT JOIN hyb_user ON workCompanyID = companyID WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -171,7 +171,7 @@ class Bkforms {
             'graduateId' => $id,
             'companyId' => $companyId
         );
-        $sql = "UPDATE user_new SET workCompanyID = :companyId WHERE id = :graduateId";
+        $sql = "UPDATE hyb_user SET workCompanyID = :companyId WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

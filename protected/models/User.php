@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "user_new".
+ * This is the model class for table "hyb_user".
  *
- * The followings are the available columns in table 'user_new':
+ * The followings are the available columns in table 'hyb_user':
  * @property integer $id
  * @property string $username
  * @property string $firstName
@@ -28,7 +28,7 @@ class User extends CActiveRecord {
 	}
 
 	public function tableName() {
-		return 'user_new';
+		return 'hyb_user';
 	}
 
 	public function rules() {

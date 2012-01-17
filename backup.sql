@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 10, 2012 at 06:02 PM
+-- Generation Time: Jan 17, 2012 at 10:58 AM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -12,7 +12,8 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `hybrida`
 --
--- CREATE DATABASE `hybrida` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+-- DROP DATABASE `hybrida`;
+CREATE DATABASE `hybrida` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida`;
 
 -- --------------------------------------------------------
@@ -78,7 +79,7 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
   `access` int(11) NOT NULL,
   `type` enum('album','article','comment','event','group','image','news','poll','signup','site','slide','slideshow','user_info','vote') collate utf8_unicode_ci NOT NULL,
   `sub_id` int(11) NOT NULL default '1',
-  PRIMARY KEY  (`id`,`type`,`access`)
+  PRIMARY KEY  (`id`,`type`,`access`,`sub_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -297,6 +298,43 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hyb_user`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_user` (
+  `id` int(11) NOT NULL auto_increment,
+  `username` varchar(10) collate utf8_unicode_ci NOT NULL,
+  `firstName` varchar(75) collate utf8_unicode_ci NOT NULL,
+  `middleName` varchar(75) collate utf8_unicode_ci default NULL,
+  `lastName` varchar(75) collate utf8_unicode_ci NOT NULL,
+  `specialization` int(11) default NULL,
+  `graduationYear` year(4) default NULL,
+  `member` enum('true','false') collate utf8_unicode_ci NOT NULL,
+  `gender` enum('unknown','male','female') collate utf8_unicode_ci NOT NULL default 'unknown',
+  `imageId` int(11) default NULL,
+  `phoneNumber` int(11) default NULL,
+  `lastLogin` datetime default NULL,
+  `cardinfo` varchar(10) collate utf8_unicode_ci default NULL,
+  `description` text collate utf8_unicode_ci,
+  `workDescription` text collate utf8_unicode_ci NOT NULL,
+  `workCompanyID` int(11) default NULL,
+  `workPlace` varchar(255) collate utf8_unicode_ci default NULL,
+  `birthdate` date default NULL,
+  `altEmail` varchar(255) collate utf8_unicode_ci default NULL,
+  PRIMARY KEY  (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=466 ;
+
+--
+-- Dumping data for table `hyb_user`
+--
+
+INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specialization`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-16 23:15:22', 'NTNU457028', '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `image`
 --
 
@@ -346,44 +384,42 @@ CREATE TABLE IF NOT EXISTS `membership_access` (
 --
 
 CREATE TABLE IF NOT EXISTS `membership_group` (
-  `id` int(11) NOT NULL,
-  `groupId` int(11) NOT NULL auto_increment,
-  `userId` int(11) default NULL,
-  `comission` varchar(30) collate utf8_unicode_ci NOT NULL,
+  `groupId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `comission` varchar(30) collate utf8_unicode_ci default NULL,
   `start` date default NULL,
-  `end` date NOT NULL,
-  KEY `userId` (`userId`,`groupId`),
-  KEY `groupId` (`groupId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
+  `end` date default NULL,
+  PRIMARY KEY  (`userId`,`groupId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `membership_group`
 --
 
-INSERT INTO `membership_group` (`id`, `groupId`, `userId`, `comission`, `start`, `end`) VALUES
-(0, 57, 348, 'Nestsjef', '2010-11-15', '0000-00-00'),
-(0, 57, 354, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
-(0, 57, 357, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
-(0, 57, 293, 'Bedriftskomitésjef', '2010-11-15', '0000-00-00'),
-(0, 56, 361, 'Jentekomitésjef', '2010-11-15', '0000-00-00'),
-(0, 56, 293, 'Bedriftskomitésjef', '2010-11-15', '0000-00-00'),
-(0, 56, 383, 'Skattmester', '2010-11-15', '0000-00-00'),
-(0, 56, 367, 'Festivalus', '2010-11-15', '0000-00-00'),
-(0, 56, 326, 'Vevsjef', '2010-11-15', '2011-11-25'),
-(0, 55, 326, 'Sjef', '2010-11-15', '0000-00-00'),
-(0, 55, 353, 'Medlem', '2010-11-15', '0000-00-00'),
-(0, 55, 358, 'Medlem', '2010-11-15', '0000-00-00'),
-(0, 55, 331, 'Medlem', '2010-11-15', '0000-00-00'),
-(0, 55, 380, 'Medlem', '2010-11-15', '0000-00-00'),
-(0, 55, 381, 'Medlem', '2010-11-15', '0000-00-00'),
-(0, 57, 343, 'Fikser', '2010-11-15', '0000-00-00'),
-(0, 56, 363, 'Leder', '2010-11-15', '0000-00-00'),
-(0, 56, 321, 'Nestleder', '2010-11-15', '0000-00-00'),
-(0, 57, 339, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
-(0, 57, 356, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
-(0, 57, 386, 'Økonomiansvarlig', '2010-11-15', '0000-00-00'),
-(0, 57, 370, 'Medlem', '2010-11-15', '0000-00-00'),
-(0, 57, 353, 'Bedriftskontakt', '2010-11-15', '0000-00-00');
+INSERT INTO `membership_group` (`groupId`, `userId`, `comission`, `start`, `end`) VALUES
+(57, 348, 'Nestsjef', '2010-11-15', '0000-00-00'),
+(57, 354, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
+(57, 357, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
+(57, 293, 'Bedriftskomitésjef', '2010-11-15', '0000-00-00'),
+(56, 361, 'Jentekomitésjef', '2010-11-15', '0000-00-00'),
+(56, 293, 'Bedriftskomitésjef', '2010-11-15', '0000-00-00'),
+(56, 383, 'Skattmester', '2010-11-15', '0000-00-00'),
+(56, 367, 'Festivalus', '2010-11-15', '0000-00-00'),
+(56, 326, 'Vevsjef', '2010-11-15', '2011-11-25'),
+(55, 326, 'Sjef', '2010-11-15', '0000-00-00'),
+(55, 353, 'Medlem', '2010-11-15', '0000-00-00'),
+(55, 358, 'Medlem', '2010-11-15', '0000-00-00'),
+(55, 331, 'Medlem', '2010-11-15', '0000-00-00'),
+(55, 380, 'Medlem', '2010-11-15', '0000-00-00'),
+(55, 381, 'Medlem', '2010-11-15', '0000-00-00'),
+(57, 343, 'Fikser', '2010-11-15', '0000-00-00'),
+(56, 363, 'Leder', '2010-11-15', '0000-00-00'),
+(56, 321, 'Nestleder', '2010-11-15', '0000-00-00'),
+(57, 339, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
+(57, 356, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
+(57, 386, 'Økonomiansvarlig', '2010-11-15', '0000-00-00'),
+(57, 370, 'Medlem', '2010-11-15', '0000-00-00'),
+(57, 353, 'Bedriftskontakt', '2010-11-15', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -544,14 +580,14 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`author`),
   KEY `author` (`author`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=210 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=360 ;
 
 --
 -- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content`, `author`, `timestamp`) VALUES
-(24, 1, '', 'Nyhet for webkomgruppen!', 4, '<p>Dette er en nyhet postet i webkomgruppen!!</p><p><br /></p><p>TADA!</p>', 326, '2011-04-12 00:06:33'),
+(24, 1, '', 'Nyhet for webkomgruppen!', 4, '<p>Dette er en nyhet postet i webkomgruppen!!</p>', 326, '2011-04-12 00:06:33'),
 (40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <b> Åretur!!! </b>\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <b>29. jan - 2. feb 2012. </b> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nTuren kommer på <b> ca 2000kr </b> per pers og inkluderer:\r\n\r\n<br>\r\n\r\n<br>\r\n\r\n-Tur/retur Åre sentrum\r\n\r\n<br>\r\n\r\n-4 netters opphold\r\n\r\n<br>\r\n\r\n-5 dagers skipass \r\n\r\n<br>\r\n\r\n-rabattkort\r\n\r\n<br>\r\n\r\n+ mye fest og moro!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nVi har <b>47 plasser </b>, så her er det førstemann til mølla som gjelder! \r\n\r\n<br>\r\n\r\n<br>\r\n\r\nOBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding\r\n\r\n<br>\r\n\r\n<br>\r\n', 326, '2011-07-17 22:34:51'),
 (41, 73, 'event', 'GenFors', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21'),
 (56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p>Sigbjørn Aukland - Festivalus</p><p>Tonje Sundstrøm - Skattemester</p><p>Sigurd Holsen - Vevsjef</p><p>Erik Aasmundrud - SPR</p>', 363, '2011-11-26 20:02:14');
@@ -828,97 +864,6 @@ CREATE TABLE IF NOT EXISTS `tag` (
 INSERT INTO `tag` (`id`, `ownerId`, `contentType`, `tagType`) VALUES
 (48, 0, 'article', ''),
 (49, 0, 'article', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL auto_increment,
-  `username` varchar(10) collate utf8_unicode_ci NOT NULL,
-  `password` varchar(32) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=407 ;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `username`, `password`) VALUES
-(381, 'sigurhol', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_info`
---
-
-CREATE TABLE IF NOT EXISTS `user_info` (
-  `userId` int(11) NOT NULL,
-  `firstName` varchar(75) collate utf8_unicode_ci default NULL,
-  `middleName` varchar(75) collate utf8_unicode_ci default NULL,
-  `lastName` varchar(75) collate utf8_unicode_ci default NULL,
-  `specialization` int(11) default NULL,
-  `graduationYear` year(4) default NULL,
-  `member` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
-  `gender` enum('unknown','male','female') collate utf8_unicode_ci NOT NULL default 'unknown',
-  `imageId` int(11) default NULL,
-  `phoneNumber` int(11) default NULL,
-  `lastLogin` datetime default NULL,
-  `cardinfo` varchar(10) collate utf8_unicode_ci default NULL,
-  `description` text collate utf8_unicode_ci,
-  `birthdate` date default NULL,
-  `altEmail` varchar(255) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`userId`),
-  KEY `spesialization` (`specialization`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `user_info`
---
-
-INSERT INTO `user_info` (`userId`, `firstName`, `middleName`, `lastName`, `specialization`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `birthdate`, `altEmail`) VALUES
-(381, 'Sigurd', 'Andreas', 'Holsen', 0, 2015, 'false', 'unknown', -1, NULL, '2011-05-09 18:36:35', '', '', '0000-00-00', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_new`
---
-
-CREATE TABLE IF NOT EXISTS `user_new` (
-  `id` int(11) NOT NULL auto_increment,
-  `username` varchar(10) collate utf8_unicode_ci NOT NULL,
-  `firstName` varchar(75) collate utf8_unicode_ci NOT NULL,
-  `middleName` varchar(75) collate utf8_unicode_ci default NULL,
-  `lastName` varchar(75) collate utf8_unicode_ci NOT NULL,
-  `specialization` int(11) default NULL,
-  `graduationYear` year(4) default NULL,
-  `member` enum('true','false') collate utf8_unicode_ci NOT NULL,
-  `gender` enum('unknown','male','female') collate utf8_unicode_ci NOT NULL default 'unknown',
-  `imageId` int(11) default NULL,
-  `phoneNumber` int(11) default NULL,
-  `lastLogin` datetime default NULL,
-  `cardinfo` varchar(10) collate utf8_unicode_ci default NULL,
-  `description` text collate utf8_unicode_ci,
-  `workDescription` text collate utf8_unicode_ci NOT NULL,
-  `workCompanyID` int(11) default NULL,
-  `workPlace` varchar(255) collate utf8_unicode_ci default NULL,
-  `birthdate` date default NULL,
-  `altEmail` varchar(255) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=466 ;
-
---
--- Dumping data for table `user_new`
---
-
-INSERT INTO `user_new` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specialization`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, NULL, 'NTNU457028', '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
 
 -- --------------------------------------------------------
 
