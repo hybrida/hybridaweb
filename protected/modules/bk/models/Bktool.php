@@ -281,7 +281,8 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, s.name, un.graduationYear FROM hyb_user AS un
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, s.name, un.graduationYear, 
+                un.altEmail, un.imageId, un.workDescription, un.workPlace FROM hyb_user AS un
                 LEFT JOIN spesialization AS s ON un.specialization = s.id
                 WHERE un.workCompanyID = :companyId ORDER BY un.graduationYear DESC";
 
@@ -504,7 +505,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT un.firstName, un.middleName, un.lastName, cmt.timestamp, cmt.content 
+        $sql = "SELECT un.imageId, un.firstName, un.middleName, un.lastName, cmt.timestamp, cmt.content 
                 FROM comment AS cmt, bk_company AS cmp, hyb_user AS un
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
                 AND cmp.companyID = cmt.parentId AND cmt.author = un.id

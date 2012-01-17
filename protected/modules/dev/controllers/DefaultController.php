@@ -40,5 +40,10 @@ class DefaultController extends Controller {
 		TestLib::deleteDummyData();
 		echo "Database is cleaned";
 	}
+	
+	public function actionInstall() {
+		Install::install();
+		$this->render('install');
+	}
 
 }

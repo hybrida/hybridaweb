@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2012 at 11:49 AM
+-- Generation Time: Jan 17, 2012 at 01:01 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -12,7 +12,7 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 -- Database: `hybrida`
 --
--- DROP DATABASE `hybrida`;
+DROP DATABASE `hybrida`;
 CREATE DATABASE `hybrida` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida`;
 
@@ -322,7 +322,7 @@ INSERT INTO `hyb_gallery` (`id`, `title`) VALUES
 
 CREATE TABLE IF NOT EXISTS `hyb_gallery_item` (
   `id` int(11) NOT NULL auto_increment,
-  `slideshowId` int(11) NOT NULL,
+  `galleryId` int(11) NOT NULL,
   `imageId` int(11) NOT NULL,
   `message` varchar(200) collate utf8_unicode_ci NOT NULL,
   PRIMARY KEY  (`id`)
@@ -332,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `hyb_gallery_item` (
 -- Dumping data for table `hyb_gallery_item`
 --
 
-INSERT INTO `hyb_gallery_item` (`id`, `slideshowId`, `imageId`, `message`) VALUES
+INSERT INTO `hyb_gallery_item` (`id`, `galleryId`, `imageId`, `message`) VALUES
 (1, 1, 1, 'Slide 1'),
 (2, 1, 1, 'Postmann Pat, Postmann Pat,  med sin svarte og hvite katt Alltid tidlig ute  på sin postmanns rute  har han all posten med seg i sin bil'),
 (3, 1, 1, 'BLABLALBA');
@@ -372,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specialization`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-16 23:15:22', 'NTNU457028', '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-17 12:37:40', 'NTNU457028', '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -887,4 +887,3 @@ INSERT INTO `vote` (`pollId`, `userId`, `choice`) VALUES
 (1, 327, 2),
 (380, 1, 2),
 (15, 1, 1);
-

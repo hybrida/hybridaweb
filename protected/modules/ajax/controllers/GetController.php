@@ -273,7 +273,7 @@ class GetController extends Controller{
         $this->renderPartial('group');
     }
     
-    private function searchUsers(){
+    private function searchUsers($search){
             
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
             
@@ -281,14 +281,14 @@ class GetController extends Controller{
                 die("");
             }
             
-            $searchArray = preg_split( '/ /', $_GET['q'] );
+            $searchArray = preg_split( '/ /', $search );
             $searchString = "";
             $data = array();
             
             for( $i = 0; $i < count( $searchArray ); $i++ ) {
                 if( $i > 0 ) $searchString .= " AND";
                 $search = $searchArray[$i];
-                $searchString .= " (ui.firstName LIKE :search".$i." OR ui.middleName LIKE :search".$i." OR ui.lastName LIKE :search".$i.")";
+                $searchString .= " (ui.username LIKE :search" . $i . " ui.firstName LIKE :search".$i." OR ui.middleName LIKE :search".$i." OR ui.lastName LIKE :search".$i.")";
                 $data['search' . $i] = $search . "%";
             }
             
@@ -301,7 +301,7 @@ class GetController extends Controller{
             
             return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    private function searchNews(){
+    private function searchNews($search){
    
             //Søke på nyheter
             $data = array(
@@ -311,22 +311,34 @@ class GetController extends Controller{
             );
             
             $sql = "SELECT id, parentId, parentType, title, timestamp 
-            FROM news n 
-            RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
-            WHERE n.title REGEXP :search
+            FROM news n WHERE n.title REGEXP :search
             ORDER BY timestamp DESC";
             
             $query = $this->pdo->prepare($sql);
             $query->execute($data);
-            return $query->fetchAll(PDO::FETCH_ASSOC);
+            $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+            
+            /*$gk = new GateKeeper();
+            $i = 0;
+            $returnArray = Array();
+            foreach ($rows as $row){
+                
+                if($gk->hasAccess('news', $row['id'])){
+                    $returnArray[i++] = $row['id'];
+                }
+            }*/
+            
+            return $rows;
+            
+            
     }
     
     public function actionSearch(){
         
         $split = '~%~';
-        
-        $result['users'] = $this->searchUsers();
-        $result['newsList'] = $this->searchNews();
+        $search = $_GET['q'];
+        $result['users'] = $this->searchUsers($search);
+        $result['newsList'] = $this->searchNews($search);
         $result['url'] = Yii::app()->baseUrl . "/profile/";
         $result['split'] = $split;
         

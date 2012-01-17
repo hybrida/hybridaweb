@@ -167,6 +167,14 @@
             </p>
             
         </td>
+        <td>
+                <h3>Registrerte bedriftspresentasjoner</h3>
+                <div id="BK-company-scrollcontainer">
+                    <table id="BK-company-listtable">
+                        <tr><th>Dato</th></tr>
+                    </table>
+                </div>
+            </td>
         </tr>
         </table>
     </tr>
@@ -195,8 +203,11 @@
                     <? foreach($comments as $comment) : ?>
                         <tr>
                             <td>
-                                <p><i><?= $comment['firstName'] ?> <?= $comment['middleName'] ?> <?= $comment['lastName'] ?>, <?= $comment['timestamp'] ?></i></p>
-                                <?= $comment['content'] ?>
+                                <p><i>
+                                    <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $comment['imageId'] ?>/size/3'/>
+                                    <?= $comment['firstName'] ?> <?= $comment['middleName'] ?> <?= $comment['lastName'] ?>, <?= $comment['timestamp'] ?>
+                                </i></p>
+                                <?= nl2br($comment['content']);?>
                             </td>
                         </tr>
                     <? endforeach ?>
@@ -208,33 +219,14 @@
     </tr>
     <tr>
         <table id="BK-company-maintable">
-            <tr id="BK-company-editinglinks">
-                <td>
-                    <h4><?=CHtml::link('Rediger bedrift', array('editcompany?id='.$companyId))?></h4>
-                <td>
-                    <h4>Fjern bedrift</h4>
-                </td>    
-            </tr>
-        </table>
-    </tr>
-    <tr>
-        <table id="BK-company-maintable">
             <tr>
-            <td>
-                <h3>Registrerte bedriftspresentasjoner</h3>
-                <div id="BK-company-scrollcontainer">
-                    <table id="BK-company-listtable">
-                        <tr><th>Dato</th></tr>
-                    </table>
-                </div>
-            </td>
             <td>
             <? foreach($employedGraduatesSum as $info) : ?>
                 <h3>Registrerte alumnistudenter (<?= $info['sum'] ?>)</h3>
             <? endforeach ?>
             <div id="BK-company-scrollcontainer">
                 <table id="BK-company-listtable">
-                    <tr><th>Navn</th><th>Spesialisering</th><th>År</th></tr>
+                    <tr><th></th><th>Navn</th><th>År</th><th>Spesialisering</th><th>Alternativ-Email</th><th>Stillingsbeskrivelse</th><th>Arbeidssted</th></tr>
                     
                     <? $counter = 1; ?>
                     
@@ -245,10 +237,14 @@
                     <?	}else{ ?>
                         <tr bgcolor='<?= $this->evenRowColour ?>'>
                     <? } ?>
-                    
+                            
+                            <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $graduate['imageId'] ?>/size/3'/></td>
                             <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
-                            <td><?= $graduate['name'] ?></td>
                             <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear?id='.$graduate['graduationYear']))?></td>
+                            <td><?= $graduate['name'] ?></td>
+                            <td><?= $graduate['altEmail'] ?></td>
+                            <td><?= $graduate['workDescription'] ?></td>
+                            <td><?= $graduate['workPlace'] ?></td>
                        </tr>
                        
                        <? $counter++; ?>
@@ -256,6 +252,17 @@
                 </table>
             </div>
             </td>
+            </tr>
+        </table>
+    </tr>
+    <tr>
+        <table id="BK-company-maintable">
+            <tr id="BK-company-editinglinks">
+                <td>
+                    <h4><?=CHtml::link('Rediger bedrift', array('editcompany?id='.$companyId))?></h4>
+                <td>
+                    <h4>Fjern bedrift</h4>
+                </td>    
             </tr>
         </table>
     </tr>

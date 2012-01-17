@@ -40,12 +40,7 @@
                 <img src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" align="left" alt="" />
                 <h1><?= CHtml::encode(Yii::app()->name) ?></h1>
                 <div class="searchWrap">
-                    <div class='search' data-url='search' data-type=''><input type='text' />
-                        <div class="searchImg"><input type='image' src='<?= Yii::app()->request->baseUrl ?>/images/Search.png' /></div>
-                        <ul id="hintList">
-
-                        </ul>
-                    </div>
+					<? $this->widget('search.components.SearchWidget') ?>
                 </div>
             </div>
             <div class="headerBottomStripe">
