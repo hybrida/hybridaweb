@@ -42,8 +42,15 @@ class DefaultController extends Controller {
 	}
 	
 	public function actionInstall() {
-		Install::install();
+		$install = new Install;
+		$install->install();
 		$this->render('install');
+	}
+	
+	public function actionUpdate() {
+		$install = new Install;
+		$install->update();
+		$this->render('update');
 	}
 
 }
