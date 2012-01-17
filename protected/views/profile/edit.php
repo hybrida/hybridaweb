@@ -89,7 +89,8 @@
             <div class="fieldInput"><input value="" size="30" name="cardnr" type="text"></div>
 
             <div class="fieldExplanation">
-                For eksempel "NTNU123456" (uten ""). Brukes for å komme inn på Hybridas bedriftspresentasjoner. <a href="/bilder/kort.jpg" target="_blank">Hvor finner jeg kortnummeret?</a>
+            	OBS! Dette er endret fra tidligere!
+                For eksempel "4512345" (uten ""). Brukes for å komme inn på Hybridas bedriftspresentasjoner. <a href="/images/kort_1.png" target="_blank">Hvor finner jeg kortnummeret?</a>
             </div>
         </div>
     </div>
