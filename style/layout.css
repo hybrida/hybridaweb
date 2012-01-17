@@ -99,7 +99,6 @@ div.searchBox{
 }
 
 .menu a:hover {
-    color: #FFF;
     text-decoration: underline;
 }
 
@@ -108,14 +107,11 @@ div.searchBox{
     background-color: rgb(0, 73, 147);
     color: white;
     
-    /* And for overriding input */
+    /* Overriding for <input>-buttons */
     border: none;
-    text-decoration: underline;
 }
 
-.button :hover, input.button :hover {
-    background-color: black;
-}
+/* Hovers handeled by animations.js */
 
 .buttonRightSide {
     float: right;
