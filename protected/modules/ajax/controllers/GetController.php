@@ -288,7 +288,7 @@ class GetController extends Controller{
             for( $i = 0; $i < count( $searchArray ); $i++ ) {
                 if( $i > 0 ) $searchString .= " AND";
                 $search = $searchArray[$i];
-                $searchString .= " (ui.firstName LIKE :search".$i." OR ui.middleName LIKE :search".$i." OR ui.lastName LIKE :search".$i.")";
+                $searchString .= " (ui.username LIKE :search" . $i . " ui.firstName LIKE :search".$i." OR ui.middleName LIKE :search".$i." OR ui.lastName LIKE :search".$i.")";
                 $data['search' . $i] = $search . "%";
             }
             
@@ -311,14 +311,26 @@ class GetController extends Controller{
             );
             
             $sql = "SELECT id, parentId, parentType, title, timestamp 
-            FROM news n 
-            RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
-            WHERE n.title REGEXP :search
+            FROM news n WHERE n.title REGEXP :search
             ORDER BY timestamp DESC";
             
             $query = $this->pdo->prepare($sql);
             $query->execute($data);
-            return $query->fetchAll(PDO::FETCH_ASSOC);
+            $rows = $query->fetchAll(PDO::FETCH_ASSOC);
+            
+            /*$gk = new GateKeeper();
+            $i = 0;
+            $returnArray = Array();
+            foreach ($rows as $row){
+                
+                if($gk->hasAccess('news', $row['id'])){
+                    $returnArray[i++] = $row['id'];
+                }
+            }*/
+            
+            return $rows;
+            
+            
     }
     
     public function actionSearch(){
