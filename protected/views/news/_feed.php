@@ -16,10 +16,10 @@
         </div>
         <div class="articleContent">
             
-            <? $url = $this->createUrl("news/edit", array("id" => $model->id)); ?>
+            <? $url = $this->createUrl("/news/edit", array("id" => $model->id)); ?>
             <!--
             <div align="right">
-                <? $url = $this->createUrl("news/edit", array("id" => $model->id)); ?>
+                <? $url = $this->createUrl("/news/edit", array("id" => $model->id)); ?>
                 <a href="<?= $url ?>">
                     <img height='20' src="/images/icons/edit.png"/>
                 </a>
@@ -30,7 +30,7 @@
             <?= $model->content ?>
             <div class="date">Dato: <?= $model->timestamp ?></div>
             <div class="author"><?=
-        CHtml::link($model->authorName, array("profile", "id" => $model->author))
+        CHtml::link($model->authorName, array("/profile/view/", "id" => $model->author))
             ?></div>
         </div>
     </div>
