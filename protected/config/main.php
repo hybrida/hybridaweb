@@ -38,6 +38,7 @@ return array(
 		'dev',
 		'bk',
 		'comment',
+		'search',
 	),
 	'components' => array(
 		'user' => array(
