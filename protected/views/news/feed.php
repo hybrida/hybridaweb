@@ -1,6 +1,14 @@
-<h1>Nyhetsstrøm</h1>
+<?
+// FIXME
+// Forferdelig stygt, men fungerer.
+?>
+<div style="margin: 1.5em 0">
+    <h1 style="display: inline">Nyhetsstrøm</h1>
+    <?= CHtml::link("Publiser", array("news/create"), array(
+        'class' => 'button buttonRightSide',
+    )) ?>
+</div>
 
-<?= CHtml::link("Publiser", array("news/create")) ?>
 
 <div class="feeds">
 	<?
@@ -13,13 +21,14 @@
 
 	<?=
 	CHtml::button('Mer', array(
-		'class' => 'button buttonRightSide'
+		'class' => 'button buttonRightSide',
+                'id'    => 'fetchNews',
 	))
 	?>
-<? app()->clientScript->registerCoreScript("jquery") ?>
+
 	<script>
 		var count = <?=$index?>;
-		$(".fetchNews").click(function(){
+		$("#fetchNews").click(function(){
 
 			$.ajax({
 				success: function(html){

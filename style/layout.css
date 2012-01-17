@@ -103,6 +103,9 @@ div.searchBox{
 }
 
 .button {
+    min-width: 80px;
+    text-align: center;
+    
     padding: 5px;
     background-color: rgb(0, 73, 147);
     color: white;
@@ -116,6 +119,8 @@ div.searchBox{
 .buttonRightSide {
     float: right;
     margin-top: 5px;
+    display: block;
+    clear: both;
 }
 
 #edit a {
