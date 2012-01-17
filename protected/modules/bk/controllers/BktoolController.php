@@ -8,16 +8,39 @@ class BktoolController extends Controller {
         protected $bkGroupId = 57;
         protected $oddRowColour = '#CCFFFF';
         protected $evenRowColour = '#FFFFFF';
+        
+        public function getNumberOfRelevantUpdatesAsString(){
+            $bkTool = new Bktool();
+            $data['relevantUpdatesInfo'] = $bkTool->getSumOfUpdatesRelevantForCurrentUser();
+            
+            $sum = 0;
+            
+            foreach ($data['relevantUpdatesInfo'] as $info) {
+                $sum = $info['sum'];
+            }
+            if($sum == 0){
+                return '';
+            }
+            else{
+                return '('.$sum.')';
+            }
+        }
 
 	public function actionIndex() {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+                
 		$this->render('index');
 	}
 
 	public function actionCalendar() {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
 		$this->render('calendar');
 	}
 
 	public function actionUpdates() {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
                 $bkTool = new Bktool();
 		$data = array();
                 
@@ -50,6 +73,8 @@ class BktoolController extends Controller {
         }
 
 	public function actionCompanyOverview() {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
 		$bkTool = new Bktool();
 		$data = array();
                 
@@ -93,6 +118,8 @@ class BktoolController extends Controller {
 	}
 
 	public function actionGraduates() {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
 		$bkTool = new Bktool();
 		$data = array();
                 
@@ -142,6 +169,8 @@ class BktoolController extends Controller {
 	}
 
 	public function actionCompanyDistribution() {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
                 $bkTool = new Bktool();
 		$data = array();
                 $data['contactingMembers'] = $bkTool->getMembersByContactingStatus('Blir kontaktet');
@@ -151,10 +180,14 @@ class BktoolController extends Controller {
 	}
 
 	public function actionPresentations() {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
 		$this->render('presentations');
 	}
 
         public function actionGraduationyear($id) {
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
                 $bkTool = new Bktool();
 		$data = array();
 		$data['graduationYears'] = $bkTool->getAllGraduationYears();
@@ -173,6 +206,8 @@ class BktoolController extends Controller {
 	}
         
         public function actionCompany($id){
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
                 $bkTool = new Bktool();
 		$data = array();
                 $data['companyId'] = $id;
@@ -214,6 +249,8 @@ class BktoolController extends Controller {
 
 
         public function actionEditcompany($id, $errordata=null){
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
                 $bkTool = new Bktool();
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
@@ -363,6 +400,8 @@ class BktoolController extends Controller {
         }
         
         public function actionAddcompany($errordata=null){
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
                 $bkTool = new Bktool();
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
@@ -494,6 +533,7 @@ class BktoolController extends Controller {
         }
 
         public function actionEditgraduate($id, $errordata=null){
+                $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
 
                 $bkTool = new Bktool();
 		$data = array();
