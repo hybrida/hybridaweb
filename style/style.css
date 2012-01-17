@@ -1,3 +1,6 @@
+/* @override 
+	http://dev.hybrida.no/style/style.css */
+
 .calendar table {
     text-align: center;
     margin: 0;
@@ -11,6 +14,9 @@
 .calendar img {
     width: auto;
     height: auto;
+	margin-left: auto;
+	margin-right: auto;
+	vertical-align: middle;
 }
 
 .calendar table#days {
@@ -39,9 +45,9 @@
     width: 33px;
     height: 25px;
     border: none;
-    margin: 0;
-    padding: 0;
+	padding: 0;
     background-color: #E1E3E5;
+	text-align: center;
 }
 
 .form{
