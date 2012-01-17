@@ -6,10 +6,10 @@ class Install {
 	
 	public function __construct() {
 		$this->sqlDir = Yii::getPathOfAlias('webroot') . "/backup.sql";
-		$this->run();
+		$this->install();
 	}
 	
-	public function run() {
+	public function install() {
 		$sql = $this->getContentOfSQLFile();
 		$stmt = Yii::app()->db->createCommand($sql);
 		$stmt->execute();
@@ -19,8 +19,11 @@ class Install {
 		return file_get_contents($this->sqlDir);
 	}
 	
-	public static function install() {
-		new Install();
+	public function update() {
+		$sqlDrop = "DROP DATABASE `hybrida`;\n";
+		$sql = $sqlDrop . $this->getContentOfSQLFile();
+		$stmt = Yii::app()->db->createCommand($sql);
+		$stmt->execute();
 	}
 	
 }

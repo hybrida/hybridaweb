@@ -3,16 +3,21 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2012 at 01:01 PM
+-- Generation Time: Jan 17, 2012 at 09:12 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
 --
 -- Database: `hybrida`
 --
-DROP DATABASE `hybrida`;
 CREATE DATABASE `hybrida` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida`;
 
@@ -86,33 +91,6 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
 -- Dumping data for table `access_relations`
 --
 
-
--- --------------------------------------------------------
-
---
--- Table structure for table `album`
---
-
-CREATE TABLE IF NOT EXISTS `album` (
-  `id` int(11) NOT NULL auto_increment,
-  `owner` int(11) NOT NULL,
-  `title` varchar(30) collate utf8_unicode_ci NOT NULL,
-  `imageId` int(11) default NULL,
-  `timestamp` datetime default NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
-
---
--- Dumping data for table `album`
---
-
-INSERT INTO `album` (`id`, `owner`, `title`, `imageId`, `timestamp`) VALUES
-(22, 1, 'HELLO', NULL, '2011-04-03 23:24:42'),
-(21, 1, 'hello', NULL, '2011-04-03 23:23:11'),
-(20, 1, 'n', NULL, '2011-04-03 22:12:46'),
-(19, 1, 'lol', NULL, '2011-04-03 21:37:07'),
-(18, 1, 'lol', NULL, '2011-04-03 20:56:39'),
-(23, 1, 'bjÃ¸rnar er bÃ¸g', NULL, '2011-04-03 23:39:46');
 
 -- --------------------------------------------------------
 
@@ -293,7 +271,7 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`) VALUES
 (58, 0, 'UpdateK', 381, 'false'),
 (55, 0, 'Webkom', 326, 'true'),
 (56, 0, 'Styret', 363, 'false'),
-(57, 0, 'Hybrida Bedriftskomité', 293, 'true');
+(57, 0, 'Bedkom', 293, 'true');
 
 -- --------------------------------------------------------
 
@@ -303,39 +281,24 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`) VALUES
 
 CREATE TABLE IF NOT EXISTS `hyb_gallery` (
   `id` int(11) NOT NULL auto_increment,
+  `userId` int(11) NOT NULL,
   `title` varchar(30) collate utf8_unicode_ci NOT NULL,
+  `imageId` int(11) default NULL,
+  `timestamp` datetime default NULL,
   PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
 --
 -- Dumping data for table `hyb_gallery`
 --
 
-INSERT INTO `hyb_gallery` (`id`, `title`) VALUES
-(1, 'index slide');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hyb_gallery_item`
---
-
-CREATE TABLE IF NOT EXISTS `hyb_gallery_item` (
-  `id` int(11) NOT NULL auto_increment,
-  `galleryId` int(11) NOT NULL,
-  `imageId` int(11) NOT NULL,
-  `message` varchar(200) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
-
---
--- Dumping data for table `hyb_gallery_item`
---
-
-INSERT INTO `hyb_gallery_item` (`id`, `galleryId`, `imageId`, `message`) VALUES
-(1, 1, 1, 'Slide 1'),
-(2, 1, 1, 'Postmann Pat, Postmann Pat,  med sin svarte og hvite katt Alltid tidlig ute  på sin postmanns rute  har han all posten med seg i sin bil'),
-(3, 1, 1, 'BLABLALBA');
+INSERT INTO `hyb_gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
+(22, 1, 'HELLO', NULL, '2011-04-03 23:24:42'),
+(21, 1, 'hello', NULL, '2011-04-03 23:23:11'),
+(20, 1, 'n', NULL, '2011-04-03 22:12:46'),
+(19, 1, 'lol', NULL, '2011-04-03 21:37:07'),
+(18, 1, 'lol', NULL, '2011-04-03 20:56:39'),
+(23, 1, 'bjÃ¸rnar er bÃ¸g', NULL, '2011-04-03 23:39:46');
 
 -- --------------------------------------------------------
 
@@ -372,7 +335,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specialization`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-17 12:37:40', 'NTNU457028', '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-17 20:08:04', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -384,11 +347,11 @@ CREATE TABLE IF NOT EXISTS `image` (
   `id` int(11) NOT NULL auto_increment,
   `title` varchar(30) collate utf8_unicode_ci default NULL,
   `oldName` varchar(40) collate utf8_unicode_ci NOT NULL,
-  `albumId` int(11) default NULL,
+  `galleryId` int(11) default NULL,
   `userId` int(11) default NULL,
   `timestamp` datetime default NULL,
   PRIMARY KEY  (`id`),
-  KEY `albumId` (`albumId`,`userId`),
+  KEY `albumId` (`galleryId`,`userId`),
   KEY `userId` (`userId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
@@ -396,7 +359,7 @@ CREATE TABLE IF NOT EXISTS `image` (
 -- Dumping data for table `image`
 --
 
-INSERT INTO `image` (`id`, `title`, `oldName`, `albumId`, `userId`, `timestamp`) VALUES
+INSERT INTO `image` (`id`, `title`, `oldName`, `galleryId`, `userId`, `timestamp`) VALUES
 (1, '', 'gtfo.jpg', -1, 1, '2011-02-26 18:34:29'),
 (2, '', 'Untitled.jpg', -1, 1, '2011-02-26 21:07:15'),
 (4, 'Koala!', 'Koala.jpg', -1, 327, '2011-03-21 18:39:21'),
@@ -461,7 +424,8 @@ INSERT INTO `membership_group` (`groupId`, `userId`, `comission`, `start`, `end`
 (57, 356, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
 (57, 386, 'Økonomiansvarlig', '2010-11-15', '0000-00-00'),
 (57, 370, 'Medlem', '2010-11-15', '0000-00-00'),
-(57, 353, 'Bedriftskontakt', '2010-11-15', '0000-00-00');
+(57, 353, 'Bedriftskontakt', '2010-11-15', '0000-00-00'),
+(57, 381, 'Kamerat', NULL, NULL);
 
 -- --------------------------------------------------------
 
