@@ -34,7 +34,7 @@
                     <option value="3">Geomatikk</option>
                     <option value="4">Konstruksjonsteknikk</option>
                     <option value="5">Marin teknikk</option>
-                    <option value="7">Produkt & prosess</option>    
+                    <option value="7">Produkt & Prosess</option>    
                 </select>
             </div>
         </div>
@@ -90,7 +90,8 @@
 
             <div class="fieldExplanation">
             	OBS! Dette er endret fra tidligere!<br />
-                For eksempel "4512345" (uten ""). Brukes for å komme inn på Hybridas bedriftspresentasjoner. <a href="/images/kort_1.png" target="_blank">Hvor finner jeg kortnummeret?</a>
+                For eksempel "4512345" (uten ""). Brukes for å komme inn på Hybridas bedriftspresentasjoner.<br /> 
+                <a href="/images/kort_1.png" target="_blank">Hvor finner jeg kortnummeret?</a>
             </div>
         </div>
     </div>
