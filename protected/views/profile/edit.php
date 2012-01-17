@@ -89,7 +89,7 @@
             <div class="fieldInput"><input value="" size="30" name="cardnr" type="text"></div>
 
             <div class="fieldExplanation">
-            	OBS! Dette er endret fra tidligere!
+            	OBS! Dette er endret fra tidligere!<br />
                 For eksempel "4512345" (uten ""). Brukes for å komme inn på Hybridas bedriftspresentasjoner. <a href="/images/kort_1.png" target="_blank">Hvor finner jeg kortnummeret?</a>
             </div>
         </div>
