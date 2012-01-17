@@ -76,7 +76,7 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
-		$accessToken = 'AAAC4dA8kMR8BAJNCZBZASqncTWux3A6lJRgoLmGoDVvnt5CEb4fZCHDp6ZAvu2PVPchKZCl1HHV5bJyhY2bkqYbRSNC3rEAQipRyhhzzo96pm8h37ZB7rq'; //statisk access token for hybrida fanpage
+		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
 		$urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
@@ -96,7 +96,7 @@ class Facebook {
 	}
 
 	public function publishNews($message, $id) {
-		$accessToken = 'AAAC4dA8kMR8BAJNCZBZASqncTWux3A6lJRgoLmGoDVvnt5CEb4fZCHDp6ZAvu2PVPchKZCl1HHV5bJyhY2bkqYbRSNC3rEAQipRyhhzzo96pm8h37ZB7rq'; //statisk access token for hybrida fanpage
+		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
 		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
