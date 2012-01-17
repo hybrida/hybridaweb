@@ -21,29 +21,27 @@
 				array('class' => 'groupNavigationItem')); ?>
 </div>
 
-<p>
-<div id="membertable">
-    <table>
 
+<table id="membertable">
+    <tr>
+        <th></th><th>Navn</th><th>Medlemskap</th><th>Spesialisering</th>
+    </tr>
+
+    <? foreach ($users as $user) : ?>
         <tr>
-            <th></th><th>Navn</th><th>Medlemskap</th><th>Spesialisering</th>
+            <td class="imageCell"><img src='<?= Yii::app()->baseURL ?>/image/view/id/<?= $user['imageId'] ?>/size/3 '></td>
+            <td class="nameCell"><a href='<?= Yii::app()->baseURL ?>/profile/view/<?= $user['id'] ?>'><?= $user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'] ?></a></td>
+
+            <td class="isMemberCell">
+                <? if ($user['member']) { ?>
+                    Medlem
+                <? } else { ?>
+                    Ikke medlem
+                <? } ?>
+            </td>
+
+            <td><a href='<?= Yii::app()->baseURL ?>/#'><?= $user['name'] ?></a></td>
         </tr>
 
-        <? foreach ($users as $user) : ?>
-            <tr>
-                <td class="imageCell"><img src='<?= Yii::app()->baseURL ?>/image/view/id/<?= $user['imageId'] ?>/size/3 '></td>
-                <td class="nameCell"><a href='<?= Yii::app()->baseURL ?>/profile/view/<?= $user['id'] ?>'><?= $user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'] ?></a></td>
-
-                <? if ($user['member']) { ?>
-                    <td>Medlem</td>
-                <? } else { ?>
-                    <td>Ikke medlem</td>
-                <? } ?>
-
-                <td><a href='<?= Yii::app()->baseURL ?>/#'><?= $user['name'] ?></a></td>
-            </tr>
-            
-        <? endforeach; ?>
-    </table>
-</div>
-</p>
+    <? endforeach; ?>
+</table>

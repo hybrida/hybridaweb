@@ -20,6 +20,8 @@ faar en undermeny i tillegg til gruppenavigasjon. */
 
 .contentItem{
     width: 736px;
+    margin-top: 50px;
+    margin-bottom: 50px;
 }
 
 .articleContent {
@@ -147,4 +149,30 @@ nav items div.last {
 
 .formSection textarea {
     resize: none;
+}
+
+table#membertable {
+    margin: 2em auto;
+    border-collapse: collapse;
+}
+
+table#membertable *{
+    border: none;
+}
+
+#membertable td {
+    margin: none;
+}
+
+#membertable th, #membertable td {
+    padding: 2px 1.5em; 
+}
+
+
+#membertable tr:hover {
+    background-color: #e1e3e5;
+}
+
+#membertable tr:first-child {
+    background-color: transparent;
 }
