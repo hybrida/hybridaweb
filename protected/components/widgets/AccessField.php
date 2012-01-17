@@ -1,32 +1,42 @@
 <?php
 
 class AccessField extends CWidget {
-	
+
 	public $model;
 	public $attribute;
-	public $attributePath;
 	public $options;
+	public $access;
 
 	public function init() {
 		CHtml::resolveNameID($this->model, $this->attribute, $this->options);
+		$this->initAccess();
+	}
+
+	public function initAccess() {
+		$path = explode('[', str_replace("]", "", $this->attribute));
+		$access = $this->model->getAttributes();
+		foreach ($path as $p) {
+			$access = $access[$p];
+		}
+		$this->access = $access;
 	}
 
 	public function run() {
 		$this->render('accessField', array(
 			'name' => $this->options['name'],
-			'groups' => $this->getGroups(),
+			'groups' => $this->getAccessGroups(),
 		));
 	}
-	
+
 	public function getChecked($access) {
-		
+		return in_array($access, $this->access) ? "checked" : "";
 	}
-	
+
 	public function getName($access) {
-		return "";
+		return $this->options['name'] . "[$access]";
 	}
-	
-	public function getGroups() {
+
+	public function getAccessGroups() {
 		return array(
 			'Generelt' => array(
 				'Innloggede' => Access::REGISTERED,
@@ -35,7 +45,30 @@ class AccessField extends CWidget {
 				'Mann' => Access::MALE,
 			),
 			'Utgangsår' => $this->getYears(),
+			'Grupper' => $this->getGroups(),
+			'Spesialisering' => $this->getSpecialisations(),
 		);
 	}
-	
+
+	private function getYears() {
+		$years = array();
+		for ($i = 2012; $i < 2016; $i++) {
+			$years[$i] = $i;
+		}
+		return $years;
+	}
+
+	private function getGroups() {
+		$groups = Groups::model()->findAll();
+		$outputArray = array();
+		foreach ($groups as $group) {
+			$outputArray[$group->title] = Access::GROUP_START + $group->id;
+		}
+		return $outputArray;
+	}
+
+	private function getSpecialisations() {
+		return array();
+	}
+
 }

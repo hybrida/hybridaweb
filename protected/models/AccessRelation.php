@@ -77,6 +77,7 @@ class AccessRelation {
 		}
 
 		if (!empty($accessArray)) {
+			$accessArray = array_values($accessArray);
 			if (is_array($accessArray[0])) {
 				$this->insertAccessGroups = $accessArray;
 			} else {
