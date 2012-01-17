@@ -273,7 +273,7 @@ class GetController extends Controller{
         $this->renderPartial('group');
     }
     
-    private function searchUsers(){
+    private function searchUsers($search){
             
             $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
             
@@ -281,7 +281,7 @@ class GetController extends Controller{
                 die("");
             }
             
-            $searchArray = preg_split( '/ /', $_GET['q'] );
+            $searchArray = preg_split( '/ /', $search );
             $searchString = "";
             $data = array();
             
@@ -301,7 +301,7 @@ class GetController extends Controller{
             
             return $query->fetchAll(PDO::FETCH_ASSOC);
     }
-    private function searchNews(){
+    private function searchNews($search){
    
             //Søke på nyheter
             $data = array(
@@ -324,9 +324,9 @@ class GetController extends Controller{
     public function actionSearch(){
         
         $split = '~%~';
-        
-        $result['users'] = $this->searchUsers();
-        $result['newsList'] = $this->searchNews();
+        $search = $_GET['q'];
+        $result['users'] = $this->searchUsers($search);
+        $result['newsList'] = $this->searchNews($search);
         $result['url'] = Yii::app()->baseUrl . "/profile/";
         $result['split'] = $split;
         
