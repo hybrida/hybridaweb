@@ -10,10 +10,10 @@
 	$index += count($models);
 	?>
 </div>
-<div class="rowbuttons">
+
 	<?=
 	CHtml::button('Mer', array(
-		'class' => 'fetchNews'
+		'class' => 'button buttonRightSide'
 	))
 	?>
 <? app()->clientScript->registerCoreScript("jquery") ?>
@@ -39,4 +39,3 @@
 		});
 
 	</script>
-</div>
