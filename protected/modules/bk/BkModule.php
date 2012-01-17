@@ -29,7 +29,7 @@ class BkModule extends CWebModule {
 		$gk = new GateKeeper;
 		$isBedkomMember = $gk->hasAccessToGroup($this->groupId);
 		if (!$isBedkomMember) {
-			throw new CHttpException("Kun for bedkom-medlemmer");
+			throw new CHttpException("Kun for medlemmer av Bedriftskomiteen");
 		}
 	}
 

@@ -32,6 +32,7 @@ for enkelhets skyld.
                 Alle bedriftspresentasjoner vil uansett publiseres under <?=CHtml::link('Presentasjoner', array('presentations')) ?>, 
                 men kun presentasjoner med bedriftsnavn som tilsvarer et bedriftsnavn vi har i databasen vil kunne linkes til en bedrift.</li></p>
         <p><li>Statistikk over lønn til alumnistudenter har ikke blitt implementert i skrivende stund, selv om dette burde gjennomføres.</li></p>
+        <p><li>Hittil har funksjonalitet blitt prioritert over layout. Men hvis noen har lyst til å endre layouten i modulen er det fritt frem for dette.</li></p>
     </ul>
 </p>
 <p>
