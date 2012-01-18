@@ -248,7 +248,7 @@ class AccessRelationTest extends CTestCase {
 		$ar->save();
 		$this->assertEquals($postAccess, $ar->get());
 	}
-	
+
 	public function test_save_emptySubGroups() {
 		$postAccess = array(
 			array(),
@@ -259,6 +259,21 @@ class AccessRelationTest extends CTestCase {
 		$ar->set($postAccess);
 		$ar->save();
 		$this->assertEquals(array(), $ar->get());
+	}
+
+	public function test_save_notOrderedInput() {
+		$postAccess = array(
+			1001 => 1001,
+			2012 => 2012,
+		);
+		$expexted = array(
+			1001, 2012,
+		);
+		$news = $this->getNewNews();
+		$ar = new AccessRelation($news);
+		$ar->set($postAccess);
+		$ar->save();
+		$this->assertEquals($expexted, $ar->get());
 	}
 
 }
