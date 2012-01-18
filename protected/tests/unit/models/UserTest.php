@@ -102,7 +102,7 @@ class UserTest extends CTestCase {
 	public function test_access_specialization() {
 		$user = $this->getNewUser();
 		$spec = 15;
-		$user->specialization = $spec;
+		$user->specializationId = $spec;
 		$user->save();
 		
 		$this->assertContains(Access::SPECIALIZATION_START + $spec, $user->access);

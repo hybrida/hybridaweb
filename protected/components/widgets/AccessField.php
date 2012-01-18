@@ -124,7 +124,7 @@ class AccessField extends CWidget {
 	private function getSpecialisations() {
 		$stmt = app()->db->createCommand()
 				->select('id, name')
-				->from('spesialization')
+				->from('hyb_specialization')
 				->queryAll();
 		$specs = array();
 		foreach ($stmt as $spec) {
