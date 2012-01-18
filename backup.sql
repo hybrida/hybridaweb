@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2012 at 07:08 PM
+-- Generation Time: Jan 18, 2012 at 08:53 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -257,7 +257,9 @@ CREATE TABLE IF NOT EXISTS `groups` (
   `title` varchar(50) collate utf8_unicode_ci NOT NULL,
   `admin` int(11) default NULL,
   `committee` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
+  `url` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'URLen til gruppen',
   PRIMARY KEY  (`id`),
+  UNIQUE KEY `url` (`url`),
   KEY `members` (`admin`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
 
@@ -265,11 +267,11 @@ CREATE TABLE IF NOT EXISTS `groups` (
 -- Dumping data for table `groups`
 --
 
-INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`) VALUES
-(58, 0, 'UpdateK', 381, 'false'),
-(55, 0, 'Webkom', 326, 'true'),
-(56, 0, 'Styret', 363, 'false'),
-(57, 0, 'Bedkom', 293, 'true');
+INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
+(58, 0, 'UpdateK', 381, 'false', 'updatek'),
+(55, 0, 'Webkom', 326, 'true', 'webkom'),
+(56, 0, 'Styret', 363, 'false', 'styret'),
+(57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bedkom');
 
 -- --------------------------------------------------------
 
@@ -623,7 +625,7 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content
 (24, 1, '', 'Nyhet for webkomgruppen!', 4, '<p>Dette er en nyhet postet i webkomgruppen!!</p>', 326, '2011-04-12 00:06:33'),
 (40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <b> Åretur!!! </b>\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <b>29. jan - 2. feb 2012. </b> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nTuren kommer på <b> ca 2000kr </b> per pers og inkluderer:\r\n\r\n<br>\r\n\r\n<br>\r\n\r\n-Tur/retur Åre sentrum\r\n\r\n<br>\r\n\r\n-4 netters opphold\r\n\r\n<br>\r\n\r\n-5 dagers skipass \r\n\r\n<br>\r\n\r\n-rabattkort\r\n\r\n<br>\r\n\r\n+ mye fest og moro!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nVi har <b>47 plasser </b>, så her er det førstemann til mølla som gjelder! \r\n\r\n<br>\r\n\r\n<br>\r\n\r\nOBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding\r\n\r\n<br>\r\n\r\n<br>\r\n', 326, '2011-07-17 22:34:51'),
 (41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21'),
-(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p><ul><li><strong><u><del>Sigbjørn Aukland</del></u></strong> - Festivalus</li></ul></p><p>Tonje Sundstrøm - Skattemester</p><p>Sigurd Holsen - Vevsjef</p><p>Erik Aasmundrud - SPR</p>', 363, '2011-11-26 20:02:14');
+(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p></p><ul><li><strong><u><del>Sigbjørn Aukland</del></u></strong> - Festivalus</li></ul><p></p><p>Tonje Sundstrøm - Skattemester</p><p>Sigurd Holsen - Vevsjef</p><p>Erik Aasmundrud - SPR</p>', 363, '2011-11-26 20:02:14');
 
 -- --------------------------------------------------------
 

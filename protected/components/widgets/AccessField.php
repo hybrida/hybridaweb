@@ -120,7 +120,7 @@ class AccessField extends CWidget {
 		$groups = Groups::model()->findAll();
 		$outputArray = array();
 		foreach ($groups as $group) {
-			$outputArray[$group->title] = Access::GROUP_START + $group->id;
+			$outputArray[$group->url] = Access::GROUP_START + $group->id;
 		}
 		return $outputArray;
 	}
