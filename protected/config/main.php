@@ -40,7 +40,6 @@ return array(
 		// If removed, Gii defaults to localhost only. Edit carefully to taste.
 		//'ipFilters'=>array('127.0.0.1','::1'),
 		),
-		'admin',
 		'ajax',
 		'dev',
 		'bk',
@@ -59,8 +58,8 @@ return array(
 			'rules' => array(
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
-				'<module:(dev|ajax|admin)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
-				'<module:(dev|ajax|admin)>/<action:\w+>' => '<module>/default/<action>',
+				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
+				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
