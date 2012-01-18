@@ -1,13 +1,13 @@
-var inDuration = 300;
-var outDuration = 350;
+var inDuration = 350;
+var outDuration = 150;
 
-var defaultLinkBackgroundColor = "rgb(0, 73, 147)";
+// var defaultLinkBackgroundColor = "rgb(0, 73, 147)"; -- Mork blaa
+var defaultLinkBackgroundColor = "rgb(0, 98, 196)"
 var hoverLinkBackgroundColor = "black";
 
 $('document').ready(function(){
-    
     $('.button').hover(function(){
-        // Stop previous animations in and out.
+        // Prevents stacking of animations, max two are added each time 
         $(this).stop().stop();
         
         $(this).animate(
