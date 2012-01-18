@@ -9,7 +9,7 @@
  * @property string $firstName
  * @property string $middleName
  * @property string $lastName
- * @property integer $specialization
+ * @property integer $specializationId
  * @property string $graduationYear
  * @property string $member
  * @property string $gender
@@ -34,7 +34,7 @@ class User extends CActiveRecord {
 	public function rules() {
 		return array(
 			array('username, firstName, lastName, member', 'required'),
-			array('specialization, imageId, phoneNumber', 'numerical', 'integerOnly' => true),
+			array('specializationId, imageId, phoneNumber', 'numerical', 'integerOnly' => true),
 			array('username, cardinfo', 'length', 'max' => 10),
 			array('firstName, middleName, lastName', 'length', 'max' => 75),
 			array('graduationYear', 'length', 'max' => 4),
@@ -44,7 +44,7 @@ class User extends CActiveRecord {
 			array('lastLogin, description, birthdate', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, firstName, middleName, lastName, specialization, graduationYear, member, gender, imageId, phoneNumber, lastLogin, cardinfo, description, birthdate, altEmail', 'safe', 'on' => 'search'),
+			array('id, username, firstName, middleName, lastName, specializationId, graduationYear, member, gender, imageId, phoneNumber, lastLogin, cardinfo, description, birthdate, altEmail', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -60,7 +60,7 @@ class User extends CActiveRecord {
 			'firstName' => 'First Name',
 			'middleName' => 'Middle Name',
 			'lastName' => 'Last Name',
-			'specialization' => 'Specialization',
+			'specializationId' => 'SpecializationID',
 			'graduationYear' => 'Graduation Year',
 			'member' => 'Member',
 			'gender' => 'Gender',
@@ -81,7 +81,7 @@ class User extends CActiveRecord {
 		$criteria->compare('firstName', $this->firstName, true);
 		$criteria->compare('middleName', $this->middleName, true);
 		$criteria->compare('lastName', $this->lastName, true);
-		$criteria->compare('specialization', $this->specialization);
+		$criteria->compare('specializationId', $this->specializationId);
 		$criteria->compare('graduationYear', $this->graduationYear, true);
 		$criteria->compare('member', $this->member, true);
 		$criteria->compare('gender', $this->gender, true);
@@ -102,9 +102,9 @@ class User extends CActiveRecord {
 		$gender = $this->getGenderAccess();
 		$groups = $this->getGroupsAccess();
 		$year = $this->getYearAccess();
-		$specialization = $this->getSpecializationAccess();
+		$specializationId = $this->getSpecializationAccess();
 		$general = $this->getGeneralAccess();
-		return array_merge($general, $gender, $year, $specialization, $groups);
+		return array_merge($general, $gender, $year, $specializationId, $groups);
 	}
 
 	private function getGenderAccess() {
@@ -133,8 +133,8 @@ class User extends CActiveRecord {
 	}
 
 	private function getSpecializationAccess() {
-		if ($this->specialization) {
-			return array(Access::SPECIALIZATION_START + $this->specialization);
+		if ($this->specializationId) {
+			return array(Access::SPECIALIZATION_START + $this->specializationId);
 		}
 		return array();
 	}

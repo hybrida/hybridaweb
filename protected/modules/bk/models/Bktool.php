@@ -180,7 +180,7 @@ class BkTool {
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.workDescription, un.workPlace, c.companyName, c.companyID,
                 un.imageId, s.name FROM hyb_user AS un 
                 LEFT JOIN bk_company AS c ON c.companyID = un.workCompanyID 
-                LEFT JOIN spesialization AS s ON un.specialization = s.id
+                LEFT JOIN hyb_specialization AS s ON un.specializationId = s.id
                 WHERE graduationYear = :graduationyear";
 
         $query = $this->pdo->prepare($sql);
@@ -283,7 +283,7 @@ class BkTool {
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, s.name, un.graduationYear, 
                 un.altEmail, un.imageId, un.workDescription, un.workPlace FROM hyb_user AS un
-                LEFT JOIN spesialization AS s ON un.specialization = s.id
+                LEFT JOIN hyb_specialization AS s ON un.specializationId = s.id
                 WHERE un.workCompanyID = :companyId ORDER BY un.graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
@@ -386,7 +386,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT cs.specializationId, s.name FROM bk_company AS c, spesialization AS s, bk_company_specialization AS cs
+        $sql = "SELECT cs.specializationId, s.name FROM bk_company AS c, hyb_specialization AS s, bk_company_specialization AS cs
                 WHERE c.companyID = cs.companyId AND c.companyID = :companyId
                 AND cs.specializationId = s.id ORDER BY name ASC";
 
@@ -523,7 +523,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT DISTINCT id, name FROM spesialization ORDER BY name";
+        $sql = "SELECT DISTINCT id, name FROM hyb_specialization ORDER BY name";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -537,7 +537,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT COUNT(DISTINCT name) AS sum FROM spesialization";
+        $sql = "SELECT COUNT(DISTINCT name) AS sum FROM hyb_specialization";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -571,7 +571,7 @@ class BkTool {
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.altEmail, s.name, un.imageId,
                 c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM hyb_user AS un 
                 LEFT JOIN bk_company AS c ON un.workCompanyID = c.companyID
-                LEFT JOIN spesialization AS s ON s.id = un.specialization
+                LEFT JOIN hyb_specialization AS s ON s.id = un.specializationId
                 WHERE un.id = :userId";
 
         $query = $this->pdo->prepare($sql);

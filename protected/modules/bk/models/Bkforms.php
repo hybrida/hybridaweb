@@ -98,7 +98,7 @@ class Bkforms {
             'graduateId' => $id,
             'specializationId' => $specializationId
         );
-        $sql = "UPDATE hyb_user SET specialization = :specializationId WHERE id = :graduateId";
+        $sql = "UPDATE hyb_user SET specializationId = :specializationId WHERE id = :graduateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -473,7 +473,7 @@ class Bkforms {
         $data = array(
             'companyId' => $companyId
         );
-        $sql = "SELECT specializationId FROM bk_company_specialization, spesialization 
+        $sql = "SELECT specializationId FROM bk_company_specialization, hyb_specialization 
                 WHERE id = specializationId AND companyId = :companyId ORDER BY name ASC";
 
         $query = $this->pdo->prepare($sql);

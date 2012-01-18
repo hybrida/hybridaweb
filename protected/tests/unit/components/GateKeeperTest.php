@@ -137,7 +137,7 @@ class GateKeeperTest extends CTestCase {
 	public function test_hasAccess_oneGroup_someIn_true() {
 		$user = $this->getNewUser();
 		$user->gender = "male";
-		$user->specialization = 3;
+		$user->specializationId = 3;
 
 		$array = array(Access::MALE);
 		$this->assertHasAccessLoggedIn(true, $user, $array);

@@ -3,17 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 17, 2012 at 09:12 PM
+-- Generation Time: Jan 18, 2012 at 07:08 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `hybrida`
@@ -91,6 +85,10 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
 -- Dumping data for table `access_relations`
 --
 
+INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
+(24, 4055, 'news', 0),
+(41, 2, 'news', 0),
+(56, 2, 'news', 0);
 
 -- --------------------------------------------------------
 
@@ -303,6 +301,35 @@ INSERT INTO `hyb_gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hyb_specialization`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_specialization` (
+  `id` int(11) NOT NULL auto_increment,
+  `siteId` int(11) default NULL,
+  `name` varchar(30) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`id`),
+  KEY `siteId` (`siteId`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
+
+--
+-- Dumping data for table `hyb_specialization`
+--
+
+INSERT INTO `hyb_specialization` (`id`, `siteId`, `name`) VALUES
+(1, 10, 'Geomatikk'),
+(2, 11, 'Marin Teknikk'),
+(3, 12, 'Produkt og Prosess'),
+(4, 13, 'Konstruksjonsteknikk'),
+(5, 14, 'Petroleumsfag'),
+(6, NULL, 'Produksjon og Ledelse'),
+(7, NULL, 'Integrerte Operasjoner'),
+(8, NULL, 'Produktutvikling og Materialer'),
+(9, NULL, 'Varme- og Strømningsteknikk');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hyb_user`
 --
 
@@ -312,7 +339,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
   `firstName` varchar(75) collate utf8_unicode_ci NOT NULL,
   `middleName` varchar(75) collate utf8_unicode_ci default NULL,
   `lastName` varchar(75) collate utf8_unicode_ci NOT NULL,
-  `specialization` int(11) default NULL,
+  `specializationId` int(11) default NULL,
   `graduationYear` year(4) default NULL,
   `member` enum('true','false') collate utf8_unicode_ci NOT NULL,
   `gender` enum('unknown','male','female') collate utf8_unicode_ci NOT NULL default 'unknown',
@@ -334,8 +361,8 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 -- Dumping data for table `hyb_user`
 --
 
-INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specialization`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-17 20:08:04', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-18 17:15:12', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -595,8 +622,8 @@ CREATE TABLE IF NOT EXISTS `news` (
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content`, `author`, `timestamp`) VALUES
 (24, 1, '', 'Nyhet for webkomgruppen!', 4, '<p>Dette er en nyhet postet i webkomgruppen!!</p>', 326, '2011-04-12 00:06:33'),
 (40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <b> Åretur!!! </b>\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <b>29. jan - 2. feb 2012. </b> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nTuren kommer på <b> ca 2000kr </b> per pers og inkluderer:\r\n\r\n<br>\r\n\r\n<br>\r\n\r\n-Tur/retur Åre sentrum\r\n\r\n<br>\r\n\r\n-4 netters opphold\r\n\r\n<br>\r\n\r\n-5 dagers skipass \r\n\r\n<br>\r\n\r\n-rabattkort\r\n\r\n<br>\r\n\r\n+ mye fest og moro!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nVi har <b>47 plasser </b>, så her er det førstemann til mølla som gjelder! \r\n\r\n<br>\r\n\r\n<br>\r\n\r\nOBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding\r\n\r\n<br>\r\n\r\n<br>\r\n', 326, '2011-07-17 22:34:51'),
-(41, 73, 'event', 'GenFors', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21'),
-(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p>Sigbjørn Aukland - Festivalus</p><p>Tonje Sundstrøm - Skattemester</p><p>Sigurd Holsen - Vevsjef</p><p>Erik Aasmundrud - SPR</p>', 363, '2011-11-26 20:02:14');
+(41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21'),
+(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p><ul><li><strong><u><del>Sigbjørn Aukland</del></u></strong> - Festivalus</li></ul></p><p>Tonje Sundstrøm - Skattemester</p><p>Sigurd Holsen - Vevsjef</p><p>Erik Aasmundrud - SPR</p>', 363, '2011-11-26 20:02:14');
 
 -- --------------------------------------------------------
 
@@ -778,35 +805,6 @@ INSERT INTO `site_content` (`id`, `filename`, `description`) VALUES
 (6, 'companies', 'Side med bedrifter'),
 (7, 'graduates', 'Alumniside'),
 (8, 'updates', 'Side med oppdateringer');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `spesialization`
---
-
-CREATE TABLE IF NOT EXISTS `spesialization` (
-  `id` int(11) NOT NULL auto_increment,
-  `siteId` int(11) default NULL,
-  `name` varchar(30) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`),
-  KEY `siteId` (`siteId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
-
---
--- Dumping data for table `spesialization`
---
-
-INSERT INTO `spesialization` (`id`, `siteId`, `name`) VALUES
-(1, 10, 'Geomatikk'),
-(2, 11, 'Marin Teknikk'),
-(3, 12, 'Produkt og Prosess'),
-(4, 13, 'Konstruksjonsteknikk'),
-(5, 14, 'Petroleumsfag'),
-(6, NULL, 'Produksjon og Ledelse'),
-(7, NULL, 'Integrerte Operasjoner'),
-(8, NULL, 'Produktutvikling og Materialer'),
-(9, NULL, 'Varme- og Strømningsteknikk');
 
 -- --------------------------------------------------------
 
