@@ -2,6 +2,7 @@
 
 class AccessField extends CWidget {
 
+	private $_assetsDir = 'application.components.widgets.assets.accessField.css';
 	public $model = null;
 	public $attribute;
 	public $name;
@@ -26,10 +27,10 @@ class AccessField extends CWidget {
 	}
 
 	public function initAssets() {
-		$cssDir = Yii::getPathOfAlias('application.components.widgets.assets.accessField.css') . "/access.css";
+		$cssDir = Yii::getPathOfAlias($this->_assetsDir) . "/access.css";
 		$am = Yii::app()->getAssetManager();
 		$cs = Yii::app()->getClientScript();
-		$cs->registerCssFile($am->publish($cssDir));
+		$cs->registerCssFile($am->publish($cssDir), CClientScript::POS_END);
 	}
 
 	public function initAccess() {
@@ -65,7 +66,7 @@ class AccessField extends CWidget {
 			));
 		}
 	}
-	
+
 	private function getSubCountIndexedBy0() {
 		if (!empty($this->access)) {
 			if (is_array($this->access[0])) {
@@ -78,7 +79,10 @@ class AccessField extends CWidget {
 	public function getChecked($access, $sub) {
 		if (!empty($this->access)) {
 			if (is_array($this->access[0])) {
-				$bol = in_array($access, $this->access[$sub]);
+				$bol = false;
+				if (isset($this->access[$sub])) {
+					$bol = in_array($access, $this->access[$sub]);
+				}
 				return $bol ? "checked" : "";
 			}
 		}
@@ -100,7 +104,7 @@ class AccessField extends CWidget {
 			),
 			'Utgangsår' => $this->getYears(),
 			'Grupper' => $this->getGroups(),
-			'Spesialisering' => $this->getSpecialisations(),
+			'Spesialisering' => $this->getSpecializations(),
 		);
 	}
 
@@ -121,7 +125,7 @@ class AccessField extends CWidget {
 		return $outputArray;
 	}
 
-	private function getSpecialisations() {
+	private function getSpecializations() {
 		$stmt = app()->db->createCommand()
 				->select('id, name')
 				->from('hyb_specialization')
