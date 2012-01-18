@@ -11,7 +11,6 @@ class GetController extends Controller{
 			'sub' => $sub,
 			'isAjaxRequest' => true,
 		));
-		echo "<h1>$sub</h1>";
 	}
     
     private function albumList() {
