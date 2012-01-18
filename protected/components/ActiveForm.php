@@ -38,7 +38,6 @@ class ActiveForm extends CActiveForm {
 		$this->widget('application.components.widgets.AccessField', array(
 			'model' => $model,
 			'attribute' => $attribute,
-			'options' => $htmlOptions,
 		));
 	}
 

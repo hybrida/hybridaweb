@@ -3,6 +3,16 @@
 class GetController extends Controller{
     //put your code here
     private $split = "~%~";
+	
+	public function actionGetAccessBlock($sub, $name, $id) {
+		$this->widget('application.components.widgets.AccessField', array(
+			'name' => $name,
+			'id' => $id,
+			'sub' => $sub,
+			'isAjaxRequest' => true,
+		));
+		echo "<h1>$sub</h1>";
+	}
     
     private function albumList() {
         $result = query("SELECT id, title, imageId FROM album AS a 

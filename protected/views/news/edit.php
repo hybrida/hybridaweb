@@ -173,7 +173,9 @@
 
 	<div class="formElement">
 		<div class="formSubmit">
-			<?php echo CHtml::submitButton('Lagre'); ?>
+			<?php echo CHtml::submitButton('Lagre', array(
+				'class'=> 'button'
+			)); ?>
 		</div>
 	</div>
 

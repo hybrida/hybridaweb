@@ -2,45 +2,91 @@
 
 class AccessField extends CWidget {
 
-	public $model;
+	public $model = null;
 	public $attribute;
-	public $options;
-	public $access;
+	public $name;
+	public $id;
+	public $access = array();
+	public $sub = 0;
+	public $isAjaxRequest = false;
 
 	public function init() {
-		CHtml::resolveNameID($this->model, $this->attribute, $this->options);
+		$this->initNameID();
 		$this->initAccess();
 		$this->initAssets();
 	}
-	
+
+	public function initNameID() {
+		if ($this->model) {
+			$array = array();
+			CHtml::resolveNameID($this->model, $this->attribute, $array);
+			$this->name = $array['name'];
+			$this->id = $array['id'];
+		}
+	}
+
 	public function initAssets() {
 		$cssDir = Yii::getPathOfAlias('application.components.widgets.assets.accessField.css') . "/access.css";
 		$am = Yii::app()->getAssetManager();
 		$cs = Yii::app()->getClientScript();
 		$cs->registerCssFile($am->publish($cssDir));
 	}
+
 	public function initAccess() {
+		if (!$this->model) {
+			$this->access = array();
+			return;
+		}
 		$path = explode('[', str_replace("]", "", $this->attribute));
 		$access = $this->model->getAttributes();
 		foreach ($path as $p) {
 			$access = $access[$p];
 		}
 		$this->access = $access;
+		$this->initAccessSubs();
+	}
+
+	private function initAccessSubs() {
+		if (is_array($this->access[0])) {
+			$this->sub = count($this->access);
+		} else {
+			$this->sub = 1;
+		}
 	}
 
 	public function run() {
-		$this->render('accessField', array(
-			'name' => $this->options['name'],
-			'groups' => $this->getAccessGroups(),
-		));
+		if ($this->isAjaxRequest) {
+			$this->render('accessField/_field', array(
+				'sub' => $this->sub,
+			));
+		} else {
+			$this->render('accessField/field', array(
+				'subs' => $this->getSubCountIndexedBy0(),
+			));
+		}
+	}
+	
+	private function getSubCountIndexedBy0() {
+		if (!empty($this->access)) {
+			if (is_array($this->access[0])) {
+				return count($this->access) - 1;
+			}
+		}
+		return 0;
 	}
 
-	public function getChecked($access) {
+	public function getChecked($access, $sub) {
+		if (!empty($this->access)) {
+			if (is_array($this->access[0])) {
+				$bol = in_array($access, $this->access[$sub]);
+				return $bol ? "checked" : "";
+			}
+		}
 		return in_array($access, $this->access) ? "checked" : "";
 	}
 
-	public function getName($access) {
-		return $this->options['name'] . "[$access]";
+	public function getName($access, $sub) {
+		return $this->name . "[$sub][$access]";
 	}
 
 	public function getAccessGroups() {
@@ -60,7 +106,7 @@ class AccessField extends CWidget {
 
 	private function getYears() {
 		$years = array();
-		for ($i = 2012; $i < 2016; $i++) {
+		for ($i = 2012; $i <= 2016; $i++) {
 			$years[$i] = $i;
 		}
 		return $years;
@@ -82,7 +128,7 @@ class AccessField extends CWidget {
 				->queryAll();
 		$specs = array();
 		foreach ($stmt as $spec) {
-			$specs[$spec['name']] = $spec['id'];
+			$specs[$spec['name']] = Access::SPECIALIZATION_START + $spec['id'];
 		}
 		return $specs;
 	}
