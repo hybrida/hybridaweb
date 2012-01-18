@@ -227,7 +227,8 @@ class GateKeeperTest extends CTestCase {
 
 	private function getNewGroup() {
 		$group = new Groups;
-		$group->title = "s" . Groups::model()->count();
+		$group->url = $group->title = "s" . Groups::model()->count();
+		
 		$group->save();
 		return $group;
 	}

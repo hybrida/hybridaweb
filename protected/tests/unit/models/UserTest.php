@@ -78,7 +78,7 @@ class UserTest extends CTestCase {
 
 	private function getNewGroup() {
 		$group = new Groups;
-		$group->title = "g" . Groups::model()->count();
+		$group->url = $group->title = "g" . Groups::model()->count();
 		$group->menu = 123;
 		$group->save();
 		return $group;

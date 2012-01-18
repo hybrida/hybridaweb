@@ -15,7 +15,7 @@ class GroupsTest extends CTestCase {
 	private function getNewGroup() {
 		$group = new Groups;
 		$group->menu = 10;
-		$group->title = "Test".Groups::model()->count();
+		$group->url = $group->title = "Test".Groups::model()->count();
 		$this->assertTrue($group->save());
 		return $group;
 	}
