@@ -30,7 +30,7 @@ class AccessField extends CWidget {
 		$cssDir = Yii::getPathOfAlias($this->_assetsDir) . "/access.css";
 		$am = Yii::app()->getAssetManager();
 		$cs = Yii::app()->getClientScript();
-		$cs->registerCssFile($am->publish($cssDir), CClientScript::POS_END);
+		$cs->registerCssFile($am->publish($cssDir));
 	}
 
 	public function initAccess() {
