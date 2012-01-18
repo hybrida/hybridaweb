@@ -50,6 +50,7 @@ class User extends CActiveRecord {
 
 	public function relations() {
 		return array(
+			'specialization' => array(self::BELONGS_TO, 'Specialization', 'specializationId' ),
 		);
 	}
 
@@ -145,6 +146,10 @@ class User extends CActiveRecord {
 			$access[] = Access::MEMBER;
 		}
 		return $access;
+	}
+	
+	public function getFullName() {
+		return $this->firstName . " " . $this->middleName . " " . $this->lastName;
 	}
 
 }

@@ -8,7 +8,7 @@ class UserTest extends CTestCase {
 		$user->firstName = "UserTest";
 		$user->lastName = "getCleanUserObject";
 		$user->member = "true";
-		$this->assertTrue($user->save());
+		$user->save();
 		return $user;
 	}
 
@@ -16,7 +16,7 @@ class UserTest extends CTestCase {
 		$user = $this->getNewUser();
 		$user->save();
 
-		$this->assertNotEquals(null, $user->id);
+		$this->assertFalse($user->isNewRecord);
 	}
 
 	public function testUserIsCreatedWithSave() {
@@ -128,6 +128,17 @@ class UserTest extends CTestCase {
 		$user->save();
 		
 		$this->assertNotContains(Access::MEMBER, $user->access);
+	}
+	
+	public function test_userHasSpecializationRelation() {
+		$spec = new Specialization;
+		$spec->name = "test";
+		$spec->save();
+		$user = $this->getNewUser();
+		$user->specializationId = $spec->id;
+		$user->save();
+		$user2 = User::model()->findByPk($user->id);
+		$this->assertNotNull($user2->specialization);
 	}
 	
 }

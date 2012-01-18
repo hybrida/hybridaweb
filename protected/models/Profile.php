@@ -28,7 +28,7 @@ class Profile {
             'year' => $year
         );
         
-        $sql = "SELECT ui.id, ui.firstName, ui.middleName, ui.lastName, ui.imageId, ui.member, siteId, name
+        $sql = "SELECT ui.id, ui.username, ui.firstName, ui.middleName, ui.lastName, ui.imageId, ui.member, siteId, name
                 FROM hyb_user AS ui LEFT JOIN hyb_specialization ON specializationId = hyb_specialization.id WHERE graduationYear = :year";
 	
         $query = $this->pdo->prepare($sql);

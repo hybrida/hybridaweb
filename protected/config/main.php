@@ -58,6 +58,7 @@ return array(
 			'rules' => array(
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
+				'profile/<username:\w+>/<action:\w+>' => 'profile/<action>/',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',

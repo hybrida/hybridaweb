@@ -3,8 +3,8 @@
 class ProfileController extends Controller {
 
 	public $imageId;
-	
-public function filters() {
+
+	public function filters() {
 		return array(
 			'accessControl',
 		);
@@ -13,37 +13,40 @@ public function filters() {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("index","view","edit","all"),
-				'users' => array('@')
+				'actions' => array("index", "info", "edit", "comment"),
+				'users' => array('@'),
 			),
 			array('deny'),
 		);
 	}
 
 	public function actionIndex() {
-		$this->actionView(Yii::app()->user->id);
+		$this->actionInfo(user()->name);
 	}
 
-	public function actionView($id) {
-		$this->actionInfo($id);
+	public function actionInfo($username) {
+		$user = $this->getUserOrThrowException($username);
+		$this->render('info', array(
+			'user' => $user,
+		));
 	}
 
-	public function actionInfo($id) {
-
-		/* $sub = ( isset($_GET['sub']) ? $_GET['sub'] : "0");
-		  $id = ( isset($_GET['id']) ? $_GET['id'] : $selfId );		//Id vil være brukerid til profilen vi ønsker å vise
-		 */
-		//$rbc->setUserImage($id);
-
-		$profile = new Profile();
-		$data = $profile->info($id);
-		$data['id'] = $id;
-		$this->imageId = $data['imageId'];
-		$this->render('index', $data);
+	private function getUserOrThrowException($username) {
+		$user = User::model()->find('username = :username', array(
+			':username' => $username,
+				));
+		if (!$user) {
+			throw new CHttpException("Brukeren finnes ikke",
+					"Brukeren du søkte etter finnes ikke");
+		}
+		return $user;
 	}
 
-	public function actionComment($id) {
-		$this->render('comment');
+	public function actionComment($username) {
+		$user = $this->getUserOrThrowException($username);
+		$this->render('comment', array(
+			'user' => $user,
+		));
 	}
 
 	public function actionEdit() {
@@ -52,11 +55,5 @@ public function filters() {
 
 		$this->render('edit', $data);
 	}
-    public function actionAll($id){
-        $profile = new Profile();
-        $data['users'] = $profile->displayMembers($id);
-        $data['now'] = date("Y");
-		$this->render('all', $data);
-	}
-    
+
 }
