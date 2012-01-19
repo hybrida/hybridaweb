@@ -243,7 +243,7 @@ class GetController extends Controller{
             flush();
             ob_end_clean(); */
 
-            if($facebook){
+            if(isset($facebook)){
                 $fb = new Facebook();
                 $fb->setAttending($eId);                
             }
