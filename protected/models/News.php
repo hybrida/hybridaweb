@@ -49,6 +49,14 @@ class News extends CActiveRecord {
 			array('id, parentId, parentType, title, imageId, author, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
+	
+	public function relations() {
+		return array (
+			'event' => array(self::BELONGS_TO, 'Event', 'parentId'),
+			'image' => array(self::BELONGS_TO, 'Image', 'imageId'),
+		);
+		
+	}
 
 	/**
 	 * @return array customized attribute labels (name=>label)
@@ -157,5 +165,5 @@ class News extends CActiveRecord {
 	private function getNewsViewUrl() {
 		return Yii::app()->createUrl("news/view",array("id" => $this->id));
 	}
-	
+
 }
