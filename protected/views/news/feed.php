@@ -2,12 +2,14 @@
 // FIXME
 // Forferdelig stygt, men fungerer.
 ?>
-<div style="margin: 1.5em 0">
+<div class="feedTitle">
     <h1 style="display: inline">Nyhetsstrøm</h1>
     <?= CHtml::link("Publiser", array("news/create"), array(
         'class' => 'button buttonRightSide',
     )) ?>
 </div>
+
+<div class="heavyBorder"></div>
 
 
 <div class="feeds">
