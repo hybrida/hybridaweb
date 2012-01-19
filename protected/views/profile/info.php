@@ -1,3 +1,6 @@
+<? $this->pageTitle = "info" ?>
+
+
 <?
 $this->renderPartial('_header', array(
 	'user' => $user,

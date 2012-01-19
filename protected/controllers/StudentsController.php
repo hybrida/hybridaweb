@@ -10,6 +10,7 @@ class StudentsController extends Controller {
 		$profile = new Profile();
 		$data['users'] = $profile->displayMembers($id);
 		$data['now'] = date("Y");
+		$data['graduationYear'] = $id;
 		$this->render('view', $data);
 	}
 

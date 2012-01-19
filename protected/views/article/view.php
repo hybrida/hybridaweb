@@ -1,3 +1,5 @@
+<? $this->pageTitle = $title ?>
+
 <?php $this->renderPartial("menu"); ?>
 <div id='edit'>
     <a href='<?= Yii::app()->baseURL ?>/article/edit/<?= $id ?>'>endre</a>

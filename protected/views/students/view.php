@@ -1,3 +1,6 @@
+<? $this->pageTitle = "Klasseliste " . $graduationYear ?>
+
+
 <div id='groupNavigation'>
 	<?=
 	CHtml::link(

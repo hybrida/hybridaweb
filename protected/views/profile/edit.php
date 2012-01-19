@@ -1,3 +1,4 @@
+<? $this->pageTitle = "Rediger profil" ?>
 <h1>Endre profil</h1>
 <div class="formSection">
     <div class="fieldDefinition">Fyll inn info fra Facebook:</div>

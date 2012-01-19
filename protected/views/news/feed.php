@@ -2,6 +2,8 @@
 // FIXME
 // Forferdelig stygt, men fungerer.
 ?>
+<? $this->pageTitle = "Nyhetsstrøm" ?>
+
 <div class="feedTitle">
     <h1 style="display: inline">Nyhetsstrøm</h1>
     <?= CHtml::link("Publiser", array("news/create"), array(

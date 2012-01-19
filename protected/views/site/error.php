@@ -1,5 +1,5 @@
 <?php
-$this->pageTitle=Yii::app()->name . ' - Error';
+$this->pageTitle= 'Error';
 $this->breadcrumbs=array(
 	'Error',
 );

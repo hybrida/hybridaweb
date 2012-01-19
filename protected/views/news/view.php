@@ -1,3 +1,5 @@
+<? $this->pageTitle = $model->title ?>
+
 <?$this->breadcrumbs=array(
 	'News',
 );?>

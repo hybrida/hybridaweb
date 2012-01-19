@@ -1,3 +1,5 @@
+<? $this->pageTitle = "Rediger nyhet" ?>
+
 <div class="form">
 	<script type="text/javascript">
 		$(document).ready(function(){

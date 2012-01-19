@@ -1,3 +1,5 @@
+<? $this->pageTitle = "Rediger artikkel" ?>
+
 <?php 
 
     $form = $this->beginWidget('ActiveForm', array(

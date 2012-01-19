@@ -1,3 +1,4 @@
+<? $this->pageTitle = "Kommentarer" ?>
 <? $this->renderPartial('_header', array(
 	'user' => $user,
 ))?>

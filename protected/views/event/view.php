@@ -1,3 +1,5 @@
+<? $this->pageTitle = $title ?>
+
 <div class='left'>
 	<h1><?= $title ?></h1>
 </div>
