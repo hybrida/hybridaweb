@@ -56,6 +56,8 @@ return array(
 			'urlFormat' => 'path',
 			'showScriptName' => false,
 			'rules' => array(
+				'bk' => 'bk/bktool/index',
+				'bk/<action:\w+>' => 'bk/bktool/<action>',
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
 				'profile/<username:\w+>/<action:\w+>' => 'profile/<action>/',
