@@ -12,7 +12,7 @@
         </div>
         <div class="topBar">
             <div class="topBarItem"></div>
-            <h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
+            <h1><?= CHtml::link($model->title, array('/news/view', 'id' => $model->id) ) ?></h1>
         </div>
         <div class="articleContent">
             
