@@ -133,7 +133,6 @@ class Signup extends CActiveRecord {
 		$sql = "SELECT COUNT(*) as num 
 			FROM membership_signup
 			WHERE eventId = :eventId";
-		$pdo = Yii::app()->db->getPdoInstance();
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 
 		$stmt->execute(array(
@@ -141,6 +140,44 @@ class Signup extends CActiveRecord {
 		));
 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $data['num'];
+	}
+	
+	public function getAttenderIDs() {
+		$sql = "SELECT userId
+			FROM membership_signup
+			WHERE eventId = :eventId
+			";
+		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$stmt->execute(array(
+			':eventId' => $this->eventId,
+		));
+		return $stmt->fetchAll(PDO::FETCH_COLUMN);
+	}
+	
+	public function getAttenders() {
+		$attenderIDs = $this->getAttenderIDs();
+		$attenders = array();
+		foreach ($attenderIDs as $userId) {
+			$user = User::model()->findByPk($userId);
+			if ($user) {
+				$attenders[] = $user;
+			}
+		}
+		return $attenders;
+	}
+	
+	public function isAttending($userId) {
+		$sql = "SELECT userId
+			FROM membership_signup
+			WHERE eventId = :eventId
+				AND userId = :userId";
+		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$stmt->execute(array(
+			':userId' => $userId,
+			':eventId' => $this->eventId,
+		));
+		$data = $stmt->fetch();
+		return ! empty($data);
 	}
 
 }
