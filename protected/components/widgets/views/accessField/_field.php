@@ -1,3 +1,7 @@
+<? if ($sub != 0): ?>
+	<h2>Eller</h2>
+<? endif ?>
+
 <? foreach ($this->getAccessGroups() as $groupName => $group): ?>
 	<div class="accessGroup" id="<?= $groupName ?>">
 		<h3><?= $groupName ?></h3>

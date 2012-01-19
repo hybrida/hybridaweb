@@ -48,6 +48,10 @@ class AccessField extends CWidget {
 	}
 
 	private function initAccessSubs() {
+		if (empty($this->access)) {
+			$this->sub = 1;
+			return;
+		}
 		if (is_array($this->access[0])) {
 			$this->sub = count($this->access);
 		} else {

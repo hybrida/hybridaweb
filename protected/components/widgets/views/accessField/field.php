@@ -9,7 +9,7 @@
 </div>
 
 <?=
-CHtml::button('Ta med ny accessBlock', array(
+CHtml::button('Legg til nytt tilgangsfelt', array(
 	'class' => 'button',
 	'id' => 'fetchNewAccessBlock',
 ))
