@@ -3,6 +3,7 @@
 class NewsController extends Controller {
 
 	private $feedLimit = 10;
+	private $offset = 0;
 
 	public function actionIndex() {
 		$this->actionFeed();
@@ -37,7 +38,10 @@ class NewsController extends Controller {
 			throw new CHttpException("Nyheten finnes ikke");
 		}
 		if ($news->getParentType() === 'event') {
-			$this->forward('/event/view/',array($id => $news->parentId));
+			$url = $this->createUrl('/event/view', array(
+				'id' => $news->parentId,
+			));
+			$this->redirect($url);
 			return;
 		}
 		
@@ -53,24 +57,26 @@ class NewsController extends Controller {
 		$feedElements = $this->getFeedElements();
 		$this->render("feed", array(
 			'models' => $feedElements,
-			'index' => 0,
+			'index' => $this->offset,
 			'limit' => $this->feedLimit,
 		));
 	}
 
 	public function actionFeedAjax($offset = 0) {
 		$feedElements = $this->getFeedElements($offset);
-		$offset += count($feedElements);
 		$this->renderPartial('_feed', array(
 			'models' => $feedElements,
-			'index' => $offset,
+			'index' => $this->offset,
 			'limit' => $this->feedLimit,
 		));
 	}
 	
 	private function getFeedElements($offset=0) {
 		$feed = new NewsFeed($this->feedLimit, $offset);
-		return $feed->getElements();
+		$elements = $feed->getElements();
+		$this->offset = $feed->getOffset();
+
+		return $elements;
 	}
 
 	public function actionCreate() {

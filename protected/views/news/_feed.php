@@ -25,8 +25,9 @@
                 </a>
             </div>
             -->
-            <a class="button buttonRightSide" href="<?= $url ?>">Rediger</a>
-            
+			<? if (!user()->isGuest): ?>
+				<a class="button buttonRightSide" href="<?= $url ?>">Rediger</a>
+            <? endif ?>
             <?= $model->content ?>
             <div class="date">Dato: <?= $model->timestamp ?></div>
             <div class="author"><?=

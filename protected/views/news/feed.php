@@ -15,12 +15,11 @@
 	$this->renderPartial("_feed", array(
 		'models' => $models,
 	));
-	$index += count($models);
 	?>
 </div>
 
 	<?=
-	CHtml::button('Mer', array(
+	CHtml::button('Vis flere', array(
 		'class' => 'button buttonRightSide',
                 'id'    => 'fetchNews',
 	))
