@@ -22,7 +22,7 @@ class News extends CActiveRecord {
 	 * Returns the static model of the specified AR class.
 	 * @return News the static model class
 	 */
-	public static function model($className=__CLASS__) {
+	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
 
@@ -49,14 +49,13 @@ class News extends CActiveRecord {
 			array('id, parentId, parentType, title, imageId, authorId, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
-	
+
 	public function relations() {
-		return array (
+		return array(
 			'event' => array(self::BELONGS_TO, 'Event', 'parentId'),
 			'image' => array(self::BELONGS_TO, 'Image', 'imageId'),
 			'author' => array(self::BELONGS_TO, 'User', 'authorId'),
 		);
-		
 	}
 
 	/**
@@ -142,29 +141,25 @@ class News extends CActiveRecord {
 	public function getParentId() {
 		return $this->parentId;
 	}
-	
+
 	public function getAuthorName() {
 		$authorId = User::model()->findByPk($this->authorId);
 		$name = "";
 		if ($authorId) {
-			$name = $authorId->firstName." ".$authorId->middleName." ".$authorId->lastName;
+			$name = $authorId->firstName . " " . $authorId->middleName . " " . $authorId->lastName;
 		}
 		return $name;
 	}
-	
+
 	public function getViewUrl() {
-		if ($this->parentId && $this->parentType === "event") {
-			return $this->getEventViewUrl();
-		} else {
-			return $this->getNewsViewUrl();
-		}
+		return Yii::app()->createUrl("news/view", array(
+					"id" => $this->id,
+					'title' => $this->getTitleWithDelimiters(),
+				));
 	}
-	
-	private function getEventViewUrl() {
-		return Yii::app()->createUrl("event/view",array("id" => $this->parentId));
-	}
-	private function getNewsViewUrl() {
-		return Yii::app()->createUrl("news/view",array("id" => $this->id));
+
+	private function getTitleWithDelimiters() {
+		return str_replace(' ', '-', $this->title);
 	}
 
 }

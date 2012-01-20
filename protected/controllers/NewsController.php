@@ -31,8 +31,17 @@ class NewsController extends Controller {
 			),
 		);
 	}
+	
+	private function getIdFromString($idString) {
+		$array = explode('+',$idString);
+		if (isset($array[0])) {
+			return $array[0];
+		}
+		return '';
+	}
 
 	public function actionView($id) {
+		$id = $this->getIdFromString($id);
 		$signup = null;
 
 		$news = News::model()->with('author')->findByPk($id);
