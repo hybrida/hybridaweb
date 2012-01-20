@@ -114,3 +114,7 @@
 	border-style: inset;
 	border-color: gray;
 	}
+        
+#BK-company-listtable img{
+	vertical-align: text-top;
+	}
