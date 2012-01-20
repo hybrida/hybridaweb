@@ -13,12 +13,14 @@ function endRequest($event) {
 	if ($notLoginUrl && !$isAjaxRequest) {
 		$app->user->setReturnUrl($app->request->getUrl());
 	}
+	
+	beginRequest();
 }
 
 function beginRequest() {
 	$cs = Yii::app()->getClientScript();
-	$cs->registerScriptFile("http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js");
-	$cs->registerScriptFile("http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js");
+	$cs->registerCoreScript('jquery');
+	$cs->registerCoreScript('jquery.ui');
 }
 
 return array(
@@ -95,8 +97,9 @@ return array(
 		),
 		'clientScript' => array(
 			'scriptMap' => array(
-				'jquery.js' => false,
-				'jquery-ui.css' => false,
+				'jquery.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
+				'jquery.min.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
+				'jquery-ui.min.js' => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js",
 			),
 		),
 	),
