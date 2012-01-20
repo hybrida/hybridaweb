@@ -1,4 +1,4 @@
-<button data-id='<?= $id ?>' data-type='<?= $signType ?>'><?= $buttonText ?></button>
+<button class="button" data-id='<?= $id ?>' data-type='<?= $signType ?>'><?= $buttonText ?></button>
 <dropdown data-title='påmeldte'>
 <ul>
 <? foreach($list as $row) : ?>
