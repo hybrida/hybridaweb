@@ -131,10 +131,7 @@ class NewsController extends Controller {
 	private function redirectAfterEdit($model) {
 		$newsModel = $model->getNewsModel();
 		if (!$newsModel->isNewRecord) {
-			$this->redirect(array(
-				"news/view",
-				"id" => $newsModel->id
-			));
+			$this->redirect($newsModel->viewUrl);
 		}
 	}
 
