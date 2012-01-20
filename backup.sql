@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 18, 2012 at 08:53 PM
+-- Generation Time: Jan 20, 2012 at 02:07 AM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
 (24, 4055, 'news', 0),
-(41, 2, 'news', 0),
-(56, 2, 'news', 0);
+(40, 2, 'news', 0),
+(41, 2, 'news', 0);
 
 -- --------------------------------------------------------
 
@@ -364,7 +364,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'unknown', NULL, NULL, '2012-01-18 17:15:12', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-01-20 00:27:56', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -610,22 +610,22 @@ CREATE TABLE IF NOT EXISTS `news` (
   `title` varchar(50) collate utf8_unicode_ci default NULL,
   `imageId` int(11) default NULL,
   `content` mediumtext collate utf8_unicode_ci,
-  `author` int(11) default NULL,
+  `authorId` int(11) default NULL,
   `timestamp` datetime default NULL,
   PRIMARY KEY  (`id`),
-  KEY `parentId` (`parentId`,`author`),
-  KEY `author` (`author`)
+  KEY `parentId` (`parentId`,`authorId`),
+  KEY `author` (`authorId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=360 ;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content`, `author`, `timestamp`) VALUES
-(24, 1, '', 'Nyhet for webkomgruppen!', 4, '<p>Dette er en nyhet postet i webkomgruppen!!</p>', 326, '2011-04-12 00:06:33'),
-(40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <b> Åretur!!! </b>\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <b>29. jan - 2. feb 2012. </b> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nTuren kommer på <b> ca 2000kr </b> per pers og inkluderer:\r\n\r\n<br>\r\n\r\n<br>\r\n\r\n-Tur/retur Åre sentrum\r\n\r\n<br>\r\n\r\n-4 netters opphold\r\n\r\n<br>\r\n\r\n-5 dagers skipass \r\n\r\n<br>\r\n\r\n-rabattkort\r\n\r\n<br>\r\n\r\n+ mye fest og moro!\r\n\r\n<br>\r\n\r\n<br>\r\n\r\nVi har <b>47 plasser </b>, så her er det førstemann til mølla som gjelder! \r\n\r\n<br>\r\n\r\n<br>\r\n\r\nOBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding\r\n\r\n<br>\r\n\r\n<br>\r\n', 326, '2011-07-17 22:34:51'),
+INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content`, `authorId`, `timestamp`) VALUES
+(24, 1, '', 'Nyhet for webkomgruppen!', 4, '<p>Dette er en nyhet som bare er synlig for webkom-medlemmer</p>', 326, '2011-04-12 00:06:33'),
+(40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <strong> Åretur!!! </strong>\r\n<br />\r\n<br />\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n<br />\r\n<br />\r\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\r\n<br />\r\n<br />\r\n-Tur/retur Åre sentrum\r\n<br />\r\n-4 netters opphold\r\n<br />\r\n-5 dagers skipass \r\n<br />\r\n-rabattkort\r\n<br />\r\n+ mye fest og moro!\r\n<br />\r\n<br />\r\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \r\n<br />\r\n<br />\r\nOBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding\r\n<br />\r\n<br />', 326, '2011-07-17 22:34:51'),
 (41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21'),
-(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p></p><ul><li><strong><u><del>Sigbjørn Aukland</del></u></strong> - Festivalus</li></ul><p></p><p>Tonje Sundstrøm - Skattemester</p><p>Sigurd Holsen - Vevsjef</p><p>Erik Aasmundrud - SPR</p>', 363, '2011-11-26 20:02:14');
+(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p><br /></p>\r\n<p><strong>Festivalus</strong> - Sigbjørn Aukland</p>\r\n<p><strong>Skattemester</strong>Tonje Sundstrøm</p>\r\n<p><strong>Vevsjef</strong> - Sigurd Holsen</p>\r\n<p><strong>SPR</strong> - Erik Aasmundrud </p>', 363, '2011-11-26 20:02:14');
 
 -- --------------------------------------------------------
 

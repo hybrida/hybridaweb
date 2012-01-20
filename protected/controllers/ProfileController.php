@@ -13,7 +13,7 @@ class ProfileController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("index", "info", "edit", "comment"),
+				'actions' => array("index", "info","view", "edit", "comment"),
 				'users' => array('@'),
 			),
 			array('deny'),
@@ -22,6 +22,10 @@ class ProfileController extends Controller {
 
 	public function actionIndex() {
 		$this->actionInfo(user()->name);
+	}
+	
+	public function actionView($username) {
+		$this->actionInfo($username);
 	}
 
 	public function actionInfo($username) {

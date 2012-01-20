@@ -10,7 +10,7 @@
  * @property string $title
  * @property integer $imageId
  * @property string $content
- * @property integer $author
+ * @property integer $authorId
  * @property string $timestamp
  * @property array $access
  */
@@ -40,13 +40,13 @@ class News extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('parentId, imageId, author', 'numerical', 'integerOnly' => true),
+			array('parentId, imageId, authorId', 'numerical', 'integerOnly' => true),
 			array('parentType', 'length', 'max' => 7),
 			array('title', 'length', 'max' => 50),
 			array('title, imageId, content, timestamp', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, parentId, parentType, title, imageId, author, timestamp', 'safe', 'on' => 'search'),
+			array('id, parentId, parentType, title, imageId, authorId, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 	
@@ -54,6 +54,7 @@ class News extends CActiveRecord {
 		return array (
 			'event' => array(self::BELONGS_TO, 'Event', 'parentId'),
 			'image' => array(self::BELONGS_TO, 'Image', 'imageId'),
+			'author' => array(self::BELONGS_TO, 'User', 'authorId'),
 		);
 		
 	}
@@ -69,7 +70,7 @@ class News extends CActiveRecord {
 			'title' => 'Title',
 			'imageId' => 'Image',
 			'content' => 'Content',
-			'author' => 'Author',
+			'authorId' => 'Author',
 			'timestamp' => 'Timestamp',
 		);
 	}
@@ -90,7 +91,7 @@ class News extends CActiveRecord {
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('imageId', $this->imageId);
 		$criteria->compare('content', $this->content, true);
-		$criteria->compare('author', $this->author);
+		$criteria->compare('authorId', $this->authorId);
 		$criteria->compare('timestamp', $this->timestamp, true);
 
 		return new CActiveDataProvider($this, array(
@@ -123,7 +124,7 @@ class News extends CActiveRecord {
 
 	public function beforeSave() {
 		if ($this->isNewRecord) {
-			$this->author = Yii::app()->user->id;
+			$this->authorId = Yii::app()->user->id;
 			$this->timestamp = new CDbExpression('NOW()');
 		}
 		return parent::beforeSave();
@@ -143,10 +144,10 @@ class News extends CActiveRecord {
 	}
 	
 	public function getAuthorName() {
-		$author = User::model()->findByPk($this->author);
+		$authorId = User::model()->findByPk($this->authorId);
 		$name = "";
-		if ($author) {
-			$name = $author->firstName." ".$author->middleName." ".$author->lastName;
+		if ($authorId) {
+			$name = $authorId->firstName." ".$authorId->middleName." ".$authorId->lastName;
 		}
 		return $name;
 	}

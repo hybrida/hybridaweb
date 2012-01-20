@@ -17,22 +17,19 @@
         <div class="articleContent">
             
             <? $url = $this->createUrl("/news/edit", array("id" => $model->id)); ?>
-            <!--
-            <div align="right">
-                <? $url = $this->createUrl("/news/edit", array("id" => $model->id)); ?>
-                <a href="<?= $url ?>">
-                    <img height='20' src="/images/icons/edit.png"/>
-                </a>
-            </div>
-            -->
+
 			<? if (!user()->isGuest): ?>
 				<a class="button buttonRightSide" href="<?= $url ?>">Rediger</a>
             <? endif ?>
             <?= $model->content ?>
             <div class="date">Dato: <?= $model->timestamp ?></div>
+			<? if ($model->author): ?>
             <div class="author"><?=
-        CHtml::link($model->authorName, array("/profile/view/", "id" => $model->author))
-            ?></div>
+				CHtml::link($model->author->fullName, array(
+					"/profile/view/", 
+					"username" => $model->author->username,
+				)) ?></div>
+			<? endif ?>
         </div>
     </div>
 <? endforeach ?>

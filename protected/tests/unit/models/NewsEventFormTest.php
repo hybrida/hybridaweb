@@ -394,7 +394,7 @@ class NewsEventFormTest extends CTestCase {
 		$news = new News;
 		$news->title="title";
 		$news->content="content";
-		$news->author=381;
+		$news->authorId=381;
 		$news->setParent("event", 98765);
 		$news->save();
 		

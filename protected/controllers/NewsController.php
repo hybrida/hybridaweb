@@ -33,24 +33,28 @@ class NewsController extends Controller {
 	}
 
 	public function actionView($id) {
-		$news = News::model()->findByPk($id);
+		$signup = null;
+
+		$news = News::model()->with('author')->findByPk($id);
 		if (!$news) {
 			throw new CHttpException("Nyheten finnes ikke");
 		}
-		if ($news->getParentType() === 'event') {
-			$url = $this->createUrl('/event/view', array(
-				'id' => $news->parentId,
-			));
-			$this->redirect($url);
-			return;
-		}
-		
-		
-		$data = $news->attributes;
-		$this->render('view', array(
-			'model' => $news,
-		));
 
+		$gk = new GateKeeper;
+		if (!$gk->hasAccess('news', $id)) {
+			throw new CHttpException('Ingen tilgang');
+		}
+
+		$event = $news->event;
+		if ($event && $event->signup && $gk->hasAccess('signup', $event->signup->eventId)) {
+			$signup = $event->signup;
+		}
+
+		$this->render('view', array(
+			'news' => $news,
+			'event' => $event,
+			'signup' => $signup,
+		));
 	}
 
 	public function actionFeed() {
@@ -70,7 +74,7 @@ class NewsController extends Controller {
 			'limit' => $this->feedLimit,
 		));
 	}
-	
+
 	private function getFeedElements($offset=0) {
 		$feed = new NewsFeed($this->feedLimit, $offset);
 		$elements = $feed->getElements();

@@ -21,7 +21,7 @@ class TestLib {
 		$sql = "delete from news where 
 				timestamp is null 
 				or title is null 
-				or author is null 
+				or authorId is null 
 				or content is null
 				or title = 'title'
 				or title = 'dummy'

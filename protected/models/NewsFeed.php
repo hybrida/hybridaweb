@@ -36,7 +36,7 @@ class NewsFeed {
 	private function toActiveRecord($newsIdArray) {
 		$ar = array();
 		foreach ($newsIdArray as $id) {
-			$ar[] = News::model()->findByPk($id);
+			$ar[] = News::model()->with('author')->findByPk($id);
 		}
 		return $ar;
 	}

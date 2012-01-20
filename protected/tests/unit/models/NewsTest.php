@@ -27,7 +27,7 @@ class NewsTest extends CTestCase {
 		$news->save();
 		$userId = Yii::app()->user->id;
 		$this->assertNotNull($userId);
-		$this->assertEquals($userId, $news->author);
+		$this->assertEquals($userId, $news->authorId);
 	}
 
 	public function test_accessGetterAndSetter_setAccess_inserted() {
@@ -125,19 +125,19 @@ class NewsTest extends CTestCase {
 		$this->assertFalse($news->save());
 	}
 	
-	public function test_authorIsNotSetOnUpdate() {
+	public function test_authorIdIsNotSetOnUpdate() {
 		$this->login();
 		$news = new News;
 		$news->title = "title";
 		$news->save();
-		$author = $news->author;
-		$this->assertNotNull($author);
+		$authorId = $news->authorId;
+		$this->assertNotNull($authorId);
 		
 		$this->login();
 		$news2 = News::model()->findByPk($news->id);
 		$news2->content = "content";
 		$news2->save();
-		$this->assertEquals($news->author,$news2->author);
+		$this->assertEquals($news->authorId,$news2->authorId);
 	}
 	
 	public function test_timestampSetOnCreate() {
