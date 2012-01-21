@@ -26,10 +26,10 @@ class BkModule extends CWebModule {
 	}
 	
 	private function throwErrorIfNotBedkomMember() {
-		$gk = new GateKeeper;
-		$isBedkomMember = $gk->hasAccessToGroup($this->groupId);
+		$gk = app()->gatekeeper;
+		$isBedkomMember = $gk->hasGroupAccess($this->groupId);
 		if (!$isBedkomMember) {
-			throw new CHttpException("Kun for medlemmer av Bedriftskomiteen");
+			throw new CHttpException("Ingen tilgang", "Kun for medlemmer av Bedriftskomiteen");
 		}
 	}
 

@@ -177,8 +177,7 @@ class GetController extends Controller{
         ob_start();
 		*/
         
-        $gatekeeper = new GateKeeper;
-        if($gatekeeper->hasAccess('event', $eId)){
+        if(app()->gatekeeper->hasPostAccess('event', $eId)){
             
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
             if(isset($_REQUEST['type'])) {               
@@ -327,12 +326,11 @@ class GetController extends Controller{
             $query->execute($data);
             $rows = $query->fetchAll(PDO::FETCH_ASSOC);
             
-            /*$gk = new GateKeeper();
-            $i = 0;
+            /*$i = 0;
             $returnArray = Array();
             foreach ($rows as $row){
                 
-                if($gk->hasAccess('news', $row['id'])){
+                if(app()->gatekeeper->hasPostAccess('news', $row['id'])){
                     $returnArray[i++] = $row['id'];
                 }
             }*/

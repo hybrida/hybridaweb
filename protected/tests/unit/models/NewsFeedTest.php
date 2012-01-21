@@ -43,9 +43,8 @@ class NewsFeedTest extends CTestCase {
 		$limit = 23;
 		$feed = new NewsFeed($limit);
 		$elements = $feed->getElements();
-		$gk = new GateKeeper;
 		foreach ($elements as $e) {
-			$this->assertTrue($gk->hasAccess('news', $e->id));
+			$this->assertTrue(app()->gatekeeper->hasPostAccess('news', $e->id));
 		}
 	}
 	

@@ -124,7 +124,7 @@ class NewsTest extends CTestCase {
 		$news->parentType = '12345678';
 		$this->assertFalse($news->save());
 	}
-	
+
 	public function test_authorIdIsNotSetOnUpdate() {
 		$this->login();
 		$news = new News;
@@ -132,40 +132,19 @@ class NewsTest extends CTestCase {
 		$news->save();
 		$authorId = $news->authorId;
 		$this->assertNotNull($authorId);
-		
+
 		$this->login();
 		$news2 = News::model()->findByPk($news->id);
 		$news2->content = "content";
 		$news2->save();
-		$this->assertEquals($news->authorId,$news2->authorId);
+		$this->assertEquals($news->authorId, $news2->authorId);
 	}
-	
+
 	public function test_timestampSetOnCreate() {
 		$this->login();
 		$news = new News;
 		$news->save();
 		$this->assertNotNull($news->timestamp);
 	}
-	
-	public function test_getUrl_News() {
-		$news = new News;
-		$news->title = "title";
-		$news->content = "content";
-		$news->save();
-		
-		$expectedUrl = Yii::app()->createUrl("news/view",array("id" => $news->id));
-		$actual = $news->getViewUrl();
-		$this->assertEquals($expectedUrl, $actual);
-	}
-	
-	public function test_getUrl_Event() {
-		$event = new Event;
-		$event->save(false);
-		$news = new News;
-		$news->setParent("event", $event->id);
-		$news->save();
-		
-		$url = Yii::app()->createUrl("event/view",array("id" => $event->id));
-		$this->assertEquals($url,$news->getViewUrl());
-	}
+
 }

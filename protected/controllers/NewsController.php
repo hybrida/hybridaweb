@@ -49,13 +49,12 @@ class NewsController extends Controller {
 			throw new CHttpException("Nyheten finnes ikke");
 		}
 
-		$gk = new GateKeeper;
-		if (!$gk->hasAccess('news', $id)) {
+		if (!app()->gatekeeper->hasPostAccess('news', $id)) {
 			throw new CHttpException('Ingen tilgang');
 		}
 
 		$event = $news->event;
-		if ($event && $event->signup && $gk->hasAccess('signup', $event->signup->eventId)) {
+		if ($event && $event->signup && app()->gatekeeper->hasPostAccess('signup', $event->signup->eventId)) {
 			$signup = $event->signup;
 		}
 
