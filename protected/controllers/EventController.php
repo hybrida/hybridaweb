@@ -3,8 +3,7 @@ class EventController extends Controller {
 
 	public function actionView($id) {
 
-        $gateKeeper = new GateKeeper();
-		$userHasAccesToEvent = $gateKeeper->hasAccess('event', $id);
+		$userHasAccesToEvent = app()->gatekeeper->hasPostAccess('event', $id);
 
 		if ($userHasAccesToEvent) {
 			// Henter Event-info

@@ -14,7 +14,7 @@ class NewsFeed {
 		$this->offset = $offset;
 		$this->limit = $limit;
 		$this->count = News::model()->count();
-		$this->gatekeeper = new GateKeeper;
+		$this->gatekeeper = app()->gatekeeper;
 		$this->initCriteria();
 	}
 
@@ -48,7 +48,7 @@ class NewsFeed {
 			if (count($good) >= $this->limit) {
 				break;
 			}
-			if ($this->gatekeeper->hasAccess('news', $id)) {
+			if ($this->gatekeeper->hasPostAccess('news', $id)) {
 				$good[] = $id;
 			} else {
 				$ar = new AccessRelation('news', $id);
