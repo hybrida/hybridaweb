@@ -27,7 +27,7 @@ class GateKeeper {
 		$this->access = $this->user->access;
 	}
 	
-	public function hasAccess($type, $id) {
+	public function hasPostAccess($type, $id) {
 		$userAccess = $this->separateInGroups($this->access);
 		
 		$postAccess = $this->getAccessRelations($type, $id);
@@ -80,6 +80,10 @@ class GateKeeper {
 	
 	public function hasAccessToGroup($groupId) {
 		return in_array(Access::GROUP_START + $groupId, $this->access);
+	}
+	
+	public function hasAccess($id) {
+		return in_array($id, $this->access);
 	}
 	
 	public function isGuest() {

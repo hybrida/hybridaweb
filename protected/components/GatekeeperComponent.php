@@ -9,7 +9,15 @@ class GatekeeperComponent extends CApplicationComponent {
 	}
 	
 	public function hasPostAccess($type, $id) {
-		return $this->gatekeeper->hasAccess($type, $id);
+		return $this->gatekeeper->hasPostAccess($type, $id);
+	}
+	
+	public function hasGroupAccess($groupId) {
+		return $this->gatekeeper->hasAccessToGroup($groupId);
+	}
+	
+	public function hasAccess($id) {
+		return $this->gatekeeper->hasAccess($id);
 	}
 
 }
