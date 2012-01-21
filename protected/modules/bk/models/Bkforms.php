@@ -712,13 +712,14 @@ class Bkforms {
         $query->execute($data);
     }
     
-    public function deleteAllCompanySpecializationsByCompanyId($companyId){
+    public function nullifyAllCompanySpecializationsByCompanyId($companyId){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
             'companyId' => $companyId,
         );
-        $sql = "DELETE FROM bk_company_specialization WHERE companyId = :companyId";
+        $sql = "UPDATE bk_company_specialization SET companyId = 0, specializationId = 0
+                WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

@@ -382,14 +382,14 @@ class BktoolController extends Controller {
                         $bkForms->updateCompanyContactor($id, $_POST['contactor']);
                     }
                     if(isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
-                        $bkForms->deleteAllCompanySpecializationsByCompanyId($id);
+                        $bkForms->nullifyAllCompanySpecializationsByCompanyId($id);
                         
                         foreach ($_POST['specializations'] as $specializationId) :
                             $bkForms->insertCompanySpecialization($id, $specializationId);
                         endforeach;
                     }
                     if(!isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, array())){
-                        $bkForms->deleteAllCompanySpecializationsByCompanyId($id);
+                        $bkForms->nullifyAllCompanySpecializationsByCompanyId($id);
                     }
                     
                     $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['adress'], 
