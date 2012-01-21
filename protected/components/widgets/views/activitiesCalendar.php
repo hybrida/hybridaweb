@@ -7,10 +7,10 @@
     </tr>
 
     <tr><td>M</td><td>T</td><td>O</td><td>T</td><td>F</td><td>L</td><td>S</td></tr>
-    <tr><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td></tr>
-    <tr><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td></tr>
-    <tr><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td></tr>
-    <tr><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td></tr>
-    <tr><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td></tr>
-    <tr><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td><td id='days'</td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
 </table>
