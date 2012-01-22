@@ -55,29 +55,7 @@
         </div>
 
         <div class="mainWrap">
-            <div class="content">	
-                <?php if (isset($this->breadcrumbs)): ?>
-                    <?php
-                    $this->widget('zii.widgets.CBreadcrumbs', array(
-                        'links' => $this->breadcrumbs,
-                    ));
-                    ?><!-- breadcrumbs -->
-                <?php endif ?>
-                <?= $content ?>
-            </div>
-
-            <div class="rightBar">
-                <?
-                if (isset($this->imageId)) {
-
-                    $this->widget("application.components.widgets.RightBarContent", array(
-                        'imageId' => $this->imageId,
-                    ));
-                } else {
-                    $this->widget("application.components.widgets.RightBarContent");
-                }
-                ?>
-            </div>
+			<?= $content ?>
         </div>
 
     </body>
