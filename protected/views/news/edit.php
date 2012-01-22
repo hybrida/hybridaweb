@@ -166,7 +166,10 @@
 				</div>
 
 				<div class="formBoxRow">
-					<?php echo $form->textField($model, 'signup[signoff]'); ?>
+					<?php echo $form->checkBox($model, 'signup[signoff]',array(
+						'value'=> 'true',
+						'uncheckValue' => 'false',
+					)); ?>
 					<?php echo $form->error($model, 'signup[signoff]'); ?>				
 				</div>
 			</div>
