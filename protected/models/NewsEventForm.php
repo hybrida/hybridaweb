@@ -115,7 +115,7 @@ class NewsEventForm extends CFormModel {
 	}
 
 	private function initHasFields() {
-		$this->hasEvent =  (!$this->eventModel ->isNewRecord && $this->eventModel ->status != Status::DELETED) ? 1 : 0;
+		$this->hasEvent = (!$this->eventModel->isNewRecord && $this->eventModel->status != Status::DELETED) ? 1 : 0;
 		$this->hasSignup = (!$this->signupModel->isNewRecord && $this->signupModel->status != Status::DELETED) ? 1 : 0;
 	}
 
@@ -154,8 +154,10 @@ class NewsEventForm extends CFormModel {
 	}
 
 	private function deleteEventModel() {
-		$this->eventModel->status = Status::DELETED;
-		$this->eventModel->save();
+		if (!$this->eventModel->isNewRecord) {
+			$this->eventModel->status = Status::DELETED;
+			$this->eventModel->save();
+		}
 	}
 
 	public function saveSignup() {
@@ -173,8 +175,10 @@ class NewsEventForm extends CFormModel {
 	}
 
 	private function deleteSignupModel() {
-		$this->signupModel->status = Status::DELETED;
-		$this->signupModel->save();
+		if (!$this->signupModel->isNewRecord) {
+			$this->signupModel->status = Status::DELETED;
+			$this->signupModel->save();
+		}
 	}
 
 	public function saveNews() {

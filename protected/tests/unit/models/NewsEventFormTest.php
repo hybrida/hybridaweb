@@ -92,7 +92,7 @@ class NewsEventFormTest extends CTestCase {
 		$this->assertEquals($title, $model->event['title']);
 		$this->assertEquals($access, $model->event['access']);
 	}
-	
+
 	public function test_saveNews_UnsavedNewsModelWithoutAccess_NewsIsCreated() {
 		$news = new News;
 		$model = new NewsEventForm($news);
@@ -463,5 +463,27 @@ class NewsEventFormTest extends CTestCase {
 		list($model, $news, $event, $signup) = $this->getEventAndSignupIsDeleted();
 		$this->assertEquals(0, $model->hasSignup);
 	}
+
+	private function getNoDeletingOfNewRecords() {
+		$this->login();
+		$model = new NewsEventForm($this->getNews());
+		$model->attributes = array(
+			'hasEvent' => false,
+			'hasSignup' => false,
+		);
+		$model->save();
+		return $model;
+	}
+
+	public function test_NoDeletingOfNewRecords_event() {
+		$model = $this->getNoDeletingOfNewRecords();
+		$this->assertTrue($model->getEventModel()->isNewRecord);
+	}
+	
+	public function test_NoDeletingOfNewRecords_signup() {
+		$model = $this->getNoDeletingOfNewRecords();
+		$this->assertTrue($model->getSignupModel()->isNewRecord);
+	}
+
 
 }
