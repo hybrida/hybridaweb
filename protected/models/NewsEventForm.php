@@ -195,8 +195,6 @@ class NewsEventForm extends CFormModel {
 	private function initNewsParent() {
 		if ($this->hasEvent) {
 			$this->newsModel->setParent("event", $this->eventModel->id);
-		} else {
-			//$this->newsModel->setParent(null, null);
 		}
 	}
 
