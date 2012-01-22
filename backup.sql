@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 20, 2012 at 02:07 AM
+-- Generation Time: Jan 22, 2012 at 05:20 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -139,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `bk_company` (
   `subgroupOfID` int(11) default NULL,
   PRIMARY KEY  (`companyID`),
   KEY `contactorID` (`contactorID`,`addedByID`,`updatedByID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=219 ;
 
 --
 -- Dumping data for table `bk_company`
@@ -161,6 +161,13 @@ CREATE TABLE IF NOT EXISTS `bk_company_specialization` (
 -- Dumping data for table `bk_company_specialization`
 --
 
+INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
+(17, 4),
+(17, 5),
+(75, 9),
+(79, 2),
+(108, 3),
+(108, 4);
 
 -- --------------------------------------------------------
 
@@ -177,12 +184,11 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   `dateAdded` datetime default NULL,
   PRIMARY KEY  (`updateId`),
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8581 ;
 
 --
 -- Dumping data for table `bk_company_update`
 --
-
 
 -- --------------------------------------------------------
 
@@ -200,7 +206,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`author`),
   KEY `author` (`author`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=129 ;
 
 --
 -- Dumping data for table `comment`
@@ -219,6 +225,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `location` varchar(30) collate utf8_unicode_ci default NULL,
   `title` varchar(30) collate utf8_unicode_ci NOT NULL,
   `imageId` int(11) default NULL,
+  `status` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=82 ;
 
@@ -226,9 +233,9 @@ CREATE TABLE IF NOT EXISTS `event` (
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `start`, `end`, `location`, `title`, `imageId`) VALUES
-(71, '2012-02-17 22:34:00', '2012-02-17 22:34:00', 'Åre', 'Åretur 2012', 0),
-(73, '2011-11-25 18:15:00', '2011-11-26 13:00:00', 'Gløs', 'GenFors', 4);
+INSERT INTO `event` (`id`, `start`, `end`, `location`, `title`, `imageId`, `status`) VALUES
+(71, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 'Åretur 2012', 0, 0),
+(73, '2011-11-25 18:15:00', '2011-11-26 13:00:00', 'Gløs', 'GenFors', 4, 0);
 
 -- --------------------------------------------------------
 
@@ -364,7 +371,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-01-20 00:27:56', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-01-22 15:59:23', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -612,20 +619,20 @@ CREATE TABLE IF NOT EXISTS `news` (
   `content` mediumtext collate utf8_unicode_ci,
   `authorId` int(11) default NULL,
   `timestamp` datetime default NULL,
+  `status` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=360 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=361 ;
 
 --
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content`, `authorId`, `timestamp`) VALUES
-(24, 1, '', 'Nyhet for webkomgruppen!', 4, '<p>Dette er en nyhet som bare er synlig for webkom-medlemmer</p>', 326, '2011-04-12 00:06:33'),
-(40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <strong> Åretur!!! </strong>\r\n<br />\r\n<br />\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n<br />\r\n<br />\r\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\r\n<br />\r\n<br />\r\n-Tur/retur Åre sentrum\r\n<br />\r\n-4 netters opphold\r\n<br />\r\n-5 dagers skipass \r\n<br />\r\n-rabattkort\r\n<br />\r\n+ mye fest og moro!\r\n<br />\r\n<br />\r\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \r\n<br />\r\n<br />\r\nOBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding\r\n<br />\r\n<br />', 326, '2011-07-17 22:34:51'),
-(41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21'),
-(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p><p><br /></p>\r\n<p><strong>Festivalus</strong> - Sigbjørn Aukland</p>\r\n<p><strong>Skattemester</strong>Tonje Sundstrøm</p>\r\n<p><strong>Vevsjef</strong> - Sigurd Holsen</p>\r\n<p><strong>SPR</strong> - Erik Aasmundrud </p>', 363, '2011-11-26 20:02:14');
+INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content`, `authorId`, `timestamp`, `status`) VALUES
+(40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <strong> Åretur!!! </strong>\r\n<br />\r\n<br />\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n<br />\r\n<br />\r\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\r\n<br />\r\n<br />\r\n-Tur/retur Åre sentrum\r\n<br />\r\n-4 netters opphold\r\n<br />\r\n-5 dagers skipass \r\n<br />\r\n-rabattkort\r\n<br />\r\n+ mye fest og moro!\r\n<br />\r\n<br />\r\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \r\n<br />\r\n<br />&nbsp;OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding.&nbsp;<br />\r\n<br />', 326, '2011-07-17 22:34:51', 0),
+(41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21', 0),
+(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p>\r\n<p>\r\n   <br />\r\n</p>\r\n<p>\r\n   <strong>Festivalus</strong> - Sigbjørn Aukland\r\n</p>\r\n<p>\r\n   <strong>Skattemester</strong> - Tonje Sundstrøm\r\n</p>\r\n<p>\r\n   <strong>Vevsjef</strong> - Sigurd Holsen\r\n</p>\r\n<p>\r\n   <strong>SPR</strong> - Erik Aasmundrud\r\n</p>', 363, '2011-11-26 20:02:14', 0);
 
 -- --------------------------------------------------------
 
@@ -721,7 +728,7 @@ CREATE TABLE IF NOT EXISTS `signup` (
   `open` datetime NOT NULL,
   `close` datetime NOT NULL,
   `signoff` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
-  `active` tinyint(1) NOT NULL,
+  `status` tinyint(4) NOT NULL default '0',
   PRIMARY KEY  (`eventId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -729,8 +736,8 @@ CREATE TABLE IF NOT EXISTS `signup` (
 -- Dumping data for table `signup`
 --
 
-INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `active`) VALUES
-(71, 40, '2011-07-17 22:34:00', '2012-07-17 22:34:00', '', 1),
+INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
+(71, 40, '2011-12-07 22:25:40', '2012-01-01 22:35:00', '', 0),
 (73, 200, '2011-11-20 00:00:00', '2011-11-24 17:00:00', 'false', 0);
 
 -- --------------------------------------------------------

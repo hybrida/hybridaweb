@@ -17,17 +17,25 @@ class NewsEventFormTest extends CTestCase {
 		$this->session->logout();
 	}
 
+	private function getNews() {
+		$news = new News;
+		$news->title = "test";
+		$news->authorId = 0;
+		$news->content = "test";
+		$this->assertTrue($news->save());
+		return $news;
+	}
+
+	private function getEvent() {
+		$event = new Event;
+		$this->assertTrue($event->save());
+		return $event;
+	}
+
 	public function test_constructor_NewsModel() {
 		$newsModel = new News;
 		$model = new NewsEventForm($newsModel);
 		$this->assertEquals($newsModel, $model->getNewsModel());
-	}
-
-	public function test_constructor_EventModel() {
-		$eventModel = new Event;
-		$eventModel->title = "title";
-		$model = new NewsEventForm($eventModel);
-		$this->assertEquals($eventModel, $model->getEventModel());
 	}
 
 	public function test_constructor_NewsInput_EventModelIsCreated() {
@@ -43,19 +51,6 @@ class NewsEventFormTest extends CTestCase {
 		$this->assertEquals($eventModel->id, $model->getEventModel()->id);
 	}
 
-	public function test_constructor_EventInput_NewsModelIsCreated() {
-		$newsModel = new News;
-		$eventModel = new Event;
-		$eventModel->title = "title";
-		$eventModel->save();
-		$newsModel->setParent("event", $eventModel->getPrimaryKey());
-		$newsModel->save();
-		$model = new NewsEventForm($eventModel);
-
-		$this->assertNotNull($model->getNewsModel());
-		$this->assertEquals($newsModel->id, $model->getNewsModel()->id);
-	}
-
 	public function test_constructor_NewsInput_allModelsNotNull() {
 		$model = new NewsEventForm(new News);
 		$news = $model->getNewsModel();
@@ -65,22 +60,6 @@ class NewsEventFormTest extends CTestCase {
 		$this->assertNotNull($news);
 		$this->assertNotNull($event);
 		$this->assertNotNull($signup);
-	}
-
-	public function test_constructor_EventInput_allModelsNotNull() {
-		$model = new NewsEventForm(new Event);
-
-		$this->assertNotNull($model->getNewsModel(), "News should not be null");
-		$this->assertNotNull($model->getEventModel(), "Event should not be null");
-		$this->assertNotNull($model->getSignupModel(), "Signup should not be null");
-	}
-
-	/**
-	 * @expectedException NullPointerException
-	 */
-	public function test_constructor_nullInput_throwsException() {
-		$model = new NewsEventForm(null);
-		$this->fail("Did not throw NullPointerException");
 	}
 
 	public function test_construct_newsModel_FieldsAreUpdated() {
@@ -98,7 +77,7 @@ class NewsEventFormTest extends CTestCase {
 		$this->assertEquals($access, $model->news['access']);
 	}
 
-	public function test_construct_eventModel_FieldsAreUpdated() {
+	public function test_construct_newsModel_EventFieldsAreUpdated() {
 		$title = "dummy";
 		$access = array(1, 2, 3, 4, 5);
 		$eventModel = new Event;
@@ -106,11 +85,14 @@ class NewsEventFormTest extends CTestCase {
 		$eventModel->access = $access;
 		$this->assertTrue($eventModel->save());
 
-		$model = new NewsEventForm($eventModel);
+		$news = $this->getNews();
+		$news->setParent('event', $eventModel->id);
+
+		$model = new NewsEventForm($news);
 		$this->assertEquals($title, $model->event['title']);
 		$this->assertEquals($access, $model->event['access']);
 	}
-
+	
 	public function test_saveNews_UnsavedNewsModelWithoutAccess_NewsIsCreated() {
 		$news = new News;
 		$model = new NewsEventForm($news);
@@ -166,7 +148,7 @@ class NewsEventFormTest extends CTestCase {
 		$this->assertEquals($access, $model->getNewsModel()->access);
 	}
 
-	public function test_setAttributes_eventModel_checkTitleContentAccess() {
+	public function test_setAttributes_newsModel_checkEventTitleContentAccess() {
 		$title = "dummy";
 		$access = array(6, 7, 8,);
 		$input = array(
@@ -176,7 +158,7 @@ class NewsEventFormTest extends CTestCase {
 			),
 		);
 
-		$model = new NewsEventForm(new Event);
+		$model = new NewsEventForm(new News);
 		$model->setAttributes($input);
 		$model->hasEvent = true;
 		$model->saveEvent();
@@ -201,7 +183,7 @@ class NewsEventFormTest extends CTestCase {
 			),
 		);
 
-		$model = new NewsEventForm(new Event);
+		$model = new NewsEventForm(new News);
 		$model->setAttributes($input);
 		$model->hasEvent = true;
 		$model->hasSignup = true;
@@ -262,7 +244,7 @@ class NewsEventFormTest extends CTestCase {
 		$this->assertFalse($news->isNewRecord, "Event kan ikke være en new record");
 		$this->assertFalse($event->isNewRecord, "News kan ikke være en new record");
 	}
-	
+
 	public function test_hasSignup_signupsIsFoundOnCreate() {
 		$this->login();
 		// Lage ny post;
@@ -285,12 +267,12 @@ class NewsEventFormTest extends CTestCase {
 		);
 		$model->attributes = $input;
 		$model->save();
-		
+
 		// De ble lagret
 		$this->assertFalse($model->getEventModel()->isNewRecord);
 		$this->assertFalse($model->getNewsModel()->isNewRecord);
 		$this->assertFalse($model->getSignupModel()->isNewRecord);
-		
+
 		// De ble hentet riktig
 		$model2 = new NewsEventForm($model->getNewsModel());
 		$this->assertFalse($model2->getEventModel()->isNewRecord);
@@ -346,7 +328,7 @@ class NewsEventFormTest extends CTestCase {
 		$this->assertEquals($event->id, $model->getEventModel()->id);
 	}
 
-	public function test_getNewsModel_newsSetParentEvent_eventInput() {
+	public function test_getNewsModel_newsSetParentEvent_newsInput() {
 		$event = new Event;
 		$event->title = "TestCase";
 
@@ -356,7 +338,7 @@ class NewsEventFormTest extends CTestCase {
 		$news->setParent("event", $event->id);
 		$news->save();
 		$this->assertFalse($news->isNewRecord, "News should not be newRecord");
-		$model = new NewsEventForm($event);
+		$model = new NewsEventForm($news);
 		$this->assertEquals($news->id, $model->getNewsModel()->id);
 	}
 
@@ -384,22 +366,102 @@ class NewsEventFormTest extends CTestCase {
 		$event->save();
 		$news->setParent("event", $event->id);
 		$news->save();
-		$model = new NewsEventForm($event);
+		$model = new NewsEventForm($news);
 
 		$this->assertEquals(1, $model->hasEvent, "hasEvent should be 1");
 		$this->assertEquals(0, $model->hasSignup, "hasSignup should be 0");
 	}
-	
+
 	public function test_NewsHasNonExistingParents_actLikeNewsHasNoParents() {
 		$news = new News;
-		$news->title="title";
-		$news->content="content";
-		$news->authorId=381;
+		$news->title = "title";
+		$news->content = "content";
+		$news->authorId = 381;
 		$news->setParent("event", 98765);
 		$news->save();
-		
+
 		$model = new NewsEventForm($news);
 		// Should not throw Exception
+	}
+
+	private function getDeleteEventTest() {
+		$this->login();
+		$news = $this->getNews();
+		$event = $this->getEvent();
+		$news->setParent('event', $event->id);
+		$news->save();
+		$model = new NewsEventForm(News::model()->findByPk($news->id));
+		$model->attributes = array(
+			'hasNews' => true,
+			'hasEvent' => false,
+		);
+		$model->save();
+		$news = News::model()->findByPk($news->id);
+		$event = Event::model()->findByPk($event->id);
+		return array($model, $news, $event);
+	}
+
+	public function test_deleteEvent_eventStatus_DELETED() {
+		list($model, $news, $event) = $this->getDeleteEventTest();
+		$this->assertEquals(Status::DELETED, $event->status);
+	}
+
+	private function getSignup($eventId) {
+		$signup = new Signup;
+		$signup->eventId = $eventId;
+		$signup->spots = 100;
+		$signup->close = $signup->open = '2011-12-12 22:30';
+
+		$this->assertTrue($signup->save(), "signup save");
+		return $signup;
+	}
+
+	public function getDeleteSignupTest() {
+		$this->login();
+		$event = $this->getEvent();
+		$signup = $this->getSignup($event->id);
+		$news = $this->getNews();
+		$news->setParent('event', $event->id);
+		$model = new NewsEventForm($news);
+		$model->attributes = array(
+			'hasEvent' => true,
+			'hasSignup' => false,
+		);
+		$model->save();
+		$signup = Signup::model()->findByPk($signup->eventId);
+		return array($model, $news, $event, $signup);
+	}
+
+	public function test_deleteSignup_signupStatus_0() {
+		list($model, $news, $event, $signup) = $this->getDeleteSignupTest();
+		$this->assertEquals(Status::DELETED, $signup->status);
+	}
+
+	private function getEventAndSignupIsDeleted() {
+		$event = $this->getEvent();
+		$event->status = Status::DELETED;
+		$event->save();
+
+		$news = $this->getNews();
+		$news->setParent('event', $event->id);
+		$news->save();
+
+		$signup = $this->getSignup($event->id);
+		$signup->status = Status::DELETED;
+		$signup->save();
+
+		$model = new NewsEventForm($news);
+		return array($model, $news, $event, $signup);
+	}
+
+	public function test_EventIsDeleted_hasEvent_false() {
+		list($model, $news, $event, $signup) = $this->getEventAndSignupIsDeleted();
+		$this->assertEquals(0, $model->hasEvent);
+	}
+
+	public function test_EventIsDeleted_hasSignup_false() {
+		list($model, $news, $event, $signup) = $this->getEventAndSignupIsDeleted();
+		$this->assertEquals(0, $model->hasSignup);
 	}
 
 }
