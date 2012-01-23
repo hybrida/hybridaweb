@@ -3,6 +3,7 @@
 class Facebook {
 
 	public $url = "http://dev.hybrida.no";
+        public $accessToken = "AAAC4dA8kMR8BABDTKGXvYu8jw75UxokdqA68eN8yrbk7joaIBOZCdeSEq1eg6p3KMtvpfhJ1MaKHe4H76JXUM9MMKwJg2v9tBxMiZCQwZDZD";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -76,27 +77,17 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
-		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
-		$urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
+                $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
 			'access_token' => $accessToken,
 			'link' => $urlEventPage,
 			'message' => utf8_encode('har opprettet et arrangement')
 		);
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo $out;
-		curl_close($ch);
+		$this->runCurl($data, $postUrl);
 	}
 
 	public function publishNews($message, $id) {
-		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
 		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
@@ -104,15 +95,18 @@ class Facebook {
 			'link' => $urlEventPage,
 			'message' => utf8_encode($message)
 		);
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo $out;
-		curl_close($ch);
+                $this->runCurl($data, $postUrl);
 	}
+        public function runCurl($data, $postUrl){
+                foreach($data as $key=>$value) { $data_string .= $key.'='.$value.'&'; }
+                rtrim($data_string,'&');
+                $ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $postUrl);
+		curl_setopt($ch, CURLOPT_POST, count($data));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+		$out = curl_exec($ch);
+		echo $out; //fjern denne linja når det funker
+		curl_close($ch);
+        }
 
 }
