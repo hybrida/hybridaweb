@@ -31,32 +31,17 @@ class NewsController extends Controller {
 			),
 		);
 	}
-	
-	private function getIdFromString($idString) {
-		$array = explode('+',$idString);
-		if (isset($array[0])) {
-			return $array[0];
-		}
-		return '';
-	}
 
 	public function actionView($id) {
-		$id = $this->getIdFromString($id);
-		$signup = null;
-
 		$news = News::model()->with('author')->findByPk($id);
-		if (!$news) {
-			throw new CHttpException("Nyheten finnes ikke");
-		}
 
-		if (!app()->gatekeeper->hasPostAccess('news', $id)) {
+		if (!$news)
+			throw new CHttpException('Nyheten finnes ikke');
+		if (!app()->gatekeeper->hasPostAccess('news', $news->id))
 			throw new CHttpException('Ingen tilgang');
-		}
 
-		$event = $news->event;
-		if ($event && $event->signup && app()->gatekeeper->hasPostAccess('signup', $event->signup->eventId)) {
-			$signup = $event->signup;
-		}
+		$event = $this->getEventByNews($news);
+		$signup = $this->getSignupByEvent($event);
 
 		$this->render('view', array(
 			'news' => $news,
@@ -65,7 +50,35 @@ class NewsController extends Controller {
 		));
 	}
 
+	private function getEventByNews($news) {
+		if ($news->parentType != 'event') {
+			return null;
+		}
+		$event = $news->event;
+
+		if ($event && 
+				$event->status == Status::PUBLISHED &&
+				app()->gatekeeper->hasPostAccess('event', $event->id)) {
+			return $event;
+		}
+		return null;
+	}
+
+	private function getSignupByEvent($event) {
+		if (!$event) {
+			return null;
+		}
+		$signup = $event->signup;
+		if ($signup &&
+				$signup->status == Status::PUBLISHED &&
+				app()->gatekeeper->hasPostAccess('signup', $signup->eventId)) {
+			return $signup;
+		}
+		return null;
+	}
+
 	public function actionFeed() {
+		$this->layout = "//layouts/column2";
 		$feedElements = $this->getFeedElements();
 		$this->render("feed", array(
 			'models' => $feedElements,

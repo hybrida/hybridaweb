@@ -19,7 +19,7 @@ class Group {
 
 		if (!isset($this->groupId)) {
 			$data = array(
-					'gID' => $this->id
+				'gID' => $this->id
 			);
 
 			$sql = "SELECT title FROM groups WHERE id = :gID";
@@ -71,118 +71,114 @@ class Group {
 	public function isAdmin($userId) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
-				'gID' => $this->id,
-				'admin' => $userId
+			'gID' => $this->id,
+			'admin' => $userId
 		);
 		$sql = "SELECT COUNT(*) AS c FROM groups 
                 WHERE id = :gID AND admin = :admin";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 		$result = $query->fetch(PDO::FETCH_ASSOC);
-        if($result['c'] < 1){
+		if ($result['c'] < 1) {
 			return false;
 		}
 		return true;
 	}
 
-    public function getMembers() {
+	public function getMembers() {
 
 
-        $data = array(
-                        'gID' => $this->id
-        );
-        
-        $sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName, mg.comission, mg.start, mg.end, un.username, un.phoneNumber, un.lastLogin, admin
+		$data = array(
+			'gID' => $this->id
+		);
+
+		$sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName, mg.comission, mg.start, mg.end, un.username, un.phoneNumber, un.lastLogin, admin
                 FROM membership_group AS mg LEFT JOIN hyb_user AS un ON mg.userId = un.id LEFT JOIN groups ON groups.id = :gID 
                 WHERE mg.groupId = :gID AND (mg.end > DATE(NOW()) OR mg.end = '0000-00-00')";
 
-        $query = $this->pdo->prepare($sql);
-        $query->execute($data);
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
 
-        $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-    }
+		$data = $query->fetchAll(PDO::FETCH_ASSOC);
+		return $data;
+	}
 
-    public function getFormerMembers($year,$semester){
-        
-        //Definerer vår-/høstsemester.
-        if ($semester == 1){
-            $start = "02";
-            $end = "03";
-        }
-        else
-        {
-            $start = "08";
-            $end = "09";
-        }
-        $data = array(
-                'gID' => $this->id,
-                'year1' => $year,
-                'start' => $start,
-                'year2' => $year,
-                'end' => $end
-        );
+	public function getFormerMembers($year, $semester) {
 
-        $sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
+		//Definerer vår-/høstsemester.
+		if ($semester == 1) {
+			$start = "02";
+			$end = "03";
+		} else {
+			$start = "08";
+			$end = "09";
+		}
+		$data = array(
+			'gID' => $this->id,
+			'year1' => $year,
+			'start' => $start,
+			'year2' => $year,
+			'end' => $end
+		);
+
+		$sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
                 FROM membership_group AS mg 
                 LEFT JOIN hyb_user AS un ON mg.userId = un.id
                 WHERE mg.groupId = :gID
-                AND mg.start <= (:year1-:start-15) AND mg.end >= (:year2-:end-15)";
+                AND mg.start >= (:year1-:start-15) AND mg.end >= (:year2-:end-15)";
 
-        $query = $this->pdo->prepare($sql);
-        $query->execute($data);
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
 
-        $data = $query->fetchAll(PDO::FETCH_ASSOC);
-        return $data;
-    }
-    
-    public function getGroupContentType($title){
-        
-        $data = array(
-            'title' => $title
-        );
-        $sql = "SELECT sc.fileName FROM 
+		$data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+		return $data;
+	}
+
+	public function getGroupContentType($title) {
+
+		$data = array(
+			'title' => $title
+		);
+		$sql = "SELECT sc.fileName FROM 
                 site AS s LEFT JOIN site_content AS sc 
                 ON s.subId = sc.id
                 WHERE s.title = :title";
-        
-        $query = $this->pdo->prepare($sql);
-        $query->execute($data);
-        
-        $result = $query->fetch(PDO::FETCH_ASSOC);
-        return $result['fileName'];
-        
-    }
-    
-    public function getArticle($title){
-        $data = array(
-            'title' => $title,
-            'id'    => $this->id
-        );
-        
-        $sql = "SELECT a.title, a.content, a.timestamp, un.firstName, un.middleName, un.lastName FROM 
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
+
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+		return $result['fileName'];
+	}
+
+	public function getArticle($title) {
+		$data = array(
+			'title' => $title,
+			'id' => $this->id
+		);
+
+		$sql = "SELECT a.title, a.content, a.timestamp, un.firstName, un.middleName, un.lastName FROM 
                 menu_group AS mg
                 LEFT JOIN site AS s ON mg.site = s.siteId
                 LEFT JOIN site_content AS sc ON s.subId = sc.id
                 LEFT JOIN article AS a ON a.id = mg.contentId 
                 LEFT JOIN hyb_user AS un ON un.id = a.author
                 WHERE mg.group = :id AND sc.filename = 'article' AND s.title = :title";
-        
-        $query = $this->pdo->prepare($sql);
-        $query->execute($data);
-        
-        return $query->fetch(PDO::FETCH_ASSOC);
-        
-        
-    }
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
+
+		return $query->fetch(PDO::FETCH_ASSOC);
+	}
 
 	public function addMember($userId, $comission) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
-        
+
 		$data = array(
-				'gID' => $this->id,
-				'uID' => $userId,
-				'comission' => $comission
+			'gID' => $this->id,
+			'uID' => $userId,
+			'comission' => $comission
 		);
 
 		$sql = "INSERT INTO membership_group (groupId, userId, comission, start) VALUES (:gID,:uID,:comission,Now())";
@@ -200,8 +196,8 @@ class Group {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array(
-				'gID' => $this->id,
-				'uID' => $userId
+			'gID' => $this->id,
+			'uID' => $userId
 		);
 
 		$sql = "UPDATE membership_group WHERE groupId = :gID AND userId = :uID 
@@ -216,7 +212,7 @@ class Group {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$dataGID = array(
-				'gId' => $this->id
+			'gId' => $this->id
 		);
 
 		//Slette medlemmer fra gruppen
@@ -235,7 +231,7 @@ class Group {
 
 			//Slette sites som hører til gruppen
 			$data = array(
-					'id' => $rows[site]
+				'id' => $rows[site]
 			);
 
 			$sql = "DELETE FROM site WHERE id = :id";
@@ -266,8 +262,8 @@ class Group {
 		//$siteContentFile = array("comments","news","article","members");
 
 		$data = array(
-				'name' => $name,
-				'adminId' => $adminId
+			'name' => $name,
+			'adminId' => $adminId
 		);
 
 		//Oppretter gruppen
@@ -287,8 +283,8 @@ class Group {
 
 			$subId = $this->getSCId($sc);
 			$data = array(
-					'sc' => $sc,
-					'subID' => $subId
+				'sc' => $sc,
+				'subID' => $subId
 			);
 
 			echo "SubID:" . $subId;
@@ -299,9 +295,9 @@ class Group {
 
 			$siteId = $this->pdo->lastInsertId();
 			$data = array(
-					'gID' => $this->id,
-					'sID' => $siteId,
-					'i' => $sortOrder++
+				'gID' => $this->id,
+				'sID' => $siteId,
+				'i' => $sortOrder++
 			);
 
 			$sql = "INSERT INTO menu_group(`group` ,`site` ,`contentId` ,`sort`)	
@@ -312,7 +308,7 @@ class Group {
 			echo $siteId . "<br>";
 
 			$data = array(
-					'sID' => $siteId
+				'sID' => $siteId
 			);
 
 			$this->access->insertAccessRelation($siteId, 1, 'site');
@@ -334,9 +330,9 @@ class Group {
 	public function updateArticle($articleId, $siteId) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
-				'aID' => $articleId,
-				'gID' => $this->id,
-				'sID' => $siteId
+			'aID' => $articleId,
+			'gID' => $this->id,
+			'sID' => $siteId
 		);
 
 		echo "GROUP ID:" . $this->id;
@@ -353,7 +349,7 @@ class Group {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array(
-				'gID' => $this->id
+			'gID' => $this->id
 		);
 		//Eksempel:
 		//Tittel      | public  |  closed
@@ -417,7 +413,7 @@ class Group {
 	private function getSCId($var) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 		$data = array(
-				'var' => $var
+			'var' => $var
 		);
 
 		$sql = "SELECT sc.id AS ID FROM site_content AS sc WHERE sc.filename = :var";
@@ -447,22 +443,19 @@ class Group {
 
 		$this->pdo = Yii::app()->db->getPdoInstance();
 		$sql = "SELECT DISTINCT subId, s.title, mg.contentId AS aId FROM menu_group AS mg LEFT JOIN site AS s ON s.siteId = mg.site 
-		RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = s.siteId
 		WHERE mg.group = :groupId
 		ORDER BY mg.sort";
 
 		$com = $this->pdo->prepare($sql);
 		$com->bindValue(":groupId", $this->id);
-		$com->bindValue(":userId", Yii::app()->user->id);
-		$com->bindValue(":type", "site");
 
 		$com->execute();
 
 		$data['menuelements'] = $com->fetchAll(PDO::FETCH_ASSOC);
-        $data['id'] = $this->id;
-        $data['isAdmin'] = $this->isAdmin(Yii::app()->user->id);
-        
-        return $data;
+		$data['id'] = $this->id;
+		$data['isAdmin'] = $this->isAdmin(Yii::app()->user->id);
+
+		return $data;
 	}
 
 }

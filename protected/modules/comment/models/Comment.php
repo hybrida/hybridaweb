@@ -95,4 +95,9 @@ class Comment extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function beforeSave() {
+		$this->author = user()->id;
+		$this->timestamp = new CDbExpression('NOW()');
+	}
 }

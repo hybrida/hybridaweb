@@ -1,4 +1,4 @@
 <? $this->widget("comment.components.commentWidget", array(
-	'id' => 1,
+	'id' => 354,
 	'type' => 'profile',
 ));

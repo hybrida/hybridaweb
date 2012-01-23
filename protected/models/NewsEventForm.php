@@ -53,24 +53,16 @@ class NewsEventForm extends CFormModel {
 		);
 	}
 
-	public function __construct($model, $scenario=' ') {
+	public function __construct(News $news, $scenario = ' ') {
 		parent::__construct($scenario);
 
-		if ($model == null) {
-			throw new NullPointerException("Input have to be a valid News or Event-model");
+		if ($news == null) {
+			throw new NullPointerException("Input have to be a valid News model");
 		}
 
-		$this->initModel($model);
-		$this->initFields();
-	}
-
-	private function initModel($model) {
 		$this->initAllModelsBaseCase();
-		if ($model instanceof News) {
-			$this->initNewsModel($model);
-		} else if ($model instanceof Event) {
-			$this->initEventModel($model);
-		}
+		$this->initNewsModel($news);
+		$this->initFields();
 	}
 
 	private function initAllModelsBaseCase() {
@@ -82,13 +74,13 @@ class NewsEventForm extends CFormModel {
 	private function initNewsModel($news) {
 		$this->newsModel = $news;
 		if (!$news->isNewRecord) {
-			$this->initEventByNews();
-			$this->initSignupByEvent();
+			$this->initEvent();
+			$this->initSignup();
 		}
 	}
 
-	private function initEventByNews() {
-		$news = $this->getNewsModel();
+	private function initEvent() {
+		$news = $this->newsModel;
 		if ($news->parentType == "event" && $news->parentId !== null) {
 			$this->eventModel = Event::model()->findByPk($news->parentId);
 		}
@@ -97,23 +89,7 @@ class NewsEventForm extends CFormModel {
 		}
 	}
 
-	private function initEventModel($event) {
-		$this->eventModel = $event;
-		if (!$event->isNewRecord) {
-			$this->initNewsByEvent();
-		}
-		$this->initSignupByEvent();
-	}
-
-	private function initNewsByEvent() {
-		$sql = "SELECT * FROM news WHERE parentType = 'event' AND parentId = :eventId";
-		$news = News::model()->findBySql($sql, array("eventId" => $this->getEventModel()->id));
-		if ($news) {
-			$this->newsModel = $news;
-		}
-	}
-
-	private function initSignupByEvent() {
+	private function initSignup() {
 		$signup = Signup::model()->findByPk($this->eventModel->primaryKey);
 		if ($signup) {
 			$this->signupModel = $signup;
@@ -139,8 +115,8 @@ class NewsEventForm extends CFormModel {
 	}
 
 	private function initHasFields() {
-		$this->hasEvent = $this->eventModel->isNewRecord ? 0 : 1;
-		$this->hasSignup = $this->signupModel->isNewRecord ? 0 : 1;
+		$this->hasEvent = (!$this->eventModel->isNewRecord && $this->eventModel->status != Status::DELETED) ? 1 : 0;
+		$this->hasSignup = (!$this->signupModel->isNewRecord && $this->signupModel->status != Status::DELETED) ? 1 : 0;
 	}
 
 	public function getNewsModel() {
@@ -170,6 +146,16 @@ class NewsEventForm extends CFormModel {
 			if (array_key_exists("access", $this->event)) {
 				$this->eventModel->access = $this->event['access'];
 			}
+			$this->eventModel->status = Status::PUBLISHED;
+			$this->eventModel->save();
+		} else {
+			$this->deleteEventModel();
+		}
+	}
+
+	private function deleteEventModel() {
+		if (!$this->eventModel->isNewRecord) {
+			$this->eventModel->status = Status::DELETED;
 			$this->eventModel->save();
 		}
 	}
@@ -181,6 +167,16 @@ class NewsEventForm extends CFormModel {
 				$this->signupModel->access = $this->signup['access'];
 			}
 			$this->signupModel->eventId = $this->eventModel->id;
+			$this->signupModel->status = Status::PUBLISHED;
+			$this->signupModel->save();
+		} else {
+			$this->deleteSignupModel();
+		}
+	}
+
+	private function deleteSignupModel() {
+		if (!$this->signupModel->isNewRecord) {
+			$this->signupModel->status = Status::DELETED;
 			$this->signupModel->save();
 		}
 	}
@@ -202,11 +198,12 @@ class NewsEventForm extends CFormModel {
 		}
 	}
 
-	public function setAttributes($values, $safeOnly=true) {
+	public function setAttributes($values, $safeOnly = true) {
 		foreach ($values as $key => $value) {
 			if (isset($this->$key)) {
 				$this->$key = $value;
 			}
 		}
 	}
+
 }

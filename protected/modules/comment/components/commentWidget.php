@@ -3,14 +3,18 @@
 class CommentWidget extends CWidget {
 	public $id = "";
 	public $type = "";
-	public $model;
+	public $author = "";
+	public $timestamp = "";
+	public $models;
+	private $formModel;
 	
 	public function init() {
 		$this->throwExceptionIfNoInput();
-		$this->model = Comment::model()->findAll("parentId = :id AND parentType = :type",array(
+		$this->models = Comment::model()->findAll("parentId = :id AND parentType = :type",array(
 			":id" => $this->id,
 			":type" => $this->type,
 		));
+		$this->formModel = new CommentForm($this->type, $this->id);
 	}
 	
 	private function throwExceptionIfNoInput() {
@@ -21,7 +25,10 @@ class CommentWidget extends CWidget {
 	
 	public function run() {
 		$this->render("view",array(
-			'models' => $this->model,
+			'models' => $this->models,
+			'formModel' => $this->formModel,
+			'id' => $this->id,
+			'type' => $this->type,
 		));
 	}
 }
