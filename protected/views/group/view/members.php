@@ -40,25 +40,26 @@
     <h2>Tidligere medlemmer</h2>
     
     <? $counter = 1; ?>
+    <? print_r($former); ?>
+    <? if(!isset($former)) : ?>
+        <table>
+            <? foreach($former as $user) : ?>  
 
-    <table>
-        
-        <? foreach($former as $user) : ?>  
+                <? if($counter % 2){ ?>
+                    <tr bgcolor='#CCFFFF'>
+                <?	}else{ ?>
+                    <tr bgcolor='#FFFFFF'>
+                <? } ?>
 
-            <? if($counter % 2){ ?>
-                <tr bgcolor='#CCFFFF'>
-            <?	}else{ ?>
-                <tr bgcolor='#FFFFFF'>
-            <? } ?>
-                    
-                <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'/></td>
-                <td><a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?></a></td>
-                <td><?= $user['comission'] ?></td>
-            </tr>
-            
-            <? $counter++; ?>
-            
-        <? endforeach ?>
-            
-    </table>
+                    <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $user['imageId'] ?>/size/3'/></td>
+                    <td><a href='/profile/<?= $user['id'] ?>'> <?= $user['firstName'] ?> <?= $user['middleName'] ?> <?= $user['lastName'] ?></a></td>
+                    <td><?= $user['comission'] ?></td>
+                </tr>
+
+                <? $counter++; ?>
+
+            <? endforeach ?>
+
+        </table>
+    <? endif ;?>
 </div>
