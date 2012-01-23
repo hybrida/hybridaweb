@@ -2,20 +2,24 @@
 
 class DefaultController extends Controller {
 
-	public function actionIndex() {
-		$this->render('index');
-	}
+    public function actionIndex() {
+        //$this->render('index');
 
-	public function actionSearch() {
+        if (strlen($_GET['q']) < 1) {
+            die("");
+        }
+        $q = $_GET['q'];
 
-		$split = '~%~';
+        $search = new Search();
 
-		$result['users'] = $this->searchUsers();
-		$result['newsList'] = $this->searchNews();
-		$result['url'] = Yii::app()->baseUrl . "/profile/";
-		$result['split'] = $split;
+        $split = '~%~';
 
-		$this->renderPartial('search', $result);
-	}
+        $result['users'] = $search->searchUsers($q);
+        $result['newsList'] = $search->searchNews($q);
+        $result['url'] = Yii::app()->baseUrl . "/profile/";
+        $result['split'] = $split;
+
+        $this->renderPartial('search', $result);
+    }
 
 }
