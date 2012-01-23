@@ -3,7 +3,7 @@
 class Facebook {
 
 	public $url = "http://dev.hybrida.no";
-        public $accessToken = "AAAC4dA8kMR8BABDTKGXvYu8jw75UxokdqA68eN8yrbk7joaIBOZCdeSEq1eg6p3KMtvpfhJ1MaKHe4H76JXUM9MMKwJg2v9tBxMiZCQwZDZD";
+        public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -105,7 +105,7 @@ class Facebook {
 		curl_setopt($ch, CURLOPT_POST, count($data));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
 		$out = curl_exec($ch);
-		echo $out; //fjern denne linja når det funker
+		echo $out; //fjern denne linja når det funker  
 		curl_close($ch);
         }
 
