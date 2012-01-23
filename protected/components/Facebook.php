@@ -3,6 +3,7 @@
 class Facebook {
 
 	public $url = "http://dev.hybrida.no";
+        public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -76,8 +77,7 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
-		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
-		$urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
+                $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
 			'access_token' => $accessToken,
@@ -87,7 +87,7 @@ class Facebook {
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POST, 3);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$out = curl_exec($ch);
@@ -96,7 +96,6 @@ class Facebook {
 	}
 
 	public function publishNews($message, $id) {
-		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
 		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
@@ -107,7 +106,7 @@ class Facebook {
 		$ch = curl_init();
 
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POST, 3);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$out = curl_exec($ch);

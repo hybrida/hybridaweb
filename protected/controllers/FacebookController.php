@@ -12,6 +12,7 @@ class FacebookController extends Controller {
         $app_id = '202808609747231';
         $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
         $my_url = 'http://dev.hybrida.no/facebook/'; //url til fila som skal lese inn code
+        $message = $_REQUEST('message');
 
         if(isset($_REQUEST['error'])){
 
@@ -34,6 +35,10 @@ class FacebookController extends Controller {
             $query->execute($array);
 
             Header("Location: http://dev.hybrida.no"); //redirect tilbake til forsiden
+        }
+        elseif(isset($message)){
+            $fb = new Facebook();
+            $fb->publishNews($message, 1);
         }
     }
 }
