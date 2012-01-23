@@ -84,15 +84,7 @@ class Facebook {
 			'link' => $urlEventPage,
 			'message' => utf8_encode('har opprettet et arrangement')
 		);
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 3);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo $out;
-		curl_close($ch);
+		$this->runCurl($data, $postUrl);
 	}
 
 	public function publishNews($message, $id) {
@@ -103,15 +95,18 @@ class Facebook {
 			'link' => $urlEventPage,
 			'message' => utf8_encode($message)
 		);
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 3);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo $out;
-		curl_close($ch);
+                $this->runCurl($data, $postUrl);
 	}
+        public function runCurl($data, $postUrl){
+                foreach($data as $key=>$value) { $data_string .= $key.'='.$value.'&'; }
+                rtrim($data_string,'&');
+                $ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $postUrl);
+		curl_setopt($ch, CURLOPT_POST, count($data));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+		$out = curl_exec($ch);
+		echo $out; //fjern denne linja når det funker
+		curl_close($ch);
+        }
 
 }
