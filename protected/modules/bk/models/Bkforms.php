@@ -32,13 +32,13 @@ class Bkforms {
         $query->execute($data);
     }
     
-    public function deleteAllUpdatesRelevantToCurrentUser(){
+    public function updateAllUpdatesRelevantToCurrentUser(){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
             'currentUserId' => Yii::app()->user->id
         );
-        $sql = "DELETE FROM bk_company_update WHERE relevantForUserId = :currentUserId";
+        $sql = "UPDATE bk_company_update SET isDeleted = 'true' WHERE relevantForUserId = :currentUserId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -50,7 +50,7 @@ class Bkforms {
         $data = array(
             'updateId' => $id
         );
-        $sql = "DELETE FROM bk_company_update WHERE updateId = :updateId";
+        $sql = "UPDATE bk_company_update SET isDeleted = 'true' WHERE updateId = :updateId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

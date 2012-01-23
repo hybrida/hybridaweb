@@ -334,7 +334,7 @@ class BkTool {
             'currentUserID' => Yii::app()->user->id
         );
         $sql = "SELECT COUNT(DISTINCT updateId) AS sum FROM bk_company_update
-                WHERE relevantForUserId = :currentUserID";
+                WHERE relevantForUserId = :currentUserID AND isDeleted = 'false'";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -352,7 +352,7 @@ class BkTool {
         );
         $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id
                 FROM bk_company_update AS cu, hyb_user AS un, bk_company AS c
-                WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID
+                WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID AND isDeleted = 'false'
                 ORDER BY dateAdded DESC";
 
         $query = $this->pdo->prepare($sql);
