@@ -26,7 +26,7 @@ class Search {
             }
 
             //Søke på brukere
-            $sql = "SELECT DISTINCT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName 
+            $sql = "SELECT DISTINCT ui.username, ui.id AS userId, ui.firstName, ui.middleName, ui.lastName 
             FROM hyb_user AS ui WHERE " . $searchString;
 
             $query = $this->pdo->prepare($sql);
@@ -47,18 +47,20 @@ class Search {
                     WHERE n.title REGEXP :search
                     ORDER BY timestamp DESC";
 
-            $gt = new GateKeeper();
             $query = $this->pdo->prepare($sql);
             $query->execute($data);
             $result = $query->fetchAll(PDO::FETCH_ASSOC);
+            
             $returnArray = Array();
             $i = 0;
             foreach ($result as $row){
                 
-                if( $gt->hasAccess('news', $row['id']) ){
+                if( Yii::app()->gatekeeper->hasPostAccess('news', $row['id']) ){
                     $returnArray[$i++] = $row;
                 }
             }
+            
+            return $returnArray;
     }
 
 }
