@@ -66,6 +66,7 @@ return array(
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
 				'news/<id:\d+>/<title>' => 'news/view',
+				'profile/<username:\w+>' => '/profile/info/',
 				'profile/<username:\w+>/<action:\w+>' => 'profile/<action>/',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
