@@ -6,7 +6,6 @@ class ProfileController extends Controller {
 	
 	public function __construct($id, $module = null) {
 		parent::__construct($id, $module);
-		$this->layout = "//layouts/column2";
 	}
 
 	public function filters() {

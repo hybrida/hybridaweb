@@ -1,4 +1,5 @@
-<? 
+<?
+$this->layout = "//layouts/doubleColumn";
 $this->beginWidget('CClipWidget', array('id' => 'sidebar')); 
 	$this->widget('application.components.widgets.ActivitiesCalendar');
 	$this->widget('application.components.widgets.ActivitiesFeed');

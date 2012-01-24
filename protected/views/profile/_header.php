@@ -1,4 +1,6 @@
-<? $this->beginWidget('CClipWidget', array('id' => 'sidebar'))?>
+<?
+$this->layout = "//layouts/doubleColumn";
+$this->beginWidget('CClipWidget', array('id' => 'sidebar'))?>
 	<img src="/image/view/id//size/1" alt="" width="248px">
 <?$this->endWidget()?>
 	

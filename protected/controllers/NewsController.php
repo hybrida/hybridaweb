@@ -78,7 +78,6 @@ class NewsController extends Controller {
 	}
 
 	public function actionFeed() {
-		$this->layout = "//layouts/column2";
 		$feedElements = $this->getFeedElements();
 		$this->render("feed", array(
 			'models' => $feedElements,
