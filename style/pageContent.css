@@ -1,9 +1,6 @@
 /* @override
 	http://dev.hybrida.no/style/pageContent.css */
 
-/* Usikker paa hvordan det blir med denne menyen naar vi
-faar en undermeny i tillegg til gruppenavigasjon. */
-
 #content div.formSection div.fieldInput a img {
 	height: 30px;
 	margin-top: -6px;
@@ -94,7 +91,6 @@ div.articleContent div.author a {
     height: 50px;
 }
 
-
 .topBar {
     background-color: #ffffff;
     height: 50px;
@@ -144,6 +140,14 @@ nav items div.last {
     font-weight: lighter;
     float: right;
     padding: 0px 2px 0px 0px;
+}
+
+.author {
+	font-style: italic;
+}
+
+.author:before {
+	content: "Skrevet av ";
 }
 
 .formSection {
