@@ -32,7 +32,7 @@ class Bkforms {
         $query->execute($data);
     }
     
-    public function updateAllUpdatesRelevantToCurrentUser(){
+    public function deleteAllUpdatesRelevantToCurrentUser(){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
