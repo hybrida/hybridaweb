@@ -145,10 +145,14 @@ div.searchBox{
 	display: table-cell;
 	width: 250px;
 	padding-left: 5px;
+	padding-right: 5px;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
 }
 
 .barText{
-	
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
 }
 
 .content{
