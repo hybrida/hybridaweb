@@ -1,9 +1,9 @@
 <?
 $this->layout = "//layouts/doubleColumn";
-$this->beginWidget('CClipWidget', array('id' => 'sidebar')); 
+$this->beginClip('sidebar'); 
 	$this->widget('application.components.widgets.ActivitiesCalendar');
 	$this->widget('application.components.widgets.ActivitiesFeed');
-$this->endWidget() 
+$this->endClip() 
 ?>
 
 <? $this->pageTitle = "Nyhetsstrøm" ?>
@@ -42,18 +42,15 @@ $this->endWidget()
 				$(".feeds").append(html);
 			},
 			type: 'get',
-			url: '<?php
-echo $this->createUrl("feedAjax", array(
-	'offset' => ''
-))
-?>' + count,
-							data: {
-								index: $(".feeds li").size()
-							},
-							cache: false,
-							dataType: 'html'
-						});
-						count += <?= $limit ?>;
-					});
-
+			url: '<?=$this->createUrl("feedAjax", array(
+						'offset' => ''
+				))?>' + count,
+			data: {
+				index: $(".feeds li").size()
+			},
+			cache: false,
+			dataType: 'html'
+		});
+		count += <?= $limit ?>;
+	});
 </script>
