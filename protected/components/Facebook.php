@@ -90,6 +90,7 @@ class Facebook {
 	public function publishNews($message, $id) {
 		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
+		echo $urlNewsPage;
 		$data = array(
 			'access_token' => $accessToken,
 			'link' => $urlNewsPage,
