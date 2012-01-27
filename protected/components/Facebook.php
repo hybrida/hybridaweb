@@ -99,7 +99,7 @@ class Facebook {
 	echo("\n");
 	echo($postUrl);
 	echo("\n");
-	echo(print_r($data[, $return=true]));
+	echo ”.htmlspecialchars(print_r($data, TRUE)).”;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
