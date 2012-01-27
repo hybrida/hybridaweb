@@ -91,13 +91,13 @@ class Facebook {
 		//$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = "https://graph.facebook.com/218073661595571/feed";
 		$data['link'] = "http://dev.hybrida.no/news";
-		$data['message'] = $message;
+		$data['message'] = "Melding";
 		$data['access_token'] = $accessToken;
-		echo($data);
 		$this->runCurl($data, $postUrl);
 	}
 	public function runCurl($data, $postUrl) {
 	echo($postUrl);
+	print_r($data);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
