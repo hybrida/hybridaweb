@@ -92,7 +92,7 @@ class Facebook {
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
 			'access_token' => $accessToken,
-			'link' => $urlEventPage,
+			'link' => $urlNewsPage,
 			'message' => utf8_encode($message)
 		);
                 $this->runCurl($data, $postUrl);
@@ -102,8 +102,8 @@ class Facebook {
                 rtrim($data_string,'&');
                 $ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, count($data));
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data_string);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		$out = curl_exec($ch);
 		echo $out; //fjern denne linja når det funker  
 		curl_close($ch);
