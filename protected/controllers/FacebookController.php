@@ -39,6 +39,7 @@ class FacebookController extends Controller {
         elseif(isset($message)){
             $fb = new Facebook();
             $fb->publishNews($message, 1);
+            
         }
     }
 }
