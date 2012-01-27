@@ -78,21 +78,18 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
-	global $accessToken;
         $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
-		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
-		$data = array(
-			'access_token' => $accessToken,
-			'link' => $urlEventPage,
-			'message' => utf8_encode('har opprettet et arrangement')
-		);
+		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
+                $data['link'] = $urlEventPage;
+		$data['message'] = utf8_encode('har opprettet et arrangement');
+		$data['access_token'] = $this->accessToken;
 		$this->runCurl($data, $postUrl);
 	}
 
 	public function publishNews($message, $id) {
-		//$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
+		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
-		$data['link'] = "http://dev.hybrida.no/news";
+		$data['link'] = $urlNewsPage;
 		$data['message'] = $message;
 		$data['access_token'] = $this->accessToken;
 		$this->runCurl($data, $postUrl);
@@ -105,7 +102,5 @@ class Facebook {
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 		$return = curl_exec($ch);
 		curl_close($ch);
-		
-		echo($return);
 	}
 }

@@ -36,10 +36,6 @@ class FacebookController extends Controller {
 
             Header("Location: http://dev.hybrida.no"); //redirect tilbake til forsiden
         }
-        elseif($_REQUEST['message']){
-            $fb = new Facebook();
-            $fb->publishNews("Dette er en melding postet fra Hybrida siden!!!", 1);
-        }
     }
 }
 
