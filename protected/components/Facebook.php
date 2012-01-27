@@ -4,6 +4,7 @@ class Facebook {
 
 	public $url = "http://dev.hybrida.no";
     public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
+    public $pageId = "218073661595571";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -90,9 +91,9 @@ class Facebook {
 
 	public function publishNews($message, $id) {
 		//$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
-		$postUrl = "https://graph.facebook.com/218073661595571/feed";
+		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
 		$data['link'] = "http://dev.hybrida.no/news";
-		$data['message'] = "Melding";
+		$data['message'] = $message;
 		$data['access_token'] = $this->accessToken;
 		$this->runCurl($data, $postUrl);
 	}

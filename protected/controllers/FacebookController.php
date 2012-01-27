@@ -38,8 +38,6 @@ class FacebookController extends Controller {
         }
         elseif($_REQUEST['message']){
             $fb = new Facebook();
-            echo("New Facebook, ");
-            echo("publishNews, ");
             $fb->publishNews("Dette er en melding postet fra Hybrida siden!!!", 1);
         }
     }
