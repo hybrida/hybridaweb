@@ -89,12 +89,11 @@ class Facebook {
 	}
 
 	public function publishNews($message, $id) {
-		global $accessToken;
 		//$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = "https://graph.facebook.com/218073661595571/feed";
 		$data['link'] = "http://dev.hybrida.no/news";
 		$data['message'] = "Melding";
-		$data['access_token'] = $accessToken;
+		$data['access_token'] = $this->accessToken;
 		$this->runCurl($data, $postUrl);
 	}
 	public function runCurl($data, $postUrl) {
