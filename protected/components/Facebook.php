@@ -88,24 +88,22 @@ class Facebook {
 	}
 
 	public function publishNews($message, $id) {
-//		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
-		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
-		$data = array(
-			'access_token' => $accessToken,
-			'link' => 'http://dev.hybrida.no/news',
-			'message' => utf8_encode($message)
-		);
-                $this->runCurl($data, $postUrl);
+		//$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
+		$postUrl = "https://graph.facebook.com/218073661595571/feed";
+		$data['access_token'] = $accessToken;
+		$data['link'] = "http://dev.hybrida.no/news";
+		$data['message'] = utf8_encode($message);
+		$this->runCurl($data, $postUrl);
 	}
-        public function runCurl($data, $postUrl){
-                $ch = curl_init();
+	public function runCurl($data, $postUrl) {
+		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-                curl_setopt($ch, CURLOPT_POST, TRUE);
-		$out = curl_exec($ch);
-		echo $out; //fjern denne linja når det funker  
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		$return = curl_exec($ch);
 		curl_close($ch);
-        }
-
+		
+		echo($return);
+	}
 }
