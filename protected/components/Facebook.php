@@ -96,8 +96,10 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
 	public function runCurl($data, $postUrl) {
+	echo("\n");
 	echo($postUrl);
-	print_r($data);
+	echo("\n");
+	echo(print_r($data));
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
