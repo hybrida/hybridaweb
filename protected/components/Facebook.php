@@ -90,9 +90,9 @@ class Facebook {
 	public function publishNews($message, $id) {
 		//$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = "https://graph.facebook.com/218073661595571/feed";
-		$data['access_token'] = $accessToken;
 		$data['link'] = "http://dev.hybrida.no/news";
-		$data['message'] = utf8_encode($message);
+		$data['message'] = $message;
+		$data['access_token'] = $accessToken;
 		$this->runCurl($data, $postUrl);
 	}
 	public function runCurl($data, $postUrl) {
