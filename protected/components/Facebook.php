@@ -102,6 +102,7 @@ class Facebook {
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($ch, CURLOPT_POST, TRUE);
 		$out = curl_exec($ch);
 		echo $out; //fjern denne linja når det funker  
 		curl_close($ch);
