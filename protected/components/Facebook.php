@@ -98,8 +98,6 @@ class Facebook {
                 $this->runCurl($data, $postUrl);
 	}
         public function runCurl($data, $postUrl){
-                foreach($data as $key=>$value) { $data_string .= $key.'='.$value.'&'; }
-                rtrim($data_string,'&');
                 $ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
