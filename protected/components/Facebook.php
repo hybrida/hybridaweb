@@ -3,7 +3,7 @@
 class Facebook {
 
 	public $url = "http://dev.hybrida.no";
-        public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
+    public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -77,6 +77,7 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
+	global $accessToken;
         $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
@@ -88,6 +89,7 @@ class Facebook {
 	}
 
 	public function publishNews($message, $id) {
+		global $accessToken;
 		//$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
 		$postUrl = "https://graph.facebook.com/218073661595571/feed";
 		$data['link'] = "http://dev.hybrida.no/news";
@@ -96,10 +98,6 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
 	public function runCurl($data, $postUrl) {
-	echo("\n");
-	echo($postUrl);
-	echo("\n");
-	echo ”.htmlspecialchars(print_r($data, TRUE)).”;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
