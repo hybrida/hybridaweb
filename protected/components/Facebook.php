@@ -77,7 +77,7 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
-                $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
+        $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
 		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
 		$data = array(
 			'access_token' => $accessToken,
@@ -93,9 +93,11 @@ class Facebook {
 		$data['link'] = "http://dev.hybrida.no/news";
 		$data['message'] = $message;
 		$data['access_token'] = $accessToken;
+		echo($data);
 		$this->runCurl($data, $postUrl);
 	}
 	public function runCurl($data, $postUrl) {
+	echo($postUrl);
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
