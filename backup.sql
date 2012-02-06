@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 06, 2012 at 10:16 AM
+-- Generation Time: Feb 06, 2012 at 11:46 AM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -14,58 +14,6 @@ SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 --
 CREATE DATABASE `hybrida` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida`;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `access_definition`
---
-
-CREATE TABLE IF NOT EXISTS `access_definition` (
-  `id` int(11) NOT NULL auto_increment,
-  `description` varchar(20) collate utf8_unicode_ci NOT NULL default 'none',
-  PRIMARY KEY  (`id`),
-  UNIQUE KEY `description` (`description`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4006 ;
-
---
--- Dumping data for table `access_definition`
---
-
-INSERT INTO `access_definition` (`id`, `description`) VALUES
-(2004, 'avgangskull_2004'),
-(2003, 'avgangskull_2003'),
-(2002, 'avgangskull_'),
-(2001, 'avgangskull_2001'),
-(1002, 'female'),
-(1001, 'male'),
-(2, 'registrert'),
-(2005, 'avgangskull_2005'),
-(2006, 'avgangskull_2006'),
-(2007, 'avgangskull_2007'),
-(2014, 'avgangskull_2014'),
-(2013, 'avgangskull_2013'),
-(2012, 'avgangskull_2012'),
-(2011, 'avgangskull_2011'),
-(2010, 'avgangskull_2010'),
-(2009, 'avgangskull_2009'),
-(2008, 'avgangskull_2008'),
-(2015, 'avgangskull_2015'),
-(2016, 'avgangskull_2016'),
-(2017, 'avgangskull_2017'),
-(2018, 'avgangskull_2018'),
-(2019, 'avgangskull_2019'),
-(2020, 'avgangskull_2020'),
-(3001, 'geomatikk'),
-(3002, 'marin_teknikk'),
-(3003, 'produkt_og_prosess'),
-(3004, 'kontruksjonsteknikk'),
-(3005, 'petroleumsfag'),
-(4001, 'webkom'),
-(4002, 'bedkom'),
-(4003, 'arrkom'),
-(4004, 'styret'),
-(4005, 'avisa');
 
 -- --------------------------------------------------------
 
@@ -187,6 +135,8 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12553 ;
 
+-- --------------------------------------------------------
+
 --
 -- Table structure for table `event`
 --
@@ -269,42 +219,13 @@ CREATE TABLE IF NOT EXISTS `hyb_comment` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=383 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=384 ;
 
 --
 -- Dumping data for table `hyb_comment`
 --
 
 INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
-(1, 1, 'profile', '...', 1, '2011-03-21 16:46:46'),
-(2, 1, 'profile', '!!', 327, '2011-03-21 18:19:00'),
-(3, 1, 'profile', 'Koala', 327, '2011-03-21 18:45:45'),
-(16, 1, 'profile', 'l\r\n', 327, '2011-04-04 00:40:16'),
-(5, 1, 'profile', 'Firefox 4', 1, '2011-03-23 15:45:42'),
-(6, 354, 'profile', 'halla', 1, '2011-03-23 21:51:22'),
-(7, 327, 'profile', 'YEAH', 1, '2011-03-23 21:51:34'),
-(8, 381, 'profile', 'Halla', 381, '2011-03-29 14:39:30'),
-(9, NULL, 'profile', 'eier!', 15, '2011-04-03 15:41:26'),
-(10, NULL, 'group', 'he', 15, '2011-04-03 15:43:50'),
-(11, NULL, 'profile', 'jeg\r\n', 327, '2011-04-03 18:40:54'),
-(12, 1, 'profile', 'yaw', 327, '2011-04-03 18:41:19'),
-(13, 7, '', 'Comment på en comment. Shit azz!!', 327, '2011-04-03 23:19:09'),
-(17, 1, 'profile', 'f\r\n', 327, '2011-04-04 00:40:29'),
-(18, 354, 'profile', '', 354, '2011-04-04 03:15:14'),
-(19, 354, 'profile', '', 354, '2011-04-04 03:15:18'),
-(20, 354, 'profile', '', 354, '2011-04-04 03:15:23'),
-(21, 354, 'profile', '', 354, '2011-04-04 03:15:55'),
-(22, 1, 'profile', 'kdf\r\n', 327, '2011-04-04 03:16:52'),
-(23, 354, 'profile', 'safari er dust...', 327, '2011-04-04 03:17:16'),
-(24, 327, 'profile', 'ny post', 327, '2011-04-04 03:17:46'),
-(25, 327, 'profile', '', 354, '2011-04-04 03:17:51'),
-(26, 327, 'profile', '', 354, '2011-04-04 03:20:55'),
-(27, 1, 'profile', 'f', 327, '2011-04-04 03:33:24'),
-(28, 1, 'profile', 'fdsdf', 327, '2011-04-04 03:33:29'),
-(29, 1, 'profile', 'sdf', 327, '2011-04-04 03:33:30'),
-(30, 1, 'profile', 'sdf', 327, '2011-04-04 03:33:32'),
-(31, 327, 'profile', 'sdfsdf', 327, '2011-04-05 14:20:40'),
-(32, 7, 'group', 'En kommentar til Apengruppe6!', 234, '2011-06-19 23:12:47'),
 (33, 82, 'company', 'Ikkje kontakta i det heile tatt fordi GK ansetter folk fra Emil.', 339, '2010-09-22 13:22:07'),
 (34, 83, 'company', 'Copypaste fra det andre forumet...\r\n\r\n"Hei,\r\n\r\nVi i Selvaag Bluethink har bestemt oss for å ikke delta denne gangen. Det kan godt hende vi vil være interessert i å presentere oss ved en senere anledning.\r\n \r\nMvh\r\nKristoffer Kvello\r\nSelvaag Bluethink\r\n"\r\n(kkv@selvaag.no)', 279, '2010-09-13 22:37:53'),
 (35, 83, 'company', 'BlueThink som avdelingen heter er forøvrig nedlagt grunnet stort driftsunderskudd, og det er bare tre av de gamle ansatte som henger igjen og hjelper til med andre prosjekter.\r\n\r\nDisse er nok ikke spesielt aktuelle for BedPres med dagens situasjon.', 353, '2010-09-23 22:40:14'),
@@ -447,11 +368,11 @@ INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`
 (172, 34, 'company', 'Vet ikke om det er riktig kontaktperson, men han svarte hvertfall (han var en av de som var med på presentasjonen for Aarhønen):\r\n\r\nPhilip Mitusch\r\nAvdelingsleder\r\nBygg og konstruksjonsteknikk\r\nTelefon: 67 12 84 32\r\nFaks: 67 12 81 45\r\nphilip.mitusch@sweco.no\r\n\r\n---------------------------------------------------------------------\r\n\r\nDe holdt som kjent en presentasjon for Aarhønen torsdag 21/10, representert med 5 personer fra konstruksjonsmiljøene på Lysaker (Oslo), Trondheim og Bergen. Der traff de også "enkelte studenter med studieretning Ingeniørvitenskap & IKT".\r\n\r\nDe vil ikke holde ny bedriftspresentasjon i år, men skal komme på Næringslivsdagene på vårparten.\r\n\r\nSiden han her bare jobba med bygg skal jeg skal sjekke med noen av de andre retningene før jeg legger Sweco helt død...', 314, '2011-01-11 22:35:17'),
 (173, 34, 'company', 'Ringte personalsjefen (som tidligere ikke har svart på mail) og fikk beskjed om at nummeret ikke er i bruk.\r\nSer etter andre aktuelle kontaktpersoner.\r\n___\r\n\r\nKanskje Sweco MEC ( http://www.mec.no/ ) er interessant, særlig for marin og prosess (mulig også konstruksjon).\r\n\r\n"Det som i dag er SWECO MEC AS, ble startet i 1981, av 5 erfarne ingeniører fra Mandal. De første årene var det stor vekt på prosjekt og disiplinledelse, samt konstruksjon, mest rettet mot offshore og den maritime sektoren.\r\nI løpet av 90 tallet dreide oppgavene seg mer og mer om design, både innen mekanikk og prosessanlegg av alle slag. I de siste 10 årene, har SWECO MEC AS konsentrert seg om fagene prosess, styring og design, innen offshore og onshore prosessindustri. Vi har lang erfaring fra alle typer prosessanlegg, alt fra farmasi, via solcelle og metallurgi, til hydrokarbon anlegg."\r\n\r\n"SWECO MEC AS er også leverandør av designsoftware fra Bentley, og innehar alle nødvendige sertifiseringer for levering, tilpassing og undervisning av programvaren, AutoPLANT "', 314, '2011-01-11 22:36:11'),
 (174, 34, 'company', 'philip.pedersen@sweco.no står oppført som leder for Sweco Industry Norge samt som kontaktperson for Sweco MEC.\r\n\r\nSender ham en mail.', 314, '2011-01-11 22:37:08'),
-(175, 34, 'company', 'Maste på sistnevnte, som nå svarte og sa han hadde videresendt dette til lysakerkontoret og kontaktperson Anne Sødem. Dette er samme personalsjef som nevnt i tidligere innlegg, så nå er jeg rundt.', 314, '2011-03-10 22:38:20');
-INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
+(175, 34, 'company', 'Maste på sistnevnte, som nå svarte og sa han hadde videresendt dette til lysakerkontoret og kontaktperson Anne Sødem. Dette er samme personalsjef som nevnt i tidligere innlegg, så nå er jeg rundt.', 314, '2011-03-10 22:38:20'),
 (176, 34, 'company', 'Virker som personalsjefen nå har sendt mailen min rundt til forskjellige avdelinger, så jeg fikk samme avslaget igjen fra bygg og konstruksjonsteknikk-avdelingen:\r\n\r\n******\r\nHei\r\n\r\nDe konstruksjonstekniske fagene i Sweco har bedriftspresentasjon hos linjeforeningen Århønen hver høst.\r\nVi er også representert på BM-Arena og Næringslivsdagene.\r\n\r\nVi har foreløpig ingen planer om å gjennomføre en bedriftspresentasjon for  masterstudiet Ingeniørvitenskap & IKT.\r\n\r\nMed Hilsen\r\n\r\nPhilip Mitusch\r\n*****\r\n\r\nHåper på å høre fra de andre avdelingene også, da det var de jeg var ute etter....', 314, '2011-03-11 22:39:09'),
 (177, 97, 'company', 'Kontaktperson Jan Petter Stenberg:\r\n\r\nJan.Petter.Stenberg@forsvarsbygg.no\r\n\r\ntlf: 924 25 576 \r\n\r\nHar snakket med han på tlf tidligere, sendte han mail, fikk ikke svar. RIngte på nytt i dag, han hadde ikke glemt oss og han hadde behandlet det men han som var ansvarlig var ikke på jobb atm.\r\n\r\nRinger meg i morra', 306, '2011-03-07 22:40:21'),
-(178, 97, 'company', 'Kontaktperson er nå Terje Jensen\r\n\r\nTerje.Jensen@forsvarsbygg.no\r\n\r\ntlf: 91868601\r\n\r\nDe har gjort en avtale med Senter for eiendomsutvikling og -forvaltning her på NTNU, og mente det var tilstrekkelig inntill videre. De hadde behandlet det ganske seriøst og sa at de skulle ta kontakt om det skulle bli aktuelt seinere, så jeg tror ikke det er noe poeng å presse dem på en stund.', 306, '2011-03-16 22:41:11'),
+(178, 97, 'company', 'Kontaktperson er nå Terje Jensen\r\n\r\nTerje.Jensen@forsvarsbygg.no\r\n\r\ntlf: 91868601\r\n\r\nDe har gjort en avtale med Senter for eiendomsutvikling og -forvaltning her på NTNU, og mente det var tilstrekkelig inntill videre. De hadde behandlet det ganske seriøst og sa at de skulle ta kontakt om det skulle bli aktuelt seinere, så jeg tror ikke det er noe poeng å presse dem på en stund.', 306, '2011-03-16 22:41:11');
+INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
 (179, 72, 'company', 'Er litt usikker på hvor relevante de er for oss, men sendte mail til administrasjonsleder og håper på rett kontaktperson.', 279, '2011-01-10 22:42:52'),
 (180, 72, 'company', 'Har ikke fått noe svar på mail, men ser at de har omtrent bare ingeniører som ansatte, og ingen utviklere... Tror derfor at vi er litt for flinke for dem...', 279, '2011-03-16 22:43:33'),
 (181, 133, 'company', '4 Divisjoner: Infrastruktur, Industri, Energi, Teknologi. Særlig Industri og Teknologi virker veldig relevant for oss. Industri har blant annet et fagfelt som heter Industriell IT. (Divisjon Industry har en ledende posisjon innen prosessteknikk, automasjon, industriell IT, elektro og mekanisk engineering.)\r\n\r\nTre mulige måter å kontakte ÅF:\r\n\r\n(1)\r\nHvem har ansvar for rekruttering i ÅF i Norge?\r\n\r\nVi har ingen sentral rekrutteringsfunksjon i ÅF, da alle avdelingene rekrutterer sine konsulenter etter behov, med bistand fra HR. For alle henvendelser om rekruttering kan du kontakte vår HR-avdeling.\r\n\r\nHR-avdelingen kontaktes på: katarina.gutu@afconsult.com\r\n\r\n(2)\r\nÅF i Norge: http://www.afconsult.com/no/Kontakt/\r\n\r\n(3)\r\nPrate med folk på stand eller å være kreativ å finne på noe annet.\r\n\r\nAnbefaler å begynne med punkt 1.', 314, '2011-03-22 22:44:51'),
@@ -572,12 +493,12 @@ INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`
 (296, 18, 'company', 'Marius Kirkeeide er btw  i smørekoppen (maskin)', 339, '2011-04-05 11:37:07'),
 (297, 18, 'company', 'Hei!\r\n\r\nDa ønsker vi å holde bedriftspresentasjon i uke 44 , slik vi snakka om. Du har nevnt tirsdag eller onsdag som aktuelle dager, da kan du se hvordan det passer med en av disse dagene. \r\n\r\nHilsen\r\n\r\nMarit Kjersti Berge\r\nHR Manager\r\nSub Sea Services AS\r\n51839530/99246140', 397, '2011-08-29 11:38:01'),
 (298, 18, 'company', 'Onsdag 02.11. i veke 44 meiner eg passer best. Dermed får folk ein dag etter UKA på å summe seg før presentasjon.\r\n\r\nEg har framleis ikkje fått svar på meldinga mi til Maskin om kva deira planer for Sub Sea er, eg ringer dei tidleg i morgon viss eg ikkje vår svar i kveld.', 293, '2011-08-29 11:38:44'),
-(299, 18, 'company', 'I dag fekk eg svar frå Maskin om kva deira forhold til Sub Sea er.\r\n\r\nDei skal ha besøk av Sub Sea på PuP-dagane, som er først på våren. Derfor er dei interesserte i ein felles presentasjon no i november som det var snakk om.\r\n\r\nPresentasjonen blir då avholdt av Maskin og I&IKT i fellesskap og ikkje med TP, sjøvsagt om dei er interesserte i eit slikt opplegg. Det har vore mykje fram og tilbake i denne saka, så eg skjønner om dei gjerne heller vil holde det for ei linje, men det er ikkje lenger eit spørsmål om kven som arrangerer viss det blir eit felles opplegg.\r\n\r\nMaskin ønska i alle fall å samarbeide med oss. Dermed er det opp til Sub Sea kva dei vil.\r\n\r\nMaskin har ledig dato tirsdag 01.11., derfor foreslår vi denne datoen for Sub Sea og ikkje 02.11. som var foreslått i forrige innlegg.\r\n\r\nDå er det berre å sende svar til Sub Sea.', 293, '2011-09-05 11:39:28');
-INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
+(299, 18, 'company', 'I dag fekk eg svar frå Maskin om kva deira forhold til Sub Sea er.\r\n\r\nDei skal ha besøk av Sub Sea på PuP-dagane, som er først på våren. Derfor er dei interesserte i ein felles presentasjon no i november som det var snakk om.\r\n\r\nPresentasjonen blir då avholdt av Maskin og I&IKT i fellesskap og ikkje med TP, sjøvsagt om dei er interesserte i eit slikt opplegg. Det har vore mykje fram og tilbake i denne saka, så eg skjønner om dei gjerne heller vil holde det for ei linje, men det er ikkje lenger eit spørsmål om kven som arrangerer viss det blir eit felles opplegg.\r\n\r\nMaskin ønska i alle fall å samarbeide med oss. Dermed er det opp til Sub Sea kva dei vil.\r\n\r\nMaskin har ledig dato tirsdag 01.11., derfor foreslår vi denne datoen for Sub Sea og ikkje 02.11. som var foreslått i forrige innlegg.\r\n\r\nDå er det berre å sende svar til Sub Sea.', 293, '2011-09-05 11:39:28'),
 (300, 18, 'company', 'Snakket med Marit på telefonen i dag. Hun skulle svare på mailen om antall personer og årskurs osv. i løpet av dagen eller morgendagen. De ønsker at vi inviterer maskin.', 397, '2011-09-20 11:40:09'),
 (301, 18, 'company', 'Meget bra :)\r\n\r\nEg prata med Maskin, dei uttrykte tilfredsstillelse over å bli invitert.\r\n\r\nVi trenger den infoen ja, men dato og tidspunkt er vel satt? 01.11., kl. 18.15 slik vi prata om?', 293, '2011-09-20 11:41:07'),
 (302, 18, 'company', 'Jepp 1/11 kl 18.15\r\n\r\nDe ønsker å invitere 3. - 5. årskurs, virker ikke som de vil ha begrensninger på retninger.', 397, '2011-09-21 11:41:57'),
-(303, 18, 'company', 'Utdrag frå visittkortet til Bernt Arne Breistein i Sub Sea Services:\r\n\r\n""\r\nBernt Arne Breistein\r\nChief Executive Officer\r\nMobile: +47 95 20 79 96\r\nEmail: bernt.arne@subseaservices.no\r\n\r\nSub Sea Services AS\r\nFinnestadsvingen 24, 4029 Stavanger\r\nPhone: +47 51 83 95 30\r\nWeb: subseaservices.no\r\n""', 293, '2011-11-05 11:42:50'),
+(303, 18, 'company', 'Utdrag frå visittkortet til Bernt Arne Breistein i Sub Sea Services:\r\n\r\n""\r\nBernt Arne Breistein\r\nChief Executive Officer\r\nMobile: +47 95 20 79 96\r\nEmail: bernt.arne@subseaservices.no\r\n\r\nSub Sea Services AS\r\nFinnestadsvingen 24, 4029 Stavanger\r\nPhone: +47 51 83 95 30\r\nWeb: subseaservices.no\r\n""', 293, '2011-11-05 11:42:50');
+INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
 (304, 18, 'company', 'Bedriftens navn:\r\nSub Sea Services\r\n\r\nAvdeling: Hele bedriften, men først og fremst kontoret i Stavanger\r\n\r\nTid for bed.pres: 1.11.2011 18.15\r\n\r\nKontaktperson(er): Marit Kjersti Berge, Julie Krause, Bernt Arne Breistein, Eirik Røysland\r\n\r\nEpostadresse: Marit: maritkjersti@subseaservices.no Julie: julie@subseaservices.no Eirik: eirik@subseaservices.no Bernt Arne: bernt.arne@subseaservices.no\r\n\r\nTlf: Sub Sea-resepsjon: 51839530 Marit: 99246140 Julie: 406 20 649 Eirik: 993 62 424 Bernt Arne: 952 07 996\r\n\r\nKort om bedriften/avdelingen (hvorfor passer den for I&IKT?):\r\n\r\nLeverer spesialisert drillingutstyr til oljerigger. Trenger ingeniører med et bredt fagfelt, siden de er en ganske liten bedrift der ingeniørene er med i hele prossesen fra ide til vedlikehold\r\n\r\nHadde først og fremst kontakt med Marit for å avtale presentasjonen. Julie, Eirik og Bernt Arne var de som var på presentasjonen. Julie ordnet det praktiske på mail like før presentasjonen.\r\n\r\nKort om hvordan du kom i kontakt, og fikk ordnet bed.pres med de:\r\n\r\nSendte mail til Marit, hadde allerede blitt kontaktet av maskin. Etter mye om og men med Teknologiporten ble vi enige om felles presentasjon med Maskin.\r\n\r\nEirik Røysland\r\nDesign Engineer, M.Sc\r\nMob; +47 9936 24 24\r\neirik@subseaservices.no\r\n\r\nSub Sea Services\r\nFinnestadsvingen 24\r\n4029 Stavanger\r\nT +47 518 39 530 / F +47 518 39 541\r\nwww.subseaservices.no\r\n\r\nJulie Krause\r\nContract Lead\r\n+47 406 20 649\r\nwww.subseaservices.no\r\n\r\nHilsen\r\nMarit Kjersti Berge\r\nHR Manager\r\nSub Sea Services AS\r\n51839530/99246140\r\nBernt Arne Breistein e-post: berntarne@subseaservices.no  tlf 952 07 996', 397, '2011-11-08 11:44:52'),
 (305, 1, 'company', 'Fikk kontakt med Andreas Gjærde gjennom Alumni-listene, han hadde en del spørsmål, har sendt svar og informasjon om profilering. Sendte mail igjen i dag for å høre om når de kan tenke seg å ha presentasjon.', 279, '2011-01-10 11:48:54'),
 (306, 1, 'company', 'De ønsker bedpres i slutten av februar, da er det fullt, jeg foreslo 1-3 eller 8-10.mars.', 279, '2011-01-17 11:49:46'),
@@ -749,7 +670,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-02-02 21:12:34', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-02-06 10:49:52', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -778,23 +699,6 @@ INSERT INTO `image` (`id`, `title`, `oldName`, `galleryId`, `userId`, `timestamp
 (2, '', 'Untitled.jpg', -1, 1, '2011-02-26 21:07:15'),
 (4, 'Koala!', 'Koala.jpg', -1, 327, '2011-03-21 18:39:21'),
 (5, 'Sommer', 'sommer', -1, 327, '2011-07-21 21:04:59');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `membership_access`
---
-
-CREATE TABLE IF NOT EXISTS `membership_access` (
-  `accessId` int(11) NOT NULL auto_increment,
-  `userId` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`accessId`,`userId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
-
---
--- Dumping data for table `membership_access`
---
-
 
 -- --------------------------------------------------------
 
@@ -845,7 +749,8 @@ INSERT INTO `membership_group` (`groupId`, `userId`, `comission`, `start`, `end`
 (57, 450, 'Medlem', '2010-11-15', '0000-00-00'),
 (57, 417, 'Medlem', '2010-11-15', '0000-00-00'),
 (57, 428, 'Medlem', '2010-11-15', '0000-00-00'),
-(57, 422, 'Medlem', '2010-11-15', '0000-00-00');
+(57, 422, 'Medlem', '2010-11-15', '0000-00-00'),
+(57, 381, 'vevsjef', '2012-02-06', '2016-02-18');
 
 -- --------------------------------------------------------
 
@@ -1001,6 +906,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `parentType` enum('event','article','group') collate utf8_unicode_ci default NULL,
   `title` varchar(50) collate utf8_unicode_ci default NULL,
   `imageId` int(11) default NULL,
+  `ingress` text collate utf8_unicode_ci,
   `content` mediumtext collate utf8_unicode_ci,
   `authorId` int(11) default NULL,
   `timestamp` datetime default NULL,
@@ -1014,10 +920,10 @@ CREATE TABLE IF NOT EXISTS `news` (
 -- Dumping data for table `news`
 --
 
-INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `content`, `authorId`, `timestamp`, `status`) VALUES
-(40, 71, 'event', 'Åretur 2012', 0, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <strong> Åretur!!! </strong>\r\n<br />\r\n<br />\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n<br />\r\n<br />\r\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\r\n<br />\r\n<br />\r\n-Tur/retur Åre sentrum\r\n<br />\r\n-4 netters opphold\r\n<br />\r\n-5 dagers skipass \r\n<br />\r\n-rabattkort\r\n<br />\r\n+ mye fest og moro!\r\n<br />\r\n<br />\r\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \r\n<br />\r\n<br />&nbsp;OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding.&nbsp;<br />\r\n<br />', 326, '2011-07-17 22:34:51', 0),
-(41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21', 0),
-(56, NULL, NULL, 'Nytt styre', NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p>\r\n<p>\r\n   <br />\r\n</p>\r\n<p>\r\n   <strong>Festivalus</strong> - Sigbjørn Aukland\r\n</p>\r\n<p>\r\n   <strong>Skattemester</strong> - Tonje Sundstrøm\r\n</p>\r\n<p>\r\n   <strong>Vevsjef</strong> - Sigurd Holsen\r\n</p>\r\n<p>\r\n   <strong>SPR</strong> - Erik Aasmundrud\r\n</p>', 363, '2011-11-26 20:02:14', 0);
+INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `timestamp`, `status`) VALUES
+(40, 71, 'event', 'Åretur 2012', 0, NULL, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <strong> Åretur!!! </strong>\r\n<br />\r\n<br />\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n<br />\r\n<br />\r\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\r\n<br />\r\n<br />\r\n-Tur/retur Åre sentrum\r\n<br />\r\n-4 netters opphold\r\n<br />\r\n-5 dagers skipass \r\n<br />\r\n-rabattkort\r\n<br />\r\n+ mye fest og moro!\r\n<br />\r\n<br />\r\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \r\n<br />\r\n<br />&nbsp;OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding.&nbsp;<br />\r\n<br />', 326, '2011-07-17 22:34:51', 0),
+(41, 73, 'event', 'Generalforsamling', 4, NULL, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21', 0),
+(56, NULL, NULL, 'Nytt styre', NULL, NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p>\r\n<p>\r\n   <br />\r\n</p>\r\n<p>\r\n   <strong>Festivalus</strong> - Sigbjørn Aukland\r\n</p>\r\n<p>\r\n   <strong>Skattemester</strong> - Tonje Sundstrøm\r\n</p>\r\n<p>\r\n   <strong>Vevsjef</strong> - Sigurd Holsen\r\n</p>\r\n<p>\r\n   <strong>SPR</strong> - Erik Aasmundrud\r\n</p>', 363, '2011-11-26 20:02:14', 0);
 
 -- --------------------------------------------------------
 

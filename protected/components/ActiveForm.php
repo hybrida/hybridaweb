@@ -2,13 +2,26 @@
 
 class ActiveForm extends CActiveForm {
 
-	public function textArea($model, $attribute, $htmlOptions=array()) {
-		CHtml::resolveNameID($model, $attribute, $htmlOptions);
-		$text = CHtml::resolveValue($model, $attribute);
+	public function textArea($model, $attribute, $htmlOptions = array()) {
+		$xheditor = isset($htmlOptions['xheditor']) ? $htmlOptions['xheditor'] : false;
+		if ($xheditor) {
+			$this->renderXHeditor($model, $attribute, $htmlOptions);
+		} else {
+			return CHtml::activeTextArea($model, $attribute, $htmlOptions);
+		}
+	}
 	
+	private function getWidthHeight($htmlOptions) {
 		$width = isset($htmlOptions['width']) ? $htmlOptions['width'] : "100%";
 		$height = isset($htmlOptions['height']) ? $htmlOptions['height'] : "100%";
+		return array($width, $height);
+	}
 
+	private function renderXHeditor($model, $attribute, $htmlOptions = array()) {
+
+		CHtml::resolveNameID($model, $attribute, $htmlOptions);
+		$text = CHtml::resolveValue($model, $attribute);
+		list($width, $height) = $this->getWidthHeight($htmlOptions);
 		$this->widget('ext.xheditor.XHeditor', array(
 			'language' => 'en', //options are en, zh-cn, zh-tw
 			'config' => array(
@@ -22,10 +35,9 @@ class ActiveForm extends CActiveForm {
 			'contentValue' => $text, // default value displayed in textarea/wysiwyg editor field
 			'htmlOptions' => array('rows' => 20, 'cols' => 15), // to be applied to textarea
 		));
-		return false;
 	}
 
-	public function dateField($model, $attribute, $htmlOptions=array()) {
+	public function dateField($model, $attribute, $htmlOptions = array()) {
 		$this->widget('application.extensions.timepicker.EJuiDateTimePicker', array(
 			'model' => $model,
 			'attribute' => $attribute,
@@ -38,7 +50,7 @@ class ActiveForm extends CActiveForm {
 		));
 	}
 
-	public function accessField($model, $attribute, $htmlOptions=array()) {
+	public function accessField($model, $attribute, $htmlOptions = array()) {
 		$this->widget('application.components.widgets.AccessField', array(
 			'model' => $model,
 			'attribute' => $attribute,

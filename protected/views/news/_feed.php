@@ -21,7 +21,7 @@
 			<? if (!user()->isGuest): ?>
 				<a class="button buttonRightSide" href="<?= $url ?>">Rediger</a>
             <? endif ?>
-            <?= $model->content ?>
+            <?= $model->ingress ?>
             <div class="date">Dato: <?= $model->timestamp ?></div>
 			<? if ($model->author): ?>
             <div class="author"><?=

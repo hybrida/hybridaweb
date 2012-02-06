@@ -43,7 +43,7 @@ class News extends CActiveRecord {
 			array('parentId, imageId, authorId', 'numerical', 'integerOnly' => true),
 			array('parentType', 'length', 'max' => 7),
 			array('title', 'length', 'max' => 50),
-			array('title, imageId, content, timestamp', 'safe'),
+			array('title, imageId, ingress, content, timestamp', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, parentId, parentType, title, imageId, authorId, timestamp', 'safe', 'on' => 'search'),
@@ -69,6 +69,7 @@ class News extends CActiveRecord {
 			'title' => 'Title',
 			'imageId' => 'Image',
 			'content' => 'Content',
+			'ingress' => 'Ingress',
 			'authorId' => 'Author',
 			'timestamp' => 'Timestamp',
 		);
@@ -89,7 +90,6 @@ class News extends CActiveRecord {
 		$criteria->compare('parentType', $this->parentType, true);
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('imageId', $this->imageId);
-		$criteria->compare('content', $this->content, true);
 		$criteria->compare('authorId', $this->authorId);
 		$criteria->compare('timestamp', $this->timestamp, true);
 

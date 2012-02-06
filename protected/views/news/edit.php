@@ -64,6 +64,7 @@
 		<div class="formElement">
 			<div class="formLabel">
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[title]'); ?></div>
+				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[ingress]'); ?></div>
 				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[content]'); ?></div>
 				<div class="formLabelRow"><?= $form->labelEx($model, 'news[access]') ?> </div>
 			</div>
@@ -75,7 +76,20 @@
 				</div>
 
 				<div class="formBoxRow">
-					<?php echo $form->textArea($model, "news[content]",array()); ?>
+					<?php echo $form->textArea($model, "news[ingress]",array(
+						'cols' => '50',
+						'rows' => '8',
+						'xheditor' => false,
+					)); ?>
+					<?php echo $form->error($model, 'news[ingress]'); ?>				
+				</div>
+				
+				<div class="formBoxRow">
+					<?php echo $form->textArea($model, "news[content]",array(
+						'width' => '140%',
+						'height' => '400',
+						'xheditor' => true,
+					)); ?>
 					<?php echo $form->error($model, 'news[content]'); ?>				
 				</div>
 				<div class="formBoxRow">

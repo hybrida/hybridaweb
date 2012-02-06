@@ -61,6 +61,8 @@ $this->endWidget()
 <br/><img src='<?=$imageURL?>' />
 <? endif; ?>
 
+<p><strong><?=$news->ingress?></strong></p>
+
 <p>
 	<?=$news->content?>
 </p>

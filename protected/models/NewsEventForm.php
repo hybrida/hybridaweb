@@ -26,7 +26,7 @@ class NewsEventForm extends CFormModel {
 			array('hasSignup, hasEvent', 'boolean'),
 			array('news[title], news[content]', 'required'),
 			array(
-				'news[title], news[content], ' .
+				'news[title], news[ingress], news[content], ' .
 				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
 				'signup[spots], signup[open], signup[close], signup[signoff], ' .
 				'hasEvent, hasSignup',
@@ -39,11 +39,11 @@ class NewsEventForm extends CFormModel {
 	public function attributeLabels() {
 		return array(
 			'news[title]' => 'Tittel',
+			'news[ingress]' => 'Ingress',
 			'news[content]' => 'Innhold',
 			'event[start]' => 'Start',
 			'event[end]' => 'Slutt',
 			'event[location]' => 'Location',
-//			'event[]' => '',
 			'signup[spots]' => 'Antall plasser',
 			'signup[open]' => 'Starter',
 			'signup[close]' => 'Slutter',
