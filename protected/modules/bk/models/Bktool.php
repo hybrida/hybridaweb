@@ -508,7 +508,7 @@ class BkTool {
         $sql = "SELECT un.imageId, un.firstName, un.middleName, un.lastName, cmt.timestamp, cmt.content 
                 FROM hyb_comment AS cmt, bk_company AS cmp, hyb_user AS un
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
-                AND cmp.companyID = cmt.parentId AND cmt.author = un.id
+                AND cmp.companyID = cmt.parentId AND cmt.authorId = un.id
                 ORDER BY cmt.timestamp DESC";
 
         $query = $this->pdo->prepare($sql);
