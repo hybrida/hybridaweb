@@ -1,9 +1,9 @@
-<?
+<? 
 $this->layout = "//layouts/doubleColumn";
-$this->beginWidget('CClipWidget', array('id' => 'sidebar')); 
-	$this->widget('application.components.widgets.ActivitiesCalendar');
-	$this->widget('application.components.widgets.ActivitiesFeed');
-$this->endWidget() 
+$this->beginWidget('CClipWidget', array('id' => 'sidebar'));
+$this->widget('application.components.widgets.ActivitiesCalendar');
+$this->widget('application.components.widgets.ActivitiesFeed');
+$this->endWidget()
 ?>
 
 <? $this->pageTitle = "Nyhetsstrøm" ?>
@@ -36,24 +36,24 @@ $this->endWidget()
 <script>
 	var count = <?= $index ?>;
 	$("#fetchNews").click(function(){
-
+		
 		$.ajax({
 			success: function(html){
 				$(".feeds").append(html);
 			},
 			type: 'get',
 			url: '<?php
-echo $this->createUrl("feedAjax", array(
-	'offset' => ''
-))
+	echo $this->createUrl("feedAjax", array(
+		'offset' => ''
+	))
 ?>' + count,
-							data: {
-								index: $(".feeds li").size()
-							},
-							cache: false,
-							dataType: 'html'
-						});
-						count += <?= $limit ?>;
-					});
+			data: {
+				index: $(".feeds li").size()
+			},
+			cache: false,
+			dataType: 'html'
+		});
+		count += <?= $limit ?>;
+	});
 
 </script>

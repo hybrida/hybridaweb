@@ -3,6 +3,8 @@
 class Facebook {
 
 	public $url = "http://dev.hybrida.no";
+    public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
+    public $pageId = "218073661595571";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -76,43 +78,29 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
-		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
-		$urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
-		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
-		$data = array(
-			'access_token' => $accessToken,
-			'link' => $urlEventPage,
-			'message' => utf8_encode('har opprettet et arrangement')
-		);
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo $out;
-		curl_close($ch);
+        $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
+		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
+                $data['link'] = $urlEventPage;
+		$data['message'] = utf8_encode('har opprettet et arrangement');
+		$data['access_token'] = $this->accessToken;
+		$this->runCurl($data, $postUrl);
 	}
 
 	public function publishNews($message, $id) {
-		$accessToken = 'AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQhMAfV6x8yZAp19PttZCVThq6wB8YmxCuoG5HBq0z0nCb9eQQZDZD'; //statisk access token for hybrida fanpage
 		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
-		$postUrl = 'https://graph.facebook.com/218073661595571/feed';
-		$data = array(
-			'access_token' => $accessToken,
-			'link' => $urlEventPage,
-			'message' => utf8_encode($message)
-		);
+		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
+		$data['link'] = $urlNewsPage;
+		$data['message'] = $message;
+		$data['access_token'] = $this->accessToken;
+		$this->runCurl($data, $postUrl);
+	}
+	public function runCurl($data, $postUrl) {
 		$ch = curl_init();
-
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo $out;
+		$return = curl_exec($ch);
 		curl_close($ch);
 	}
-
 }

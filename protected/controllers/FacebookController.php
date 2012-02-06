@@ -13,6 +13,7 @@ class FacebookController extends Controller {
         $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
         $my_url = 'http://dev.hybrida.no/facebook/'; //url til fila som skal lese inn code
 
+        
         if(isset($_REQUEST['error'])){
 
             echo 'En feil har oppstått. Vennligst prøv igjen';

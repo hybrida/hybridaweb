@@ -1,4 +1,37 @@
 <? $this->pageTitle = $news->title ?>
+<? $this->layout = "//layouts/doubleColumn" ?>
+<? 
+$this->beginWidget('CClipWidget', array('id' => 'sidebar')); ?>
+
+<? if ($event): ?>
+	<div class="barTitle">Event</div>
+	<div class="barText">
+		<b>Starter: </b><i><?= $event->start ?></i><br />
+		<b>Slutter: </b><i><?= $event->end ?></i>
+	</div>
+
+	<? if ($signup): ?>
+	<div class="barTitle">Påmelding:</div>
+	<div class="barText">
+		<strong>Påmeldte: </strong> <i><?= $signup->attendingCount ?> av <?= $signup->spots ?></i> <br/>
+		<strong>Åpner: </strong><i><?= $signup->open ?></i> <br>
+		<strong>Stenger: </strong><i><?= $signup->close ?></i> <br>
+	</div>
+		
+	<div class="barTitle">Påmeldte</div>
+	<div class="barText">
+		<div class="signup" data-id='<?= $signup->eventId ?>'></div>
+	</div>
+	<? endif // signup ?>
+
+
+<? endif; // event?>
+
+<?
+$this->widget('application.components.widgets.ActivitiesCalendar');
+$this->widget('application.components.widgets.ActivitiesFeed');
+$this->endWidget()
+?>
 
 <?$this->breadcrumbs=array(
 	'News',
@@ -31,38 +64,3 @@
 <p>
 	<?=$news->content?>
 </p>
-
-<? if ($event): ?>
-<h2>Event</h2>
-	<div class='right'>
-		<b>Starter: </b><i><?= $event->start ?></i>
-	</div>
-
-	<div class='right'>
-		<b>Slutter: </b><i><?= $event->end ?></i>
-	</div>
-
-
-	<? if ($signup): ?>
-
-<h2>Påmelding:</h2>
-		<div class='clear'>
-			<p>
-				<strong>Påmeldte: </strong> <i><?=$signup->attendingCount?> av <?=$signup->spots?></i> <br/>
-			</p>
-
-			<p>
-				<strong>Åpner: </strong><i><?= $signup->open ?></i> <br/>
-			<p>
-			</p>
-				<strong>Stenger: </strong><i><?= $signup->close ?></i> <br/>
-			</p>
-		</div>
-		
-		<h2>Påmeldte</h2>
-		<div class="signup" data-id='<?= $signup->eventId ?>'></div>
-	<? endif // signup ?>
-
-
-<? endif; // event?>
-		
