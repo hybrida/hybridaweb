@@ -1,7 +1,7 @@
 <?php
 
 class DefaultController extends Controller {
-	
+
 	public function actionIndex() {
 		$this->render('index');
 	}
@@ -13,7 +13,7 @@ class DefaultController extends Controller {
 			$this->redirect(user()->returnUrl);
 		}
 	}
-	
+
 	public function actionAccess() {
 		for ($i = 2008; $i <= 2020; $i++) {
 			$a = new AccessDefinition();
@@ -22,7 +22,7 @@ class DefaultController extends Controller {
 			$a->save();
 		}
 	}
-	
+
 	public function actionDumpNews() {
 		$lipsum = new LoremIpsumGenerator();
 		$i = 0;
@@ -34,23 +34,32 @@ class DefaultController extends Controller {
 		}
 		echo "Suksess: Laget $i nye dummy-elementer";
 	}
-	
+
 	public function actionCleanDB() {
 		Yii::import('application.tests.testlib.*');
 		TestLib::deleteDummyData();
 		echo "Database is cleaned";
 	}
-	
+
 	public function actionInstall() {
 		$install = new Install;
 		$install->install();
 		$this->render('install');
 	}
-	
+
 	public function actionUpdate() {
 		$install = new Install;
 		$install->update();
 		$this->render('update');
+	}
+
+	public function admin() {
+		$admin = User::model()->find('username = "admin"');
+		$id = new DefaultIdentity($admin->id);
+		if ($id->authenticate()) {
+			user()->login($id);
+			$this->redirect(user()->returnUrl);
+		}
 	}
 
 }
