@@ -436,7 +436,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, hyb_user
+        $sql = "SELECT id, username, firstName, middleName, lastName FROM bk_company, hyb_user
                 WHERE companyID = :companyId AND contactorID = id";
 
         $query = $this->pdo->prepare($sql);

@@ -95,7 +95,8 @@
                     <th>Kontaktet av</th>
                     <td>
                         <? foreach($contactor as $info) : ?>
-                            <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+							<? $url = $this->createUrl('/profile/info', array('username' => $info['username'])) ?>
+                            <a href='<?=$url?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
                         <? endforeach ?>
                     </td>
                 </tr>
