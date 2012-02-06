@@ -3,12 +3,7 @@
 	'user' => $user,
 ))?>
 
-<!--Appendes av e.js-->
-<div class='comment'>
-    <form>
-        <input type='text' />
-    </form>
-    <ul>
-        
-    </ul>
-</div>
+<? $this->widget('comment.components.commentWidget',array(
+	'id' => $user->id,
+	'type' => 'profile',
+)) ?>

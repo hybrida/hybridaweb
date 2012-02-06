@@ -9,6 +9,8 @@ class CommentWidget extends CWidget {
 	public $type = "";
 	public $author = "";
 	public $timestamp = "";
+	public $width = 400;
+	public $height = 130;
 	public $models;
 	private $formModel;
 
@@ -34,6 +36,8 @@ class CommentWidget extends CWidget {
 			$this->render("member", array(
 				'models' => $this->models,
 				'formModel' => $this->formModel,
+				'width' => $this->width,
+				'height' => $this->height,
 			));
 		} else {
 			$this->render('guest');

@@ -22,8 +22,8 @@
 	<div class="row">
 		<?php
 		echo $form->textArea($formModel, 'content', array(
-			'width' => '400',
-			'height' => '130',
+			'width' => $width,
+			'height' => $height,
 		));
 		?>
 		<?php echo $form->error($formModel, 'content'); ?>
