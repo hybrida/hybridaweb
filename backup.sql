@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 06, 2012 at 11:46 AM
+-- Generation Time: Feb 06, 2012 at 05:04 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -133,9 +133,7 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   `isDeleted` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
   PRIMARY KEY  (`updateId`),
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12553 ;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12587 ;
 
 --
 -- Table structure for table `event`
@@ -219,13 +217,14 @@ CREATE TABLE IF NOT EXISTS `hyb_comment` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=384 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=386 ;
 
 --
 -- Dumping data for table `hyb_comment`
 --
 
 INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
+(385, 204, 'company', 'Fått en flyer fra Jomar, lagt den til i ei ny mappe i dropbox.', 339, '2012-02-06 12:51:08'),
 (33, 82, 'company', 'Ikkje kontakta i det heile tatt fordi GK ansetter folk fra Emil.', 339, '2010-09-22 13:22:07'),
 (34, 83, 'company', 'Copypaste fra det andre forumet...\r\n\r\n"Hei,\r\n\r\nVi i Selvaag Bluethink har bestemt oss for å ikke delta denne gangen. Det kan godt hende vi vil være interessert i å presentere oss ved en senere anledning.\r\n \r\nMvh\r\nKristoffer Kvello\r\nSelvaag Bluethink\r\n"\r\n(kkv@selvaag.no)', 279, '2010-09-13 22:37:53'),
 (35, 83, 'company', 'BlueThink som avdelingen heter er forøvrig nedlagt grunnet stort driftsunderskudd, og det er bare tre av de gamle ansatte som henger igjen og hjelper til med andre prosjekter.\r\n\r\nDisse er nok ikke spesielt aktuelle for BedPres med dagens situasjon.', 353, '2010-09-23 22:40:14'),
@@ -577,7 +576,8 @@ INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`
 (379, 120, 'company', '50 personer er eit bra antall, med mindre Vianova har preferanser?\r\n\r\nElles trur eg vi har all informasjon vi trenger.', 293, '2012-02-01 17:12:26'),
 (380, 40, 'company', 'Hei igjen Rune.\r\n Tiden går jo fort  og du savner vel litt tilbakemelding.\r\n\r\n Vi konsentrerer oss om Hybrida og inviterer fra alle årstrinnene, alle retningene\r\n\r\n Vi vil gjerne invitere til pizza og øl etterpå og håper dere kan ordne dette.\r\n Jeg ser at dere opererer med maks 70 på andre tilsvarende presentasjoner og da setter vi det på samme nivå.\r\n\r\n Vi kommer til å stille med 4-5 personer fra vår side. \r\n\r\n Med tanke på innbydelsen så kommer her noen ord.\r\n\r\n Focus Software er et programvareselskap som utvikler og leverer programvare til norsk og internasjonal bygg-og anleggsnæring. \r\n Selskapets løsninger er i daglig bruk hos en rekke arkitekter og rådgivende ingeniørfirmaer.\r\n Løsningene dekker områdene konstruksjonsberegninger, anbudsbeskrivelser, BIM programvare(Autodesk Revit, Civil3D og Navisworks) og konsulenttjenester innen de samme områdene.\r\n Selskapet teller i dag 27 medarbeidere og er i vekst. Det skal rekrutteres 2-3 nyutdannede i inneværende år innen område programutvikling og BIM konsulent.\r\n Vi ønsker også kontakt med mulige masterkandidater som ønsker å gjennomføre masteroppgaven hos oss, gjerne kombinert med sommerjobb.\r\n Etter presentasjonen blir det mulighet for å avtale nærmere tidspunkt for en-til en samtaler senere.\r\n For nærmere informasjon om firmaet se www.focus.no \r\n\r\n Håper dette gir svar på dine spørsmål. Er det noe uklart så vennligst gi beskjed.\r\n\r\n\r\n Med hilsen\r\n\r\n Pål Eskerud\r\n Daglig Leder\r\n\r\n Epost: pe@focus.no\r\n Mob: +4790149690\r\n www.focus.no', 339, '2012-02-03 09:44:15'),
 (381, 204, 'company', 'Rune\r\n\r\n  \r\n\r\n Vi følger samme mønster som med Aarhønen. Dvs. at dere kommer ned hit ca. 18.30. Vi holder en presentasjon på ca. 1 time med servering av pizza og brus. \r\n\r\n  \r\n\r\n Dere kan bestille buss tilbake ca. 20.30 da vi setter av litt tid til å diskutere og tar en tur rundt i lokalet.\r\n\r\n  \r\n\r\n Alle er velkomne. Jeg tror agendaen styrer hvem som kommer. Vi trenger først og fremst folk med bygg, marin og maskinbakgrunn. Vi har plass til ca. 20 personer. \r\n\r\n  \r\n\r\n Agenda\r\n\r\n 1). GE et av verdens største selskaper  \r\n\r\n 2). Undervannskonstruksjoner , hva er det? 3). Piping vibrasjonsutfordringer  \r\n\r\n 4). Impact analyser på Manifold \r\n\r\n 5). Strømning i rørsystemer\r\n\r\n 6). Muligheter i GE og ansettelsesprosessen\r\n\r\n  \r\n\r\n  \r\n\r\n Regards\r\n\r\n Jomar Tørset\r\n\r\n Department Manager Trondheim\r\n\r\n GE Oil & Gas\r\n\r\n  \r\n\r\n T +47 73832621\r\n\r\n M +47 91715189\r\n\r\njomar.torset@ge.com\r\n\r\n www.geoilandgas.com/VetcoGray\r\n\r\n  \r\n\r\n Sluppenveien 12 C\r\n\r\n 7037 Trondheim', 339, '2012-02-03 09:45:10'),
-(382, 40, 'company', 'Det ser bra ut dette, vi har all nødvenig informasjon for påmeldinga.\r\n\r\nTo ting du gjerne kan spørre Focus om:\r\n\r\n- Kjem tidligere I&IKT-studenter til å vere blant dei besøkande?\r\n\r\n- Vil dei trenge intervjurom i etterkant for deira planlagte samtaler?', 293, '2012-02-03 15:40:41');
+(382, 40, 'company', 'Det ser bra ut dette, vi har all nødvenig informasjon for påmeldinga.\r\n\r\nTo ting du gjerne kan spørre Focus om:\r\n\r\n- Kjem tidligere I&IKT-studenter til å vere blant dei besøkande?\r\n\r\n- Vil dei trenge intervjurom i etterkant for deira planlagte samtaler?', 293, '2012-02-03 15:40:41'),
+(384, 40, 'company', 'Dei treng ikkje intervjurom. Daniel Aase kjem.', 339, '2012-02-06 12:50:12');
 
 -- --------------------------------------------------------
 
@@ -663,14 +663,15 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
   `altEmail` varchar(255) collate utf8_unicode_ci default NULL,
   PRIMARY KEY  (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=466 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=467 ;
 
 --
 -- Dumping data for table `hyb_user`
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-02-06 10:49:52', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com');
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-02-06 11:51:25', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com'),
+(466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -921,9 +922,9 @@ CREATE TABLE IF NOT EXISTS `news` (
 --
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `timestamp`, `status`) VALUES
-(40, 71, 'event', 'Åretur 2012', 0, NULL, '	Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: <strong> Åretur!!! </strong>\r\n<br />\r\n<br />\r\nSom de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n<br />\r\n<br />\r\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\r\n<br />\r\n<br />\r\n-Tur/retur Åre sentrum\r\n<br />\r\n-4 netters opphold\r\n<br />\r\n-5 dagers skipass \r\n<br />\r\n-rabattkort\r\n<br />\r\n+ mye fest og moro!\r\n<br />\r\n<br />\r\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \r\n<br />\r\n<br />&nbsp;OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding.&nbsp;<br />\r\n<br />', 326, '2011-07-17 22:34:51', 0),
-(41, 73, 'event', 'Generalforsamling', 4, NULL, 'Generalforsamling i Hybrida', 326, '2011-11-10 21:14:21', 0),
-(56, NULL, NULL, 'Nytt styre', NULL, NULL, '<p>Vil gratulere de nye styremedlemmene med valget!</p>\r\n<p>\r\n   <br />\r\n</p>\r\n<p>\r\n   <strong>Festivalus</strong> - Sigbjørn Aukland\r\n</p>\r\n<p>\r\n   <strong>Skattemester</strong> - Tonje Sundstrøm\r\n</p>\r\n<p>\r\n   <strong>Vevsjef</strong> - Sigurd Holsen\r\n</p>\r\n<p>\r\n   <strong>SPR</strong> - Erik Aasmundrud\r\n</p>', 363, '2011-11-26 20:02:14', 0);
+(40, 71, 'event', 'Åretur 2012', 0, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', 'Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\r\n<br />\r\n<br />\r\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\r\n<br />\r\n<br />\r\n-Tur/retur Åre sentrum\r\n<br />\r\n-4 netters opphold\r\n<br />\r\n-5 dagers skipass \r\n<br />\r\n-rabattkort\r\n<br />\r\n+ mye fest og moro!\r\n<br />\r\n<br />\r\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \r\n<br />\r\n<br />&nbsp;OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding.&nbsp;<br />\r\n<br />', 326, '2011-07-17 22:34:51', 0),
+(41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', '', 326, '2011-11-10 21:14:21', 0),
+(56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\r\n   <strong>Festivalus</strong> - Sigbjørn Aukland\r\n</p>\r\n<p>\r\n   <strong>Skattemester</strong> - Tonje Sundstrøm\r\n</p>\r\n<p>\r\n   <strong>Vevsjef</strong> - Sigurd Holsen\r\n</p>\r\n<p>\r\n   <strong>SPR</strong> - Erik Aasmundrud\r\n</p>', 363, '2011-11-26 20:02:14', 0);
 
 -- --------------------------------------------------------
 
