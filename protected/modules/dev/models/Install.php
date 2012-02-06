@@ -6,7 +6,6 @@ class Install {
 	
 	public function __construct() {
 		$this->sqlDir = Yii::getPathOfAlias('webroot') . "/backup.sql";
-		$this->install();
 	}
 	
 	public function install() {
