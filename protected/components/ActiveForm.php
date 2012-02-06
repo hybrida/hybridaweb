@@ -3,7 +3,7 @@
 class ActiveForm extends CActiveForm {
 
 	public function textArea($model, $attribute, $htmlOptions = array()) {
-		$xheditor = isset($htmlOptions['xheditor']) ? $htmlOptions['xheditor'] : false;
+		$xheditor = isset($htmlOptions['xheditor']) ? $htmlOptions['xheditor'] : true;
 		if ($xheditor) {
 			$this->renderXHeditor($model, $attribute, $htmlOptions);
 		} else {
