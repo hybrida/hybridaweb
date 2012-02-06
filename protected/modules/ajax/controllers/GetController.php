@@ -109,7 +109,6 @@ class GetController extends Controller{
         $this->pdo = Yii::app()->db->getPdoInstance();
         
         $data = array(
-            'userId' => Yii::app()->user->id,
             'type' => 'comment',
             'id' => $pId,
             'pType' => $pType
@@ -145,7 +144,6 @@ class GetController extends Controller{
         $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
         
         $data = array(
-            'userId' =>  Yii::app()->user->id,
             'type' => 'event'
         );
           
@@ -177,6 +175,22 @@ class GetController extends Controller{
         
         if(app()->gatekeeper->hasPostAccess('event', $eId)){
             
+			$data = array(
+				'eId' => $eId,
+			);
+			
+			$sql = "SELECT s.open, s.close, s.spots - ms.count AS available FROM signup AS s LEFT JOIN 
+				(SELECT eventId AS id, COUNT(*) AS count FROM membership_signup GROUP BY eventId) AS ms
+				ON s.eventId = ms.id 
+				WHERE s.eventId = :eId";
+			$query = $this->pdo->prepare($sql);
+			$query->execute($data);
+			
+			$event = $query->fetch(PDO::FETCH_ASSOC);
+			if (strtotime($event['open'] > time()) && strtotime($event['close']) < time() && $event['available'] < 1 ) {
+				die(" ");	//Påmelding ikke åpen, eller ikke ledige plasser!
+			}
+			
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
             if(isset($_REQUEST['type'])) {               
                 $signup = $_REQUEST['type'] == "on" ? "false" : "true";
@@ -311,7 +325,6 @@ class GetController extends Controller{
    
             //Søke på nyheter
             $data = array(
-                'userId' => Yii::app()->user->id,
                 'type'   => 'news',
                 'search' => $search
             );
@@ -367,7 +380,6 @@ class GetController extends Controller{
         $iterate= ($firstDay + $lastDay >= 35 ? 42 : 35) - $firstDay;
 
         $data = array(
-            'userId' => Yii::app()->user->id,
             'type' => 'event',
             'year' => $_GET['year'],
             'month' => $_GET['month']
