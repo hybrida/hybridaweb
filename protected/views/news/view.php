@@ -64,3 +64,8 @@ $this->endWidget()
 <p>
 	<?=$news->content?>
 </p>
+
+<?$this->widget('comment.components.commentWidget', array(
+	'id' => $news->id,
+	'type' => 'news',
+)); ?>

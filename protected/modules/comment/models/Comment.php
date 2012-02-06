@@ -27,7 +27,7 @@ class Comment extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'comment';
+		return 'hyb_comment';
 	}
 
 	/**
@@ -38,12 +38,12 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('parentId, author', 'numerical', 'integerOnly'=>true),
+			array('parentId, authorId', 'numerical', 'integerOnly'=>true),
 			array('parentType', 'length', 'max'=>7),
 			array('content, timestamp', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, parentId, parentType, content, author, timestamp', 'safe', 'on'=>'search'),
+			array('id, parentId, parentType, content, authorId, timestamp', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -68,7 +68,6 @@ class Comment extends CActiveRecord
 			'parentId' => 'Parent',
 			'parentType' => 'Parent Type',
 			'content' => 'Content',
-			'author' => 'Author',
 			'timestamp' => 'Timestamp',
 		);
 	}
