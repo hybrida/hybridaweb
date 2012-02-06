@@ -5,6 +5,9 @@ class ActiveForm extends CActiveForm {
 	public function textArea($model, $attribute, $htmlOptions=array()) {
 		CHtml::resolveNameID($model, $attribute, $htmlOptions);
 		$text = CHtml::resolveValue($model, $attribute);
+	
+		$width = isset($htmlOptions['width']) ? $htmlOptions['width'] : "100%";
+		$height = isset($htmlOptions['height']) ? $htmlOptions['height'] : "100%";
 
 		$this->widget('ext.xheditor.XHeditor', array(
 			'language' => 'en', //options are en, zh-cn, zh-tw
@@ -12,8 +15,8 @@ class ActiveForm extends CActiveForm {
 				'id' => $htmlOptions['id'],
 				'name' => $htmlOptions['name'],
 				'tools' => 'GStart,Bold,Italic,Underline,GEnd,Separator,GStart,Cut,Copy,Paste,GEnd,Separator,GStart,Blocktag,Removeformat,Separator,List,Source,Fullscreen,GEnd', // mini, simple, full or from XHeditor::$_tools, tool names are case sensitive
-				'width' => '130%',
-				'height' => '400',
+				'width' => $width,
+				'height' => $height,
 			//see XHeditor::$_configurableAttributes for more
 			),
 			'contentValue' => $text, // default value displayed in textarea/wysiwyg editor field
