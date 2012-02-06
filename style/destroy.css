@@ -1,7 +1,7 @@
 /* @override 
 	http://dev.hybrida.no/style/destroy.css */
 
-div, input, body, table, thead, tbody, tr, td {
+input, body, table, thead, tbody, tr, td {
 	position: relative;
 	padding: 0px;
 	margin: 0px;

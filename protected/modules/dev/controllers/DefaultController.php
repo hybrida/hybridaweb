@@ -53,7 +53,7 @@ class DefaultController extends Controller {
 		$this->render('update');
 	}
 
-	public function admin() {
+	public function actionAdmin() {
 		$admin = User::model()->find('username = "admin"');
 		$id = new DefaultIdentity($admin->id);
 		if ($id->authenticate()) {
