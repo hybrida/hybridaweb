@@ -187,14 +187,19 @@ class GetController extends Controller{
 			$query->execute($data);
 			
 			$event = $query->fetch(PDO::FETCH_ASSOC);
-			if (strtotime($event['open'] > time()) && strtotime($event['close']) < time() && $event['available'] < 1 ) {
-				die(" ");	//Påmelding ikke åpen, eller ikke ledige plasser!
-			}
 			
+
+			
+		
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
             if(isset($_REQUEST['type'])) {               
                 $signup = $_REQUEST['type'] == "on" ? "false" : "true";
 
+				//Gjøres sikkert i BPC etterhvert..
+				if (time() < strtotime($event['open']) || time() > strtotime($event['close']) || $event['available'] < 1 ) {
+					die("Påmelding ikke åpen, eller ikke ledige plasser!");	//Påmelding ikke åpen, eller ikke ledige plasser!
+				}
+				
                 $data = array(
                     'id' => $eId,
                     'selfId' => Yii::app()->user->id,
@@ -380,7 +385,6 @@ class GetController extends Controller{
         $iterate= ($firstDay + $lastDay >= 35 ? 42 : 35) - $firstDay;
 
         $data = array(
-            'type' => 'event',
             'year' => $_GET['year'],
             'month' => $_GET['month']
         );
