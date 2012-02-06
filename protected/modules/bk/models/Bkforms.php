@@ -10,7 +10,7 @@ class Bkforms {
             'companyId' => $id,
             'currentUserId' => Yii::app()->user->id
         );
-        $sql = "INSERT INTO comment (parentId, parentType, content, author, timestamp) 
+        $sql = "INSERT INTO hyb_comment (parentId, parentType, content, author, timestamp) 
 		VALUES (:companyId, 'company', :comment, :currentUserId, now())";
 
         $query = $this->pdo->prepare($sql);

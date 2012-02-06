@@ -487,7 +487,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM comment AS cmt, bk_company AS cmp
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM hyb_comment AS cmt, bk_company AS cmp
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
                 AND cmp.companyID = cmt.parentId";
 
@@ -506,7 +506,7 @@ class BkTool {
             'companyId' => $id
         );
         $sql = "SELECT un.imageId, un.firstName, un.middleName, un.lastName, cmt.timestamp, cmt.content 
-                FROM comment AS cmt, bk_company AS cmp, hyb_user AS un
+                FROM hyb_comment AS cmt, bk_company AS cmp, hyb_user AS un
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
                 AND cmp.companyID = cmt.parentId AND cmt.author = un.id
                 ORDER BY cmt.timestamp DESC";
