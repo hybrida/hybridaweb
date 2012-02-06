@@ -105,9 +105,5 @@ class Access {
 		return $result['id'];
 	}
 
-	public static function innerSQLAllowedTypeIds() {
-		return "(SELECT ar.id AS accessId, ma.userId FROM membership_access ma LEFT JOIN access_relations ar ON ma.accessId=ar.access 
-		WHERE ar.type=:type AND ma.userId = :userId) AS a ON a.accessId";
-	}
 
 }

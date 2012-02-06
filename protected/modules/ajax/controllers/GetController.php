@@ -47,16 +47,16 @@ class GetController extends Controller{
         
     }
     
+	
+	//Brukes denne? Ikke noe TILGANGSKONTROLL
     public function actionFeed(){
         $contentLength = 500;
         $limit  = (isset($_GET['s']) && isset($_GET['l']))  ? ' LIMIT ' . $_GET['s'] . ', ' . $_GET['l'] : ' ';
         
 
-        //Feil å bruke parentType for selection. 
         if ( !isset($_GET['parentType'])) {			
             $sql = "SELECT DISTINCT ui.id AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp 
                         FROM news n JOIN hyb_user ui ON n.author = ui.id 
-                        RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = n.id 
                         ORDER BY timestamp DESC " . $limit;
             
             $data = array(
@@ -119,7 +119,6 @@ class GetController extends Controller{
 
         $sql = "SELECT u.imageId, c.id, c.content, c.timestamp, u.firstName, u.middleName, u.lastName 
         FROM comment AS c JOIN hyb_user AS u ON c.author = u.id
-        RIGHT JOIN " . Access::innerSQLAllowedTypeIds() . " = c.id
         WHERE c.parentType = :pType AND c.parentId = :id 
         ORDER BY c.timestamp DESC " . $limit;
 
@@ -152,7 +151,6 @@ class GetController extends Controller{
           
         $sql = "SELECT e.id AS id, e.start AS start, e.title AS title
         FROM event AS e 
-        RIGHT JOIN  " . Access::innerSQLAllowedTypeIds() . " = e.id 
         WHERE start >= NOW()
         ORDER BY start $limit";
          
@@ -377,7 +375,6 @@ class GetController extends Controller{
 
         $sql = "SELECT e.title, e.id, DAY(e.start) AS day, DATE_FORMAT(e.start, '%k:%i') AS time 
         FROM event AS e 
-        RIGHT JOIN  " . Access::innerSQLAllowedTypeIds() ." = e.id
         WHERE YEAR(e.start) = :year AND MONTH(e.start) = :month 
         ORDER BY DAY(e.start)";
 
