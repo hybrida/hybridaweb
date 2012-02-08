@@ -1,4 +1,5 @@
 <? $this->pageTitle = "Rediger profil" ?>
+
 <h1>Endre profil</h1>
 <div class="formSection">
     <div class="fieldDefinition">Fyll inn info fra Facebook:</div>
@@ -10,16 +11,22 @@
     </div>
 </div>
 
-<form action="" method="post">
+<?
+$form = $this->beginWidget('ActiveForm', array(
+	'id' => 'profile-edit-form',
+	'enableClientValidation' => true,
+	'clientOptions' => array(
+		'validateOnSubmit' => true,
+	),
+))
+?>
     <div class="formSection">
         <div class="inputGoup">
             <div class="fieldDefinition">
                 Ferdig utdannet år: 
             </div>
             <div class="fieldInput">
-                <select name="graduateYear">
-                    <option value="1990">2015</option>
-                </select>
+				<?= $form->textField($model, 'graduationYear') ?>
             </div>
         </div>
 
@@ -28,36 +35,30 @@
                 Studieretning: 
             </div>
             <div class="fieldInput">
-                <select name="specialization">
-                    <option value="-1">(Avbrutt studie)</option>
-                    <option value="0" selected="selected">(Ikke valgt)</option>
-                    <option value="2">Petroleumsfag</option>
-                    <option value="3">Geomatikk</option>
-                    <option value="4">Konstruksjonsteknikk</option>
-                    <option value="5">Marin teknikk</option>
-                    <option value="7">Produkt & Prosess</option>    
-                </select>
+				<?= $form->dropDownList($model, 'specializationId', $specializations) ?>
             </div>
         </div>
+		
+		<div class="inputGroup">
+			<div class="fieldDefinition">
+				Kjønn:
+			</div>
+			<div class="fieldInput">
+				<?=$form->dropDownList($model, 'gender', array(
+					'unknown' => 'Ukjent',
+					'male' => 'Male',
+					'female' => 'Female',
+				)) ?>
+			</div>
+		</div>
 
         <div class="inputGoup">
             <div class="fieldDefinition">
                 Fødselsdato:
             </div>
-        </div>
-
-        <div class="inputGoup">
-            <div class="fieldInput">
-                <select name="bornDay">
-                    <option value="11">23</option>
-                </select>
-                <select name="bornMonth">
-                    <option value="1">12</option>
-                </select>
-                <select name="bornYear">
-                    <option value="1990">1990</option>
-                </select>
-            </div>
+			<div class="fieldInput">
+				<?= $form->dateField($model, 'birthdate') ?>
+			</div>
         </div>
 
         <div class="fieldExplanation">
@@ -68,12 +69,9 @@
     <div class="formSection">
         <div class="inputGoup">
             <div class="fieldDefinition">Privat e-postadresse:</div>
-            <div class="fieldInput"><input value="" size="30" name="email" type="email"></div>
-        </div>
-
-        <div class="inputGoup">
-            <div class="fieldDefinition">Jobbrelatert e-postadresse:</div>
-            <div class="fieldInput"><input value="" size="30" name="work" type="email"></div>
+            <div class="fieldInput">
+				<?= $form->textField($model, 'altEmail') ?>
+			</div>
         </div>
 
         <div class="fieldExplanation">
@@ -87,7 +85,9 @@
     <div class="formSection">
         <div class="inputGoup">
             <div class="fieldDefinition">Kortnummer:</div>
-            <div class="fieldInput"><input value="" size="30" name="cardnr" type="text"></div>
+            <div class="fieldInput">
+				<?= $form->textField($model, 'cardinfo') ?>
+			</div>
 
             <div class="fieldExplanation">
             	OBS! Dette er endret fra tidligere!<br />
@@ -101,7 +101,9 @@
         <div class="inputGoup">
             <div class="fieldDefinition">Om meg:</div>
 
-            <div class="fieldInput"><textarea cols="45" rows="6" wrap="soft" name="tekst"></textarea></div>
+            <div class="fieldInput">
+				<?= $form->textArea($model, 'description') ?>
+			</div>
 
             <div class="fieldExplanation">
                 I infotekst-feltet kan du legge til en beskrivelse av deg selv, hjemmeside og eventuelt
@@ -113,7 +115,9 @@
     <div class="formSection">
         <div class="inputGoup">
             <div class="fieldDefinition">Jobber i bedrift:</div>
-            <div class="fieldInput"><input value="" size="30" name="company" type="text"></div>
+            <div class="fieldInput">
+				<?= $form->dropDownList($model, 'workCompanyID', $companies) ?>
+			</div>
             <div class="fieldExplanation">
                 Navnet på bedriften du har blitt ansatt i. Hvis bedriften ikke finnes i databasen,
                 si ifra i stillingsbeskrivelsen, så blir bedriften blir lagt til av Bedkom.
@@ -122,7 +126,9 @@
 
         <div class="inputGoup">
             <div class="fieldDefinition">Stillingsbeskrivelse:</div>
-            <div class="fieldInput"><textarea cols="45" rows="6" wrap="soft" name="workDescription"></textarea></div>
+            <div class="fieldInput">
+				<?= $form->textArea($model, 'workDescription') ?>
+			</div>
             <div class="fieldExplanation">
                 Hva jobber du med? For eksempel offshore konstruksjoner eller NX.
             </div>
@@ -130,7 +136,9 @@
             
         <div class="inputGoup">
             <div class="fieldDefinition">Arbeidssted</div>
-            <div class="fieldInput"><input value="" size="30" name="workPlace" type="text"></div>
+            <div class="fieldInput">
+				<?= $form->textField($model, 'workPlace') ?>
+			</div>
             <div class="fieldExplanation">
                 Hvor du jobber (for eksempel Oslo).
             </div>
@@ -155,24 +163,8 @@
             </div>
         </div>
     </div>
-    
-</form>
+<?= CHtml::submitButton('Lagre', array(
+	'class' => 'button',
+))?>
 
-<!--
-<div style="margin: 1em 0; padding: 2em; border: dotted 1px red">
-    <b>Last opp bilde</b>
-    <div class="bildetips"><big>Tips</big> 
-        <p>Enkel bilderedigering online:
-            <a href="http://snipshot.com" target="_blank">snipshot.com</a>
-        </p>
-    </div>
-    <br /><br />
-    <form enctype="multipart/form-data" action="" method="post">
-        <input type="file" name="user_image"><br/>
-        <input type="hidden" name="username" value="bjorask"/>
-        <em style="font-size: 80%">Du må kanskje oppdatere siden for at det nye bildet skal vises</em>
-        <br/><br/><input value="Last opp" name="new_user_image" type="submit">    
-    </form>
-</div>
-
--->
+<? $this->endWidget() ?>
