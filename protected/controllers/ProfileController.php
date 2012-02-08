@@ -66,8 +66,6 @@ class ProfileController extends Controller {
 		}
 
 		if (isset($_POST['User'])) {
-			echo "<pre>";
-			print_r($_POST);
 			$user->attributes = $_POST['User'];
 			if ($user->validate()) {
 				$user->save();
