@@ -15,12 +15,6 @@
             <h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
         </div>
         <div class="articleContent">
-            
-            <? $url = $this->createUrl("/news/edit", array("id" => $model->id)); ?>
-
-			<? if (!user()->isGuest): ?>
-				<a class="button buttonRightSide" href="<?= $url ?>">Rediger</a>
-            <? endif ?>
             <?= $model->ingress ?>
             <div class="date">Dato: <?= $model->timestamp ?></div>
 			<? if ($model->author): ?>

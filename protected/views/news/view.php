@@ -39,7 +39,7 @@ $this->endWidget()
 
 <h1><?=$news->title?></h1>
 
-<? if (!user()->isGuest): ?>
+<? if ($hasEditAccess): ?>
 <p>
 	<?= CHtml::link("Rediger",array("news/edit",'id' => $news->id), array(
 		'class' => 'button buttonRightSide'

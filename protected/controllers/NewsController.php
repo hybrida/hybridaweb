@@ -43,6 +43,7 @@ class NewsController extends Controller {
 			'news' => $news,
 			'event' => $event,
 			'signup' => $signup,
+			'hasEditAccess' => user()->checkAccess('updateNews', array('id' => $id)),
 		));
 	}
 
@@ -79,6 +80,7 @@ class NewsController extends Controller {
 			'models' => $feedElements,
 			'index' => $this->offset,
 			'limit' => $this->feedLimit,
+			'hasPublishAccess' => user()->checkAccess('createNews'),
 		));
 	}
 

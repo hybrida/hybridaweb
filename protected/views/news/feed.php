@@ -14,9 +14,11 @@ $this->endWidget()
 ?>
 <div class="feedTitle">
     <h1 style="display: inline">Nyhetsstrøm</h1>
+	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
 		'class' => 'button buttonRightSide',
 	))	?>
+	<? endif ?>
 </div>
 
 <div class="heavyBorder"></div>
