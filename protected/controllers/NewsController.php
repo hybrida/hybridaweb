@@ -18,17 +18,13 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view"),
-				'users' => array('*'),
-			),
-			array('deny',
-				'actions' => array("edit", "create"),
-				'users' => array('?'),
+				'actions' => array("view","edit",'feed','feedAjax','index'),
 			),
 			array('allow',
-				'actions' => array("edit", "create"),
-				'users' => array('@'),
+				'actions' => array("create"),
+				'roles' => array('createNews'),
 			),
+			array('deny'),
 		);
 	}
 
@@ -108,6 +104,9 @@ class NewsController extends Controller {
 	}
 
 	public function actionEdit($id) {
+		if (!user()->checkAccess('updateNews', array('id' => $id))) {
+			throw new CHttpException(403, "Du har ikke tilgang til å endre denne nyheten");
+		}
 		$model = $this->getNewsModel($id);
 		$this->renderNewsEventForm($model);
 	}
