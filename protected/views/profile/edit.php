@@ -38,6 +38,19 @@ $form = $this->beginWidget('ActiveForm', array(
 				<?= $form->dropDownList($model, 'specializationId', $specializations) ?>
             </div>
         </div>
+		
+		<div class="inputGroup">
+			<div class="fieldDefinition">
+				Kjønn:
+			</div>
+			<div class="fieldInput">
+				<?=$form->dropDownList($model, 'gender', array(
+					'unknown' => 'Ukjent',
+					'male' => 'Male',
+					'female' => 'Female',
+				)) ?>
+			</div>
+		</div>
 
         <div class="inputGoup">
             <div class="fieldDefinition">
