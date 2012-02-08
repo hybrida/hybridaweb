@@ -1151,3 +1151,77 @@ INSERT INTO `vote` (`pollId`, `userId`, `choice`) VALUES
 (380, 1, 2),
 (15, 1, 1);
 
+--
+-- Table structure for table `hyb_rbac_assignment`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_rbac_assignment` (
+  `itemname` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `userid` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `bizrule` text COLLATE utf8_unicode_ci,
+  `data` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`itemname`,`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hyb_rbac_assignment`
+--
+
+INSERT INTO `hyb_rbac_assignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
+('admin', '381', '', 's:0:"";'),
+('writer', '356', '', 's:0:"";');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hyb_rbac_item`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_rbac_item` (
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `bizrule` text COLLATE utf8_unicode_ci,
+  `data` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hyb_rbac_item`
+--
+
+INSERT INTO `hyb_rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
+('admin', 2, '', '', 's:0:"";'),
+('createNews', 0, 'Poste nyhet', '', 's:0:"";'),
+('editor', 2, '', '', 's:0:"";'),
+('updateNews', 0, '', '', 's:0:"";'),
+('updateOwnNews', 1, '', 'return isset($params["id"]) && News::model()->findByPk($params["id"])->authorId == user()->id;', 's:0:"";'),
+('writer', 2, '', '', 's:0:"";');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hyb_rbac_itemchild`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_rbac_itemchild` (
+  `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
+  KEY `child` (`child`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hyb_rbac_itemchild`
+--
+
+INSERT INTO `hyb_rbac_itemchild` (`parent`, `child`) VALUES
+('writer', 'createNews'),
+('admin', 'editor'),
+('editor', 'updateNews'),
+('updateOwnNews', 'updateNews'),
+('writer', 'updateOwnNews'),
+('admin', 'writer');
+
+-- --------------------------------------------------------
+

@@ -52,17 +52,14 @@ return array(
 			'userid' => 'id', //default: userid
 			'username' => 'username', //default:username
 			'delimeter' => '@', //default:-
-			'debug' => true, //default :false
+			'debug' => false, //default :false
 			'pageSize' => 10, // default : 15
-			'superUser' => 'Admin', //default: Authorizer
+			'superUser' => 'admin', //default: Authorizer
 			'css' => 'srbac.css', //default: srbac.css
-			'layout' =>'//layouts/column2',
+			'layout' =>'//layouts/singleColumn',
 			'notAuthorizedView' => 'srbac.views.authitem.unauthorized', // default:
 			//srbac.views.authitem.unauthorized, must be an existing alias
-			'alwaysAllowed' => array(
-				//default: array()
-				'SiteLogin', 'SiteLogout', 'SiteIndex', 'SiteAdmin',
-				'SiteError', 'SiteContact'),
+			'alwaysAllowed' => array(),
 			'userActions' => array('Show', 'View', 'List'), //default: array()
 			'listBoxNumberOfLines' => 15, //default : 10
 			'imagesPath' => 'srbac.images', // default: srbac.images
