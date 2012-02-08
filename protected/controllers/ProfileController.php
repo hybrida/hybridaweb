@@ -3,7 +3,7 @@
 class ProfileController extends Controller {
 
 	public $imageId;
-	
+
 	public function __construct($id, $module = null) {
 		parent::__construct($id, $module);
 	}
@@ -17,7 +17,7 @@ class ProfileController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("index", "info","view", "edit", "comment"),
+				'actions' => array("index", "info", "view", "edit", "comment"),
 				'users' => array('@'),
 			),
 			array('deny'),
@@ -27,7 +27,7 @@ class ProfileController extends Controller {
 	public function actionIndex() {
 		$this->actionInfo(user()->name);
 	}
-	
+
 	public function actionView($username) {
 		$this->actionInfo($username);
 	}
@@ -57,11 +57,56 @@ class ProfileController extends Controller {
 		));
 	}
 
-	public function actionEdit() {
+	public function actionEdit($username) {
 		$fb = new Facebook();
-		$data['fb'] = $fb->authLink();
+		$user = User::model()->find('username = ?', array($username));
 
-		$this->render('edit', $data);
+		if (!$user) {
+			throw new CHttpException("Brukeren finnes ikke");
+		}
+
+		if (isset($_POST['User'])) {
+			echo "<pre>";
+			print_r($_POST);
+			$user->attributes = $_POST['User'];
+			if ($user->validate()) {
+				$user->save();
+				$this->redirect(array('/profile/info', 'username' => $username));
+			} else {
+				print_r($user->errors);
+			}
+		}
+
+
+		$this->render('edit', array(
+			'fb' => $fb->authLink(),
+			'model' => $user,
+			'specializations' => $this->getSpecializationsList(),
+			'companies' => $this->getCompaniesList(),
+		));
 	}
 
+	public function getSpecializationsList() {
+		$specs = Specialization::model()->findAll();
+		$array = array();
+		$array[null] = 'Ingen valgt';
+		foreach ($specs as $spec) {
+			$array[$spec->id] = $spec->name;
+		}
+		return $array;
+	}
+
+	public function getCompaniesList() {
+		$companies = app()->db->createCommand()
+				->select('companyID, companyName')
+				->from('bk_company')
+				->order('companyName ASC')
+				->queryAll();
+		$array = array();
+		$array[null] = 'Ingen valgt';
+		foreach ($companies as $c) {
+			$array[$c['companyID']] = $c['companyName'];
+		}
+		return $array;
+	}
 }
