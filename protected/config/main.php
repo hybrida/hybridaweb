@@ -46,6 +46,7 @@ return array(
 		'ajax',
 		'dev',
 		'bk',
+		'bpc',
 		'comment',
 		'search',
 		'srbac' => array(

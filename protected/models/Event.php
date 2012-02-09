@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'event':
  * @property integer $id
+ * @property integer $bpcID
  * @property string $start
  * @property string $end
  * @property string $location

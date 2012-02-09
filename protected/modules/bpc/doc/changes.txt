@@ -1,0 +1,65 @@
+1.1 - 20/10-2009
+===========================================================================
+-Påmelding starter og påmeldingsfrist har gått helt i glemmeboken, implementert nå.
+-Legger til støtte for å hente ut statistikk for en bruker mtp prikksystem.
+-Linjeforeninga som arrangerer en bedpres kan nå melde på og av brukere fra andre linjeforeninger om de ønsker.
+
+De eneste endringene som er gjort i bpc_core.php er at versjonsnummeret er endret til 1.1 og at vi har lagt til connection timeout for koblingen til serveren. (Takk til Torstein Ingebrigtsen Bø).
+
+Følgende endringer er gjort i dokumentasjonen (bruk dette som en oppdateringsguide):
+
+get_events:
+	Parametre:
+		+event_type		- Om vi skal returnere bedpresser uten blæstedeal. Kan være 'advertised', 'not_advertised' eller 'all'
+	Returnert data:
+		+deadline_passed	- Hvorvidt påmeldingsfristen er passert, 1 eller 0 (true/false)
+		+registration_start	- Påmelding starter, i formatet YYYY-MM-DD HH:MM:SS
+		+registration_started	- Hvorvidt påmeldingen har begynt, 1 eller 0 (true/false)
+		+is_advertised		- 1 hvis dere har blæstedeal, 0 ellers. Trenger bare ta hensyn til denne når event_type='all'
+		
++get_user_stats:
+	Se readme for detaljer.
+
+Nye feilmeldinger:
+408 – Påmelding har ikke startet ennå (add_attending)
+409 - Påmeldingsfristen har passert (add_attending)
+
+
+1.0 - 26/2-2009
+===========================================================================
+Legger til støtte for venteliste, logo, url til bedriften og sortering av deltagere.
+
+Følgende endringer er gjort i dokumentasjonen (bruk dette som en oppdateringsguide):
+
+Ny fellesparameter:
+version
+
+get_events:
+	Returnert data:
+		+web_page - Link til bedriftens nettside
+		+logo - url til bedriftens logo
+		+waitlist_enabled - 1 hvis venteliste er aktivert for dette arrangementet
+		+count_waiting - Antall personer på venteliste fra denne linjeforeningen
+		+is_waiting - Kun hvis username-paramteren er gitt, angir om denne brukeren står på venteliste (1) eller ikke (0).
+
+add_attending:
+	returnert data:
+		['add_attending'][0] = 1 ved vanlig påmelding uten feil. Hvis brukeren blir satt på venteliste er ['add_attending'][0] et array med 'waiting' som key og brukerens plass på ventelista som value: array('waiting' => int). Hvis en feil oppstod kommer det en feilmelding i $data['error'].
+
+get_attending:
+	Frivillig argument:
+		+sort - hvordan deltagerne skal sorteres. Alternativer: 'lname' (etternavn, standard), 'fname' (fornavn), 'username', 'registered' (når påmeldingen skjedde)
+	Returnert data:
+		+year - hvilken årstrinn i studiet personen er på
+	
++get_waiting:
+	Samme paramtere som get_attending, men gir personer på venteliste. Sortert etter påmeldingstidspunkt som standard, kan overstyres med 'sort'.
+
+
+0.9
+==========================================================================
+method 'php_array' byttes ut til fordel for 'serialized_array'
+
+0.8
+==========================================================================
+Første release
