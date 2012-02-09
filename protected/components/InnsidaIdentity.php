@@ -60,7 +60,7 @@ class InnsidaIdentity extends CUserIdentity {
         $this->setState("member", $info['member']);
         $this->setState("gender", $info['gender']);
         $this->setState("imageId", $info['imageId']);
-		$this->setState("cardinfo", $user->cardinfo ? $user->cardinfo : "");
+		$this->setState("cardinfo", $this->user->cardinfo ? $this->user->cardinfo : "");
     }
 
     public function getErrorMessage() {
