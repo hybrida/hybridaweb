@@ -56,9 +56,11 @@ class InnsidaIdentity extends CUserIdentity {
         $this->setState("firstName", $info['firstName']);
         $this->setState("middleName", $info['middleName']);
         $this->setState("lastName", $info['lastName']);
+		$this->setState("fullName", $this->user->fullName);
         $this->setState("member", $info['member']);
         $this->setState("gender", $info['gender']);
         $this->setState("imageId", $info['imageId']);
+		$this->setState("cardinfo", $info['cardinfo']);
     }
 
     public function getErrorMessage() {
