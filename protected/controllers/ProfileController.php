@@ -77,6 +77,7 @@ class ProfileController extends Controller {
 				$this->redirect(array('/profile/info', 'username' => $username));
 			} else {
 				print_r($user->errors);
+				return;
 			}
 		}
 

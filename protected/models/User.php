@@ -135,6 +135,18 @@ class User extends CActiveRecord {
 					'criteria' => $criteria,
 				));
 	}
+	
+	public function afterValidate() {
+		$p = new CHtmlPurifier;
+		$this->altEmail = $p->purify($this->altEmail);
+		$this->description = $p->purify($this->description);
+		$this->firstName = $p->purify($this->firstName);
+		$this->middleName = $p->purify($this->middleName);
+		$this->lastName = $p->purify($this->lastName);
+		$this->workDescription = $p->purify($this->workDescription);
+		$this->workPlace = $p->purify($this->workPlace);
+		parent::afterValidate();
+	}
 
 	public function getAccess() {
 		$gender = $this->getGenderAccess();
