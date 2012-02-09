@@ -389,9 +389,12 @@ class GetController extends Controller{
             'month' => $_GET['month']
         );
 
-        $sql = "SELECT e.title, e.id, DAY(e.start) AS day, DATE_FORMAT(e.start, '%k:%i') AS time 
+        $sql = "SELECT n.id ,n.title , DAY(e.start) AS day, DATE_FORMAT(e.start, '%k:%i') AS time 
         FROM event AS e 
-        WHERE YEAR(e.start) = :year AND MONTH(e.start) = :month 
+		JOIN news AS n ON n.parentId = e.id
+        WHERE YEAR(e.start) = :year 
+			AND MONTH(e.start) = :month
+			AND n.parentType = 'event'
         ORDER BY DAY(e.start)";
 
         $query = $this->pdo->prepare($sql);
@@ -402,7 +405,7 @@ class GetController extends Controller{
         for( $i = -$firstDay + 1; $i < $iterate; $i++ ) {
             if( $i > 0 && $i <= $lastDay ) {
                 if( $i == $result['day'] ) {
-                    echo ("<a title='" . $result['title'] . " kl " . $result['time'] . "' href='" . Yii::app()->request->baseUrl ."/event/" . $result['id'] ."'>" . $i . "</a>");
+                    echo ("<a title='" . $result['title'] . " kl " . $result['time'] . "' href='" . Yii::app()->request->baseUrl ."/news/" . $result['id'] ."/" . $result['title'] . "'>" . $i . "</a>");
                     $result = $query->fetch(PDO::FETCH_ASSOC);
                     //$row = mysql_fetch_array( $result );
                 } else {
