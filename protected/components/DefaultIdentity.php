@@ -39,7 +39,7 @@ class DefaultIdentity extends CUserIdentity {
         $this->setState("member", $info['member']);
         $this->setState("gender", $info['gender']);
         $this->setState("imageId", $info['imageId']);
-		$this->setState("cardinfo", $user->cardinfo);
+		$this->setState("cardinfo", $user->cardinfo ? $user->cardinfo : "");
 		return true;
 	}
 
