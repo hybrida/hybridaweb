@@ -42,6 +42,7 @@ class SignupFeed extends AbstractFeed {
 				AND e.start > NOW()
 				AND e.status = " . Status::PUBLISHED ."
 				AND s.status = " . Status::PUBLISHED ."
+				AND m.signedOff = 'false'
 			ORDER BY n.timestamp ASC";
 	}
 
