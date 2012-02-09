@@ -1,5 +1,5 @@
 
-<div class='barTitle'>Kommende aktiviteter</div>
+<div class='barTitle'>Dine kommende aktiviteter</div>
 
 <div class="barText">
 	<? foreach ($models as $model): ?>
