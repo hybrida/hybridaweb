@@ -58,7 +58,12 @@ class ProfileController extends Controller {
 	}
 
 	public function actionEdit($username) {
-		$fb = new Facebook();
+		$updateAccess = user()->checkAccess('updateProfile', array(
+			'username' => $username,
+		));
+		if (!$updateAccess) {
+			throw new CHttpException(403, "Du har ikke tilgang til å endre denne profilen");
+		}
 		$user = User::model()->find('username = ?', array($username));
 
 		if (!$user) {
@@ -75,7 +80,7 @@ class ProfileController extends Controller {
 			}
 		}
 
-
+		$fb = new Facebook();
 		$this->render('edit', array(
 			'fb' => $fb->authLink(),
 			'model' => $user,

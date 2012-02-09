@@ -52,7 +52,7 @@ return array(
 			'userid' => 'id', //default: userid
 			'username' => 'username', //default:username
 			'delimeter' => '@', //default:-
-			'debug' => false, //default :false
+			'debug' => true, //default :false
 			'pageSize' => 10, // default : 15
 			'superUser' => 'admin', //default: Authorizer
 			'css' => 'srbac.css', //default: srbac.css
@@ -79,7 +79,7 @@ return array(
 		'authManager' => array(
 			// Path to SDbAuthManager in srbac module if you want to use case insensitive
 			//access checking (or CDbAuthManager for case sensitive access checking)
-			'class' => 'srbac.components.SDbAuthManager',
+			'class' => 'CDbAuthManager',
 			// The database component used
 			'connectionID' => 'db',
 			// The itemTable name (default:authitem)
@@ -88,6 +88,7 @@ return array(
 			'assignmentTable' => 'hyb_rbac_assignment',
 			// The itemChildTable name (default:authitemchild)
 			'itemChildTable' => 'hyb_rbac_itemchild',
+			'defaultRoles' => array('updateOwnProfile'),
 		),
 		'gatekeeper' => array(
 			'class' => 'GatekeeperComponent',

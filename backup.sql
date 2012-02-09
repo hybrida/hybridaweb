@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 06, 2012 at 05:04 PM
+-- Generation Time: Feb 09, 2012 at 12:30 AM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny13
 
@@ -133,7 +133,13 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   `isDeleted` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
   PRIMARY KEY  (`updateId`),
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12587 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12808 ;
+
+--
+-- Dumping data for table `bk_company_update`
+--
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `event`
@@ -217,13 +223,18 @@ CREATE TABLE IF NOT EXISTS `hyb_comment` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=386 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=391 ;
 
 --
 -- Dumping data for table `hyb_comment`
 --
 
 INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
+(390, 1, 'company', 'Fakturaadresse 2012:\r\n\r\nAker Engineering & Technology AS\r\nPO Box 2030\r\nN-5409 STORD\r\nNorway\r\nAtt. Jon Østmoen\r\n\r\nTag:\r\nBedriftspresentasjon, NTNU\r\n70 deltakere\r\nHonorar og servering', 293, '2012-02-08 23:33:18'),
+(389, 397, 'profile', '<u><strong>YO</strong></u>', 397, '0000-00-00 00:00:00'),
+(388, 397, 'profile', '<u><strong>YO</strong></u>', 397, '0000-00-00 00:00:00'),
+(387, 120, 'company', 'Fikk svar om kaffe nå:\r\n\r\n"Hei.\r\nKaffe høres ut som en god ide, så det tar vi gjerne..."\r\n\r\nså vi kjører kaffe!\r\n\r\n\r\n', 354, '2012-02-07 13:23:53'),
+(386, 204, 'company', 'Den er grei, eg gav Nikolai i oppgåve å henge opp flyeren på lesesalen.', 293, '2012-02-06 17:06:39'),
 (385, 204, 'company', 'Fått en flyer fra Jomar, lagt den til i ei ny mappe i dropbox.', 339, '2012-02-06 12:51:08'),
 (33, 82, 'company', 'Ikkje kontakta i det heile tatt fordi GK ansetter folk fra Emil.', 339, '2010-09-22 13:22:07'),
 (34, 83, 'company', 'Copypaste fra det andre forumet...\r\n\r\n"Hei,\r\n\r\nVi i Selvaag Bluethink har bestemt oss for å ikke delta denne gangen. Det kan godt hende vi vil være interessert i å presentere oss ved en senere anledning.\r\n \r\nMvh\r\nKristoffer Kvello\r\nSelvaag Bluethink\r\n"\r\n(kkv@selvaag.no)', 279, '2010-09-13 22:37:53'),
@@ -368,10 +379,10 @@ INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`
 (173, 34, 'company', 'Ringte personalsjefen (som tidligere ikke har svart på mail) og fikk beskjed om at nummeret ikke er i bruk.\r\nSer etter andre aktuelle kontaktpersoner.\r\n___\r\n\r\nKanskje Sweco MEC ( http://www.mec.no/ ) er interessant, særlig for marin og prosess (mulig også konstruksjon).\r\n\r\n"Det som i dag er SWECO MEC AS, ble startet i 1981, av 5 erfarne ingeniører fra Mandal. De første årene var det stor vekt på prosjekt og disiplinledelse, samt konstruksjon, mest rettet mot offshore og den maritime sektoren.\r\nI løpet av 90 tallet dreide oppgavene seg mer og mer om design, både innen mekanikk og prosessanlegg av alle slag. I de siste 10 årene, har SWECO MEC AS konsentrert seg om fagene prosess, styring og design, innen offshore og onshore prosessindustri. Vi har lang erfaring fra alle typer prosessanlegg, alt fra farmasi, via solcelle og metallurgi, til hydrokarbon anlegg."\r\n\r\n"SWECO MEC AS er også leverandør av designsoftware fra Bentley, og innehar alle nødvendige sertifiseringer for levering, tilpassing og undervisning av programvaren, AutoPLANT "', 314, '2011-01-11 22:36:11'),
 (174, 34, 'company', 'philip.pedersen@sweco.no står oppført som leder for Sweco Industry Norge samt som kontaktperson for Sweco MEC.\r\n\r\nSender ham en mail.', 314, '2011-01-11 22:37:08'),
 (175, 34, 'company', 'Maste på sistnevnte, som nå svarte og sa han hadde videresendt dette til lysakerkontoret og kontaktperson Anne Sødem. Dette er samme personalsjef som nevnt i tidligere innlegg, så nå er jeg rundt.', 314, '2011-03-10 22:38:20'),
-(176, 34, 'company', 'Virker som personalsjefen nå har sendt mailen min rundt til forskjellige avdelinger, så jeg fikk samme avslaget igjen fra bygg og konstruksjonsteknikk-avdelingen:\r\n\r\n******\r\nHei\r\n\r\nDe konstruksjonstekniske fagene i Sweco har bedriftspresentasjon hos linjeforeningen Århønen hver høst.\r\nVi er også representert på BM-Arena og Næringslivsdagene.\r\n\r\nVi har foreløpig ingen planer om å gjennomføre en bedriftspresentasjon for  masterstudiet Ingeniørvitenskap & IKT.\r\n\r\nMed Hilsen\r\n\r\nPhilip Mitusch\r\n*****\r\n\r\nHåper på å høre fra de andre avdelingene også, da det var de jeg var ute etter....', 314, '2011-03-11 22:39:09'),
-(177, 97, 'company', 'Kontaktperson Jan Petter Stenberg:\r\n\r\nJan.Petter.Stenberg@forsvarsbygg.no\r\n\r\ntlf: 924 25 576 \r\n\r\nHar snakket med han på tlf tidligere, sendte han mail, fikk ikke svar. RIngte på nytt i dag, han hadde ikke glemt oss og han hadde behandlet det men han som var ansvarlig var ikke på jobb atm.\r\n\r\nRinger meg i morra', 306, '2011-03-07 22:40:21'),
-(178, 97, 'company', 'Kontaktperson er nå Terje Jensen\r\n\r\nTerje.Jensen@forsvarsbygg.no\r\n\r\ntlf: 91868601\r\n\r\nDe har gjort en avtale med Senter for eiendomsutvikling og -forvaltning her på NTNU, og mente det var tilstrekkelig inntill videre. De hadde behandlet det ganske seriøst og sa at de skulle ta kontakt om det skulle bli aktuelt seinere, så jeg tror ikke det er noe poeng å presse dem på en stund.', 306, '2011-03-16 22:41:11');
+(176, 34, 'company', 'Virker som personalsjefen nå har sendt mailen min rundt til forskjellige avdelinger, så jeg fikk samme avslaget igjen fra bygg og konstruksjonsteknikk-avdelingen:\r\n\r\n******\r\nHei\r\n\r\nDe konstruksjonstekniske fagene i Sweco har bedriftspresentasjon hos linjeforeningen Århønen hver høst.\r\nVi er også representert på BM-Arena og Næringslivsdagene.\r\n\r\nVi har foreløpig ingen planer om å gjennomføre en bedriftspresentasjon for  masterstudiet Ingeniørvitenskap & IKT.\r\n\r\nMed Hilsen\r\n\r\nPhilip Mitusch\r\n*****\r\n\r\nHåper på å høre fra de andre avdelingene også, da det var de jeg var ute etter....', 314, '2011-03-11 22:39:09');
 INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
+(177, 97, 'company', 'Kontaktperson Jan Petter Stenberg:\r\n\r\nJan.Petter.Stenberg@forsvarsbygg.no\r\n\r\ntlf: 924 25 576 \r\n\r\nHar snakket med han på tlf tidligere, sendte han mail, fikk ikke svar. RIngte på nytt i dag, han hadde ikke glemt oss og han hadde behandlet det men han som var ansvarlig var ikke på jobb atm.\r\n\r\nRinger meg i morra', 306, '2011-03-07 22:40:21'),
+(178, 97, 'company', 'Kontaktperson er nå Terje Jensen\r\n\r\nTerje.Jensen@forsvarsbygg.no\r\n\r\ntlf: 91868601\r\n\r\nDe har gjort en avtale med Senter for eiendomsutvikling og -forvaltning her på NTNU, og mente det var tilstrekkelig inntill videre. De hadde behandlet det ganske seriøst og sa at de skulle ta kontakt om det skulle bli aktuelt seinere, så jeg tror ikke det er noe poeng å presse dem på en stund.', 306, '2011-03-16 22:41:11'),
 (179, 72, 'company', 'Er litt usikker på hvor relevante de er for oss, men sendte mail til administrasjonsleder og håper på rett kontaktperson.', 279, '2011-01-10 22:42:52'),
 (180, 72, 'company', 'Har ikke fått noe svar på mail, men ser at de har omtrent bare ingeniører som ansatte, og ingen utviklere... Tror derfor at vi er litt for flinke for dem...', 279, '2011-03-16 22:43:33'),
 (181, 133, 'company', '4 Divisjoner: Infrastruktur, Industri, Energi, Teknologi. Særlig Industri og Teknologi virker veldig relevant for oss. Industri har blant annet et fagfelt som heter Industriell IT. (Divisjon Industry har en ledende posisjon innen prosessteknikk, automasjon, industriell IT, elektro og mekanisk engineering.)\r\n\r\nTre mulige måter å kontakte ÅF:\r\n\r\n(1)\r\nHvem har ansvar for rekruttering i ÅF i Norge?\r\n\r\nVi har ingen sentral rekrutteringsfunksjon i ÅF, da alle avdelingene rekrutterer sine konsulenter etter behov, med bistand fra HR. For alle henvendelser om rekruttering kan du kontakte vår HR-avdeling.\r\n\r\nHR-avdelingen kontaktes på: katarina.gutu@afconsult.com\r\n\r\n(2)\r\nÅF i Norge: http://www.afconsult.com/no/Kontakt/\r\n\r\n(3)\r\nPrate med folk på stand eller å være kreativ å finne på noe annet.\r\n\r\nAnbefaler å begynne med punkt 1.', 314, '2011-03-22 22:44:51'),
@@ -495,9 +506,9 @@ INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`
 (299, 18, 'company', 'I dag fekk eg svar frå Maskin om kva deira forhold til Sub Sea er.\r\n\r\nDei skal ha besøk av Sub Sea på PuP-dagane, som er først på våren. Derfor er dei interesserte i ein felles presentasjon no i november som det var snakk om.\r\n\r\nPresentasjonen blir då avholdt av Maskin og I&IKT i fellesskap og ikkje med TP, sjøvsagt om dei er interesserte i eit slikt opplegg. Det har vore mykje fram og tilbake i denne saka, så eg skjønner om dei gjerne heller vil holde det for ei linje, men det er ikkje lenger eit spørsmål om kven som arrangerer viss det blir eit felles opplegg.\r\n\r\nMaskin ønska i alle fall å samarbeide med oss. Dermed er det opp til Sub Sea kva dei vil.\r\n\r\nMaskin har ledig dato tirsdag 01.11., derfor foreslår vi denne datoen for Sub Sea og ikkje 02.11. som var foreslått i forrige innlegg.\r\n\r\nDå er det berre å sende svar til Sub Sea.', 293, '2011-09-05 11:39:28'),
 (300, 18, 'company', 'Snakket med Marit på telefonen i dag. Hun skulle svare på mailen om antall personer og årskurs osv. i løpet av dagen eller morgendagen. De ønsker at vi inviterer maskin.', 397, '2011-09-20 11:40:09'),
 (301, 18, 'company', 'Meget bra :)\r\n\r\nEg prata med Maskin, dei uttrykte tilfredsstillelse over å bli invitert.\r\n\r\nVi trenger den infoen ja, men dato og tidspunkt er vel satt? 01.11., kl. 18.15 slik vi prata om?', 293, '2011-09-20 11:41:07'),
-(302, 18, 'company', 'Jepp 1/11 kl 18.15\r\n\r\nDe ønsker å invitere 3. - 5. årskurs, virker ikke som de vil ha begrensninger på retninger.', 397, '2011-09-21 11:41:57'),
-(303, 18, 'company', 'Utdrag frå visittkortet til Bernt Arne Breistein i Sub Sea Services:\r\n\r\n""\r\nBernt Arne Breistein\r\nChief Executive Officer\r\nMobile: +47 95 20 79 96\r\nEmail: bernt.arne@subseaservices.no\r\n\r\nSub Sea Services AS\r\nFinnestadsvingen 24, 4029 Stavanger\r\nPhone: +47 51 83 95 30\r\nWeb: subseaservices.no\r\n""', 293, '2011-11-05 11:42:50');
+(302, 18, 'company', 'Jepp 1/11 kl 18.15\r\n\r\nDe ønsker å invitere 3. - 5. årskurs, virker ikke som de vil ha begrensninger på retninger.', 397, '2011-09-21 11:41:57');
 INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`, `timestamp`) VALUES
+(303, 18, 'company', 'Utdrag frå visittkortet til Bernt Arne Breistein i Sub Sea Services:\r\n\r\n""\r\nBernt Arne Breistein\r\nChief Executive Officer\r\nMobile: +47 95 20 79 96\r\nEmail: bernt.arne@subseaservices.no\r\n\r\nSub Sea Services AS\r\nFinnestadsvingen 24, 4029 Stavanger\r\nPhone: +47 51 83 95 30\r\nWeb: subseaservices.no\r\n""', 293, '2011-11-05 11:42:50'),
 (304, 18, 'company', 'Bedriftens navn:\r\nSub Sea Services\r\n\r\nAvdeling: Hele bedriften, men først og fremst kontoret i Stavanger\r\n\r\nTid for bed.pres: 1.11.2011 18.15\r\n\r\nKontaktperson(er): Marit Kjersti Berge, Julie Krause, Bernt Arne Breistein, Eirik Røysland\r\n\r\nEpostadresse: Marit: maritkjersti@subseaservices.no Julie: julie@subseaservices.no Eirik: eirik@subseaservices.no Bernt Arne: bernt.arne@subseaservices.no\r\n\r\nTlf: Sub Sea-resepsjon: 51839530 Marit: 99246140 Julie: 406 20 649 Eirik: 993 62 424 Bernt Arne: 952 07 996\r\n\r\nKort om bedriften/avdelingen (hvorfor passer den for I&IKT?):\r\n\r\nLeverer spesialisert drillingutstyr til oljerigger. Trenger ingeniører med et bredt fagfelt, siden de er en ganske liten bedrift der ingeniørene er med i hele prossesen fra ide til vedlikehold\r\n\r\nHadde først og fremst kontakt med Marit for å avtale presentasjonen. Julie, Eirik og Bernt Arne var de som var på presentasjonen. Julie ordnet det praktiske på mail like før presentasjonen.\r\n\r\nKort om hvordan du kom i kontakt, og fikk ordnet bed.pres med de:\r\n\r\nSendte mail til Marit, hadde allerede blitt kontaktet av maskin. Etter mye om og men med Teknologiporten ble vi enige om felles presentasjon med Maskin.\r\n\r\nEirik Røysland\r\nDesign Engineer, M.Sc\r\nMob; +47 9936 24 24\r\neirik@subseaservices.no\r\n\r\nSub Sea Services\r\nFinnestadsvingen 24\r\n4029 Stavanger\r\nT +47 518 39 530 / F +47 518 39 541\r\nwww.subseaservices.no\r\n\r\nJulie Krause\r\nContract Lead\r\n+47 406 20 649\r\nwww.subseaservices.no\r\n\r\nHilsen\r\nMarit Kjersti Berge\r\nHR Manager\r\nSub Sea Services AS\r\n51839530/99246140\r\nBernt Arne Breistein e-post: berntarne@subseaservices.no  tlf 952 07 996', 397, '2011-11-08 11:44:52'),
 (305, 1, 'company', 'Fikk kontakt med Andreas Gjærde gjennom Alumni-listene, han hadde en del spørsmål, har sendt svar og informasjon om profilering. Sendte mail igjen i dag for å høre om når de kan tenke seg å ha presentasjon.', 279, '2011-01-10 11:48:54'),
 (306, 1, 'company', 'De ønsker bedpres i slutten av februar, da er det fullt, jeg foreslo 1-3 eller 8-10.mars.', 279, '2011-01-17 11:49:46'),
@@ -609,6 +620,85 @@ INSERT INTO `hyb_gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALU
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `hyb_rbac_assignment`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_rbac_assignment` (
+  `itemname` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `userid` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `bizrule` text collate utf8_unicode_ci,
+  `data` text collate utf8_unicode_ci,
+  PRIMARY KEY  (`itemname`,`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hyb_rbac_assignment`
+--
+
+INSERT INTO `hyb_rbac_assignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
+('admin', '381', '', 's:0:"";'),
+('updateOwnProfile', '382', NULL, NULL),
+('writer', '356', '', 's:0:"";');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hyb_rbac_item`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_rbac_item` (
+  `name` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `type` int(11) NOT NULL,
+  `description` text collate utf8_unicode_ci,
+  `bizrule` text collate utf8_unicode_ci,
+  `data` text collate utf8_unicode_ci,
+  PRIMARY KEY  (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hyb_rbac_item`
+--
+
+INSERT INTO `hyb_rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
+('admin', 2, '', '', 's:0:"";'),
+('createNews', 0, 'Poste nyhet', '', 's:0:"";'),
+('editor', 2, '', '', 's:0:"";'),
+('updateNews', 0, '', '', 's:0:"";'),
+('updateOwnNews', 1, '', 'return isset($params["id"]) && News::model()->findByPk($params["id"])->authorId == user()->id;', 's:0:"";'),
+('updateOwnProfile', 1, '', 'return isset($params[''username'']) && isset(user()->name) && $params[''username''] == user()->name;\r\n', 's:0:"";'),
+('updateProfile', 0, '', '', 's:0:"";'),
+('writer', 2, '', '', 's:0:"";');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hyb_rbac_itemchild`
+--
+
+CREATE TABLE IF NOT EXISTS `hyb_rbac_itemchild` (
+  `parent` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `child` varchar(64) collate utf8_unicode_ci NOT NULL,
+  PRIMARY KEY  (`parent`,`child`),
+  KEY `child` (`child`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `hyb_rbac_itemchild`
+--
+
+INSERT INTO `hyb_rbac_itemchild` (`parent`, `child`) VALUES
+('writer', 'createNews'),
+('admin', 'editor'),
+('editor', 'updateNews'),
+('updateOwnNews', 'updateNews'),
+('writer', 'updateOwnNews'),
+('admin', 'updateProfile'),
+('updateOwnProfile', 'updateProfile'),
+('admin', 'writer');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `hyb_specialization`
 --
 
@@ -656,7 +746,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
   `lastLogin` datetime default NULL,
   `cardinfo` varchar(10) collate utf8_unicode_ci default NULL,
   `description` text collate utf8_unicode_ci,
-  `workDescription` text collate utf8_unicode_ci NOT NULL,
+  `workDescription` text collate utf8_unicode_ci,
   `workCompanyID` int(11) default NULL,
   `workPlace` varchar(255) collate utf8_unicode_ci default NULL,
   `birthdate` date default NULL,
@@ -670,7 +760,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 0, 2015, 'true', 'male', NULL, NULL, '2012-02-06 11:51:25', NULL, '', '', NULL, NULL, '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-02-08 22:28:10', '', '', '', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1152,76 +1242,19 @@ INSERT INTO `vote` (`pollId`, `userId`, `choice`) VALUES
 (15, 1, 1);
 
 --
--- Table structure for table `hyb_rbac_assignment`
+-- Constraints for dumped tables
 --
 
-CREATE TABLE IF NOT EXISTS `hyb_rbac_assignment` (
-  `itemname` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `userid` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `bizrule` text COLLATE utf8_unicode_ci,
-  `data` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`itemname`,`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+--
+-- Constraints for table `hyb_rbac_assignment`
+--
+ALTER TABLE `hyb_rbac_assignment`
+  ADD CONSTRAINT `hyb_rbac_assignment_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `hyb_rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Dumping data for table `hyb_rbac_assignment`
+-- Constraints for table `hyb_rbac_itemchild`
 --
-
-INSERT INTO `hyb_rbac_assignment` (`itemname`, `userid`, `bizrule`, `data`) VALUES
-('admin', '381', '', 's:0:"";'),
-('writer', '356', '', 's:0:"";');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hyb_rbac_item`
---
-
-CREATE TABLE IF NOT EXISTS `hyb_rbac_item` (
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `type` int(11) NOT NULL,
-  `description` text COLLATE utf8_unicode_ci,
-  `bizrule` text COLLATE utf8_unicode_ci,
-  `data` text COLLATE utf8_unicode_ci,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `hyb_rbac_item`
---
-
-INSERT INTO `hyb_rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
-('admin', 2, '', '', 's:0:"";'),
-('createNews', 0, 'Poste nyhet', '', 's:0:"";'),
-('editor', 2, '', '', 's:0:"";'),
-('updateNews', 0, '', '', 's:0:"";'),
-('updateOwnNews', 1, '', 'return isset($params["id"]) && News::model()->findByPk($params["id"])->authorId == user()->id;', 's:0:"";'),
-('writer', 2, '', '', 's:0:"";');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `hyb_rbac_itemchild`
---
-
-CREATE TABLE IF NOT EXISTS `hyb_rbac_itemchild` (
-  `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`parent`,`child`),
-  KEY `child` (`child`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dumping data for table `hyb_rbac_itemchild`
---
-
-INSERT INTO `hyb_rbac_itemchild` (`parent`, `child`) VALUES
-('writer', 'createNews'),
-('admin', 'editor'),
-('editor', 'updateNews'),
-('updateOwnNews', 'updateNews'),
-('writer', 'updateOwnNews'),
-('admin', 'writer');
-
--- --------------------------------------------------------
+ALTER TABLE `hyb_rbac_itemchild`
+  ADD CONSTRAINT `hyb_rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `hyb_rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `hyb_rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `hyb_rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 

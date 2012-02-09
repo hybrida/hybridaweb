@@ -4,7 +4,7 @@ $this->beginWidget('CClipWidget', array('id' => 'sidebar'))?>
 	<img src="/image/view/id//size/1" alt="" width="248px">
 <?$this->endWidget()?>
 	
-<? if (user()->id == $user->id): ?>
+<? if (user()->checkAccess('updateProfile', array('username' => $user->username))): ?>
 	
 	<?= CHtml::link('Edit', array('edit', 'username' => $user->username), array(
 		'class' => 'button buttonRightSide',
