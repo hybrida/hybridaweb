@@ -1,5 +1,7 @@
 <?php
 
+Yii::import('bpc.components.*');
+
 /**
  * This is the model class for table "signup".
  *
@@ -52,6 +54,7 @@ class Signup extends CActiveRecord {
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'event' => array(self::BELONGS_TO, 'Event', 'eventId'),
 		);
 	}
 
@@ -111,7 +114,7 @@ class Signup extends CActiveRecord {
 		$this->_access->replace();
 	}
 
-	public function addAttender($userId) {
+	public function addAttender($userId, $addBPC = true) {
 		$sql = "INSERT INTO membership_signup 
 			( `eventId`, `userId`, `signedOff` )
 			VALUES ( :eid, :uid, 'false')
@@ -120,14 +123,34 @@ class Signup extends CActiveRecord {
 		$stmt->bindValue(':eid', $this->eventId);
 		$stmt->bindValue(':uid', $userId);
 		$stmt->execute();
+
+		if ($addBPC) {
+			$this->addBpcAttender($userId);
+		}
+	}
+
+	private function addBpcAttender($userID) {
+		if ($this->isBpc()) {
+			BpcCore::addAttending($this->event->bpcID, $userID);
+		}
 	}
 
 	public function removeAttender($userId) {
 		Yii::app()->db->createCommand()
-				->update('membership_signup', array('signedOff' => 'true',), 
-					'eventId = :eventId AND userId = :userId', array(
+				->update('membership_signup', array('signedOff' => 'true',), 'eventId = :eventId AND userId = :userId', array(
 					':eventId' => $this->eventId,
 					':userId' => $userId));
+		$this->removeBpcAttender($userId);
+	}
+
+	private function removeBpcAttender($userID) {
+		if ($this->isBpc()) {
+			BpcCore::removeAttending($this->event->bpcID, $userID);
+		}
+	}
+
+	private function isBpc() {
+		return $this->event != null && $this->event->bpcID;
 	}
 
 	public function removeAllAttenders() {
@@ -138,7 +161,8 @@ class Signup extends CActiveRecord {
 	public function getAttendingCount() {
 		$sql = "SELECT COUNT(*) as num 
 			FROM membership_signup
-			WHERE eventId = :eventId";
+			WHERE eventId = :eventId
+				AND signedOff = 'false'";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 
 		$stmt->execute(array(
@@ -152,6 +176,7 @@ class Signup extends CActiveRecord {
 		$sql = "SELECT userId
 			FROM membership_signup
 			WHERE eventId = :eventId
+				AND signedOff = 'false'
 			";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->execute(array(
@@ -176,7 +201,8 @@ class Signup extends CActiveRecord {
 		$sql = "SELECT userId
 			FROM membership_signup
 			WHERE eventId = :eventId
-				AND userId = :userId";
+				AND userId = :userId
+				AND signedOff = 'false'";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->execute(array(
 			':userId' => $userId,
@@ -184,6 +210,29 @@ class Signup extends CActiveRecord {
 		));
 		$data = $stmt->fetch();
 		return !empty($data);
+	}
+
+	public function isOpen() {
+		return time() > strtotime($this->open) &&
+				time() < strtotime($this->close);
+	}
+
+	public function hasFreeSpots() {
+		return $this->spots > $this->getAttendingCount();
+	}
+
+	public function canAttend($userID) {
+		return !$this->isAttending($userID) &&
+				$this->isOpen() &&
+				$this->hasFreeSpots() &&
+				app()->gatekeeper->hasPostAccess('signup', $this->eventId) &&
+				!user()->isGuest;
+	}
+
+	public function canUnattend($userID) {
+		return $this->isAttending($userID) &&
+				$this->isOpen() &&
+				$this->signoff == "true";
 	}
 
 }

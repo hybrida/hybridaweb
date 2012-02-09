@@ -30,16 +30,16 @@ class DefaultIdentity extends CUserIdentity {
 		}
 		$this->_userName = $user->username;
 
-		$userInfo = $user->getAttributes();
+		$info = $user->getAttributes();
 
-		$this->setState("firstName", $userInfo['firstName']);
-		$this->setState("middleName", $userInfo['middleName']);
-		$this->setState("lastName", $userInfo['lastName']);
-		$this->setState("member", $userInfo['member']);
-		$this->setState("gender", $userInfo['gender']);
-		$this->setState("imageId", $userInfo['imageId']);
-		
-		$this->setState("access", $user->access);
+        $this->setState("firstName", $info['firstName']);
+        $this->setState("middleName", $info['middleName']);
+        $this->setState("lastName", $info['lastName']);
+		$this->setState("fullName", $user->fullName);
+        $this->setState("member", $info['member']);
+        $this->setState("gender", $info['gender']);
+        $this->setState("imageId", $info['imageId']);
+		$this->setState("cardinfo", $user->cardinfo);
 		return true;
 	}
 

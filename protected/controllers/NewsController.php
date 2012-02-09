@@ -20,7 +20,7 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view", "edit", 'feed', 'feedAjax', 'index'),
+				'actions' => array("view", "edit", 'feed', 'feedAjax', 'index', 'toggleAttending'),
 			),
 			array('allow',
 				'actions' => array("create"),
@@ -42,19 +42,23 @@ class NewsController extends Controller {
 		$signup = $this->getSignupByEvent($event);
 		$hasSignup = false;
 		$hasEvent = false;
+		$isAttending = false;
 		if ($event) {
 			$hasEvent = app()->gatekeeper->hasPostAccess('event', $event->id);
 			if ($event->bpcID) {
 				BpcCore::update($event->bpcID);
 			}
 		}
-		if ($signup)
-			$hasSignup = app()->gatekeeper->hasPostAccess('signup', $signup->eventId);
+		if ($signup) {
+			$hasSignup = app()->gatekeeper->hasPostAccess('signup', $signup->eventId) && !user()->isGuest;
+			$isAttending = $signup->isAttending(user()->id);
+		}
 
 		$this->render('view', array(
 			'news' => $news,
 			'event' => $event,
 			'signup' => $signup,
+			'isAttending' => $isAttending,
 			'hasEvent' => $hasEvent,
 			'hasSignup' => $hasSignup,
 			'hasEditAccess' => user()->checkAccess('updateNews', array('id' => $id)),
@@ -160,6 +164,20 @@ class NewsController extends Controller {
 		if (!$newsModel->isNewRecord) {
 			$this->redirect($newsModel->viewUrl);
 		}
+	}
+	
+	public function actionToggleAttending($userID, $eventID) {
+		$event = Event::model()->findByPk($eventID);
+		$signup = $this->getSignupByEvent($event);
+		if ($signup->canUnattend($userID)) {
+			$signup->removeAttender($userID);
+		} else if ($signup->canAttend($userID)) {
+			$signup->addAttender($userID);
+		}
+		
+		$this->renderPartial("_signup", array(
+			'signup' => $signup,
+		));
 	}
 
 }

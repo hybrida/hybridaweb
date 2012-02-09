@@ -21,7 +21,10 @@ $this->beginWidget('CClipWidget', array('id' => 'sidebar')); ?>
 		
 	<div class="barTitle">Påmeldte</div>
 	<div class="barText">
-		<div class="signup" data-id='<?= $signup->eventId ?>'></div>
+		<? $this->renderPartial("_signup", array(
+			'signup' => $signup,
+			'isAttending' => $isAttending,
+		)) ?>
 	</div>
 	<? endif // signup ?>
 

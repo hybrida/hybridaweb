@@ -148,7 +148,7 @@ class BpcUpdate {
 		$user = User::model()->find('username = ?', array($username));
 		if (!$user)
 			return;
-		$this->signup->addAttender($user->id);
+		$this->signup->addAttender($user->id, false);
 	}
 
 }

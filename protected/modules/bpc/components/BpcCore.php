@@ -96,7 +96,7 @@ class BpcCore {
 		BpcCore::doRequest($inData);
 	}
 	
-	public static function updateEvent($bpcID) {
+	public static function update($bpcID) {
 		$b = new BpcUpdate();
 		$b->update($bpcID);
 	}
