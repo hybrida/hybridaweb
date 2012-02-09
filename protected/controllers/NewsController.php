@@ -1,5 +1,7 @@
 <?php
 
+Yii::import('bpc.components.*');
+
 class NewsController extends Controller {
 
 	private $feedLimit = 10;
@@ -40,8 +42,12 @@ class NewsController extends Controller {
 		$signup = $this->getSignupByEvent($event);
 		$hasSignup = false;
 		$hasEvent = false;
-		if ($event)
+		if ($event) {
 			$hasEvent = app()->gatekeeper->hasPostAccess('event', $event->id);
+			if ($event->bpcID) {
+				BpcCore::update($event->bpcID);
+			}
+		}
 		if ($signup)
 			$hasSignup = app()->gatekeeper->hasPostAccess('signup', $signup->eventId);
 
@@ -83,6 +89,7 @@ class NewsController extends Controller {
 	}
 
 	public function actionFeed() {
+		BpcCore::updateAll();
 		$feedElements = $this->getFeedElements();
 		$this->render("feed", array(
 			'models' => $feedElements,

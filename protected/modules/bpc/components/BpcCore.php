@@ -61,20 +61,49 @@ class BpcCore {
 			echo "Sorry, " . $postdata['method'] . " is not supported.<br />";
 		}
 	}
-	
+
 	public static function addAttending($bpcID, $userID) {
 		$user = User::model()->findByPk($userID);
 		if (!$user) {
 			return;
 		}
+		
+		if ($user->cardinfo == "" || $user->cardinfo == null) {
+			throw new CHttpException("Du må legge inn kortnummer først", "Du har ikke lagt inn noe kortnummer");
+		}
+		
 		$inData = array(
-			'fullName' => $user->fullName,
-			'username' => $user->name,
-			'card_no' => (float)$user->cardinfo,
+			'request' => 'add_attending',
+			'fullname' => $user->fullName,
+			'username' => $user->username,
+			'card_no' => (float) $user->cardinfo,
 			'event' => $bpcID,
-			'year' => $user->graduationYear, //FIXME
+			'year' => 2, //FIXME
 		);
-		$answer = BpcCore::doRequest($inData);
+		BpcCore::doRequest($inData);
+	}
+
+	public static function removeAttending($bpcID, $userID) {
+		$user = User::model()->findByPk($userID);
+		if (!$user) {
+			return;
+		}
+		$inData = array(
+			'request' => 'rem_attending',
+			'username' => $user->username,
+			'event' => $bpcID,
+		);
+		BpcCore::doRequest($inData);
+	}
+	
+	public static function updateEvent($bpcID) {
+		$b = new BpcUpdate();
+		$b->update($bpcID);
+	}
+	
+	public static function updateAll() {
+		$b = new BpcUpdate();
+		$b->updateAll();
 	}
 
 }

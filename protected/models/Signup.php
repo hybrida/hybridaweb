@@ -112,21 +112,27 @@ class Signup extends CActiveRecord {
 	}
 
 	public function addAttender($userId) {
-		$stmt = app()->db->createCommand()
-				->insert('membership_signup', array(
-			'eventId' => $this->eventId,
-			'userId' => $userId,
-			'signedOff' => 'false',
-		));
+		$sql = "INSERT INTO membership_signup 
+			( `eventId`, `userId`, `signedOff` )
+			VALUES ( :eid, :uid, 'false')
+			ON DUPLICATE KEY UPDATE `signedOff` = 'false'";
+		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$stmt->bindValue(':eid', $this->eventId);
+		$stmt->bindValue(':uid', $userId);
+		$stmt->execute();
 	}
-	
+
 	public function removeAttender($userId) {
 		Yii::app()->db->createCommand()
-				->delete('membership_signup', 
-						'eventId = :eventId AND userId = :userId', array(
+				->update('membership_signup', array('signedOff' => 'true',), 
+					'eventId = :eventId AND userId = :userId', array(
 					':eventId' => $this->eventId,
-					':userId' => $userId,
-				));
+					':userId' => $userId));
+	}
+
+	public function removeAllAttenders() {
+		Yii::app()->db->createCommand()
+				->update('membership_signup', array('signedOff' => 'true'), 'eventId = :eid', array(':eid' => $this->eventId));
 	}
 
 	public function getAttendingCount() {
@@ -141,7 +147,7 @@ class Signup extends CActiveRecord {
 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $data['num'];
 	}
-	
+
 	public function getAttenderIDs() {
 		$sql = "SELECT userId
 			FROM membership_signup
@@ -153,7 +159,7 @@ class Signup extends CActiveRecord {
 		));
 		return $stmt->fetchAll(PDO::FETCH_COLUMN);
 	}
-	
+
 	public function getAttenders() {
 		$attenderIDs = $this->getAttenderIDs();
 		$attenders = array();
@@ -165,7 +171,7 @@ class Signup extends CActiveRecord {
 		}
 		return $attenders;
 	}
-	
+
 	public function isAttending($userId) {
 		$sql = "SELECT userId
 			FROM membership_signup
@@ -177,7 +183,7 @@ class Signup extends CActiveRecord {
 			':eventId' => $this->eventId,
 		));
 		$data = $stmt->fetch();
-		return ! empty($data);
+		return !empty($data);
 	}
 
 }

@@ -179,9 +179,10 @@ class GetController extends Controller{
 				'eId' => $eId,
 			);
 			
-			$sql = "SELECT s.open, s.close, s.spots - ms.count AS available FROM signup AS s LEFT JOIN 
+			$sql = "SELECT e.bpcID, s.open, s.close, s.spots - ms.count AS available FROM signup AS s LEFT JOIN 
 				(SELECT eventId AS id, COUNT(*) AS count FROM membership_signup GROUP BY eventId) AS ms
 				ON s.eventId = ms.id 
+				JOIN event AS e ON e.id = s.eventId
 				WHERE s.eventId = :eId";
 			$query = $this->pdo->prepare($sql);
 			$query->execute($data);
@@ -193,22 +194,23 @@ class GetController extends Controller{
 		
             //Hvis brukeren prøver å poste, legg til først for så å oppdatere
             if(isset($_REQUEST['type'])) {               
-                $signup = $_REQUEST['type'] == "on" ? "false" : "true";
+                $signedOff = $_REQUEST['type'] == "on" ? "false" : "true";
 
 				//Gjøres sikkert i BPC etterhvert..
-				if (time() < strtotime($event['open']) || time() > strtotime($event['close']) || $event['available'] < 1 ) {
+				if (time() < strtotime($event['open']) || time() > strtotime($event['close']) ) {
 					die("Påmelding ikke åpen, eller ikke ledige plasser!");	//Påmelding ikke åpen, eller ikke ledige plasser!
 				}
 				
                 $data = array(
                     'id' => $eId,
                     'selfId' => Yii::app()->user->id,
-                    'signupId' => $signup
+                    'signupId' => $signedOff
                 );
                 $sql = "INSERT INTO membership_signup VALUES( :id, :selfId, :signupId ) ON DUPLICATE KEY UPDATE signedOff = :signupId";
                 $query = $this->pdo->prepare($sql);
-                $query->execute($data); 
-               
+                $query->execute($data);
+				Yii::import('bpc.components.*');
+				BpcCore::removeAttending($event['bpcID'], user()->id);
             }
             
             if(isset($_REQUEST['type']) && $_REQUEST['type'] == "on") {

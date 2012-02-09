@@ -6,25 +6,41 @@ class BpcUpdate {
 	private $event;
 	private $signup;
 
-	public function update() {
+	public function updateAll() {
 		$postData = array(
 			'request' => 'get_events',
 		);
 		$data = BpcCore::doRequest($postData);
-		$this->addAllBedpresses($data);
+		$this->updateAllBedpresses($data);
 	}
 
-	private function addAllBedpresses($data) {
-		foreach ($data['event'] as $event) {
-			$this->addBedpres($event);
+	public function update($bpcID) {
+		$postData = array(
+			'request' => 'get_events',
+			'event' => $bpcID,
+		);
+		$data = BpcCore::doRequest($postData);
+		if (isset($data['event'][0])) {
+			$event = $data['event'][0];
+			$this->updateBedpres($event);
 		}
 	}
 
-	private function addBedpres($bedpresData) {
+	private function updateAllBedpresses($data) {
+		if (!isset($data['event'])) {
+			return;
+		}
+		foreach ($data['event'] as $event) {
+			$this->updateBedpres($event);
+		}
+	}
+
+	private function updateBedpres($bedpresData) {
 		$this->init($bedpresData['id']);
 		$this->saveEvent($bedpresData);
 		$this->saveNews($bedpresData);
 		$this->saveSignup($bedpresData);
+		$this->updateMemberships();
 	}
 
 	public function init($bpcID) {
@@ -50,11 +66,11 @@ class BpcUpdate {
 			$this->news = new News;
 		}
 	}
-	
+
 	private function initNewsByEvent() {
 		$news = News::model()->find('parentId = ? AND parentType = "event"', array(
 			$this->event->id
-		));
+				));
 		if ($news) {
 			$this->news = $news;
 		} else {
@@ -98,6 +114,41 @@ class BpcUpdate {
 			$years[] = $access;
 		}
 		return $years;
+	}
+
+	private function updateMemberships() {
+		$usernames = $this->getAttendingUsernames($this->event->bpcID);
+		$this->clearMembershipsOnEvent();
+		foreach ($usernames as $username) {
+			$this->updateMembership($username);
+		}
+	}
+
+	private function clearMembershipsOnEvent() {
+		$this->signup->removeAllAttenders();
+	}
+
+	public function getAttendingUsernames($bpcID) {
+		$array = array(
+			'request' => 'get_attending',
+			'event' => $bpcID,
+		);
+		$data = BpcCore::doRequest($array);
+		$names = array();
+		if (!isset($data['users'])) {
+			return array();
+		}
+		foreach ($data['users'] as $user) {
+			$names[] = $user['username'];
+		}
+		return $names;
+	}
+
+	public function updateMembership($username) {
+		$user = User::model()->find('username = ?', array($username));
+		if (!$user)
+			return;
+		$this->signup->addAttender($user->id);
 	}
 
 }
