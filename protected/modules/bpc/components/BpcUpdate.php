@@ -93,6 +93,8 @@ class BpcUpdate {
 		$news->ingress = "Bedriftspresentasjon";
 		$news->setParent('event', $this->event->id);
 		$news->save();
+		$news->authorId = null;
+		$news->save();
 	}
 
 	private function saveSignup($bpc) {

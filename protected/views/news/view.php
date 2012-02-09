@@ -51,10 +51,12 @@ $this->endWidget()
 </p>
 <? endif ?>
 
+<? if ($news->author): ?>
 <strong>Skribent:</strong> <?= CHtml::link($news->author->fullName, array(
 	'/profile/view/',
 	'username' => $news->author->username,
 	))?>
+<? endif ?>
 
 <? if ($news->imageId):
 	$imageURL = $this->createUrl('/image/view',array(
