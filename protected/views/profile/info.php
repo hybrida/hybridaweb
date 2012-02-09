@@ -30,11 +30,14 @@ $this->renderPartial('_header', array(
 		<td>Kjønn: </td>
 		<td> <?= $user->gender ?></td>
 	</tr>
-    <tr>
-		<td>Fødselsdato: </td>
-		<td> <?= ($user->birthdate == 0000 - 00 - 00 ? " " : $user->birthdate) ?></td>
-	</tr>
-
+	
+	<? if ($user->birthdate != '0000-00-00'): ?>
+		<tr>
+			<td>Fødselsdato: </td>
+			<td> <?= Html::dateToString($user->birthdate) ?></td>
+		</tr>
+	<? endif ?>
+		
     <tr>
 		<td>Spesialisering:     </td>
 		<td><?= $user->specialization ? $user->specialization->name : ""?></td>

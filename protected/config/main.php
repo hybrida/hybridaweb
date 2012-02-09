@@ -33,6 +33,7 @@ return array(
 	'import' => array(
 		'application.models.*',
 		'application.components.*',
+		'application.components.helpers.*',
 		'application.exceptions.*',
 	),
 	'modules' => array(
