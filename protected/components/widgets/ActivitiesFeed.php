@@ -36,9 +36,12 @@ class SignupFeed extends AbstractFeed {
 		return "SELECT n.id
 			FROM news as n
 			JOIN event as e ON n.parentId = e.id
+			JOIN signup as s ON s.eventId = e.id
 			JOIN membership_signup AS m ON m.eventId = e.id
 			WHERE m.userId = " . user()->id ."
 				AND e.start > NOW()
+				AND e.status = " . Status::PUBLISHED ."
+				AND s.status = " . Status::PUBLISHED ."
 			ORDER BY n.timestamp ASC";
 	}
 
