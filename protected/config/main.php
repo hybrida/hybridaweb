@@ -52,7 +52,7 @@ return array(
 			'userid' => 'id', //default: userid
 			'username' => 'username', //default:username
 			'delimeter' => '@', //default:-
-			'debug' => true, //default :false
+			'debug' => false, //default :false
 			'pageSize' => 10, // default : 15
 			'superUser' => 'admin', //default: Authorizer
 			'css' => 'srbac.css', //default: srbac.css
