@@ -21,6 +21,30 @@ $form = $this->beginWidget('ActiveForm', array(
 ))
 ?>
     <div class="formSection">
+		<div class="inputGroup">
+			<div class="fieldDefinition">
+				Fornavn:
+			</div>
+			<div class="fieldInput">
+				<?=$form->textField($model, 'firstName') ?>
+			</div>
+		</div>
+		<div class="inputGroup">
+			<div class="fieldDefinition">
+				Mellomnavn:
+			</div>
+			<div class="fieldInput">
+				<?=$form->textField($model, 'middleName') ?>
+			</div>
+		</div>
+		<div class="inputGroup">
+			<div class="fieldDefinition">
+				Etternavn:
+			</div>
+			<div class="fieldInput">
+				<?=$form->textField($model, 'lastName') ?>
+			</div>
+		</div>
         <div class="inputGoup">
             <div class="fieldDefinition">
                 Ferdig utdannet år: 
