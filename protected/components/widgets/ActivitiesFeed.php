@@ -14,9 +14,6 @@ class ActivitiesFeed extends CWidget {
 	public function runFeed() {
 		$feed = new SignupFeed($this->limit);
 		$elements = $feed->getElements();
-		if (empty($elements)) {
-			return;
-		}
 		$this->render('activitiesFeed', array(
 			'models' => $elements,
 		));
