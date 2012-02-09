@@ -17,11 +17,12 @@ class CommentForm extends CFormModel {
 	}
 
 	public function save() {
+		$purifier = new CHtmlPurifier;
 		Yii::app()->db->createCommand()
 				->insert('hyb_comment', array(
 					'parentId' => $this->id,
 					'parentType' => $this->type,
-					'content' => $this->content,
+					'content' => $purifier->purify($this->content),
 					'authorId' => user()->id,
 					'timestamp' => 'NOW()',
 				));
