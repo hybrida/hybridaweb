@@ -146,5 +146,17 @@ class NewsTest extends CTestCase {
 		$news->save();
 		$this->assertNotNull($news->timestamp);
 	}
+	
+	public function test_purifier_content() {
+		$this->login();
+		$news = new News;
+		$news->content = "<script></script>";
+		$news->title = "hei";
+		$news->save();
+		
+		$news2 = News::model()->findByPk($news->id);
+		$this->assertEquals("",$news2->content);
+		$this->assertEquals("hei", $news2->title);
+	}
 
 }

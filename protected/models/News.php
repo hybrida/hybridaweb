@@ -120,6 +120,14 @@ class News extends CActiveRecord {
 		$this->_access->replace();
 		return parent::afterSave();
 	}
+	
+	public function beforeValidate() {
+		$purifier = new CHtmlPurifier();
+		$this->ingress = $purifier->purify($this->ingress);
+		$this->content = $purifier->purify($this->content);
+		$this->title = $purifier->purify($this->title);
+		return parent::beforeValidate();
+	}
 
 	public function beforeSave() {
 		if ($this->isNewRecord) {
