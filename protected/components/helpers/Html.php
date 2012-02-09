@@ -9,7 +9,7 @@ class Html extends CHtml {
 		if ($format == 'medium')
 			return date('d. M Y', $date);
 		if ($format == 'long')
-			return date('D j. F Y', $date);
+			return date('d. F Y H:i:s', $date);
 		else
 			return date($format, $date);
 	}
