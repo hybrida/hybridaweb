@@ -18,7 +18,7 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view","edit",'feed','feedAjax','index'),
+				'actions' => array("view", "edit", 'feed', 'feedAjax', 'index'),
 			),
 			array('allow',
 				'actions' => array("create"),
@@ -38,11 +38,19 @@ class NewsController extends Controller {
 
 		$event = $this->getEventByNews($news);
 		$signup = $this->getSignupByEvent($event);
+		$hasSignup = false;
+		$hasEvent = false;
+		if ($event)
+			$hasEvent = app()->gatekeeper->hasPostAccess('event', $event->id);
+		if ($signup)
+			$hasSignup = app()->gatekeeper->hasPostAccess('signup', $signup->eventId);
 
 		$this->render('view', array(
 			'news' => $news,
 			'event' => $event,
 			'signup' => $signup,
+			'hasEvent' => $hasEvent,
+			'hasSignup' => $hasSignup,
 			'hasEditAccess' => user()->checkAccess('updateNews', array('id' => $id)),
 		));
 	}
@@ -53,7 +61,7 @@ class NewsController extends Controller {
 		}
 		$event = $news->event;
 
-		if ($event && 
+		if ($event &&
 				$event->status == Status::PUBLISHED &&
 				app()->gatekeeper->hasPostAccess('event', $event->id)) {
 			return $event;
@@ -93,7 +101,7 @@ class NewsController extends Controller {
 		));
 	}
 
-	private function getFeedElements($offset=0) {
+	private function getFeedElements($offset = 0) {
 		$feed = new NewsFeed($this->feedLimit, $offset);
 		$elements = $feed->getElements();
 		$this->offset = $feed->getOffset();
