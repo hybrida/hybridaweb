@@ -6,16 +6,17 @@ $this->beginWidget('CClipWidget', array('id' => 'sidebar')); ?>
 <? if ($event): ?>
 	<div class="barTitle">Event</div>
 	<div class="barText">
-		<b>Starter: </b><i><?= $event->start ?></i><br />
-		<b>Slutter: </b><i><?= $event->end ?></i>
+		<b>Sted: </b><?= $event->location ?> <br>
+		<b>Starter: </b><i><?= Html::dateToString($event->start) ?></i><br />
+		<b>Slutter: </b><i><?= Html::dateToString($event->end) ?></i>
 	</div>
 
 	<? if ($signup): ?>
 	<div class="barTitle">Påmelding:</div>
 	<div class="barText">
 		<strong>Påmeldte: </strong> <i><?= $signup->attendingCount ?> av <?= $signup->spots ?></i> <br/>
-		<strong>Åpner: </strong><i><?= $signup->open ?></i> <br>
-		<strong>Stenger: </strong><i><?= $signup->close ?></i> <br>
+		<strong>Åpner: </strong><i><?= Html::dateToString($signup->open) ?></i> <br>
+		<strong>Stenger: </strong><i><?= Html::dateToString($signup->close) ?></i> <br>
 	</div>
 		
 	<div class="barTitle">Påmeldte</div>
