@@ -1,4 +1,8 @@
 
-<div class='barTitle'><?= user()->firstName ?>s aktiviteter</div>
+<div class='barTitle'>Kommende aktiviteter</div>
 
-<div class='feed' data-src='eventfeed'></div>
+<div class="barText">
+	<? foreach ($models as $model): ?>
+		<?= CHtml::link($model->title, $model->viewUrl) ?> <br>
+	<? endforeach ?>
+</div>
