@@ -200,5 +200,11 @@ class User extends CActiveRecord {
 	public function getFullName() {
 		return $this->firstName . " " . $this->middleName . " " . $this->lastName;
 	}
+	
+	public function getViewUrl() {
+		return Yii::app()->createUrl('/profile/info', array(
+			'username' => $this->username,
+		));
+	}
 
 }
