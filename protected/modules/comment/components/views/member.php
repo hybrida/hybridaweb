@@ -2,6 +2,7 @@
 
 <? foreach ($models as $model): ?>
 	<p><?= $model->content ?></p>
+	<p> Skrevet av: <?= $model->author->fullName ?>
 <? endforeach; ?>
 
 

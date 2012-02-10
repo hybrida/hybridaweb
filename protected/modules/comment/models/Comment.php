@@ -8,7 +8,7 @@
  * @property integer $parentId
  * @property string $parentType
  * @property string $content
- * @property integer $author
+ * @property integer $authorId
  * @property string $timestamp
  */
 class Comment extends CActiveRecord
@@ -55,6 +55,7 @@ class Comment extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'author' => array(self::BELONGS_TO, 'User', 'authorId'),
 		);
 	}
 
@@ -96,7 +97,7 @@ class Comment extends CActiveRecord
 	}
 	
 	public function beforeSave() {
-		$this->author = user()->id;
+		$this->authorId = user()->id;
 		$this->timestamp = new CDbExpression('NOW()');
 	}
 }
