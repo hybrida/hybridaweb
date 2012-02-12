@@ -8,6 +8,7 @@
 	<? if (!user()->isGuest): ?>
 		<div><?= CHtml::link("Profil", array("/profile/")); ?></div>
 		<div><?= CHtml::link("Medlemmer", array("/students/")); ?></div> 
+		<div><?= CHtml::link("Galleri", array("/gallery/gallery/")); ?></div> 
 	<? endif ?>
 
 	<div><?= CHtml::link("Bedrift", array("/article/2")); ?></div> 
