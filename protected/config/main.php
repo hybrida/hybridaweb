@@ -90,7 +90,7 @@ return array(
 			'assignmentTable' => 'hyb_rbac_assignment',
 			// The itemChildTable name (default:authitemchild)
 			'itemChildTable' => 'hyb_rbac_itemchild',
-			'defaultRoles' => array('updateOwnProfile'),
+			'defaultRoles' => array('updateOwnProfile', 'webkom'),
 		),
 		'gatekeeper' => array(
 			'class' => 'GatekeeperComponent',
