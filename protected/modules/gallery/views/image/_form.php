@@ -2,7 +2,7 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'image-form',
-	'enableAjaxValidation'=>false,
+        'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -12,31 +12,16 @@
 	<div class="row">
 		<?php echo $form->labelEx($model,'title'); ?>
 		<?php echo $form->textField($model,'title',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'title'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'oldName'); ?>
-		<?php echo $form->textField($model,'oldName',array('size'=>40,'maxlength'=>40)); ?>
-		<?php echo $form->error($model,'oldName'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'galleryId'); ?>
-		<?php echo $form->textField($model,'galleryId'); ?>
-		<?php echo $form->error($model,'galleryId'); ?>
+		<?php echo $form->dropDownList($model,'galleryId', $galleries); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'userId'); ?>
-		<?php echo $form->textField($model,'userId'); ?>
-		<?php echo $form->error($model,'userId'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'timestamp'); ?>
-		<?php echo $form->textField($model,'timestamp'); ?>
-		<?php echo $form->error($model,'timestamp'); ?>
+		<?php echo $form->labelEx($model,'file'); ?>
+		<?php echo $form->fileField($model,'file'); ?>
 	</div>
 
 	<div class="row buttons">

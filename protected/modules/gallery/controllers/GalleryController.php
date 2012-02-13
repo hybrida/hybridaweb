@@ -45,10 +45,12 @@ class GalleryController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$models = Gallery::model()->findAll();
-		$this->render('index',array(
-			'models'=>$models,
-		));
+            $orphans = Image::model()->findAllByAttributes(array('galleryId' => -1));
+            $models = Gallery::model()->findAll();
+            $this->render('index',array(
+		'models'=>$models,
+		'orphans'=>$orphans,
+            ));
 	}
 
 	/**

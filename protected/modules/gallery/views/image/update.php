@@ -1,10 +1,19 @@
 <?php
-$this->breadcrumbs=array(
+if (!is_null($gallery))
+{
+    $this->breadcrumbs=array(
 	'Galleries'=>array('gallery/index'),
 	$gallery->title => array('gallery/view', 'id' => $model['galleryId']),
-	$model->title=>array('view','id'=>$model->id),
-	'Update',
-);
+	$model->title,
+    );
+}
+else
+{
+    $this->breadcrumbs=array(
+	'Galleries'=>array('gallery/index'),
+	$model->title,
+    ); 
+}
 
 $this->menu=array(
 	array('label'=>'List Image', 'url'=>array('/gallery/gallery/')),
@@ -16,4 +25,4 @@ $this->menu=array(
 
 <h1>Update Image <?php echo $model->id; ?></h1>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<?php echo $this->renderPartial('_form', array('model'=>$model, 'gallery'=>$gallery, 'galleries'=>$galleries)); ?>

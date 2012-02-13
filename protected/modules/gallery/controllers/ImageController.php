@@ -32,11 +32,11 @@ class ImageController extends Controller
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('*'),
+				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -74,6 +74,7 @@ class ImageController extends Controller
 	public function actionCreate()
 	{
 		$model=new Image;
+                $galleries = $this->getGalleryList();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -81,12 +82,18 @@ class ImageController extends Controller
 		if(isset($_POST['Image']))
 		{
 			$model->attributes=$_POST['Image'];
+                        $model->oldName = CUploadedFile::getInstance($model,'file');
+                        $model->userId = user()->id;
+                        $model->timestamp = new CDbExpression('NOW()');
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
+                        {
+                            $this->redirect(array('view','id'=>$model->id));
+                        }
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
+			'galleries'=>$galleries,
 		));
 	}
 
@@ -99,6 +106,7 @@ class ImageController extends Controller
 	{
                 $model = $this->loadModel($id);
                 $gallery = Gallery::model()->findByPk($model['galleryId']);
+                $galleries = $this->getGalleryList();
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -106,6 +114,9 @@ class ImageController extends Controller
 		if(isset($_POST['Image']))
 		{
 			$model->attributes=$_POST['Image'];
+                        $model->oldName = CUploadedFile::getInstance($model,'file');
+                        $model->userId = user()->id;
+                        $model->timestamp = new CDbExpression('NOW()');
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -113,6 +124,7 @@ class ImageController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 			'gallery'=>$gallery,
+			'galleries'=>$galleries,
 		));
 	}
 
@@ -175,5 +187,16 @@ class ImageController extends Controller
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
 		}
+	}
+        
+        public function getGalleryList()
+        {
+		$galleries = Gallery::model()->findAll();
+		$array = array();
+		$array[null] = 'Ingen valgt';
+		foreach ($galleries as $gallery) {
+			$array[$gallery->id] = $gallery->title;
+		}
+		return $array;
 	}
 }

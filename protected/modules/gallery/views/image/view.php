@@ -1,9 +1,19 @@
 <?php
-$this->breadcrumbs=array(
+if (!is_null($gallery))
+{
+    $this->breadcrumbs=array(
 	'Galleries'=>array('gallery/index'),
 	$gallery->title => array('gallery/view', 'id' => $model['galleryId']),
 	$model->title,
-);
+    );
+}
+else
+{
+    $this->breadcrumbs=array(
+	'Galleries'=>array('gallery/index'),
+	$model->title,
+    ); 
+}
 
 $this->menu=array(
 	array('label'=>'List Image', 'url'=>array('gallery/index')),
@@ -21,6 +31,4 @@ $this->menu=array(
     $img = CHtml::image($url, $model->title, array('width' => '200'));
     echo "<br>";
     echo CHtml::link($img, array('image/view', 'id' => $model->id));
-    
-    echo "<br><br>";
 ?>
