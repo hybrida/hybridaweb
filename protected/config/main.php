@@ -147,7 +147,7 @@ return array(
 			'scriptMap' => array(
 				'jquery.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
 				'jquery.min.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
-				'jquery-ui.min.js' => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js",
+				'jquery-ui.min.js' => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js",
 			),
 		),
 	),
