@@ -1,12 +1,14 @@
 <div class="accessWrapper<?=$this->id?>">
 <div class="accessField unique<?=$this->id?>">
-<? for ($sub = 0; $sub <= $subs; $sub++): ?>
+
+<? for ($sub = 0; $sub < $subs; $sub++): ?>
 	<?php
 		$this->render('accessField/_field', array(
 			'sub' => $sub,
 		));
 	?>
 <? endfor ?>
+
 </div>
 
 <?=
