@@ -101,8 +101,6 @@ class AccessField extends CWidget {
 		return array(
 			'Generelt' => array(
 				'Innloggede' => Access::REGISTERED,
-			),
-			'Kjønn' => array(
 				'Mann' => Access::MALE,
 				'Kvinne' => Access::FEMALE,
 			),
