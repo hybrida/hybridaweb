@@ -6,14 +6,6 @@ class BpcUpdate {
 	private $event;
 	private $signup;
 
-	public function updateAll() {
-		$postData = array(
-			'request' => 'get_events',
-		);
-		$data = BpcCore::doRequest($postData);
-		$this->updateAllBedpresses($data);
-	}
-
 	public function update($bpcID) {
 		$postData = array(
 			'request' => 'get_events',
@@ -24,6 +16,14 @@ class BpcUpdate {
 			$event = $data['event'][0];
 			$this->updateBedpres($event);
 		}
+	}
+
+	public function updateAll() {
+		$postData = array(
+			'request' => 'get_events',
+		);
+		$data = BpcCore::doRequest($postData);
+		$this->updateAllBedpresses($data);
 	}
 
 	private function updateAllBedpresses($data) {
@@ -96,7 +96,7 @@ class BpcUpdate {
 		$news->authorId = null;
 		$news->save();
 	}
-	
+
 	private function saveSignup($bpc) {
 		$signup = $this->signup;
 		$signup->close = $bpc['deadline'];
@@ -107,11 +107,15 @@ class BpcUpdate {
 		$signup->save();
 	}
 
-	// FIXME: fungerer bare på vårsemesteret
 	private function getAccessYears($from, $to) {
+		if (date('n') >= 7) {
+			$compensationForAutumn = 1;
+		} else {
+			$compensationForAutumn = 0;
+		}
 		$years = array();
 		for ($i = $from; $i <= $to; $i++) {
-			$year = date('Y') + 5;
+			$year = date('Y') + 5 - $compensationForAutumn;
 			$access = $year - $i;
 			$years[] = $access;
 		}
