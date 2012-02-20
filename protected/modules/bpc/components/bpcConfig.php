@@ -14,7 +14,7 @@ class bpcConfig
 	public static $defaultmethod = 'serialized_array';
 
 	// Url til server-scriptet hos BPC. Ikke endre disse til noe annet en de som står her med mindre dere får beskjed om det.
-	//public static $url = 'https://bpc.timini.no/bpc_testing/remote/'; // Dette er en testserver som dere kan leke med
+//	public static $url = 'https://bpc.timini.no/bpc_testing/remote/'; // Dette er en testserver som dere kan leke med
 	public static $url = 'https://bpc.timini.no/remote/'; // Dette er produksjonsserveren
 
 	// Utvikling - disse parameterne vil vanligvis stå som false

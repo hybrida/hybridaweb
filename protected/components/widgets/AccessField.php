@@ -38,6 +38,10 @@ class AccessField extends CWidget {
 			$this->access = array();
 			return;
 		}
+		$this->initAccessOnModel();
+	}
+
+	private function initAccessOnModel() {
 		$path = explode('[', str_replace("]", "", $this->attribute));
 		$access = $this->model->getAttributes();
 		foreach ($path as $p) {
@@ -50,9 +54,7 @@ class AccessField extends CWidget {
 	private function initAccessSubs() {
 		if (empty($this->access)) {
 			$this->sub = 1;
-			return;
-		}
-		if (is_array($this->access[0])) {
+		} else if (is_array($this->access[0])) {
 			$this->sub = count($this->access);
 		} else {
 			$this->sub = 1;
@@ -66,15 +68,19 @@ class AccessField extends CWidget {
 			));
 		} else {
 			$this->render('accessField/field', array(
-				'subs' => $this->getSubCountIndexedBy0(),
+				'subs' => $this->getSubCount(),
 			));
 		}
 	}
 
-	private function getSubCountIndexedBy0() {
+	private function getSubCount() {
 		if (!empty($this->access)) {
 			if (is_array($this->access[0])) {
-				return count($this->access) - 1;
+				$count = count($this->access);
+				print($count);
+				return count($this->access);
+			} else {
+				return 1;
 			}
 		}
 		return 0;
@@ -101,8 +107,6 @@ class AccessField extends CWidget {
 		return array(
 			'Generelt' => array(
 				'Innloggede' => Access::REGISTERED,
-			),
-			'Kjønn' => array(
 				'Mann' => Access::MALE,
 				'Kvinne' => Access::FEMALE,
 			),

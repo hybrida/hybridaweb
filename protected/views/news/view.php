@@ -69,9 +69,7 @@ $this->endWidget()
 
 <p><strong><?=$news->ingress?></strong></p>
 
-<p>
-	<?=$news->content?>
-</p>
+<?=$news->content?>
 
 <?$this->widget('comment.components.commentWidget', array(
 	'id' => $news->id,

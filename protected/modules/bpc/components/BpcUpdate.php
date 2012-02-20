@@ -88,20 +88,20 @@ class BpcUpdate {
 
 	private function saveNews($bpc) {
 		$news = $this->news;
-		$news->title = $bpc['title'];
-		$news->content = $bpc['description'];
-		$news->ingress = "Bedriftspresentasjon";
+		$news->title = 'Bedpres: '.$bpc['title'];
+		$news->content = $bpc['description_formatted'];
+		$news->ingress = '';
 		$news->setParent('event', $this->event->id);
 		$news->save();
 		$news->authorId = null;
 		$news->save();
 	}
-
+	
 	private function saveSignup($bpc) {
 		$signup = $this->signup;
 		$signup->close = $bpc['deadline'];
 		$signup->open = $bpc['registration_start'];
-		$signup->spots = $bpc['seats_available'];
+		$signup->spots = $bpc['seats'];
 		$signup->access = $this->getAccessYears($bpc['min_year'], $bpc['max_year']);
 		$signup->eventId = $this->event->id;
 		$signup->save();

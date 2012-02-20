@@ -186,6 +186,10 @@
 					)); ?>
 					<?php echo $form->error($model, 'signup[signoff]'); ?>				
 				</div>
+				
+				<div class="formBoxRow">
+					<?= $form->accessField($model, 'signup[access]') ?>
+				</div>
 			</div>
 		</div>
 	</div>
