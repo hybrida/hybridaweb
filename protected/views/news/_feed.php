@@ -16,7 +16,7 @@
         </div>
         <div class="articleContent">
             <?= $model->ingress ?>
-            <div class="date">Dato: <?= Html::dateToString($model->timestamp) ?></div>
+            <div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
 			<? if ($model->author): ?>
             <div class="author"><?=
 				CHtml::link($model->author->fullName, array(
