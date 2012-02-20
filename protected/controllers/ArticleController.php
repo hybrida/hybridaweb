@@ -27,17 +27,28 @@ class ArticleController extends Controller {
 	
 	public function actionCreate() {
 		$model = New Article;
-		$title = $_POST['arcticle[title]'];
-		$content = $_POST['article[content]'];
+
+		if (isset($_POST['Article'])) {
+			echo "<pre>";
+			print_r($_POST);
+			
+			$model->attributes = $_POST['Article'];
+			$model->save();
+			print_r($model->attributes);
+			echo "</pre>";
+		}
 		
 		if(isset($content) && isset($title)) {
 			$model->setAttribute('content', $content);
-			$model->save();
 			
-			$url = $this->createUrl($route='edit');
-			$this->redirect($url);
+			
+			
 			return;
 		}
+		$this->render('edit',
+				array(
+					'model'=> $model,
+				));
 	}
     
     public function actionEdit($id){

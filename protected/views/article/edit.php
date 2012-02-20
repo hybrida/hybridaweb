@@ -13,19 +13,20 @@
 	?>
 
 <div class="row">
-			<?php echo $form->labelEx($model, 'article[title]'); ?>
-			<?php echo $form->textField($model, 'article[title]'); ?>
-			<?php echo $form->error($model, 'article[title]'); ?>
+			<?= $form->labelEx($model, 'title') ?>
+			<?= $form->textField($model, 'title') ?>
+			<?= $form->error($model, 'title') ?>
 
 </div>
 
 <div class="row">
-    <?php echo $form->labelEx($model, 'article[content]'); ?>
-    <?php echo $form->textArea($model, "article[content]"); ?>
-    <?php echo $form->error($model, 'article[content]'); ?>
+    <?php echo $form->labelEx($model, 'content'); ?>
+    <?php echo $form->textArea($model, "content"); ?>
+    <?php echo $form->error($model, 'content'); ?>
 </div>
 
-<h1><?= $title ?> </h1>
 
-<p><?=$content?></p>
+<input type="submit" class="button" />
 
+
+<? $this->endWidget() ?>
