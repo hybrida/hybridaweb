@@ -24,6 +24,21 @@ class ArticleController extends Controller {
         $this->renderPartial('menu',$articleList);
         $this->render('view',$data);
     }
+	
+	public function actionCreate() {
+		$model = New Article;
+		$title = $_POST['arcticle[title]'];
+		$content = $_POST['article[content]'];
+		
+		if(isset($content) && isset($title)) {
+			$model->setAttribute('content', $content);
+			$model->save();
+			
+			$url = $this->createUrl($route='edit');
+			$this->redirect($url);
+			return;
+		}
+	}
     
     public function actionEdit($id){
 		$model = $this->getArticleModel($id);
