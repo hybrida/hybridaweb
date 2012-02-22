@@ -23,10 +23,10 @@ class StudentsController extends Controller {
 
 	public function actionView($id) {
 		$profile = new Profile();
-		$data['users'] = $profile->displayMembers($id);
-		$data['now'] = date("Y");
-		$data['graduationYear'] = $id;
-		$this->render('view', $data);
+		$this->render('view', array(
+			'users' => $profile->displayMembers($id),
+			'graduationYear' => $id,
+		));
 	}
 
 }
