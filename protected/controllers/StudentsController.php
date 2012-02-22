@@ -18,7 +18,7 @@ class StudentsController extends Controller {
 	}
 	
 	public function actionIndex() {
-		$this->actionView(date('Y') + 4);
+		$this->actionView(YearConverter::getFreshmanGraduationYear());
 	}
 
 	public function actionView($id) {
