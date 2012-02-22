@@ -1,44 +1,44 @@
 <?php
 
-class YearConverter {
+class YearConverter_PHP_5_3 {
 	
 	protected static $year = null;
 	protected static $isAutumn = null;
 	
 	public static function init() {
-		if (!self::$year)
-			self::$year = date('Y');
-		if (!self::$isAutumn)
-			self::$isAutumn = date('n') >= 7;
+		if (!static::$year)
+			static::$year = date('Y');
+		if (!static::$isAutumn)
+			static::$isAutumn = date('n') >= 7;
 	}
 
 	public static function graduationYearToClassYear($graduationYear) {
-		if (self::$isAutumn) {
-			return $graduationYear - self::$year;
+		if (static::$isAutumn) {
+			return $graduationYear - static::$year;
 		} else {
-			return $graduationYear - self::$year - 1;
+			return $graduationYear - static::$year - 1;
 		}
 	}
 
 	public static function classYearToGraduationYear($classYear) {
-		if (self::$isAutumn) {
-			return self::$year + 6 - $classYear;
+		if (static::$isAutumn) {
+			return static::$year + 6 - $classYear;
 		} else {
-			return self::$year + 5 - $classYear;
+			return static::$year + 5 - $classYear;
 		}
 	}
 	
 	public static function getFreshmanGraduationYear() {
-		if (self::$isAutumn) {
-			return self::$year + 5;
+		if (static::$isAutumn) {
+			return static::$year + 5;
 		}
-		return self::$year + 4;
+		return static::$year + 4;
 	}
 	
 	public static function getCurrentGraduationYearsArray() {
 		$years = array();
-		foreach (self::getCurrentClassYears() as $i) {
-			$years[] = self::classYearToGraduationYear($i) ;
+		foreach (static::getCurrentClassYears() as $i) {
+			$years[] = static::classYearToGraduationYear($i) ;
 		}
 		return $years;
 	}

@@ -53,7 +53,7 @@ class YearConverterTest extends CTestCase {
 
 }
 
-class DateMock extends YearConverter {
+class DateMock extends YearConverter_PHP_5_3 {
 
 	public static $year;
 	public static $isAutumn;
