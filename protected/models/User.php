@@ -136,7 +136,7 @@ class User extends CActiveRecord {
 				));
 	}
 	
-	public function afterValidate() {
+	public function purify() {
 		$p = new CHtmlPurifier;
 		$this->altEmail = $p->purify($this->altEmail);
 		$this->description = $p->purify($this->description);

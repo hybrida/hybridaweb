@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2012 at 08:24 AM
+-- Generation Time: Feb 22, 2012 at 08:45 AM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny16
 
@@ -43,11 +43,6 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
 (24, 4055, 'news', 0),
 (40, 2, 'news', 0),
 (41, 2, 'news', 0),
-(84, 2012, 'signup', 0),
-(84, 2013, 'signup', 0),
-(84, 2014, 'signup', 0),
-(84, 2015, 'signup', 0),
-(84, 2016, 'signup', 0),
 (364, 2014, 'news', 0),
 (364, 4055, 'news', 1);
 
@@ -194,7 +189,6 @@ INSERT INTO `event` (`id`, `bpcID`, `start`, `end`, `location`, `title`, `imageI
 (73, NULL, '2011-11-25 18:15:00', '2011-11-26 13:00:00', 'Gløs', 'GenFors', 4, 0),
 (82, NULL, '2012-03-08 00:00:00', '2012-06-07 00:00:00', 'Åre', '', NULL, 2),
 (83, NULL, '2012-12-01 00:00:00', '2013-04-06 00:00:00', 'Kontoret', '', NULL, 0),
-(84, 363, '2012-02-11 17:00:00', '2012-02-11 17:00:00', '', '', NULL, 0),
 (85, NULL, '2012-02-25 20:00:54', '2012-02-26 02:00:00', 'Lyche', '', NULL, 0);
 
 -- --------------------------------------------------------
@@ -622,11 +616,7 @@ INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`
 (381, 204, 'company', 'Rune\r\n\r\n  \r\n\r\n Vi følger samme mønster som med Aarhønen. Dvs. at dere kommer ned hit ca. 18.30. Vi holder en presentasjon på ca. 1 time med servering av pizza og brus. \r\n\r\n  \r\n\r\n Dere kan bestille buss tilbake ca. 20.30 da vi setter av litt tid til å diskutere og tar en tur rundt i lokalet.\r\n\r\n  \r\n\r\n Alle er velkomne. Jeg tror agendaen styrer hvem som kommer. Vi trenger først og fremst folk med bygg, marin og maskinbakgrunn. Vi har plass til ca. 20 personer. \r\n\r\n  \r\n\r\n Agenda\r\n\r\n 1). GE et av verdens største selskaper  \r\n\r\n 2). Undervannskonstruksjoner , hva er det? 3). Piping vibrasjonsutfordringer  \r\n\r\n 4). Impact analyser på Manifold \r\n\r\n 5). Strømning i rørsystemer\r\n\r\n 6). Muligheter i GE og ansettelsesprosessen\r\n\r\n  \r\n\r\n  \r\n\r\n Regards\r\n\r\n Jomar Tørset\r\n\r\n Department Manager Trondheim\r\n\r\n GE Oil & Gas\r\n\r\n  \r\n\r\n T +47 73832621\r\n\r\n M +47 91715189\r\n\r\njomar.torset@ge.com\r\n\r\n www.geoilandgas.com/VetcoGray\r\n\r\n  \r\n\r\n Sluppenveien 12 C\r\n\r\n 7037 Trondheim', 339, '2012-02-03 09:45:10'),
 (382, 40, 'company', 'Det ser bra ut dette, vi har all nødvenig informasjon for påmeldinga.\r\n\r\nTo ting du gjerne kan spørre Focus om:\r\n\r\n- Kjem tidligere I&IKT-studenter til å vere blant dei besøkande?\r\n\r\n- Vil dei trenge intervjurom i etterkant for deira planlagte samtaler?', 293, '2012-02-03 15:40:41'),
 (384, 40, 'company', 'Dei treng ikkje intervjurom. Daniel Aase kjem.', 339, '2012-02-06 12:50:12'),
-(391, 363, 'news', 'Jeg kommer. Garra årnings!<br />', 370, '0000-00-00 00:00:00'),
-(392, 362, 'news', 'Granåsen<br />', 370, '0000-00-00 00:00:00'),
 (393, 381, 'profile', 'Hallo<br />', 370, '0000-00-00 00:00:00'),
-(394, 363, 'news', 'Knall!', 381, '0000-00-00 00:00:00'),
-(395, 363, 'news', 'Flott', 417, '0000-00-00 00:00:00'),
 (396, 5, 'company', 'Capgemini har nå bestemt seg for å begrense antallet til 50 stk. Åpne for 3.-5. klasse først, deretter fylle på med 1. og 2. om det ikke er fullt. Tapas med øl/mineralvann/vin og to bonger per pers.\r\n\r\nDe har tre stillingsbeskrivelser de ønsker å få ut også, sikkert greit å slenge med i samme mailen.\r\n\r\nhttp://reca.nordic.capgemini.com/index.cfm?act=c.listAdDetail&cID=6&selAdID=2912\r\nhttp://reca.nordic.capgemini.com/index.cfm?act=c.listAdDetail&cID=6&selAdID=3082\r\n\r\nSummerinternship\r\nhttp://reca.nordic.capgemini.com/index.cfm?act=c.listAdDetail&cID=6&selAdID=3130', 353, '2012-02-10 15:05:59'),
 (397, 326, 'profile', 'Hei, jeg lurer på hvordan dette ser ut', 353, '0000-00-00 00:00:00'),
 (398, 66, 'company', 'Status: har ikke kontaktet bedriften pga full kapasitet på bedpresser våren 2012.', 357, '2012-02-16 22:28:33'),
@@ -959,15 +949,7 @@ INSERT INTO `membership_signup` (`eventId`, `userId`, `signedOff`) VALUES
 (73, 282, 'false'),
 (73, 353, 'false'),
 (83, 381, 'false'),
-(84, 381, 'false'),
-(84, 353, 'false'),
-(84, 293, 'false'),
-(84, 370, 'false'),
-(84, 326, 'false'),
 (83, 326, 'false'),
-(84, 416, 'false'),
-(84, 397, 'false'),
-(84, 413, 'false'),
 (83, 417, 'false'),
 (83, 353, 'false'),
 (85, 356, 'false'),
@@ -1118,7 +1100,6 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (362, 83, 'event', 'Eksempelarrangement', NULL, 'Dette skjer om veeldig lenge', 'BLa bla bla<br />', 381, '2012-02-09 11:41:25', 0),
 (41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', '', 326, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, '2011-11-26 20:02:14', 0),
-(363, 84, 'event', 'Bedpres: testevent', NULL, '', '<p>Testevent for hybridasiden</p>\n', NULL, '2012-02-09 19:21:44', 0),
 (364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte\n	tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en\n	mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p><strong>Lycheburger </strong>Lyches ubestridte klassiker. Med\n	aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter.\n	kr 109.</p>\n<p><strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli,\n	pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.\n	 kr 99</p>\n<p><strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår.\n	Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte\n	mandelpoteter. kr 129</p>\n<p><strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte\n	grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr\n	129</p>\n<p><strong><em>Dessertvalg:</em></strong></p>\n<p><strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr\n	45</p>\n<p><strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p><br /></p>\n<p>Betaling skjer på Hybridas konto:\n	0539.26.44913 Prisen\n	avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn +\n	halvingfest</p>\n<p><br /></p>', 367, '2012-02-17 19:09:39', 0);
 
 -- --------------------------------------------------------
@@ -1228,7 +1209,6 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (73, 200, '2011-11-20 00:00:00', '2011-11-24 17:00:00', 'false', 0),
 (82, 510, '2011-10-12 00:00:00', '2012-05-11 00:00:00', 'true', 2),
 (83, 1000, '2012-02-09 00:00:00', '2013-03-15 00:00:00', 'true', 0),
-(84, 200, '2012-02-09 12:00:00', '2012-02-10 17:00:00', 'true', 0),
 (85, 50, '2012-02-17 19:10:29', '2012-02-21 15:00:00', 'false', 0),
 (86, 25, '2012-02-08 10:00:00', '2012-02-20 03:30:00', 'false', 0),
 (87, 50, '2012-02-15 17:00:00', '2012-02-22 17:00:00', 'false', 0),

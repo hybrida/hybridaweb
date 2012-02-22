@@ -189,6 +189,7 @@ class NewsEventForm extends CFormModel {
 		}
 
 		$this->initNewsParent();
+		$this->newsModel->purify();
 		$this->newsModel->save();
 	}
 

@@ -121,7 +121,7 @@ class News extends CActiveRecord {
 		return parent::afterSave();
 	}
 	
-	public function beforeValidate() {
+	public function purify() {
 		$purifier = new CHtmlPurifier();
 		$this->ingress = $purifier->purify($this->ingress);
 		$this->content = $purifier->purify($this->content);

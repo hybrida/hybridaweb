@@ -152,6 +152,7 @@ class NewsTest extends CTestCase {
 		$news = new News;
 		$news->content = "<script></script>";
 		$news->title = "hei";
+		$news->purify();
 		$news->save();
 		
 		$news2 = News::model()->findByPk($news->id);

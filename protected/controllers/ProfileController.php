@@ -73,6 +73,7 @@ class ProfileController extends Controller {
 		if (isset($_POST['User'])) {
 			$user->attributes = $_POST['User'];
 			if ($user->validate()) {
+				$user->purify();
 				$user->save();
 				$this->redirect(array('/profile/info', 'username' => $username));
 			} else {
