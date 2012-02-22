@@ -29,7 +29,10 @@ class Profile {
         );
         
         $sql = "SELECT ui.id, ui.username, ui.firstName, ui.middleName, ui.lastName, ui.imageId, ui.member, siteId, name
-                FROM hyb_user AS ui LEFT JOIN hyb_specialization ON specializationId = hyb_specialization.id WHERE graduationYear = :year";
+                FROM hyb_user AS ui 
+				LEFT JOIN hyb_specialization ON specializationId = hyb_specialization.id 
+				WHERE graduationYear = :year
+				ORDER BY ui.firstName";
 	
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
