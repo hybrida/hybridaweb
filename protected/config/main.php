@@ -13,8 +13,6 @@ function endRequest($event) {
 	if ($notLoginUrl && !$isAjaxRequest) {
 		$app->user->setReturnUrl($app->request->getUrl());
 	}
-
-	beginRequest();
 }
 
 function beginRequest() {
