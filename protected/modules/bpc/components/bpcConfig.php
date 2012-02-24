@@ -20,5 +20,6 @@ class bpcConfig
 	// Utvikling - disse parameterne vil vanligvis stå som false
 	public static $debug = false;
 	public static $timing = false;
+	public static $version = '1.1';
 
 }

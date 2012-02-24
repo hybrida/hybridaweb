@@ -20,7 +20,7 @@ class BpcCore {
 		$postdata['key'] = bpcConfig::$key;
 		$postdata['debug'] = bpcConfig::$debug;
 		$postdata['timing'] = bpcConfig::$timing;
-		$postdata['version'] = '1.1';
+		$postdata['version'] = bpcConfig::$version;
 		if (!isset($postdata['method']))
 			$postdata['method'] = bpcConfig::$defaultmethod;
 
