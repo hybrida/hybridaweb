@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Feb 22, 2012 at 08:45 AM
+-- Generation Time: Feb 25, 2012 at 02:00 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny16
 
@@ -155,7 +155,7 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   `isDeleted` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
   PRIMARY KEY  (`updateId`),
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13675 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14593 ;
 
 --
 -- Dumping data for table `bk_company_update`
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `hyb_comment` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=421 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=422 ;
 
 --
 -- Dumping data for table `hyb_comment`
@@ -617,6 +617,7 @@ INSERT INTO `hyb_comment` (`id`, `parentId`, `parentType`, `content`, `authorId`
 (382, 40, 'company', 'Det ser bra ut dette, vi har all nødvenig informasjon for påmeldinga.\r\n\r\nTo ting du gjerne kan spørre Focus om:\r\n\r\n- Kjem tidligere I&IKT-studenter til å vere blant dei besøkande?\r\n\r\n- Vil dei trenge intervjurom i etterkant for deira planlagte samtaler?', 293, '2012-02-03 15:40:41'),
 (384, 40, 'company', 'Dei treng ikkje intervjurom. Daniel Aase kjem.', 339, '2012-02-06 12:50:12'),
 (393, 381, 'profile', 'Hallo<br />', 370, '0000-00-00 00:00:00'),
+(421, 120, 'company', 'Utdrag frå visittkortet til Kristin Lysebo i Vianova:\r\n\r\n""\r\nKristin Lysebo\r\nBachelor of Science\r\nHR Manager\r\n\r\nTelephone +47 67 81 70 00\r\nDirect line +47 67 81 70 69\r\nTelefax +47 67 81 70 01\r\nMobile +47 90 67 54 55\r\n\r\nkristin.lysebo@vianova.no\r\n""', 293, '2012-02-22 22:21:02'),
 (396, 5, 'company', 'Capgemini har nå bestemt seg for å begrense antallet til 50 stk. Åpne for 3.-5. klasse først, deretter fylle på med 1. og 2. om det ikke er fullt. Tapas med øl/mineralvann/vin og to bonger per pers.\r\n\r\nDe har tre stillingsbeskrivelser de ønsker å få ut også, sikkert greit å slenge med i samme mailen.\r\n\r\nhttp://reca.nordic.capgemini.com/index.cfm?act=c.listAdDetail&cID=6&selAdID=2912\r\nhttp://reca.nordic.capgemini.com/index.cfm?act=c.listAdDetail&cID=6&selAdID=3082\r\n\r\nSummerinternship\r\nhttp://reca.nordic.capgemini.com/index.cfm?act=c.listAdDetail&cID=6&selAdID=3130', 353, '2012-02-10 15:05:59'),
 (397, 326, 'profile', 'Hei, jeg lurer på hvordan dette ser ut', 353, '0000-00-00 00:00:00'),
 (398, 66, 'company', 'Status: har ikke kontaktet bedriften pga full kapasitet på bedpresser våren 2012.', 357, '2012-02-16 22:28:33'),
@@ -813,7 +814,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 --
 
 INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-02-22 08:07:24', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-02-25 13:32:04', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -1089,7 +1090,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=368 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=365 ;
 
 --
 -- Dumping data for table `news`
@@ -1097,9 +1098,9 @@ CREATE TABLE IF NOT EXISTS `news` (
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `timestamp`, `status`) VALUES
 (40, 71, 'event', 'Åretur 2012', 0, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', 'Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\n<br /><br />\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\n<br /><br /><ul><li>\nTur/retur Åre sentrum\n</li><li>\n4 netters opphold\n</li><li>\n5 dagers skipass \n</li><li>\nrabattkort</li><li>mye fest og moro!\n<br /></li></ul><br />\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \n<br /><br /> OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br /><br />', 326, '2011-07-17 22:34:51', 0),
-(362, 83, 'event', 'Eksempelarrangement', NULL, 'Dette skjer om veeldig lenge', 'BLa bla bla<br />', 381, '2012-02-09 11:41:25', 0),
 (41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', '', 326, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, '2011-11-26 20:02:14', 0),
+(362, 83, 'event', 'Eksempelarrangement', NULL, 'Dette skjer om veeldig lenge', 'BLa bla bla<br />', 381, '2012-02-09 11:41:25', 0),
 (364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte\n	tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en\n	mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p><strong>Lycheburger </strong>Lyches ubestridte klassiker. Med\n	aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter.\n	kr 109.</p>\n<p><strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli,\n	pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.\n	 kr 99</p>\n<p><strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår.\n	Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte\n	mandelpoteter. kr 129</p>\n<p><strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte\n	grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr\n	129</p>\n<p><strong><em>Dessertvalg:</em></strong></p>\n<p><strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr\n	45</p>\n<p><strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p><br /></p>\n<p>Betaling skjer på Hybridas konto:\n	0539.26.44913 Prisen\n	avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn +\n	halvingfest</p>\n<p><br /></p>', 367, '2012-02-17 19:09:39', 0);
 
 -- --------------------------------------------------------
