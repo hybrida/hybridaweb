@@ -93,7 +93,7 @@ class Group {
 		);
 
 		$sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName, mg.comission, mg.start, mg.end, un.username, un.phoneNumber, un.lastLogin, admin
-                FROM membership_group AS mg LEFT JOIN hyb_user AS un ON mg.userId = un.id LEFT JOIN groups ON groups.id = :gID 
+                FROM group_membership AS mg LEFT JOIN hyb_user AS un ON mg.userId = un.id LEFT JOIN groups ON groups.id = :gID 
                 WHERE mg.groupId = :gID AND (mg.end > DATE(NOW()) OR mg.end = '0000-00-00')";
 
 		$query = $this->pdo->prepare($sql);
@@ -122,7 +122,7 @@ class Group {
 		);
 
 		$sql = "SELECT un.id, un.imageId, un.firstName,un.middleName,un.lastName,mg.comission, un.username, un.phoneNumber, un.lastLogin
-                FROM membership_group AS mg 
+                FROM group_membership AS mg 
                 LEFT JOIN hyb_user AS un ON mg.userId = un.id
                 WHERE mg.groupId = :gID
                 AND mg.start >= (:year1-:start-15) AND mg.end >= (:year2-:end-15)";
@@ -181,11 +181,11 @@ class Group {
 			'comission' => $comission
 		);
 
-		$sql = "INSERT INTO membership_group (groupId, userId, comission, start) VALUES (:gID,:uID,:comission,Now())";
+		$sql = "INSERT INTO group_membership (groupId, userId, comission, start) VALUES (:gID,:uID,:comission,Now())";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 
-		$membership = new MembershipGroup;
+		$membership = new GroupMembership;
 		$membership->groupId = $this->id;
 		$membership->userId = $userId;
 		$membership->save();
@@ -200,7 +200,7 @@ class Group {
 			'uID' => $userId
 		);
 
-		$sql = "UPDATE membership_group WHERE groupId = :gID AND userId = :uID 
+		$sql = "UPDATE group_membership WHERE groupId = :gID AND userId = :uID 
                         SET end = NOW()";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -216,7 +216,7 @@ class Group {
 		);
 
 		//Slette medlemmer fra gruppen
-		$sql = "DELETE FROM membership_group WHERE groupId = :gID";
+		$sql = "DELETE FROM group_membership WHERE groupId = :gID";
 		$query = $this->pdo->prepare($sql);
 		$query->execute($dataGID);
 

@@ -168,7 +168,7 @@ class User extends CActiveRecord {
 	}
 
 	private function getGroupsAccess() {
-		$groups = MembershipGroup::model()->findAll("userId = :id", array(
+		$groups = GroupMembership::model()->findAll("userId = :id", array(
 			'id' => $this->id,
 				));
 		$access = array();

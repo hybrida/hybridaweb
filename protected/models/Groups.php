@@ -95,7 +95,7 @@ class Groups extends CActiveRecord
 	}
 	
 	public function addMember($userId, $commission=null) {
-		$ms = new MembershipGroup;
+		$ms = new GroupMembership;
 		$ms->groupId = $this->id;
 		$ms->userId = $userId;
 		$ms->comission = $commission;

@@ -38,7 +38,7 @@ class GroupsTest extends CTestCase {
 		$user = $this->getNewUser();
 		$this->assertTrue($group->addMember($user->id));
 
-		$ms = MembershipGroup::model()->find(
+		$ms = GroupMembership::model()->find(
 				"groupId = :groupId AND userId = :userId", array(
 			':groupId' => $group->id,
 			':userId' => $user->id,

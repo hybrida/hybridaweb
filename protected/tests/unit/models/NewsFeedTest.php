@@ -5,7 +5,7 @@ class NewsFeedTest extends CTestCase {
 	private $dummyDataLength = 100;
 
 	public function __construct() {
-		$this->createDummyData();
+		//$this->createDummyData();
 	}
 
 	private function createDummyData() {

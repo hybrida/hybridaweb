@@ -589,7 +589,7 @@ class BkTool {
             'groupId' => $id
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName
-                FROM hyb_user AS un, membership_group AS mg
+                FROM hyb_user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND mg.end <= now() ORDER BY un.firstname ASC";
 
@@ -608,7 +608,7 @@ class BkTool {
             'groupId' => $id
         );
         $sql = "SELECT COUNT(DISTINCT un.id) AS sum
-                FROM hyb_user AS un, membership_group AS mg
+                FROM hyb_user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND mg.end <= now()";
 

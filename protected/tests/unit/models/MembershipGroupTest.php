@@ -1,6 +1,6 @@
 <?php
 
-class MembershipGroupTest extends CTestCase {
+class GroupMembershipTest extends CTestCase {
 
 	private function getNewUser() {
 		$user = new User();
@@ -25,7 +25,7 @@ class MembershipGroupTest extends CTestCase {
 		$user = $this->getNewUser();
 		$group = $this->getNewGroup();
 
-		$ms = new MembershipGroup;
+		$ms = new GroupMembership;
 		$ms->userId = $user->primaryKey;
 		$ms->groupId = $group->primaryKey;
 		$this->assertTrue($ms->save());
@@ -35,12 +35,12 @@ class MembershipGroupTest extends CTestCase {
 		$user = $this->getNewUser();
 		$group = $this->getNewGroup();
 
-		$ms = new MembershipGroup;
+		$ms = new GroupMembership;
 		$ms->userId = $user->id;
 		$ms->groupId = $group->id;
 		$this->assertTrue($ms->save());
 
-		$ms2 = MembershipGroup::model()->find("userId = :uid AND groupId = :gid", array(
+		$ms2 = GroupMembership::model()->find("userId = :uid AND groupId = :gid", array(
 			':uid' => $user->id,
 			':gid' => $group->id,
 				));
@@ -52,17 +52,17 @@ class MembershipGroupTest extends CTestCase {
 		$user2 = $this->getNewUser();
 		$group = $this->getNewGroup();
 
-		$ms1 = new MembershipGroup;
+		$ms1 = new GroupMembership;
 		$ms1->userId = $user1->id;
 		$ms1->groupId = $group->id;
 		$ms1->save();
 
-		$ms2 = new MembershipGroup;
+		$ms2 = new GroupMembership;
 		$ms2->userId = $user2->id;
 		$ms2->groupId = $group->id;
 		$ms2->save();
 
-		$count = MembershipGroup::model()->count("groupId = :groupId", array(
+		$count = GroupMembership::model()->count("groupId = :groupId", array(
 			':groupId' => $group->id,
 				));
 

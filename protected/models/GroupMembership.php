@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "membership_group".
+ * This is the model class for table "group_membership".
  *
- * The followings are the available columns in table 'membership_group':
+ * The followings are the available columns in table 'group_membership':
  * @property integer $id
  * @property integer $groupId
  * @property integer $userId
@@ -11,11 +11,11 @@
  * @property string $start
  * @property string $end
  */
-class MembershipGroup extends CActiveRecord
+class GroupMembership extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return MembershipGroup the static model class
+	 * @return GroupMembership the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -27,7 +27,7 @@ class MembershipGroup extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'membership_group';
+		return 'group_membership';
 	}
 
 	/**

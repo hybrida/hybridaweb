@@ -57,7 +57,7 @@ class UserTest extends CTestCase {
 		$user->save();
 		$groupId = 32;
 		$groupAccessId = Access::GROUP_START + $groupId;
-		$ms = new MembershipGroup;
+		$ms = new GroupMembership;
 		$ms->groupId = $groupId;
 		$ms->userId = $user->id;
 		$this->assertTrue($ms->save());
@@ -85,7 +85,7 @@ class UserTest extends CTestCase {
 	}
 	
 	private function addGroupToUser($group, $user) {
-		$ms = new MembershipGroup;
+		$ms = new GroupMembership;
 		$ms->groupId = $group->id;
 		$ms->userId = $user->id;
 		$this->assertTrue($ms->save(),"Membership burde vært lagret");
