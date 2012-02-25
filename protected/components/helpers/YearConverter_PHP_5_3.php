@@ -14,9 +14,9 @@ class YearConverter_PHP_5_3 {
 
 	public static function graduationYearToClassYear($graduationYear) {
 		if (static::$isAutumn) {
-			return $graduationYear - static::$year;
+			return static::$year - $graduationYear  + 6;
 		} else {
-			return $graduationYear - static::$year - 1;
+			return static::$year - $graduationYear  + 5;
 		}
 	}
 
@@ -53,4 +53,4 @@ class YearConverter_PHP_5_3 {
 
 }
 
-YearConverter::init();
+YearConverter_PHP_5_3::init();

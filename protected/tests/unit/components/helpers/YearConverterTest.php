@@ -20,6 +20,10 @@ class YearConverterTest extends CTestCase {
 		DateMock::$isAutumn = true;
 		$this->assertEquals(3, DateMock::graduationYearToClassYear(2003));
 		$this->assertEquals(2005, DateMock::classYearToGraduationYear(1));
+		$this->assertEquals(2004, DateMock::classYearToGraduationYear(2));
+		$this->assertEquals(2003, DateMock::classYearToGraduationYear(3));
+		$this->assertEquals(2002, DateMock::classYearToGraduationYear(4));
+		$this->assertEquals(2001, DateMock::classYearToGraduationYear(5));
 	}
 
 	public function test_isAutumn() {
@@ -49,6 +53,12 @@ class YearConverterTest extends CTestCase {
 		DateMock::$year = 2000;
 		DateMock::$isAutumn = false;
 		$this->assertEquals(2004, DateMock::getFreshmanGraduationYear());
+	}
+	
+	public function test_() {
+		DateMock::$year = 2012;
+		DateMock::$isAutumn = false;
+		$this->assertEquals(3, DateMock::graduationYearToClassYear(2014));
 	}
 
 }
