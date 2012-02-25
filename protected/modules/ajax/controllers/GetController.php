@@ -35,7 +35,7 @@ class GetController extends Controller{
         );
         
         $sql = "SELECT e.id, e.title, e.start FROM 
-                event AS e RIGHT JOIN membership_signup AS ms 
+                event AS e RIGHT JOIN signup_membership AS ms 
                 ON ms.eventId= e.id 
                 WHERE ms.userId = :userId AND signedOff = 'false' AND start > NOW()
                 ORDER BY start DESC " . $limit;
@@ -180,7 +180,7 @@ class GetController extends Controller{
 			);
 			
 			$sql = "SELECT e.bpcID, s.open, s.close, s.spots - ms.count AS available FROM signup AS s LEFT JOIN 
-				(SELECT eventId AS id, COUNT(*) AS count FROM membership_signup GROUP BY eventId) AS ms
+				(SELECT eventId AS id, COUNT(*) AS count FROM signup_membership GROUP BY eventId) AS ms
 				ON s.eventId = ms.id 
 				JOIN event AS e ON e.id = s.eventId
 				WHERE s.eventId = :eId";
@@ -206,7 +206,7 @@ class GetController extends Controller{
                     'selfId' => Yii::app()->user->id,
                     'signupId' => $signedOff
                 );
-                $sql = "INSERT INTO membership_signup VALUES( :id, :selfId, :signupId ) ON DUPLICATE KEY UPDATE signedOff = :signupId";
+                $sql = "INSERT INTO signup_membership VALUES( :id, :selfId, :signupId ) ON DUPLICATE KEY UPDATE signedOff = :signupId";
                 $query = $this->pdo->prepare($sql);
                 $query->execute($data);
 				Yii::import('bpc.components.*');
@@ -225,7 +225,7 @@ class GetController extends Controller{
             );
             
             $sql = "SELECT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName, ui.imageId 
-            FROM membership_signup AS ms LEFT JOIN hyb_user AS ui ON ms.userId = ui.id LEFT JOIN event as e ON e.id=ms.eventId
+            FROM signup_membership AS ms LEFT JOIN hyb_user AS ui ON ms.userId = ui.id LEFT JOIN event as e ON e.id=ms.eventId
             WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
 
             $query = $this->pdo->prepare($sql);
@@ -238,7 +238,7 @@ class GetController extends Controller{
                 'id' => $eId,
                 'userId' => Yii::app()->user->id
             );
-            $sql = "SELECT userId, signedOff FROM membership_signup WHERE eventId = :id AND userId = :userId";
+            $sql = "SELECT userId, signedOff FROM signup_membership WHERE eventId = :id AND userId = :userId";
             $query = $this->pdo->prepare($sql);
             $query->execute($input);
             $result = $query->fetch(PDO::FETCH_ASSOC);

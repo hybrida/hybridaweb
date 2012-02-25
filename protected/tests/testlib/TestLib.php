@@ -6,7 +6,7 @@ class TestLib {
 		$sql = "TRUNCATE `access_relations`;
 				TRUNCATE `event`;
 				TRUNCATE `membership_access`;
-				TRUNCATE `membership_signup`;
+				TRUNCATE `signup_membership`;
 				TRUNCATE `news`;
 				TRUNCATE `signup`;";
 		Yii::app()->db->getPdoInstance()->prepare($sql)->execute();

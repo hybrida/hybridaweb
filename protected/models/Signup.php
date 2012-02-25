@@ -115,7 +115,7 @@ class Signup extends CActiveRecord {
 	}
 
 	public function addAttender($userId, $addBPC = true) {
-		$sql = "INSERT INTO membership_signup 
+		$sql = "INSERT INTO signup_membership 
 			( `eventId`, `userId`, `signedOff` )
 			VALUES ( :eid, :uid, 'false')
 			ON DUPLICATE KEY UPDATE `signedOff` = 'false'";
@@ -137,7 +137,7 @@ class Signup extends CActiveRecord {
 
 	public function removeAttender($userId) {
 		Yii::app()->db->createCommand()
-				->update('membership_signup', array('signedOff' => 'true',), 'eventId = :eventId AND userId = :userId', array(
+				->update('signup_membership', array('signedOff' => 'true',), 'eventId = :eventId AND userId = :userId', array(
 					':eventId' => $this->eventId,
 					':userId' => $userId));
 		$this->removeBpcAttender($userId);
@@ -155,12 +155,12 @@ class Signup extends CActiveRecord {
 
 	public function removeAllAttenders() {
 		Yii::app()->db->createCommand()
-				->update('membership_signup', array('signedOff' => 'true'), 'eventId = :eid', array(':eid' => $this->eventId));
+				->update('signup_membership', array('signedOff' => 'true'), 'eventId = :eid', array(':eid' => $this->eventId));
 	}
 
 	public function getAttendingCount() {
 		$sql = "SELECT COUNT(*) as num 
-			FROM membership_signup
+			FROM signup_membership
 			WHERE eventId = :eventId
 				AND signedOff = 'false'";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
@@ -174,7 +174,7 @@ class Signup extends CActiveRecord {
 
 	public function getAttenderIDs() {
 		$sql = "SELECT userId
-			FROM membership_signup
+			FROM signup_membership
 			WHERE eventId = :eventId
 				AND signedOff = 'false'
 			";
@@ -199,7 +199,7 @@ class Signup extends CActiveRecord {
 
 	public function isAttending($userId) {
 		$sql = "SELECT userId
-			FROM membership_signup
+			FROM signup_membership
 			WHERE eventId = :eventId
 				AND userId = :userId
 				AND signedOff = 'false'";
