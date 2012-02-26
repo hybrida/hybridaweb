@@ -61,6 +61,7 @@ class InnsidaIdentity extends CUserIdentity {
         $this->setState("gender", $info['gender']);
         $this->setState("imageId", $info['imageId']);
 		$this->setState("cardinfo", $this->user->cardinfo ? $this->user->cardinfo : "");
+		$this->setState("classYear", $this->user->classYear);
     }
 
     public function getErrorMessage() {
