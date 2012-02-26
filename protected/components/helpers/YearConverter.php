@@ -14,9 +14,9 @@ class YearConverter {
 
 	public static function graduationYearToClassYear($graduationYear) {
 		if (self::$isAutumn) {
-			return $graduationYear - self::$year;
+			return self::$year - $graduationYear  + 6;
 		} else {
-			return $graduationYear - self::$year - 1;
+			return self::$year - $graduationYear  + 5;
 		}
 	}
 

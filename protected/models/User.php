@@ -23,6 +23,8 @@
  * @property string $workPlace
  * @property string $birthdate
  * @property string $altEmail
+ * @property-read string fullName
+ * @property Access $access
  */
 class User extends CActiveRecord {
 
@@ -205,6 +207,10 @@ class User extends CActiveRecord {
 		return Yii::app()->createUrl('/profile/info', array(
 			'username' => $this->username,
 		));
+	}
+	
+	public function getClassYear() {
+		return YearConverter::graduationYearToClassYear($this->graduationYear);
 	}
 
 }

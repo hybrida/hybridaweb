@@ -19,10 +19,7 @@
             <div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
 			<? if ($model->author): ?>
             <div class="author"><?=
-				CHtml::link($model->author->fullName, array(
-					"/profile/view/", 
-					"username" => $model->author->username,
-				)) ?></div>
+				CHtml::link($model->author->fullName, $model->author->viewUrl) ?></div>
 			<? endif ?>
         </div>
     </div>
