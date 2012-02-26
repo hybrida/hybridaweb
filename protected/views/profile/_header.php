@@ -1,8 +1,7 @@
-<?
-$this->layout = "//layouts/doubleColumn";
-$this->beginWidget('CClipWidget', array('id' => 'sidebar'))?>
+<? $this->layout = "//layouts/doubleColumn"; ?>
+<? $this->beginClip('sidebar'); ?>
 	<img src="/image/view/id//size/1" alt="" width="248px">
-<?$this->endWidget()?>
+<?$this->endClip()?>
 	
 <? if (user()->checkAccess('updateProfile', array('username' => $user->username))): ?>
 	

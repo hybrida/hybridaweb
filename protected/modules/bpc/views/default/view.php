@@ -1,13 +1,11 @@
 <? $this->pageTitle = "Bedpres: ".$event->title ?>
 <? $this->layout = "//layouts/doubleColumn" ?>
 <? 
-$this->beginWidget('CClipWidget', array('id' => 'sidebar')); ?>
+$this->beginClip('sidebar'); ?>
 	<? $this->renderPartial("_attenders", array(
 		'event' => $event,
 	))  ?>
-<?
-$this->endWidget()
-?>
+<? $this->endClip() ?>
 
 <h1>Bedpres: <?=$event->title?></h1>
 

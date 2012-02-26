@@ -1,9 +1,9 @@
 <? 
 $this->layout = "//layouts/doubleColumn";
-$this->beginWidget('CClipWidget', array('id' => 'sidebar'));
-$this->widget('application.components.widgets.ActivitiesCalendar');
-$this->widget('application.components.widgets.ActivitiesFeed');
-$this->endWidget()
+$this->beginClip('sidebar');
+	$this->widget('application.components.widgets.ActivitiesCalendar');
+	$this->widget('application.components.widgets.ActivitiesFeed');
+$this->endClip()
 ?>
 
 <? $this->pageTitle = "Nyhetsstrøm" ?>
