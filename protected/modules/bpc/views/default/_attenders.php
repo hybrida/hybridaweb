@@ -13,7 +13,7 @@
 	</div>
 
 
-	<? if (user()->cardinfo == ''): ?>
+	<? if (!user()->isGuest && user()->cardinfo == ''): ?>
 		<div class="barTitle">Error</div>
 		For å melde deg på må du først registrere kortnummeret ditt på
 		<?= Html::link('profilredigeringssiden', array('/profile/edit', 'username' => user()->name)) ?> din.

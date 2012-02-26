@@ -76,6 +76,7 @@ class BpcEvent extends CModel {
 
 	public function canAttend($userId) {
 		$user = User::model()->findByPk($userId);
+		if (!$user) return false;
 		$classYear = $user->classYear;
 		$signupIsOn = $this->registration_started == 1 && $this->deadline_passed == 0;
 		$okYear = $classYear >= $this->min_year && $classYear <= $this->max_year;
