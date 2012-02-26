@@ -3,7 +3,7 @@
 <? 
 $this->beginWidget('CClipWidget', array('id' => 'sidebar')); ?>
 
-<? if ($hasEvent): ?>
+<? if ($event): ?>
 	<div class="barTitle">Event</div>
 	<div class="barText">
 		<b>Sted: </b><?= $event->location ?> <br>
@@ -11,7 +11,7 @@ $this->beginWidget('CClipWidget', array('id' => 'sidebar')); ?>
 		<b>Slutter: </b><i><?= Html::dateToString($event->end, 'long') ?></i>
 	</div>
 
-	<? if ($hasSignup): ?>
+	<? if ($signup): ?>
 	<div class="barTitle">Påmelding:</div>
 	<div class="barText">
 		<strong>Påmeldte: </strong> <i><?= $signup->attendingCount ?> av <?= $signup->spots ?></i> <br/>

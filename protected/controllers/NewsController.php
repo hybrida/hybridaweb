@@ -40,17 +40,13 @@ class NewsController extends Controller {
 
 		$event = $this->getEventByNews($news);
 		$signup = $this->getSignupByEvent($event);
-		$hasSignup = false;
-		$hasEvent = false;
 		$isAttending = false;
 		if ($event) {
-			$hasEvent = app()->gatekeeper->hasPostAccess('event', $event->id);
 			if ($event->bpcID) {
 				BpcCore::update($event->bpcID);
 			}
 		}
 		if ($signup) {
-			$hasSignup = app()->gatekeeper->hasPostAccess('signup', $signup->eventId) && !user()->isGuest;
 			$isAttending = $signup->isAttending(user()->id);
 		}
 
@@ -59,8 +55,6 @@ class NewsController extends Controller {
 			'event' => $event,
 			'signup' => $signup,
 			'isAttending' => $isAttending,
-			'hasEvent' => $hasEvent,
-			'hasSignup' => $hasSignup,
 			'hasEditAccess' => user()->checkAccess('updateNews', array('id' => $id)),
 		));
 	}
