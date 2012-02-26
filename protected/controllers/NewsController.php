@@ -113,7 +113,7 @@ class NewsController extends Controller {
 			}
 		}
 
-		$this->renderPartial('_sidebarEvent', array(
+		$this->renderPartial('_view_sidebar', array(
 			'event' => $event,
 			'signup' => $signup,
 			'isAttending' => $isAttending,

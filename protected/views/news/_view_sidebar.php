@@ -1,4 +1,4 @@
-<div id="blablabla">
+<div id="sidebarToBeUpdated">
 	<? if ($event): ?>
 		<div class="barTitle">Event</div>
 		<div class="barText">
@@ -28,13 +28,13 @@
 				<? if ($signup->canAttend(user()->id)): ?>
 					<?=
 					Html::ajaxLink($isAttending ? "Meld meg av" : "Meld meg på", array('toggleAttending', 'userId' => user()->id, 'eventId' => $event->id), array(
-						'update' => '#blablabla',
+						'update' => '#sidebarToBeUpdated',
 							), array(
 						'class' => 'button',
 					))
 					?>
 				<? endif; ?>
-			<? endif ?>
+			</div>
 		<? endif ?>
-	</div>
+	<? endif ?>
 </div>

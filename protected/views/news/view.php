@@ -3,7 +3,7 @@ $this->pageTitle = $news->title ;
 $this->layout = "//layouts/doubleColumn" ;
  
 $this->beginClip('sidebar'); 
-	$this->renderPartial($sidebarView, array(
+	$this->renderPartial('_view_sidebar', array(
 		'signup' => $signup,
 		'event' => $event,
 		'isAttending' => $isAttending,
