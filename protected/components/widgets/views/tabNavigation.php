@@ -10,6 +10,6 @@
 		<div><?= CHtml::link("Medlemmer", array("/students/")); ?></div> 
 	<? endif ?>
 
-	<div><?= CHtml::link("Bedrift", array("/article/2")); ?></div> 
-	<div><?= CHtml::link("Om Hybrida", array("/article/1")); ?></div>
+	<div><?= CHtml::link("Bedrift", array("/article/view", 'id' => 2)); ?></div> 
+	<div><?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 2)); ?></div>
 </items>
