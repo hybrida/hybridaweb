@@ -111,6 +111,7 @@ return array(
 				'profile/<username:\w+>/<action:\w+>' => 'profile/<action>/',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
+				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',

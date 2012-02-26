@@ -1,40 +1,16 @@
-<? $this->pageTitle = $news->title ?>
-<? $this->layout = "//layouts/doubleColumn" ?>
-<? 
-$this->beginWidget('CClipWidget', array('id' => 'sidebar')); ?>
-
-<? if ($event): ?>
-	<div class="barTitle">Event</div>
-	<div class="barText">
-		<b>Sted: </b><?= $event->location ?> <br>
-		<b>Starter: </b><i><?= Html::dateToString($event->start, 'long') ?></i><br />
-		<b>Slutter: </b><i><?= Html::dateToString($event->end, 'long') ?></i>
-	</div>
-
-	<? if ($signup): ?>
-	<div class="barTitle">Påmelding:</div>
-	<div class="barText">
-		<strong>Påmeldte: </strong> <i><?= $signup->attendingCount ?> av <?= $signup->spots ?></i> <br/>
-		<strong>Åpner: </strong><i><?= Html::dateToString($signup->open, 'long') ?></i> <br>
-		<strong>Stenger: </strong><i><?= Html::dateToString($signup->close, 'long') ?></i> <br>
-	</div>
-		
-	<div class="barTitle">Påmeldte</div>
-	<div class="barText">
-		<? $this->renderPartial("_signup", array(
-			'signup' => $signup,
-			'isAttending' => $isAttending,
-		)) ?>
-	</div>
-	<? endif // signup ?>
-
-
-<? endif; // event?>
-
-<?
-$this->widget('application.components.widgets.ActivitiesCalendar');
-$this->widget('application.components.widgets.ActivitiesFeed');
-$this->endWidget()
+<?php 
+$this->pageTitle = $news->title ;
+$this->layout = "//layouts/doubleColumn" ;
+ 
+$this->beginClip('sidebar'); 
+	$this->renderPartial($sidebarView, array(
+		'signup' => $signup,
+		'event' => $event,
+		'isAttending' => $isAttending,
+	));
+	$this->widget('application.components.widgets.ActivitiesCalendar');
+	$this->widget('application.components.widgets.ActivitiesFeed');
+$this->endClip()
 ?>
 
 <?$this->breadcrumbs=array(

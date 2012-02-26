@@ -31,21 +31,16 @@ class NewsController extends Controller {
 	}
 
 	public function actionView($id) {
-		$news = News::model()->with('author')->findByPk($id);
-
-		if (!$news)
-			throw new CHttpException('Nyheten finnes ikke');
-		if (!app()->gatekeeper->hasPostAccess('news', $news->id))
-			throw new CHttpException('Ingen tilgang');
-
+		$news = $this->getNewsModelAndThrowExceptionIfNullOrNotAccess($id);
 		$event = $this->getEventByNews($news);
-		$signup = $this->getSignupByEvent($event);
-		$isAttending = false;
 		if ($event) {
 			if ($event->bpcID) {
-				BpcCore::update($event->bpcID);
+				$this->redirectToBpc($event->bpcID, $news->title);
+				return;
 			}
 		}
+		$signup = $this->getSignupByEvent($event);
+		$isAttending = false;
 		if ($signup) {
 			$isAttending = $signup->isAttending(user()->id);
 		}
@@ -57,6 +52,24 @@ class NewsController extends Controller {
 			'isAttending' => $isAttending,
 			'hasEditAccess' => user()->checkAccess('updateNews', array('id' => $id)),
 		));
+	}
+
+	private function redirectToBpc($id, $title) {
+		$url = $this->createUrl('/bpc/default/view', array(
+			'id' => $id,
+			'title' => $title,
+				));
+		$this->redirect($url);
+	}
+
+	private function getNewsModelAndThrowExceptionIfNullOrNotAccess($id) {
+		$news = News::model()->with('author')->findByPk($id);
+
+		if (!$news)
+			throw new CHttpException('Nyheten finnes ikke');
+		if (!app()->gatekeeper->hasPostAccess('news', $news->id))
+			throw new CHttpException('Ingen tilgang');
+		return $news;
 	}
 
 	private function getEventByNews($news) {
@@ -84,6 +97,27 @@ class NewsController extends Controller {
 			return $signup;
 		}
 		return null;
+	}
+
+	public function actionToggleAttending($userId, $eventId) {
+		$event = Event::model()->findByPk($eventId);
+		$signup = $this->getSignupByEvent($event);
+		if (!$signup || !$event)
+			return;
+		$isAttending = $signup->isAttending($userId);
+		if ($signup->canAttend($userId)) {
+			if ($isAttending) {
+				$signup->removeAttender($userId);
+			} else {
+				$signup->addAttender($userId);
+			}
+		}
+
+		$this->renderPartial('_sidebarEvent', array(
+			'event' => $event,
+			'signup' => $signup,
+			'isAttending' => $isAttending,
+		));
 	}
 
 	public function actionFeed() {
@@ -153,25 +187,11 @@ class NewsController extends Controller {
 		));
 	}
 
-	private function redirectAfterEdit($model) {
-		$newsModel = $model->getNewsModel();
+	private function redirectAfterEdit($newsEventFormModel) {
+		$newsModel = $newsEventFormModel->getNewsModel();
 		if (!$newsModel->isNewRecord) {
 			$this->redirect($newsModel->viewUrl);
 		}
-	}
-	
-	public function actionToggleAttending($userID, $eventID) {
-		$event = Event::model()->findByPk($eventID);
-		$signup = $this->getSignupByEvent($event);
-		if ($signup->canUnattend($userID)) {
-			$signup->removeAttender($userID);
-		} else if ($signup->canAttend($userID)) {
-			$signup->addAttender($userID);
-		}
-		
-		$this->renderPartial("_signup", array(
-			'signup' => $signup,
-		));
 	}
 
 }

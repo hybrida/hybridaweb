@@ -222,17 +222,10 @@ class Signup extends CActiveRecord {
 	}
 
 	public function canAttend($userID) {
-		return !$this->isAttending($userID) &&
-				$this->isOpen() &&
+		return 	$this->isOpen() &&
 				$this->hasFreeSpots() &&
 				app()->gatekeeper->hasPostAccess('signup', $this->eventId) &&
 				!user()->isGuest;
-	}
-
-	public function canUnattend($userID) {
-		return $this->isAttending($userID) &&
-				$this->isOpen() &&
-				$this->signoff == "true";
 	}
 
 }
