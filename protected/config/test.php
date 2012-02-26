@@ -13,7 +13,7 @@ return CMap::mergeArray(
 					'class' => 'system.test.CDbFixtureManager',
 				),
 				'user' => array(
-					'loginUrl' => array("dev/login", 'id' => 2),
+					'loginUrl' => "dev/login/381",
 				),
 				'urlManager' => array(
 					'urlFormat' => 'get',
