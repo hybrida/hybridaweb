@@ -11,5 +11,5 @@
 	<? endif ?>
 
 	<div><?= CHtml::link("Bedrift", array("/article/view", 'id' => 2)); ?></div> 
-	<div><?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 2)); ?></div>
+	<div><?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 1)); ?></div>
 </items>
