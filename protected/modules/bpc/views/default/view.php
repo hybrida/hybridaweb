@@ -14,9 +14,3 @@ $this->endWidget()
 <img src='<?=$event->logo?>' alt=""/><br>
 
 <?=$event->description?>
-
-<?$this->widget('comment.components.commentWidget', array(
-	'id' => $event->id,
-	'type' => 'bedpres',
-)); ?>
-
