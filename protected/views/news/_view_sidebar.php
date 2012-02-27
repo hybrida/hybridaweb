@@ -7,8 +7,8 @@
 			<b>Slutter: </b><i><?= Html::dateToString($event->end, 'long') ?></i>
 		</div>
 
+		<div class="barTitle">Påmelding:</div>
 		<? if ($signup): ?>
-			<div class="barTitle">Påmelding:</div>
 			<div class="barText">
 				<strong>Påmeldte: </strong> <i><?= $signup->attendingCount ?> av <?= $signup->spots ?></i> <br/>
 				<strong>Åpner: </strong><i><?= Html::dateToString($signup->open, 'long') ?></i> <br>
@@ -34,7 +34,9 @@
 					))
 					?>
 				<? endif; ?>
+			<? else: ?>
 			</div>
-		<? endif ?>
+			<p>Du har ikke tilgang til å melde deg på.</p>
+		<? endif; ?>
 	<? endif ?>
 </div>

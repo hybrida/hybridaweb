@@ -154,7 +154,7 @@ nav items div.last {
     clear: both;
     margin: 1.5em;
 	border-radius: 2px;
-    background-color: rgba(0, 0, 0, 0.08);
+	border: 1px dashed #0062C4;
 	padding: 1.5em;
 }
 
@@ -167,15 +167,21 @@ nav items div.last {
     width: 30%;
     float: left;
     clear: left;
+	text-align: right;
 }
 
 .formSection .fieldInput {
-    width: 70%;
+    width: 68%;
+/*	For 2% opphold mellom definisjon og input.
+	Om man skal bruke padding eller margin, må den ytre
+	boksen ha fastsatt bredde, men den skalerer (derfor %) */
+	
     float: right;
     clear: right;
+	margin-bottom: 0.4em;
 }
 
-.formSection .inputGoup :focus {
+.formSection .inputGroup :focus {
     box-shadow: 0 0 10px black;
 }
 

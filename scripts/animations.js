@@ -1,5 +1,8 @@
-var inDuration = 'fast';
-var outDuration = 'medium';
+var inDuration = 0;
+var outDuration = 0;
+
+// var inDuration = 'fast';
+// var outDuration = 'medium';
 
 // var defaultLinkBackgroundColor = "rgb(0, 73, 147)"; -- Mork blaa
 var defaultLinkBackgroundColor = "rgb(0, 98, 196)"
