@@ -43,10 +43,12 @@ class SiteController extends Controller {
 	}
 	
 	public function getLoginRedirect() {
-		$returnUrl = user()->returnUrl;
-		$returnUrl = ''; // Fix. Sjekker om dette fjerner redirecthelvete
+		$returnUrl = $_SERVER['SERVER_NAME'] . "/site/innsidalogin";
+
+		//$returnUrl = ''; // Fix. Sjekker om dette fjerner redirecthelvete
 		
 		$redirectUrl = self::$innsidaLink . $returnUrl;
+
 		return $redirectUrl;
 	}
 
