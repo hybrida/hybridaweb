@@ -221,10 +221,11 @@ class Signup extends CActiveRecord {
 		return $this->spots > $this->getAttendingCount();
 	}
 
-	public function canAttend($userID) {
+	public function canAttend() {
 		return 	$this->isOpen() &&
 				$this->hasFreeSpots() &&
 				app()->gatekeeper->hasPostAccess('signup', $this->eventId) &&
+				app()->gatekeeper->hasPostAccess('event', $this->eventId) &&
 				!user()->isGuest;
 	}
 

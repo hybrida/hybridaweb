@@ -27,7 +27,7 @@
 
 				<? if ($signup->canAttend(user()->id)): ?>
 					<?=
-					Html::ajaxLink($isAttending ? "Meld meg av" : "Meld meg på", array('toggleAttending', 'userId' => user()->id, 'eventId' => $event->id), array(
+					Html::ajaxLink($isAttending ? "Meld meg av" : "Meld meg på", array('toggleAttending', 'eventId' => $event->id), array(
 						'update' => '#sidebarToBeUpdated',
 							), array(
 						'class' => 'button',

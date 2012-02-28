@@ -99,7 +99,11 @@ class NewsController extends Controller {
 		return null;
 	}
 
-	public function actionToggleAttending($userId, $eventId) {
+	public function actionToggleAttending($eventId) {
+		if (user()->isGuest) {
+			return;
+		}
+		$userId = user()->id;
 		$event = Event::model()->findByPk($eventId);
 		$signup = $this->getSignupByEvent($event);
 		if (!$signup || !$event)
