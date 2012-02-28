@@ -18,22 +18,23 @@
 			<div class="barTitle">Påmeldte</div>
 			<div class="barText">
 
-				<? foreach ($signup->getAttenders() as $user): ?>
-					<img src='/image/view/id//size/3 '></img>
-					<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
-					<br>
-				<? endforeach; ?>
-
-
 				<? if ($signup->canAttend(user()->id)): ?>
 					<?=
 					Html::ajaxLink($isAttending ? "Meld meg av" : "Meld meg på", array('toggleAttending', 'eventId' => $event->id), array(
 						'update' => '#sidebarToBeUpdated',
 							), array(
 						'class' => 'button',
+							
 					))
-					?>
+						?><p></p>
 				<? endif; ?>
+
+				<? foreach ($signup->getAttenders() as $user): ?>
+					<img src='/image/view/id//size/3 '></img>
+					<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
+					<br>
+				<? endforeach; ?>
+
 			<? else: ?>
 			</div>
 			<p>Du har ikke tilgang til å melde deg på.</p>
