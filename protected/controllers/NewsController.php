@@ -112,6 +112,7 @@ class NewsController extends Controller {
 				$signup->addAttender($userId);
 			}
 		}
+		$isAttending = ! $isAttending;
 
 		$this->renderPartial('_view_sidebar', array(
 			'event' => $event,
