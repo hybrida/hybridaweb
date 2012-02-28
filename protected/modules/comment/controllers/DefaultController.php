@@ -20,6 +20,10 @@ class DefaultController extends Controller {
 	public function redirectAfterCommentUpload($model) {
 		$r = "";
 		switch ($model->type) {
+			case 'profile':
+				$user = User::model()->findByPk($model->id);
+				$r = $this->createUrl('/profile/comment',array('username' => $user->username));
+				break;
 			case 'news':
 				$r = $this->createUrl('/news/view', array('id' => $model->id));
 				break;
