@@ -19,7 +19,8 @@ class Install {
 	}
 	
 	public function update() {
-		$sqlDrop = "DROP DATABASE `hybrida`;\n";
+		$sqlDrop = "DROP DATABASE IF EXISTS `hybrida_dev`;\n";
+		$sqlDrop.= "DROP DATABASE IF EXISTS `hybrida`;\n";
 		$sql = $sqlDrop . $this->getContentOfSQLFile();
 		$stmt = Yii::app()->db->createCommand($sql);
 		$stmt->execute();

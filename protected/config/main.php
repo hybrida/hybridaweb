@@ -118,7 +118,7 @@ return array(
 			),
 		),
 		'db' => array(
-			'connectionString' => 'mysql:host=localhost;dbname=hybrida',
+			'connectionString' => 'mysql:host=localhost;dbname=hybrida_dev',
 			'emulatePrepare' => true,
 			'username' => 'www-data',
 			'password' => 'Q8JdU5MY7dDr5XEU',
