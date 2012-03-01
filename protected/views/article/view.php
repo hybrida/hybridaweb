@@ -1,13 +1,25 @@
-<? $this->pageTitle = $title ?>
+<? $this->pageTitle = $article->title ?>
 
 <?php $this->renderPartial("menu"); ?>
-<div id='edit'>
-    <a href='<?= Yii::app()->baseURL ?>/article/edit/<?= $id ?>'>endre</a>
-</div>
 
-<h1><?= $title ?> </h1>
+<?$this->breadcrumbs=array(
+	'Article feed' => array("/article/feed"),
+	'Article',
+);?>
 
-<p><?=$content?></p>
+<h1><?= $article->title ?> </h1>
 
+<p><?= $article->content ?></p>
 
+<? if ($hasEditAccess): ?>
+	<p>
+	<?= CHtml::link("Rediger",array("article/edit",'id' => $article->id), array(
+		'class' => 'button buttonRightSide'
+	)); ?>
+	</p>
+<? endif ?>
 
+<? if ($article->author): ?>
+	<strong>Skribent:</strong>
+	<?= CHtml::link($article->AuthorName, array($article->AuthorUrl)) ?>
+<? endif ?>

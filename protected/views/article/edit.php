@@ -1,32 +1,48 @@
 <? $this->pageTitle = "Rediger artikkel" ?>
 
-<?php 
+<?$this->breadcrumbs=array(
+	'Article feed' => array("/article/feed"),
+	'Article',
+);?>
 
+<?php 
     $form = $this->beginWidget('ActiveForm', array(
-		'id' => 'news_edit-form',
-		//'enableAjaxValidation' => true,
+		'id' => 'article_edit-form',
+		//'enableAjaxValidation' => true, // Ødelegger redirect.
 		'enableClientValidation' => true,
 		'clientOptions' => array(
 			'validateOnSubmit' => true,
-		),
-			));
+		)));
 	?>
 
-<div class="row">
-			<?= $form->labelEx($model, 'title') ?>
-			<?= $form->textField($model, 'title') ?>
-			<?= $form->error($model, 'title') ?>
+<div class="form">
+	<div class="formHeader">
+		<h1>Artikkel</h1>
+	</div>
 
+	<div class="row">
+				<?= $form->labelEx($model, 'title') ?>
+				<?= $form->textField($model, 'title') ?>
+				<?= $form->error($model, 'title') ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model, 'content'); ?>
+		<?php echo $form->textArea($model, 'content',array(
+					'cols' => '50',
+					'rows' => '8',
+					'xheditor' => true,
+		)); ?>
+		<?php echo $form->error($model, 'content'); ?>
+	</div>
+
+	<div class="formElement">
+		<div class="formSubmit">
+			<?php echo CHtml::submitButton('Lagre', array(
+				'class'=> 'button'
+			)); ?>
+		</div>
+	</div>
 </div>
-
-<div class="row">
-    <?php echo $form->labelEx($model, 'content'); ?>
-    <?php echo $form->textArea($model, "content"); ?>
-    <?php echo $form->error($model, 'content'); ?>
-</div>
-
-
-<input type="submit" class="button" />
-
 
 <? $this->endWidget() ?>
