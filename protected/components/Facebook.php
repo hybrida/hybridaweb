@@ -3,8 +3,8 @@
 class Facebook {
 
 	public $url = "http://dev.hybrida.no";
-    public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
-    public $pageId = "218073661595571";
+        public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
+        public $pageId = "218073661595571";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -48,22 +48,15 @@ class Facebook {
 
 	public function setAttending($id) {
 		$userId = Yii::app()->user->id;
-		$urlEventPage = $this->url . Yii::app()->baseURL . '/event/facebook/' . $id;
+		//$urlEventPage = $this->url . Yii::app()->baseURL . '/event/facebook/' . $id;
+                $urlEventPage = 'http://dev.hybrida.no/facebook/';
 		$accessToken = $this->getAccessToken();
 		$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 		$data = array(
 			'access_token' => $accessToken,
 			'event' => $urlEventPage,
 		);
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo "<!--" . $out . "-->";
-		curl_close($ch);
+		$this->runCurl($data, $postUrl);
 	}
 
 	public function metaDataEvent($eventName, $urlEventPage) { //Denne funksjonen skal kalles og skrives ut i head p� eventsidene
@@ -78,7 +71,7 @@ class Facebook {
 	}
 
 	public function publishAtFanpage($id) {
-        $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
+                $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
 		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
                 $data['link'] = $urlEventPage;
 		$data['message'] = utf8_encode('har opprettet et arrangement');

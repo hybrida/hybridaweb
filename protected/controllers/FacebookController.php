@@ -35,6 +35,12 @@ class FacebookController extends Controller {
             $query->execute($array);
 
             Header("Location: http://dev.hybrida.no"); //redirect tilbake til forsiden
+        }else{
+            $fb = new Facebook();
+            echo '<html>';
+            echo $fb->metaDataEvent('TestEvent', 'http://dev.hybrida.no/facebook/');
+            echo '</html>';
+            $fb->setAttending(1);
         }
     }
 }
