@@ -41,12 +41,14 @@ class Facebook {
 		$my_url = Yii::app()->createAbsoluteUrl('/facebook/'); //oppdater path til endelig side 
 		$dir = Yii::app()->createAbsoluteUrl('/images/facebookconnectlogo.jpg');
 		$permissions = 'publish_actions,offline_access';
+                echo 'https://www.facebook.com/dialog/oauth?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&scope=' . $permissions;
 		return '<a href="https://www.facebook.com/dialog/oauth?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&scope=' . $permissions . '"><img src="' . $dir . '"></a>';
 	}
 
 	public function setAttending($id) {
 		$userId = Yii::app()->user->id;
-		$urlEventPage = Yii::app()->createAbsoluteUrl('/facebook/?error=tullball');//, array('id' => $id));
+		$urlEventPage = Yii::app()->createAbsoluteUrl('/facebook/?error=tullball');
+                //$urlEventPage = Yii::app()->createAbsoluteUrl('/event/'.$id);
                 echo $urlEventPage;
 		$accessToken = $this->getAccessToken();
 		$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';

@@ -23,7 +23,8 @@ class FacebookController extends Controller {
 
         }
         elseif(isset($code)){
-            $token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code;
+            
+            $token_url = urlencode('https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code);
             $access = file_get_contents($token_url);
             $params = null;
                 parse_str($access, $params);
