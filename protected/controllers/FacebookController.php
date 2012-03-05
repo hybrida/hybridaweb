@@ -15,17 +15,14 @@ class FacebookController extends Controller {
 
         
         if(isset($_REQUEST['error'])){
-            $fb = new Facebook;
-            $fb->metaData();
-            $fb->setAttending('1');
             echo 'En feil har oppstått. Vennligst prøv igjen';
             echo $_REQUEST['error'];
 
         }
         elseif(isset($code)){
-            
+            //Feilen med facebook ligger i den neste linjen med kode. file_get_contents klarer ikke åpne riktig link. Må være noe feil med formatering av linken....
             $token_url = urlencode('https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code);
-            $access = file_get_contents($token_url);
+            $access = file_get_contents($token_url); 
             $params = null;
                 parse_str($access, $params);
             $accessToken = $params['access_token'];

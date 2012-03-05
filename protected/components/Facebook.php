@@ -15,7 +15,6 @@ class Facebook {
 	}
 
 	public function getUsername() {
-		$userId = Yii::app()->user->id;
 		$access_token = $this->getAccessToken();
 		$url = 'https://graph.facebook.com/me?access_token=' . $access_token;
 		$content = file_get_contents($url);
@@ -26,7 +25,6 @@ class Facebook {
 	}
 
 	public function retrieveProfilePicture() {
-		$userId = Yii::app()->user->id;
 		$username = getUsername();
 
 		//Skriver ut profilbildet vha username (200piksler bred, variabel h�yde)
@@ -36,19 +34,15 @@ class Facebook {
 	}
 
 	public function authLink() { //Returnerer link til authentication
-		$userId = Yii::app()->user->id;
 		$app_id = '202808609747231';
-		$my_url = Yii::app()->createAbsoluteUrl('/facebook/'); //oppdater path til endelig side 
+		$my_url = Yii::app()->createAbsoluteUrl('/facebook/');
 		$dir = Yii::app()->createAbsoluteUrl('/images/facebookconnectlogo.jpg');
 		$permissions = 'publish_actions,offline_access';
-                echo 'https://www.facebook.com/dialog/oauth?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&scope=' . $permissions;
 		return '<a href="https://www.facebook.com/dialog/oauth?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&scope=' . $permissions . '"><img src="' . $dir . '"></a>';
 	}
 
 	public function setAttending($id) {
-		$userId = Yii::app()->user->id;
-		$urlEventPage = Yii::app()->createAbsoluteUrl('/facebook/?error=tullball');
-                //$urlEventPage = Yii::app()->createAbsoluteUrl('/event/'.$id);
+                $urlEventPage = Yii::app()->createAbsoluteUrl('/event/'.$id);
                 echo $urlEventPage;
 		$accessToken = $this->getAccessToken();
 		$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
@@ -59,19 +53,9 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
         
-        public function metaData(){
-            $urlEventPage = Yii::app()->createAbsoluteUrl('/facebook/');
-            $urlEventPage = $urlEventPage.'/?error=tullball';
-            $urlEvent = 'SuperAwesomeEvent';
-            echo '<html><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#">
-                <meta property="fb:app_id"      content="202808609747231" />
-                <meta property="og:type"        content="lfhybrida:event" />
-                <meta property="og:url"         content="'.$urlEventPage.'" />
-                <meta property="og:title"       content="'.$urlEvent.'" /></head></html>';
-        }
-
 	public function publishAtFanpage($id) {
-                $urlEventPage = Yii::app()->createAbsoluteUrl('/event/', array('id' => $id));
+                $urlEventPage = Yii::app()->createAbsoluteUrl('/event?id=');
+                $urlEventPage=urlEventPage.$id;
 		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
                 $data['link'] = $urlEventPage;
 		$data['message'] = utf8_encode('har opprettet et arrangement');
@@ -80,7 +64,8 @@ class Facebook {
 	}
 
 	public function publishNews($message, $id) {
-		$urlEventPage = Yii::app()->createAbsoluteUrl('/news/' , array('id' => $id));
+		$urlEventPage = Yii::app()->createAbsoluteUrl('/news?id=');
+                $urlEventPage=urlEventPage.$id;
 		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
 		$data['link'] = $urlNewsPage;
 		$data['message'] = $message;
