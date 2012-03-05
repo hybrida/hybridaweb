@@ -59,11 +59,12 @@ class Facebook {
         public function metaData(){
             $urlEventPage = Yii::app()->createAbsoluteUrl('/facebook/' , array('error' => 'tullball'));
             $urlEvent = 'SuperAwesomeEventLagdPåWebKomMøte';
-            return '<html><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#">
+            echo '<html><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#">
                 <meta property="fb:app_id"      content="202808609747231" />
                 <meta property="og:type"        content="lfhybrida:event" />
                 <meta property="og:url"         content="'.$urlEventPage.'" />
                 <meta property="og:title"       content="'.$urlEvent.'" /></head></html>';
+            echo $urlEventPage;
         }
 
 	public function publishAtFanpage($id) {
