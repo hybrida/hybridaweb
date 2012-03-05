@@ -12,7 +12,18 @@ $this->beginClip('sidebar');
 	$this->widget('application.components.widgets.ActivitiesFeed');
 $this->endClip()
 ?>
+<? if ($event): ?>
+	<? $this->beginClip('head-tag') ?>
+prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#"
+	<? $this->endClip() ?>
 
+	<? $this->beginClip('head-facebook') ?>
+		<meta property="fb:app_id"      content="202808609747231" />
+		<meta property="og:type"        content="lfhybrida:event" />
+		<meta property="og:url"         content="<?= Yii::app()->createAbsoluteUrl("/") . $news->viewUrl ?>" />
+		<meta property="og:title"       content="<?= $news->title ?>" />
+	<? $this->endClip() ?>
+<? endif; ?>
 <?$this->breadcrumbs=array(
 	'News',
 );?>

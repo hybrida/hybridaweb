@@ -1,10 +1,11 @@
 <!DOCTYPE HTML>
 <html>
 
-    <head>
+    <head <?= $this->clips['head-tag'] ?> >
         <title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         
+		<?= $this->clips['head-facebook'] ?>
         <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/e.js"></script>
         <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/animations.js"></script>
 

@@ -1,10 +1,8 @@
 <?php
 
 class Facebook {
-
-	public $url = "http://dev.hybrida.no";
-    public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
-    public $pageId = "218073661595571";
+        public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
+        public $pageId = "218073661595571";
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -17,7 +15,6 @@ class Facebook {
 	}
 
 	public function getUsername() {
-		$userId = Yii::app()->user->id;
 		$access_token = $this->getAccessToken();
 		$url = 'https://graph.facebook.com/me?access_token=' . $access_token;
 		$content = file_get_contents($url);
@@ -28,7 +25,6 @@ class Facebook {
 	}
 
 	public function retrieveProfilePicture() {
-		$userId = Yii::app()->user->id;
 		$username = getUsername();
 
 		//Skriver ut profilbildet vha username (200piksler bred, variabel h�yde)
@@ -38,47 +34,28 @@ class Facebook {
 	}
 
 	public function authLink() { //Returnerer link til authentication
-		$userId = Yii::app()->user->id;
 		$app_id = '202808609747231';
-		$my_url = $this->url . Yii::app()->baseURL . '/facebook/'; //oppdater path til endelig side 
-		$dir = Yii::app()->baseURL . '/images/facebookconnectlogo.jpg';
+		$my_url = Yii::app()->createAbsoluteUrl('/facebook/');
+		$dir = Yii::app()->createAbsoluteUrl('/images/facebookconnectlogo.jpg');
 		$permissions = 'publish_actions,offline_access';
 		return '<a href="https://www.facebook.com/dialog/oauth?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&scope=' . $permissions . '"><img src="' . $dir . '"></a>';
 	}
 
 	public function setAttending($id) {
-		$userId = Yii::app()->user->id;
-		$urlEventPage = $this->url . Yii::app()->baseURL . '/event/facebook/' . $id;
+                $urlEventPage = Yii::app()->createAbsoluteUrl('/event/'.$id);
+                echo $urlEventPage;
 		$accessToken = $this->getAccessToken();
 		$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 		$data = array(
 			'access_token' => $accessToken,
 			'event' => $urlEventPage,
 		);
-		$ch = curl_init();
-
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$out = curl_exec($ch);
-		echo "<!--" . $out . "-->";
-		curl_close($ch);
+		$this->runCurl($data, $postUrl);
 	}
-
-	public function metaDataEvent($eventName, $urlEventPage) { //Denne funksjonen skal kalles og skrives ut i head p� eventsidene
-		$metaData = '<head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#">' . "\n" .
-				'<meta property="fb:app_id"      content="202808609747231" />' . "\n" .
-				'<meta property="og:type"        content="lfhybrida:event" />' . "\n" .
-				'<meta property="og:url"         content="' . $urlEventPage . '" />' . "\n" .
-				'<meta property="og:title"       content="' . $eventName . '" /></head>'; //."\n".
-		//'<meta property="og:description" content="'.$eventDesc.'" />';."\n".
-		//'<meta property="og:image"       content="'.$linkImage.'" />';  
-		return $metaData;
-	}
-
+        
 	public function publishAtFanpage($id) {
-        $urlEventPage = $url . Yii::app()->baseURL . '/event/' . $id;
+                $urlEventPage = Yii::app()->createAbsoluteUrl('/event?id=');
+                $urlEventPage=urlEventPage.$id;
 		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
                 $data['link'] = $urlEventPage;
 		$data['message'] = utf8_encode('har opprettet et arrangement');
@@ -87,7 +64,8 @@ class Facebook {
 	}
 
 	public function publishNews($message, $id) {
-		$urlNewsPage = $url . Yii::app()->baseURL . '/news/' . $id; //obs obs
+		$urlEventPage = Yii::app()->createAbsoluteUrl('/news?id=');
+                $urlEventPage=urlEventPage.$id;
 		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
 		$data['link'] = $urlNewsPage;
 		$data['message'] = $message;
