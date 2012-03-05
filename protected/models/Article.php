@@ -4,6 +4,7 @@
  *
  * The followings are the available columns in table 'article':
  * @property integer $id
+ * @property integer $parentId
  * @property string $title
  * @property string $content
  * @property integer $author
@@ -23,9 +24,10 @@ class Article extends CActiveRecord {
 	public function rules() {
 		return array(
 			array('title', 'length', 'max' => 30),
+			array('parentId', 'numerical', 'integerOnly' => true),
 			array('author', 'numerical', 'integerOnly' => true),
 			array('title, content, timestamp', 'safe'),
-			array('id, title, content, author, timestamp', 'safe', 'on' => 'search'),
+			array('id, parentId, title, content, author, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -38,6 +40,7 @@ class Article extends CActiveRecord {
 	public function attributeLabels() {
 		return array(
 			'id' => 'ID',
+			'parentId' => 'parentId',
 			'title' => 'Title',
 			'content' => 'Content',
 			'author' => 'Author',
@@ -49,6 +52,7 @@ class Article extends CActiveRecord {
 		$criteria = new CDbCriteria;
 
 		$criteria->compare('id', $this->id);
+		$criteria->compare('parentId', $this->parentId);
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('content', $this->content, true);
 		$criteria->compare('author', $this->author);
@@ -74,7 +78,7 @@ class Article extends CActiveRecord {
 	}
 
 	public function getAccess() {
-		return $this->_access->get();
+		return $this->_access;
 	}
 	
 	public function beforeSave() {
@@ -92,29 +96,12 @@ class Article extends CActiveRecord {
 	
 	public function purify() {
 		$purifier = new CHtmlPurifier();
+		$this->parentId = $purifier->purify($this->parentId);
 		$this->content = $purifier->purify($this->content);
 		$this->title = $purifier->purify($this->title);
 		return parent::beforeValidate();
 	}
 
-	public function getAuthorName() {
-		$authorId = User::model()->findByPk($this->author);
-		$name = "";
-		if ($authorId) {
-			$name = $authorId->firstName . " " . $authorId->middleName . " " . $authorId->lastName;
-		}
-		return $name;
-	}
-	
-	public function getAuthorUrl() {
-		$authorId = User::model()->findByPk($this->author);
-		$url = "";
-		if ($authorId) {
-			$url = $authorId->getViewUrl();
-		}
-		return $url;
-	}
-	
 	public function getTitle() {
 		return $this->title;
 	}

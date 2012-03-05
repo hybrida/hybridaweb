@@ -1,15 +1,19 @@
-<? $this->pageTitle = $article->title ?>
+<?php
+$this->pageTitle = $article->title;
+$this->layout = "//layouts/doubleColumn"; ?>
 
-<?php $this->renderPartial("menu"); ?>
-
-<?$this->breadcrumbs=array(
-	'Article feed' => array("/article/feed"),
+<? $this->breadcrumbs=array(
 	'Article',
-);?>
+) ?>
 
-<h1><?= $article->title ?> </h1>
-
-<p><?= $article->content ?></p>
+<?
+$this->beginClip('sidebar'); 
+	$this->renderPartial('_view_sidebar', array(
+		'article' => $article,
+	));
+$this->endClip()
+ 
+?>
 
 <? if ($hasEditAccess): ?>
 	<p>
@@ -18,8 +22,7 @@
 	)); ?>
 	</p>
 <? endif ?>
+	
+<h1><?= $article->title ?> </h1>
 
-<? if ($article->author): ?>
-	<strong>Skribent:</strong>
-	<?= CHtml::link($article->AuthorName, array($article->AuthorUrl)) ?>
-<? endif ?>
+<p><?= $article->content ?></p>

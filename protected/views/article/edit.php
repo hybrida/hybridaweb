@@ -25,6 +25,12 @@
 				<?= $form->textField($model, 'title') ?>
 				<?= $form->error($model, 'title') ?>
 	</div>
+	
+	<div class="row">
+				<?= $form->labelEx($model, 'parentId') ?>
+				<?= $form->textField($model, 'parentId') ?>
+				<?= $form->error($model, 'parentId') ?>
+	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'content'); ?>

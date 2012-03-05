@@ -1,9 +1,6 @@
 <?php
 
 class ArticleController extends Controller {
-	private $feedLimit = 3;
-	private $offset = 0;
-
     public function actionView($id) {
         $article = Article::model()->findByPk($id);
 		
@@ -46,6 +43,7 @@ class ArticleController extends Controller {
 	private function renderArticleForm($model) {
 		if (isset($_POST['Article'])) {
 			$model->setAttributes($_POST['Article']);
+			$model->purify();
 			$model->save();
 			
 			$this->redirect($model->getViewUrl());
@@ -56,24 +54,6 @@ class ArticleController extends Controller {
 				array(
 					'model'=> $model,
 			));
-	}
-
-	public function actionFeed() {
-		$feedElements = $this->getFeedElements();
-		$this->render("feed", array(
-			'models' => $feedElements,
-			'index' => $this->offset,
-			'limit' => $this->feedLimit,
-			'hasPublishAccess' => user()->checkAccess('createArticle'),
-		));
-	}
-	
-	private function getFeedElements($offset = 0) {
-		$feed = new ArticleFeed($this->feedLimit, $offset);
-		$elements = $feed->getElements();
-		$this->offset = $feed->getOffset();
-
-		return $elements;
 	}
     
     public function getArticleModel($id) {
