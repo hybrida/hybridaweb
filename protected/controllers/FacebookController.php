@@ -18,7 +18,6 @@ class FacebookController extends Controller {
             $fb = new Facebook;
             $fb->metaData();
             $fb->setAttending('1');
-            echo $my_url;
             echo 'En feil har oppstått. Vennligst prøv igjen';
             echo $_REQUEST['error'];
 
