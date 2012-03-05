@@ -11,17 +11,20 @@ class FacebookController extends Controller {
         $userId = Yii::app()->user->id;
         $app_id = '202808609747231';
         $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
-        $my_url = 'http://dev.hybrida.no/facebook/'; //url til fila som skal lese inn code
+        $my_url = Yii::app()->createAbsoluteUrl('');
 
         
         if(isset($_REQUEST['error'])){
-
+            $fb = new Facebook;
+            $fb->metaData();
+            $fb->setAttending('1');
             echo 'En feil har oppstått. Vennligst prøv igjen';
             echo $_REQUEST['error'];
 
         }
         elseif(isset($code)){
-            $token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code;
+            
+            $token_url = urlencode('https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code);
             $access = file_get_contents($token_url);
             $params = null;
                 parse_str($access, $params);
@@ -34,13 +37,7 @@ class FacebookController extends Controller {
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
 
-            Header("Location: http://dev.hybrida.no"); //redirect tilbake til forsiden
-        }else{
-            $fb = new Facebook();
-            echo '<html>';
-            echo $fb->metaDataEvent('TestEvent', 'http://dev.hybrida.no/facebook/');
-            echo '</html>';
-            $fb->setAttending(1);
+            Header("Location: ".$my_url); //redirect tilbake til forsiden
         }
     }
 }
