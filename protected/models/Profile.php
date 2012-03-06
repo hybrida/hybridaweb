@@ -11,7 +11,7 @@ class Profile {
         );
         
         $sql = "SELECT un.firstName, un.middleName, un.lastName, un.username, un.phoneNumber, un.specializationId, 
-                un.graduationYear, un.imageId, un.member, un.gender, un.cardinfo, un.birthdate, un.altEmail, un.description,
+                un.graduationYear, un.imageId, un.member, un.gender, un.cardHash, un.birthdate, un.altEmail, un.description,
                 siteId, name FROM hyb_user AS un LEFT JOIN hyb_specialization ON specializationId = hyb_specialization.id WHERE un.id = :id";
 	
         $query = $this->pdo->prepare($sql);

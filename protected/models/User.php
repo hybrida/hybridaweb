@@ -16,7 +16,8 @@
  * @property integer $imageId
  * @property integer $phoneNumber
  * @property string $lastLogin
- * @property string $cardinfo
+ * @property string $cardHash
+ * @property string $cardNumber
  * @property string $description
  * @property string $workDescription
  * @property integer $workCompanyID
@@ -27,6 +28,8 @@
  * @property Access $access
  */
 class User extends CActiveRecord {
+	
+	public $cardNumber;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -51,8 +54,10 @@ class User extends CActiveRecord {
 		// will receive user inputs.
 		return array(
 			array('username, firstName, lastName, member', 'required'),
-			array('specializationId, imageId, phoneNumber, workCompanyID, cardinfo', 'numerical', 'integerOnly' => true),
-			array('username, cardinfo', 'length', 'max' => 10),
+			array('specializationId, imageId, phoneNumber, workCompanyID, cardNumber', 'numerical', 'integerOnly' => true),
+			array('username', 'length', 'max' => 10),
+			array('cardNumber','length','max' => 8),
+			array('cardNumber','length','min' => 5),
 			array('firstName, middleName, lastName', 'length', 'max' => 75),
 			array('graduationYear', 'length', 'max' => 4),
 			array('member', 'length', 'max' => 5),
@@ -61,7 +66,7 @@ class User extends CActiveRecord {
 			array('workDescription, lastLogin, description, birthdate', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, username, firstName, middleName, lastName, specializationId, graduationYear, member, gender, imageId, phoneNumber, lastLogin, cardinfo, description, workDescription, workCompanyID, workPlace, birthdate, altEmail', 'safe', 'on' => 'search'),
+			array('id, username, firstName, middleName, lastName, specializationId, graduationYear, member, gender, imageId, phoneNumber, lastLogin, cardHash, description, workDescription, workCompanyID, workPlace, birthdate, altEmail', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -93,7 +98,7 @@ class User extends CActiveRecord {
 			'imageId' => 'Image',
 			'phoneNumber' => 'Phone Number',
 			'lastLogin' => 'Last Login',
-			'cardinfo' => 'Cardinfo',
+			'cardHash' => 'Cardinfo',
 			'description' => 'Description',
 			'workDescription' => 'Work Description',
 			'workCompanyID' => 'Work Company',
@@ -125,7 +130,7 @@ class User extends CActiveRecord {
 		$criteria->compare('imageId', $this->imageId);
 		$criteria->compare('phoneNumber', $this->phoneNumber);
 		$criteria->compare('lastLogin', $this->lastLogin, true);
-		$criteria->compare('cardinfo', $this->cardinfo, true);
+		$criteria->compare('cardHash', $this->cardHash, true);
 		$criteria->compare('description', $this->description, true);
 		$criteria->compare('workDescription', $this->workDescription, true);
 		$criteria->compare('workCompanyID', $this->workCompanyID);
@@ -211,6 +216,13 @@ class User extends CActiveRecord {
 	
 	public function getClassYear() {
 		return YearConverter::graduationYearToClassYear($this->graduationYear);
+	}
+	
+	protected function beforeSave() {
+		if ($this->cardNumber) {
+			$this->cardHash = sha1($this->cardNumber);
+		}
+		return parent::beforeSave();
 	}
 
 }

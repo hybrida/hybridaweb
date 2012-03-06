@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 06, 2012 at 10:04 AM
+-- Generation Time: Mar 06, 2012 at 01:08 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6-1+lenny16
 
@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   `isDeleted` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
   PRIMARY KEY  (`updateId`),
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14593 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14610 ;
 
 --
 -- Dumping data for table `bk_company_update`
@@ -277,7 +277,7 @@ CREATE TABLE IF NOT EXISTS `hyb_comment` (
   PRIMARY KEY  (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=423 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=424 ;
 
 --
 -- Dumping data for table `hyb_comment`
@@ -691,7 +691,8 @@ r\ncom/VetcoGray\r\n\r\n  \r\n\r\n Sluppenveien 12 C\r\n\r\n 7037 Trondheim', 33
 (418, 117, 'company', 'ikke blitt fulgt opp noe særlig utover historikken.', 354, '2012-02-20 14:51:14'),
 (419, 126, 'company', 'Har sendt mail for en stund siden, men aldri fått svar. Ellers se historikk.', 354, '2012-02-20 14:52:43'),
 (420, 61, 'company', 'Var opprinnelig negativ til konseptet bedriftspresentasjon, er ganske relevant for noen av oss. Ønsker ikke å betale så mye, hvertfall ikke ha mat. ', 353, '2012-02-21 12:46:46'),
-(422, 56, 'news', 'rfpdrfp', 381, '0000-00-00 00:00:00');
+(422, 56, 'news', 'rfpdrfp', 381, '0000-00-00 00:00:00'),
+(423, 18, 'company', 'Hei Silje!\r\nDa blir det Julie Vold Krause som er kontaktperson for Sub Sea Services videre.\r\nTelefonnummer 406 20 649. e-post: julie@subseaservices.no        \r\n\r\nKind Regards, \r\n\r\nMarit Kjersti Berge\r\nHR Manager\r\n+47 992 46 140\r\nwww.subseaservices.no', 441, '2012-03-06 11:40:21');
 
 -- --------------------------------------------------------
 
@@ -854,7 +855,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
   `imageId` int(11) default NULL,
   `phoneNumber` int(11) default NULL,
   `lastLogin` datetime default NULL,
-  `cardinfo` varchar(50) collate utf8_unicode_ci default NULL,
+  `cardHash` varchar(70) collate utf8_unicode_ci default NULL,
   `description` text collate utf8_unicode_ci,
   `workDescription` text collate utf8_unicode_ci,
   `workCompanyID` int(11) default NULL,
@@ -869,7 +870,7 @@ CREATE TABLE IF NOT EXISTS `hyb_user` (
 -- Dumping data for table `hyb_user`
 --
 
-INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardinfo`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
+INSERT INTO `hyb_user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
 (381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-03-05 18:14:50', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 

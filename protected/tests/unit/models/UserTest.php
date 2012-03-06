@@ -141,4 +141,45 @@ class UserTest extends CTestCase {
 		$this->assertNotNull($user2->specialization);
 	}
 	
+	public function test_save_cardNumber_is_Saved_to_CardHash_float() {
+		$cardNumber = 12345678;
+		$user = $this->getNewUser();
+		$user->cardNumber = $cardNumber;
+		$user->save();
+		
+		$user2 = User::model()->findByPk($user->id);
+		$this->assertEquals(sha1($cardNumber), $user2->cardHash);
+	}
+	
+	public function test_save_cardNumber_is_Saved_to_CardHash_string() {
+		$cardNumber = "12345678";
+		$user = $this->getNewUser();
+		$user->cardNumber = $cardNumber;
+		$user->save();
+		
+		$user2 = User::model()->findByPk($user->id);
+		$this->assertEquals(sha1(12345678), $user2->cardHash);
+	}	
+	
+	public function test_save_cardNumber_empty() {
+		$user = $this->getNewUser();
+		$user->cardNumber = "";
+		$user->save();
+		
+		$user2 = User::model()->findByPk($user->id);
+		$this->assertEquals(null, $user2->cardHash);
+	}
+	
+	public function test_save_cardNumber_correctLength() {
+		$user = $this->getNewUser();
+		$user->cardNumber = 123456789;
+		$this->assertFalse($user->validate());
+		$user->cardNumber = 1234;
+		$this->assertFalse($user->validate());
+		$user->cardNumber = 12345;
+		$this->assertTrue($user->validate());
+		$user->cardNumber = 12345678;
+		$this->assertTrue($user->validate());
+	}
+	
 }

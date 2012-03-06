@@ -68,7 +68,7 @@ class BpcCore {
 			return;
 		}
 		
-		if ($user->cardinfo == "" || $user->cardinfo == null) {
+		if ($user->cardHash == "" || $user->cardHash == null) {
 			throw new CHttpException("Du må legge inn kortnummer først", "Du har ikke lagt inn noe kortnummer");
 		}
 		
@@ -76,7 +76,7 @@ class BpcCore {
 			'request' => 'add_attending',
 			'fullname' => $user->fullName,
 			'username' => $user->username,
-			'card_no' => (float) $user->cardinfo,
+			'card_no' => (float) $user->cardHash,
 			'event' => $bpcID,
 			'year' => 2, //FIXME
 		);

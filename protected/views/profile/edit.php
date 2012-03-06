@@ -110,7 +110,7 @@ $form = $this->beginWidget('ActiveForm', array(
         <div class="inputGoup">
             <div class="fieldDefinition">Kortnummer:</div>
             <div class="fieldInput">
-				<?= $form->textField($model, 'cardinfo') ?>
+				<?= $form->textField($model, 'cardNumber') ?>
 			</div>
 
             <div class="fieldExplanation">
