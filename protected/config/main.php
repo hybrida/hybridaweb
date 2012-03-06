@@ -76,6 +76,9 @@ return array(
 		)
 	),
 	'components' => array(
+		'cache' => array(
+			'class' => 'CDummyCache'
+		),
 		'authManager' => array(
 			// Path to SDbAuthManager in srbac module if you want to use case insensitive
 			//access checking (or CDbAuthManager for case sensitive access checking)
