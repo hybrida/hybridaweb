@@ -114,8 +114,8 @@ $form = $this->beginWidget('ActiveForm', array(
 			</div>
 
             <div class="fieldExplanation">
-            	OBS! Dette er endret fra tidligere!<br />
-                For eksempel "4512345" (uten ""). Brukes for å komme inn på Hybridas bedriftspresentasjoner.<br /> 
+				La feltet være blankt for å ikke endre det.<br /><br />
+            	OBS! Dette er endret fra tidligere!
                 <a href="/images/kort_1.png" target="_blank">Hvor finner jeg kortnummeret?</a>
             </div>
         </div>
