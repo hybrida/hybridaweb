@@ -78,7 +78,7 @@ class Article extends CActiveRecord {
 	}
 
 	public function getAccess() {
-		return $this->_access;
+		return $this->_access->get();
 	}
 	
 	public function beforeSave() {
