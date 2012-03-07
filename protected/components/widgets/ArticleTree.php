@@ -22,8 +22,10 @@ class ArticleTree extends CWidget {
 	public static function getArticleTree() {
 		$articles = Article::model()->findAll();
 		$articleTree = self::topOfTreeBuilder($articles);
+		Node::sortNodes($articleTree);
 		return $articleTree;
 	}
+
 
 	private static function topOfTreeBuilder($articles) {
 		$articleTree = array();
@@ -129,7 +131,20 @@ class Node {
 	public function __construct($id, $title, $children) {
 		$this->id = $id;
 		$this->title = $title;
-		$this->children = $children;
+		$this->setChildren($children);
 	}
-
+	public function setChildren($children) {
+		$this->children = $children;
+		self::sortNodes($this->children);
+	}
+	
+	public function compare($a, $b) {
+		return strcmp($a->title, $b->title);
+	}
+	
+	public static function sortNodes(&$nodes) {
+		usort($nodes, array(__CLASS__,"compare"));
+	}
+	
+	
 }

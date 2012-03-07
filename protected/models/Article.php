@@ -16,6 +16,7 @@ Yii::import('application.components.widgets.ArticleTree');
 class Article extends CActiveRecord {
 
 	private $_access;
+	private static $list;
 
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
@@ -125,10 +126,8 @@ class Article extends CActiveRecord {
 	}
 
 	private function getTitleWithDelimiters() {
-		return str_replace(' ', '-', $this->title);
+		return Html::removeSpecialChars($this->title);
 	}
-
-	private static $list;
 
 	public static function getTreeList() {
 		$list = ArticleTree::getArticleTree();
