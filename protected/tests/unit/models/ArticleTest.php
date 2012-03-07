@@ -23,4 +23,37 @@ class ArticleTest extends CTestCase {
 		$this->assertEquals($access, $article2->access);
 	}
 	
+	public function test_getChildren() {
+		$parent = $this->getArticle();
+		$parent->save();
+		$child1 = $this->getArticle();
+		$child2 = $this->getArticle();
+		$child1->parentId = $parent->id;
+		$child2->parentId = $parent->id;
+		$child1->save();
+		$child2->save();
+		
+		$children = $parent->getChildren();
+		$this->assertEquals(2, count($children));
+		$this->assertEquals($children[0]->id, $child1->id);
+	}
+	
+	public function test_unset_method() {
+		$article1 = $this->getArticle();
+		$article2 = $this->getArticle();
+		$myArray = array($article1, $article2);
+		$this->assertEquals(2, count($myArray));
+		$key = array_search($article1, $myArray);
+		unset($myArray[$key]);
+		$this->assertEquals(1, count($myArray));
+		while ($myArray) {
+			$key = array_search($article2, $myArray);
+			unset($myArray[$key]);
+		}
+		$this->assertEquals(0, count($myArray));
+		$this->assertNotEquals(null, $myArray);
+		$this->assertEquals(true, isset($myArray));
+		$this->assertEquals(true, empty($myArray));
+	}
+	
 }

@@ -6,6 +6,8 @@ $this->layout = "//layouts/doubleColumn"; ?>
 	'Article',
 ) ?>
 
+
+
 <?
 $this->beginClip('sidebar'); 
 	$this->renderPartial('_view_sidebar', array(
@@ -16,6 +18,12 @@ $this->endClip()
 ?>
 
 <? if ($hasEditAccess): ?>
+	<p>
+	<?= CHtml::link("Publiser barn", array("article/create", 'parentId' => $article->id), array(
+		'class' => 'button buttonRightSide'
+	)); ?>
+	</p>
+		
 	<p>
 	<?= CHtml::link("Rediger",array("article/edit",'id' => $article->id), array(
 		'class' => 'button buttonRightSide'

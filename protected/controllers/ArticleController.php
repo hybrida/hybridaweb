@@ -22,12 +22,13 @@ class ArticleController extends Controller {
         $this->render('view',$data);
     }
 	
-	public function actionCreate() {
+	public function actionCreate($parentId = null) {
 		if(!user()->checkAccess('createArticle')) {
 			throw new CHttpException(403, "Du har ikke tilgang");
 		}
 		
 		$model = new Article;
+		$model->parentId = $parentId;
 		$this->renderArticleForm($model);		
 	}
     

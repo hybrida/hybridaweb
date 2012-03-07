@@ -16,6 +16,7 @@ class Article extends CActiveRecord {
 	public static function model($className=__CLASS__) {
 		return parent::model($className);
 	}
+	
 
 	public function tableName() {
 		return 'article';
@@ -100,6 +101,13 @@ class Article extends CActiveRecord {
 		$this->content = $purifier->purify($this->content);
 		$this->title = $purifier->purify($this->title);
 		return parent::beforeValidate();
+	}
+	
+	public function getChildren() {
+		$children = Article::model()->findAll("parentId = :id", array(
+			":id" => $this->id,
+		));
+		return $children;
 	}
 
 	public function getTitle() {

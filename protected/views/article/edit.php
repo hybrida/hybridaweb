@@ -1,10 +1,5 @@
 <? $this->pageTitle = "Rediger artikkel" ?>
 
-<?$this->breadcrumbs=array(
-	'Article feed' => array("/article/feed"),
-	'Article',
-);?>
-
 <?php 
     $form = $this->beginWidget('ActiveForm', array(
 		'id' => 'article_edit-form',
@@ -35,7 +30,7 @@
 	<div class="row">
 		<?php echo $form->labelEx($model, 'content'); ?>
 		<?php echo $form->textArea($model, 'content',array(
-					'cols' => '50',
+					'cols' => '150',
 					'rows' => '8',
 					'xheditor' => true,
 		)); ?>
