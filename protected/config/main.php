@@ -105,8 +105,10 @@ return array(
 			'urlFormat' => 'path',
 			'showScriptName' => false,
 			'rules' => array(
+				'artikler/<id:\d+>/<title>' => '/article/view',
 				'bk' => 'bk/bktool/index',
 				'bk/<action:\w+>' => 'bk/bktool/<action>',
+				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
 				'news/<id:\d+>/<title>' => 'news/view',
@@ -114,7 +116,6 @@ return array(
 				'profile/<username:\w+>/<action:\w+>' => 'profile/<action>/',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
-				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
 				'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
