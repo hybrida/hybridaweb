@@ -16,15 +16,12 @@ class ArticleTree extends CWidget {
 	private $articleTree;
 
 	public function init() {
-		$articles = Article::model()->findAll();
-		$this->articleTree = self::topOfTreeBuilder($articles);
+		$this->articleTree = self::getArticleTree();
 	}
 
 	public static function getArticleTree() {
 		$articles = Article::model()->findAll();
 		$articleTree = self::topOfTreeBuilder($articles);
-		//print_r($articleTree);
-		//$articleTree = self::arrayInCorrectFormat($articles);
 		return $articleTree;
 	}
 
@@ -40,11 +37,6 @@ class ArticleTree extends CWidget {
 								$article->title,
 								self::recursiveTreeBuilder($articles, $article->id)
 				);
-				/* $articleTree[$i] = array(
-				  $article->id,
-				  $article->title,
-				  self::recursiveTreeBuilder($articles, $article->id),
-				  ); */
 				$i++;
 			}
 		}
@@ -67,13 +59,6 @@ class ArticleTree extends CWidget {
 								$article->title,
 								self::recursiveTreeBuilder($articles, $article->id)
 				);
-				/*
-				  $articleTree[$i] = array(
-				  $article->id,
-				  $article->title,
-				  self::recursiveTreeBuilder($articles, $article->id),
-				  );
-				 */
 				$i++;
 			}
 		}

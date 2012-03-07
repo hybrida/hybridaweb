@@ -64,9 +64,4 @@ class ArticleController extends Controller {
         else
             throw new CHttpException("Artikkelen finnes ikke");
 	}
-	
-	public function actionDum() {
-		Yii::import('application.components.widgets.ArticleTree');
-		$ar = Article::getTreeList();
-	}
 }
