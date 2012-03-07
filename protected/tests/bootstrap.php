@@ -1,6 +1,9 @@
 <?php
 
+// For at man fortsatt kan drive med innlogging og utlogging
+// (endring av session) etter at testene har begynt å kjøre.
 ob_start();
+
 
 // change the following paths if necessary
 $yiit=dirname(__FILE__).'/../../framework/yiit.php';
@@ -12,4 +15,3 @@ require_once(dirname(__FILE__).'/WebTestCase.php');
 require_once($globals);
 
 Yii::createWebApplication($config);
-TestLib::deleteDummyData();
