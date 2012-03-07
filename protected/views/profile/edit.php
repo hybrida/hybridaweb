@@ -27,6 +27,7 @@ $form = $this->beginWidget('ActiveForm', array(
 			</div>
 			<div class="fieldInput">
 				<?=$form->textField($model, 'firstName') ?>
+				<?=$form->error($model, 'firstName') ?>
 			</div>
 		</div>
 		<div class="inputGroup">
@@ -35,6 +36,7 @@ $form = $this->beginWidget('ActiveForm', array(
 			</div>
 			<div class="fieldInput">
 				<?=$form->textField($model, 'middleName') ?>
+				<?=$form->error($model, 'middleName') ?>
 			</div>
 		</div>
 		<div class="inputGroup">
@@ -43,6 +45,7 @@ $form = $this->beginWidget('ActiveForm', array(
 			</div>
 			<div class="fieldInput">
 				<?=$form->textField($model, 'lastName') ?>
+				<?=$form->error($model, 'lastName') ?>
 			</div>
 		</div>
         <div class="inputGoup">
@@ -51,6 +54,7 @@ $form = $this->beginWidget('ActiveForm', array(
             </div>
             <div class="fieldInput">
 				<?= $form->textField($model, 'graduationYear') ?>
+				<?= $form->error($model, 'graduationYear') ?>
             </div>
         </div>
 
@@ -60,6 +64,7 @@ $form = $this->beginWidget('ActiveForm', array(
             </div>
             <div class="fieldInput">
 				<?= $form->dropDownList($model, 'specializationId', $specializations) ?>
+				<?= $form->error($model, 'specializationId') ?>
             </div>
         </div>
 		
@@ -73,6 +78,7 @@ $form = $this->beginWidget('ActiveForm', array(
 					'male' => 'Male',
 					'female' => 'Female',
 				)) ?>
+				<?= $form->error($model, 'gender') ?>
 			</div>
 		</div>
 
@@ -82,6 +88,7 @@ $form = $this->beginWidget('ActiveForm', array(
             </div>
 			<div class="fieldInput">
 				<?= $form->dateField($model, 'birthdate') ?>
+				<?= $form->error($model, 'birthdate') ?>
 			</div>
         </div>
 
@@ -95,6 +102,7 @@ $form = $this->beginWidget('ActiveForm', array(
             <div class="fieldDefinition">Privat e-postadresse:</div>
             <div class="fieldInput">
 				<?= $form->textField($model, 'altEmail') ?>
+				<?= $form->error($model, 'altEmail') ?>
 			</div>
         </div>
 
@@ -111,9 +119,15 @@ $form = $this->beginWidget('ActiveForm', array(
             <div class="fieldDefinition">Kortnummer:</div>
             <div class="fieldInput">
 				<?= $form->textField($model, 'cardNumber') ?>
+				<?= $form->error($model, 'cardNumber') ?>
 			</div>
 
             <div class="fieldExplanation">
+				<? if (! $model->cardHash): ?>
+				<p style="color: #f00; font-weight: bold">
+						Du har ikke registrert kortnummer!
+				</p>
+				<? endif ?>
 				La feltet være blankt for å ikke endre det.<br /><br />
             	OBS! Dette er endret fra tidligere!
                 <a href="/images/kort_1.png" target="_blank">Hvor finner jeg kortnummeret?</a>
@@ -127,6 +141,7 @@ $form = $this->beginWidget('ActiveForm', array(
 
             <div class="fieldInput">
 				<?= $form->textArea($model, 'description') ?>
+				<?= $form->error($model, 'description') ?>
 			</div>
 
             <div class="fieldExplanation">
@@ -141,6 +156,7 @@ $form = $this->beginWidget('ActiveForm', array(
             <div class="fieldDefinition">Jobber i bedrift:</div>
             <div class="fieldInput">
 				<?= $form->dropDownList($model, 'workCompanyID', $companies) ?>
+				<?= $form->error($model, 'workCompanyID', $companies) ?>
 			</div>
             <div class="fieldExplanation">
                 Navnet på bedriften du har blitt ansatt i. Hvis bedriften ikke finnes i databasen,
@@ -152,6 +168,7 @@ $form = $this->beginWidget('ActiveForm', array(
             <div class="fieldDefinition">Stillingsbeskrivelse:</div>
             <div class="fieldInput">
 				<?= $form->textArea($model, 'workDescription') ?>
+				<?= $form->error($model, 'workDescription') ?>
 			</div>
             <div class="fieldExplanation">
                 Hva jobber du med? For eksempel offshore konstruksjoner eller NX.
@@ -162,6 +179,7 @@ $form = $this->beginWidget('ActiveForm', array(
             <div class="fieldDefinition">Arbeidssted</div>
             <div class="fieldInput">
 				<?= $form->textField($model, 'workPlace') ?>
+				<?= $form->error($model, 'workPlace') ?>
 			</div>
             <div class="fieldExplanation">
                 Hvor du jobber (for eksempel Oslo).
