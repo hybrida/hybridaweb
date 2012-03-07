@@ -24,4 +24,8 @@ class Html extends CHtml {
 			return date($format, $date);
 	}
 	
+	public static function removeSpecialChars($text) {
+		return preg_replace('/[^a-zæøåA-ZÆØÅ0-9_ -]/s', '', $text);
+	}
+	
 }
