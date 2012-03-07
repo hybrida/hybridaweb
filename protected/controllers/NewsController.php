@@ -57,7 +57,7 @@ class NewsController extends Controller {
 	private function redirectToBpc($id, $title) {
 		$url = $this->createUrl('/bpc/default/view', array(
 			'id' => $id,
-			'title' => $title,
+			'title' => Html::removeSpecialChars($title),
 				));
 		$this->redirect($url);
 	}

@@ -162,12 +162,12 @@ class News extends CActiveRecord {
 	public function getViewUrl() {
 		return Yii::app()->createUrl("news/view", array(
 					"id" => $this->id,
-					'title' => $this->getTitleWithDelimiters(),
+					'title' => $this->getTitleWithoutSpecialChars(),
 				));
 	}
 
-	private function getTitleWithDelimiters() {
-		return str_replace(' ', '-', $this->title);
+	private function getTitleWithoutSpecialChars() {
+		return Html::removeSpecialChars($this->title);
 	}
 
 }
