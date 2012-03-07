@@ -23,7 +23,7 @@
 	
 	<div class="row">
 				<?= $form->labelEx($model, 'parentId') ?>
-				<?= $form->textField($model, 'parentId') ?>
+				<?= $form->dropDownList($model, 'parentId', Article::getTreeList()) ?>
 				<?= $form->error($model, 'parentId') ?>
 	</div>
 

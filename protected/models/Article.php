@@ -1,4 +1,7 @@
 <?php
+
+Yii::import('application.components.widgets.ArticleTree');
+
 /**
  * This is the model class for table "article".
  *
@@ -11,12 +14,12 @@
  * @property string $timestamp
  */
 class Article extends CActiveRecord {
+
 	private $_access;
 
-	public static function model($className=__CLASS__) {
+	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
-	
 
 	public function tableName() {
 		return 'article';
@@ -58,7 +61,7 @@ class Article extends CActiveRecord {
 		$criteria->compare('content', $this->content, true);
 		$criteria->compare('author', $this->author);
 		$criteria->compare('timestamp', $this->timestamp, true);
-		
+
 		return new CActiveDataProvider($this, array(
 					'criteria' => $criteria,
 				));
@@ -81,7 +84,7 @@ class Article extends CActiveRecord {
 	public function getAccess() {
 		return $this->_access->get();
 	}
-	
+
 	public function beforeSave() {
 		if ($this->isNewRecord) {
 			$this->author = Yii::app()->user->id;
@@ -89,12 +92,12 @@ class Article extends CActiveRecord {
 		}
 		return parent::beforeSave();
 	}
-	
+
 	public function afterSave() {
 		$this->_access->replace();
 		return parent::afterSave();
 	}
-	
+
 	public function purify() {
 		$purifier = new CHtmlPurifier();
 		$this->parentId = $purifier->purify($this->parentId);
@@ -102,26 +105,53 @@ class Article extends CActiveRecord {
 		$this->title = $purifier->purify($this->title);
 		return parent::beforeValidate();
 	}
-	
+
 	public function getChildren() {
 		$children = Article::model()->findAll("parentId = :id", array(
 			":id" => $this->id,
-		));
+				));
 		return $children;
 	}
 
 	public function getTitle() {
 		return $this->title;
 	}
-	
+
 	public function getViewUrl() {
 		return Yii::app()->createUrl("article/view", array(
-			"id" => $this->id,
-			"title" => $this->getTitleWithDelimiters(),
-		));
+					"id" => $this->id,
+					"title" => $this->getTitleWithDelimiters(),
+				));
 	}
-	
+
 	private function getTitleWithDelimiters() {
 		return str_replace(' ', '-', $this->title);
 	}
+
+	private static $list;
+
+	public static function getTreeList() {
+		$list = ArticleTree::getArticleTree();
+		self::$list[null] = '';
+		foreach ($list as $root) {
+			self::addRootToList($root);
+		}
+		return self::$list;
+	}
+
+	private function addRootToList($root) {
+		self::$list[$root->id] = $root->title;
+		foreach ($root->children as $child) {
+			self::addNodeToList($child, $root->title);
+		}
+	}
+
+	private function addNodeToList($node, $prev) {
+		$text = $prev . "/" . $node->title;
+		self::$list[$node->id] = $text;
+		foreach ($node->children as $child) {
+			self::addNodeToList($child, $text);
+		}
+	}
+
 }

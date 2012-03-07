@@ -53,7 +53,7 @@ class ArticleTree extends CWidget {
 
 	private static function recursiveTreeBuilder($articles, $parentId) {
 		if (empty($articles)) {
-			return null;
+			return array();
 		}
 
 		$articleNodeArray = array();
