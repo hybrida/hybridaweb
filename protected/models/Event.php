@@ -139,5 +139,33 @@ class Event extends CActiveRecord {
 	private function setSignup() {
 		$this->signupModel = Signup::model()->findByPk($this->id);
 	}
+	
+	public function getGoogleCalendarButton() {
+		$news = News::model()->find('parentType = "event" AND parentId = ?',array(
+			$this->id,
+		));
+		if (!$news) {
+			return null;
+		}
+		$from = $this->getUTC($this->start);
+		$to = $this->getUTC($this->end);
+
+		return "<a href=\"http://www.google.com/calendar/event?action=TEMPLATE".
+			"&text={$this->spaceToUrl($news->title)}".
+			"&dates={$from}/{$to}".
+			"&details={$this->spaceToUrl($news->ingress)}".
+			"&location={$this->spaceToUrl($this->location)}".
+			"&trp=true".
+			"&sprop=http%3A%2F%2Fhybrida.no".
+			"&sprop=name:Hybrida\" target=\"_blank\">Legg til i kalender</a>";
+	}
+	
+	private function spaceToUrl($text) {
+		return str_replace(" ", "%20", $text);
+	}
+	
+	private function getUTC($timeString) {
+		return gmdate("Ymd\THis\Z",strtotime($timeString));
+	}
 
 }
