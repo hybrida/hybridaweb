@@ -36,7 +36,7 @@
     <body>
         <div class="headerStripe">
             <div class="header">
-                <a href="/news/feed" ><img src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" align="left" alt="" /></a>
+                <a href="/" ><img src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" align="left" alt="" /></a>
                 <h1><?= CHtml::encode(Yii::app()->name) ?></h1>
                 <div class="searchWrap">
 					<? $this->widget('search.components.SearchWidget') ?>
