@@ -1,22 +1,12 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+Yii::import('application.components.widgets.ArticleTree');
 
-/**
- * Description of ArticleTreeTest
- *
- * @author krisvage
- */
 class ArticleTreeTest extends CTestCase {
 	public function test_article_tree() {
-		$widget = $this->widget('application.components.widgets.ArticleTree');
+		$widget = new ArticleTree();
 		$articleTree = $widget->articleTree;
-		print_r($articleTree);
+		//print_r($articleTree);
 	}
 	
 }
-
-?>
