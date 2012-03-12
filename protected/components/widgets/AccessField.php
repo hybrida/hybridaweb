@@ -43,9 +43,13 @@ class AccessField extends CWidget {
 
 	private function initAccessOnModel() {
 		$path = explode('[', str_replace("]", "", $this->attribute));
-		$access = $this->model->getAttributes();
-		foreach ($path as $p) {
-			$access = $access[$p];
+		if (method_exists($this->model, "getAccess")) {
+			$access = $this->model->getAccess();
+		} else {
+			$access = $this->model->getAttributes();
+			foreach ($path as $p) {
+				$access = $access[$p];
+			}
 		}
 		$this->access = $access;
 		$this->initAccessSubs();
