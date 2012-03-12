@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "hyb_specialization".
+ * This is the model class for table "specialization".
  *
- * The followings are the available columns in table 'hyb_specialization':
+ * The followings are the available columns in table 'specialization':
  * @property integer $id
  * @property integer $siteId
  * @property string $name
@@ -24,7 +24,7 @@ class Specialization extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'hyb_specialization';
+		return 'specialization';
 	}
 
 	/**

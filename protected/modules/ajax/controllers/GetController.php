@@ -56,7 +56,7 @@ class GetController extends Controller{
 
         if ( !isset($_GET['parentType'])) {			
             $sql = "SELECT DISTINCT ui.id AS userId, n.id AS id,parentId, parentType, n.title, n.imageId AS imageId, content, firstName, middleName, lastName, timestamp 
-                        FROM news n JOIN hyb_user ui ON n.author = ui.id 
+                        FROM news n JOIN user ui ON n.author = ui.id 
                         ORDER BY timestamp DESC " . $limit;
             
             $data = array(
@@ -70,7 +70,7 @@ class GetController extends Controller{
                         RIGHT JOIN (SELECT ar.id AS accessId, ma.userId FROM membership_access ma LEFT JOIN access_relations ar ON ma.accessId=ar.access WHERE ar.type='news' AND ma.userId = 327) AS a ON a.accessId = n.id 
                         RIGHT JOIN tag AS t ON t.id = n.id 
                         LEFT JOIN groups AS g ON g.id = t.ownerId 
-                        LEFT JOIN hyb_user ui ON n.author = ui.id
+                        LEFT JOIN user ui ON n.author = ui.id
                         WHERE g.id = :id AND t.contentType = 'news' AND t.tagType = 'group'";
             
             $data = array(
@@ -117,7 +117,7 @@ class GetController extends Controller{
         $limit  = (isset($_GET['start']) && isset($_GET['interval']))  ? ' LIMIT ' . $_GET['start'] . ', ' . $_GET['interval'] : ' ';
 
         $sql = "SELECT u.imageId, c.id, c.content, c.timestamp, u.firstName, u.middleName, u.lastName 
-        FROM comment AS c JOIN hyb_user AS u ON c.author = u.id
+        FROM comment AS c JOIN user AS u ON c.author = u.id
         WHERE c.parentType = :pType AND c.parentId = :id 
         ORDER BY c.timestamp DESC " . $limit;
 
@@ -225,7 +225,7 @@ class GetController extends Controller{
             );
             
             $sql = "SELECT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName, ui.imageId 
-            FROM signup_membership AS ms LEFT JOIN hyb_user AS ui ON ms.userId = ui.id LEFT JOIN event as e ON e.id=ms.eventId
+            FROM signup_membership AS ms LEFT JOIN user AS ui ON ms.userId = ui.id LEFT JOIN event as e ON e.id=ms.eventId
             WHERE ms.signedOff='false' AND ms.eventId=:id ORDER BY ui.graduationYear";
 
             $query = $this->pdo->prepare($sql);
@@ -321,7 +321,7 @@ class GetController extends Controller{
             
             //Søke på brukere
             $sql = "SELECT DISTINCT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName 
-            FROM hyb_user AS ui WHERE " . $searchString;
+            FROM user AS ui WHERE " . $searchString;
             
             $query = $this->pdo->prepare($sql);
             $query->execute($data);

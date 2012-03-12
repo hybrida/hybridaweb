@@ -51,7 +51,7 @@ class ImageController extends Controller {
 
 		/* if(GateKeeper::hasAccess('image',$imageId)){ */
 		$sql = "SELECT u.username
-                        FROM image AS i LEFT JOIN hyb_user AS u ON i.userId = u.id
+                        FROM image AS i LEFT JOIN user AS u ON i.userId = u.id
                         WHERE i.id = :imageId";
 
 		$query = $this->pdo->prepare($sql);

@@ -86,11 +86,11 @@ return array(
 			// The database component used
 			'connectionID' => 'db',
 			// The itemTable name (default:authitem)
-			'itemTable' => 'hyb_rbac_item',
+			'itemTable' => 'rbac_item',
 			// The assignmentTable name (default:authassignment)
-			'assignmentTable' => 'hyb_rbac_assignment',
+			'assignmentTable' => 'rbac_assignment',
 			// The itemChildTable name (default:authitemchild)
-			'itemChildTable' => 'hyb_rbac_itemchild',
+			'itemChildTable' => 'rbac_itemchild',
 			'defaultRoles' => array('updateOwnProfile', 'webkom'),
 		),
 		'gatekeeper' => array(
