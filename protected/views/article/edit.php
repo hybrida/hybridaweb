@@ -29,11 +29,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'content'); ?>
-		<?php echo $form->textArea($model, 'content',array(
-					'cols' => '150',
-					'rows' => '8',
-					'xheditor' => true,
-		)); ?>
+		<?php echo $form->richTextArea($model, 'content'); ?>
 		<?php echo $form->error($model, 'content'); ?>
 	</div>
 

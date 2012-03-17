@@ -85,11 +85,7 @@
 				</div>
 				
 				<div class="formBoxRow">
-					<?php echo $form->textArea($model, "news[content]",array(
-						'width' => '140%',
-						'height' => '400',
-						'xheditor' => true,
-					)); ?>
+					<?php echo $form->richTextArea($model, "news[content]"); ?>
 					<?php echo $form->error($model, 'news[content]'); ?>				
 				</div>
 				<div class="formBoxRow">

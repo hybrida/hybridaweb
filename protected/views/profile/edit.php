@@ -140,7 +140,7 @@ $form = $this->beginWidget('ActiveForm', array(
             <div class="fieldDefinition">Om meg:</div>
 
             <div class="fieldInput">
-				<?= $form->textArea($model, 'description') ?>
+				<?= $form->richTextArea($model, 'description') ?>
 				<?= $form->error($model, 'description') ?>
 			</div>
 
