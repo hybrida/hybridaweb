@@ -6,7 +6,7 @@ class Html extends CHtml {
 			'juli','august','september','oktober','november',
 			'desember'
 		);
-		private static $shortMonthNames = array(
+	private static $shortMonthNames = array(
 			'jan.', 'feb.', "mar.", "apr.","mai","jun.","jul.",
 			"aug.","sep.","okt.", "nov.", "des."
 		);

@@ -10,7 +10,7 @@ class ActiveForm extends CActiveForm {
 			return CHtml::activeTextArea($model, $attribute, $htmlOptions);
 		}
 	}
-	
+
 	private function getWidthHeight($htmlOptions) {
 		$width = isset($htmlOptions['width']) ? $htmlOptions['width'] : "100%";
 		$height = isset($htmlOptions['height']) ? $htmlOptions['height'] : "100%";

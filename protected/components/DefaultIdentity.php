@@ -5,8 +5,8 @@
  * It contains the authentication method that checks if the provided
  * data can identity the user.
  */
-
 Yii::import('application.tests.mocks.SSOMock');
+
 class DefaultIdentity extends InnsidaIdentity {
 
 	public function __construct($id) {
