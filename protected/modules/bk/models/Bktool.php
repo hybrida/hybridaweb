@@ -7,7 +7,7 @@ class BkTool {
 
         $data = array();
         $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM bk_company 
-        LEFT JOIN hyb_user ON contactorID = id ORDER BY ".$orderBy." ".$order."";
+        LEFT JOIN user ON contactorID = id ORDER BY ".$orderBy." ".$order."";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -35,7 +35,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT DISTINCT graduationYear FROM hyb_user WHERE graduationYear <= now() ORDER BY graduationYear DESC";
+        $sql = "SELECT DISTINCT graduationYear FROM user WHERE graduationYear <= now() ORDER BY graduationYear DESC";
                     
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -49,7 +49,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM hyb_user 
+        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user 
                 WHERE graduationYear <= now() GROUP BY graduationYear ORDER BY graduationYear DESC";
                     
         $query = $this->pdo->prepare($sql);
@@ -64,7 +64,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM hyb_user, bk_company 
+        $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user, bk_company 
                 WHERE graduationYear <= now() AND workCompanyID = companyID 
                 GROUP BY graduationYear ORDER BY graduationYear DESC";
                     
@@ -82,7 +82,7 @@ class BkTool {
         $data = array(
             'graduationYear' => $year
         );
-        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM hyb_user, bk_company 
+        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user, bk_company 
                 WHERE companyID = workCompanyID AND graduationYear = :graduationYear GROUP BY companyName
                 ORDER BY sum DESC, companyName ASC";
 
@@ -100,7 +100,7 @@ class BkTool {
         $data = array(
             'graduationYear' => $year
         );
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM hyb_user, bk_company 
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user, bk_company 
                 WHERE companyID = workCompanyID AND graduationYear = :graduationYear";
                     
         $query = $this->pdo->prepare($sql);
@@ -115,7 +115,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM hyb_user, bk_company 
+        $sql = "SELECT companyID, companyName, COUNT(DISTINCT id) AS sum FROM user, bk_company 
                 WHERE companyID = workCompanyID GROUP BY companyName
                 ORDER BY sum DESC, companyName ASC";
 
@@ -131,7 +131,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM hyb_user WHERE graduationYear <= now()";
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user WHERE graduationYear <= now()";
                     
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -145,7 +145,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM hyb_user, bk_company WHERE companyID = workCompanyID";
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user, bk_company WHERE companyID = workCompanyID";
                     
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -159,7 +159,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM hyb_user 
+        $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM user 
                 LEFT JOIN bk_company ON companyID = workCompanyID
                 WHERE graduationYear <= now() ORDER BY ".$orderBy." ".$order."";
 
@@ -178,9 +178,9 @@ class BkTool {
             'graduationyear' => $year
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.workDescription, un.workPlace, c.companyName, c.companyID,
-                un.imageId, s.name FROM hyb_user AS un 
+                un.imageId, s.name FROM user AS un 
                 LEFT JOIN bk_company AS c ON c.companyID = un.workCompanyID 
-                LEFT JOIN hyb_specialization AS s ON un.specializationId = s.id
+                LEFT JOIN specialization AS s ON un.specializationId = s.id
                 WHERE graduationYear = :graduationyear";
 
         $query = $this->pdo->prepare($sql);
@@ -197,7 +197,7 @@ class BkTool {
         $data = array(
             'graduationyear' => $year
         );
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM hyb_user WHERE graduationYear = :graduationyear";
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user WHERE graduationYear = :graduationyear";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -213,7 +213,7 @@ class BkTool {
         $data = array(
             'currentUserID' => Yii::app()->user->id
         );
-        $sql = "SELECT lastLogin FROM hyb_user WHERE id = :currentUserID";
+        $sql = "SELECT lastLogin FROM user WHERE id = :currentUserID";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -230,7 +230,7 @@ class BkTool {
             'status' => $status
         );
         $sql = "SELECT DISTINCT id, imageId, firstName, middleName, lastName
-                FROM bk_company, hyb_user 
+                FROM bk_company, user 
                 WHERE contactorID = id AND status = :status ORDER BY firstName ASC";
 
         $query = $this->pdo->prepare($sql);
@@ -247,7 +247,7 @@ class BkTool {
         $data = array(
             'status' => $status
         );
-        $sql = "SELECT id, companyID, companyName, status, dateAssigned, dateUpdated FROM hyb_user LEFT JOIN bk_company 
+        $sql = "SELECT id, companyID, companyName, status, dateAssigned, dateUpdated FROM user LEFT JOIN bk_company 
                 ON id = contactorID WHERE status = :status ORDER BY firstName ASC, companyName ASC";
 
         $query = $this->pdo->prepare($sql);
@@ -282,8 +282,8 @@ class BkTool {
             'companyId' => $id
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, s.name, un.graduationYear, 
-                un.altEmail, un.imageId, un.workDescription, un.workPlace FROM hyb_user AS un
-                LEFT JOIN hyb_specialization AS s ON un.specializationId = s.id
+                un.altEmail, un.imageId, un.workDescription, un.workPlace FROM user AS un
+                LEFT JOIN specialization AS s ON un.specializationId = s.id
                 WHERE un.workCompanyID = :companyId ORDER BY un.graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
@@ -300,7 +300,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM hyb_user WHERE workCompanyID = :companyId";
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM user WHERE workCompanyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -351,7 +351,7 @@ class BkTool {
             'currentUserID' => Yii::app()->user->id
         );
         $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id
-                FROM bk_company_update AS cu, hyb_user AS un, bk_company AS c
+                FROM bk_company_update AS cu, user AS un, bk_company AS c
                 WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID AND isDeleted = 'false'
                 ORDER BY dateAdded DESC";
 
@@ -386,7 +386,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT cs.specializationId, s.name FROM bk_company AS c, hyb_specialization AS s, bk_company_specialization AS cs
+        $sql = "SELECT cs.specializationId, s.name FROM bk_company AS c, specialization AS s, bk_company_specialization AS cs
                 WHERE c.companyID = cs.companyId AND c.companyID = :companyId
                 AND cs.specializationId = s.id ORDER BY name ASC";
 
@@ -436,7 +436,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, username, firstName, middleName, lastName FROM bk_company, hyb_user
+        $sql = "SELECT id, username, firstName, middleName, lastName FROM bk_company, user
                 WHERE companyID = :companyId AND contactorID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -453,7 +453,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, hyb_user
+        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, user
                 WHERE companyID = :companyId AND updatedByID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -470,7 +470,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, hyb_user
+        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, user
                 WHERE companyID = :companyId AND addedByID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -487,7 +487,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM hyb_comment AS cmt, bk_company AS cmp
+        $sql = "SELECT COUNT(DISTINCT id) AS sum FROM comment AS cmt, bk_company AS cmp
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
                 AND cmp.companyID = cmt.parentId";
 
@@ -506,7 +506,7 @@ class BkTool {
             'companyId' => $id
         );
         $sql = "SELECT un.imageId, un.firstName, un.middleName, un.lastName, cmt.timestamp, cmt.content 
-                FROM hyb_comment AS cmt, bk_company AS cmp, hyb_user AS un
+                FROM comment AS cmt, bk_company AS cmp, user AS un
                 WHERE cmp.companyID = :companyId AND cmt.parentType = 'company'
                 AND cmp.companyID = cmt.parentId AND cmt.authorId = un.id
                 ORDER BY cmt.timestamp DESC";
@@ -523,7 +523,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT DISTINCT id, name FROM hyb_specialization ORDER BY name";
+        $sql = "SELECT DISTINCT id, name FROM specialization ORDER BY name";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -537,7 +537,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT COUNT(DISTINCT name) AS sum FROM hyb_specialization";
+        $sql = "SELECT COUNT(DISTINCT name) AS sum FROM specialization";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -551,7 +551,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array();
-        $sql = "SELECT DISTINCT graduationYear FROM hyb_user
+        $sql = "SELECT DISTINCT graduationYear FROM user
                 WHERE graduationYear IS NOT NULL ORDER BY graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
@@ -569,9 +569,9 @@ class BkTool {
             'userId' => $id
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.altEmail, s.name, un.imageId,
-                c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM hyb_user AS un 
+                c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM user AS un 
                 LEFT JOIN bk_company AS c ON un.workCompanyID = c.companyID
-                LEFT JOIN hyb_specialization AS s ON s.id = un.specializationId
+                LEFT JOIN specialization AS s ON s.id = un.specializationId
                 WHERE un.id = :userId";
 
         $query = $this->pdo->prepare($sql);
@@ -589,7 +589,7 @@ class BkTool {
             'groupId' => $id
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName
-                FROM hyb_user AS un, group_membership AS mg
+                FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND mg.end <= now() ORDER BY un.firstname ASC";
 
@@ -608,7 +608,7 @@ class BkTool {
             'groupId' => $id
         );
         $sql = "SELECT COUNT(DISTINCT un.id) AS sum
-                FROM hyb_user AS un, group_membership AS mg
+                FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND mg.end <= now()";
 

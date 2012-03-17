@@ -2,34 +2,25 @@
 
 class DefaultController extends Controller {
 
-	public function actionForm() {
+	public function actionSubmit() {
 		$model = new CommentForm();
 
 		if (isset($_POST['CommentForm'])) {
-			// Se at POST har en nøkkel id og en nøkkel type
-			// lage nytt commentarForm med type, id
-
 			$model->attributes = $_POST['CommentForm'];
 			$model->save();
-			$this->redirectAfterCommentUpload($model);
+			$this->actionView($model->type, $model->id);
 		} else {
 			throw new CHttpException(500, "Ikke tillat");
 		}
 	}
 
-	public function redirectAfterCommentUpload($model) {
-		$r = "";
-		switch ($model->type) {
-			case 'profile':
-				$user = User::model()->findByPk($model->id);
-				$r = $this->createUrl('/profile/comment',array('username' => $user->username));
-				break;
-			case 'news':
-				$r = $this->createUrl('/news/view', array('id' => $model->id));
-				break;
-		}
-		if ($r)
-			$this->redirect($r);
+	public function actionView($type, $id) {
+		$models = Comment::model()->findAll("parentId = :id AND parentType = :type", array(
+			":id" => $id,
+			":type" => $type));
+		$this->renderPartial("_comments",array(
+			'models' => $models
+		));
 	}
 
 }

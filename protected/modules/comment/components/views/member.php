@@ -1,18 +1,13 @@
 <h1>Kommentarer</h1>
 
-<? foreach ($models as $model): ?>
-	<p><?= $model->content ?></p>
-	<p> Skrevet av: <?= Html::link($model->author->fullName, $model->author->viewUrl) ?></p>
-<? endforeach; ?>
+<div class="comment-view-all"></div>
 
 
 
-
-<div class="form">
+<div class="comment-view-form">
 
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
-		'action' => '/comment/default/form',
 		'id' => 'comment-form-form-form',
 		'enableAjaxValidation' => false,
 			));
@@ -31,9 +26,24 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Submit'); ?>
+		<?php echo CHtml::ajaxSubmitButton("Send", Yii::app()->createUrl("/comment/default/submit") ,array(
+			'update' => '.comment-view-all',
+		), array(
+			'class' => 'comment-form-submit'
+		)) ?>
 	</div>
 
 	<?php $this->endWidget(); ?>
 
 </div><!-- form -->
+
+<script lang="javascript" >
+	$(function() {
+		var commentViewBox = $(".comment-view-all");
+		commentViewBox.load("<?= Yii::app()->createUrl("/comment/default/view",array(
+			'type' => $formModel->type,
+			'id' => $formModel->id,
+		)) ?>")
+	});
+
+</script>

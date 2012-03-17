@@ -38,7 +38,7 @@ class Article extends CActiveRecord {
 
 	public function relations() {
 		return array(
-			'author' => array(self::BELONGS_TO, 'hyb_user', 'author'),
+			'author' => array(self::BELONGS_TO, 'user', 'author'),
 		);
 	}
 

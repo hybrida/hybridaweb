@@ -27,7 +27,7 @@ class Comment extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'hyb_comment';
+		return 'comment';
 	}
 
 	/**
