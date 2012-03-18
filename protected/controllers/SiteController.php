@@ -5,7 +5,7 @@ class SiteController extends Controller {
 	public static $innsidaLink = "https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=";
 
 	public function actionIndex() {
-		$this->forward("news/feed");
+		$this->forward("/newsfeed/");
 	}
 
 	/**

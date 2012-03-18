@@ -1,15 +1,6 @@
 <?php
 
-Yii::import('bpc.components.*');
-
 class NewsController extends Controller {
-
-	private $feedLimit = 10;
-	private $offset = 0;
-
-	public function actionIndex() {
-		$this->actionFeed();
-	}
 
 	public function filters() {
 		return array(
@@ -20,7 +11,7 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view", "edit", 'feed', 'feedAjax', 'index', 'toggleAttending'),
+				'actions' => array("view", "edit",  'toggleAttending'),
 			),
 			array('allow',
 				'actions' => array("create"),
@@ -123,34 +114,6 @@ class NewsController extends Controller {
 			'signup' => $signup,
 			'isAttending' => $isAttending,
 		));
-	}
-
-	public function actionFeed() {
-		BpcCore::updateAll();
-		$feedElements = $this->getFeedElements();
-		$this->render("feed", array(
-			'models' => $feedElements,
-			'index' => $this->offset,
-			'limit' => $this->feedLimit,
-			'hasPublishAccess' => user()->checkAccess('createNews'),
-		));
-	}
-
-	public function actionFeedAjax($offset = 0) {
-		$feedElements = $this->getFeedElements($offset);
-		$this->renderPartial('_feed', array(
-			'models' => $feedElements,
-			'index' => $this->offset,
-			'limit' => $this->feedLimit,
-		));
-	}
-
-	private function getFeedElements($offset = 0) {
-		$feed = new NewsFeed($this->feedLimit, $offset);
-		$elements = $feed->getElements();
-		$this->offset = $feed->getOffset();
-
-		return $elements;
 	}
 
 	public function actionCreate() {
