@@ -1,150 +1,153 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- * Description of ArticleTree
- *
+ * Widget for å håndtere de statiske artiklene på siden.
+ * Lager et statisk tre av artiklene i databasen og vil i
+ * run-metoden skrive ut alle som skal skrives ut i forhold
+ * til hvor i treet brukeren er.
  * @author krisvage
  */
 class ArticleTree extends CWidget {
 
 	public $currentId;
-	private $articleTree;
-
-	public function init() {
-		$this->articleTree = self::getArticleTree();
-	}
+	private static $articleTree;
 
 	public static function getArticleTree() {
-		$articles = Article::model()->findAll();
-		$articleTree = self::topOfTreeBuilder($articles);
-		Node::sortNodes($articleTree);
-		return $articleTree;
-	}
-
-
-	private static function topOfTreeBuilder($articles) {
-		$articleTree = array();
-		$i = 0;
-		foreach ($articles as $article) {
-			if ($article->parentId == null) {
-				$key = array_search($article, $articles);
-				unset($articles[$key]);
-				$articleTree[$i] = new Node(
-								$article->id,
-								$article->title,
-								self::recursiveTreeBuilder($articles, $article->id)
-				);
-				$i++;
-			}
+		if (!isset(self::$articleTree)) {
+			self::setArticleTree();
 		}
-		return $articleTree;
+		return self::$articleTree;
 	}
 
-	private static function recursiveTreeBuilder($articles, $parentId) {
+	public function init() {
+		self::setArticleTree();
+	}
+
+	private static function setArticleTree() {
+		$articles = Article::model()->findAll();
+		self::$articleTree = self::treeBuilder($articles);
+		Node::sortNodes(self::$articleTree);
+	}
+
+	private static function treeBuilder($articles, $parentId = null) {
 		if (empty($articles)) {
 			return array();
 		}
 
-		$articleNodeArray = array();
-		$i = 0;
+		$branchOfArticleTree = array();
 		foreach ($articles as $article) {
-			if ($article->parentId == $parentId) {
+			if (($article->parentId == null && $parentId == null)
+					|| $article->parentId == $parentId) {
+
 				$key = array_search($article, $articles);
 				unset($articles[$key]);
-				$articleNodeArray[$i] = new Node(
+				$branchOfArticleTree[] = new Node(
 								$article->id,
+								$article->parentId,
 								$article->title,
-								self::recursiveTreeBuilder($articles, $article->id)
+								$article->shorttitle,
+								self::treeBuilder($articles, $article->id)
 				);
-				$i++;
 			}
 		}
-		return $articleNodeArray;
+		return $branchOfArticleTree;
 	}
 
 	public function run() {
-		$root = $this->findArticleRoot();
-		echo "<ul>";
-		$this->printTree($root);
-		echo "</ul>";
+		$currentArticles = $this->findRelevantArticles($this->articleTree, $this->currentId);
+		echo "<h4>";
+		$this->printNode($currentArticles[0]);
+		echo "</h4>";
+		$this->printArticleTree($currentArticles[1]);
 	}
 
-	private function findArticleRoot() {
-		foreach ($this->articleTree as $root) {
-			if ($this->isIdInTree($this->currentId, $root)) {
-				return $root;
+	private function findRelevantArticles($subTree, $id) {
+		if (empty($subTree))
+			return array();
+		foreach ($subTree as $node) {
+			if ($node->id == $id) {
+				return array($node, array($node->children, array()));
+			}
+			$found = $this->findRelevantArticles($node->children, $id);
+			if (!empty($found)) {
+				return array($node, array($node->children, $found));
 			}
 		}
-		return new Node(null, null, null);
 	}
 
-	private function isIdInTree($id, $node) {
-		$found = false;
-		if ($id == $node->id) {
-			return true;
-		}
-		foreach ($node->children as $child) {
-			$found = $this->isIdInTree($id, $child);
-			if ($found) {
-				break;
-			}
-		}
-		return $found;
-	}
-
-	private function printTree($node) {
-		$this->printNode($node);
-		if (empty($node->children)) {
+	private function printArticleTree($relevantArticles) {
+		if ($relevantArticles instanceof Node) {
+			// Dette skjer bare med duplikater,
+			// stygg bugfix.
+			//$this->printNode($relevantArticles);
 			return;
 		}
 		echo "<ul>";
-
-		foreach ($node->children as $child) {
-			$this->printTree($child);
+		foreach ($relevantArticles[0] as $node) {
+			echo "<li>";
+			$this->printNode($node);
+			if ($this->containsChild($node, $relevantArticles[1])) {
+				foreach ($relevantArticles[1] as $children) {
+					$this->printArticleTree($children);
+				}
+			}
+			echo "</li>";
 		}
 		echo "</ul>";
 	}
 
 	private function printNode($node) {
-		echo "<li>";
-		echo CHtml::link($node->title, array(
-			'/article/view',
-			'id' => $node->id,
-			'title' => $node->title,
-		));
-		echo "</li>";
-	}
+		$title = $node->title;
+		if (isset($node->shorttitle))
+			$title = $node->shorttitle;
 
+		if ($this->currentId != $node->id) {
+			echo CHtml::link($title, array(
+				'/article/view',
+				'id' => $node->id,
+				'title' => $node->title,
+			));
+		} else {
+			echo $title;
+		}
+	}
+	
+	private function containsChild($parent, $possibleChildren) {
+		if (isset($possibleChildren[1]) && isset($possibleChildren[1][0])) {
+			foreach ($possibleChildren[1][0] as $child) {
+				if ($parent->id == $child->parentId)
+						return true;
+			}
+		}
+		return false;
+	}
 }
 
 class Node {
-
 	public $id;
+	public $parentId;
 	public $title;
+	public $shorttitle;
 	public $children = array();
 
-	public function __construct($id, $title, $children) {
+	public function __construct($id, $parentId, $title, $shorttitle, $children) {
 		$this->id = $id;
+		$this->parentId = $parentId;
 		$this->title = $title;
+		$this->shorttitle = $shorttitle;
 		$this->setChildren($children);
-	}
-	public function setChildren($children) {
-		$this->children = $children;
-		self::sortNodes($this->children);
-	}
-	
-	public function compare($a, $b) {
-		return strcmp($a->title, $b->title);
 	}
 	
 	public static function sortNodes(&$nodes) {
-		usort($nodes, array(__CLASS__,"compare"));
+		usort($nodes, array(__CLASS__, "compare"));
 	}
-	
-	
+
+	private function setChildren($children) {
+		$this->children = $children;
+		self::sortNodes($this->children);
+	}
+
+	private function compare($a, $b) {
+		return strcmp($a->title, $b->title);
+	}
 }
