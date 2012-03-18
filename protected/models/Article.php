@@ -9,9 +9,11 @@ Yii::import('application.components.widgets.ArticleTree');
  * @property integer $id
  * @property integer $parentId
  * @property string $title
+ * @property string $shorttitle
  * @property string $content
  * @property integer $author
  * @property string $timestamp
+ * @property array $access
  */
 class Article extends CActiveRecord {
 
@@ -29,10 +31,11 @@ class Article extends CActiveRecord {
 	public function rules() {
 		return array(
 			array('title', 'length', 'max' => 30),
+			array('shorttitle', 'length', 'max' => 15),
 			array('parentId', 'numerical', 'integerOnly' => true),
 			array('author', 'numerical', 'integerOnly' => true),
-			array('title, content, timestamp', 'safe'),
-			array('id, parentId, title, content, author, timestamp', 'safe', 'on' => 'search'),
+			array('title, shorttitle, content, timestamp', 'safe'),
+			array('id, parentId, title, shorttitle, content, author, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -47,6 +50,7 @@ class Article extends CActiveRecord {
 			'id' => 'ID',
 			'parentId' => 'parentId',
 			'title' => 'Title',
+			'shorttitle' => 'ShortTitle',
 			'content' => 'Content',
 			'author' => 'Author',
 			'timestamp' => 'Timestamp',
@@ -59,6 +63,7 @@ class Article extends CActiveRecord {
 		$criteria->compare('id', $this->id);
 		$criteria->compare('parentId', $this->parentId);
 		$criteria->compare('title', $this->title, true);
+		$criteria->compare('shorttitle', $this->shorttitle, true);
 		$criteria->compare('content', $this->content, true);
 		$criteria->compare('author', $this->author);
 		$criteria->compare('timestamp', $this->timestamp, true);
@@ -91,6 +96,9 @@ class Article extends CActiveRecord {
 			$this->author = Yii::app()->user->id;
 			$this->timestamp = new CDbExpression('NOW()');
 		}
+		if (empty($this->shorttitle)) {
+			$this->shorttitle = new CDbExpression('NULL'); 
+		}
 		return parent::beforeSave();
 	}
 
@@ -104,6 +112,7 @@ class Article extends CActiveRecord {
 		$this->parentId = $purifier->purify($this->parentId);
 		$this->content = $purifier->purify($this->content);
 		$this->title = $purifier->purify($this->title);
+		$this->shorttitle = $purifier->purify($this->shorttitle);
 		return parent::beforeValidate();
 	}
 
@@ -116,6 +125,10 @@ class Article extends CActiveRecord {
 
 	public function getTitle() {
 		return $this->title;
+	}
+	
+	public function getShortTitle() {
+		return $this->shorttitle;
 	}
 
 	public function getViewUrl() {

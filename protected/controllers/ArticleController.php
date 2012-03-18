@@ -1,8 +1,15 @@
 <?php
 
 class ArticleController extends Controller {
+	
+	public function filters() {
+		return array(
+			'accessControl',
+		);
+	}
+	
     public function actionView($id) {
-        $article = Article::model()->findByPk($id);
+        $article = $this->getArticleModelAndThrowExceptionIfNullOrNotAccess($id);
 		
 		$this->render("view", array(
 			'article' => $article,
@@ -40,6 +47,17 @@ class ArticleController extends Controller {
 		$model = $this->getArticleModel($id);
 		$this->renderArticleForm($model);
     }
+	
+	private function getArticleModelAndThrowExceptionIfNullOrNotAccess($id) {
+		$article = Article::model()->findByPk($id);
+
+		if (!$article)
+			throw new CHttpException('Artikkelen finnes ikke');
+		if (!app()->gatekeeper->hasPostAccess('article', $article->id))
+			throw new CHttpException('Ingen tilgang');
+		return $article;
+	}
+
 	
 	private function renderArticleForm($model) {
 		if (isset($_POST['Article'])) {

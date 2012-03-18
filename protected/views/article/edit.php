@@ -14,23 +14,35 @@
 	<div class="formHeader">
 		<h1>Artikkel</h1>
 	</div>
-
+	
 	<div class="row">
-				<?= $form->labelEx($model, 'title') ?>
-				<?= $form->textField($model, 'title') ?>
-				<?= $form->error($model, 'title') ?>
+		<?= $form->labelEx($model, 'Tittel: ') ?>
+		<?= $form->textField($model, 'title') ?>
+		<?= $form->error($model, 'title') ?>
+	</div>
+		
+	<div class="row">
+		<?= $form->labelEx($model, 'Forkortet tittel: ') ?>
+		<?= $form->textField($model, 'shorttitle') ?>
+		<?= $form->error($model, 'shorttitle') ?>
 	</div>
 	
 	<div class="row">
-				<?= $form->labelEx($model, 'parentId') ?>
-				<?= $form->dropDownList($model, 'parentId', Article::getTreeList()) ?>
-				<?= $form->error($model, 'parentId') ?>
+		<?= $form->labelEx($model, 'Foreldreartikkel: ') ?>
+		<?= $form->dropDownList($model, 'parentId', Article::getTreeList()) ?>
+		<?= $form->error($model, 'parentId') ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model, 'content'); ?>
+		<?php echo $form->labelEx($model, 'Innhold: '); ?>
 		<?php echo $form->richTextArea($model, 'content'); ?>
 		<?php echo $form->error($model, 'content'); ?>
+	</div>
+	
+	<div class="formBoxRow">
+		<?php echo $form->labelEx($model, 'Tilganger: '); ?>
+		<?php echo $form->accessField($model, 'access'); ?>
+		<?php echo $form->error($model, 'access'); ?>				
 	</div>
 
 	<div class="formElement">
