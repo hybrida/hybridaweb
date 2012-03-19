@@ -87,26 +87,30 @@ div.articleContent div.author a {
 
 .blueBoxItem {
     background-color: #0062C4;
-    width: 33px;
-    height: 33px;
+    width: 31px;
+    height: 31px;
+	display: none;
 }
 
 .topBar {
-    background-color: #0062c4;
     height: 33px;
-    margin-left: 40px;
+    margin-left: -10px;
 }
 
 .topBar h1 {
-    color: #ffffff;
-	font: 27px 'Din';
-    margin-top: 0;
+    color: #000000;
+	font: 25px 'Gill';
 	margin-left: 3px;
+	margin-top: 0;
 }
 
 .topBar h1 a {
 	text-decoration: none;
 	color: #ffffff;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	background-color: #0062c4;
+	padding: 4px 15px;
 }
 
 .contentDivider {
@@ -114,6 +118,7 @@ background: url('../images/shaded-divider.gif') no-repeat;
 	height: 10px;
 	top: 15px;
 	position: relative;
+	display: none;
 }
 
 nav items div {
@@ -144,6 +149,8 @@ nav items div.last {
 
 .author {
 	font-style: italic;
+	position: relative;
+	padding-top: 10px;
 }
 
 .author:before {
