@@ -11,6 +11,10 @@ html{
     font-weight: lighter;
 }
 
+body {
+	height: 100%;
+}
+
 body, .mainWrap, .bodyWrap{
     padding: 0px;
     margin: 0px;
@@ -31,7 +35,14 @@ div.ui-datepicker{
     height: 25px;
 }
 
-.mainContainer{
+.mainWrap {
+	position: absolute;
+	top: 130px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	overflow: hidden;
+	background-color: #ffffff;
 }
 
 .mainWrap, .bodyWrap{
@@ -157,21 +168,24 @@ div.searchBox{
 
 .content{
     padding: 0 7px 30px 7px;
-    float: left;
     width: 736px;
-    background-color: #FFFFFF;
+    overflow-y: auto;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
 }
 
 .rightBar{
-    float: right;
-    width: 248px;
-    background-color: #FFFFFF;
-    border-style: solid;
-    border-color: #79A2CE;
-    border-left-width: 1px;
-    border-right-width: 1px;
-    border-top-width: 0px;
-    border-bottom-width: 2px;
+    width: 250px;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 750px;
+	overflow-y: auto;
+	border-left: 1px solid #0062c4;
 }
 
 /* @end */
