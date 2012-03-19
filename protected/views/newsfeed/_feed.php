@@ -11,7 +11,6 @@
             <div class="blueBoxItem"></div>
         </div>
         <div class="topBar">
-            <div class="topBarItem"></div>
             <h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
         </div>
         <div class="articleContent">
@@ -21,6 +20,8 @@
             <div class="author"><?=
 				CHtml::link($model->author->fullName, $model->author->viewUrl) ?></div>
 			<? endif ?>
+        </div>
+        <div class="contentDivider">
         </div>
     </div>
 <? endforeach ?>
