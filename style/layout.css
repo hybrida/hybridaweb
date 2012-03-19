@@ -25,7 +25,7 @@ div.ui-datepicker{
 }
 
 .headerStripe{
-    height: 130px;
+    height: 90px;
     background-color: #0062C4;
 }
 
@@ -33,6 +33,8 @@ div.ui-datepicker{
     background-image:url('../images/black_trans_25.png');
     background-repeat:repeat-x;
     height: 25px;
+	position: relative;
+	top: -41px;
 }
 
 .mainWrap {
@@ -61,29 +63,41 @@ div.ui-datepicker{
 .header h1 {
     float: left;
     width: 450px;
-    height: 105px;
+    height: 90px;
     color: #FFFFFF;
     text-transform: uppercase;
     font: 90px 'DIN-Medium';
-    margin-top: 20px;
-    margin-bottom: -20px;
-    margin-left: 15px;
+	margin: 0;
+}
+
+.header img {
+	height: 90px;
 }
 
 .searchWrap{
     vertical-align: top; 
     display: inline;
-    width: 184px;
-    height: 50px;
-    float: right;
-    margin-top: 65px;
-    padding: 0px 2px 0px 0px;
+	float: right;
+	padding: 0px 2px 0px 0px;
+	position: relative;
+	top: 35px;
 }
 
-div.searchImg{
+div.search {
+	width: 130px;
+	float: left;
+}
+
+.search input {
+	width: 100px;
+	float: left;
+}
+
+div.searchImg input{
     width: 24px;
     padding-top: 1px;
-    float: right;
+	position: relative;
+	float: right;
 }
 
 div.searchBox{
@@ -94,8 +108,11 @@ div.searchBox{
 .menu{
     margin-left: auto; 
     margin-right: auto;
-    width: 1000px;
+    width: 900px;
     color: #FFFFFF;
+	height: 25px;
+	position: relative;
+	left: 50px;
 }
 
 .menu a:visited {
