@@ -20,8 +20,8 @@ class FacebookController extends Controller {
 
         }
         elseif(isset($code)){
-            //Feilen med facebook ligger i den neste linjen med kode. file_get_contents klarer ikke åpne riktig link. Må være noe feil med formatering av linken....
-            $token_url = urlencode('https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code);
+            echo 'Dette er koden: '.$code;
+            /*$token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code;
             $access = file_get_contents($token_url); 
             $params = null;
                 parse_str($access, $params);
@@ -34,7 +34,7 @@ class FacebookController extends Controller {
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
 
-            Header("Location: ".$my_url); //redirect tilbake til forsiden
+            Header("Location: ".$my_url); //redirect tilbake til forsiden*/
         }
     }
 }
