@@ -11,7 +11,7 @@ class FacebookController extends Controller {
         $userId = Yii::app()->user->id;
         $app_id = '202808609747231';
         $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
-        $my_url = Yii::app()->createAbsoluteUrl('');
+        $my_url = Yii::app()->createAbsoluteUrl('/facebook/');
 
         
         if(isset($_REQUEST['error'])){
@@ -20,8 +20,7 @@ class FacebookController extends Controller {
 
         }
         elseif(isset($code)){
-            echo 'Dette er koden: '.$code;
-            /*$token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code;
+            $token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&client_secret=' . $app_secret . '&code=' . $code;
             $access = file_get_contents($token_url); 
             $params = null;
                 parse_str($access, $params);
@@ -34,7 +33,7 @@ class FacebookController extends Controller {
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
 
-            Header("Location: ".$my_url); //redirect tilbake til forsiden*/
+            Header("Location: ".$my_url); //redirect tilbake til forsiden
         }
     }
 }
