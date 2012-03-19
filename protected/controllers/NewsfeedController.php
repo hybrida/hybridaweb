@@ -1,13 +1,10 @@
 <?php
 
-Yii::import('bpc.components.*');
-
 class NewsfeedController extends Controller {
 	private $feedLimit = 10;
 	private $offset = 0;
 	
 	public function actionIndex() {
-		BpcCore::updateAll();
 		$feedElements = $this->getFeedElements();
 		$this->render("feed", array(
 			'models' => $feedElements,
