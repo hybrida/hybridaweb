@@ -42,8 +42,8 @@ class Facebook {
 	}
 
 	public function setAttending($id) {
-                $urlEventPage = Yii::app()->createAbsoluteUrl('/event/'.$id);
-                echo $urlEventPage;
+                $title = News::model()->findByPk($id)->title;
+                $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
 		$accessToken = $this->getAccessToken();
 		$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 		$data = array(
