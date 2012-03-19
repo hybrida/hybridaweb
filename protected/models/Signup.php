@@ -123,11 +123,17 @@ class Signup extends CActiveRecord {
 		$stmt->bindValue(':eid', $this->eventId);
 		$stmt->bindValue(':uid', $userId);
 		$stmt->execute();
-
+                $this->pushToFacebook($eventId);
+                
 		if ($addBPC) {
 			$this->addBpcAttender($userId);
 		}
 	}
+        
+        public function pushToFacebook($eventId){
+            $fb = new Facebook();
+            $fb->setAttending($eventId);
+        }
 
 	private function addBpcAttender($userID) {
 		if ($this->isBpc()) {
