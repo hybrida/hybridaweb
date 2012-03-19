@@ -39,7 +39,7 @@ div.ui-datepicker{
 
 .mainWrap {
 	position: absolute;
-	top: 130px;
+	top: 90px;
 	right: 0;
 	bottom: 0;
 	left: 0;
@@ -179,8 +179,10 @@ div.searchBox{
 }
 
 .barText{
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
+}
+
+.barText a {
+	
 }
 
 .content{
