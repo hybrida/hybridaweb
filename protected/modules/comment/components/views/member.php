@@ -18,8 +18,8 @@
 	<div class="row">
 		<?php
 		echo $form->textArea($formModel, 'content', array(
-			'width' => $width,
-			'height' => $height,
+			'cols' => 60,
+			'rows' => 10,
 		));
 		?>
 		<?php echo $form->error($formModel, 'content'); ?>

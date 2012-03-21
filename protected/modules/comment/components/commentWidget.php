@@ -7,8 +7,6 @@ class CommentWidget extends CWidget {
 
 	public $id = "";
 	public $type = "";
-	public $width = 400;
-	public $height = 130;
 	private $formModel;
 
 	public function init() {
@@ -28,8 +26,6 @@ class CommentWidget extends CWidget {
 		if (!user()->isGuest) {
 			$this->render("member", array(
 				'formModel' => $this->formModel,
-				'width' => $this->width,
-				'height' => $this->height,
 			));
 		} else {
 			$this->render('guest');
