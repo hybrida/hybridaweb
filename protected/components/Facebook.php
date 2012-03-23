@@ -55,7 +55,7 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
         
-	public function publishAtFanpage($id) {
+	public function publishEventAtFanpage($eventId) {
                 $title = News::model()->findByPk($id)->title;
                 $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
 		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
@@ -65,7 +65,7 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
 
-	public function publishAtFanpage($id, $message) {
+	public function publishNewsAtFanpage($newsId, $message) {
 		$title = News::model()->findByPk($id)->title;
                 $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
 		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
@@ -75,7 +75,7 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
         
-	public function runCurl($data, $postUrl) {
+	private function runCurl($data, $postUrl) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
 		curl_setopt($ch, CURLOPT_POST, 1);
@@ -88,7 +88,6 @@ class Facebook {
         public function addAccessToken($code){
             $userId = Yii::app()->user->id;
             $my_url = Yii::app()->createAbsoluteUrl('');
-            
             $array = array('uID' => $userId);
             $sql = 'DELETE FROM fb_user WHERE uID = :uID';
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
@@ -99,12 +98,12 @@ class Facebook {
             $params = null;
             parse_str($access, $params);
             $accessToken = $params['access_token'];
-            $array=array('uID' => $userId, 'aToken' => $accessToken);
             
+            $array=array('uID' => $userId, 'aToken' => $accessToken);
             $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken)';
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
-
+            
             Header("Location: ".$my_url); //redirect tilbake til forsiden
         }
 }
