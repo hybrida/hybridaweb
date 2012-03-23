@@ -3,6 +3,8 @@
 class Facebook {
         public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
         public $pageId = "218073661595571";
+        public $app_id = '202808609747231';
+        public $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -54,8 +56,8 @@ class Facebook {
 	}
         
 	public function publishAtFanpage($id) {
-                $urlEventPage = Yii::app()->createAbsoluteUrl('/event?id=');
-                $urlEventPage=urlEventPage.$id;
+                $title = News::model()->findByPk($id)->title;
+                $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
 		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
                 $data['link'] = $urlEventPage;
 		$data['message'] = utf8_encode('har opprettet et arrangement');
@@ -63,15 +65,16 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
 
-	public function publishNews($message, $id) {
-		$urlEventPage = Yii::app()->createAbsoluteUrl('/news?id=');
-                $urlEventPage=urlEventPage.$id;
+	public function publishAtFanpage($id, $message) {
+		$title = News::model()->findByPk($id)->title;
+                $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
 		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
 		$data['link'] = $urlNewsPage;
-		$data['message'] = $message;
+		$data['message'] = utf8_encode($message);
 		$data['access_token'] = $this->accessToken;
 		$this->runCurl($data, $postUrl);
 	}
+        
 	public function runCurl($data, $postUrl) {
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $postUrl);
@@ -81,4 +84,27 @@ class Facebook {
 		$return = curl_exec($ch);
 		curl_close($ch);
 	}
+        
+        public function addAccessToken($code){
+            $userId = Yii::app()->user->id;
+            $my_url = Yii::app()->createAbsoluteUrl('');
+            
+            $array = array('uID' => $userId);
+            $sql = 'DELETE FROM fb_user WHERE uID = :uID';
+            $query = Yii::app()->db->getPdoInstance()->prepare($sql);
+            $query->execute($array);
+            
+            $token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->app_id . '&redirect_uri=' . $my_url . '/facebook&client_secret=' . $this->app_secret . '&code=' . $code;
+            $access = file_get_contents($token_url); 
+            $params = null;
+            parse_str($access, $params);
+            $accessToken = $params['access_token'];
+            $array=array('uID' => $userId, 'aToken' => $accessToken);
+            
+            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken)';
+            $query = Yii::app()->db->getPdoInstance()->prepare($sql);
+            $query->execute($array);
+
+            Header("Location: ".$my_url); //redirect tilbake til forsiden
+        }
 }

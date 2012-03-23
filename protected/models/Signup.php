@@ -131,7 +131,7 @@ class Signup extends CActiveRecord {
 	}
         
         public function pushToFacebook($eventId){
-            $fb = new Facebook();
+            $fb = new Facebook;
             $fb->setAttending($eventId);
         }
 
