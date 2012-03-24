@@ -31,7 +31,7 @@ $this->endClip()
 	));	?>
 </div>
 
-<div class="calendar"> </div>
+<div class="calendar-switch"> </div>
 
 <?=CHtml::button('Vis flere', array(
 	'class' => 'button buttonRightSide',
@@ -41,7 +41,7 @@ $this->endClip()
 <script>
 	var count = <?= $index ?>;
 	$(function() {
-		$(".calendar").load("/calendar/ajax");
+		$(".calendar-switch").load("/calendar/ajax");
 	});
 	
 	$("#toggleCalendar".click(function(){

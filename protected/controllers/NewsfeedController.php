@@ -4,6 +4,14 @@ class NewsfeedController extends Controller {
 	private $feedLimit = 10;
 	private $offset = 0;
 	
+	public function init() {
+		$path = Yii::getPathOfAlias("ext.php-calendar.assets.css") . 
+				"/style.css";
+		$cs = Yii::app()->getClientScript();
+		$am = Yii::app()->getAssetManager();
+		$cs->registerCssFile($am->publish($path));
+	}
+	
 	public function actionIndex() {
 		$feedElements = $this->getFeedElements();
 		$this->render("feed", array(
