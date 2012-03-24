@@ -9,7 +9,7 @@ class CalendarController extends Controller {
 	public $year = 2000;
 	private $calendar;
 	private $showDays = array(
-		'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag', 'Søndag'
+		 'Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'
 	);
 
 	public function init() {

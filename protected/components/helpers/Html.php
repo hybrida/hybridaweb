@@ -28,4 +28,11 @@ class Html extends CHtml {
 		return preg_replace('/[^a-zæøåA-ZÆØÅ0-9_ -]/s', '', $text);
 	}
 	
+	public static function getLongMonthNames() {
+		return self::$longMonthNames;
+	}
+	public static function getShortMonthNames() {
+		return self::$shortMonthNames;
+	}
+	
 }

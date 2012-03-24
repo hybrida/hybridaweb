@@ -70,38 +70,13 @@ class Calendar extends Event_Subject {
 		$format = ($length === TRUE OR $length > 3) ? '%A' : '%a';
 
 		// Days of the week
-		$days = array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+		$days = $this->config['show_days'];
 
 		if ($this->config['week_start'] > 0) {
 			for ($i = 0; $i < $this->config['week_start']; $i++) {
 				array_push($days, array_shift($days));
 			}
 		}
-
-		// Remove days that shouldn't be shown
-		if (in_array(0, $this->config['show_days'])) {
-			for ($i = 0; $i < 7; $i++) {
-				if ($this->config['show_days'][$i] === 0) {
-					unset($days[$i]);
-				}
-			}
-
-			$days = array_values($days);
-		}
-
-		// This is a bit awkward, but it works properly and is reliable
-		foreach ($days as $i => $day) {
-			// Convert the English names to i18n names
-			$days[$i] = strftime($format, strtotime($day));
-		}
-
-		if (is_int($length) OR ctype_digit($length)) {
-			foreach ($days as $i => $day) {
-				// Shorten the days to the expected length
-				$days[$i] = substr($day, 0, $length);
-			}
-		}
-
 		return $days;
 	}
 
@@ -319,21 +294,13 @@ class Calendar extends Event_Subject {
 	 * @return  string     Month name
 	 */
 	public function prev_month($length = TRUE, $before = '&lsaquo; ') {
-		$format = ($length === TRUE OR $length > 3) ? '%B' : '%b';
-
-		$date = mktime(0, 0, 0, $this->month - 1, 1, $this->year);
-
-		$month = strftime($format, $date);
-
-		if (is_int($length) OR ctype_digit($length)) {
-			$month = substr($month, 0, $length);
+		$months = Html::getLongMonthNames();
+		$next = $this->month - 1;
+		if ($this->month == 1) {
+			$next = 12;
 		}
 
-		if ($length === 0 OR $length === FALSE) {
-			$month = '';
-		}
-
-		return $before . $month;
+		return $before . $months[$next - 1];
 	}
 
 	/**
@@ -343,6 +310,8 @@ class Calendar extends Event_Subject {
 	 * @return  string     Current month name
 	 */
 	public function month($length = TRUE) {
+		$months = Html::getLongMonthNames();
+		return $months[$this->month - 1];
 		$format = ($length === TRUE OR $length > 3) ? '%B' : '%b';
 
 		$date = mktime(0, 0, 0, $this->month, 1, $this->year);
@@ -381,21 +350,13 @@ class Calendar extends Event_Subject {
 	 * @return  string     Month name
 	 */
 	public function next_month($length = TRUE, $after = ' &rsaquo;') {
-		$format = ($length === TRUE OR $length > 3) ? '%B' : '%b';
-
-		$date = mktime(0, 0, 0, $this->month + 1, 1, $this->year);
-
-		$month = strftime($format, $date);
-
-		if (is_int($length) OR ctype_digit($length)) {
-			$month = substr($month, 0, $length);
+		$months = Html::getLongMonthNames();
+		$next = $this->month + 1;
+		if ($this->month == 12) {
+			$next = 1;
 		}
 
-		if ($length === 0 OR $length === FALSE) {
-			$month = '';
-		}
-
-		return $month . $after;
+		return $months[$next - 1] . $after;
 	}
 
 	/**
