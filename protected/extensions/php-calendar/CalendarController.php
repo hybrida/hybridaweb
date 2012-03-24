@@ -58,16 +58,28 @@ class CalendarController extends Controller {
 		$this->putEvents($eventList);
 	}
 
-	private function getNextMonthsYear() {
+	public function getNextMonthsYear() {
 		if ($this->month == 12)
 			return $this->year + 1;
 		return $this->year;
 	}
 
-	private function getNextMonth() {
+	public function getNextMonth() {
 		if ($this->month == 12)
 			return 1;
 		return $this->month + 1;
+	}
+	
+	public function getPrevMonthsYear() {
+		if ($this->month == 1)
+			return $this->year - 1;
+		return $this->year;
+	}
+
+	public function getPrevMonth() {
+		if ($this->month == 1)
+			return 12;
+		return $this->month - 1;
 	}
 
 	private function putEvents($eventList) {
@@ -96,10 +108,17 @@ class CalendarController extends Controller {
 			'calendar' => $this->calendar,
 		));
 	}
-	
+
 	public function actionAjax($year = null, $month = null) {
 		$this->setCalendar($year, $month);
 		$this->renderPartial('ext.php-calendar.views.calendar', array(
+			'calendar' => $this->calendar,
+		));
+	}
+
+	public function actionWidget($year = null, $month = null) {
+		$this->setCalendar($year, $month);
+		$this->render('ext.php-calendar.views.widget', array(
 			'calendar' => $this->calendar,
 		));
 	}

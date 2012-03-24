@@ -1,14 +1,18 @@
+<div class="calendar-all">
 <div style="width:700px; padding:20px; margin:50px auto">
 	<table class="big-calendar">
 		<thead>
 			<tr class="navigation">
 				<th class="prev-month">
-					<a href="<?php echo htmlspecialchars($calendar->prev_month_url()) ?>"
-					   ><?php echo $calendar->prev_month() ?></a></th>
+					<?= CHtml::link($calendar->prev_month(), "#", array(
+							'class' => 'calendar-previous-month-button'
+						)) ?>
+					</th>
 				<th colspan="5" class="current-month"><?php echo $calendar->month() ?></th>
 				<th class="next-month">
-					<a href="<?php echo htmlspecialchars($calendar->next_month_url()) ?>"
-					   ><?php echo $calendar->next_month() ?></a></th>
+					<?= CHtml::link($calendar->next_month(), "#", array(
+							'class' => 'calendar-next-month-button'
+						)) ?></th>
 			</tr>
 			<tr class="weekdays">
 				<?php foreach ($calendar->days() as $day): ?>
@@ -44,4 +48,33 @@
 			<?php endforeach ?>
 		</tbody>
 	</table>
+</div>
+
+<script language="javascript">
+	$(function() {
+		var nextMonthButton = $(".calendar-next-month-button");
+		var prevMonthButton = $(".calendar-previous-month-button");
+		
+		var nextMonthButtonUrl = "<?=$this->createUrl('/calendar/ajax', array(
+				'year' => $this->getNextMonthsYear(),
+				'month' => $this->getNextMonth()))?>";
+		var prevMonthButtonUrl = "<?=$this->createUrl('/calendar/ajax', array(
+				'year' => $this->getPrevMonthsYear(),
+				'month' => $this->getPrevMonth()))?>";
+		var content = $(".calendar-all");
+				
+				
+
+		function update(url) {
+			content.load(url)
+		}
+		
+		nextMonthButton.click(function () {
+			update(nextMonthButtonUrl)
+		});
+		prevMonthButton.click(function() {
+			update(prevMonthButtonUrl)
+		});
+	});
+</script>
 </div>
