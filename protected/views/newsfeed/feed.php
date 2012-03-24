@@ -21,14 +21,16 @@ $this->endClip()
 	<? endif ?>
 </div>
 
-<div class="heavyBorder"></div>
-
-
 <div class="feeds">
 	<?	$this->renderPartial("_feed", array(
 		'models' => $models,
 	));	?>
 </div>
+
+<div class="calendar"> </div>
+<script language="javascript">
+	$(".calendar").get("/calendar/ajax/");
+</script>
 
 <?=CHtml::button('Vis flere', array(
 	'class' => 'button buttonRightSide',
