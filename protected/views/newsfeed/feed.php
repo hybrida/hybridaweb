@@ -28,7 +28,7 @@ $this->endClip()
 </div>
 
 <div class="calendar"> </div>
-<script language="javascript">
+<script>
 	$(".calendar").get("/calendar/ajax/");
 </script>
 
