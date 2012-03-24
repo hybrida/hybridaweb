@@ -14,6 +14,10 @@ $this->endClip()
 ?>
 <div class="feedTitle">
     <h1 style="display: inline">Nyhetsstrøm</h1>
+    <?=CHtml::button('Nyheter/Kalender', array(
+    'class' => 'button buttonRightSide',
+    'id' => 'toggleCalendar'
+    ))?>
 	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
 		'class' => 'button buttonRightSide',
@@ -28,9 +32,6 @@ $this->endClip()
 </div>
 
 <div class="calendar"> </div>
-<script>
-	$(".calendar").get("/calendar/ajax/");
-</script>
 
 <?=CHtml::button('Vis flere', array(
 	'class' => 'button buttonRightSide',
@@ -39,6 +40,10 @@ $this->endClip()
 
 <script>
 	var count = <?= $index ?>;
+	$(".calendar").get("/calendar/ajax");
+	$("#toggleCalendar".click(function(){
+		//Do something
+	});
 	$("#fetchNews").click(function(){
 		
 		$.ajax({
