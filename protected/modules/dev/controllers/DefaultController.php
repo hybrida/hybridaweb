@@ -61,5 +61,9 @@ class DefaultController extends Controller {
 			$this->redirect(user()->returnUrl);
 		}
 	}
+	
+	public function actionTest() {
+		$this->render('test');
+	}
 
 }
