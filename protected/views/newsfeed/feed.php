@@ -40,10 +40,13 @@ $this->endClip()
 
 <script>
 	var count = <?= $index ?>;
-	$(".calendar").load("/calendar/ajax");
+	$(function() {
+		$(".calendar").load("/calendar/ajax");
+	});
+	
 	$("#toggleCalendar".click(function(){
 		//Do something
-	});
+	}));
 	$("#fetchNews").click(function(){
 		
 		$.ajax({
