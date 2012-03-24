@@ -1,0 +1,26 @@
+/* Calendar Styles */
+.big-calendar {width:100%; border-collapse:collapse;}
+.big-calendar tr.navigation th {padding-bottom:20px;}
+.big-calendar th.prev-month {text-align:left;}
+.big-calendar th.current-month {text-align:center; font-size:1.5em;}
+.big-calendar th.next-month {text-align:right;}
+.big-calendar tr.weekdays th {text-align:left;}
+.big-calendar td {width:14%; height:100px; vertical-align:top; border:1px solid #CCC;}
+.big-calendar td.today {background:#FFD;}
+.big-calendar td.prev-next {background:#EEE;}
+.big-calendar td.prev-next span.date {color:#9C9C9C;}
+.big-calendar td.holiday {background:#DDFFDE;}
+.big-calendar span.date {display:block; padding:4px; line-height:12px; background:#EEE;}
+.big-calendar div.day-content {}
+.big-calendar ul.output {margin:0; padding:0 4px; list-style:none;}
+.big-calendar ul.output li {margin:0; padding:5px 0; line-height:1em; border-bottom:1px solid #CCC;}
+.big-calendar ul.output li:last-child {border:0;}
+
+/* Small Calendar */
+.big-calendar.small {width:auto; border-collapse:separate;}
+.big-calendar.small tr.navigation th {padding-bottom:5px;}
+.big-calendar.small tr.navigation th a span {font-size:1.5em;}
+.big-calendar.small th.current-month {font-size:1em;}
+.big-calendar.small tr.weekdays th {text-align:center;}
+.big-calendar.small td {width:auto; height:auto; padding:4px 8px; text-align:center; border:0; background:#EEE;}
+.big-calendar.small span.date {display:inline; padding:0; background:none;}

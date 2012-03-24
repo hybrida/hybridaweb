@@ -120,7 +120,7 @@ class News extends CActiveRecord {
 		$this->_access->replace();
 		return parent::afterSave();
 	}
-	
+
 	public function purify() {
 		$purifier = new CHtmlPurifier();
 		$this->ingress = $purifier->purify($this->ingress);
@@ -168,6 +168,23 @@ class News extends CActiveRecord {
 
 	private function getTitleWithoutSpecialChars() {
 		return Html::removeSpecialChars($this->title);
+	}
+
+	public static function getNewsBetween($from, $to) {
+		$sql = "SELECT news.id FROM news
+			JOIN event ON news.parentId = event.id AND news.parentType = 'event'
+			WHERE event.start >= :start AND event.start < :end
+			OR event.end >= :start AND event.end < :end";
+		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$stmt->bindParam(":start", $from);
+		$stmt->bindParam(":end", $to);
+		$stmt->execute();
+		$rows = $stmt->fetchAll(PDO::FETCH_COLUMN);
+		$newsList = array();
+		foreach ($rows as $id) {
+			$newsList[] = News::model()->with('event')->findByPk($id);
+		}
+		return $newsList;
 	}
 
 }

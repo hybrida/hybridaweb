@@ -34,6 +34,11 @@ return array(
 		'application.components.helpers.*',
 		'application.exceptions.*',
 	),
+	'controllerMap' => array(
+		'calendar' => array(
+			'class' => 'ext.php-calendar.CalendarController'
+		),
+	),
 	'modules' => array(
 		'gii' => array(
 			'class' => 'system.gii.GiiModule',
