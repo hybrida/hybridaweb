@@ -1,5 +1,5 @@
-<div class="calendar-all">
-<div style="width:700px; padding:20px; margin:50px auto">
+<div class="calendarWrap">
+<div class="calendarData">
 	<table class="big-calendar">
 		<thead>
 			<tr class="navigation">
