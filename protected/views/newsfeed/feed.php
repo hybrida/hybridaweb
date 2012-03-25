@@ -41,16 +41,15 @@ $this->endClip()
 <script>
 	var count = <?= $index ?>;
 	var calendarDiv = $(".calendar-switch");
-	$(function() {
+	$(function loadCalendar() {
 		calendarDiv.load("/calendar/ajax");
-		calendarDiv.hide();
+	});	
+	$("#toggleCalendar").toggle(function flipCalendar(){
+		$(".content").addClass("flip");
+	},function(){
+		$(".content").removeClass("flip");
 	});
-	
-	$("#toggleCalendar").click(function(){
-		calendarDiv.toggle();
-		$(".feeds").toggle();
-	});
-	$("#fetchNews").click(function(){
+	$("#fetchNews").click(function fetchNews(){
 		
 		$.ajax({
 			success: function(html){

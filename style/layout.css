@@ -185,15 +185,58 @@ div.searchBox{
 	
 }
 
+.content .calendar-switch {
+	float: none;
+	-webkit-transform: rotateY(180deg);
+	-webkit-backface-visibility: hidden;
+	position: absolute;
+	top: 50px;
+	left: 7px;
+	z-index: 8;
+	width: inherit;
+	height: inherit;
+	
+	-webkit-transform: rotateY(-180deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: all .4s ease-in-out;
+}
+
+.content.flip .calendar-switch {
+	z-index: 10;
+	-webkit-transform: rotateY(0deg);
+}
+
+.content .feeds {
+	float: none;
+	position: absolute;
+	top: 50px;
+	left: 7px;
+	z-index: 9;
+	width: inherit;
+	height: inherit;
+	
+	-webkit-transform: rotateY(0deg);
+	-webkit-transform-style: preserve-3d;
+	-webkit-backface-visibility: hidden;
+	-webkit-transition: all .4s ease-in-out;
+}
+
+.content.flip .feeds {
+	z-index: 9;
+	-webkit-transform: rotateY(180deg);
+}
+
 .content{
-    padding: 0 7px 30px 7px;
-    width: 736px;
+	width: 736px;
     overflow-y: auto;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
+	padding-right: 7px;
+	padding-left: 7px;
 }
 
 .rightBar{

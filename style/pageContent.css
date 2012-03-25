@@ -30,17 +30,20 @@
 
 .contentItem{
     width: 736px;
-	margin-bottom: 10px;
+	margin-bottom: 25px;
 	margin-top: 5px;
 }
 
 .articleContent {
 	margin-left: 25px;
 	border: 1px solid #a8a8a8;
-	padding: 20px 3px 3px;
+	padding: 22px 6px 3px;
 	position: relative;
 	bottom: 15px;
 	z-index: 1;
+	-moz-box-shadow: 2px 1px 2px #848484;
+	-webkit-box-shadow: 2px 1px 2px #848484;
+	box-shadow: 2px 1px 2px #848484;
 }
 
 .articleContent p {
@@ -115,8 +118,19 @@ div.articleContent div.author a {
 	color: #ffffff;
 	border-top-right-radius: 6px;
 	border-bottom-right-radius: 6px;
-	background-color: #0062c4;
 	padding: 4px 15px;
+	text-shadow: 1px 1px 1px black;
+	background: -moz-linear-gradient(270deg, #aed6fe 0%, #0061c2 63.4%) #0062c4;
+	background: -webkit-gradient(linear, left top, left bottom, from(#aed6fe), color-stop(0.634, #0061c2)) #0062c4;
+	-moz-box-shadow: 2px 2px 2px #9d9d9d;
+	-webkit-box-shadow: 2px 2px 2px #9d9d9d;
+	box-shadow: 2px 2px 2px #9d9d9d;
+	border: 1px solid #005fbe;
+	border-left-style: none;
+}
+
+.topBar h1 a:hover {
+	text-decoration: underline;
 }
 
 .contentDivider {
