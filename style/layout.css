@@ -178,17 +178,14 @@ div.searchBox{
 	margin-bottom: 0.3em;
 }
 
-.barText{
+.calendar-switch {
+	width: ;
 }
 
-.barText a {
-	
 }
 
 .content .calendar-switch {
 	float: none;
-	-webkit-transform: rotateY(180deg);
-	-webkit-backface-visibility: hidden;
 	left: 0;
 	z-index: 8;
 	width: inherit;
@@ -207,19 +204,24 @@ div.searchBox{
 	-o-transition: all .4s ease-in-out;
 	-ms-transition: all .4s ease-in-out;
 	transition: all .4s ease-in-out;
+	background-color: #ffffff;
+	padding-right: 7px;
+	padding-left: 7px;
 }
 
 .content.flip .calendar-switch {
 	z-index: 10;
 	-webkit-transform: rotateY(0deg);
 	-moz-transform: rotateY(0deg);
+	background-color: #ffffff;
+	padding-left: 7px;
+	padding-right: 7px;
 }
 
-.content .feeds {
+.feeds {
 	float: none;
 	position: absolute;
 	top: 50px;
-	left: 7px;
 	z-index: 9;
 	width: inherit;
 	height: inherit;
@@ -237,26 +239,34 @@ div.searchBox{
 	-o-transition: all .4s ease-in-out;
 	-ms-transition: all .4s ease-in-out;
 	transition: all .4s ease-in-out;
+	background-color: #ffffff;
 }
 
 .content.flip .feeds {
 	z-index: 9;
 	-webkit-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
+	background-color: #ffffff;
+	padding-left: 7px;
+	padding-right: 7px;
 }
 
 .content{
-	width: 736px;
+	
+	width: 750px;
+    overflow-x: hidden;
     overflow-y: auto;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
 	left: 0;
-	padding-right: 7px;
-	padding-left: 7px;
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
+}
+
+.feedTitle {
+	margin-left: 7px;
 }
 
 .rightBar{
