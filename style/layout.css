@@ -178,7 +178,7 @@ div.searchBox{
 	margin-bottom: 0.3em;
 }
 
-.calendar-switch {
+.content .calendar-switch {
 	float: none;
 	left: 0;
 	z-index: 8;
