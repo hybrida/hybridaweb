@@ -55,9 +55,9 @@ class ArticleTree extends CWidget {
 
 	public function run() {
 		$currentArticles = $this->findRelevantArticles($this->articleTree, $this->currentId);
-		echo "<h4>";
+		/*echo "<h4>";
 		$this->printNode($currentArticles[0]);
-		echo "</h4>";
+		echo "</h4>";*/
 		$this->printArticleTree($currentArticles[1]);
 	}
 
@@ -66,25 +66,26 @@ class ArticleTree extends CWidget {
 			return array();
 		foreach ($subTree as $node) {
 			if ($node->id == $id) {
-				return array($node, array($node->children, array()));
+				return array(null, array($node->children, array()));
 			}
 			$found = $this->findRelevantArticles($node->children, $id);
 			if (!empty($found)) {
-				return array($node, array($node->children, $found));
+				return array(null, array($node->children, $found));
 			}
 		}
 	}
 
 	private function printArticleTree($relevantArticles) {
-		if ($relevantArticles instanceof Node) {
-			// Dette skjer bare med duplikater,
-			// stygg bugfix.
-			//$this->printNode($relevantArticles);
+		if (empty($relevantArticles))
 			return;
-		}
+		
 		echo "<ul>";
 		foreach ($relevantArticles[0] as $node) {
-			echo "<li>";
+                        if (!empty($node->children))
+                            echo "<li class = \"hasChildren\">";
+                        else
+                            echo "<li class = \"childless\">";
+                        
 			$this->printNode($node);
 			if ($this->containsChild($node, $relevantArticles[1])) {
 				foreach ($relevantArticles[1] as $children) {
@@ -102,14 +103,13 @@ class ArticleTree extends CWidget {
 			$title = $node->shorttitle;
 
 		if ($this->currentId != $node->id) {
-			echo CHtml::link($title, array(
+                    echo CHtml::link($title, array(
 				'/article/view',
 				'id' => $node->id,
 				'title' => $node->title,
 			));
-		} else {
-			echo $title;
-		}
+		} else
+                    echo $title;
 	}
 	
 	private function containsChild($parent, $possibleChildren) {

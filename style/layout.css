@@ -259,6 +259,15 @@ div.searchBox{
 	-moz-perspective: 600px;
 }
 
+li.hasChildren{
+    /*list-style: circle;*/
+    list-style-image: url('../images/icons/calender_forward.png');
+}
+
+li.childless{
+    list-style: disc;
+}
+
 .rightBar{
     width: 250px;
 	position: absolute;
