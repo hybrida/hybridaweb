@@ -40,7 +40,7 @@ class Image extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('oldName', 'required'),
-			array('albumId, userId', 'numerical', 'integerOnly'=>true),
+			array('userId', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>30),
 			array('oldName', 'length', 'max'=>40),
 			array('timestamp', 'safe'),

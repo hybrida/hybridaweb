@@ -1,6 +1,14 @@
 <? $this->layout = "//layouts/doubleColumn"; ?>
 <? $this->beginClip('sidebar'); ?>
-	<img src="/image/view/id//size/1" alt="" width="248px">
+	<? if ($user->image == null): ?>
+		<img src="/images/unknown_malefemale_profile.jpg" alt="" width="248px">
+	<? else: ?>
+		<? $url = $this->createUrl('image/view', array(
+			'id' => $user->imageId,
+			'size' => 'profile',
+		)) ?>
+		<img src="<?=$url?>" alt="" />
+	<? endif; ?>
 <?$this->endClip()?>
 	
 <? if (user()->checkAccess('updateProfile', array('username' => $user->username))): ?>

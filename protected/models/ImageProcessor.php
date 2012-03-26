@@ -3,7 +3,7 @@
 class ImageProcessor {
 
 	private static $sizes = array(
-		'profile' => array(350, 250),
+		'profile' => array(248, 400),
 		'frontpage' => array(700, 100),
 	);
 

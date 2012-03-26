@@ -14,6 +14,9 @@
 <?
 $form = $this->beginWidget('ActiveForm', array(
 	'id' => 'profile-edit-form',
+	'htmlOptions' => array(
+		'enctype'=>'multipart/form-data',
+	),
 	'enableClientValidation' => true,
 	'clientOptions' => array(
 		'validateOnSubmit' => true,
@@ -197,11 +200,11 @@ $form = $this->beginWidget('ActiveForm', array(
             <div class="fieldDefinition">Last opp bilde:</div>
             
             <div class="fieldInput">
-                <input type="file" name="user_image">
+                <?= $form->fileField($model, 'imageUpload') ?>
             </div>
             
             <div class="fieldExplanation">
-                Du må kanskje oppdatere siden for at det nye bildet skal vises.
+                
             </div>
         </div>
     </div>
