@@ -101,15 +101,13 @@ div.articleContent div.author a {
 
 .topBar {
     height: 33px;
-	position: relative;
 	z-index: 2;
-	right: 10px;
+	position: relative;
 }
 
 .topBar h1 {
     color: #000000;
 	font: 25px 'Gill';
-	margin-left: 3px;
 	margin-top: 0;
 }
 
