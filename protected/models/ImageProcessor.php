@@ -3,12 +3,16 @@
 class ImageProcessor {
 
 	private static $sizes = array(
-		'profile' => array(350,250),
-		'frontpage' => array(200, 200),
+		'profile' => array(350, 250),
+		'frontpage' => array(700, 100),
 	);
-	
+
+	public static function getSizes() {
+		return self::$sizes;
+	}
+
 	public static function resize(Image $image, $size) {
-		if (!array_key_exists($size, self::$sizes)) return;
+		if (!array_key_exists($size, self::$sizes))	return;
 		list($width, $height) = self::$sizes[$size];
 		$si = new SimpleImage($image->getFilePath());
 		$si->resize($width, $height);

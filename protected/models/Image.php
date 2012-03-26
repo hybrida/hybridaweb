@@ -103,11 +103,11 @@ class Image extends CActiveRecord
 		return Yii::getPathOfAlias("webroot.upc.images");
 	}
 	
-	public function getFilePath() {
+	public function getFilePath($size="original") {
 		if ($this->isNewRecord) {
 			throw new CException("Filen er ikke lagret i databasen, og har derfor ingen plassering");
 		}
-		return self::getImageDir() . "/original/" . $this->id . ".jpg";
+		return self::getImageDir() . "/$size/" . $this->id . ".jpg";
 	}
 	
 	public function hasSize($size) {
