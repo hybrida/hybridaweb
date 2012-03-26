@@ -9,11 +9,11 @@ $this->renderPartial('_header', array(
 
 <table>
     <tr>
-		<td>NTNU-Epost:         </td>
+		<td>NTNU e-post:         </td>
 		<td><?= CHtml::mailto($user->username . "@stud.ntnu.no") ?></td>
 	</tr>
     <tr>
-		<td>Alternativ-Epost:   </td>
+		<td>Alternativ e-post:   </td>
 		<td> <?= CHtml::mailto($user->altEmail) ?></td>
 	</tr>
     <tr>
