@@ -30,6 +30,7 @@
 class User extends CActiveRecord {
 	
 	public $cardNumber;
+	public $imageUpload;
 
 	/**
 	 * Returns the static model of the specified AR class.
@@ -78,6 +79,7 @@ class User extends CActiveRecord {
 		// class name for the relations automatically generated below.
 		return array(
 			'specialization' => array(self::BELONGS_TO, 'Specialization', 'specializationId'),
+			'image' => array(self::BELONGS_TO, 'Image', 'imageId'),
 		);
 	}
 

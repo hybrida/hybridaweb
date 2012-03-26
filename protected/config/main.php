@@ -116,6 +116,7 @@ return array(
 				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
+				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
 				'nyheter/<id:\d+>/<title>' => 'news/view',
 				'nyheter' => 'newsfeed/index',
 				'profile/<username:\w+>' => '/profile/info/',

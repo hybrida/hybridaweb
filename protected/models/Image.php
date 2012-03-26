@@ -13,6 +13,7 @@
  */
 class Image extends CActiveRecord
 {
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Image the static model class
@@ -39,7 +40,7 @@ class Image extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('oldName', 'required'),
-			array('albumId, userId', 'numerical', 'integerOnly'=>true),
+			array('userId', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>30),
 			array('oldName', 'length', 'max'=>40),
 			array('timestamp', 'safe'),
@@ -96,5 +97,21 @@ class Image extends CActiveRecord
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	public static function getImageDir() {
+		return Yii::getPathOfAlias("webroot.upc.images");
+	}
+	
+	public function getFilePath($size="original") {
+		if ($this->isNewRecord) {
+			throw new CException("Filen er ikke lagret i databasen, og har derfor ingen plassering");
+		}
+		return self::getImageDir() . "/$size/" . $this->id . ".jpg";
+	}
+	
+	public function hasSize($size) {
+		$filename = str_replace($this->getFilePath(), "original", $size);
+		return file_exists($filename);
 	}
 }

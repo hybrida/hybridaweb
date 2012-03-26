@@ -74,7 +74,16 @@ class ProfileController extends Controller {
 			$user->attributes = $_POST['User'];
 			if ($user->validate()) {
 				$user->purify();
-				$user->save();
+				if ($user->save()) {
+					$image = new Image();
+					$image->oldName = "tmp";
+					if ($image->save()) {
+						$image->oldName = CUploadedFile::getInstance($user, 'imageUpload');
+						$image->oldName->saveAs($image->getFilePath());
+						$user->imageId = $image->id;
+						$user->save();
+					}
+				}
 				$this->redirect(array('/profile/info', 'username' => $username));
 			} else {
 				print_r($user->errors);
