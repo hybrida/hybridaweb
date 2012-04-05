@@ -11,55 +11,50 @@
  * @property integer $userId
  * @property string $timestamp
  */
-class Image extends CActiveRecord
-{
-	
+class Image extends CActiveRecord {
+
 	public static $sizes = array(
 		'profile' => array('width' => 248),
 		'frontpage' => array('width' => 700, 'height' => 100),
 	);
-	
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Image the static model class
 	 */
-	public static function model($className=__CLASS__)
-	{
+	public static function model($className = __CLASS__) {
 		return parent::model($className);
 	}
 
 	/**
 	 * @return string the associated database table name
 	 */
-	public function tableName()
-	{
+	public function tableName() {
 		return 'image';
 	}
 
 	/**
 	 * @return array validation rules for model attributes.
 	 */
-	public function rules()
-	{
+	public function rules() {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
 			array('oldName', 'required'),
-			array('userId', 'numerical', 'integerOnly'=>true),
-			array('title', 'length', 'max'=>30),
-			array('oldName', 'length', 'max'=>40),
+			array('userId', 'numerical', 'integerOnly' => true),
+			array('title', 'length', 'max' => 30),
+			array('oldName', 'length', 'max' => 40),
 			array('timestamp', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, oldName, albumId, userId, timestamp', 'safe', 'on'=>'search'),
+			array('id, title, oldName, albumId, userId, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 
 	/**
 	 * @return array relational rules.
 	 */
-	public function relations()
-	{
+	public function relations() {
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
@@ -69,8 +64,7 @@ class Image extends CActiveRecord
 	/**
 	 * @return array customized attribute labels (name=>label)
 	 */
-	public function attributeLabels()
-	{
+	public function attributeLabels() {
 		return array(
 			'id' => 'ID',
 			'title' => 'Title',
@@ -85,55 +79,37 @@ class Image extends CActiveRecord
 	 * Retrieves a list of models based on the current search/filter conditions.
 	 * @return CActiveDataProvider the data provider that can return the models based on the search/filter conditions.
 	 */
-	public function search()
-	{
+	public function search() {
 		// Warning: Please modify the following code to remove attributes that
 		// should not be searched.
 
-		$criteria=new CDbCriteria;
+		$criteria = new CDbCriteria;
 
-		$criteria->compare('id',$this->id);
-		$criteria->compare('title',$this->title,true);
-		$criteria->compare('oldName',$this->oldName,true);
-		$criteria->compare('albumId',$this->albumId);
-		$criteria->compare('userId',$this->userId);
-		$criteria->compare('timestamp',$this->timestamp,true);
+		$criteria->compare('id', $this->id);
+		$criteria->compare('title', $this->title, true);
+		$criteria->compare('oldName', $this->oldName, true);
+		$criteria->compare('albumId', $this->albumId);
+		$criteria->compare('userId', $this->userId);
+		$criteria->compare('timestamp', $this->timestamp, true);
 
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
-		));
+					'criteria' => $criteria,
+				));
 	}
-	
-	public static function getImageDir() {
-		return Yii::getPathOfAlias("webroot.upc.images");
-	}
-	
-	public function getFilePath($size="original") {
-		if ($this->isNewRecord) {
-			throw new CException("Filen er ikke lagret i databasen, og har derfor ingen plassering");
+
+	public static function getResized($id, $size) {
+		$image = Image::model()->findByPk($id);
+		if ($image == null) {
+			throw new CException("The picture '$size/$id' does not exist");
+		} else if (!Image::sizeExists($size)) {
+			throw new CExcepiton("The size '$size' does not exists");
 		}
-		return self::getImageDir() . "/$size/" . $this->id . ".jpg";
-	}
-	
-	public function hasSize($size) {
-		$filename = str_replace($this->getFilePath(), "original", $size);
-		return file_exists($filename);
-	}
-	
-	public static function sizeExists($size) {
-		return array_key_exists($size, self::$sizes);
-	}
-	
-	public static function getSize($size) {
-		if (! self::sizeExists($size)){
-			throw new CException("Size '$size' does not exist");
+		if (!$image->hasSize($size)) {
+			$image->resize($size);
 		}
-		$ar = self::$sizes[$size];
-		$width = isset($ar['width']) ? $ar['width'] : null;
-		$height = isset($ar['height']) ? $ar['height'] : null;
-		return array($width, $height);
+		return $image;
 	}
-	
+
 	public static function tag($id, $size) {
 		list($width, $height) = self::getSize($size);
 		$options = array();
@@ -142,12 +118,33 @@ class Image extends CActiveRecord
 		$url = Yii::app()->createAbsoluteUrl("/image/view", array(
 			'id' => $id,
 			'size' => $size,
-		));
+				));
 		return CHtml::image($url, "", $options);
 	}
-	
+
+	public static function getImageDir() {
+		return Yii::getPathOfAlias("webroot.upc.images");
+	}
+
+	public function getFilePath($size = "original") {
+		if ($this->isNewRecord) {
+			throw new CException("Filen er ikke lagret i databasen, og har derfor ingen plassering");
+		}
+		return self::getImageDir() . "/$size/" . $this->id . ".jpg";
+	}
+
+	public function hasSize($size) {
+		$filename = str_replace($this->getFilePath(), "original", $size);
+		return file_exists($filename);
+	}
+
+	public static function sizeExists($size) {
+		return array_key_exists($size, self::$sizes);
+	}
+
 	public function resize($size) {
-		if (!self::sizeExists($size)) return;
+		if (!self::sizeExists($size))
+			return;
 		$si = new SimpleImage($this->getFilePath());
 		list($width, $height) = self::getSize($size);
 		if ($height && $width) {
@@ -159,21 +156,17 @@ class Image extends CActiveRecord
 		}
 		$si->save(Image::getImageDir() . "/" . $size . "/" . $this->id . ".jpg");
 	}
-	
-	public static function getResized($id, $size) {
-		$image = Image::model()->findByPk($id);
-		if ($image == null) {
-			throw new CException("The picture '$size/$id' does not exist");
-		} else if (!Image::sizeExists($size)) {
-			throw new CExcepiton("The size '$size' does not exists");
+
+	public static function getSize($size) {
+		if (!self::sizeExists($size)) {
+			throw new CException("Size '$size' does not exist");
 		}
-		if (! $image->hasSize($size)) {
-			$image->resize($size);
-		}
-		return $image;
+		$ar = self::$sizes[$size];
+		$width = isset($ar['width']) ? $ar['width'] : null;
+		$height = isset($ar['height']) ? $ar['height'] : null;
+		return array($width, $height);
 	}
-	
-	
+
 }
 
 /*
@@ -281,4 +274,5 @@ class SimpleImage {
 		imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
 		$this->image = $new_image;
 	}
+
 }
