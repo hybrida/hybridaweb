@@ -60,7 +60,7 @@ class ProfileController extends Controller {
 	public function actionEdit($username) {
 		$updateAccess = user()->checkAccess('updateProfile', array(
 			'username' => $username,
-		));
+				));
 		if (!$updateAccess) {
 			throw new CHttpException(403, "Du har ikke tilgang til å endre denne profilen");
 		}
@@ -79,9 +79,11 @@ class ProfileController extends Controller {
 					$image->oldName = "tmp";
 					if ($image->save()) {
 						$image->oldName = CUploadedFile::getInstance($user, 'imageUpload');
-						$image->oldName->saveAs($image->getFilePath());
-						$user->imageId = $image->id;
-						$user->save();
+						if ($image->oldName) {
+							$image->oldName->saveAs($image->getFilePath());
+							$user->imageId = $image->id;
+							$user->save();
+						}
 					}
 				}
 				$this->redirect(array('/profile/info', 'username' => $username));
@@ -123,4 +125,5 @@ class ProfileController extends Controller {
 		}
 		return $array;
 	}
+
 }
