@@ -134,6 +134,7 @@ return array(
 			'username' => 'www-data',
 			'password' => 'Q8JdU5MY7dDr5XEU',
 			'charset' => 'utf8',
+			'schemaCachingDuration' => 1000,
 		),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
