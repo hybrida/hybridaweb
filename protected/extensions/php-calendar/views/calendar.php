@@ -61,7 +61,7 @@
 		var prevMonthButtonUrl = "<?=$this->createUrl('/calendar/ajax', array(
 				'year' => $this->getPrevMonthsYear(),
 				'month' => $this->getPrevMonth()))?>";
-		var content = $(".calendar-all");
+		var content = $(".calendarWrap");
 				
 				
 
