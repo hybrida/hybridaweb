@@ -34,7 +34,7 @@
 				<? endif; ?>
 
 				<? foreach ($signup->getAttenders() as $user): ?>
-					<img src='/image/view/id//size/3 ' />
+					<?= Image::profileTag($user->imageId, 'small') ?>
 					<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
 					<br />
 				<? endforeach; ?>

@@ -1,10 +1,6 @@
 <? $this->layout = "//layouts/doubleColumn"; ?>
 <? $this->beginClip('sidebar'); ?>
-	<? if ($user->image == null): ?>
-		<img src="/images/unknown_malefemale_profile.jpg" alt="" width="248px">
-	<? else: ?>
-		<?= Image::tag($user->imageId, 'profile') ?>
-	<? endif; ?>
+	<?= Image::profileTag($user->imageId, 'profile') ?>
 <?$this->endClip()?>
 	
 <? if (user()->checkAccess('updateProfile', array('username' => $user->username))): ?>

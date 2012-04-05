@@ -21,7 +21,9 @@
 		<? $odd = !$odd ?>
 		<div class="<?= $odd ? "odd" : "like" ?>" >
 			<tr>
-				<td class="imageCell"><img src='<?= Yii::app()->baseURL ?>/image/view/id/<?= $user['imageId'] ?>/size/3 '></td>
+				<td class="imageCell">
+					<?= Image::profileTag($user['imageId'], 'small') ?>
+				</td>
 				<td class="nameCell"><?= CHtml::link($user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'], array('/profile/info', 'username' => $user['username'])) ?></a></td>
 
 				<td class="isMemberCell">
