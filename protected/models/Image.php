@@ -102,7 +102,7 @@ class Image extends CActiveRecord {
 		if ($image == null) {
 			throw new CException("The picture '$size/$id' does not exist");
 		} else if (!Image::sizeExists($size)) {
-			throw new CExcepiton("The size '$size' does not exists");
+			throw new CException("The size '$size' does not exists");
 		}
 		if (!$image->hasSize($size)) {
 			$image->resize($size);
