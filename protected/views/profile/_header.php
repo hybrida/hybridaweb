@@ -3,11 +3,7 @@
 	<? if ($user->image == null): ?>
 		<img src="/images/unknown_malefemale_profile.jpg" alt="" width="248px">
 	<? else: ?>
-		<? $url = $this->createUrl('image/view', array(
-			'id' => $user->imageId,
-			'size' => 'profile',
-		)) ?>
-		<img src="<?=$url?>" alt="" />
+		<?= Image::tag($user->imageId, 'profile') ?>
 	<? endif; ?>
 <?$this->endClip()?>
 	

@@ -26,17 +26,7 @@ class ImageController extends Controller {
 	}
 	
 	public function actionView($id, $size) {
-		if (!array_key_exists($size, ImageProcessor::getSizes())){
-			throw new CException("Imagesize \"$size\" does not exists");
-		}
-		
-		$image = Image::model()->findByPk($id);
-		if ($image == null) {
-			throw new CException("Picture $id.jpg does not exists");
-		}
-		if (!$image->hasSize($size)) {
-			ImageProcessor::resize($image, $size);
-		} 
+		$image = Image::getResized($id, $size);
 		$this->renderImage($image->getFilePath($size));
 	}
 

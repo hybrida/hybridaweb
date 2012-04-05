@@ -14,6 +14,11 @@
 class Image extends CActiveRecord
 {
 	
+	public static $sizes = array(
+		'profile' => array('width' => 248),
+		'frontpage' => array('width' => 700, 'height' => 100),
+	);
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Image the static model class
@@ -113,5 +118,167 @@ class Image extends CActiveRecord
 	public function hasSize($size) {
 		$filename = str_replace($this->getFilePath(), "original", $size);
 		return file_exists($filename);
+	}
+	
+	public static function sizeExists($size) {
+		return array_key_exists($size, self::$sizes);
+	}
+	
+	public static function getSize($size) {
+		if (! self::sizeExists($size)){
+			throw new CException("Size '$size' does not exist");
+		}
+		$ar = self::$sizes[$size];
+		$width = isset($ar['width']) ? $ar['width'] : null;
+		$height = isset($ar['height']) ? $ar['height'] : null;
+		return array($width, $height);
+	}
+	
+	public static function tag($id, $size) {
+		list($width, $height) = self::getSize($size);
+		$options = array();
+		if ($width) $options['width'] = $width;
+		if ($height) $options['height'] = $height;
+		$url = Yii::app()->createAbsoluteUrl("/image/view", array(
+			'id' => $id,
+			'size' => $size,
+		));
+		return CHtml::image($url, "", $options);
+	}
+	
+	public function resize($size) {
+		if (!self::sizeExists($size)) return;
+		$si = new SimpleImage($this->getFilePath());
+		list($width, $height) = self::getSize($size);
+		if ($height && $width) {
+			$si->resize($width, $height);
+		} else if ($height) {
+			$si->resizeToHeight($height);
+		} else {
+			$si->resizeToWidth($width);
+		}
+		$si->save(Image::getImageDir() . "/" . $size . "/" . $this->id . ".jpg");
+	}
+	
+	public static function getResized($id, $size) {
+		$image = Image::model()->findByPk($id);
+		if ($image == null) {
+			throw new CException("The picture '$size/$id' does not exist");
+		} else if (!Image::sizeExists($size)) {
+			throw new CExcepiton("The size '$size' does not exists");
+		}
+		if (! $image->hasSize($size)) {
+			$image->resize($size);
+		}
+		return $image;
+	}
+	
+	
+}
+
+/*
+ * File: SimpleImage.php
+ * Author: Simon Jarvis
+ * Copyright: 2006 Simon Jarvis
+ * Date: 08/11/06
+ * Link: http://www.white-hat-web-design.co.uk/articles/php-image-resizing.php
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details:
+ * http://www.gnu.org/licenses/gpl.html
+ *
+ */
+
+class SimpleImage {
+
+	var $image;
+	var $image_type;
+
+	function __construct($filename) {
+
+		$image_info = getimagesize($filename);
+		$this->image_type = $image_info[2];
+		if ($this->image_type == IMAGETYPE_JPEG) {
+
+			$this->image = imagecreatefromjpeg($filename);
+		} elseif ($this->image_type == IMAGETYPE_GIF) {
+
+			$this->image = imagecreatefromgif($filename);
+		} elseif ($this->image_type == IMAGETYPE_PNG) {
+
+			$this->image = imagecreatefrompng($filename);
+		}
+	}
+
+	function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 75, $permissions = null) {
+
+		if ($image_type == IMAGETYPE_JPEG) {
+			imagejpeg($this->image, $filename, $compression);
+		} elseif ($image_type == IMAGETYPE_GIF) {
+
+			imagegif($this->image, $filename);
+		} elseif ($image_type == IMAGETYPE_PNG) {
+
+			imagepng($this->image, $filename);
+		}
+		if ($permissions != null) {
+
+			chmod($filename, $permissions);
+		}
+	}
+
+	function output($image_type = IMAGETYPE_JPEG) {
+
+		if ($image_type == IMAGETYPE_JPEG) {
+			imagejpeg($this->image);
+		} elseif ($image_type == IMAGETYPE_GIF) {
+
+			imagegif($this->image);
+		} elseif ($image_type == IMAGETYPE_PNG) {
+
+			imagepng($this->image);
+		}
+	}
+
+	function getWidth() {
+
+		return imagesx($this->image);
+	}
+
+	function getHeight() {
+
+		return imagesy($this->image);
+	}
+
+	function resizeToHeight($height) {
+
+		$ratio = $height / $this->getHeight();
+		$width = $this->getWidth() * $ratio;
+		$this->resize($width, $height);
+	}
+
+	function resizeToWidth($width) {
+		$ratio = $width / $this->getWidth();
+		$height = $this->getheight() * $ratio;
+		$this->resize($width, $height);
+	}
+
+	function scale($scale) {
+		$width = $this->getWidth() * $scale / 100;
+		$height = $this->getheight() * $scale / 100;
+		$this->resize($width, $height);
+	}
+
+	function resize($width, $height) {
+		$new_image = imagecreatetruecolor($width, $height);
+		imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
+		$this->image = $new_image;
 	}
 }
