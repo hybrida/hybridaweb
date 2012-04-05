@@ -15,6 +15,7 @@ class Image extends CActiveRecord {
 
 	public static $sizes = array(
 		'profile' => array('width' => 248),
+		'small' => array('width' => 40, 'height' => 40),
 		'frontpage' => array('width' => 700, 'height' => 100),
 	);
 
@@ -120,6 +121,22 @@ class Image extends CActiveRecord {
 			'size' => $size,
 				));
 		return CHtml::image($url, "", $options);
+	}
+	
+	public static function profileTag($id, $size) {
+		if ($id != null) {
+			return self::tag($id, $size);
+		}
+		$url = "";
+		switch ($size) {
+			case "small":
+				$url = "unknown_profile_small";
+				break;
+			case "profile":
+				$url = "unknown_profile";
+				break;
+		}
+		return CHtml::image("/images/$url.jpg");
 	}
 
 	public static function getImageDir() {
