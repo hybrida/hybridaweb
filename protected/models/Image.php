@@ -151,7 +151,7 @@ class Image extends CActiveRecord {
 	}
 
 	public function hasSize($size) {
-		$filename = str_replace($this->getFilePath(), "original", $size);
+		$filename = $this->getFilePath($size);
 		return file_exists($filename);
 	}
 
