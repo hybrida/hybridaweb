@@ -35,9 +35,6 @@ return array(
 		'application.exceptions.*',
 	),
 	'controllerMap' => array(
-		'calendar' => array(
-			'class' => 'ext.php-calendar.CalendarController'
-		),
 	),
 	'modules' => array(
 		'gii' => array(
@@ -50,6 +47,7 @@ return array(
 		'dev',
 		'bk',
 		'bpc',
+		'calendar',
 		'comment',
 		'search',
 		'srbac' => array(
@@ -122,6 +120,7 @@ return array(
 				'profil' => '/profile/',
 				'profil/<username:\w+>' => '/profile/info/',
 				'profil/<username:\w+>/<action:\w+>' => 'profile/<action>/',
+				'kalender' => 'calendar/default/index',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',

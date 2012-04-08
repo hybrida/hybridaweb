@@ -12,15 +12,11 @@ class CalendarController extends Controller {
 		 'Søndag', 'Mandag', 'Tirsdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lørdag'
 	);
 
-	public function init() {
-		$this->publishAssets();
-	}
-
-	private function publishAssets() {
+	private function publishAssets($name) {
 		$url = $this->getAssetsDir() . "css/";
 		$cs = Yii::app()->getClientScript();
 		$am = Yii::app()->getAssetManager();
-		$cs->registerCssFile($am->publish($url . 'style.css'));
+		$cs->registerCssFile($am->publish($url . "$name.css"));
 	}
 
 	private function getAssetsDir() {
@@ -103,6 +99,7 @@ class CalendarController extends Controller {
 	}
 
 	public function actionIndex($year = null, $month = null) {
+		$this->publishAssets("style");
 		$this->setCalendar($year, $month);
 		$this->render('ext.php-calendar.views.calendar', array(
 			'calendar' => $this->calendar,
@@ -117,8 +114,16 @@ class CalendarController extends Controller {
 	}
 
 	public function actionWidget($year = null, $month = null) {
+		$this->publishAssets("widget");
 		$this->setCalendar($year, $month);
 		$this->render('ext.php-calendar.views.widget', array(
+			'calendar' => $this->calendar,
+		));
+	}
+		public function actionWidgetAjaxi($year = null, $month = null) {
+		$this->publishAssets("widget");
+		$this->setCalendar($year, $month);
+		$this->renderPartial('ext.php-calendar.views.widget', array(
 			'calendar' => $this->calendar,
 		));
 	}
