@@ -1,4 +1,5 @@
 /* Calendar Styles */
+.calendar {font-size: 1em}
 .calendar {width:100%; border-collapse:collapse;}
 .calendar tr.navigation th {padding-bottom:20px;}
 .calendar th.prev-month {text-align:left;}
@@ -22,5 +23,5 @@
 .calendar.small tr.navigation th a {font-size:1.5em;}
 .calendar.small th.current-month {font-size:1em;}
 .calendar.small tr.weekdays th {text-align:center;}
-.calendar.small td {width:auto; height:auto; padding:4px 8px; text-align:center; border:0; background:#EEE;}
+.calendar.small td {width:auto; height:auto; padding:4px 7px; text-align:center; border:0; background:#EEE;}
 .calendar.small span.date {display:inline; padding:0; background:none;}

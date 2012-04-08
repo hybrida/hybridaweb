@@ -8,7 +8,8 @@ $this->beginClip('sidebar');
 		'event' => $event,
 		'isAttending' => $isAttending,
 	));
-	$this->widget('application.components.widgets.ActivitiesCalendar');
+	?><div class="barTitle">Kalender</div><?
+	$this->widget('calendar.widgets.CalendarWidget');
 	$this->widget('application.components.widgets.ActivitiesFeed');
 $this->endClip()
 ?>
