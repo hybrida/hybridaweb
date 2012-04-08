@@ -1,7 +1,7 @@
 <? 
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar');
-	$this->widget('application.components.widgets.ActivitiesCalendar');
+	$this->widget('calendar.widgets.CalendarWidget');
 	$this->widget('application.components.widgets.ActivitiesFeed');
 $this->endClip()
 ?>
