@@ -81,7 +81,6 @@ class AccessField extends CWidget {
 		if (!empty($this->access)) {
 			if (is_array($this->access[0])) {
 				$count = count($this->access);
-				print($count);
 				return count($this->access);
 			} else {
 				return 1;
