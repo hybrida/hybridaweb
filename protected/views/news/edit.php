@@ -30,75 +30,10 @@
 			eventButton.click(updateEvent);
 			signupButton.click(updateSignup);
 			
-			//updateSignup();
-			//updateEvent();
+			updateSignup();
+			updateEvent();
 		});
 	</script>
-<style>
-
-	div.g-form {
-		margin:0 auto;
-		position:relative;
-	}
-
-
-	div.g-form .row {
-		width:100%;
-		display: block;
-		
-		/*border-top:1px solid #ccc;
-		border-bottom:1px solid #ccc;*/
-		padding:10px 0 10px 0;
-	}
-
-	div.g-form .row label {
-		display: block;
-		
-		font-size:1em;
-		font-weight: bold;
-		float:left;
-		width:15%;
-		text-align:right;
-		padding:5px 20px 0 0;
-	}
-	
-	div.g-form .errorMessage {
-		color: #F00;
-	}
-
-	
-	div.g-form .errorMessage:before {
-		content: " ";
-		background-image: url("http://icons.iconarchive.com/icons/kyo-tux/phuzion/16/Sign-Error-icon.png");
-		background-repeat: no-repeat;
-		width: 20px;
-		height: 16px;
-		display:block;
-		float:left;
-	}
-
-	div.g-form .input_text {
-		padding:5px 5px;
-		width:250px;
-		font-size: 0.9em;
-	}
-
-	div.g-form .message{
-		padding:7px 7px;
-		width:350px;
-		overflow:hidden;
-		height:150px;
-	}
-	
-	div.g-form .row .rowField {
-		width: 85%;
-		float:left;
-		display:block;
-		position:relative;
-	}
-
-
-</style>
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
 		'id' => 'news_edit-form',
@@ -147,9 +82,12 @@
 			
 		<div class="row">
 			<label>Tilgang til nyhet</label>
-			<?= $form->accessField($model, "news[access]"); ?> 
+			<div style="width: 85%; maring-left:150px">
+				<?= $form->accessField($model, "news[access]"); ?> 
+			</div>
 			<?= $form->error($model, 'news[acces]'); ?>	
 		</div>
+
 			
 <br clear="all" />
 		<div class="formHeader">
@@ -180,7 +118,7 @@
 				
 		<div class="row">
 			<?= $form->labelEx($model, 'event[imageId]'); ?>
-			<?= $form->textField($model, 'event[imageId]'); ?>
+			<?= $form->textField($model, 'event[imageId]', array('class' => 'input_text')); ?>
 			<?= $form->error($model, 'event[imageId]'); ?>				
 		</div>		
 		<div class="formHeader">
@@ -193,19 +131,19 @@
 	<div class="signup">
 		<div class="row">
 			<?= $form->labelEx($model, 'signup[spots]'); ?>
-			<?= $form->textField($model, 'signup[spots]'); ?>
+			<?= $form->textField($model, 'signup[spots]', array('class' => 'input_text')); ?>
 			<?= $form->error($model, 'signup[spots]'); ?>				
 		</div>
 		
 		<div class="row">
 			<?= $form->labelEx($model, 'signup[open]'); ?>
-			<?= $form->dateField($model, 'signup[open]'); ?>
+			<?= $form->dateField($model, 'signup[open]', array('class' => 'input_text')); ?>
 			<?= $form->error($model, 'signup[open]'); ?>				
 		</div>
 		
 		<div class="row">
 			<?= $form->labelEx($model, 'signup[close]'); ?>
-			<?= $form->dateField($model, 'signup[close]'); ?>
+			<?= $form->dateField($model, 'signup[close]', array('class' => 'input_text')); ?>
 			<?= $form->error($model, 'signup[close]'); ?>				
 		</div>
 		
@@ -220,7 +158,7 @@
 		<br>
 		<div class="row">
 			<label>Tillgang til påmelding</label>
-			<div class="">
+			<div style="width: 85%; text-align: right;">
 				<?= $form->accessField($model, 'signup[access]') ?>
 			</div>
 		</div>

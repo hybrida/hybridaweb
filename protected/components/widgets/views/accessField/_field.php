@@ -1,5 +1,4 @@
 <div class="accessSub">
-	<br clear="all">
 	<?= CHtml::button('X',array(
 		'class' => 'button buttonRightSide',
 		'onclick' => "js:$(this).closest('div').remove()",
@@ -18,3 +17,4 @@
 		</div>
 	<? endforeach ?>
 </div>
+<br clear="all">
