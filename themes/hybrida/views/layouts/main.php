@@ -6,7 +6,6 @@
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         
 		<?= $this->clips['head-facebook'] ?>
-        <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/e.js"></script>
         <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/animations.js"></script>
 
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/style.css" />
