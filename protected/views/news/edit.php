@@ -1,6 +1,6 @@
 <? $this->pageTitle = "Rediger nyhet" ?>
 
-<div class="form">
+<div class="g-form">
 	<script type="text/javascript">
 		$(document).ready(function(){
 			var eventButton = $("#NewsEventForm_hasEvent")
@@ -30,11 +30,75 @@
 			eventButton.click(updateEvent);
 			signupButton.click(updateSignup);
 			
-			updateSignup();
-			updateEvent();
+			//updateSignup();
+			//updateEvent();
 		});
 	</script>
+<style>
 
+	div.g-form {
+		margin:0 auto;
+		position:relative;
+	}
+
+
+	div.g-form .row {
+		width:100%;
+		display: block;
+		
+		/*border-top:1px solid #ccc;
+		border-bottom:1px solid #ccc;*/
+		padding:10px 0 10px 0;
+	}
+
+	div.g-form .row label {
+		display: block;
+		
+		font-size:1em;
+		font-weight: bold;
+		float:left;
+		width:15%;
+		text-align:right;
+		padding:5px 20px 0 0;
+	}
+	
+	div.g-form .errorMessage {
+		color: #F00;
+	}
+
+	
+	div.g-form .errorMessage:before {
+		content: " ";
+		background-image: url("http://icons.iconarchive.com/icons/kyo-tux/phuzion/16/Sign-Error-icon.png");
+		background-repeat: no-repeat;
+		width: 20px;
+		height: 16px;
+		display:block;
+		float:left;
+	}
+
+	div.g-form .input_text {
+		padding:5px 5px;
+		width:250px;
+		font-size: 0.9em;
+	}
+
+	div.g-form .message{
+		padding:7px 7px;
+		width:350px;
+		overflow:hidden;
+		height:150px;
+	}
+	
+	div.g-form .row .rowField {
+		width: 85%;
+		float:left;
+		display:block;
+		position:relative;
+	}
+
+
+</style>
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
 		'id' => 'news_edit-form',
@@ -48,156 +112,124 @@
 
 	<!--<p class="note">Fields with <span class="required">*</span> are required.</p>-->
 
-	<?php echo $form->errorSummary($model); ?>
+	<?= $form->errorSummary($model); ?>
+	<?= $form->hiddenField($model, 'news[id]') ?> 
+	<?= $form->hiddenField($model, 'event[id]') ?> 
+	<?= $form->hiddenField($model, 'signup[id]') ?> 
 
-	<?= $form->hiddenField($model, 'news[id]') ?>
-
-	<?= $form->hiddenField($model, 'event[id]') ?>
-
-	<?= $form->hiddenField($model, 'signup[id]') ?>
-
-	<div class="news">
 		<div class="formHeader">
-			<h1>Nyhet</h1>
+			<h1 class="formHeader">Nyhet</h1>
+		</div>
+		
+		<div class="row">
+			<?= $form->labelEx($model, 'news[title]'); ?> 
+			<?= $form->textField($model, 'news[title]', array('class' => 'input_text')); ?> 
+			<?= $form->error($model, 'news[title]'); ?> 
+		</div>
+		
+
+		<div class="row">
+			<?= $form->labelEx($model, 'news[ingress]'); ?> 
+			<?= $form->textArea($model, "news[ingress]",array(
+				'cols' => '50',
+				'rows' => '8',
+				'class'=> 'message',
+			)); ?> 
+			<?= $form->error($model, 'news[ingress]'); ?> 
 		</div>
 
-		<div class="formElement">
-			<div class="formLabel">
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[title]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[ingress]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'news[content]'); ?></div>
-				<div class="formLabelRow"><?= $form->labelEx($model, 'news[access]') ?> </div>
-			</div>
-
-			<div class="formBox">
-				<div class="formBoxRow">
-					<?php echo $form->textField($model, 'news[title]'); ?>
-					<?php echo $form->error($model, 'news[title]'); ?>				
-				</div>
-
-				<div class="formBoxRow">
-					<?php echo $form->textArea($model, "news[ingress]",array(
-						'cols' => '50',
-						'rows' => '8',
-						'xheditor' => false,
-					)); ?>
-					<?php echo $form->error($model, 'news[ingress]'); ?>				
-				</div>
 				
-				<div class="formBoxRow">
-					<?php echo $form->richTextArea($model, "news[content]"); ?>
-					<?php echo $form->error($model, 'news[content]'); ?>				
-				</div>
-				<div class="formBoxRow">
-					<?php echo $form->accessField($model, "news[access]"); ?>
-					<?php echo $form->error($model, 'news[acces]'); ?>				
-				</div>
-			</div>
-
-			<div class="rowCheck">
-				<?php echo $form->labelEx($model, 'hasEvent'); ?>
-				<?php echo $form->checkBox($model, 'hasEvent'); ?>
-				<?php echo $form->error($model, 'hasEvent'); ?>
-			</div>
+		<div class="row">
+			<?= $form->labelEx($model, 'news[content]'); ?> 
+			<?= $form->richTextArea($model, "news[content]",array('class'=>'message')); ?>
+			<?= $form->error($model, 'news[content]'); ?> 
 		</div>
-	</div>
-
-
-
-	<div class="event">
+			
+		<div class="row">
+			<label>Tilgang til nyhet</label>
+			<?= $form->accessField($model, "news[access]"); ?> 
+			<?= $form->error($model, 'news[acces]'); ?>	
+		</div>
+			
+<br clear="all" />
 		<div class="formHeader">
-			<h1>Hendelse</h1>
+			<h1>
+				<?= $form->checkBox($model, 'hasEvent'); ?> 
+				Hendelse
+			</h1>
 		</div>
+		<div class="event">
 
-		<div class="formElement">
-			<div class="formLabel">
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[start]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[end]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[location]'); ?></div>
-<!--				<div class="formLabelRow"><?php echo $form->labelEx($model, 'event[imageId]'); ?></div>-->
-			</div>
+		<div class="row">
+			<?= $form->labelEx($model, 'event[start]'); ?>
+			<?= $form->dateField($model, 'event[start]', array('class' => 'input_text')); ?> 
+			<?= $form->error($model, 'event[start]'); ?> 
+		</div>
+		
+		<div class="row">
+			<?= $form->labelEx($model, 'event[end]'); ?>
+			<?= $form->dateField($model, 'event[end]', array('class' => 'input_text')); ?>
+			<?= $form->error($model, 'event[end]'); ?>				
+		</div>			
 
-			<div class="formBox">
-				<div class="formBoxRow">
-					<?php echo $form->dateField($model, 'event[start]'); ?>
-					<?php echo $form->error($model, 'event[start]'); ?>				
-				</div>
-
-				<div class="formBoxRow">
-					<?php echo $form->dateField($model, 'event[end]'); ?>
-					<?php echo $form->error($model, 'event[end]'); ?>				
-				</div>
-
-				<div class="formBoxRow">
-					<?php echo $form->textField($model, 'event[location]'); ?>
-					<?php echo $form->error($model, 'event[location]'); ?>				
-				</div>
-
-<!--				<div class="formBoxRow">
-					<?php echo $form->textField($model, 'event[imageId]'); ?>
-					<?php echo $form->error($model, 'event[imageId]'); ?>				
-				</div>-->
-			</div>
-
-			<div class="rowCheck">
-				<?php echo $form->labelEx($model, 'hasSignup'); ?>
-				<?php echo $form->checkBox($model, 'hasSignup'); ?>
-				<?php echo $form->error($model, 'hasSignup'); ?>
-			</div>
+		<div class="row">
+			<label>Sted</label>
+			<?= $form->textField($model, 'event[location]', array('class' => 'input_text')); ?>
+			<?= $form->error($model, 'event[location]'); ?>				
+		</div>
+				
+		<div class="row">
+			<?= $form->labelEx($model, 'event[imageId]'); ?>
+			<?= $form->textField($model, 'event[imageId]'); ?>
+			<?= $form->error($model, 'event[imageId]'); ?>				
+		</div>		
+		<div class="formHeader">
+			<h1>
+				<?= $form->checkBox($model, 'hasSignup'); ?>
+				Påmelding
+			</h1>
 		</div>
 	</div>
 	<div class="signup">
-		<div class="formHeader">
-			<h1>Påmelding</h1>
+		<div class="row">
+			<?= $form->labelEx($model, 'signup[spots]'); ?>
+			<?= $form->textField($model, 'signup[spots]'); ?>
+			<?= $form->error($model, 'signup[spots]'); ?>				
 		</div>
-
-		<div class="formElement">
-			<div class="formLabel">
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'signup[spots]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'signup[open]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'signup[close]'); ?></div>
-				<div class="formLabelRow"><?php echo $form->labelEx($model, 'signup[signoff]'); ?></div>
-			</div>
-
-			<div class="formBox">
-				<div class="formBoxRow">
-					<?php echo $form->textField($model, 'signup[spots]'); ?>
-					<?php echo $form->error($model, 'signup[spots]'); ?>				
-				</div>
-
-				<div class="formBoxRow">
-					<?php echo $form->dateField($model, 'signup[open]'); ?>
-					<?php echo $form->error($model, 'signup[open]'); ?>				
-				</div>
-
-				<div class="formBoxRow">
-					<?php echo $form->dateField($model, 'signup[close]'); ?>
-					<?php echo $form->error($model, 'signup[close]'); ?>				
-				</div>
-
-				<div class="formBoxRow">
-					<?php echo $form->checkBox($model, 'signup[signoff]',array(
-						'value'=> 'true',
-						'uncheckValue' => 'false',
-					)); ?>
-					<?php echo $form->error($model, 'signup[signoff]'); ?>				
-				</div>
-				
-				<div class="formBoxRow">
-					<?= $form->accessField($model, 'signup[access]') ?>
-				</div>
+		
+		<div class="row">
+			<?= $form->labelEx($model, 'signup[open]'); ?>
+			<?= $form->dateField($model, 'signup[open]'); ?>
+			<?= $form->error($model, 'signup[open]'); ?>				
+		</div>
+		
+		<div class="row">
+			<?= $form->labelEx($model, 'signup[close]'); ?>
+			<?= $form->dateField($model, 'signup[close]'); ?>
+			<?= $form->error($model, 'signup[close]'); ?>				
+		</div>
+		
+		<div class="row">
+			<label>Tillat avmelding</label>
+			<?= $form->checkBox($model, 'signup[signoff]',array(
+				'value'=> 'true',
+				'uncheckValue' => 'false',
+			)); ?>
+			<?= $form->error($model, 'signup[signoff]'); ?>				
+		</div>
+		<br>
+		<div class="row">
+			<label>Tillgang til påmelding</label>
+			<div class="">
+				<?= $form->accessField($model, 'signup[access]') ?>
 			</div>
 		</div>
 	</div>
 
-	<div class="formElement">
-		<div class="formSubmit">
-			<?php echo CHtml::submitButton('Lagre', array(
+			<?= CHtml::submitButton('Lagre', array(
 				'class'=> 'button'
 			)); ?>
-		</div>
-	</div>
 
-	<!--<?php $this->endWidget(); ?>-->
+	<?php $this->endWidget(); ?>
 
 </div>
