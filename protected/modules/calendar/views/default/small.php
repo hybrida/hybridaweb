@@ -35,10 +35,14 @@
                         $title   = $data['title'];
                         $output  = $data['output'];
                     }
+					if (! $current) {
+						$classes[] = "no-date";
+					}
                     ?>
                     <td class="day <?php echo implode(' ', $classes) ?>">
                         <span class="date" title="<?php echo implode(' / ', $title) ?>">
-                            <?php if ( ! empty($output)): ?>
+							<? if (!$current): ?>								
+                            <? elseif ( ! empty($output)): ?>
                                 <a href="<?= $output[0] ?>" class="view-events"><?php echo $number ?></a>
                             <?php else: ?>
                                 <?php echo $number ?>
