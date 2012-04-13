@@ -38,6 +38,7 @@ class ActiveForm extends CActiveForm {
 				'stepMinute' => 5,
 				'stepHour' => 1,
 			),
+			'htmlOptions' => $htmlOptions,
 		));
 	}
 
