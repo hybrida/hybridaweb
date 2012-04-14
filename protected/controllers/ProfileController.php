@@ -74,22 +74,12 @@ class ProfileController extends Controller {
 			$user->attributes = $_POST['User'];
 			if ($user->validate()) {
 				$user->purify();
-				if ($user->save()) {
-					$image = new Image();
-					$image->oldName = "tmp";
-					if ($image->save()) {
-						$image->oldName = CUploadedFile::getInstance($user, 'imageUpload');
-						if ($image->oldName) {
-							$image->oldName->saveAs($image->getFilePath());
-							$image->title = $image->oldName;
-							$image->timestamp = new CDbExpression("NOW()");
-							$image->userId = $user->id;
-							$image->save();
-							$user->imageId = $image->id;
-							$user->save();
-						}
-					}
-				}
+				$user->save();
+				try {
+					$image = Image::uploadAndSave(CUploadedFile::getInstance($user, 'imageUpload'), $user->id);
+					$user->imageId = $image->id;
+					$user->save();
+				} catch (NoFileIsUploadedException $ex) {}
 				$this->redirect(array('/profile/info', 'username' => $username));
 			} else {
 				print_r($user->errors);

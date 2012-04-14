@@ -122,7 +122,7 @@ class Image extends CActiveRecord {
 				));
 		return CHtml::image($url, "", $options);
 	}
-	
+
 	public static function profileTag($id, $size) {
 		if ($id != null) {
 			return self::tag($id, $size);
@@ -184,6 +184,20 @@ class Image extends CActiveRecord {
 		return array($width, $height);
 	}
 
+	public static function uploadAndSave($uploadedFile, $userId) {
+		$image = new Image();
+		$image->oldName = $uploadedFile;
+		if (!$image->oldName) {
+			throw new NoFileIsUploadedException();
+		}
+		$image->save();
+		$image->oldName->saveAs($image->getFilePath());
+		$image->title = $image->oldName;
+		$image->timestamp = new CDbExpression("NOW()");
+		$image->userId = $userId;
+		$image->save();
+		return $image;
+	}
 }
 
 /*
