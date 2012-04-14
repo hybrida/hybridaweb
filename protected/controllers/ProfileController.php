@@ -81,6 +81,10 @@ class ProfileController extends Controller {
 						$image->oldName = CUploadedFile::getInstance($user, 'imageUpload');
 						if ($image->oldName) {
 							$image->oldName->saveAs($image->getFilePath());
+							$image->title = $image->oldName;
+							$image->timestamp = new CDbExpression("NOW()");
+							$image->userId = $user->id;
+							$image->save();
 							$user->imageId = $image->id;
 							$user->save();
 						}

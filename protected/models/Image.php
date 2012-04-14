@@ -43,8 +43,8 @@ class Image extends CActiveRecord {
 		return array(
 			array('oldName', 'required'),
 			array('userId', 'numerical', 'integerOnly' => true),
-			array('title', 'length', 'max' => 30),
-			array('oldName', 'length', 'max' => 40),
+			array('title', 'length', 'max' => 255),
+			array('oldName', 'length', 'max' => 255),
 			array('timestamp', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
