@@ -43,7 +43,7 @@ return array(
 			'pageSize' => 10, // default : 15
 			'superUser' => 'admin', //default: Authorizer
 			'css' => 'srbac.css', //default: srbac.css
-			'layout' =>'//layouts/singleColumn',
+			'layout' => '//layouts/singleColumn',
 			'notAuthorizedView' => 'srbac.views.authitem.unauthorized', // default:
 			//srbac.views.authitem.unauthorized, must be an existing alias
 			'alwaysAllowed' => array(),
@@ -86,7 +86,7 @@ return array(
 		'user' => array(
 			// enable cookie-based authentication
 			'allowAutoLogin' => true,
-			'loginUrl' => array("site/login", 'page' => $_SERVER['REQUEST_URI']),
+			'loginUrl' => array("/site/login", 'page' => $_SERVER['REQUEST_URI']),
 		),
 		'urlManager' => array(
 			'urlFormat' => 'path',
@@ -147,6 +147,6 @@ return array(
 		),
 	),
 	'params' => array(
-		'baseUrl' => "dev.hybrida.no",
+		'logoutUrl' => array("/site/logout"),
 	),
 );

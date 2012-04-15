@@ -1,4 +1,4 @@
-<? echo CHtml::link("Logg ut", array('site/logout'));
+<? echo CHtml::link("Logg ut", param('logoutUrl'));
 /*
 
 <a href='<?= Yii::app()->baseURL ?>/site/logout'>
