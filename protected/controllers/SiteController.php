@@ -21,7 +21,7 @@ class SiteController extends Controller {
 		}
 	}
 
-	public function actionInnsidaLogin($data, $sign, $target) {
+	public function actionInnsidaLogin($data, $sign, $target, $returnUrl) {
 		ob_clean();
 		
 		$SSOclient = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR'], $target);
@@ -29,21 +29,21 @@ class SiteController extends Controller {
 
 		if ($identity->authenticate()) {
 			user()->login($identity);
-			$this->redirect(user()->returnUrl);
+			$this->redirect($returnUrl);
 		} else {
 			throw new CHttpException("Logg inn ikke vellykket"
 					.$identity->errorMessage);
 		}
 	}
 
-	public function actionLogin() {
-		$redirect = $this->getLoginRedirect();
+	public function actionLogin($page) {
+		$redirect = $this->getLoginRedirect($page);
 		$this->redirect($redirect);
 		return;
 	}
 	
-	public function getLoginRedirect() {
-		$returnUrl = $_SERVER['SERVER_NAME'] . "/site/innsidalogin";
+	public function getLoginRedirect($page) {
+		$returnUrl = $_SERVER['SERVER_NAME'] . "/site/innsidalogin,$page";
 
 		//$returnUrl = ''; // Fix. Sjekker om dette fjerner redirecthelvete
 		

@@ -1,20 +1,5 @@
 <?php
 
-function endRequest($event) {
-	$app = Yii::app();
-	$ajaxRegList = array(
-		'/get/', '/post$/', '/image/'
-	);
-	$isAjaxRequest = Yii::app()->request->isAjaxRequest;
-	foreach ($ajaxRegList as $bad) {
-		$isAjaxRequest |= preg_match($bad, $app->request->getUrl());
-	}
-	$notLoginUrl = $app->createUrl($app->user->loginUrl[0]) != $app->request->getUrl();
-	if ($notLoginUrl && !$isAjaxRequest) {
-		$app->user->setReturnUrl($app->request->getUrl());
-	}
-}
-
 function beginRequest() {
 	$cs = Yii::app()->getClientScript();
 	$cs->registerCoreScript('jquery');
@@ -22,7 +7,6 @@ function beginRequest() {
 }
 
 return array(
-	'onEndRequest' => 'endRequest',
 	'onBeginRequest' => 'beginRequest',
 	'theme' => 'hybrida',
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
@@ -102,7 +86,7 @@ return array(
 		'user' => array(
 			// enable cookie-based authentication
 			'allowAutoLogin' => true,
-			'loginUrl' => array("site/login"),
+			'loginUrl' => array("site/login", 'page' => $_SERVER['REQUEST_URI']),
 		),
 		'urlManager' => array(
 			'urlFormat' => 'path',
