@@ -165,5 +165,55 @@ class Article extends CActiveRecord {
 			self::addNodeToList($child, $text);
 		}
 	}
+	
+	public function getCrumbsList() {
+		$list = ArticleTree::getArticleTree();
+		
+		$que = array();
+		foreach ($list as $node) {
+			$que[] = new Queue(0, $node);
+		}
+		$crumbList = array();
+		while(!empty($que)) {
+			$q = array_pop($que);
+			$this->updateCrumbList($crumbList, $q);
+			if ($q->node->id == $this->id) {
+				return $this->createCrumbs($crumbList);
+			}
+			foreach ($q->node->children as $child) {
+				$que[] = new Queue($q->level + 1, $child);
+			}
+		}
+		return array();
+	}
+	
+	private function updateCrumbList(&$crumbList, $q) {
+		while (count($crumbList) > $q->level && count($crumbList) != 0) {
+			array_pop($crumbList);
+		}
+		array_push($crumbList, $q);
+	}
+	
+	private function createCrumbs($crumbList) {
+		$list = array();
+		foreach ($crumbList as $que) {
+			$node = $que->node;
+			$list[$node->title] = Yii::app()->createUrl("/article/view", array(
+				'title' => $node->title,
+				'id' => $node->id,
+			));
+		}
+		return $list;
+	}
 
+}
+
+class Queue {
+	public $level;
+	public $node;
+	
+	public function __construct($level, $node) {
+		$this->level = $level;
+		$this->node = $node;
+	}
 }

@@ -2,8 +2,9 @@
 $this->pageTitle = $article->title;
 $this->layout = "//layouts/doubleColumn"; ?>
 
-<? $this->breadcrumbs=array(
-	'Article',
+<? $this->breadcrumbs=$article->getCrumbsList() ?>
+<? $this->breadcrumbOptions = array(
+	'firstCrumb' => false,
 ) ?>
 
 

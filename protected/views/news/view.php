@@ -26,7 +26,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	<? $this->endClip() ?>
 <? endif; ?>
 <?$this->breadcrumbs=array(
-	'News',
+	$news->title => $news->viewUrl,
 );?>
 
 <h1><?=$news->title?></h1>
