@@ -123,7 +123,10 @@ class Signup extends CActiveRecord {
 		$stmt->bindValue(':eid', $this->eventId);
 		$stmt->bindValue(':uid', $userId);
 		$stmt->execute();
-                $this->pushToFacebook($eventId);
+		
+		$news = $this->getNews();
+		$newsAbsolutePath = Yii::app()->baseUrl . $news->viewUrl;
+		$this->pushToFacebook($newsAbsolutePath);
                 
 		if ($addBPC) {
 			$this->addBpcAttender($userId);
@@ -134,6 +137,12 @@ class Signup extends CActiveRecord {
             $fb = new Facebook;
             $fb->setAttending($eventId);
         }
+		
+	public function getNews() {
+		return News::model()->find("parentId = ? AND parentType = 'event'", array(
+			$this->eventId,
+		));
+	}
 
 	private function addBpcAttender($userID) {
 		if ($this->isBpc()) {

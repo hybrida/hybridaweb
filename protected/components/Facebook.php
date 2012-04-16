@@ -43,18 +43,17 @@ class Facebook {
 		return '<a href="https://www.facebook.com/dialog/oauth?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&scope=' . $permissions . '"><img src="' . $dir . '"></a>';
 	}
 
-	public function setAttending($id) {
-                $title = News::model()->findByPk($id)->title;
-                $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
+	public function setAttending($url) {
 		$accessToken = $this->getAccessToken();
 		$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 		$data = array(
 			'access_token' => $accessToken,
-			'event' => $urlEventPage,
+			'event' => $url,
 		);
 		$this->runCurl($data, $postUrl);
 	}
         
+	// TODO: endre parameterinput til kun $url
 	public function publishEventAtFanpage($eventId) {
                 $title = News::model()->findByPk($id)->title;
                 $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
@@ -65,6 +64,7 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
 
+	// TODO: endre parameterinput til kun $url
 	public function publishNewsAtFanpage($newsId, $message) {
 		$title = News::model()->findByPk($id)->title;
                 $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
@@ -76,23 +76,20 @@ class Facebook {
 	}
         
 	private function runCurl($data, $postUrl) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		$return = curl_exec($ch);
-		curl_close($ch);
+                $ch = curl_init($postUrl);
+                curl_setopt_array($ch, array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_POST => true,
+                    CURLOPT_POSTFIELDS => $data
+                ));
+                $return = curl_exec($ch);
+                curl_close($ch);
 	}
         
         public function addAccessToken($code){
             $userId = Yii::app()->user->id;
             $my_url = Yii::app()->createAbsoluteUrl('');
-            $array = array('uID' => $userId);
-            $sql = 'DELETE FROM fb_user WHERE uID = :uID';
-            $query = Yii::app()->db->getPdoInstance()->prepare($sql);
-            $query->execute($array);
-            
+                        
             $token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->app_id . '&redirect_uri=' . $my_url . '/facebook&client_secret=' . $this->app_secret . '&code=' . $code;
             $access = file_get_contents($token_url); 
             $params = null;
@@ -100,7 +97,7 @@ class Facebook {
             $accessToken = $params['access_token'];
             
             $array=array('uID' => $userId, 'aToken' => $accessToken);
-            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken)';
+            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken) ON DUPLICATE KEY UPDATE userId = :uID';
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
             
