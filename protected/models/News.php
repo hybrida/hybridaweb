@@ -165,6 +165,13 @@ class News extends CActiveRecord {
 					'title' => $this->getTitleWithoutSpecialChars(),
 				));
 	}
+	
+	public function getAbsoluteUrl() {
+		return Yii::app()->createAbsoluteUrl("news/view", array(
+					"id" => $this->id,
+					'title' => $this->getTitleWithoutSpecialChars(),
+				));
+	}
 
 	private function getTitleWithoutSpecialChars() {
 		return Html::removeSpecialChars($this->title);

@@ -125,8 +125,7 @@ class Signup extends CActiveRecord {
 		$stmt->execute();
 		
 		$news = $this->getNews();
-		$newsAbsolutePath = Yii::app()->baseUrl . $news->viewUrl;
-		$this->pushToFacebook($newsAbsolutePath);
+		$this->pushToFacebook($news->absoluteUrl);
                 
 		if ($addBPC) {
 			$this->addBpcAttender($userId);
