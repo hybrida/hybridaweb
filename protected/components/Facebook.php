@@ -76,15 +76,14 @@ class Facebook {
 	}
         
 	private function runCurl($data, $postUrl) {
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $postUrl);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt($ch, CURLOPT_TIMEOUT,2);
-
-		$return = curl_exec($ch);
-		curl_close($ch);
+                $ch = curl_init($postUrl);
+                curl_setopt_array($ch, array(
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_POST => true,
+                    CURLOPT_POSTFIELDS => $data
+                ));
+                $return = curl_exec($ch);
+                curl_close($ch);
 	}
         
         public function addAccessToken($code){
