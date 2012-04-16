@@ -88,11 +88,7 @@ class Facebook {
         public function addAccessToken($code){
             $userId = Yii::app()->user->id;
             $my_url = Yii::app()->createAbsoluteUrl('');
-            $array = array('uID' => $userId);
-            $sql = 'DELETE FROM fb_user WHERE uID = :uID';
-            $query = Yii::app()->db->getPdoInstance()->prepare($sql);
-            $query->execute($array);
-            
+                        
             $token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->app_id . '&redirect_uri=' . $my_url . '/facebook&client_secret=' . $this->app_secret . '&code=' . $code;
             $access = file_get_contents($token_url); 
             $params = null;
@@ -100,7 +96,7 @@ class Facebook {
             $accessToken = $params['access_token'];
             
             $array=array('uID' => $userId, 'aToken' => $accessToken);
-            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken)';
+            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken) ON DUPLICATED SET userId = :uID';
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
             
