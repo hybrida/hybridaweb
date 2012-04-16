@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 2.11.8.1deb5+lenny9
+-- version 3.3.7deb7
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 05, 2012 at 11:04 PM
--- Server version: 5.0.51
--- PHP Version: 5.2.6-1+lenny16
+-- Generation Time: Apr 16, 2012 at 06:24 PM
+-- Server version: 5.1.61
+-- PHP Version: 5.3.3-7+squeeze8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
@@ -30,9 +30,9 @@ USE `hybrida_dev`;
 CREATE TABLE IF NOT EXISTS `access_relations` (
   `id` int(11) NOT NULL,
   `access` int(11) NOT NULL,
-  `type` enum('article','event','image','news','signup') collate utf8_unicode_ci NOT NULL,
-  `sub_id` int(11) NOT NULL default '1',
-  PRIMARY KEY  (`id`,`type`,`access`,`sub_id`)
+  `type` enum('article','event','image','news','signup') COLLATE utf8_unicode_ci NOT NULL,
+  `sub_id` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`,`type`,`access`,`sub_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -45,6 +45,102 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
 (41, 2, 'news', 0),
 (85, 2014, 'signup', 1),
 (85, 4055, 'signup', 0),
+(91, 1918, 'signup', 0),
+(91, 1919, 'signup', 0),
+(91, 1920, 'signup', 0),
+(91, 1921, 'signup', 0),
+(91, 1922, 'signup', 0),
+(91, 1923, 'signup', 0),
+(91, 1924, 'signup', 0),
+(91, 1925, 'signup', 0),
+(91, 1926, 'signup', 0),
+(91, 1927, 'signup', 0),
+(91, 1928, 'signup', 0),
+(91, 1929, 'signup', 0),
+(91, 1930, 'signup', 0),
+(91, 1931, 'signup', 0),
+(91, 1932, 'signup', 0),
+(91, 1933, 'signup', 0),
+(91, 1934, 'signup', 0),
+(91, 1935, 'signup', 0),
+(91, 1936, 'signup', 0),
+(91, 1937, 'signup', 0),
+(91, 1938, 'signup', 0),
+(91, 1939, 'signup', 0),
+(91, 1940, 'signup', 0),
+(91, 1941, 'signup', 0),
+(91, 1942, 'signup', 0),
+(91, 1943, 'signup', 0),
+(91, 1944, 'signup', 0),
+(91, 1945, 'signup', 0),
+(91, 1946, 'signup', 0),
+(91, 1947, 'signup', 0),
+(91, 1948, 'signup', 0),
+(91, 1949, 'signup', 0),
+(91, 1950, 'signup', 0),
+(91, 1951, 'signup', 0),
+(91, 1952, 'signup', 0),
+(91, 1953, 'signup', 0),
+(91, 1954, 'signup', 0),
+(91, 1955, 'signup', 0),
+(91, 1956, 'signup', 0),
+(91, 1957, 'signup', 0),
+(91, 1958, 'signup', 0),
+(91, 1959, 'signup', 0),
+(91, 1960, 'signup', 0),
+(91, 1961, 'signup', 0),
+(91, 1962, 'signup', 0),
+(91, 1963, 'signup', 0),
+(91, 1964, 'signup', 0),
+(91, 1965, 'signup', 0),
+(91, 1966, 'signup', 0),
+(91, 1967, 'signup', 0),
+(91, 1968, 'signup', 0),
+(91, 1969, 'signup', 0),
+(91, 1970, 'signup', 0),
+(91, 1971, 'signup', 0),
+(91, 1972, 'signup', 0),
+(91, 1973, 'signup', 0),
+(91, 1974, 'signup', 0),
+(91, 1975, 'signup', 0),
+(91, 1976, 'signup', 0),
+(91, 1977, 'signup', 0),
+(91, 1978, 'signup', 0),
+(91, 1979, 'signup', 0),
+(91, 1980, 'signup', 0),
+(91, 1981, 'signup', 0),
+(91, 1982, 'signup', 0),
+(91, 1983, 'signup', 0),
+(91, 1984, 'signup', 0),
+(91, 1985, 'signup', 0),
+(91, 1986, 'signup', 0),
+(91, 1987, 'signup', 0),
+(91, 1988, 'signup', 0),
+(91, 1989, 'signup', 0),
+(91, 1990, 'signup', 0),
+(91, 1991, 'signup', 0),
+(91, 1992, 'signup', 0),
+(91, 1993, 'signup', 0),
+(91, 1994, 'signup', 0),
+(91, 1995, 'signup', 0),
+(91, 1996, 'signup', 0),
+(91, 1997, 'signup', 0),
+(91, 1998, 'signup', 0),
+(91, 1999, 'signup', 0),
+(91, 2000, 'signup', 0),
+(91, 2001, 'signup', 0),
+(91, 2002, 'signup', 0),
+(91, 2003, 'signup', 0),
+(91, 2004, 'signup', 0),
+(91, 2005, 'signup', 0),
+(91, 2006, 'signup', 0),
+(91, 2007, 'signup', 0),
+(91, 2008, 'signup', 0),
+(91, 2009, 'signup', 0),
+(91, 2010, 'signup', 0),
+(91, 2011, 'signup', 0),
+(91, 2012, 'signup', 0),
+(91, 2013, 'signup', 0),
 (364, 2, 'news', 0);
 
 -- --------------------------------------------------------
@@ -54,14 +150,14 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `article` (
-  `id` int(11) NOT NULL auto_increment,
-  `parentId` int(11) default NULL,
-  `title` varchar(30) collate utf8_unicode_ci default NULL,
-  `shorttitle` varchar(255) collate utf8_unicode_ci default NULL,
-  `content` mediumtext collate utf8_unicode_ci,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentId` int(11) DEFAULT NULL,
+  `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `shorttitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8_unicode_ci,
   `author` int(11) NOT NULL,
   `timestamp` date NOT NULL,
-  PRIMARY KEY  (`id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=62 ;
 
 --
@@ -100,24 +196,24 @@ referater/h06/hybrida_mote_02-10-2006.pdf">Møte 02. oktober 2006</a></li>\n	<li
 --
 
 CREATE TABLE IF NOT EXISTS `bk_company` (
-  `companyID` int(11) NOT NULL auto_increment,
-  `adress` varchar(255) collate utf8_unicode_ci default NULL,
-  `contactorID` int(11) default NULL,
-  `companyName` varchar(255) collate utf8_unicode_ci default NULL,
-  `dateAdded` datetime default NULL,
-  `dateUpdated` datetime default NULL,
-  `dateAssigned` datetime default NULL,
-  `homepage` varchar(255) collate utf8_unicode_ci default NULL,
-  `addedByID` int(11) default NULL,
-  `mail` varchar(255) collate utf8_unicode_ci default NULL,
-  `updatedByID` int(11) default NULL,
-  `postbox` varchar(255) collate utf8_unicode_ci default NULL,
-  `postnumber` int(11) default NULL,
-  `postplace` varchar(255) collate utf8_unicode_ci default NULL,
-  `status` enum('Aktuell senere','Blir kontaktet','Ikke kontaktet','Uaktuell') collate utf8_unicode_ci default 'Ikke kontaktet',
-  `phoneNumber` int(11) default NULL,
-  `subgroupOfID` int(11) default NULL,
-  PRIMARY KEY  (`companyID`),
+  `companyID` int(11) NOT NULL AUTO_INCREMENT,
+  `adress` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `contactorID` int(11) DEFAULT NULL,
+  `companyName` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `dateAdded` datetime DEFAULT NULL,
+  `dateUpdated` datetime DEFAULT NULL,
+  `dateAssigned` datetime DEFAULT NULL,
+  `homepage` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `addedByID` int(11) DEFAULT NULL,
+  `mail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `updatedByID` int(11) DEFAULT NULL,
+  `postbox` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `postnumber` int(11) DEFAULT NULL,
+  `postplace` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status` enum('Aktuell senere','Blir kontaktet','Ikke kontaktet','Uaktuell') COLLATE utf8_unicode_ci DEFAULT 'Ikke kontaktet',
+  `phoneNumber` int(11) DEFAULT NULL,
+  `subgroupOfID` int(11) DEFAULT NULL,
+  PRIMARY KEY (`companyID`),
   KEY `contactorID` (`contactorID`,`addedByID`,`updatedByID`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=219 ;
 
@@ -134,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `bk_company` (
 CREATE TABLE IF NOT EXISTS `bk_company_specialization` (
   `companyId` int(11) NOT NULL,
   `specializationId` int(11) NOT NULL,
-  PRIMARY KEY  (`companyId`,`specializationId`)
+  PRIMARY KEY (`companyId`,`specializationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -170,14 +266,14 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `bk_company_update` (
-  `updateId` int(11) NOT NULL auto_increment,
-  `relevantForUserId` int(11) default NULL,
-  `companyId` int(11) default NULL,
-  `description` text collate utf8_unicode_ci,
-  `addedById` int(11) default NULL,
-  `dateAdded` datetime default NULL,
-  `isDeleted` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
-  PRIMARY KEY  (`updateId`),
+  `updateId` int(11) NOT NULL AUTO_INCREMENT,
+  `relevantForUserId` int(11) DEFAULT NULL,
+  `companyId` int(11) DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `addedById` int(11) DEFAULT NULL,
+  `dateAdded` datetime DEFAULT NULL,
+  `isDeleted` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
+  PRIMARY KEY (`updateId`),
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14610 ;
 
@@ -192,13 +288,13 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
 --
 
 CREATE TABLE IF NOT EXISTS `comment` (
-  `id` int(11) NOT NULL auto_increment,
-  `parentId` int(11) default NULL,
-  `parentType` enum('profile','gallery','image','group','company','news') collate utf8_unicode_ci default NULL,
-  `content` mediumtext collate utf8_unicode_ci,
-  `authorId` int(11) default NULL,
-  `timestamp` datetime default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentId` int(11) DEFAULT NULL,
+  `parentType` enum('profile','gallery','image','group','company','news') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `content` mediumtext COLLATE utf8_unicode_ci,
+  `authorId` int(11) DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=431 ;
@@ -214,30 +310,32 @@ CREATE TABLE IF NOT EXISTS `comment` (
 --
 
 CREATE TABLE IF NOT EXISTS `event` (
-  `id` int(11) NOT NULL auto_increment,
-  `bpcID` int(11) default NULL,
-  `start` datetime default NULL,
-  `end` datetime default NULL,
-  `location` varchar(30) collate utf8_unicode_ci default NULL,
-  `title` varchar(30) collate utf8_unicode_ci NOT NULL,
-  `imageId` int(11) default NULL,
-  `status` tinyint(4) NOT NULL default '0',
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bpcID` int(11) DEFAULT NULL,
+  `start` datetime DEFAULT NULL,
+  `end` datetime DEFAULT NULL,
+  `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `imageId` int(11) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
   UNIQUE KEY `bpcID` (`bpcID`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=91 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=93 ;
 
 --
 -- Dumping data for table `event`
 --
 
 INSERT INTO `event` (`id`, `bpcID`, `start`, `end`, `location`, `title`, `imageId`, `status`) VALUES
-(71, NULL, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 'Åretur 2012', 0, 0),
+(71, NULL, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 'Åretur 2012', 12, 0),
 (73, NULL, '2011-11-25 18:15:00', '2011-11-26 13:00:00', 'Gløs', 'GenFors', 4, 0),
 (82, NULL, '2012-03-08 00:00:00', '2012-06-07 00:00:00', 'Åre', '', NULL, 2),
 (83, NULL, '2012-12-01 00:00:00', '2013-04-06 00:00:00', 'Kontoret', '', NULL, 0),
 (85, NULL, '2012-02-25 20:00:54', '2012-02-26 02:00:00', 'Lyche', '', NULL, 0),
 (89, NULL, '2012-03-21 14:00:00', '2012-03-21 19:00:00', '', '', NULL, 0),
-(90, NULL, '2012-03-28 11:15:42', '2012-03-29 00:00:00', '', '', NULL, 0);
+(90, NULL, '2012-03-28 11:15:42', '2012-03-29 00:00:00', '', '', NULL, 0),
+(91, 378, '2012-04-19 18:15:00', '2012-04-19 18:15:00', NULL, '', NULL, 0),
+(92, NULL, '2012-04-17 00:00:00', '2012-04-18 00:00:00', 'Kontoret', '', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -247,7 +345,8 @@ INSERT INTO `event` (`id`, `bpcID`, `start`, `end`, `location`, `title`, `imageI
 
 CREATE TABLE IF NOT EXISTS `fb_user` (
   `userId` int(11) NOT NULL,
-  `fb_token` varchar(100) collate utf8_unicode_ci NOT NULL
+  `fb_token` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -261,12 +360,12 @@ CREATE TABLE IF NOT EXISTS `fb_user` (
 --
 
 CREATE TABLE IF NOT EXISTS `gallery` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
-  `title` varchar(30) collate utf8_unicode_ci NOT NULL,
-  `imageId` int(11) default NULL,
-  `timestamp` datetime default NULL,
-  PRIMARY KEY  (`id`)
+  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `imageId` int(11) DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
 --
@@ -290,10 +389,10 @@ INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
 CREATE TABLE IF NOT EXISTS `group_membership` (
   `groupId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `comission` varchar(30) collate utf8_unicode_ci default NULL,
-  `start` date default NULL,
-  `end` date default NULL,
-  PRIMARY KEY  (`userId`,`groupId`)
+  `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `start` date DEFAULT NULL,
+  `end` date DEFAULT NULL,
+  PRIMARY KEY (`userId`,`groupId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -307,13 +406,13 @@ CREATE TABLE IF NOT EXISTS `group_membership` (
 --
 
 CREATE TABLE IF NOT EXISTS `groups` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu` int(11) NOT NULL,
-  `title` varchar(50) collate utf8_unicode_ci NOT NULL,
-  `admin` int(11) default NULL,
-  `committee` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
-  `url` varchar(255) collate utf8_unicode_ci NOT NULL COMMENT 'URLen til gruppen',
-  PRIMARY KEY  (`id`),
+  `title` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `admin` int(11) DEFAULT NULL,
+  `committee` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
+  `url` varchar(255) COLLATE utf8_unicode_ci NOT NULL COMMENT 'URLen til gruppen',
+  PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`),
   KEY `members` (`admin`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
@@ -335,16 +434,16 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `image` (
-  `id` int(11) NOT NULL auto_increment,
-  `title` varchar(255) collate utf8_unicode_ci default NULL,
-  `oldName` varchar(255) collate utf8_unicode_ci NOT NULL,
-  `galleryId` int(11) default NULL,
-  `userId` int(11) default NULL,
-  `timestamp` datetime default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `oldName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `galleryId` int(11) DEFAULT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
   KEY `albumId` (`galleryId`,`userId`),
   KEY `userId` (`userId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=18 ;
 
 --
 -- Dumping data for table `image`
@@ -360,7 +459,13 @@ INSERT INTO `image` (`id`, `title`, `oldName`, `galleryId`, `userId`, `timestamp
 (8, NULL, 'tmp', NULL, NULL, NULL),
 (9, NULL, 'tmp', NULL, NULL, NULL),
 (10, NULL, 'tmp', NULL, NULL, NULL),
-(11, NULL, 'tmp', NULL, NULL, NULL);
+(11, NULL, 'tmp', NULL, NULL, NULL),
+(12, NULL, 'tmp', NULL, NULL, NULL),
+(13, NULL, 'tmp', NULL, NULL, NULL),
+(14, NULL, 'tmp', NULL, NULL, NULL),
+(15, NULL, 'tmp', NULL, NULL, NULL),
+(16, NULL, 'tmp', NULL, NULL, NULL),
+(17, NULL, 'tmp', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -371,9 +476,9 @@ INSERT INTO `image` (`id`, `title`, `oldName`, `galleryId`, `userId`, `timestamp
 CREATE TABLE IF NOT EXISTS `menu_group` (
   `group` int(11) NOT NULL,
   `site` int(11) NOT NULL,
-  `contentId` int(11) default NULL,
+  `contentId` int(11) DEFAULT NULL,
   `sort` int(11) NOT NULL,
-  PRIMARY KEY  (`group`,`site`)
+  PRIMARY KEY (`group`,`site`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -411,11 +516,11 @@ INSERT INTO `menu_group` (`group`, `site`, `contentId`, `sort`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `menu_top` (
-  `menu` int(11) NOT NULL auto_increment,
+  `menu` int(11) NOT NULL AUTO_INCREMENT,
   `site` int(11) NOT NULL,
-  `id` int(11) default NULL,
+  `id` int(11) DEFAULT NULL,
   `sort` int(11) NOT NULL,
-  PRIMARY KEY  (`menu`,`site`)
+  PRIMARY KEY (`menu`,`site`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
@@ -437,7 +542,7 @@ INSERT INTO `menu_top` (`menu`, `site`, `id`, `sort`) VALUES
 CREATE TABLE IF NOT EXISTS `menu_top_sub` (
   `menuId` int(11) NOT NULL,
   `site` int(11) NOT NULL,
-  `id` int(11) default NULL,
+  `id` int(11) DEFAULT NULL,
   `sort` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -460,34 +565,37 @@ INSERT INTO `menu_top_sub` (`menuId`, `site`, `id`, `sort`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
-  `id` int(11) NOT NULL auto_increment,
-  `parentId` int(11) default NULL,
-  `parentType` enum('event','article','group') collate utf8_unicode_ci default NULL,
-  `title` varchar(50) collate utf8_unicode_ci default NULL,
-  `imageId` int(11) default NULL,
-  `ingress` text collate utf8_unicode_ci,
-  `content` mediumtext collate utf8_unicode_ci,
-  `authorId` int(11) default NULL,
-  `timestamp` datetime default NULL,
-  `status` tinyint(4) NOT NULL default '0',
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `parentId` int(11) DEFAULT NULL,
+  `parentType` enum('event','article','group') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `imageId` int(11) DEFAULT NULL,
+  `ingress` text COLLATE utf8_unicode_ci,
+  `content` mediumtext COLLATE utf8_unicode_ci,
+  `authorId` int(11) DEFAULT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=367 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=369 ;
 
 --
 -- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `timestamp`, `status`) VALUES
-(40, 71, 'event', 'Åretur 2012', 0, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', 'Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!\n<br /><br />\nTuren kommer på <strong> ca 2000kr </strong> per pers og inkluderer:\n<br /><br /><ul><li>\nTur/retur Åre sentrum\n</li><li>\n4 netters opphold\n</li><li>\n5 dagers skipass \n</li><li>\nrabattkort</li><li>mye fest og moro!\n<br /></li></ul><br />\nVi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder! \n<br /><br /> OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br /><br />', 326, '2011-07-17 22:34:51', 0),
+(40, 71, 'event', 'Åretur 2012', 0, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, '2011-
+07-17 22:34:51', 0),
 (41, 73, 'event', 'Generalforsamling', 4, 'Generalforsamling i Hybrida', '', 326, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, '2011-11-26 20:02:14', 0),
 (362, 83, 'event', 'Eksempelarrangement', NULL, 'Dette skjer om veeldig lenge', 'BLa bla bla<br />', 381, '2012-02-09 11:41:25', 0),
 (364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte\n	tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en\n	mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p><strong>Lycheburger </strong>Lyches ubestridte klassiker. Med\n	aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter.\n	kr 109.</p>\n<p><strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli,\n	pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.\n	 kr 99</p>\n<p><strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår.\n	Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte\n	mandelpoteter. kr 129</p>\n<p><strong>Ovnsbakt lakseloin</strong>
 Lakseloin med \novnsbakte\n	grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr\n	129</p>\n<p><strong><em>Dessertvalg:</em></strong></p>\n<p><strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr\n	45</p>\n<p><strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p><br /></p>\n<p>Betaling skjer på Hybridas konto:\n	0539.26.44913 Prisen\n	avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn +\n	halvingfest</p>\n<p><br /></p>', 367, '2012-02-17 19:09:39', 0),
 (365, 89, 'event', 'Event bare for Facebook', NULL, 'Testevent for facebook posting.', '<p>\n	sdfghjklø</p>\n', 347, '2012-03-19 17:10:36', 0),
-(366, 90, 'event', 'TestEvent', NULL, '', '<p>\n	Testing testing, 1 2 3</p>\n', 347, '2012-03-23 11:17:41', 0);
+(366, 90, 'event', 'TestEvent', NULL, '', '<p>\n	Testing testing, 1 2 3</p>\n', 347, '2012-03-23 11:17:41', 0),
+(367, 91, 'event', 'Bedpres: Aker Solutions MMO', NULL, '', '<p>http://www.akersolutions.com/</p>\n', NULL, '2012-04-07 17:08:20', 0),
+(368, 92, 'event', 'Facebook-testing', NULL, '', '<p>\n	Testevent</p>\n', 347, '2012-04-16 17:14:09', 0);
 
 -- --------------------------------------------------------
 
@@ -515,12 +623,12 @@ INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `order` (
-  `id` int(11) NOT NULL auto_increment,
-  `userId` int(11) default NULL,
-  `order` mediumtext character set utf8 collate utf8_unicode_ci,
-  `timestamp` datetime default NULL,
-  `paid` enum('true','false') character set utf8 collate utf8_unicode_ci NOT NULL default 'false',
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) DEFAULT NULL,
+  `order` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
+  `timestamp` datetime DEFAULT NULL,
+  `paid` enum('true','false') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
+  PRIMARY KEY (`id`),
   KEY `userId` (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -536,9 +644,9 @@ CREATE TABLE IF NOT EXISTS `order` (
 --
 
 CREATE TABLE IF NOT EXISTS `poll` (
-  `id` int(11) NOT NULL auto_increment,
-  `title` varchar(30) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
@@ -555,11 +663,11 @@ INSERT INTO `poll` (`id`, `title`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `poll_option` (
-  `id` int(11) NOT NULL auto_increment,
-  `pollId` int(11) default NULL,
-  `name` varchar(30) collate utf8_unicode_ci default NULL,
-  `color` char(6) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `pollId` int(11) DEFAULT NULL,
+  `name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `color` char(6) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `pollId` (`pollId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
@@ -578,11 +686,11 @@ INSERT INTO `poll_option` (`id`, `pollId`, `name`, `color`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `rbac_assignment` (
-  `itemname` varchar(64) collate utf8_unicode_ci NOT NULL,
-  `userid` varchar(64) collate utf8_unicode_ci NOT NULL,
-  `bizrule` text collate utf8_unicode_ci,
-  `data` text collate utf8_unicode_ci,
-  PRIMARY KEY  (`itemname`,`userid`)
+  `itemname` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `userid` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `bizrule` text COLLATE utf8_unicode_ci,
+  `data` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`itemname`,`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -596,12 +704,12 @@ CREATE TABLE IF NOT EXISTS `rbac_assignment` (
 --
 
 CREATE TABLE IF NOT EXISTS `rbac_item` (
-  `name` varchar(64) collate utf8_unicode_ci NOT NULL,
+  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` int(11) NOT NULL,
-  `description` text collate utf8_unicode_ci,
-  `bizrule` text collate utf8_unicode_ci,
-  `data` text collate utf8_unicode_ci,
-  PRIMARY KEY  (`name`)
+  `description` text COLLATE utf8_unicode_ci,
+  `bizrule` text COLLATE utf8_unicode_ci,
+  `data` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -629,9 +737,9 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 --
 
 CREATE TABLE IF NOT EXISTS `rbac_itemchild` (
-  `parent` varchar(64) collate utf8_unicode_ci NOT NULL,
-  `child` varchar(64) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`parent`,`child`),
+  `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`parent`,`child`),
   KEY `child` (`child`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -661,13 +769,13 @@ INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `signup` (
-  `eventId` int(11) NOT NULL default '0',
+  `eventId` int(11) NOT NULL DEFAULT '0',
   `spots` int(11) NOT NULL,
   `open` datetime NOT NULL,
   `close` datetime NOT NULL,
-  `signoff` enum('true','false') collate utf8_unicode_ci NOT NULL default 'false',
-  `status` tinyint(4) NOT NULL default '0',
-  PRIMARY KEY  (`eventId`)
+  `signoff` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`eventId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -684,7 +792,9 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (87, 50, '2012-02-15 17:00:00', '2012-02-22 17:00:00', 'false', 0),
 (88, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 0),
 (89, 45, '2012-03-19 17:10:23', '2012-03-19 19:10:24', 'false', 0),
-(90, 10, '2012-03-23 11:20:10', '2012-04-30 10:00:00', 'true', 0);
+(90, 10, '2012-03-23 11:20:10', '2012-04-30 10:00:00', 'true', 0),
+(91, 1, '2012-04-12 12:00:00', '2012-04-19 12:00:00', 'false', 0),
+(92, 20, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'true', 0);
 
 -- --------------------------------------------------------
 
@@ -695,8 +805,8 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 CREATE TABLE IF NOT EXISTS `signup_membership` (
   `eventId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
-  `signedOff` enum('true','false') collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`eventId`,`userId`)
+  `signedOff` enum('true','false') COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`eventId`,`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -710,12 +820,12 @@ CREATE TABLE IF NOT EXISTS `signup_membership` (
 --
 
 CREATE TABLE IF NOT EXISTS `site` (
-  `siteId` int(11) NOT NULL auto_increment,
-  `title` varchar(30) collate utf8_unicode_ci NOT NULL,
-  `path` varchar(60) collate utf8_unicode_ci NOT NULL,
-  `id` int(11) default NULL,
-  `subId` int(11) default NULL,
-  PRIMARY KEY  (`siteId`)
+  `siteId` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `path` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `id` int(11) DEFAULT NULL,
+  `subId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`siteId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=469 ;
 
 --
@@ -758,10 +868,10 @@ INSERT INTO `site` (`siteId`, `title`, `path`, `id`, `subId`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `site_content` (
-  `id` int(11) NOT NULL auto_increment,
-  `filename` varchar(20) collate utf8_unicode_ci NOT NULL,
-  `description` varchar(200) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`)
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
 --
@@ -785,10 +895,10 @@ INSERT INTO `site_content` (`id`, `filename`, `description`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `specialization` (
-  `id` int(11) NOT NULL auto_increment,
-  `siteId` int(11) default NULL,
-  `name` varchar(30) collate utf8_unicode_ci NOT NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `siteId` int(11) DEFAULT NULL,
+  `name` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
   KEY `siteId` (`siteId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
 
@@ -816,8 +926,8 @@ INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 CREATE TABLE IF NOT EXISTS `tag` (
   `id` int(11) NOT NULL,
   `ownerId` int(11) NOT NULL,
-  `contentType` enum('news','article') collate utf8_unicode_ci NOT NULL,
-  `tagType` enum('wiki','group') collate utf8_unicode_ci NOT NULL
+  `contentType` enum('news','article') COLLATE utf8_unicode_ci NOT NULL,
+  `tagType` enum('wiki','group') COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -835,26 +945,26 @@ INSERT INTO `tag` (`id`, `ownerId`, `contentType`, `tagType`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
-  `id` int(11) NOT NULL auto_increment,
-  `username` varchar(10) collate utf8_unicode_ci NOT NULL,
-  `firstName` varchar(75) collate utf8_unicode_ci NOT NULL,
-  `middleName` varchar(75) collate utf8_unicode_ci default NULL,
-  `lastName` varchar(75) collate utf8_unicode_ci NOT NULL,
-  `specializationId` int(11) default NULL,
-  `graduationYear` year(4) default NULL,
-  `member` enum('true','false') collate utf8_unicode_ci NOT NULL,
-  `gender` enum('unknown','male','female') collate utf8_unicode_ci NOT NULL default 'unknown',
-  `imageId` int(11) default NULL,
-  `phoneNumber` int(11) default NULL,
-  `lastLogin` datetime default NULL,
-  `cardHash` varchar(70) collate utf8_unicode_ci default NULL,
-  `description` text collate utf8_unicode_ci,
-  `workDescription` text collate utf8_unicode_ci,
-  `workCompanyID` int(11) default NULL,
-  `workPlace` varchar(255) collate utf8_unicode_ci default NULL,
-  `birthdate` date default NULL,
-  `altEmail` varchar(255) collate utf8_unicode_ci default NULL,
-  PRIMARY KEY  (`id`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `firstName` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `middleName` varchar(75) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lastName` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `specializationId` int(11) DEFAULT NULL,
+  `graduationYear` year(4) DEFAULT NULL,
+  `member` enum('true','false') COLLATE utf8_unicode_ci NOT NULL,
+  `gender` enum('unknown','male','female') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
+  `imageId` int(11) DEFAULT NULL,
+  `phoneNumber` int(11) DEFAULT NULL,
+  `lastLogin` datetime DEFAULT NULL,
+  `cardHash` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8_unicode_ci,
+  `workDescription` text COLLATE utf8_unicode_ci,
+  `workCompanyID` int(11) DEFAULT NULL,
+  `workPlace` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `altEmail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=469 ;
 
@@ -863,7 +973,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', 9, NULL, '2012-04-05 22:33:17', '123123', '', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', 12, NULL, '2012-04-16 17:12:26', '123123', '', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -876,7 +986,7 @@ CREATE TABLE IF NOT EXISTS `vote` (
   `pollId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
   `choice` int(11) NOT NULL,
-  PRIMARY KEY  (`pollId`,`userId`)
+  PRIMARY KEY (`pollId`,`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
