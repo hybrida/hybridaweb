@@ -1,9 +1,9 @@
 /* @override
-	http://dev.hybrida.no/style/pageContent.css */
+        http://dev.hybrida.no/style/pageContent.css */
 
 #content div.formSection div.fieldInput a img {
-	height: 30px;
-	margin-top: -6px;
+    height: 30px;
+    margin-top: -6px;
 }
 
 #groupNavigation {
@@ -11,15 +11,15 @@
     clear: both;
     background-color: #0062c4;
     padding: 5px;
-	margin-left: -7px;
-	text-align: center;
+    margin-left: -7px;
+    text-align: center;
 }
 
 #groupNavigation > .groupNavigationItem {
     margin-left: 5px;
     padding: 5px;
     color: white;
-	text-decoration: none;
+    text-decoration: none;
 }
 
 #groupNavigation > .groupNavigationItem:hover{
@@ -29,20 +29,20 @@
 
 .contentItem{
     width: 736px;
-	margin-bottom: 40px;
-	margin-top: 5px;
+    margin-bottom: 40px;
+    margin-top: 5px;
 }
 
 .articleContent {
-	margin-left: 25px;
-	border: 1px solid #a8a8a8;
-	padding: 22px 6px 3px;
-	position: relative;
-	bottom: 15px;
-	z-index: 1;
-	-moz-box-shadow: 2px 1px 2px #848484;
-	-webkit-box-shadow: 2px 1px 2px #848484;
-	box-shadow: 2px 1px 2px #848484;
+    margin-left: 25px;
+    border: 1px solid #a8a8a8;
+    padding: 22px 6px 3px;
+    position: relative;
+    bottom: 15px;
+    z-index: 1;
+    -moz-box-shadow: 2px 1px 2px #848484;
+    -webkit-box-shadow: 2px 1px 2px #848484;
+    box-shadow: 2px 1px 2px #848484;
 }
 
 .articleContent p {
@@ -50,23 +50,23 @@
     font-weight: lighter;
     text-align: left;
     margin-top: 0;
-	margin-bottom: 7px;
+    margin-bottom: 7px;
 }
 
 div.articleContent div.date {
-	font-size: 0.79em;
-	float: right;
-	clear: right;
+    font-size: 0.79em;
+    float: right;
+    clear: right;
 }
 
 div.articleContent div.author {
-	font-size: 0.79em;
-	clear: left;
+    font-size: 0.79em;
+    clear: left;
 }
 
 div.articleContent div.author a {
-	color: #0062c4;
-	text-decoration: none;
+    color: #0062c4;
+    text-decoration: none;
 }
 
 .articleContent img.smallImg {
@@ -95,48 +95,48 @@ div.articleContent div.author a {
     background-color: #0062C4;
     width: 31px;
     height: 31px;
-	display: none;
+    display: none;
 }
 
 .topBar {
     height: 33px;
-	z-index: 2;
-	position: relative;
-	margin-left: -7px;
+    z-index: 2;
+    position: relative;
+    margin-left: -7px;
 }
 
 .topBar h1 {
     color: #000000;
-	font: 25px 'Gill';
-	margin-top: 0;
+    font: 25px 'Gill';
+    margin-top: 0;
 }
 
 .topBar h1 a {
-	text-decoration: none;
-	color: #ffffff;
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-	padding: 4px 15px;
-	text-shadow: 1px 1px 1px black;
-	background: -moz-linear-gradient(270deg, #55a9fe 0%, #0061c2 45.9%) #0062c4;
-	background: -webkit-gradient(linear, left top, left bottom, from(#55a9fe), color-stop(0.459, #0061c2)) #0062c4;
-	-moz-box-shadow: 2px 2px 2px #9d9d9d;
-	-webkit-box-shadow: 2px 2px 2px #9d9d9d;
-	box-shadow: 2px 2px 2px #9d9d9d;
-	border: 1px solid #005fbe;
-	border-left-style: none;
+    text-decoration: none;
+    color: #ffffff;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    padding: 4px 15px;
+    text-shadow: 1px 1px 1px black;
+    background: -moz-linear-gradient(270deg, #55a9fe 0%, #0061c2 45.9%) #0062c4;
+    background: -webkit-gradient(linear, left top, left bottom, from(#55a9fe), color-stop(0.459, #0061c2)) #0062c4;
+    -moz-box-shadow: 2px 2px 2px #9d9d9d;
+    -webkit-box-shadow: 2px 2px 2px #9d9d9d;
+    box-shadow: 2px 2px 2px #9d9d9d;
+    border: 1px solid #005fbe;
+    border-left-style: none;
 }
 
 .topBar h1 a:hover {
-	text-decoration: underline;
+    text-decoration: underline;
 }
 
 .contentDivider {
-background: url('../images/shaded-divider.gif') no-repeat;
-	height: 10px;
-	top: 15px;
-	position: relative;
-	display: none;
+    background: url('../images/shaded-divider.gif') no-repeat;
+    height: 10px;
+    top: 15px;
+    position: relative;
+    display: none;
 }
 
 nav items div {
@@ -166,44 +166,49 @@ nav items div.last {
 }
 
 .author {
-	font-style: italic;
-	position: relative;
-	padding-top: 10px;
+    font-style: italic;
+    position: relative;
+    padding-top: 10px;
 }
 
 .author:before {
-	content: "Skrevet av ";
+    content: "Skrevet av ";
 }
 
 .formSection {
     clear: both;
     margin: 1.5em;
-	border-radius: 2px;
-	border: 1px dashed #0062C4;
-	padding: 1.5em;
+    border-radius: 2px;
+    border: 1px dashed #0062C4;
+    padding: 1.5em;
 }
 
 .formSection > * {
-	margin-bottom: 0.25em;
-	margin-top: 0.25em;
+    margin-bottom: 0.25em;
+    margin-top: 0.25em;
 }
 
 .formSection .fieldDefinition {
     width: 30%;
     float: left;
     clear: left;
-	text-align: right;
+    text-align: right;
 }
 
 .formSection .fieldInput {
     width: 68%;
-/*	For 2% opphold mellom definisjon og input.
-	Om man skal bruke padding eller margin, må den ytre
-	boksen ha fastsatt bredde, men den skalerer (derfor %) */
-	
+    /*	For 2% opphold mellom definisjon og input.
+            Om man skal bruke padding eller margin, må den ytre
+            boksen ha fastsatt bredde, men den skalerer (derfor %) */
+
     float: right;
     clear: right;
-	margin-bottom: 0.4em;
+    margin-bottom: 0.4em;
+}
+
+.formSection .inputGroup {
+    float: none;
+    clear: both;
 }
 
 .formSection .inputGroup :focus {
@@ -216,7 +221,7 @@ nav items div.last {
     font-size: 90%;
     font-style: italic;
     padding-top: .4em;
-	padding-bottom: 1em;
+    padding-bottom: 1em;
 }
 
 .formSection textarea {
@@ -250,25 +255,25 @@ table#membertable *{
 }
 
 #breadCrumb ul, #breadCrumb li {
-	list-style-type:none;
-	padding:0;
-	margin:0;
+    list-style-type:none;
+    padding:0;
+    margin:0;
 }
 
 #breadCrumb {
-	border-bottom: 1px solid #dedede;
-	height:2.3em;
+    border-bottom: 1px solid #dedede;
+    height:2.3em;
 }
 
 #breadCrumb li {
-	float:left;
-	line-height:2.3em;
-	padding-left:.75em;
-	color:#777;
+    float:left;
+    line-height:2.3em;
+    padding-left:.75em;
+    color:#777;
 }
 
 #breadCrumb li a {
-	display:block;
-	padding:0 15px 0 0;
-	background:url('/images/icons/crumbs.gif') no-repeat right center;
+    display:block;
+    padding:0 15px 0 0;
+    background:url('/images/icons/crumbs.gif') no-repeat right center;
 }
