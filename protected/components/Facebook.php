@@ -43,18 +43,17 @@ class Facebook {
 		return '<a href="https://www.facebook.com/dialog/oauth?client_id=' . $app_id . '&redirect_uri=' . $my_url . '&scope=' . $permissions . '"><img src="' . $dir . '"></a>';
 	}
 
-	public function setAttending($id) {
-                $title = News::model()->findByPk($id)->title;
-                $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
+	public function setAttending($url) {
 		$accessToken = $this->getAccessToken();
 		$postUrl = 'https://graph.facebook.com/me/lfhybrida:attend';
 		$data = array(
 			'access_token' => $accessToken,
-			'event' => $urlEventPage,
+			'event' => $url,
 		);
 		$this->runCurl($data, $postUrl);
 	}
         
+	// TODO: endre parameterinput til kun $url
 	public function publishEventAtFanpage($eventId) {
                 $title = News::model()->findByPk($id)->title;
                 $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
@@ -65,6 +64,7 @@ class Facebook {
 		$this->runCurl($data, $postUrl);
 	}
 
+	// TODO: endre parameterinput til kun $url
 	public function publishNewsAtFanpage($newsId, $message) {
 		$title = News::model()->findByPk($id)->title;
                 $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
@@ -81,6 +81,8 @@ class Facebook {
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt($ch, CURLOPT_TIMEOUT,2);
+
 		$return = curl_exec($ch);
 		curl_close($ch);
 	}
