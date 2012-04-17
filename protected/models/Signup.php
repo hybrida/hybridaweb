@@ -210,6 +210,21 @@ class Signup extends CActiveRecord {
 		}
 		return $attenders;
 	}
+	
+	public function getAttendersFiveYearArrays() {
+		$attenders = $this->getAttenders();
+		$attendersArrays = array();
+		for ($i=1; $i<=5; $i++) {
+			$year = array();
+			foreach ($attenders as $attender) {
+				if ($attender->classYear == $i) {
+					array_push($year, $attender);
+				}
+			}
+			array_push($attendersArrays, $year);
+		}
+		return $attendersArrays;
+	}
 
 	public function isAttending($userId) {
 		$sql = "SELECT userId
