@@ -73,7 +73,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 			<td>
 			<? if (!empty($fiveYear[$j][$i])): ?>
 				<? $user = $fiveYear[$j][$i] ?>
-				<?  //Image::profileTag($user->imageId, 'small') ?>
+				<?= Image::profileTag($user->imageId, 'small') ?>
 				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
 				<? unset($user) ?>
 			<? else: ?>
