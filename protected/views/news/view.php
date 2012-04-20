@@ -81,6 +81,8 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 			<? else: ?>
 				<? if ($i == 0): ?>
 					<? print_r("Du kan bli først!") ?>
+				<? else: ?>
+					Totalt: <?=  $i ?>
 				<? endif ?>
 				<? unset($firstThreeYears[$j]) ?>
 			<? endif ?>
@@ -106,6 +108,8 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 			<? else: ?>
 				<? if ($i == 0): ?>
 					<? print_r("Du kan bli først!") ?>
+				<? else: ?>
+					Totalt: <?=  $i ?>
 				<? endif ?>
 				<? unset($lastTwoYears[$j]) ?>
 			<? endif ?>
