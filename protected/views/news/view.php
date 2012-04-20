@@ -69,6 +69,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	<? $firstThreeYears = array_slice($fiveYear, 0 ,3) ?>
 	<? $lastTwoYears = array_slice($fiveYear, 3) ?>
 	<? $i = 0 ?>
+	<? $total = array(0 => false, 1 => false, 2 => false) ?>
 	<? while (!empty($firstThreeYears)): ?>
 		</tr>
 		<? for ($j = 0; $j < 3; $j++): ?>
@@ -82,7 +83,10 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 				<? if ($i == 0): ?>
 					<? print_r("Du kan bli først!") ?>
 				<? else: ?>
-					Totalt: <?=  $i ?>
+					<? if (!$total[$j]): ?>
+						Totalt på årskurs: <?=  $i ?>
+						<? $total[$j] = true; ?>
+					<? endif ?>
 				<? endif ?>
 				<? unset($firstThreeYears[$j]) ?>
 			<? endif ?>
@@ -96,6 +100,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	<table cellspacing ="5" width ="700px">
 	<tr><td>4. årskurs</td><td>5. årskurs</td>
 	<? $i = 0 ?>
+	<? $total = array(0 => false, 1 => false) ?>
 	<? while (!empty($lastTwoYears)): ?>
 		</tr>
 		<? for ($j = 0; $j < 2; $j++): ?>
@@ -109,7 +114,10 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 				<? if ($i == 0): ?>
 					<? print_r("Du kan bli først!") ?>
 				<? else: ?>
-					Totalt: <?=  $i ?>
+					<? if (!$total[$j]): ?>
+						Totalt på årskurs: <?=  $i ?>
+						<? $total[$j] = true; ?>
+					<? endif ?>
 				<? endif ?>
 				<? unset($lastTwoYears[$j]) ?>
 			<? endif ?>
