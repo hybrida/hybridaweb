@@ -91,8 +91,8 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	<? endwhile ?>
 	</tr>
 	</table>
-	<table>
-	<tr><td>4. årskurs</td><td>5. årskurs</td><td>Andre</td>
+	<table cellspacing ="5" width ="700px">
+	<tr><td>4. årskurs</td><td>5. årskurs</td>
 	<? $i = 0 ?>
 	<? while (!empty($lastTwoYears)): ?>
 		</tr>
