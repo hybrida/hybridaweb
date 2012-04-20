@@ -63,21 +63,51 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 
 <? if ($signup): ?>
 	<h1> Påmeldte: </h1>
-	<table>
-	<tr><td>1. årskurs</td><td>2. årskurs</td><td>3. årskurs</td><td>4. årskurs</td><td>5. årskurs</td>
+	<table cellspacing ="5" width ="700px">
+	<tr><td>1. årskurs</td><td>2. årskurs</td><td>3. årskurs</td>
 	<? $fiveYear = $signup->attendersFiveYearArrays ?>
+	<? $firstThreeYears = array_slice($fiveYear, 0 ,3) ?>
+	<? $lastTwoYears = array_slice($fiveYear, 3) ?>
 	<? $i = 0 ?>
-	<? while (!empty($fiveYear)): ?>
+	<? while (!empty($firstThreeYears)): ?>
 		</tr>
-		<? for ($j = 0; $j < 5; $j++): ?>
+		<? for ($j = 0; $j < 3; $j++): ?>
 			<td>
-			<? if (!empty($fiveYear[$j][$i])): ?>
-				<? $user = $fiveYear[$j][$i] ?>
+			<? if (!empty($firstThreeYears[$j][$i])): ?>
+				<? $user = $firstThreeYears[$j][$i] ?>
 				<?= Image::profileTag($user->imageId, 'small') ?>
 				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
 				<? unset($user) ?>
 			<? else: ?>
-				<? unset($fiveYear[$j]) ?>
+				<? if ($i == 0): ?>
+					<? print_r("Du kan bli først!") ?>
+				<? endif ?>
+				<? unset($firstThreeYears[$j]) ?>
+			<? endif ?>
+			</td>
+		<? endfor ?>
+		<? $i++ ?>
+		<tr>
+	<? endwhile ?>
+	</tr>
+	</table>
+	<table>
+	<tr><td>4. årskurs</td><td>5. årskurs</td><td>Andre</td>
+	<? $i = 0 ?>
+	<? while (!empty($lastTwoYears)): ?>
+		</tr>
+		<? for ($j = 0; $j < 2; $j++): ?>
+			<td>
+			<? if (!empty($lastTwoYears[$j][$i])): ?>
+				<? $user = $lastTwoYears[$j][$i] ?>
+				<?= Image::profileTag($user->imageId, 'small') ?>
+				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
+				<? unset($user) ?>
+			<? else: ?>
+				<? if ($i == 0): ?>
+					<? print_r("Du kan bli først!") ?>
+				<? endif ?>
+				<? unset($lastTwoYears[$j]) ?>
 			<? endif ?>
 			</td>
 		<? endfor ?>
