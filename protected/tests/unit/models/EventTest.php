@@ -2,17 +2,12 @@
 
 class EventTest extends CTestCase {
 	
-	public function getEventObject() {
+	public function getNewEvent() {
 		return Util::getNewEvent();
 	}
 
-	public function test_construct() {
-		$event = $this->getEventObject();
-		$this->assertTrue($event->save());
-	}
-
 	public function test_insert_() {
-		$event = $this->getEventObject();
+		$event = $this->getNewEvent();
 		$array = array(1, 2, 3);
 		$event->setAccess($array);
 		$event->save();
@@ -21,7 +16,7 @@ class EventTest extends CTestCase {
 
 	public function test_accessGetterAndSetter_setAccess_inserted() {
 		$array = array(1, 2, 3, 4, 5);
-		$event = $this->getEventObject();
+		$event = $this->getNewEvent();
 		$event->setAccess($array);
 		$event->save();
 
@@ -30,7 +25,7 @@ class EventTest extends CTestCase {
 	}
 
 	public function test_accessProperty() {
-		$event = $this->getEventObject();
+		$event = $this->getNewEvent();
 		$array = array(1, 2, 3, 4, 5);
 		$event->access = $array;
 		$event->save();
@@ -40,7 +35,7 @@ class EventTest extends CTestCase {
 	}
 
 	public function test_accessIsLoadedOnFound() {
-		$event = $this->getEventObject();
+		$event = $this->getNewEvent();
 		$access = array(1, 2, 4, 5);
 		$event->access = $access;
 		$event->save();
@@ -50,13 +45,13 @@ class EventTest extends CTestCase {
 	}
 
 	public function test_save_noInput_idNotNull() {
-		$event = $this->getEventObject();
+		$event = $this->getNewEvent();
 		$event->save();
 		$this->assertNotEquals(null, $event->id);
 	}
 
 	public function test_construct_noInput_idIsNull() {
-		$event = $this->getEventObject();
+		$event = $this->getNewEvent();
 		$this->assertEquals(null, $event->id);
 	}
 

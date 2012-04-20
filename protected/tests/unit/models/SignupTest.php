@@ -3,13 +3,7 @@
 class SignupTest extends CTestCase {
 
 	private function getSignup() {
-		$signup = new Signup;
-		$signup->spots = 1;
-		$signup->close = "2011.10.22 14:30";
-		$signup->open = "2011.10.22 14:30";
-		$signup->eventId = 10000 + Signup::model()->count();
-		$signup->save();
-		return $signup;
+		return Util::getSignup();
 	}
 
 	public function getUser() {

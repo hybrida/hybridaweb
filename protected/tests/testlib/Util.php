@@ -34,10 +34,9 @@ class Util {
 	public static function getNewSignup() {
 		$signup = new Signup;
 		$signup->spots = 1;
-		$signup->close = "2011.10.22 14:30";
-		$signup->open = "2011.10.22 14:30";
+		$signup->close = "2011-10-22 14:30";
+		$signup->open = "2015-10-22 14:30";
 		$signup->eventId = 10000 + Signup::model()->count();
-		$signup->save();
 		return $signup;
 	}
 	
@@ -48,17 +47,42 @@ class Util {
 	}
 	
 	
-	public static function getUser() {
-		$user = self::getNewUser();
-		$user->save();
-		return $user;
-	}
-	
 	public static function getNewUser() {
 		$user = new User;
 		$user->username = 'test' . User::model()->count();
 		$user->firstName = $user->lastName = "test";
 		$user->member = "false";
 		return $user;
+	}
+	
+	public static function getUser() {
+		$user = self::getNewUser();
+		$user->save();
+		return $user;
+	}
+	
+	public static function getNewGroup() {
+		$group = new Groups;
+		$group->url = $group->title = "test" . Groups::model()->count();
+		$group->menu = 123;
+		return $group;
+	}
+	
+	public static function getGroup() {
+		$group = self::getNewGroup();
+		$group->save();
+		return $group;
+	}
+	
+	public static function getNewArticle() {
+		$article = new Article;
+		$article->title = "test";
+		return $article;
+	}
+	
+	public static function getArticle() {
+		$article = self::getNewArticle();
+		$article->save();
+		return $article;
 	}
 }

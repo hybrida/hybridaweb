@@ -2,20 +2,22 @@
 
 class ArticleTest extends CTestCase {
 	
+	private function getNewArticle() {
+		return Util::getNewArticle();
+	}
+	
 	private function getArticle() {
-		$article = new Article();
-		return $article;
+		return Util::getArticle();
 	}
 
 	public function test_construct() {
 		$article = $this->getArticle();
-		$article->save();
 		$this->assertNotNull($article->primaryKey);
 	}
 	
 	public function test_setAccess() {
 		$access = array(1,2,3,4);
-		$article = $this->getArticle();
+		$article = $this->getNewArticle();
 		$article->access = $access;
 		$article->save();
 		
@@ -24,10 +26,10 @@ class ArticleTest extends CTestCase {
 	}
 	
 	public function test_getChildren() {
-		$parent = $this->getArticle();
+		$parent = $this->getNewArticle();
 		$parent->save();
-		$child1 = $this->getArticle();
-		$child2 = $this->getArticle();
+		$child1 = $this->getNewArticle();
+		$child2 = $this->getNewArticle();
 		$child1->parentId = $parent->id;
 		$child2->parentId = $parent->id;
 		$child1->save();
@@ -39,8 +41,8 @@ class ArticleTest extends CTestCase {
 	}
 	
 	public function test_unset_method() {
-		$article1 = $this->getArticle();
-		$article2 = $this->getArticle();
+		$article1 = $this->getNewArticle();
+		$article2 = $this->getNewArticle();
 		$myArray = array($article1, $article2);
 		$this->assertEquals(2, count($myArray));
 		$key = array_search($article1, $myArray);

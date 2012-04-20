@@ -2,30 +2,20 @@
 
 class GroupsTest extends CTestCase {
 
-	private function getNewUser() {
-		$user = new User;
-		$user->firstName = "Test";
-		$user->lastName = "Test";
-		$user->username = "t" . User::model()->count();
-		$user->member = "false";
-		$this->assertTrue($user->save());
-		return $user;
+	private function getUser() {
+		return Util::getUser();
 	}
 
-	private function getNewGroup() {
-		$group = new Groups;
-		$group->menu = 10;
-		$group->url = $group->title = "Test".Groups::model()->count();
-		$this->assertTrue($group->save());
-		return $group;
+	private function getGroup() {
+		return Util::getGroup();
 	}
 
 	public function test_create_validates() {
-		$group = $this->getNewGroup();
+		$group = $this->getGroup();
 		$this->assertTrue($group->save());
 	}
 	public function test_create() {
-		$group = $this->getNewGroup();
+		$group = $this->getGroup();
 		$this->assertTrue($group->save());
 		$this->assertNotNull($group->id, "Id kan ikke være null.");
 		
@@ -34,8 +24,8 @@ class GroupsTest extends CTestCase {
 	}
 
 	public function test_addMember() {
-		$group = $this->getNewGroup();
-		$user = $this->getNewUser();
+		$group = $this->getGroup();
+		$user = $this->getUser();
 		$this->assertTrue($group->addMember($user->id));
 
 		$ms = GroupMembership::model()->find(

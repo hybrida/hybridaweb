@@ -3,13 +3,7 @@
 class UserTest extends CTestCase {
 
 	private function getNewUser() {
-		$user = new User;
-		$user->username = "t" . User::model()->count();
-		$user->firstName = "UserTest";
-		$user->lastName = "getCleanUserObject";
-		$user->member = "true";
-		$user->save();
-		return $user;
+		return Util::getUser();
 	}
 
 	public function testUserIsCreatedWithInsert() {
