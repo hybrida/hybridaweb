@@ -62,28 +62,30 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 
 
 <? if ($signup): ?>
-	<div class="barTitle"> Påmeldte: </div>
-	<br/>
-	<div class="barText">
-		<? $i = 0 ?>
-		<? foreach ($signup->attendersFiveYearArrays as $year): ?>
-			<? $i++ ?>
-			<? if (empty($year)): ?>
-				<? continue; ?>
-			<? endif ?>
-			
-			<div class="barTitle">
-			<?= $i ?>. årskurs
-			</div>
-			<br/>
-			
-			<? foreach ($year as $user): ?>
-				<?= Image::profileTag($user->imageId, 'small') ?>
+	<h1> Påmeldte: </h1>
+	<table>
+	<tr><td>1. årskurs</td><td>2. årskurs</td><td>3. årskurs</td><td>4. årskurs</td><td>5. årskurs</td>
+	<? $fiveYear = $signup->attendersFiveYearArrays ?>
+	<? $i = 0 ?>
+	<? while (!empty($fiveYear)): ?>
+		</tr>
+		<? for ($j = 0; $j < 5; $j++): ?>
+			<td>
+			<? if (!empty($fiveYear[$j][$i])): ?>
+				<? $user = $fiveYear[$j][$i] ?>
+				<?  //Image::profileTag($user->imageId, 'small') ?>
 				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
-				<br />
-			<? endforeach; ?>
-		<? endforeach; ?>
-	</div><!-- barText -->
+				<? unset($user) ?>
+			<? else: ?>
+				<? unset($fiveYear[$j]) ?>
+			<? endif ?>
+			</td>
+		<? endfor ?>
+		<? $i++ ?>
+		<tr>
+	<? endwhile ?>
+	</tr>
+	</table>
 <? endif ?>
 
 <?$this->widget('comment.components.commentWidget', array(
