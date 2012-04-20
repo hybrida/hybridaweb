@@ -4,7 +4,7 @@ class BpcUpdate {
 
 	private $news;
 	private $event;
-	private $signup;
+	private $MAX_INGRESS_LENGTH = 700;
 
 	public function update($bpcID) {
 		$postData = array(
@@ -39,8 +39,6 @@ class BpcUpdate {
 		$this->init($bedpresData['id']);
 		$this->saveEvent($bedpresData);
 		$this->saveNews($bedpresData);
-		$this->saveSignup($bedpresData);
-		$this->updateMemberships();
 	}
 
 	public function init($bpcID) {
@@ -52,10 +50,8 @@ class BpcUpdate {
 		$event = Event::model()->find('bpcID = ?', array($bpcID));
 		if ($event) {
 			$this->event = $event;
-			$this->signup = $event->signup;
 		} else {
 			$this->event = new Event;
-			$this->signup = new Signup;
 		}
 	}
 
@@ -83,6 +79,7 @@ class BpcUpdate {
 		$event->bpcID = $bpc['id'];
 		$event->start = $bpc['time'];
 		$event->end = $bpc['time']; // FIXME
+		$event->location = $bpc['place'];
 		$event->save();
 	}
 
@@ -90,71 +87,16 @@ class BpcUpdate {
 		$news = $this->news;
 		$news->title = 'Bedpres: '.$bpc['title'];
 		$news->content = $bpc['description_formatted'];
-		$news->ingress = '';
+		$news->ingress = $this->shortenIngress($bpc['description']);
 		$news->setParent('event', $this->event->id);
 		$news->save();
 		$news->authorId = null;
 		$news->save();
 	}
-
-	private function saveSignup($bpc) {
-		$signup = $this->signup;
-		$signup->close = $bpc['deadline'];
-		$signup->open = $bpc['registration_start'];
-		$signup->spots = $bpc['seats'];
-		$signup->access = $this->getAccessYears($bpc['min_year'], $bpc['max_year']);
-		$signup->eventId = $this->event->id;
-		$signup->save();
+	
+	private function shortenIngress($string) {
+		$len = strlen($string);
+		if ($len < $this->MAX_INGRESS_LENGTH) return $string;
+		return substr($string, 0,$this->MAX_INGRESS_LENGTH) . "...";
 	}
-
-	private function getAccessYears($from, $to) {
-		if (date('n') >= 7) {
-			$compensationForAutumn = 1;
-		} else {
-			$compensationForAutumn = 0;
-		}
-		$years = array();
-		for ($i = $from; $i <= $to; $i++) {
-			$year = date('Y') + 5 - $compensationForAutumn;
-			$access = $year - $i;
-			$years[] = $access;
-		}
-		return $years;
-	}
-
-	private function updateMemberships() {
-		$usernames = $this->getAttendingUsernames($this->event->bpcID);
-		$this->clearMembershipsOnEvent();
-		foreach ($usernames as $username) {
-			$this->updateMembership($username);
-		}
-	}
-
-	private function clearMembershipsOnEvent() {
-		$this->signup->removeAllAttenders();
-	}
-
-	public function getAttendingUsernames($bpcID) {
-		$array = array(
-			'request' => 'get_attending',
-			'event' => $bpcID,
-		);
-		$data = BpcCore::doRequest($array);
-		$names = array();
-		if (!isset($data['users'])) {
-			return array();
-		}
-		foreach ($data['users'] as $user) {
-			$names[] = $user['username'];
-		}
-		return $names;
-	}
-
-	public function updateMembership($username) {
-		$user = User::model()->find('username = ?', array($username));
-		if (!$user)
-			return;
-		$this->signup->addAttender($user->id, false);
-	}
-
 }

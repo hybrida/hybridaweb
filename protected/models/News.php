@@ -131,7 +131,7 @@ class News extends CActiveRecord {
 
 	public function beforeSave() {
 		if ($this->isNewRecord) {
-			$this->authorId = Yii::app()->user->id;
+			$this->authorId = isset(Yii::app()->user) ? Yii::app()->user->id : null;
 			$this->timestamp = new CDbExpression('NOW()');
 		}
 		return parent::beforeSave();

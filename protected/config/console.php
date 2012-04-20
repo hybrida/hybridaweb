@@ -12,9 +12,10 @@ return array(
 			'emulatePrepare' => true,
 			'username' => 'www-data',
 			'password' => 'Q8JdU5MY7dDr5XEU',
-			'charset' => 'utf8',)
+			'charset' => 'utf8',
+		),
 	),
 	'modules' => array(
-		'dev',
+		'dev','bpc',
 	)
 );
