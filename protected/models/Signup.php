@@ -125,7 +125,9 @@ class Signup extends CActiveRecord {
 		$stmt->execute();
 		
 		$news = $this->getNews();
-		$this->pushToFacebook($news->absoluteUrl);
+		if ($news) {
+			$this->pushToFacebook($news->absoluteUrl);
+		}
                 
 		if ($addBPC) {
 			$this->addBpcAttender($userId);

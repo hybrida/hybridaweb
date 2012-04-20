@@ -3,9 +3,7 @@
 class EventTest extends CTestCase {
 	
 	public function getEventObject() {
-		$event = new Event;
-		$event->title ="TestCase";
-		return $event;
+		return Util::getNewEvent();
 	}
 
 	public function test_construct() {
