@@ -5,7 +5,6 @@ class Util {
 	public static function getNewNews() {
 		$news = new News;
 		$news->title = "test";
-		$news->authorId = 0;
 		$news->content = "test";
 		return $news;
 	}
