@@ -8,8 +8,8 @@ $this->beginClip('sidebar');
 		'event' => $event,
 		'isAttending' => $isAttending,
 	));
-	?><div class="barTitle">Kalender</div><?
-	$this->widget('calendar.widgets.CalendarWidget');
+	?>
+	<?
 	$this->widget('application.components.widgets.ActivitiesFeed');
 $this->endClip()
 ?>
@@ -23,6 +23,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 		<meta property="og:type"        content="lfhybrida:event" />
 		<meta property="og:url"         content="<?= Yii::app()->createAbsoluteUrl("/") . $news->viewUrl ?>" />
 		<meta property="og:title"       content="<?= $news->title ?>" />
+                <meta property="og:image"       content="<?= Yii::app()->createAbsoluteUrl("/") ?>/images/mastHeadLogo.png" />
 	<? $this->endClip() ?>
 <? endif; ?>
 <?$this->breadcrumbs=array(
@@ -40,7 +41,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 <? endif ?>
 
 <? if ($news->author): ?>
-<strong>Skribent:</strong> <?= CHtml::link($news->author->fullName, array(
+<strong>Skribent:&nbsp;</strong> <?= CHtml::link($news->author->fullName, array(
 	'/profile/view/',
 	'username' => $news->author->username,
 	))?>
@@ -58,6 +59,32 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 <p><strong><?=$news->ingress?></strong></p>
 
 <?=$news->content?>
+
+
+<? if ($signup): ?>
+	<div class="barTitle"> Påmeldte: </div>
+	<br/>
+	<div class="barText">
+		<? $i = 0 ?>
+		<? foreach ($signup->attendersFiveYearArrays as $year): ?>
+			<? $i++ ?>
+			<? if (empty($year)): ?>
+				<? continue; ?>
+			<? endif ?>
+			
+			<div class="barTitle">
+			<?= $i ?>. årskurs
+			</div>
+			<br/>
+			
+			<? foreach ($year as $user): ?>
+				<?= Image::profileTag($user->imageId, 'small') ?>
+				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
+				<br />
+			<? endforeach; ?>
+		<? endforeach; ?>
+	</div><!-- barText -->
+<? endif ?>
 
 <?$this->widget('comment.components.commentWidget', array(
 	'id' => $news->id,

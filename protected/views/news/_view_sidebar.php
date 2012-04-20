@@ -20,9 +20,8 @@
 			<?= $event->getGoogleCalendarButton() ?>
 		</div>
 		<? if ($signup): ?>
-			<div class="barTitle">Påmeldte</div>
+			<div class="barTitle">Påmelding</div>
 			<div class="barText">
-
 				<? if ($signup->canAttend(user()->id)): ?>
 					<?=
 					Html::ajaxLink($isAttending ? "Meld meg av" : "Meld meg på", array('toggleAttending', 'eventId' => $event->id), array(
@@ -32,13 +31,6 @@
 					))
 					?><p></p>
 				<? endif; ?>
-
-				<? foreach ($signup->getAttenders() as $user): ?>
-					<?= Image::profileTag($user->imageId, 'small') ?>
-					<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
-					<br />
-				<? endforeach; ?>
-
 			</div><!-- barText -->
 		<? endif; ?>
 	<? endif ?>

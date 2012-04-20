@@ -123,7 +123,9 @@ class Signup extends CActiveRecord {
 		$stmt->bindValue(':eid', $this->eventId);
 		$stmt->bindValue(':uid', $userId);
 		$stmt->execute();
-                $this->pushToFacebook($eventId);
+		
+		$news = $this->getNews();
+		$this->pushToFacebook($news->absoluteUrl);
                 
 		if ($addBPC) {
 			$this->addBpcAttender($userId);
@@ -134,6 +136,12 @@ class Signup extends CActiveRecord {
             $fb = new Facebook;
             $fb->setAttending($eventId);
         }
+		
+	public function getNews() {
+		return News::model()->find("parentId = ? AND parentType = 'event'", array(
+			$this->eventId,
+		));
+	}
 
 	private function addBpcAttender($userID) {
 		if ($this->isBpc()) {
@@ -201,6 +209,21 @@ class Signup extends CActiveRecord {
 			}
 		}
 		return $attenders;
+	}
+	
+	public function getAttendersFiveYearArrays() {
+		$attenders = $this->getAttenders();
+		$attendersArrays = array();
+		for ($i=1; $i<=5; $i++) {
+			$year = array();
+			foreach ($attenders as $attender) {
+				if ($attender->classYear == $i) {
+					array_push($year, $attender);
+				}
+			}
+			array_push($attendersArrays, $year);
+		}
+		return $attendersArrays;
 	}
 
 	public function isAttending($userId) {
