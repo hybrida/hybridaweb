@@ -111,16 +111,15 @@ class Image extends CActiveRecord {
 		return $image;
 	}
 
-	public static function tag($id, $size) {
+	public static function tag($id, $size, $htmlOptions=array()) {
 		list($width, $height) = self::getSize($size);
-		$options = array();
-		if ($width) $options['width'] = $width;
-		if ($height) $options['height'] = $height;
+		if ($width) $htmlOptions['width'] = $width;
+		if ($height) $htmlOptions['height'] = $height;
 		$url = Yii::app()->createAbsoluteUrl("/image/view", array(
 			'id' => $id,
 			'size' => $size,
 				));
-		return CHtml::image($url, "", $options);
+		return CHtml::image($url, "", $htmlOptions);
 	}
 
 	public static function profileTag($id, $size) {
