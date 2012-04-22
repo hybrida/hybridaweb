@@ -50,7 +50,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 <? if ($news->imageId):
 	$imageURL = $this->createUrl('/image/view',array(
 		'id' => $news->imageId,
-		'size' => 1, //FIXME
+		'size' => 'frontpage', //FIXME
 	));
 	?>
 <br/><img src='<?=$imageURL?>' />

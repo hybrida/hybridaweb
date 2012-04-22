@@ -41,6 +41,8 @@
 		'enableClientValidation' => true,
 		'clientOptions' => array(
 			'validateOnSubmit' => true,
+		), 'htmlOptions' => array(
+			'enctype' => 'multipart/form-data',
 		),
 	));
 	?>
@@ -79,6 +81,12 @@
 			<?= $form->richTextArea($model, "news[content]",array('class'=>'message')); ?>
 			<?= $form->error($model, 'news[content]'); ?> 
 		</div>
+	
+		<div class="row">
+			<label>Last opp bilde</label>
+			<?= $form->fileField($model, 'imageUpload') ?>
+			<?= $form->error($model, 'imageUpload') ?>
+		</div>
 			
 		<div class="row">
 			<label>Tilgang til nyhet</label>
@@ -115,12 +123,7 @@
 			<?= $form->textField($model, 'event[location]', array('class' => 'input_text')); ?>
 			<?= $form->error($model, 'event[location]'); ?>				
 		</div>
-				
-		<div class="row">
-			<?= $form->labelEx($model, 'event[imageId]'); ?>
-			<?= $form->textField($model, 'event[imageId]', array('class' => 'input_text')); ?>
-			<?= $form->error($model, 'event[imageId]'); ?>				
-		</div>		
+
 		<div class="formHeader">
 			<h1>
 				<?= $form->checkBox($model, 'hasSignup'); ?>

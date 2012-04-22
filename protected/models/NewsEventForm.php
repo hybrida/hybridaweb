@@ -17,9 +17,12 @@ class NewsEventForm extends CFormModel {
 	public $news = array();
 	public $event = array();
 	public $signup = array();
+	
+	public $imageUpload;
 	private $newsModel;
 	private $eventModel;
 	private $signupModel;
+	
 
 	public function rules() {
 		return array(
@@ -190,7 +193,13 @@ class NewsEventForm extends CFormModel {
 
 		$this->initNewsParent();
 		$this->newsModel->purify();
-		$this->newsModel->save();
+		if ($this->newsModel->save()) {
+			try {
+				$image = Image::uploadByModel($this, 'imageUpload', user()->id);
+				$this->newsModel->imageId = $image->id;
+				$this->newsModel->save();
+			} catch (NoFileIsUploadedException $e) {}
+		}
 	}
 
 	private function initNewsParent() {

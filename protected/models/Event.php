@@ -10,8 +10,6 @@
  * @property string $end
  * @property string $location
  * @property integer $access
- * @property string $title
- * @property integer $imageId
  * @property string $content
  */
 class Event extends CActiveRecord {
@@ -42,12 +40,11 @@ class Event extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-		  array('imageId', 'numerical', 'integerOnly' => true),
-		  array('location, title', 'length', 'max' => 30),
+		  array('location', 'length', 'max' => 30),
 		  array('start, end', 'safe'),
 		  // The following rule is used by search().
 		  // Please remove those attributes that should not be searched.
-		  array('id, start, end, location, title, imageId', 'safe', 'on' => 'search'),
+		  array('id, start, end, location', 'safe', 'on' => 'search'),
 		);
 	}
 
@@ -71,8 +68,6 @@ class Event extends CActiveRecord {
 		  'start' => 'Start',
 		  'end' => 'End',
 		  'location' => 'Location',
-		  'title' => 'Title',
-		  'imageId' => 'Image',
 		  'content' => 'Content',
 		);
 	}
@@ -92,8 +87,6 @@ class Event extends CActiveRecord {
 		$criteria->compare('end', $this->end, true);
 		$criteria->compare('location', $this->location, true);
 		$criteria->compare('access', $this->access);
-		$criteria->compare('title', $this->title, true);
-		$criteria->compare('imageId', $this->imageId);
 		$criteria->compare('content', $this->content, true);
 
 		return new CActiveDataProvider($this, array(
