@@ -2,7 +2,7 @@
     <div class="comment">
         <div class="comment-left">
             <div class="profile-image">
-                <? //TODO ?>
+                <?= Image::profileTag($model->author->imageId, 'small') ?>
             </div>
         </div>
 
