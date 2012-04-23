@@ -30,6 +30,7 @@ class DefaultController extends Controller {
 			$news = new News;
 			$news->title = "Lipsum $i";
 			$news->content = $lipsum->getContent(rand(100, 700));
+			$news->ingress = $lipsum->getContent(rand(5,150));
 			$news->save();
 		}
 		echo "Suksess: Laget $i nye dummy-elementer";
