@@ -17,9 +17,8 @@
 <body>
 	<div class="headerStripe">
 		<div class="header">
-			<img src="<?=Yii::app()->request->baseUrl?>/images/mastHeadLogo.png" align="left"></img>
-			<h1><?= CHtml::encode(Yii::app()->name) ?></h1>
-			<div class="searchWrap">
+			<img src="<?=Yii::app()->request->baseUrl?>/images/BannerLarge.png" align="left"></img>
+				<div class="searchWrap">
 				<form method='post' action='?site=search' id='searchForm'>
 				<div class="searchBox">
 					<input type='text' id='activeSearchBox' />
