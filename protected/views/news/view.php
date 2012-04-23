@@ -76,7 +76,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 			<td>
 			<? if (!empty($firstThreeYears[$j][$i])): ?>
 				<? $user = $firstThreeYears[$j][$i] ?>
-				<?= Image::profileTag($user->imageId, 'small') ?>
+				<?= Image::profileTag($user->imageId, 'mini') ?>
 				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
 				<? unset($user) ?>
 			<? else: ?>
@@ -107,7 +107,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 			<td>
 			<? if (!empty($lastTwoYears[$j][$i])): ?>
 				<? $user = $lastTwoYears[$j][$i] ?>
-				<?= Image::profileTag($user->imageId, 'small') ?>
+				<?= Image::profileTag($user->imageId, 'mini') ?>
 				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
 				<? unset($user) ?>
 			<? else: ?>
