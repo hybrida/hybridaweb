@@ -96,8 +96,8 @@ class Facebook {
             parse_str($access, $params);
             $accessToken = $params['access_token'];
             
-            $array=array('uID' => $userId, 'aToken' => $accessToken);
-            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken) ON DUPLICATE KEY UPDATE userId = :uID';
+            $array=array('uID' => $userId, 'aToken' => $accessToken, 'postEvents' => 'true');
+            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken, :postEvents) ON DUPLICATE KEY UPDATE userId = :uID';
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
             
