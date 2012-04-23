@@ -14,11 +14,11 @@ $this->endClip()
 <div class="feedTitle">
 </div>
 
-<div class="feeds">
-    <?=CHtml::button('Nyheter/Kalender', array(
-    'class' => 'button buttonRightSide',
+    <?=CHtml::link('Listevisning / Kalendervisning', '#', array(
+    'class' => '',
     'id' => 'toggleCalendar'
     ))?>
+<div class="feeds">
 	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
 		'class' => 'button buttonRightSide',
@@ -27,14 +27,14 @@ $this->endClip()
 	<?	$this->renderPartial("_feed", array(
 		'models' => $models,
 	));	?>
-</div>
-
-<div class="calendar-switch"> </div>
 
 <?=CHtml::button('Vis flere', array(
 	'class' => 'button buttonRightSide',
 	'id' => 'fetchNews',
 ))?>
+</div>
+
+<div class="calendar-switch"> </div>
 
 <script>
 	var count = <?= $index ?>;
