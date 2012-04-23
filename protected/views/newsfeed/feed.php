@@ -12,7 +12,6 @@ $this->endClip()
 // Forferdelig stygt, men fungerer.
 ?>
 <div class="feedTitle">
-    <h1 style="display: inline">Nyhetsstrøm</h1>
     <?=CHtml::button('Nyheter/Kalender', array(
     'class' => 'button buttonRightSide',
     'id' => 'toggleCalendar'
