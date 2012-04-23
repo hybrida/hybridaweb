@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/fonts/fonts.css" />
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/pageContent.css" />
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/classList.css" />
+        <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/widget-comment.css" />
         
         <!-- google analytics -->
         <script type="text/javascript">
