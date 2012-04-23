@@ -3,40 +3,41 @@
 class AccessRelationTest extends CTestCase {
 
 	private function getNewNews() {
-		$news = new News;
-		$news->title = "title";
-		$news->content = "content";
-		$news->save();
-		return $news;
+		return Util::getNewNews();
+	}
+
+	private function getNews() {
+		return Util::getNews();
+	}
+
+	private function getEvent() {
+		return Util::getEvent();
+	}
+
+	private function getArticle() {
+		return Util::getArticle();
 	}
 
 	public function test_constructor_NewsModel_GetId() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$this->assertEquals($news->id, $access->getId());
 	}
 
 	public function test_constructor_NewsModel_getType() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$this->assertEquals("news", $access->getType());
 	}
 
 	public function test_constructor_EventModel_getType() {
-		$event = new Event;
-		$event->title = "dummy";
-		$event->save();
+		$event = $this->getEvent();
 		$access = new AccessRelation($event);
 		$this->assertEquals("event", $access->getType());
 	}
 
 	public function test_constructor_ArticleModel_getType() {
-		$article = new Article;
-		$article->title = "title";
-		$article->content = "content";
-		$article->save();
+		$article = $this->getArticle();
 		$access = new AccessRelation($article);
 
 		$this->assertEquals("article", $access->getType());
@@ -60,7 +61,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_validate_UnsavedModel_returnsFalse() {
-		$news = new News;
+		$news = $this->getNewNews();
 		$access = new AccessRelation($news);
 		$this->assertFalse($access->validate());
 	}
@@ -69,7 +70,7 @@ class AccessRelationTest extends CTestCase {
 	 *  @expectedException BadMethodCallException
 	 */
 	public function test_insert_UnsavedModel_throwsException() {
-		$news = new News;
+		$news = $this->getNewNews();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3,));
 		$access->insert();
@@ -77,8 +78,7 @@ class AccessRelationTest extends CTestCase {
 
 	public function test_insert_accessArray() {
 		$accessArray = array(1, 2, 3, 4);
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$access->set($accessArray);
 		$access->insert();
@@ -90,8 +90,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_insert_insertInNonEmpty_arraysGetsMerged() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$accessArray1 = array(1, 2, 3, 4);
 		$access->set($accessArray1);
@@ -105,8 +104,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_insert_duplicatedInsertion_insertsOnce() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3));
 		$access->insert();
@@ -117,8 +115,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_insert_duplicatedInsertionInSameSet_insertOnce() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3, 1, 2));
 		$access->insert();
@@ -127,8 +124,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_insert_duplicatedInsertionSeparateObjects() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3));
 		$access->insert();
@@ -145,7 +141,7 @@ class AccessRelationTest extends CTestCase {
 
 	public function test_insert_makeAccessRelationOnNewRecord_throwsNothing() {
 		$array = array(1, 2, 3);
-		$news = new News;
+		$news = $this->getNewNews();
 		$access = new AccessRelation($news);
 		$access->set($array);
 		$news->save();
@@ -157,8 +153,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_insert_EmptyArray_doesNothing() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$access->set(array());
 		$access->replace();
@@ -179,8 +174,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_save_nonEmptyAccess_deleteOld() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3, 4));
 		$access->replace();
@@ -195,8 +189,7 @@ class AccessRelationTest extends CTestCase {
 	}
 
 	public function test_removeAll() {
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$access = new AccessRelation($news);
 		$access->set(array(1, 2, 3, 4));
 		$access->insert();
@@ -208,8 +201,7 @@ class AccessRelationTest extends CTestCase {
 
 	public function test_save_noInputIsJustLikeInsert() {
 		$array = array(1, 2, 3, 4, 5);
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 
 		$access = new AccessRelation($news);
 		$access->set($array);
@@ -226,7 +218,7 @@ class AccessRelationTest extends CTestCase {
 			array(2, 3, 1001),
 			array(2, 3, 2012),
 		);
-		$news = $this->getNewNews();
+		$news = $this->getNews();
 		$ar = new AccessRelation($news);
 		$ar->set($postAccess);
 		$ar->save();
@@ -242,7 +234,7 @@ class AccessRelationTest extends CTestCase {
 			array(2, 3, 2012),
 		);
 
-		$news = $this->getNewNews();
+		$news = $this->getNews();
 		$ar = new AccessRelation($news);
 		$ar->set($postAccess);
 		$ar->save();
@@ -254,7 +246,7 @@ class AccessRelationTest extends CTestCase {
 			array(),
 			array(),
 		);
-		$news = $this->getNewNews();
+		$news = $this->getNews();
 		$ar = new AccessRelation($news);
 		$ar->set($postAccess);
 		$ar->save();
@@ -269,7 +261,7 @@ class AccessRelationTest extends CTestCase {
 		$expexted = array(
 			1001, 2012,
 		);
-		$news = $this->getNewNews();
+		$news = $this->getNews();
 		$ar = new AccessRelation($news);
 		$ar->set($postAccess);
 		$ar->save();

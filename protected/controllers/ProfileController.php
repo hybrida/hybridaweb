@@ -76,7 +76,7 @@ class ProfileController extends Controller {
 				$user->purify();
 				$user->save();
 				try {
-					$image = Image::uploadAndSave(CUploadedFile::getInstance($user, 'imageUpload'), $user->id);
+					$image = Image::uploadByModel($user, 'imageUpload', $user->id);
 					$user->imageId = $image->id;
 					$user->save();
 				} catch (NoFileIsUploadedException $ex) {}

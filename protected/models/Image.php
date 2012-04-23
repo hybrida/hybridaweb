@@ -16,7 +16,7 @@ class Image extends CActiveRecord {
 	public static $sizes = array(
 		'profile' => array('width' => 248),
 		'small' => array('width' => 40, 'height' => 40),
-		'frontpage' => array('width' => 700, 'height' => 100),
+		'frontpage' => array('width' => 400),
 	);
 
 	/**
@@ -111,16 +111,15 @@ class Image extends CActiveRecord {
 		return $image;
 	}
 
-	public static function tag($id, $size) {
+	public static function tag($id, $size, $htmlOptions=array()) {
 		list($width, $height) = self::getSize($size);
-		$options = array();
-		if ($width) $options['width'] = $width;
-		if ($height) $options['height'] = $height;
+		if ($width) $htmlOptions['width'] = $width;
+		if ($height) $htmlOptions['height'] = $height;
 		$url = Yii::app()->createAbsoluteUrl("/image/view", array(
 			'id' => $id,
 			'size' => $size,
 				));
-		return CHtml::image($url, "", $options);
+		return CHtml::image($url, "", $htmlOptions);
 	}
 
 	public static function profileTag($id, $size) {
@@ -182,6 +181,12 @@ class Image extends CActiveRecord {
 		$width = isset($ar['width']) ? $ar['width'] : null;
 		$height = isset($ar['height']) ? $ar['height'] : null;
 		return array($width, $height);
+	}
+	
+	public static function uploadByModel($model, $attribute, $userId) {
+		$uploadedFile = CUploadedFile::getInstance($model, $attribute);
+		$image = self::uploadAndSave($uploadedFile, $userId);
+		return $image;
 	}
 
 	public static function uploadAndSave($uploadedFile, $userId) {

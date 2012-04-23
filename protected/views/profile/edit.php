@@ -2,13 +2,7 @@
 
 <h1>Endre profil</h1>
 <div class="formSection">
-    <div class="fieldDefinition">Fyll inn info fra Facebook:</div>
-
     <div class="fieldInput"><?= $fb ?></div>
-
-    <div class="fieldExplanation">
-        Henter personlig info fra Facebook så du slipper gjøre det selv!
-    </div>
 </div>
 
 <?

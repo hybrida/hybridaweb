@@ -77,14 +77,5 @@ class NewsFeedTest extends CTestCase {
 		$feed = new NewsFeed($limit, $offset);
 		$this->assertEquals($offset, $feed->getOffset());
 	}
-	
-	public function test_getOffset_offsetIncrementsByLimitForeachGetElements() {
-		$limit = 10;
-		$feed = new NewsFeed($limit);
-		$feed->getElements();
-		$this->assertEquals($limit, $feed->getOffset());
-		$feed->getElements();
-		$this->assertEquals($limit * 2, $feed->getOffset());
-	}
 
 }

@@ -50,7 +50,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 <? if ($news->imageId):
 	$imageURL = $this->createUrl('/image/view',array(
 		'id' => $news->imageId,
-		'size' => 1, //FIXME
+		'size' => 'frontpage', //FIXME
 	));
 	?>
 <br/><img src='<?=$imageURL?>' />
@@ -62,28 +62,72 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 
 
 <? if ($signup): ?>
-	<div class="barTitle"> Påmeldte: </div>
-	<br/>
-	<div class="barText">
-		<? $i = 0 ?>
-		<? foreach ($signup->attendersFiveYearArrays as $year): ?>
-			<? $i++ ?>
-			<? if (empty($year)): ?>
-				<? continue; ?>
-			<? endif ?>
-			
-			<div class="barTitle">
-			<?= $i ?>. årskurs
-			</div>
-			<br/>
-			
-			<? foreach ($year as $user): ?>
+	<h1> Påmeldte: </h1>
+	<table cellspacing ="5" width ="700px">
+	<tr><td>1. årskurs</td><td>2. årskurs</td><td>3. årskurs</td>
+	<? $fiveYear = $signup->attendersFiveYearArrays ?>
+	<? $firstThreeYears = array_slice($fiveYear, 0 ,3) ?>
+	<? $lastTwoYears = array_slice($fiveYear, 3) ?>
+	<? $i = 0 ?>
+	<? $total = array(0 => false, 1 => false, 2 => false) ?>
+	<? while (!empty($firstThreeYears)): ?>
+		</tr>
+		<? for ($j = 0; $j < 3; $j++): ?>
+			<td>
+			<? if (!empty($firstThreeYears[$j][$i])): ?>
+				<? $user = $firstThreeYears[$j][$i] ?>
 				<?= Image::profileTag($user->imageId, 'small') ?>
 				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
-				<br />
-			<? endforeach; ?>
-		<? endforeach; ?>
-	</div><!-- barText -->
+				<? unset($user) ?>
+			<? else: ?>
+				<? if ($i == 0): ?>
+					<? print_r("Du kan bli først!") ?>
+				<? else: ?>
+					<? if (!$total[$j]): ?>
+						Totalt på årskurs: <?=  $i ?>
+						<? $total[$j] = true; ?>
+					<? endif ?>
+				<? endif ?>
+				<? unset($firstThreeYears[$j]) ?>
+			<? endif ?>
+			</td>
+		<? endfor ?>
+		<? $i++ ?>
+		<tr>
+	<? endwhile ?>
+	</tr>
+	</table>
+	<table cellspacing ="5" width ="700px">
+	<tr><td>4. årskurs</td><td>5. årskurs</td>
+	<? $i = 0 ?>
+	<? $total = array(0 => false, 1 => false) ?>
+	<? while (!empty($lastTwoYears)): ?>
+		</tr>
+		<? for ($j = 0; $j < 2; $j++): ?>
+			<td>
+			<? if (!empty($lastTwoYears[$j][$i])): ?>
+				<? $user = $lastTwoYears[$j][$i] ?>
+				<?= Image::profileTag($user->imageId, 'small') ?>
+				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
+				<? unset($user) ?>
+			<? else: ?>
+				<? if ($i == 0): ?>
+					<? print_r("Du kan bli først!") ?>
+				<? else: ?>
+					<? if (!$total[$j]): ?>
+						Totalt på årskurs: <?=  $i ?>
+						<? $total[$j] = true; ?>
+					<? endif ?>
+				<? endif ?>
+				<? unset($lastTwoYears[$j]) ?>
+			<? endif ?>
+			</td>
+		<? endfor ?>
+		<? $i++ ?>
+		<tr>
+	<? endwhile ?>
+	</tr>
+	</table>
 <? endif ?>
 
 <?$this->widget('comment.components.commentWidget', array(

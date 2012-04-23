@@ -11,10 +11,26 @@ class NewsTest extends CTestCase {
 	public function login() {
 		$this->session->loginNewUser();
 	}
+	
+	private function getNewNews() {
+		return Util::getNewNews();
+	}
+	
+	private function getNews() {
+		return Util::getNews();
+	}
+	
+	private function getNewEvent() {
+		return Util::getNewEvent();
+	}
+	
+	private function getEvent() {
+		return Util::getEvent();
+	}
 
 	public function test_save_getAccess() {
 		$this->login();
-		$news = new News;
+		$news = $this->getNewNews();
 		$array = array(1, 2, 3);
 		$news->setAccess($array);
 		$news->save();
@@ -23,8 +39,7 @@ class NewsTest extends CTestCase {
 
 	public function test_save_getAuthor() {
 		$this->login();
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$userId = Yii::app()->user->id;
 		$this->assertNotNull($userId);
 		$this->assertEquals($userId, $news->authorId);
@@ -33,7 +48,7 @@ class NewsTest extends CTestCase {
 	public function test_accessGetterAndSetter_setAccess_inserted() {
 		$this->login();
 		$array = array(1, 2, 3, 4, 5);
-		$news = new News();
+		$news = $this->getNewNews();
 		$news->setAccess($array);
 		$news->save();
 
@@ -43,7 +58,7 @@ class NewsTest extends CTestCase {
 
 	public function test_accessProperty() {
 		$this->login();
-		$news = new News();
+		$news = $this->getNewNews();
 		$array = array(1, 2, 3, 4, 5);
 		$news->access = $array;
 		$news->save();
@@ -54,7 +69,7 @@ class NewsTest extends CTestCase {
 
 	public function test_accessIsLoadedOnFound() {
 		$this->login();
-		$news = new News;
+		$news = $this->getNewNews();
 		$access = array(1, 2, 4, 5);
 		$news->access = $access;
 		$news->save();
@@ -65,22 +80,20 @@ class NewsTest extends CTestCase {
 
 	public function test_save_noInput_idNotNull() {
 		$this->login();
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$this->assertNotEquals(null, $news->id);
 	}
 
 	public function test_construct_noInput_idIsNull() {
 		$this->login();
-		$news = new News;
+		$news = $this->getNewNews();
 		$this->assertEquals(null, $news->id);
 	}
 
 	public function test_setParent_getParentId_TypeAndID() {
 		$this->login();
-		$event = new Event;
-		$event->insert();
-		$news = new News;
+		$event = $this->getEvent();
+		$news = $this->getNewNews();
 		$news->setParent("event", $event->getPrimaryKey());
 		$news->insert();
 
@@ -92,9 +105,8 @@ class NewsTest extends CTestCase {
 	public function test_setParent_getParentType_TypeAndId() {
 
 		$this->login();
-		$event = new Event;
-		$event->insert();
-		$news = new News;
+		$event = $this->getEvent();
+		$news = $this->getNewNews();
 		$news->setParent("event", $event->getPrimaryKey());
 		$news->insert();
 
@@ -102,34 +114,30 @@ class NewsTest extends CTestCase {
 		$this->assertEquals("event", $news2->getParentTYpe());
 	}
 
-	public function test_rules_tooLongTitle_false() {
+	public function test_rules_tooLongTitle_invalid() {
 		$this->login();
-		$news = new News;
+		$news = $this->getNewNews();
 		$news->title = '_123456789_0123456789_123456789_123456789_123456789_123456789';
 		$this->assertFalse($news->save());
 	}
 
-	public function test_rules_longestParentType_true() {
+	public function test_rules_longestParentType_valid() {
 		$this->login();
-		$news = new News;
-		$news->title = __METHOD__;
+		$news = $this->getNewNews();
 		$news->parentType = '1234567';
 		$this->assertTrue($news->save());
 	}
 
-	public function test_rules_tooLongParentType_false() {
+	public function test_rules_tooLongParentType_invalid() {
 		$this->login();
-		$news = new News;
-		$news->title = __METHOD__;
+		$news = $this->getNewNews();
 		$news->parentType = '12345678';
 		$this->assertFalse($news->save());
 	}
 
 	public function test_authorIdIsNotSetOnUpdate() {
 		$this->login();
-		$news = new News;
-		$news->title = "title";
-		$news->save();
+		$news = $this->getNews();
 		$authorId = $news->authorId;
 		$this->assertNotNull($authorId);
 
@@ -142,22 +150,21 @@ class NewsTest extends CTestCase {
 
 	public function test_timestampSetOnCreate() {
 		$this->login();
-		$news = new News;
-		$news->save();
+		$news = $this->getNews();
 		$this->assertNotNull($news->timestamp);
 	}
 	
 	public function test_purifier_content() {
 		$this->login();
-		$news = new News;
-		$news->content = "<script></script>";
-		$news->title = "hei";
+		$news = $this->getNewNews();
+		$news->content = "tomrom<script></script>";
+		$news->title = "test<script></script>";
 		$news->purify();
 		$news->save();
 		
 		$news2 = News::model()->findByPk($news->id);
-		$this->assertEquals("",$news2->content);
-		$this->assertEquals("hei", $news2->title);
+		$this->assertEquals("tomrom",$news2->content);
+		$this->assertEquals("test", $news2->title);
 	}
 
 }

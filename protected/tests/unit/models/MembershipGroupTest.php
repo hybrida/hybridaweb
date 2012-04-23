@@ -2,28 +2,17 @@
 
 class GroupMembershipTest extends CTestCase {
 
-	private function getNewUser() {
-		$user = new User();
-		$user->username = "t" . User::model()->count();
-		$user->firstName = "Test";
-		$user->lastName = "Test";
-		$user->member = "true";
-		$user->save();
-		return $user;
+	private function getUser() {
+		return Util::getUser();
 	}
 
-	private function getNewGroup() {
-		$group = new Groups;
-		$group->url = $group->title = "g" . Groups::model()->count();
-		$group->menu = 123;
-		$group->save();
-		$this->assertNotEquals(0, $group->id);
-		return $group;
+	private function getGroup() {
+		return Util::getGroup();
 	}
 
 	public function test_create_validates() {
-		$user = $this->getNewUser();
-		$group = $this->getNewGroup();
+		$user = $this->getUser();
+		$group = $this->getGroup();
 
 		$ms = new GroupMembership;
 		$ms->userId = $user->primaryKey;
@@ -32,8 +21,8 @@ class GroupMembershipTest extends CTestCase {
 	}
 
 	public function test_create() {
-		$user = $this->getNewUser();
-		$group = $this->getNewGroup();
+		$user = $this->getUser();
+		$group = $this->getGroup();
 
 		$ms = new GroupMembership;
 		$ms->userId = $user->id;
@@ -48,9 +37,9 @@ class GroupMembershipTest extends CTestCase {
 	}
 
 	public function test_addTwoUsersToGroup_count() {
-		$user1 = $this->getNewUser();
-		$user2 = $this->getNewUser();
-		$group = $this->getNewGroup();
+		$user1 = $this->getUser();
+		$user2 = $this->getUser();
+		$group = $this->getGroup();
 
 		$ms1 = new GroupMembership;
 		$ms1->userId = $user1->id;

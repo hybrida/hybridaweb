@@ -14,4 +14,5 @@ require_once($yiit);
 require_once(dirname(__FILE__).'/WebTestCase.php');
 require_once($globals);
 
+$_SERVER['REQUEST_URI'] = "/";
 Yii::createWebApplication($config);
