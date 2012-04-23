@@ -31,8 +31,9 @@ class Facebook {
 
 		//Skriver ut profilbildet vha username (200piksler bred, variabel h�yde)
 		$data = file_get_contents('https://graph.facebook.com/' . $username . '/picture?type=large');
-		$file = new File;
-		$file->put_image($data, '.jpg', $userId);
+		echo $data;
+		/*$file = new File;
+		$file->put_image($data, '.jpg', $userId);*/
 	}
 
 	public function authLink() { //Returnerer link til authentication
