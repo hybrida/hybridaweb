@@ -1,3 +1,4 @@
+<div id="newsfeed">
 <? if (empty($models)): ?>
     <p>
         Ingen flere nyheter
@@ -6,22 +7,25 @@
 <? endif; ?>
 
 <? foreach ($models as $model): ?>
-    <div class="contentItem">
-        <div class="blueBox">
-            <div class="blueBoxItem"></div>
+    <div class="element">
+		<div class="header-wrapper">
+			<div class="header-title">
+				<h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
+			</div>
+			<div class="header-date">
+				<div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
+			</div>
         </div>
-        <div class="topBar">
-            <h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
-        </div>
-        <div class="articleContent">
-            <?= $model->ingress ?>
-            <div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
-			<? if ($model->author): ?>
-            <div class="author"><?=
-				CHtml::link($model->author->fullName, $model->author->viewUrl) ?></div>
+		<div class="text-content">
+			<? if ($model->imageId):?>
+				<?= Image::tag($model->imageId, 'frontpage') ?>
 			<? endif ?>
-        </div>
-        <div class="contentDivider">
-        </div>
+            <?= $model->ingress ?>
+			<? if ($model->author): ?>
+				<div class="author"><?=
+					CHtml::link($model->author->fullName, $model->author->viewUrl) ?></div>
+			<? endif ?>
+		</div>
     </div>
 <? endforeach ?>
+</div>

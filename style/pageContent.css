@@ -198,7 +198,7 @@ nav items div.last {
 .formSection .fieldInput {
     width: 68%;
     /*	For 2% opphold mellom definisjon og input.
-            Om man skal bruke padding eller margin, må den ytre
+            Om man skal bruke padding eller margin, m?? den ytre
             boksen ha fastsatt bredde, men den skalerer (derfor %) */
 
     float: right;
@@ -276,4 +276,50 @@ table#membertable *{
     display:block;
     padding:0 15px 0 0;
     background:url('/images/icons/crumbs.gif') no-repeat right center;
+}
+
+#newsfeed .element {
+	margin: 50px 30px;
+}
+#newsfeed .header-wrapper {
+	border-bottom: 2px solid #0062c4;
+	margin-bottom: 0;
+	padding-bottom: 0;
+    overflow: hidden;
+    display: inline-block; /* Necessary to trigger "hasLayout" in IE */
+    display: block; /* Sets element back to block */
+}
+#newsfeed .header-title {
+	float:left;
+	width: 400px;
+	margin-left: 20px;
+}
+
+#newsfeed a {
+	text-decoration: none;
+	color: black;
+}
+
+#newsfeed .header-title h1 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+#newsfeed .header-date {
+	float:right;
+	display: inline;
+	margin-top: 20px;
+	font-style: italic;
+}
+
+#newsfeed .text-content {
+	margin-left: 20px;
+	margin-top: 1em;
+}
+
+#newsfeed .text-content img {
+	clear: both;
+	margin: 10px auto;
+	display: block;
 }
