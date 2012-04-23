@@ -1,7 +1,6 @@
 <? 
 $this->layout = "//layouts/doubleColumn";
-$this->beginClip('sidebar');?>
-	<?
+$this->beginClip('sidebar');
 	$this->widget('application.components.widgets.ActivitiesFeed');
 $this->endClip()
 ?>
@@ -42,7 +41,7 @@ $this->endClip()
 	var count = <?= $index ?>;
 	var calendarDiv = $(".calendar-switch");
 	$(function loadCalendar() {
-		calendarDiv.load("/calendar/ajax");
+		calendarDiv.load("/kalender");
 	});	
 	$("#toggleCalendar").toggle(function flipCalendar(){
 		$(".content").addClass("flip");
