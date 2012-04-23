@@ -195,6 +195,10 @@ div.searchBox{
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
 	
+	-o-transform: rotateY(-180deg);
+	-o-transform-style: preserve-3d;
+	-o-backface-visibility: hidden;
+	
 	-moz-transform: rotateY(-180deg);
 	-moz-transform-style: preserve-3d;
 	-moz-backface-visibility: hidden;
@@ -213,6 +217,7 @@ div.searchBox{
 	z-index: 10;
 	-webkit-transform: rotateY(0deg);
 	-moz-transform: rotateY(0deg);
+	-o-transform: rotateY(0deg);
 	background-color: #ffffff;
 	padding-left: 7px;
 	padding-right: 7px;
@@ -231,9 +236,14 @@ div.searchBox{
 	-webkit-transform-style: preserve-3d;
 	-webkit-backface-visibility: hidden;
 	
+	
 	-moz-transform: rotateY(0deg);
 	-moz-transform-style: preserve-3d;
 	-moz-backface-visibility: hidden;
+	
+	-o-transform: rotateY(0deg);
+	-o-transform-style: preserve-3d;
+	-o-backface-visibility: hidden;
 	
 	-webkit-transition: all .4s ease-in-out;
 	-moz-transition: all .4s ease-in-out;
@@ -246,6 +256,7 @@ div.searchBox{
 .content.flip .feeds {
 	z-index: 9;
 	-webkit-transform: rotateY(180deg);
+	-o-transform: rotateY(180deg);
 	-moz-transform: rotateY(180deg);
 	background-color: #ffffff;
 	padding-left: 7px;
@@ -262,6 +273,7 @@ div.searchBox{
 	left: 0;
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
+	-o-perspective: 600px;
 	height: auto;
 }
 
