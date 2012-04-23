@@ -30,13 +30,16 @@
                 Poste til Facebook:
             </div>
             <div class="fieldInput">
-                
+                <!-- Her må det legges inn en checkbox for om man skal poste til facebook eller ikke -->
             </div>
        </div>
        <div class="inputGroup">
             <div class="fieldDefinition">
                 Importer profilbilde:
             </div>
+           <div class="fieldInput">
+               <!-- Bruk retrieveProfilePicture i Facebook.php og lagre profilbildet -->
+           </div>
        </div>
     <? endif ?> 
        <div class="fieldExplanation"></div>

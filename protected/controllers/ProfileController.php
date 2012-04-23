@@ -69,6 +69,8 @@ class ProfileController extends Controller {
 		if (!$user) {
 			throw new CHttpException("Brukeren finnes ikke");
 		}
+		$fbUser = new FacebookUser;
+		
 
 		if (isset($_POST['User'])) {
 			$user->attributes = $_POST['User'];
