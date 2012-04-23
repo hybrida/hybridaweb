@@ -1,8 +1,6 @@
 <div id="breadCrumb">
 	<ul>
-		<? if ($this->option("firstCrumb")): ?>
-			<li><?= $this->firstCrumb ?></li>
-		<? endif ?>
+		<li><?= $this->firstCrumb ?></li>
     <?php
     foreach($this->links as $val => $url) {
 		echo "<li>";

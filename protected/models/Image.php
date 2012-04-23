@@ -98,6 +98,13 @@ class Image extends CActiveRecord {
 				));
 	}
 
+	public function getFilePath($size = "original") {
+		if ($this->isNewRecord) {
+			throw new CException("Filen er ikke lagret i databasen, og har derfor ingen plassering");
+		}
+		return Yii::getPathOfAlias("webroot") . self::getRelativeFilePath($this->id, $size);
+	}
+
 	public static function getResized($id, $size) {
 		$image = Image::model()->findByPk($id);
 		if ($image == null) {
@@ -115,11 +122,19 @@ class Image extends CActiveRecord {
 		list($width, $height) = self::getSize($size);
 		if ($width) $htmlOptions['width'] = $width;
 		if ($height) $htmlOptions['height'] = $height;
-		$url = Yii::app()->createAbsoluteUrl("/image/view", array(
-			'id' => $id,
-			'size' => $size,
-				));
+		$url = self::getViewUrl($id, $size);
 		return CHtml::image($url, "", $htmlOptions);
+	}
+	
+	public static function getViewUrl($id, $size) {
+		$image = self::getResized($id, $size);
+		return self::getRelativeFilePath($id, $size);
+	}
+	
+	public static function getRelativeFilePath($id, $size) {
+		$filename = self::getFileName($id);
+		$filePath = "/upc/images/$size/$filename.jpg";
+		return $filePath;
 	}
 
 	public static function profileTag($id, $size) {
@@ -141,12 +156,9 @@ class Image extends CActiveRecord {
 	public static function getImageDir() {
 		return Yii::getPathOfAlias("webroot.upc.images");
 	}
-
-	public function getFilePath($size = "original") {
-		if ($this->isNewRecord) {
-			throw new CException("Filen er ikke lagret i databasen, og har derfor ingen plassering");
-		}
-		return self::getImageDir() . "/$size/" . $this->id . ".jpg";
+	
+	public static function getFileName($id) {
+		return sha1("hybrida" . $id);
 	}
 
 	public function hasSize($size) {
@@ -170,7 +182,7 @@ class Image extends CActiveRecord {
 		} else {
 			$si->resizeToWidth($width);
 		}
-		$si->save(Image::getImageDir() . "/" . $size . "/" . $this->id . ".jpg");
+		$si->save($this->getFilePath($size));
 	}
 
 	public static function getSize($size) {

@@ -32,9 +32,12 @@ div.ui-datepicker{
 .headerBottomStripe{
     background-image:url('../images/black_trans_25.png');
     background-repeat:repeat-x;
-    height: 25px;
+    height: 23px;
 	position: relative;
-	top: -41px;
+	bottom: 23px;
+	width: auto;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .mainWrap {
@@ -50,14 +53,14 @@ div.ui-datepicker{
 .mainWrap, .bodyWrap{
     margin-left: auto; 
     margin-right: auto;
-    width: 1000px;
+    width: 980px;
 }
 
 .header{
     margin-left: auto; 
     margin-right: auto;
-    width: 1000px;
-    height: 105px;
+    width: 980px;
+    height: 90px;
 }
 
 .header h1 {
@@ -73,6 +76,7 @@ div.ui-datepicker{
 .header img {
 	height: 90px;
 	border: 0px;
+	width: 980px;
 }
 
 .searchWrap{
@@ -107,13 +111,17 @@ div.searchBox{
 }
 
 .menu{
-    margin-left: auto; 
-    margin-right: auto;
-    width: 900px;
+	width: 980px;
     color: #FFFFFF;
-	height: 25px;
+	height: 23px;
 	position: relative;
-	left: 50px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.menu nav {
+	width: 838px;
+	margin-left: auto;
 }
 
 .menu a:visited {
@@ -260,7 +268,7 @@ div.searchBox{
 }
 
 .feedTitle {
-	margin-left: 7px;
+	
 }
 
 li.hasChildren{
@@ -273,7 +281,7 @@ li.childless{
 }
 
 .rightBar{
-    width: 250px;
+    width: 230px;
 	position: absolute;
 	top: 0;
 	right: 0;
