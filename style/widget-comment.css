@@ -18,9 +18,12 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
     clear: both;
 }
 
-.commenter {
-    margin-top: 0.5em;
-    text-align: center;
+.comment-title {
+    margin-bottom: 0.35em;
+}
+
+.comment-date :before {
+    content: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 }
 
 .comment-left {
