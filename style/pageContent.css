@@ -311,6 +311,7 @@ table#membertable *{
 	display: inline;
 	margin-top: 20px;
 	font-style: italic;
+	margin-right: 3px;
 }
 
 #newsfeed .text-content {

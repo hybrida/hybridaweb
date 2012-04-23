@@ -22,7 +22,7 @@
 		<div class="<?= $odd ? "odd" : "like" ?>" >
 			<tr>
 				<td class="imageCell">
-					<?= Image::profileTag($user['imageId'], 'small') ?>
+					<?= Image::profileTag($user['imageId'], 'mini') ?>
 				</td>
 				<td class="nameCell"><?= CHtml::link($user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'], array('/profile/info', 'username' => $user['username'])) ?></a></td>
 
