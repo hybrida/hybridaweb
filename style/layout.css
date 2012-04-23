@@ -216,6 +216,7 @@ div.searchBox{
 	background-color: #ffffff;
 	padding-left: 7px;
 	padding-right: 7px;
+	position: absolute;
 }
 
 .feeds {
