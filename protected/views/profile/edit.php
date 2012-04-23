@@ -37,9 +37,6 @@
             <div class="fieldDefinition">
                 Importer profilbilde:
             </div>
-           <div class="Button">
-               <? $fb->retrieveProfilePicture(); ?>
-           </div>
        </div>
     <? endif ?> 
        <div class="fieldExplanation"></div>
