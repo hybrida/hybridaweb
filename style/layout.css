@@ -35,6 +35,9 @@ div.ui-datepicker{
     height: 23px;
 	position: relative;
 	bottom: 23px;
+	width: auto;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .mainWrap {
@@ -50,13 +53,13 @@ div.ui-datepicker{
 .mainWrap, .bodyWrap{
     margin-left: auto; 
     margin-right: auto;
-    width: 1000px;
+    width: 980px;
 }
 
 .header{
     margin-left: auto; 
     margin-right: auto;
-    width: 1000px;
+    width: 980px;
     height: 90px;
 }
 
@@ -73,6 +76,7 @@ div.ui-datepicker{
 .header img {
 	height: 90px;
 	border: 0px;
+	width: 980px;
 }
 
 .searchWrap{
@@ -107,12 +111,16 @@ div.searchBox{
 }
 
 .menu{
-	width: 859px;
+	width: 980px;
     color: #FFFFFF;
 	height: 23px;
 	position: relative;
-	left: 70px;
+	margin-left: auto;
 	margin-right: auto;
+}
+
+.menu nav {
+	width: 838px;
 	margin-left: auto;
 }
 
@@ -260,7 +268,7 @@ div.searchBox{
 }
 
 .feedTitle {
-	margin-left: 7px;
+	
 }
 
 li.hasChildren{
@@ -273,7 +281,7 @@ li.childless{
 }
 
 .rightBar{
-    width: 250px;
+    width: 230px;
 	position: absolute;
 	top: 0;
 	right: 0;
