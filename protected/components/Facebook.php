@@ -31,8 +31,9 @@ class Facebook {
 
 		//Skriver ut profilbildet vha username (200piksler bred, variabel h�yde)
 		$data = file_get_contents('https://graph.facebook.com/' . $username . '/picture?type=large');
-		$file = new File;
-		$file->put_image($data, '.jpg', $userId);
+		echo $data;
+		/*$file = new File;
+		$file->put_image($data, '.jpg', $userId);*/
 	}
 
 	public function authLink() { //Returnerer link til authentication
@@ -96,8 +97,8 @@ class Facebook {
             parse_str($access, $params);
             $accessToken = $params['access_token'];
             
-            $array=array('uID' => $userId, 'aToken' => $accessToken);
-            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken) ON DUPLICATE KEY UPDATE userId = :uID';
+            $array=array('uID' => $userId, 'aToken' => $accessToken, 'postEvents' => 'true');
+            $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken, :postEvents) ON DUPLICATE KEY UPDATE userId = :uID';
             $query = Yii::app()->db->getPdoInstance()->prepare($sql);
             $query->execute($array);
             

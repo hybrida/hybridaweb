@@ -15,6 +15,7 @@
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/fonts/fonts.css" />
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/pageContent.css" />
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/classList.css" />
+        <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/widget-comment.css" />
         
         <!-- google analytics -->
         <script type="text/javascript">
@@ -35,8 +36,7 @@
     <body>
         <div class="headerStripe">
             <div class="header">
-                <a href="/" ><img src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" align="left" alt="" /></a>
-                <h1><?= CHtml::encode(Yii::app()->name) ?></h1>
+                <a href="/" ><img src="<?= Yii::app()->request->baseUrl ?>/images/BannerLarge.png" align="left" alt="" /></a>
                 <div class="searchWrap">
 					<? $this->widget('search.components.SearchWidget') ?>
                 </div>

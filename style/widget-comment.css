@@ -1,0 +1,43 @@
+.comment {
+    width: 700px;
+}
+
+/* Forcing comment to contain its children despite the floats inside
+http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
+.comment {
+    overflow: hidden;
+    display: inline-block;
+    display: block;
+}
+
+.comment .profile-image {
+    width: 75px;
+    height: 75px;
+    border: 1px solid black;
+    margin: auto;
+    clear: both;
+}
+
+.commenter {
+    margin-top: 0.5em;
+    text-align: center;
+}
+
+.comment-left {
+    width: 150px;
+    float: left;
+    border-right: 1px solid #abadb3;
+}
+
+.comment-right {
+    float: left;
+    width: 515px;
+    border-left: 1px solid #abadb3;
+    padding-left: 34px;
+    margin-left: -1px;
+}
+
+.comment-left, .comment-right {
+    margin-bottom: 25px;
+    margin-top: 25px;
+}

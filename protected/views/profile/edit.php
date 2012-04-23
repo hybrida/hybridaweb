@@ -1,12 +1,12 @@
 <? $this->pageTitle = "Rediger profil" ?>
 
 <h1>Endre profil</h1>
-<div class="formSection">
-    <div class="fieldInput"><?= $fb ?></div>
-</div>
 
-<?
-$form = $this->beginWidget('ActiveForm', array(
+<? 
+    $fb = new Facebook;
+    $result = $fb->getAccessToken();
+    
+    $form = $this->beginWidget('ActiveForm', array(
     'id' => 'profile-edit-form',
     'htmlOptions' => array(
         'enctype' => 'multipart/form-data',
@@ -15,8 +15,36 @@ $form = $this->beginWidget('ActiveForm', array(
     'clientOptions' => array(
         'validateOnSubmit' => true,
     ),
-        ))
+        ));
 ?>
+
+<div class="formSection">
+    <? if(!isset($result)): ?>
+       <div class="fieldDefinition">Facebook:</div>
+       <div class="fieldInput">
+            <? $fb->authLink() ?>
+       </div>
+    <? else: ?>
+       <div class="inputGroup">
+            <div class="fieldDefinition">
+                Poste til Facebook:
+            </div>
+            <div class="fieldInput">
+                <!-- Her må det legges inn en checkbox for om man skal poste til facebook eller ikke -->
+            </div>
+       </div>
+       <div class="inputGroup">
+            <div class="fieldDefinition">
+                Importer profilbilde:
+            </div>
+           <div class="fieldInput">
+               <!-- Bruk retrieveProfilePicture i Facebook.php og lagre profilbildet -->
+           </div>
+       </div>
+    <? endif ?> 
+       <div class="fieldExplanation"></div>
+</div>
+
 <div class="formSection">
     <div class="inputGroup">
         <div class="fieldDefinition">
