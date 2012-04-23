@@ -12,7 +12,6 @@ $this->endClip()
 // Forferdelig stygt, men fungerer.
 ?>
 <div class="feedTitle">
-    <h1 style="display: inline">Nyhetsstrøm</h1>
     <?=CHtml::button('Nyheter/Kalender', array(
     'class' => 'button buttonRightSide',
     'id' => 'toggleCalendar'
@@ -41,7 +40,7 @@ $this->endClip()
 	var count = <?= $index ?>;
 	var calendarDiv = $(".calendar-switch");
 	$(function loadCalendar() {
-		calendarDiv.load("/kalender");
+		calendarDiv.load("/calendar/default/ajax");
 	});	
 	$("#toggleCalendar").toggle(function flipCalendar(){
 		$(".content").addClass("flip");

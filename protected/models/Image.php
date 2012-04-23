@@ -147,6 +147,9 @@ class Image extends CActiveRecord {
 			case "small":
 				$url = "unknown_profile_small";
 				break;
+			case "mini":
+				$url = "unknown_profile_mini";
+				break;
 			case "profile":
 				$url = "unknown_profile";
 				break;

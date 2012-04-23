@@ -313,11 +313,12 @@ table#membertable *{
 	display: inline;
 	margin-top: 20px;
 	font-style: italic;
+	margin-right: 3px;
 }
 
 #newsfeed .text-content {
 	margin-left: 20px;
-	margin-top: 1em;
+	margin-top: 0.4em;
 }
 
 #newsfeed .text-content img {

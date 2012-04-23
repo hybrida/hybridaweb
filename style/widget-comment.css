@@ -13,7 +13,6 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 .comment .profile-image {
     width: 75px;
     height: 75px;
-    border: 1px solid black;
     margin: auto;
     clear: both;
 }
