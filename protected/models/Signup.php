@@ -126,7 +126,14 @@ class Signup extends CActiveRecord {
 		
 		$news = $this->getNews();
 		if ($news) {
-			$this->pushToFacebook($news->absoluteUrl);
+                    $array = array('uID' => $userId);
+                    $sql = "SELECT postEvents FROM fb_user WHERE userId = :uID";
+                    $query = Yii::app()->db->getPdoInstance()->prepare($sql);
+                    $query->execute($array);
+                    $result = $query->fetch(PDO::FETCH_ASSOC);
+                    if ($result['postEvents']==true){
+                        $this->pushToFacebook($news->absoluteUrl);
+                    }
 		}
                 
 		if ($addBPC) {

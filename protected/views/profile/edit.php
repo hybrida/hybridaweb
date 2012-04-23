@@ -1,8 +1,36 @@
 <? $this->pageTitle = "Rediger profil" ?>
 
 <h1>Endre profil</h1>
+
+<? 
+    $fb = new Facebook;
+    $result = $fb->getAccessToken();
+?>
+
 <div class="formSection">
-    <div class="fieldInput"><?= $fb ?></div>
+    <? if(!$result): ?>
+       <div class="fieldDefinition">Facebook:</div>
+       <div class="fieldInput">
+            <? $fb->authLink() ?>
+       </div>
+    <? else: ?>
+       <div class="inputGroup">
+            <div class="fieldDefinition">
+                Poste til Facebook:
+            </div>
+            <div class="fieldInput">
+                
+            </div>
+       </div>
+       <div class="inputGroup">
+            <div class="fieldDefinition">
+                Importer profilbilde fra Facebook:
+            </div>
+            <div class="Button">
+                <? $fb->retrieveProfilePicture() ?>
+            </div>
+       </div>
+    <? endif ?>    
 </div>
 
 <?
