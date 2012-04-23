@@ -35,10 +35,14 @@
        </div>
        <div class="inputGroup">
             <div class="fieldDefinition">
-                Importer profilbilde fra Facebook:
+                Importer profilbilde:
             </div>
+           <div class="Button">
+               <? $fb->retrieveProfilePicture(); ?>
+           </div>
        </div>
-    <? endif ?>    
+    <? endif ?> 
+       <div class="fieldExplanation"></div>
 </div>
 
 <div class="formSection">
