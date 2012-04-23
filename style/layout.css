@@ -32,9 +32,9 @@ div.ui-datepicker{
 .headerBottomStripe{
     background-image:url('../images/black_trans_25.png');
     background-repeat:repeat-x;
-    height: 25px;
+    height: 23px;
 	position: relative;
-	top: -41px;
+	bottom: 23px;
 }
 
 .mainWrap {
@@ -57,7 +57,7 @@ div.ui-datepicker{
     margin-left: auto; 
     margin-right: auto;
     width: 1000px;
-    height: 105px;
+    height: 90px;
 }
 
 .header h1 {
@@ -107,13 +107,13 @@ div.searchBox{
 }
 
 .menu{
-    margin-left: auto; 
-    margin-right: auto;
-    width: 900px;
+	width: 859px;
     color: #FFFFFF;
-	height: 25px;
+	height: 23px;
 	position: relative;
-	left: 50px;
+	left: 70px;
+	margin-right: auto;
+	margin-left: auto;
 }
 
 .menu a:visited {
