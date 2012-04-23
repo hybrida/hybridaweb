@@ -12,6 +12,9 @@ $this->endClip()
 // Forferdelig stygt, men fungerer.
 ?>
 <div class="feedTitle">
+</div>
+
+<div class="feeds">
     <?=CHtml::button('Nyheter/Kalender', array(
     'class' => 'button buttonRightSide',
     'id' => 'toggleCalendar'
@@ -21,9 +24,6 @@ $this->endClip()
 		'class' => 'button buttonRightSide',
 	))	?>
 	<? endif ?>
-</div>
-
-<div class="feeds">
 	<?	$this->renderPartial("_feed", array(
 		'models' => $models,
 	));	?>
