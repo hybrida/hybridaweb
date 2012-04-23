@@ -2,13 +2,11 @@
 	http://dev.hybrida.no/style/layout.css */
 
 html{
-    height: 100%;
-    background-color: #DDE8F3;
-
-
+	background-color: #DDE8F3;
     /* Gill standard, ikke serif */
     font-family: "Gill";
     font-weight: lighter;
+	height: 100%;
 }
 
 body {
@@ -27,6 +25,9 @@ div.ui-datepicker{
 .headerStripe{
     height: 90px;
     background-color: #0062C4;
+	position: fixed;
+	z-index: 2000;
+	width: 100%;
 }
 
 .headerBottomStripe{
@@ -46,7 +47,6 @@ div.ui-datepicker{
 	right: 0;
 	bottom: 0;
 	left: 0;
-	overflow: hidden;
 	background-color: #ffffff;
 }
 
@@ -80,12 +80,13 @@ div.ui-datepicker{
 }
 
 .searchWrap{
-    vertical-align: top; 
-    display: inline;
-	float: right;
-	padding: 0px 2px 0px 0px;
+    vertical-align: top;
 	position: relative;
-	top: 35px;
+	padding: 0;
+	float: none;
+	bottom: 60px;
+	left: 845px;
+	width: 135px;
 }
 
 div.search {
@@ -175,16 +176,13 @@ div.searchBox{
 }
 
 .barTitle{
-    height: 25px;
-    background-color: #0062c4;
-    color: #FFFFFF;
-	vertical-align: middle;
-	display: table-cell;
-	width: 250px;
-	padding-left: 5px;
-	padding-right: 5px;
-	margin-top: 0.3em;
-	margin-bottom: 0.3em;
+	color: #000000;
+	width: 190px;
+	border-bottom: 2px solid #0063c5;
+	margin: 0.5em auto 0.2em;
+	padding-left: 10px;
+	padding-right: 10px;
+	height: 1.5em;
 }
 
 .content .calendar-switch {
@@ -226,7 +224,7 @@ div.searchBox{
 	top: 50px;
 	z-index: 9;
 	width: inherit;
-	height: inherit;
+	height: auto;
 	
 	-webkit-transform: rotateY(0deg);
 	-webkit-transform-style: preserve-3d;
@@ -256,8 +254,6 @@ div.searchBox{
 .content{
 	
 	width: 750px;
-    overflow-x: hidden;
-    overflow-y: auto;
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -265,6 +261,7 @@ div.searchBox{
 	left: 0;
 	-webkit-perspective: 600px;
 	-moz-perspective: 600px;
+	height: auto;
 }
 
 .feedTitle {
@@ -282,13 +279,16 @@ li.childless{
 
 .rightBar{
     width: 230px;
-	position: absolute;
-	top: 0;
+	position: fixed;
+	top: 90px;
 	right: 0;
 	bottom: 0;
 	left: 750px;
 	overflow-y: auto;
 	border-left: 1px solid #0062c4;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #ffffff;
 }
 
 /* @end */
