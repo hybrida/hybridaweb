@@ -41,7 +41,7 @@ $this->endClip()
 	var count = <?= $index ?>;
 	var calendarDiv = $(".calendar-switch");
 	$(function loadCalendar() {
-		calendarDiv.load("/kalender");
+		calendarDiv.load("/calendar/default/ajax");
 	});	
 	$("#toggleCalendar").toggle(function flipCalendar(){
 		$(".content").addClass("flip");
