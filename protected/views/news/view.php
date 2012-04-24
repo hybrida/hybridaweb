@@ -47,13 +47,8 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	))?>
 <? endif ?>
 
-<? if ($news->imageId):
-	$imageURL = $this->createUrl('/image/view',array(
-		'id' => $news->imageId,
-		'size' => 'frontpage', //FIXME
-	));
-	?>
-<br/><img src='<?=$imageURL?>' />
+<? if ($news->imageId): ?>
+<br/><?= Image::tag($news->imageId, "frontpage") ?>
 <? endif; ?>
 
 <p><strong><?=$news->ingress?></strong></p>

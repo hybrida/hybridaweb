@@ -119,7 +119,7 @@ class Image extends CActiveRecord {
 		return $image;
 	}
 
-	public static function tag($id, $size, $htmlOptions=array()) {
+	public static function tag($id, $size, $htmlOptions=array('alt' => '')) {
 		list($width, $height) = self::getSize($size);
 		if ($width) $htmlOptions['width'] = $width;
 		if ($height) $htmlOptions['height'] = $height;
