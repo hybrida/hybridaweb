@@ -79,7 +79,7 @@ class ArticleTree extends CWidget {
 		if (empty($relevantArticles))
 			return;
 		
-		echo "<ul>";
+		echo "\n<ul class=\"widget-articletree\">\n";
 		foreach ($relevantArticles[0] as $node) {
                         if (!empty($node->children))
                             echo "<li class = \"hasChildren\">";
@@ -92,9 +92,9 @@ class ArticleTree extends CWidget {
 					$this->printArticleTree($children);
 				}
 			}
-			echo "</li>";
+			echo "</li>\n";
 		}
-		echo "</ul>";
+		echo "</ul>\n";
 	}
 
 	private function printNode($node) {
@@ -108,8 +108,9 @@ class ArticleTree extends CWidget {
 				'id' => $node->id,
 				'title' => $node->title,
 			));
-		} else
-                    echo $title;
+		} else {
+			echo "<span class=\"current\">$title</span>";
+		}
 	}
 	
 	private function containsChild($parent, $possibleChildren) {
