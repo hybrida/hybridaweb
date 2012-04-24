@@ -347,7 +347,6 @@ class SimpleImage {
 
 			imagecopyresampled($cropped_image_gd, $original_image_gd, -$int_width, 0, 0, 0, $adjusted_width, $crop_height, $original_width, $original_height);
 		} else  {
-			echo("number two");
 			$adjusted_height = $original_height / $widthRatio;
 			$half_height = $adjusted_height / 2;
 			$int_height = $half_height - $h_height;
