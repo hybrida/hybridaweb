@@ -11,7 +11,7 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view", "edit",  'toggleAttending'),
+				'actions' => array("view", "edit", 'toggleAttending'),
 			),
 			array('allow',
 				'actions' => array("create"),
@@ -43,6 +43,13 @@ class NewsController extends Controller {
 			'isAttending' => $isAttending,
 			'hasEditAccess' => user()->checkAccess('updateNews', array('id' => $id)),
 		));
+	}
+
+	private function getSignupByEvent($event) {
+		if (!$event) {
+			return null;
+		}
+		return $this->getSignupByEventId($event->id);
 	}
 
 	private function redirectToBpc($id, $title) {
@@ -77,28 +84,15 @@ class NewsController extends Controller {
 		return null;
 	}
 
-	private function getSignupByEvent($event) {
-		if (!$event) {
-			return null;
-		}
-		$signup = $event->signup;
-		if ($signup &&
-				$signup->status == Status::PUBLISHED &&
-				app()->gatekeeper->hasPostAccess('signup', $signup->eventId)) {
-			return $signup;
-		}
-		return null;
-	}
-
 	public function actionToggleAttending($eventId) {
 		if (user()->isGuest) {
 			return;
 		}
 		$userId = user()->id;
-		$event = Event::model()->findByPk($eventId);
-		$signup = $this->getSignupByEvent($event);
-		if (!$signup || !$event)
+		$signup = $this->getSignupByEventId($eventId);
+		if (!$signup) {
 			return;
+		}
 		$isAttending = $signup->isAttending($userId);
 		if ($signup->canAttend($userId)) {
 			if ($isAttending) {
@@ -107,11 +101,27 @@ class NewsController extends Controller {
 				$signup->addAttender($userId);
 			}
 		}
-		$isAttending = ! $isAttending;
+		$this->redirectToNewsByEventId($eventId);
+	}
+
+	private function getSignupByEventId($eventId) {
+		$signup = Signup::model()->findByPk($eventId);
+		if ($signup &&
+				$signup->status == Status::PUBLISHED &&
+				app()->gatekeeper->hasPostAccess('signup', $signup->eventId)) {
+			return $signup;
+		}
+		return null;
+	}
+
+	private function redirectToNewsByEventId($eventId) {
 		$news = News::model()->find("parentId = ? AND parentType = 'event'", array(
 			$eventId,
-		));
-		$this->actionView($news->id);
+				));
+		$url = $this->createUrl('/news/view', array(
+			'id' => $news->id,
+			'title' => $news->title));
+		$this->redirect($url);
 	}
 
 	public function actionCreate() {
