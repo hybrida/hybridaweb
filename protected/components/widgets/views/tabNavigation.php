@@ -1,4 +1,4 @@
-<items>
+<div class="navItems">
 	<div><?= CHtml::link("Forsiden", array("/newsfeed/index")); ?></div> 
 	<div><?= CHtml::link("Kalender", array("/calendar/default/index")); ?></div> 
 
@@ -13,4 +13,4 @@
 
 	<div><?= CHtml::link("Bedrift", array("/article/view", 'id' => 2, 'title' => 'Bedrift')); ?></div> 
 	<div><?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 1, 'title' => 'Om Hybrida')); ?></div>
-</items>
+</div>

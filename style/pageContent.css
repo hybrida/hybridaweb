@@ -94,7 +94,7 @@ div.articleContent div.author a {
     display: none;
 }
 
-nav items div {
+nav .navItems div {
     height: 25px;
     font: 20px 'Gill';
     font-weight: lighter;
@@ -108,7 +108,7 @@ nav items div {
     padding: 0px 11px 0px 10px;
 }
 
-nav items div.last {
+nav .navItems div.last {
     border-right-style: none;
 }
 
