@@ -332,26 +332,27 @@ class SimpleImage {
 		$original_image_gd = $this->image;
 		$original_width = $this->getWidth();
 		$original_height = $this->getHeight();
-		$wm = $original_width / $crop_width;
-		$hm = $original_height / $crop_height;
+		$widthRatio = $original_width / $crop_width;
+		$heightRatio = $original_height / $crop_height;
+		$originalRation = $original_width / $original_height;
+		$cropRatio = $crop_width / $crop_height;
 		$h_height = $crop_height / 2;
 		$w_height = $crop_width / 2;
 
-		if ($original_width > $original_height) {
-			$adjusted_width = $original_width / $hm;
+		$cropWidthFirst = $originalRation > $cropRatio;
+		if ($cropWidthFirst) {
+			$adjusted_width = $original_width / $heightRatio;
 			$half_width = $adjusted_width / 2;
 			$int_width = $half_width - $w_height;
 
 			imagecopyresampled($cropped_image_gd, $original_image_gd, -$int_width, 0, 0, 0, $adjusted_width, $crop_height, $original_width, $original_height);
-		} elseif (($original_width < $original_height ) || ($original_width == $original_height )) {
-			$adjusted_height = $original_height / $wm;
+		} else  {
+			echo("number two");
+			$adjusted_height = $original_height / $widthRatio;
 			$half_height = $adjusted_height / 2;
 			$int_height = $half_height - $h_height;
 
 			imagecopyresampled($cropped_image_gd, $original_image_gd, 0, -$int_height, 0, 0, $crop_width, $adjusted_height, $original_width, $original_height);
-		} else {
-
-			imagecopyresampled($cropped_image_gd, $original_image_gd, 0, 0, 0, 0, $crop_width, $crop_height, $original_width, $original_height);
 		}
 		$this->image = $cropped_image_gd;
 	}
