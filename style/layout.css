@@ -317,4 +317,20 @@ div.searchBox{
 	background-color: #ffffff;
 }
 
+.collapsibleList li{
+  list-style: none;
+  
+  cursor:auto;
+}
+
+li.collapsibleListOpen{
+  list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+  cursor:pointer;
+}
+
+li.collapsibleListClosed{
+  list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+  cursor:pointer;
+}
+
 /* @end */
