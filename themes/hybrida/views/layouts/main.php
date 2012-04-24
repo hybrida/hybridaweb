@@ -43,7 +43,7 @@
     <body>
         <div class="headerStripe">
             <div class="header">
-                <a href="/" ><img src="<?= Yii::app()->request->baseUrl ?>/images/BannerLarge.png" align="left" alt="" /></a>
+                <a href="/" ><img class="header-banner" src="<?= Yii::app()->request->baseUrl ?>/images/BannerLarge.png" alt="" /></a>
                 <div class="searchWrap">
 					<? $this->widget('search.components.SearchWidget') ?>
                 </div>

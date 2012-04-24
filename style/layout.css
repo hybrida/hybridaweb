@@ -30,6 +30,10 @@ div.ui-datepicker{
 	width: 100%;
 }
 
+.header img.header-banner {
+	float: left;
+}
+
 .headerBottomStripe{
     background-image:url('../images/black_trans_25.png');
     background-repeat:repeat-x;
