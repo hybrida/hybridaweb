@@ -220,6 +220,10 @@ class User extends CActiveRecord {
 		return YearConverter::graduationYearToClassYear($this->graduationYear);
 	}
 	
+	public function setClassYear($classYear) {
+		$this->graduationYear = YearConverter::classYearToGraduationYear($classYear);
+	}
+	
 	protected function beforeSave() {
 		if ($this->cardNumber) {
 			$this->cardHash = sha1($this->cardNumber);

@@ -34,13 +34,24 @@ class BpcAttending extends CComponent {
 	public function getUsernames() {
 		return $this->usernames;
 	}
-
+	
+	public function getActiveRecordsInYearArray() {
+		$years = array(
+			1 => array(), 2 => array(), 3 => array(),
+			4 => array(), 5 => array(), 6 => array());
+		foreach ($this->getActiveRecords() as $user) {
+			$years[$user->getClassYear()][] = $user;
+		}
+		return $years;
+	}
+	
 	public function getActiveRecords() {
 		if ($this->activeRecordUsers == null) {
 			$this->addActiveRecordUsers();
 		}
 		return $this->activeRecordUsers;
 	}
+	
 
 	private function addActiveRecordUsers() {
 		$this->activeRecordUsers = array();
@@ -51,6 +62,7 @@ class BpcAttending extends CComponent {
 			}
 		}
 	}
+	
 	
 	public function contains($username) {
 		return in_array($username, $this->usernames);

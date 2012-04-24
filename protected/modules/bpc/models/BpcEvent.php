@@ -92,8 +92,16 @@ class BpcEvent extends CModel {
 		return $this->attenders->activeRecords;
 	}
 	
+	public function getAttendingByYear() {
+		return $this->attenders->getActiveRecordsInYearArray();
+	}
+	
 	public function getWaiting() {
 		return $this->waiters->activeRecords;
+	}
+	
+	public function getWaitingByYear() {
+		return $this->waiters->getActiveRecordsInYearArray();
 	}
 	
 		
