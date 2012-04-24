@@ -12,10 +12,11 @@ class DefaultController extends Controller {
 		));
 	}
 
-	public function actionToggleAttending($userId, $bpcId) {
-		if ($userId != user()->id) {
-			throw new CHttpException(403, "Du har ikke tilgang til å endre andre brukeres påmelding");
+	public function actionToggleAttending($bpcId) {
+		if (user()->isGuest) {
+			throw new CHttpException(403, "Du er ikke logget inn");
 		}
+		$userId = user()->id;
 		$event = new BpcEvent($bpcId);
 		if ($event->canAttend($userId)) {
 			if (!$event->isAttending($userId)) {
@@ -23,9 +24,8 @@ class DefaultController extends Controller {
 			} else {
 				$event->removeAttending($userId);
 			}
-			$this->renderPartial('_attenders', array(
-				'event' => new BpcEvent($bpcId),
-			));
 		}
+		$url = $this->createUrl('view', array('id' => $bpcId));
+		$this->redirect($url);
 	}
 }

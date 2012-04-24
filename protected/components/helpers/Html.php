@@ -35,4 +35,27 @@ class Html extends CHtml {
 		return self::$shortMonthNames;
 	}
 	
+	public static function userListByYear($usersByYear) {
+		$i = 1;
+		foreach($usersByYear as $year): 
+			if (!empty($year)):
+				?>
+				<ul class="collapsibleList">
+				<li><h3> <?= $i ?>. årskurs </h3>
+				<ul>
+				<?
+				foreach ($year as $user): 
+					?><li>
+						<?= Image::profileTag($user->imageId, 'mini') ?>
+						<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
+					</li><?
+				endforeach;
+				?></ul>
+				</li>
+				</ul><? 
+			endif;
+			$i++;
+		endforeach;
+	}
+	
 }
