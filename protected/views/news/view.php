@@ -129,6 +129,16 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	</tr>
 	</table>
 <? endif ?>
+	
+<? if ($signup->canAttend(user()->id)): ?>
+	<?=
+	Html::link(
+			$isAttending ? "Meld meg av" : "Meld meg på", array(
+		'toggleAttending', 'eventId' => $event->id),  array(
+		'class' => 'button',
+	))
+	?><p></p>
+<? endif; ?>
 
 <?$this->widget('comment.components.commentWidget', array(
 	'id' => $news->id,

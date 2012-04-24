@@ -108,12 +108,10 @@ class NewsController extends Controller {
 			}
 		}
 		$isAttending = ! $isAttending;
-
-		$this->renderPartial('_view_sidebar', array(
-			'event' => $event,
-			'signup' => $signup,
-			'isAttending' => $isAttending,
+		$news = News::model()->find("parentId = ? AND parentType = 'event'", array(
+			$eventId,
 		));
+		$this->actionView($news->id);
 	}
 
 	public function actionCreate() {
