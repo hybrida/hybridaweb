@@ -7,6 +7,13 @@
         
 		<?= $this->clips['head-facebook'] ?>
         <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/animations.js"></script>
+	<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/CollapsibleLists.js'></script>
+	<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/OnloadScheduler.js'></script>
+	
+	<script type="text/javascript">
+		OnloadScheduler.schedule(function(){ CollapsibleLists.apply(); });
+	</script>
+
 
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/style.css" />
         <link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/hintList.css" />
