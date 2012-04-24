@@ -5,7 +5,7 @@ html{
 	background-color: #DDE8F3;
     /* Gill standard, ikke serif */
     font-family: "Gill";
-    font-weight: lighter;
+    /*font-weight: lighter;*/
 	height: 100%;
 }
 
@@ -177,20 +177,20 @@ div.searchBox{
 
 .barTitle{
 	color: #000000;
-	width: 190px;
+	width: 170px;
 	border-bottom: 2px solid #0063c5;
-	margin: 1em auto 0;
+	margin: 2em 1em 0 1em;
 	padding-bottom: 0;
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 1em;
+	padding-right: 1em;
 	height: 1.5em;
 }
 
 .barText{
-	margin-top: 25px;
 	margin-bottom: 0;
-	margin-left: 10px;
+	margin-left: 2em;
 	margin-right: 10px;
+	margin-top: 0.5em;
 }
 
 

@@ -86,51 +86,6 @@ div.articleContent div.author a {
     margin-right: 0;
 }
 
-.blueBox {
-    width: 33px;
-    float: left;
-}
-
-.blueBoxItem {
-    background-color: #0062C4;
-    width: 31px;
-    height: 31px;
-    display: none;
-}
-
-.topBar {
-    height: 33px;
-    z-index: 2;
-    position: relative;
-    margin-left: -7px;
-}
-
-.topBar h1 {
-    color: #000000;
-    font: 25px 'Gill';
-    margin-top: 0;
-}
-
-.topBar h1 a {
-    text-decoration: none;
-    color: #ffffff;
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    padding: 4px 15px;
-    text-shadow: 1px 1px 1px black;
-    background: -moz-linear-gradient(270deg, #55a9fe 0%, #0061c2 45.9%) #0062c4;
-    background: -webkit-gradient(linear, left top, left bottom, from(#55a9fe), color-stop(0.459, #0061c2)) #0062c4;
-    -moz-box-shadow: 2px 2px 2px #9d9d9d;
-    -webkit-box-shadow: 2px 2px 2px #9d9d9d;
-    box-shadow: 2px 2px 2px #9d9d9d;
-    border: 1px solid #005fbe;
-    border-left-style: none;
-}
-
-.topBar h1 a:hover {
-    text-decoration: underline;
-}
-
 .contentDivider {
     background: url('../images/shaded-divider.gif') no-repeat;
     height: 10px;
