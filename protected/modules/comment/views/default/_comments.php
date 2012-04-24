@@ -10,7 +10,7 @@
             <div class="comment-title">
                 <span class="comment-author"><?= Html::link($model->author->fullName, $model->author->viewUrl) ?></span>
                 <span class="comment-date">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    11.12.1990</span>
+                    <?= Html::dateToString($model->timestamp, 'long') ?></span>
             </div>
             <div class="commentContent">
                 <?= $model->content ?>
