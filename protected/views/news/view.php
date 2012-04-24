@@ -63,25 +63,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 
 <? if ($signup): ?>
 	<h1> Påmeldte: </h1>
-	<? $attenders = $signup->attendersFiveYearArrays ?>
-	<? $i = 1; ?>
-	<? foreach($attenders as $year): ?>
-		<? if (!empty($year)):  ?>
-			<ul class="collapsibleList">
-			<li><h3> <?= $i ?>. årskurs </h3>
-			<ul>
-			<? foreach ($year as $user): ?>
-				<li>
-				<?= Image::profileTag($user->imageId, 'mini') ?>
-				<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
-				</li>
-			<? endforeach ?>
-			</ul>
-			</li>
-			</ul>
-		<? endif ?>
-		<? $i++ ?>
-	<? endforeach ?>
+	<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
 	
 	<? if ($signup->canAttend(user()->id)): ?>
 		<?=
