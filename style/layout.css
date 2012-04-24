@@ -179,11 +179,20 @@ div.searchBox{
 	color: #000000;
 	width: 190px;
 	border-bottom: 2px solid #0063c5;
-	margin: 0.5em auto 0.2em;
+	margin: 1em auto 0;
+	padding-bottom: 0;
 	padding-left: 10px;
 	padding-right: 10px;
 	height: 1.5em;
 }
+
+.barText{
+	margin-top: 25px;
+	margin-bottom: 0;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
 
 .content .calendar-switch {
 	float: none;

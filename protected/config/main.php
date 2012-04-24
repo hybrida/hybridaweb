@@ -104,7 +104,7 @@ return array(
 				'profil' => '/profile/',
 				'profil/<username:\w+>' => '/profile/info/',
 				'profil/<username:\w+>/<action:\w+>' => 'profile/<action>/',
-				'kalender' => 'calendar/default/index',
+				'kalender' => '/calendar/default/index',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',

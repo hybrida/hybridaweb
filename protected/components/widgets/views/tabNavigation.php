@@ -1,5 +1,6 @@
 <items>
-	<div><?= CHtml::link("Forsiden", "/"); ?></div> 
+	<div><?= CHtml::link("Forsiden", array("/newsfeed/index")); ?></div> 
+	<div><?= CHtml::link("Kalender", array("/calendar/default/index")); ?></div> 
 
 	<? if (app()->gatekeeper->hasGroupAccess(57)): ?>
 		<div><?= CHtml::link("BK", array('/bk/bktool/index')) ?> </div>

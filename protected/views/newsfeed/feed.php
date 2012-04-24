@@ -11,14 +11,8 @@ $this->endClip()
 // FIXME
 // Forferdelig stygt, men fungerer.
 ?>
-<div class="feedTitle">
-</div>
 
-    <?=CHtml::link('Listevisning / Kalendervisning', '#', array(
-    'class' => '',
-    'id' => 'toggleCalendar'
-    ))?>
-<div class="feeds">
+<div class="feeds2">
 	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
 		'class' => 'button buttonRightSide',
@@ -28,30 +22,20 @@ $this->endClip()
 		'models' => $models,
 	));	?>
 
+</div>
 <?=CHtml::button('Vis flere', array(
 	'class' => 'button buttonRightSide',
 	'id' => 'fetchNews',
 ))?>
-</div>
 
-<div class="calendar-switch"> </div>
 
 <script>
 	var count = <?= $index ?>;
-	var calendarDiv = $(".calendar-switch");
-	$(function loadCalendar() {
-		calendarDiv.load("/calendar/default/ajax");
-	});	
-	$("#toggleCalendar").toggle(function flipCalendar(){
-		$(".content").addClass("flip");
-	},function(){
-		$(".content").removeClass("flip");
-	});
 	$("#fetchNews").click(function fetchNews(){
 		
 		$.ajax({
 			success: function(html){
-				$(".feeds").append(html);
+				$(".feeds2").append(html);
 			},
 			type: 'get',
 			url: '<?php
@@ -60,7 +44,7 @@ $this->endClip()
 	))
 ?>' + count,
 			data: {
-				index: $(".feeds li").size()
+				index: $(".feeds2 li").size()
 			},
 			cache: false,
 			dataType: 'html'

@@ -19,19 +19,6 @@
 		<div class="barText">
 			<?= $event->getGoogleCalendarButton() ?>
 		</div>
-		<? if ($signup): ?>
-			<div class="barTitle">Påmelding</div>
-			<div class="barText">
-				<? if ($signup->canAttend(user()->id)): ?>
-					<?=
-					Html::ajaxLink($isAttending ? "Meld meg av" : "Meld meg på", array('toggleAttending', 'eventId' => $event->id), array(
-						'update' => '#sidebarToBeUpdated',
-							), array(
-						'class' => 'button',
-					))
-					?><p></p>
-				<? endif; ?>
-			</div><!-- barText -->
-		<? endif; ?>
+		
 	<? endif ?>
 </div><!-- sidebarToBeUPdated -->
