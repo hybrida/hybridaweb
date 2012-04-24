@@ -180,7 +180,7 @@ class Image extends CActiveRecord {
 		$si = new SimpleImage($this->getFilePath());
 		list($width, $height) = self::getSize($size);
 		if ($height && $width) {
-			$si->resize($width, $height);
+			$si->crop($width, $height);
 		} else if ($height) {
 			$si->resizeToHeight($height);
 		} else {
@@ -243,10 +243,10 @@ class Image extends CActiveRecord {
 
 class SimpleImage {
 
-	var $image;
-	var $image_type;
+	private $image;
+	private $image_type;
 
-	function __construct($filename) {
+	public function __construct($filename) {
 
 		$image_info = getimagesize($filename);
 		$this->image_type = $image_info[2];
@@ -262,7 +262,7 @@ class SimpleImage {
 		}
 	}
 
-	function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 75, $permissions = null) {
+	public function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 75, $permissions = null) {
 
 		if ($image_type == IMAGETYPE_JPEG) {
 			imagejpeg($this->image, $filename, $compression);
@@ -326,5 +326,35 @@ class SimpleImage {
 		imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
 		$this->image = $new_image;
 	}
+	
+	public function crop($crop_width, $crop_height) {
+		$cropped_image_gd = imagecreatetruecolor($crop_width, $crop_height);
+		$original_image_gd = $this->image;
+		$original_width = $this->getWidth();
+		$original_height = $this->getHeight();
+		$wm = $original_width / $crop_width;
+		$hm = $original_height / $crop_height;
+		$h_height = $crop_height / 2;
+		$w_height = $crop_width / 2;
+
+		if ($original_width > $original_height) {
+			$adjusted_width = $original_width / $hm;
+			$half_width = $adjusted_width / 2;
+			$int_width = $half_width - $w_height;
+
+			imagecopyresampled($cropped_image_gd, $original_image_gd, -$int_width, 0, 0, 0, $adjusted_width, $crop_height, $original_width, $original_height);
+		} elseif (($original_width < $original_height ) || ($original_width == $original_height )) {
+			$adjusted_height = $original_height / $wm;
+			$half_height = $adjusted_height / 2;
+			$int_height = $half_height - $h_height;
+
+			imagecopyresampled($cropped_image_gd, $original_image_gd, 0, -$int_height, 0, 0, $crop_width, $adjusted_height, $original_width, $original_height);
+		} else {
+
+			imagecopyresampled($cropped_image_gd, $original_image_gd, 0, 0, 0, 0, $crop_width, $crop_height, $original_width, $original_height);
+		}
+		$this->image = $cropped_image_gd;
+	}
 
 }
+
