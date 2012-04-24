@@ -24,7 +24,7 @@ class CommentForm extends CFormModel {
 					'parentType' => $this->type,
 					'content' => $purifier->purify($this->content),
 					'authorId' => user()->id,
-					'timestamp' => 'NOW()',
+					'timestamp' => new CDbExpression('NOW()'),
 				));
 	}
 

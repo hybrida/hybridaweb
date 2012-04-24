@@ -15,7 +15,7 @@ class DefaultController extends Controller {
 	}
 
 	public function actionView($type, $id) {
-		$models = Comment::model()->findAll("parentId = :id AND parentType = :type", array(
+		$models = Comment::model()->findAll("parentId = :id AND parentType = :type ORDER BY `timestamp` ASC", array(
 			":id" => $id,
 			":type" => $type));
 		$this->renderPartial("_comments",array(
