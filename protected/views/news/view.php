@@ -30,25 +30,29 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	$news->title => $news->viewUrl,
 );?>
 
+<div class="newsIndex">
+
 <h1><?=$news->title?></h1>
 
 <? if ($hasEditAccess): ?>
-<p>
-	<?= CHtml::link("Rediger",array("news/edit",'id' => $news->id), array(
-		'class' => 'button buttonRightSide'
-	)); ?>
-</p>
+	<p>
+		<?= CHtml::link("Rediger",array("news/edit",'id' => $news->id), array(
+			'class' => 'button buttonRightSide'
+		)); ?>
+	</p>
 <? endif ?>
 
 <? if ($news->author): ?>
-<strong>Skribent:&nbsp;</strong> <?= CHtml::link($news->author->fullName, array(
+<strong>Skribent:</strong> <?= CHtml::link($news->author->fullName, array(
 	'/profile/view/',
 	'username' => $news->author->username,
 	))?>
 <? endif ?>
 
 <? if ($news->imageId): ?>
-<br/><?= Image::tag($news->imageId, "frontpage") ?>
+<div class="headerImage">
+	<br/><?= Image::tag($news->imageId, "frontpage") ?>
+</div>
 <? endif; ?>
 
 <p><strong><?=$news->ingress?></strong></p>
@@ -75,3 +79,4 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 	'id' => $news->id,
 	'type' => 'news',
 )); ?>
+</div>

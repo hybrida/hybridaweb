@@ -280,3 +280,11 @@ table#membertable *{
 	margin: 10px auto;
 	display: block;
 }
+
+.newsIndex {
+	margin: auto 1em;
+}
+
+.newsIndex .headerImage img {
+	margin-left: 1em;
+}
