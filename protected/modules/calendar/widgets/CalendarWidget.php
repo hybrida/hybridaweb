@@ -37,6 +37,7 @@ class CalendarWidget extends CWidget {
 	private function initCalendar() {
 		$this->initDate();
 		$this->calendar = Calendar::factory($this->month, $this->year, $this->getConfig());
+		$this->calendar->standard("today");
 		$this->getEvents();
 	}
 

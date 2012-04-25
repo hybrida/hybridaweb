@@ -109,16 +109,6 @@
 .big-calendar ul.output li {margin:0; padding:5px 0; line-height:1em; border-bottom:1px solid #CCC;}
 .big-calendar ul.output li:last-child {border:0;}
 
-/* Small Calendar */
-.big-calendar.small {width:auto; border-collapse:separate;}
-.big-calendar.small tr.navigation th {padding-bottom:5px;}
-.big-calendar.small tr.navigation th a span {font-size:1.5em;}
-.big-calendar.small th.current-month {font-size:1em;}
-.big-calendar.small tr.weekdays th {text-align:center;}
-.big-calendar.small td {width:auto; height:auto; padding:4px 8px; text-align:center; border:0; background:#EEE;}
-.big-calendar.small span.date {display:inline; padding:0; background:none;}
-
-
 /* Fra sigurd:
 
 Forslag til design av nyhetspublisering 
