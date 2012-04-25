@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 24, 2012 at 09:25 PM
+-- Generation Time: Apr 25, 2012 at 07:03 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
@@ -188,7 +188,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=434 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=436 ;
 
 --
 -- Dumping data for table `comment`
@@ -227,7 +227,7 @@ INSERT INTO `event` (`id`, `bpcID`, `start`, `end`, `location`, `status`) VALUES
 (92, NULL, '2012-04-17 00:00:00', '2012-04-18 00:00:00', 'Kontoret', 0),
 (93, NULL, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'NTNU', 0),
 (94, NULL, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'Sted', 0),
-(95, NULL, '2012-04-01 06:35:00', '2012-04-01 19:30:00', 'Her!', 0);
+(95, NULL, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0);
 
 -- --------------------------------------------------------
 
@@ -336,15 +336,12 @@ CREATE TABLE IF NOT EXISTS `image` (
   PRIMARY KEY (`id`),
   KEY `albumId` (`galleryId`,`userId`),
   KEY `userId` (`userId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `image`
 --
 
-INSERT INTO `image` (`id`, `title`, `oldName`, `galleryId`, `userId`, `timestamp`) VALUES
-(21, 'zombie.jpg', 'zombie.jpg', NULL, 397, '2012-04-24 16:24:56'),
-(20, 'Lyche-thumb.jpg', 'Lyche-thumb.jpg', NULL, 381, '2012-04-23 22:30:14');
 
 -- --------------------------------------------------------
 
@@ -468,7 +465,7 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (41, 73, 'event', 'Generalforsamling', NULL, 'Generalforsamling i Hybrida', '', 326, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, '2011-11-26 20:02:14', 0),
 (362, 83, 'event', 'Eksempelarrangement', NULL, 'Dette skjer om veeldig lenge', 'BLa bla bla<br />', 381, '2012-02-09 11:41:25', 0),
-(364, 85, 'event', 'Halvingfest!', 20, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>\n	Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>\n	Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p>\n	<strong>Lycheburger </strong>Lyches ubestridte klassiker. Med aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter. kr 109.</p>\n<p>\n	<strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli, pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.  kr 99</p>\n<p>\n	<strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår. Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte mandelpoteter. kr 129</p>\n<p>\n	<strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr 129</p>\n<p>\n	<strong><em>Dessertvalg:</em></strong></p>\n<p>\n	<strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr 45</p>\n<p>\n	<strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p>\n	 </p>\n<p>\n	Betaling skjer på Hybridas konto: 0539.26.44913 Prisen avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn + halvingfest</p>\n<p>\n	 </p>\n', 367, '2012-02-17 19:09:39', 0),
+(364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>\n	Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>\n	Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p>\n	<strong>Lycheburger </strong>Lyches ubestridte klassiker. Med aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter. kr 109.</p>\n<p>\n	<strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli, pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.  kr 99</p>\n<p>\n	<strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår. Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte mandelpoteter. kr 129</p>\n<p>\n	<strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr 129</p>\n<p>\n	<strong><em>Dessertvalg:</em></strong></p>\n<p>\n	<strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr 45</p>\n<p>\n	<strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p>\n	 </p>\n<p>\n	Betaling skjer på Hybridas konto: 0539.26.44913 Prisen avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn + halvingfest</p>\n<p>\n	 </p>\n', 367, '2012-02-17 19:09:39', 0),
 (365, 89, 'event', 'Event bare for Facebook', NULL, 'Testevent for facebook posting.', '<p>\n	sdfghjklø</p>\n', 347, '2012-03-19 17:10:36', 0),
 (366, 90, 'event', 'TestEvent', NULL, '', '<p>\n	Testing testing, 1 2 3</p>\n', 347, '2012-03-23 11:17:41', 0),
 (367, 91, 'event', 'Bedpres: Aker Solutions MMO', NULL, '', '<p>http://www.akersolutions.com/</p>\n', NULL, '2012-04-07 17:08:20', 0),
@@ -476,7 +473,7 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (369, 93, 'event', 'Facebooktesting 2', NULL, 'Liten ingress', '<p>\n	Testevent</p>\n<p>\n	<img alt="" src="http://farm6.staticflickr.com/5340/6934930078_763319e3bf.jpg" /></p>\n<p>\n	Dette bildet er tatt fra <a href="">http://www.flickr.com/photos/oscarvaladares/6934930078/</a></p>\n', 381, '2012-04-16 18:43:00', 0),
 (370, 94, 'event', 'Beklager all spammingen', NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas facilisis vulputate magna at ultricies. Aliquam in massa ut mi sodales imperdiet tempor ac mauris. Nulla facilisi. Mauris vitae dolor odio. Aenean sodales congue sodales. Sed id libero metus. Vivamus magna mauris, dictum et consequat mattis, bibendum non metus. Fusce eu neque lacus. Suspendisse sollicitudin mi at felis sollicitudin dapibus.', '<p>\n	aw</p>\n', 381, '2012-04-16 19:06:38', 0),
 (371, NULL, NULL, 'Testing testing', NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas facilisis vulputate magna at ultricies. Aliquam in massa ut mi sodales imperdiet tempor ac mauris. Nulla facilisi. Mauris vitae dolor odio. Aenean sodales congue sodales. Sed id libero metus. Vivamus magna mauris, dictum et consequat mattis, bibendum non metus. Fusce eu neque lacus. Suspendisse sollicitudin mi at felis sollicitudin dapibus.', '<p>\n	Heisann df</p>\n', 381, '2012-04-22 19:58:57', 0),
-(372, 95, 'event', 'TITITKTITITKTITITIEL', NULL, 'Dette er en fin ingress! Lkaslødaslødkjasldkjasdkløj', '<p>\n	økladjflksdjfgaklsgjølksafjghdfjklsghadfjklhgdfjklshgølkdsfjgølkdsfjg</p>\n<p>\n	sfg</p>\n<p>\n	dafgljkdfsnglkdsfjgn</p>\n<p>\n	 </p>\n', 353, '2012-04-23 21:31:27', 0);
+(372, 95, 'event', 'Lorem Ipsum', NULL, 'Dette er en fin ingress! Lkaslødaslødkjasldkjasdkløj', '<p>\n	økladjflksdjfgaklsgjølksafjghdfjklsghadfjklhgdfjklshgølkdsfjgølkdsfjg</p>\n<p>\n	sfg</p>\n<p>\n	dafgljkdfsnglkdsfjgn</p>\n<p>\n	 </p>\n', 353, '2012-04-23 21:31:27', 0);
 
 -- --------------------------------------------------------
 
@@ -856,7 +853,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-04-24 11:16:35', '123123', '', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-04-25 09:33:29', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
