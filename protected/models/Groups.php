@@ -95,10 +95,26 @@ class Groups extends CActiveRecord
 	}
 	
 	public function addMember($userId, $commission=null) {
+		$this->removeMember($userId);
 		$ms = new GroupMembership;
 		$ms->groupId = $this->id;
 		$ms->userId = $userId;
 		$ms->comission = $commission;
+		$ms->start = new CDbExpression("NOW()");
+		$ms->end = null;
 		return $ms->save();
+	}
+	
+	public function removeMember($userId) {
+		$condition = "userId = :userId AND groupId = :groupId AND end is null";
+		$params = array(
+			'userId' => $userId,
+			'groupId' => $this->id,
+		);
+		$memberships = GroupMembership::model()->findAll($condition, $params);
+		foreach ($memberships as $ms) {
+			$ms->end = new CDbExpression('NOW()');
+			$ms->save();
+		}
 	}
 }

@@ -591,7 +591,7 @@ class BkTool {
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
-                AND mg.end <= now() ORDER BY un.firstname ASC";
+                AND mg.end IS NULL ORDER BY un.firstname ASC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -610,7 +610,7 @@ class BkTool {
         $sql = "SELECT COUNT(DISTINCT un.id) AS sum
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
-                AND mg.end <= now()";
+                AND mg.end IS NULL";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
