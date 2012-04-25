@@ -277,17 +277,8 @@ div.searchBox{
 }
 
 .content{
-	
 	width: 750px;
-	position: absolute;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	-webkit-perspective: 600px;
-	-moz-perspective: 600px;
-	-o-perspective: 600px;
-	height: auto;
+	background-color: white;
 }
 
 .feedTitle {

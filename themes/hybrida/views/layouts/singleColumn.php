@@ -10,4 +10,7 @@
                 <?php endif ?>
                 <?= $content ?>
             </div>
+			<div class="rightBar">
+			
+            </div>
 <?php $this->endContent(); ?>
