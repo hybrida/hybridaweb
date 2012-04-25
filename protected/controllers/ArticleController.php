@@ -44,7 +44,6 @@ class ArticleController extends Controller {
 
 	private function getArticleModelAndThrowExceptionIfNullOrNotAccess($id) {
 		$article = Article::model()->findByPk($id);
-
 		if (!$article)
 			throw new CHttpException('Artikkelen finnes ikke');
 		if (!app()->gatekeeper->hasPostAccess('article', $article->id))
@@ -53,17 +52,17 @@ class ArticleController extends Controller {
 	}
 
 	private function renderArticleForm($model) {
-		if (isset($_POST['Article'])) {
-			$model->setAttributes($_POST['Article']);
-			$model->purify();
-			$model->save();
+		$form = new ArticleForm($model);
+		if (isset($_POST['ArticleForm'])) {
+			$form->setAttributes($_POST['ArticleForm']);
+			$form->save();
 
-			$this->redirect($model->getViewUrl());
+			$this->redirect($form->getArticleModel()->getViewUrl());
 			return;
 		}
 
 		$this->render('edit', array(
-			'model' => $model,
+			'model' => $form,
 		));
 	}
 

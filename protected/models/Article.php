@@ -113,7 +113,6 @@ class Article extends CActiveRecord {
 		$this->content = $purifier->purify($this->content);
 		$this->title = $purifier->purify($this->title);
 		$this->shorttitle = $purifier->purify($this->shorttitle);
-		return parent::beforeValidate();
 	}
 
 	public function getChildren() {
