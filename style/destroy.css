@@ -13,6 +13,7 @@ div.content table, div.content h1, div.content h2, div.content p {
 
 div.content strong {
 	font-size: 1.1em;
+	position: relative;
 	left: 7px;
 }
 

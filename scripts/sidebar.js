@@ -1,14 +1,15 @@
 var sidebarWidth = 230;
+var headerHeight = 90;
 var pageMin = 800;
 var pageMax = 1200;
 
-$('window').onresize(function () {
+$(window).resize(function () {
 	setSidebarHeight();
 	setSidebarPos();
 });
 
 function setSidebarHeight() {
-	$('document').getElementById("sidebar").style[height]=$('document').documentElement.innerHeight-90+"px";
+	$(".sidebar").height($('document').documentElement.innerHeight-headerHeight;
 }
 
 function setSidebarPos(){
@@ -23,5 +24,5 @@ function setSidebarPos(){
 	else {
 		width-sidebarWidth;
 	}
-	$('document').getElementById("sidebar").style[left]=leftvalue+"px";
+	$(".sidebar").left(leftvalue);
 }

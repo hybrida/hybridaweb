@@ -19,6 +19,7 @@ html, body, .mainWrap {
 	margin-right: auto;
 	margin-left: auto;
 	margin-top: 90px;
+	background-color: #fff;
 }
 
 .header {
@@ -96,9 +97,16 @@ html, body, .mainWrap {
 
 .content {
 	background-color: #ffffff;
-	margin-right: 230px;
-	float: left;
 	line-height: 1.5em;
+	height: 100%;
+	margin-right: 230px;
+}
+
+.content h1 {
+	position: relative;
+	top: 22px;
+	margin-top: 0;
+	margin-bottom: 40px;
 }
 
 .rightBar {
