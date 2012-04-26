@@ -5,11 +5,6 @@ html {
 	    font-family: "Gill";
 }
 
-.content h1, .content h2, .content h3, .content p {
-	margin-left: 15px;
-	margin-right: 15px;
-}
-
 h1, h2, h3 {
 	color: #DA5127;
 	text-decoration: none;

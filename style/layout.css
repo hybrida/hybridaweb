@@ -109,6 +109,12 @@ html, body, .mainWrap {
 	top: 22px;
 	margin-top: 0;
 	margin-bottom: 40px;
+	margin-left: 20px;
+}
+
+#article-content {
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 .rightBar {
@@ -171,13 +177,21 @@ div.ui-datepicker {
 }
 
 .widget-articletree li a, .widget-articletree .current {
-	padding-left: 15px;
+	padding-left: 18px;
+	text-decoration: none;
+	color: #000;
+	padding-top: 2px;
 }
 
 .widget-articletree li.hasChildren > a, .widget-articletree li.hasChildren > .current {
-	background: url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif') left center no-repeat;
+	background: url('http://industrialtradingcentre.com/images/bullet_list_icon.jpg') left center no-repeat;
 }
 
+.widget-articletree .hasChildren .widget-articletree a {
+	padding-left: 15px;
+	position: relative;
+	right: 20px;
+}
 
 .collapsibleList li{
   list-style: none;
@@ -186,11 +200,11 @@ div.ui-datepicker {
 }
 
 li.collapsibleListOpen{
-  list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+  list-style-image:url('http://industrialtradingcentre.com/images/bullet_list_icon.jpg');
   cursor:pointer;
 }
 
 li.collapsibleListClosed{
-  list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+  list-style-image: url('http://industrialtradingcentre.com/images/bullet_list_icon.jpg');
   cursor:pointer;
 }
