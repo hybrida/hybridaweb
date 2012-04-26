@@ -264,6 +264,7 @@ table#membertable *{
 	height: auto;
 	width: auto;
 	margin: 30px 40px;
+	overflow-x: hidden;
 }
 #newsfeed .header-wrapper {
 	width: 100%;
