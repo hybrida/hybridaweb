@@ -20,8 +20,8 @@
             <?= $model->ingress ?>
 			<? if ($model->author): ?>
 				<div class="author">
-				Skrevet av <?= CHtml::link($model->author->fullName, $model->author->viewUrl) ?> den <div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
-				</div></div>
+				Skrevet av <?= CHtml::link($model->author->fullName, $model->author->viewUrl) ?> den <?= Html::dateToString($model->timestamp, 'short') ?>
+				</div>
 			<? endif ?>
 		</div>
     </div>
