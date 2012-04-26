@@ -5,10 +5,11 @@ var pageMax = 1200;
 $('window').resize(function () {
 	setSidebarHeight();
 	setSidebarPos();
-)};
+});
 
 function setSidebarHeight() {
 	$('document').getElementById("sidebar").style[height]=$('document').documentElement.innerHeight-90+"px";
+}
 
 function setSidebarPos(){
 	var leftValue = 0;
@@ -23,4 +24,4 @@ function setSidebarPos(){
 		width-sidebarWidth;
 	}
 	$('document').getElementById("sidebar").style[left]=leftvalue+"px";
-};
+}
