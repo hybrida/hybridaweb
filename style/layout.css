@@ -41,10 +41,9 @@ html, body, .mainWrap {
 }
 
 .headerBottomStripe {
-	background-color: rgba(0, 0, 0, 0.25);
 	height: 23px;
 	position: relative;
-	bottom: 23px;
+	background-color: #00509e;
 }
 
 .searchWrap {
@@ -80,7 +79,7 @@ html, body, .mainWrap {
     color:#FFFFFF;
 }
 .menu a:link {
-    color:#FFFFFF;
+    color: #ffffff;
 }
 
 .menu a {
@@ -95,9 +94,9 @@ html, body, .mainWrap {
 
 .content {
 	background-color: #ffffff;
-	line-height: 1.5em;
 	height: 100%;
 	margin-right: 230px;
+	padding-top: 1px;
 }
 
 .feeds2 {

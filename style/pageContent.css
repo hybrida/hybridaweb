@@ -274,7 +274,7 @@ table#membertable *{
 
 #newsfeed a {
 	text-decoration: none;
-	color: #DA5127;
+	color: #00509e;
 }
 
 #newsfeed a:hover {
@@ -297,12 +297,13 @@ table#membertable *{
 
 #newsfeed .text-content {
 	margin-top: 1em;
-	font-size: 1.1em;
+	font-size: 1em;
+	text-align: justify;
 }
 
 #newsfeed .author a {
-	color: #AAA;
-	border-bottom: 1px solid rgba(8, 98, 196, 0.5);
+	color: #0063c5;
+
 	font-size: 1em;
 }
 

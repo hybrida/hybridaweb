@@ -8,7 +8,7 @@
 
 <? foreach ($models as $model): ?>
     <div class="element">
-		<div class="header-wrapper">
+		<div class="header-wrapper"> 
 			<div class="header-title">
 				<h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
 			</div>
@@ -18,6 +18,7 @@
 				<?= Image::tag($model->imageId, 'frontpage') ?>
 			<? endif ?>
             <?= $model->ingress ?>
+            <?= CHtml::link("Les mer", $model->viewUrl) ?>
 			<? if ($model->author): ?>
 				<div class="author">
 				Skrevet av <?= CHtml::link($model->author->fullName, $model->author->viewUrl) ?> den <?= Html::dateToString($model->timestamp, 'medium') ?>
