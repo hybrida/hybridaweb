@@ -24,5 +24,5 @@ function setSidebarPos(){
 	else {
 		width-sidebarWidth;
 	}
-	document.getElementById("rightBar").style.left = leftvalue + "px";
+	document.getElementById("rightBar").style.left = leftValue + "px";
 }
