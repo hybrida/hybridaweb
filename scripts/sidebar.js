@@ -22,7 +22,7 @@ function setSidebarPos(){
 		leftValue = (width-pageMax)/2+pageMax-sidebarWidth;
 	}
 	else {
-		width-sidebarWidth;
+		leftValue = width-sidebarWidth;
 	}
 	document.getElementById("rightBar").style.left = leftValue + "px";
 }
