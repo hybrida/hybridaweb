@@ -15,7 +15,7 @@ function setSidebarHeight() {
 function setSidebarPos(){
 	var leftValue = 0;
 	var width = window.innerWidth;
-	if (width < pageMax) {
+	if (width < pageMin) {
 		leftValue = pageMin - sidebarWidth;
 	}
 	else if (width > pageMax) {
