@@ -2,130 +2,78 @@
 	http://dev.hybrida.no/style/layout.css */
 
 html{
-	background-color: #DDE8F3;
-    /* Gill standard, ikke serif */
+	background-color: #c1d6ee;
     font-family: "Gill";
     /*font-weight: lighter;*/
+}
+
+html, body, .mainWrap {
+	padding: 0px;
+	margin: 0px;
 	height: 100%;
-}
-
-body {
-	height: 100%;
-}
-
-body, .mainWrap, .bodyWrap{
-    padding: 0px;
-    margin: 0px;
-}
-
-div.ui-datepicker{ 
-    font-size:12px;
-}
-
-.headerStripe{
-    height: 90px;
-    background-color: #0062C4;
-	position: fixed;
-	z-index: 2000;
-	width: 100%;
-}
-
-.header img.header-banner {
-	float: left;
-}
-
-.headerBottomStripe{
-    background-image:url('../images/black_trans_25.png');
-    background-repeat:repeat-x;
-    height: 23px;
-	position: relative;
-	bottom: 23px;
-	width: auto;
-	margin-right: auto;
-	margin-left: auto;
 }
 
 .mainWrap {
-	position: absolute;
-	top: 90px;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: #ffffff;
+	min-width: 800px;
+	max-width: 1200px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 90px;
 }
 
-.mainWrap, .bodyWrap{
-    margin-left: auto; 
-    margin-right: auto;
-    width: 980px;
-}
-
-.header{
-    margin-left: auto; 
-    margin-right: auto;
-    width: 980px;
-    height: 90px;
-}
-
-.header h1 {
-    float: left;
-    width: 450px;
-    height: 90px;
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font: 90px 'DIN-Medium';
-	margin: 0;
+.header {
+	margin: 0 auto;
+	width: 980px;
+	height: 90px;
 }
 
 .header img {
 	height: 90px;
-	border: 0px;
 	width: 980px;
 }
 
-.searchWrap{
-    vertical-align: top;
-	position: relative;
-	padding: 0;
-	float: none;
-	bottom: 60px;
-	left: 845px;
-	width: 135px;
+.headerStripe {
+	height: 90px;
+	width: 100%;
+	z-index: 100;
+	background-color: #0963c4;
+	position: fixed;
+	top: 0;
 }
 
-div.search {
-	width: 130px;
-	float: left;
-}
-
-.search input {
-	width: 100px;
-	float: left;
-}
-
-div.searchImg input{
-    width: 24px;
-    padding-top: 1px;
-	position: relative;
-	float: right;
-}
-
-div.searchBox{
-    width: 155px;
-    float: left;
-}
-
-.menu{
-	width: 980px;
-    color: #FFFFFF;
+.headerBottomStripe {
+	background-color: rgba(0, 0, 0, 0.25);
 	height: 23px;
 	position: relative;
-	margin-left: auto;
+	bottom: 23px;
+}
+
+.searchWrap {
+	position: relative;
+	bottom: 65px;
+	left: 700px;
+	width: 195px;
+	padding: 0;
+}
+.search {
+	padding: 0;
+	height: 24px;
+	width: 154px;
+}
+
+.searchImg, .search input {
+	float: left;
+}
+
+.menu {
+	width: 980px;
+	height: 23px;
 	margin-right: auto;
+	margin-left: auto;
 }
 
 .menu nav {
-	width: 838px;
+	width: 840px;
 	margin-left: auto;
 }
 
@@ -139,32 +87,43 @@ div.searchBox{
 .menu a {
     text-decoration: none;
     color: #FFF;
+	padding-bottom: 2px;
 }
 
 .menu a:hover {
-    text-decoration: underline;
+	border-bottom: 2px solid #0963c4;
+}
+
+.content {
+	background-color: #ffffff;
+	margin-right: 230px;
+	float: left;
+	line-height: 1.5em;
+}
+
+.rightBar {
+	width: 230px;
+	background-color: #ffffff;
+	position: fixed;
+	top: 90px;
+	height: 750px;
+	right: 0;
 }
 
 .button {
-    min-width: 80px;
-    text-align: center;
-    
-    padding: 5px;
-    /* background-color: rgb(0, 73, 147); mork blaa */
+	min-width: 80px;
+	text-align: center;
+	padding: 5px;
 	background-color: rgb(0, 98, 196);
-    color: white;
-    
-    /* Overriding for <input>-buttons */
-    border: none;
+	color: #fff;
+	border: none;
 }
 
-/* Hovers handeled by animations.js */
-
 .buttonRightSide {
-    float: right;
-    margin-top: 5px;
-    display: block;
-    clear: both;
+	position: relative;
+	float: right;
+	top: -50px;
+	clear: both;
 }
 
 #edit a {
@@ -197,95 +156,11 @@ div.searchBox{
 	margin-top: 0.5em;
 }
 
-
-.content .calendar-switch {
-	float: none;
-	left: 0;
-	z-index: 8;
-	width: auto;
-	
-	-webkit-transform: rotateY(-180deg);
-	-webkit-transform-style: preserve-3d;
-	-webkit-backface-visibility: hidden;
-	
-	-o-transform: rotateY(-180deg);
-	-o-transform-style: preserve-3d;
-	-o-backface-visibility: hidden;
-	
-	-moz-transform: rotateY(-180deg);
-	-moz-transform-style: preserve-3d;
-	-moz-backface-visibility: hidden;
-	
-	-webkit-transition: all .4s ease-in-out;
-	-moz-transition: all .4s ease-in-out;
-	-o-transition: all .4s ease-in-out;
-	-ms-transition: all .4s ease-in-out;
-	transition: all .4s ease-in-out;
-	background-color: #ffffff;
-	padding-right: 7px;
-	padding-left: 7px;
+div.ui-datepicker { 
+    font-size:12px;
 }
 
-.content.flip .calendar-switch {
-	z-index: 10;
-	-webkit-transform: rotateY(0deg);
-	-moz-transform: rotateY(0deg);
-	-o-transform: rotateY(0deg);
-	background-color: #ffffff;
-	padding-left: 7px;
-	padding-right: 7px;
-	position: absolute;
-}
-
-.feeds {
-	float: none;
-	position: absolute;
-	top: 50px;
-	z-index: 9;
-	width: inherit;
-	height: auto;
-	
-	-webkit-transform: rotateY(0deg);
-	-webkit-transform-style: preserve-3d;
-	-webkit-backface-visibility: hidden;
-	
-	
-	-moz-transform: rotateY(0deg);
-	-moz-transform-style: preserve-3d;
-	-moz-backface-visibility: hidden;
-	
-	-o-transform: rotateY(0deg);
-	-o-transform-style: preserve-3d;
-	-o-backface-visibility: hidden;
-	
-	-webkit-transition: all .4s ease-in-out;
-	-moz-transition: all .4s ease-in-out;
-	-o-transition: all .4s ease-in-out;
-	-ms-transition: all .4s ease-in-out;
-	transition: all .4s ease-in-out;
-	background-color: #ffffff;
-}
-
-.content.flip .feeds {
-	z-index: 9;
-	-webkit-transform: rotateY(180deg);
-	-o-transform: rotateY(180deg);
-	-moz-transform: rotateY(180deg);
-	background-color: #ffffff;
-	padding-left: 7px;
-	padding-right: 7px;
-}
-
-.content{
-	width: 750px;
-	background-color: white;
-}
-
-.feedTitle {
-	
-}
-
-.widget-articletree li{
+.widget-articletree li {
 	list-style-type: none;
 	font-size: 18px;
 }
@@ -298,19 +173,6 @@ div.searchBox{
 	background: url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif') left center no-repeat;
 }
 
-.rightBar{
-    width: 230px;
-	position: fixed;
-	top: 90px;
-	right: 0;
-	bottom: 0;
-	left: 750px;
-	overflow-y: auto;
-	border-left: 1px solid #0062c4;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #ffffff;
-}
 
 .collapsibleList li{
   list-style: none;
@@ -327,5 +189,3 @@ li.collapsibleListClosed{
   list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
   cursor:pointer;
 }
-
-/* @end */

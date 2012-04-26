@@ -12,9 +12,6 @@
 			<div class="header-title">
 				<h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
 			</div>
-			<div class="header-date">
-				<div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
-			</div>
         </div>
 		<div class="text-content">
 			<? if ($model->imageId):?>
@@ -22,8 +19,9 @@
 			<? endif ?>
             <?= $model->ingress ?>
 			<? if ($model->author): ?>
-				<div class="author"><?=
-					CHtml::link($model->author->fullName, $model->author->viewUrl) ?></div>
+				<div class="author">
+				Skrevet av <?= CHtml::link($model->author->fullName, $model->author->viewUrl) ?> den <div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
+				</div></div>
 			<? endif ?>
 		</div>
     </div>

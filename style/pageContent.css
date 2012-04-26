@@ -120,9 +120,13 @@ nav .navItems div.last {
 }
 
 .author {
-    font-style: italic;
-    position: relative;
+	position: relative;
     padding-top: 10px;
+	text-transform: uppercase;
+	color: #AAA;
+	border-top: 1px solid #DDD;
+	margin-top: 20px;
+	font-size: 0.6em;
 }
 
 .author:before {
@@ -233,27 +237,25 @@ table#membertable *{
 }
 
 #newsfeed .element {
-	margin: 50px 30px;
 	height: auto;
 	width: auto;
+	margin: 40px;
 }
 #newsfeed .header-wrapper {
-	border-bottom: 2px solid #0062c4;
-	margin-bottom: 0;
-	padding-bottom: 0;
-    overflow: hidden;
-    display: inline-block; /* Necessary to trigger "hasLayout" in IE */
-    display: block; /* Sets element back to block */
+	width: 100%;
+	height: 47px;
+	margin-bottom: 13px;
 }
 #newsfeed .header-title {
 	float:left;
-	width: 400px;
 	margin-left: 20px;
+	margin-right: 20px;
 }
 
 #newsfeed a {
 	text-decoration: none;
-	color: black;
+	color: #DA5127;
+	font-size: 1.2em;
 }
 
 #newsfeed .header-title h1 {
@@ -273,6 +275,13 @@ table#membertable *{
 #newsfeed .text-content {
 	margin-left: 20px;
 	margin-top: 0.4em;
+	font-size: 1.1em;
+}
+
+#newsfeed .author a {
+	color: #AAA;
+	border-bottom: 1px solid #0963c4;
+	font-size: 1em;
 }
 
 #newsfeed .text-content img {
