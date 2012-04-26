@@ -9,7 +9,7 @@ window.onresize = function () {
 }
 
 function setSidebarHeight() {
-	document.getElementsByName("sidebar").style.height = (window.innerHeight-headerHeight) + "px";
+	document.getElementById("rightBar").style.height = (window.innerHeight-headerHeight) + "px";
 }
 
 function setSidebarPos(){
@@ -24,5 +24,5 @@ function setSidebarPos(){
 	else {
 		width-sidebarWidth;
 	}
-	document.getElementsByName("sidebar").style.left = leftvalue + "px";
+	document.getElementById("rightBar").style.left = leftvalue + "px";
 }
