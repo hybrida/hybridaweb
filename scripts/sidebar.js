@@ -3,18 +3,18 @@ var headerHeight = 90;
 var pageMin = 800;
 var pageMax = 1200;
 
-$(window).resize(function () {
+window.onresize = function () {
 	setSidebarHeight();
 	setSidebarPos();
-});
+}
 
 function setSidebarHeight() {
-	$(".sidebar").height($('document').documentElement.innerHeight-headerHeight;
+	document.getElementsByName("sidebar").style.height = (window.innerHeight-headerHeight) + "px";
 }
 
 function setSidebarPos(){
 	var leftValue = 0;
-	var width = $('document').documentElement.innerHeight;
+	var width = window.innerWidth;
 	if (width < pageMax) {
 		leftValue = pageMin - sidebarWidth;
 	}
@@ -24,5 +24,5 @@ function setSidebarPos(){
 	else {
 		width-sidebarWidth;
 	}
-	$(".sidebar").left(leftvalue);
+	document.getElementsByName("sidebar").style.left = leftvalue + "px";
 }
