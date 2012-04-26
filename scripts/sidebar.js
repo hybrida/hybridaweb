@@ -2,7 +2,7 @@ var sidebarWidth = 230;
 var pageMin = 800;
 var pageMax = 1200;
 
-$('window').resize(function () {
+$('window').onresize(function () {
 	setSidebarHeight();
 	setSidebarPos();
 });
