@@ -2,27 +2,13 @@
 
 <h1>Endre profil</h1>
 
-<? 
-    $fb = new Facebook;
-    $result = $fb->getAccessToken();
-    
-    $form = $this->beginWidget('ActiveForm', array(
-    'id' => 'profile-edit-form',
-    'htmlOptions' => array(
-        'enctype' => 'multipart/form-data',
-    ),
-    'enableClientValidation' => true,
-    'clientOptions' => array(
-        'validateOnSubmit' => true,
-    ),
-        ));
-?>
+<? $result = $fb->getAccessToken(); ?>
 
 <div class="formSection">
     <? if(!isset($result)): ?>
        <div class="fieldDefinition">Facebook:</div>
        <div class="fieldInput">
-            <? $fb->authLink() ?>
+            <?= $fb ?>
        </div>
     <? else: ?>
        <div class="inputGroup">
@@ -30,7 +16,7 @@
                 Poste til Facebook:
             </div>
             <div class="fieldInput">
-                <!-- Her må det legges inn en checkbox for om man skal poste til facebook eller ikke -->
+                <!-- Checkbox for om man vil poste til Facebook eller ikke -->
             </div>
        </div>
        <div class="inputGroup">
@@ -44,6 +30,19 @@
     <? endif ?> 
        <div class="fieldExplanation"></div>
 </div>
+
+<?
+    $form = $this->beginWidget('ActiveForm', array(
+    'id' => 'profile-edit-form',
+    'htmlOptions' => array(
+        'enctype' => 'multipart/form-data',
+    ),
+    'enableClientValidation' => true,
+    'clientOptions' => array(
+        'validateOnSubmit' => true,
+    ),
+        ));
+?>
 
 <div class="formSection">
     <div class="inputGroup">

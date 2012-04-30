@@ -34,7 +34,7 @@ class FacebookUser extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('userId, fb_token', 'required'),
+			array('userId, fb_token', 'postEvents', 'required'),
 			array('userId', 'numerical', 'integerOnly'=>true),
 			array('fb_token', 'length', 'max'=>100),
 			// The following rule is used by search().
