@@ -175,3 +175,22 @@ Forslag til design av nyhetspublisering
 
 /* Search and autocomplete */
 
+.ui-autocomplete {
+    
+}
+
+.ui-autocomplete .ui-menu-item {
+    background-color: white;
+    border-bottom: 1px solid #0963C4;
+    list-style: none;
+    width: 155px;
+}
+
+.ui-autocomplete .ui-menu-item:first-child {
+    border-top: 1px solid #0963C4;
+}
+
+.ui-autocomplete, .ui-autocomplete ui-menu-item {
+    margin-left: 0;
+    padding-left: 0;
+}
