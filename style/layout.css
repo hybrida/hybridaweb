@@ -183,7 +183,7 @@ div.ui-datepicker {
 }
 
 .widget-articletree li.hasChildren > a, .widget-articletree li.hasChildren > .current {
-	background: url('http://industrialtradingcentre.com/images/bullet_list_icon.jpg') left center no-repeat;
+	background: url('../images/icons/bullet_list_icon.jpg') left center no-repeat;
 }
 
 .widget-articletree .hasChildren .widget-articletree a {
@@ -199,11 +199,11 @@ div.ui-datepicker {
 }
 
 li.collapsibleListOpen{
-  list-style-image:url('http://industrialtradingcentre.com/images/bullet_list_icon.jpg');
+  list-style-image:url('../images/icons/bullet_list_icon.jpg');
   cursor:pointer;
 }
 
 li.collapsibleListClosed{
-  list-style-image: url('http://industrialtradingcentre.com/images/bullet_list_icon.jpg');
+  list-style-image: url('../images/icons/bullet_list_icon.jpg');
   cursor:pointer;
 }

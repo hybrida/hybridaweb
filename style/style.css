@@ -145,7 +145,7 @@ Forslag til design av nyhetspublisering
 
 .g-form .errorMessage:before {
 	content: " ";
-	background-image: url("http://icons.iconarchive.com/icons/kyo-tux/phuzion/16/Sign-Error-icon.png");
+	background-image: url("../images/icons/Sign-Error-icon.png");
 	background-repeat: no-repeat;
 	width: 20px;
 	height: 16px;
