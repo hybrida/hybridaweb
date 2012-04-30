@@ -10,6 +10,7 @@
 	<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/CollapsibleLists.js'></script>
 	<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/OnloadScheduler.js'></script>
 	<script type="text/javascript" src = '<?=Yii::app()->request->baseUrl?>/scripts/sidebar.js'></script>
+        <script type="text/javascript" src = '<?=Yii::app()->request->baseUrl?>/scripts/autocomplete_search.js'></script>
 	
 	<script type="text/javascript">
 		OnloadScheduler.schedule(function(){ CollapsibleLists.apply(); });
