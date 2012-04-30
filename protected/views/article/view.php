@@ -20,13 +20,13 @@ $this->endClip()
 
 <? if ($hasEditAccess): ?>
 	<p>
-	<?= CHtml::link("Publiser barn", array("article/create", 'parentId' => $article->id), array(
+	<?= CHtml::link("Lag underside", array("article/create", 'parentId' => $article->id), array(
 		'class' => 'button buttonRightSide'
 	)); ?>
 	</p>
 		
 	<p>
-	<?= CHtml::link("Rediger",array("article/edit",'id' => $article->id), array(
+	<?= CHtml::link("Rediger siden",array("article/edit",'id' => $article->id), array(
 		'class' => 'button buttonRightSide'
 	)); ?>
 	</p>

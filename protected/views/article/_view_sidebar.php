@@ -1,4 +1,4 @@
-<div class="barTitle">Artikkeltre</div>
+<div class="barTitle">Sider</div>
 
 <div id="sidebarToBeUpdated">
 	<?
