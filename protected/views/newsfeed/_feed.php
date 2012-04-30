@@ -8,12 +8,9 @@
 
 <? foreach ($models as $model): ?>
     <div class="element">
-		<div class="header-wrapper">
+		<div class="header-wrapper"> 
 			<div class="header-title">
 				<h1><?= CHtml::link($model->title, $model->viewUrl) ?></h1>
-			</div>
-			<div class="header-date">
-				<div class="date"><?= Html::dateToString($model->timestamp, 'long') ?></div>
 			</div>
         </div>
 		<div class="text-content">
@@ -21,9 +18,11 @@
 				<?= Image::tag($model->imageId, 'frontpage') ?>
 			<? endif ?>
             <?= $model->ingress ?>
+            <?= CHtml::link("Les mer", $model->viewUrl) ?>
 			<? if ($model->author): ?>
-				<div class="author"><?=
-					CHtml::link($model->author->fullName, $model->author->viewUrl) ?></div>
+				<div class="author">
+				Skrevet av <?= CHtml::link($model->author->fullName, $model->author->viewUrl) ?> den <?= Html::dateToString($model->timestamp, 'medium') ?>
+				</div>
 			<? endif ?>
 		</div>
     </div>

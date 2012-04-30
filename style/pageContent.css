@@ -1,6 +1,30 @@
 /* @override
         http://dev.hybrida.no/style/pageContent.css */
 
+html {
+	    font-family: "Gill";
+}
+
+h1, h2, h3 {
+	color: #DA5127;
+	text-decoration: none;
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1 {
+	font-size: 2.5em;
+}
+
+h2 {
+	margin-top: 30px;
+	font-size: 2em;
+}
+
+.content ul {
+	list-style-image: url('http://industrialtradingcentre.com/images/bullet_list_icon.jpg');
+}
+
 #content div.formSection div.fieldInput a img {
     height: 30px;
     margin-top: -6px;
@@ -8,17 +32,18 @@
 
 #groupNavigation {
     font-size: 1em;
-    clear: both;
-    background-color: #0062c4;
-    padding: 5px;
-    text-align: center;
+	background-color: #0062c4;
+	text-align: center;
+	clear: both;
+	height: 23px;
 }
 
 #groupNavigation > .groupNavigationItem {
-    margin-left: 5px;
-    padding: 5px;
-    color: white;
+    margin-left: 4px;
+	color: white;
     text-decoration: none;
+	height: 23px;
+	padding: 3px 5px 1px;
 }
 
 #groupNavigation > .groupNavigationItem:hover{
@@ -32,24 +57,8 @@
     margin-top: 5px;
 }
 
-.articleContent {
-    margin-left: 25px;
-    border: 1px solid #a8a8a8;
-    padding: 22px 6px 3px;
-    position: relative;
-    bottom: 15px;
-    z-index: 1;
-    -moz-box-shadow: 2px 1px 2px #848484;
-    -webkit-box-shadow: 2px 1px 2px #848484;
-    box-shadow: 2px 1px 2px #848484;
-}
-
-.articleContent p {
-    font-family: "Gill";
-    font-weight: lighter;
-    text-align: left;
-    margin-top: 0;
-    margin-bottom: 7px;
+#article {
+	background-color: #ffffff;
 }
 
 div.articleContent div.date {
@@ -85,14 +94,6 @@ div.articleContent div.author a {
     margin-right: 0;
 }
 
-.contentDivider {
-    background: url('../images/shaded-divider.gif') no-repeat;
-    height: 10px;
-    top: 15px;
-    position: relative;
-    display: none;
-}
-
 nav .navItems div {
     height: 25px;
     font: 20px 'Gill';
@@ -120,13 +121,18 @@ nav .navItems div.last {
 }
 
 .author {
-    font-style: italic;
-    position: relative;
-    padding-top: 10px;
+	position: relative;
+    padding-top: 15px;
+	text-transform: uppercase;
+	color: #AAA;
+	border-top: 1px solid #DDD;
+	margin-top: 12px;
+	font-size: 0.6em;
 }
 
-.author:before {
-    content: "Skrevet av ";
+.barTitle {
+	font-size: 1.2em;
+	color: #DA5127;
 }
 
 .formSection {
@@ -182,6 +188,11 @@ nav .navItems div.last {
     resize: none;
 }
 
+.memberlists {
+	width: 100%;
+	background-color: #fff;
+}
+
 table#membertable {
     margin: 2em auto;
     border-collapse: collapse;
@@ -199,6 +210,16 @@ table#membertable *{
     padding: 2px 1.5em; 
 }
 
+#membertable .nameCell a {
+	font-size: 1em;
+	color: #000;
+	text-decoration: none;
+	border-bottom: 1px solid rgba(9, 99, 195, 0.5);
+}
+
+.content table {
+	margin: 5px 20px;
+}
 
 #membertable tr:hover {
     background-color: #e1e3e5;
@@ -209,6 +230,7 @@ table#membertable *{
 }
 
 #breadCrumb ul, #breadCrumb li {
+	list-style-image: none;
     list-style-type:none;
     padding:0;
     margin:0;
@@ -230,30 +252,33 @@ table#membertable *{
     display:block;
     padding:0 15px 0 0;
     background:url('/images/icons/crumbs.gif') no-repeat right center;
+	text-decoration: none;
+	color: #000;
+}
+
+#breadCrumb li:hover {
+	
 }
 
 #newsfeed .element {
-	margin: 50px 30px;
 	height: auto;
 	width: auto;
+	margin: 30px 40px;
+	overflow-x: hidden;
 }
 #newsfeed .header-wrapper {
-	border-bottom: 2px solid #0062c4;
-	margin-bottom: 0;
-	padding-bottom: 0;
-    overflow: hidden;
-    display: inline-block; /* Necessary to trigger "hasLayout" in IE */
-    display: block; /* Sets element back to block */
-}
-#newsfeed .header-title {
-	float:left;
-	width: 400px;
-	margin-left: 20px;
+	width: 100%;
+	height: 47px;
+	margin-bottom: 29px;
 }
 
 #newsfeed a {
 	text-decoration: none;
-	color: black;
+	color: #00509e;
+}
+
+#newsfeed a:hover {
+	border-bottom: 2px solid #DA5127;
 }
 
 #newsfeed .header-title h1 {
@@ -271,8 +296,15 @@ table#membertable *{
 }
 
 #newsfeed .text-content {
-	margin-left: 20px;
-	margin-top: 0.4em;
+	margin-top: 1em;
+	font-size: 1em;
+	text-align: justify;
+}
+
+#newsfeed .author a {
+	color: #0063c5;
+
+	font-size: 1em;
 }
 
 #newsfeed .text-content img {

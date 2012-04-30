@@ -50,13 +50,8 @@
 	text-align: center;
 }
 
-.form{
-	height: 750px;
-}
-
 .formHeader{
 	padding-left: 4px;
-	background-color: #E1E3E5;
 }
 
 .formElement{
@@ -117,6 +112,7 @@ Forslag til design av nyhetspublisering
 .g-form {
 	margin:0 auto;
 	position:relative;
+	background-color: #fff;
 }
 
 

@@ -31,7 +31,11 @@ $this->endClip()
 	)); ?>
 	</p>
 <? endif ?>
-	
-<h1><?= $article->title ?> </h1>
-
-<?= $article->content ?>
+<div id="article">	
+	<div id="article-title">
+		<h1><?= $article->title ?> </h1>
+	</div>
+	<div id="article-content">
+		<?= $article->content ?>
+	</div>
+</div>

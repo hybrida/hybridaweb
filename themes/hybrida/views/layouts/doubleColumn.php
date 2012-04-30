@@ -11,7 +11,7 @@
                 <?= $content ?>
             </div>
 
-            <div class="rightBar">
+            <div id="rightBar">
 				<?= $this->clips['sidebar'] ?>
             </div>
 <?php $this->endContent(); ?>

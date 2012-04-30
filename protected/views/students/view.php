@@ -1,6 +1,6 @@
 <? $this->pageTitle = "Klasseliste " . $graduationYear ?>
 
-
+<div class="memberlists">
 <div id='groupNavigation'>
 	<? for ($i = 1; $i <= 5; $i++): ?>
 		<?=	CHtml::link("$i. klasse", array(
@@ -39,3 +39,4 @@
 		</div>
 	<? endforeach; ?>
 </table>
+</div>
