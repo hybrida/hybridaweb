@@ -34,6 +34,67 @@ class Html extends CHtml {
 	public static function getShortMonthNames() {
 		return self::$shortMonthNames;
 	}
+        
+        public static 
+                function timeLeftFromUNIXtimespampToString($eventDate){
+            $timeLeft = $eventDate - time();
+            if ($timeLeft > 60*60*24*30){
+                $monthsLeft = floor($timeLeft/(60*60*24*30));
+                Html::printTime($monthsLeft,"måned");
+            }elseif($timeLeft > 60*60*24){
+                $daysLeft = floor($timeLeft/(60*60*24));
+                Html::printTime($daysLeft,"dag");
+            }elseif($timeLeft > 60*60){
+                $hoursLeft = floor($timeLeft/(60*60));
+                Html::printTime($hoursLeft,"time");
+            }elseif($timeLeft > 60){
+                $minutesLeft = floor($timeLeft/60);
+                Html::printTime($minutesLeft,"minutt");
+            }elseif ($timeLeft > 0){
+                echo "Mindre enn ett minutt gjenstår.<br/>Om du skal, bør du raska på";
+            }else{
+                echo "Har begynt";
+            }
+        }
+        
+        private function printTime($timeLeft,$duration){
+            if ($duration=="måned"){
+                Html::printPlural($timeLeft,"måned");
+            }elseif($duration == "dag"){
+                Html::printPlural($timeLeft,"dag");
+            }elseif($duration == "time"){
+                Html::printPlural($timeLeft,"time");
+            }elseif($duration == "minutt"){
+                Html::printPlural($timeLeft,"minutt");
+            }
+        }
+        
+       private static function printPlural($timeLeft,$duration){
+            if ($timeLeft == 1){
+                echo "1 {$duration} gjenstår.";
+            }else{
+                echo "{$timeLeft} {$duration}er gjenstår.";
+            }
+        }
+       
+        public static function timeLeftFromDateToString($eventDate){ /*
+         * Formatet til $eventDate må være på formen
+         * 
+         * YYYYMMDDTTTT
+         * 
+         * der Y er år, M måned, D dag og T 24-tallsklokkeslett
+         */            
+            $year = floor($eventDate/100000000); 
+            $rest = ($eventDate/100000000 - $year);
+            $month = floor($rest*100);
+            $rest2 = ($rest*100 - $month);
+            $day = floor($rest2*100);
+            $rest3 = ($rest2*100 - $day);
+            $hour = floor($rest3*100);
+            $rest4 = ($rest3*100 - $hour)*100;
+            $minute = floor($rest4);
+            return Html::timeLeftFromUNIXtimespampToString(mktime($hour, $minute, 00, $month, $day, $year));
+        }
 	
 	public static function userListByYear($usersByYear) {
 		$i = 1;
