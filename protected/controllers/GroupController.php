@@ -39,81 +39,79 @@ class GroupController extends Controller {
                   LEFT JOIN site AS s ON s.siteId = mg.site 
                   WHERE mg.sort = (SELECT MIN(sort) FROM menu_group as mg)) AS menu
                   ON menu.group = g.id
-                  WHERE committee = 'false'" ;
+                  WHERE committee = 'false'";
 
-        
+
 		$command = $this->pdo->prepare($query);
 		$command->execute();
 
-       
+
 		$data['groups'] = $command->fetchAll(PDO::FETCH_ASSOC);
 
 		$this->render("index", $data);
 	}
 
-    public function actionView($id, $title) {
+	public function actionView($id, $title) {
 
-        $data = array();
-        $group = new Group($id);
-        $data['id'] = $id;
-        $data['model'] = $group;
-        $data['title'] = $group->getTitle();
-        $data['menu'] = $group->getMenu();
+		$data = array();
+		$group = new Group($id);
+		$data['id'] = $id;
+		$data['model'] = $group;
+		$data['title'] = $group->getTitle();
+		$data['menu'] = $group->getMenu();
 
-        $content = $group->getGroupContentType($title);
+		$content = $group->getGroupContentType($title);
 
-        if($content=="article"){
-           $data['content'] = $group->getArticle($title);
-        }
+		if ($content == "article") {
+			$data['content'] = $group->getArticle($title);
+		}
 
-        if($content == "members"){
-            $data['content'] = $group->getMembers();
-            $data['date'] = date('Y');
+		if ($content == "members") {
+			$data['content'] = $group->getMembers();
+			$data['date'] = date('Y');
 
-            //Henter ut alle tidligere medlemmer av gruppen siden 2003
-            //Bør gjøres ved hjelp av feed med en egen stil
-            $former = array();
-            $i = 0;
-            for( $year = date('Y'); $year > 2003; $year--){
-                for( $s = 1; $s <= 2; $s++ ) { 
-                    if(sizeof($group->getFormerMembers($year,$s))>0){
-                        $former[$i++] = $group->getFormerMembers($year,$s);
-                    }
-                }
-            }
+			//Henter ut alle tidligere medlemmer av gruppen siden 2003
+			//Bør gjøres ved hjelp av feed med en egen stil
+			$former = array();
+			$i = 0;
+			for ($year = date('Y'); $year > 2003; $year--) {
+				for ($s = 1; $s <= 2; $s++) {
+					if (sizeof($group->getFormerMembers($year, $s)) > 0) {
+						$former[$i++] = $group->getFormerMembers($year, $s);
+					}
+				}
+			}
 
-            $data['former'] = $former;
-            print_r($former);
-        }
+			$data['former'] = $former;
+			print_r($former);
+		}
 
-        if($content == "news"){
-            $data['id'] = $group->id;
-        }
+		if ($content == "news") {
+			$data['id'] = $group->id;
+		}
 
 
 
-        $this->render("view" . $content, $data);
-    }
+		$this->render("view" . $content, $data);
+	}
 
-    public function actions() {
-            return array(
-                                            //'view' => 'application.controllers.group.ViewAction',
-            );
-    }
-    
-    public function actionEdit($id){
-        $group = new Group($id);
-        $data['title'] = $group->getTitle();
-        $data['groups'] = $group->getAdminMenu();
-        $data['members'] = $group->getMembers();
-        $data['menu'] = $group->getMenu();
-        $this->render("edit",$data);
-    }
-	
+	public function actions() {
+		return array(
+				//'view' => 'application.controllers.group.ViewAction',
+		);
+	}
+
+	public function actionEdit($id) {
+		$group = new Group($id);
+		$data['title'] = $group->getTitle();
+		$data['groups'] = $group->getAdminMenu();
+		$data['members'] = $group->getMembers();
+		$data['menu'] = $group->getMenu();
+		$this->render("edit", $data);
+	}
+
 	public function actionEditMembers($url) {
-		$group = Groups::model()->find("url = ?", array($url));
-		if (!$group) throw new CHttpException(404, "Denne gruppen finnes ikke");
-		
+		$group = $this->getGroupByUrl($url);
 		if (!user()->checkAccess('updateGroup', array('id' => $group->id))) {
 			throw new CHttpException(403, "Du har ikke tilgang til å redigere disse medlemslistene");
 		}
@@ -126,7 +124,14 @@ class GroupController extends Controller {
 			'members' => $members,
 		));
 	}
-	
+
+	private function getGroupByUrl($url) {
+		$group = Groups::model()->find("url = ?", array($url));
+		if (!$group)
+			throw new CHttpException(404, "Denne gruppen finnes ikke");
+		return $group;
+	}
+
 	private function saveIfPostRequest($groupForm) {
 		if (Yii::app()->request->isPostRequest && isset($_POST['GroupMembersForm'])) {
 			$input = $_POST['GroupMembersForm'];
@@ -136,4 +141,32 @@ class GroupController extends Controller {
 			$this->redirect("editMembers");
 		}
 	}
+
+	public function actionEditMembership($url, $userId) {
+		$group = $this->getGroupByUrl($url);
+		$condition = "groupId = :groupId AND userId = :userId AND end = :end";
+		$membership = GroupMembership::model()->find($condition, array(
+			'groupId' => $group->id,
+			'userId' => $userId,
+			'end' => Groups::STILL_ACTIVE,
+				));
+		$shouldRedirect = $this->saveMembershipIfPostRequest($membership);
+		if ($shouldRedirect) {
+			$url = $this->createUrl("editMembers", array('url' => $url));
+			$this->redirect($url);
+		}
+		$this->render('editMembership', array(
+			'model' => $membership,
+		));
+	}
+	
+	private function saveMembershipIfPostRequest($membership) {
+		if ( isset($_POST['GroupMembership']) ) {
+			$input = $_POST['GroupMembership'];
+			$membership->setAttributes($input);
+			return $membership->save();
+		}
+		return false;
+	}
+
 }

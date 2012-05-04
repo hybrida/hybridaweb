@@ -13,7 +13,8 @@
 <h1>Slett medlemmer</h1>
 <table border="1">
 	<tr>
-	<th>Slett medlem</th>
+	<th>Slett</th>
+	<th>Rediger</th>
 	<th>Brukernavn</th>
 	<th>Fullt navn</th>
 	<th>Stilling</th>
@@ -24,6 +25,7 @@
 	$user = $membership->user ?>
 	<tr>
 		<td><?= $form->checkbox($groupForm, 'delete[' . $user->id . ']') ?></td>
+		<td><?= CHtml::link("Rediger", array('editMembership', 'url' => $group->url, 'userId' => $user->id)) ?></td>
 		<td><?= $user->username ?></td>
 		<td><?= $user->fullName ?></td>
 		<td><?=$membership->comission ?></td>
