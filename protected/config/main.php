@@ -78,7 +78,7 @@ return array(
 			'assignmentTable' => 'rbac_assignment',
 			// The itemChildTable name (default:authitemchild)
 			'itemChildTable' => 'rbac_itemchild',
-			'defaultRoles' => array('updateOwnProfile', 'webkom'),
+			'defaultRoles' => array('all'),
 		),
 		'gatekeeper' => array(
 			'class' => 'GatekeeperComponent',
