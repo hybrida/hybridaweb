@@ -190,10 +190,7 @@ class GroupController extends Controller {
 	}
 	
 	public function actionView($url) {
-		$group = $this->getGroupByUrl($url);
-		$this->render("view", array(
-			'group' => $group,
-		));
+		$this->actionMembers($url);
 	}
 	
 }
