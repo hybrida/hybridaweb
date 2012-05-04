@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 04, 2012 at 05:26 PM
+-- Generation Time: May 04, 2012 at 07:40 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
@@ -575,6 +575,7 @@ CREATE TABLE IF NOT EXISTS `rbac_assignment` (
 -- Dumping data for table `rbac_assignment`
 --
 
+
 -- --------------------------------------------------------
 
 --
@@ -595,18 +596,22 @@ CREATE TABLE IF NOT EXISTS `rbac_item` (
 --
 
 INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
-('admin', 2, '', '', 's:0:"";'),
+('admin', 2, 'Administrator', '', 's:0:"";'),
+('all', 2, 'Alle studenter har denne access som standard', NULL, NULL),
 ('createArticle', 0, 'Poste artikkel', '', 's:0:"";'),
 ('createNews', 0, 'Poste nyhet', '', 's:0:"";'),
-('editor', 2, '', '', 's:0:"";'),
+('editor', 2, 'Kan redigere, men ikke lage noe nytt', '', 's:0:"";'),
+('styret', 2, 'Medlemmer av styret', 'return Yii::app()->gatekeeper->hasGroupAccess(56);', NULL),
 ('updateArticle', 0, '', '', 's:0:"";'),
-('updateNews', 0, '', '', 's:0:"";'),
+('updateGroup', 0, '', '', NULL),
+('updateNews', 0, 'oppdatere nyhet', '', 's:0:"";'),
 ('updateOwnArticle', 1, '', 'return isset($params["id"]) && Article::model()->findByPk($params["id"])->author == user()->id;', 's:0:"";'),
+('updateOwnGroup', 1, '', 'return isset($params["id"]) && Groups::model()->findByPk($params["id"])->admin == user()->id;', NULL),
 ('updateOwnNews', 1, '', 'return isset($params["id"]) && News::model()->findByPk($params["id"])->authorId == user()->id;', 's:0:"";'),
 ('updateOwnProfile', 1, '', 'return isset($params[''username'']) && isset(user()->name) && $params[''username''] == user()->name;\r\n', 's:0:"";'),
 ('updateProfile', 0, '', '', 's:0:"";'),
-('webkom', 2, NULL, 'return Yii::app()->gatekeeper->hasGroupAccess(55);', NULL),
-('writer', 2, '', '', 's:0:"";');
+('webkom', 2, 'Medlemmer av webkom', 'return Yii::app()->gatekeeper->hasGroupAccess(55);', NULL),
+('writer', 2, 'Kan publisere', '', 's:0:"";');
 
 -- --------------------------------------------------------
 
@@ -630,15 +635,20 @@ INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 ('writer', 'createArticle'),
 ('writer', 'createNews'),
 ('admin', 'editor'),
+('all', 'styret'),
 ('editor', 'updateArticle'),
 ('updateOwnArticle', 'updateArticle'),
+('admin', 'updateGroup'),
 ('editor', 'updateNews'),
 ('updateOwnNews', 'updateNews'),
 ('writer', 'updateOwnArticle'),
 ('writer', 'updateOwnNews'),
+('all', 'updateOwnProfile'),
 ('admin', 'updateProfile'),
 ('updateOwnProfile', 'updateProfile'),
-('admin', 'writer');
+('all', 'webkom'),
+('admin', 'writer'),
+('styret', 'writer');
 
 -- --------------------------------------------------------
 
@@ -853,7 +863,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-04-29 23:41:51', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-05-04 18:15:17', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
