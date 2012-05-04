@@ -18,17 +18,16 @@ class GroupMembersForm extends CFormModel {
 	public function add() {
 		if (!$this->add)
 			return;
-		$this->add = str_replace(" ", "", $this->add);
-		$this->add = str_replace("\n", "", $this->add);
-		$usernames = explode(",", $this->add);
-
-		foreach ($usernames as $username) {
+		$memberships = $this->add;
+		foreach ($memberships as $ms) {
+			$username = $ms['username'];
+			$comission = $ms['comission'];
 			if ($username == "") continue;
 			$user = User::model()->find("username = :username", array(
 				"username" => $username));
 			if (!$user)
 				return;
-			$this->_group->addMember($user->id);
+			$this->_group->addMember($user->id, $comission);
 		}
 	}
 
