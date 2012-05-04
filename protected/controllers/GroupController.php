@@ -110,11 +110,13 @@ class GroupController extends Controller {
         $this->render("edit",$data);
     }
 	
-	public function actionEditMembers($id) {
-		if (!user()->checkAccess('updateGroup', array('id' => $id))) {
+	public function actionEditMembers($url) {
+		$group = Groups::model()->find("url = ?", array($url));
+		if (!$group) throw new CHttpException(404, "Denne gruppen finnes ikke");
+		
+		if (!user()->checkAccess('updateGroup', array('id' => $group->id))) {
 			throw new CHttpException(403, "Du har ikke tilgang til å redigere disse medlemslistene");
 		}
-		$group = Groups::model()->findByPk($id);
 		$groupForm = new GroupMembersForm($group);
 		$members = $group->getActiveMemberships();
 		$this->saveIfPostRequest($groupForm);
