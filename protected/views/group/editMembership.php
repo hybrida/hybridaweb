@@ -26,7 +26,9 @@
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Submit'); ?>
+		<?php echo CHtml::submitButton('Submit', array(
+			'class' => 'button'
+		)); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
