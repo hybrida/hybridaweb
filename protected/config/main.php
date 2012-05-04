@@ -97,7 +97,7 @@ return array(
 				'bk/<action:\w+>' => 'bk/bktool/<action>',
 				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
-				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
+				'gruppe/<id:\d+>/<action:\w+>' => 'group/<action>',
 				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
 				'nyheter/<id:\d+>/<title>' => 'news/view',
 				'nyheter' => 'newsfeed/index',

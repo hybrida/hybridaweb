@@ -92,7 +92,7 @@ class GroupController extends Controller {
 
 
 
-        $this->render("view/" . $content, $data);
+        $this->render("view" . $content, $data);
     }
 
     public function actions() {
@@ -108,6 +108,28 @@ class GroupController extends Controller {
         $data['members'] = $group->getMembers();
         $data['menu'] = $group->getMenu();
         $this->render("edit",$data);
-        
     }
+	
+	public function actionEditMembers($id) {
+		$group = Groups::model()->findByPk($id);
+		$groupForm = new GroupMembersForm($group);
+		$members = $group->getMembersInActiveRecord();
+		$this->saveIfPostRequest($groupForm);
+		$this->render("editMembers", array(
+			'group' => $group,
+			'groupForm' => $groupForm,
+			'members' => $members,
+		));
+	}
+	
+	private function saveIfPostRequest($groupForm) {
+		if (Yii::app()->request->isPostRequest && isset($_POST['GroupMembersForm'])) {
+			$input = $_POST['GroupMembersForm'];
+			var_export($input);
+			
+			$groupForm->setAttributes($input);
+			$groupForm->save();
+			$this->redirect("editMembers");
+		}
+	}
 }

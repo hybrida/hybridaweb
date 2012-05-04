@@ -12,6 +12,7 @@
  */
 class Groups extends CActiveRecord
 {
+	private $STILL_ACTIVE = '0000-00-00';
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Groups the static model class
@@ -105,8 +106,28 @@ class Groups extends CActiveRecord
 		return $ms->save();
 	}
 	
+	public function getMembers() {
+		$pdo = Yii::app()->db->getPdoInstance();	
+		$sql = "SELECT userId FROM group_membership WHERE groupId = :groupId AND end = '{$this->STILL_ACTIVE}'";
+		$stmt = new PdoStatement;
+		$stmt = $pdo->prepare($sql);
+		$stmt->bindValue("groupId", $this->id);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_COLUMN);
+	}
+	
+	public function getMembersInActiveRecord() {
+		$members = $this->getMembers();
+		$membersInActiveRecord = array();
+		foreach ($members as $userId) {
+			$user = User::model()->findByPk($userId);
+			$membersInActiveRecord[] =  $user;
+		}
+		return $membersInActiveRecord;
+	}
+	
 	public function removeMember($userId) {
-		$condition = "userId = :userId AND groupId = :groupId AND end is null";
+		$condition = "userId = :userId AND groupId = :groupId AND end = '{$this->STILL_ACTIVE}'";
 		$params = array(
 			'userId' => $userId,
 			'groupId' => $this->id,

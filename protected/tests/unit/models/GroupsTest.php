@@ -22,7 +22,7 @@ class GroupsTest extends CTestCase {
 		$group2 = Groups::model()->findByPk($group->id);
 		$this->assertNotNull($group2);
 	}
-
+	
 	public function test_addMember() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
@@ -97,6 +97,18 @@ class GroupsTest extends CTestCase {
 		$this->assertNotNull($ms1->end);
 		$this->assertNull($ms2->end);
 		
+	}
+	
+	public function test_getMembers() {
+		$group = $this->getGroup();
+		$u1 = $this->getUser();
+		$u2 = $this->getUser();
+		$group->addMember($u1->id);
+		$group->addMember($u2->id);
+		$members = $group->getMembers();
+		$this->assertEquals(2, count($members));
+		$this->assertContains($u2->id, $members);
+		$this->assertContains($u1->id, $members);
 	}
 
 }
