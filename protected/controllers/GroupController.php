@@ -112,9 +112,7 @@ class GroupController extends Controller {
 
 	public function actionEditMembers($url) {
 		$group = $this->getGroupByUrl($url);
-		if (!user()->checkAccess('updateGroup', array('id' => $group->id))) {
-			throw new CHttpException(403, "Du har ikke tilgang til å redigere disse medlemslistene");
-		}
+		$this->checkAccessToGroupOrThrowException($group->id);
 		$groupForm = new GroupMembersForm($group);
 		$members = $group->getActiveMemberships();
 		$this->saveIfPostRequest($groupForm);
@@ -123,6 +121,12 @@ class GroupController extends Controller {
 			'groupForm' => $groupForm,
 			'members' => $members,
 		));
+	}
+	
+	private function checkAccessToGroupOrThrowException($groupId) {
+		if (!user()->checkAccess('updateGroup', array('id' => $groupId))) {
+			throw new CHttpException(403, "Du har ikke tilgang til å redigere denne gruppen");
+		}
 	}
 
 	private function getGroupByUrl($url) {
@@ -144,6 +148,7 @@ class GroupController extends Controller {
 
 	public function actionEditMembership($url, $userId) {
 		$group = $this->getGroupByUrl($url);
+		$this->checkAccessToGroupOrThrowException($group->id);
 		$condition = "groupId = :groupId AND userId = :userId AND end = :end";
 		$membership = GroupMembership::model()->find($condition, array(
 			'groupId' => $group->id,
