@@ -104,5 +104,24 @@ class GroupsTest extends CTestCase {
 		$this->assertContains($u2->id, $members);
 		$this->assertContains($u1->id, $members);
 	}
+	
+	public function test_addRemoveMultipleTimesOnSameDay_only_oneRecordIsSaved() {
+		$group = $this->getGroup();
+		$user = $this->getUser();
+		$group->addMember($user->id);
+		$group->removeMember($user->id);
+		$group->addMember($user->id);
+		$group->removeMember($user->id);
+	}
+	
+	public function test_hasEarlierMembershipSameDay() {
+		$group = $this->getGroup();
+		$user = $this->getUser();
+		$actual = $group->hasEarlierMembershipSameDay($user->id);
+		//$this->assertFalse($actual);
+		$group->addMember($user->id);
+		$actual = $group->hasEarlierMembershipSameDay($user->id);
+		$this->assertTrue($actual);
+	}
 
 }
