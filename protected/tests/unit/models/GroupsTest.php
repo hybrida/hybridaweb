@@ -26,17 +26,11 @@ class GroupsTest extends CTestCase {
 	public function test_addMember() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
-		$this->assertTrue($group->addMember($user->id));
-
-		$ms = GroupMembership::model()->find(
-				"groupId = :groupId AND userId = :userId", array(
-			':groupId' => $group->id,
-			':userId' => $user->id,
-				));
+		$group->addMember($user->id);
+		$ms = $this->getMemberships($group->id, $user->id);
 		
-		$this->assertNotNull($ms);
-		$this->assertNotNull($ms->start);
-		$this->assertNull($ms->end);
+		$this->assertEquals(1, count($ms));
+		$this->assertEquals(Groups::STILL_ACTIVE, $ms[0]->end);
 	}
 	
 	private function addMembership($groupId, $userId, $start, $end) {
@@ -87,15 +81,15 @@ class GroupsTest extends CTestCase {
 		$group = $this->getGroup();
 		$user = $this->getUser();
 		$earlyDummyStartDate = "2010-11-12";
-		$this->addMembership($group->id, $user->id, $earlyDummyStartDate, null);
+		$this->addMembership($group->id, $user->id, $earlyDummyStartDate, Groups::STILL_ACTIVE);
 		$group->addMember($user->id);
 		$memberships = $this->getMemberships($group->id, $user->id);
-		$ms1 = $memberships[0];
-		$ms2 = $memberships[1];
+		$ms1 = $memberships[1];
+		$ms0 = $memberships[0];
 		
 		$this->assertEquals($earlyDummyStartDate, $ms1->start);
-		$this->assertNotNull($ms1->end);
-		$this->assertNull($ms2->end);
+		$this->assertNotEquals(Groups::STILL_ACTIVE, $ms1->end);
+		$this->assertEquals(Groups::STILL_ACTIVE, $ms0->end);
 		
 	}
 	

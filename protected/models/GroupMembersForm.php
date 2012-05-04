@@ -19,8 +19,6 @@ class GroupMembersForm extends CFormModel {
 		if (!$this->add)
 			return;
 		$usernames = explode(PHP_EOL, $this->add);
-		print_r($this->add);
-		print_r($usernames);
 
 		foreach ($usernames as $username) {
 			$user = User::model()->find("username = :username", array(

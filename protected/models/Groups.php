@@ -12,7 +12,7 @@
  */
 class Groups extends CActiveRecord
 {
-	private $STILL_ACTIVE = '0000-00-00';
+	const STILL_ACTIVE = '0000-00-00';
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Groups the static model class
@@ -97,18 +97,20 @@ class Groups extends CActiveRecord
 	
 	public function addMember($userId, $commission=null) {
 		$this->removeMember($userId);
-		$ms = new GroupMembership;
-		$ms->groupId = $this->id;
-		$ms->userId = $userId;
-		$ms->comission = $commission;
-		$ms->start = new CDbExpression("NOW()");
-		$ms->end = null;
-		return $ms->save();
+		$sql = "INSERT INTO group_membership 
+			(userId, groupId, comission, start, end)
+			VALUES (:userId, :groupId, :comission, NOW(), :end)";
+		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$stmt->bindValue("groupId", $this->id);
+		$stmt->bindValue("userId", $userId);
+		$stmt->bindValue("comission", $commission);
+		$stmt->bindValue("end", self::STILL_ACTIVE);
+		$stmt->execute();
 	}
 	
 	public function getMembers() {
 		$pdo = Yii::app()->db->getPdoInstance();	
-		$sql = "SELECT userId FROM group_membership WHERE groupId = :groupId AND end = '{$this->STILL_ACTIVE}'";
+		$sql = "SELECT userId FROM group_membership WHERE groupId = :groupId AND end = '" . self::STILL_ACTIVE . "'";
 		$stmt = new PdoStatement;
 		$stmt = $pdo->prepare($sql);
 		$stmt->bindValue("groupId", $this->id);
@@ -127,7 +129,7 @@ class Groups extends CActiveRecord
 	}
 	
 	public function removeMember($userId) {
-		$condition = "userId = :userId AND groupId = :groupId AND end = '{$this->STILL_ACTIVE}'";
+		$condition = "userId = :userId AND groupId = :groupId AND end = '" . self::STILL_ACTIVE . "'";
 		$params = array(
 			'userId' => $userId,
 			'groupId' => $this->id,

@@ -33,9 +33,7 @@ class ArticleFormTest extends CTestCase {
 			'title' => $info,
 			'content' => $info,
 		);
-		echo "putting in\n";
 		$form->setAttributes($input);
-		echo "done putting\n";
 		$this->assertEquals($info, $form->title);
 		$this->assertEquals($info, $form->content);
 	}
