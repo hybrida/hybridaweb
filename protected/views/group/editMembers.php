@@ -1,5 +1,9 @@
 <h1>Medlemsredigering for <?= $group->title ?></h1>
 
+<? $this->renderPartial("_menu", array(
+	'group' => $group,
+)) ?>
+
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
 		'id' => 'news_edit-form',

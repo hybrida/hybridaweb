@@ -98,7 +98,7 @@ return array(
 				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
 				'grupper' => 'group/index',
-				'grupper/<url:\w+>' => 'group/view',
+				'grupper/<url:\w+>' => '/group/view',
 				'grupper/<url:\w+>/<action:\w+>' => 'group/<action>',
 				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
 				'nyheter/<id:\d+>/<title>' => 'news/view',

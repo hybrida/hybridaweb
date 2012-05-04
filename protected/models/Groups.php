@@ -176,5 +176,5 @@ class Groups extends CActiveRecord {
 			$ms->save();
 		}
 	}
-
+	
 }

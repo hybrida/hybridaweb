@@ -1,10 +1,15 @@
 <h1><?= $group->title ?></h1>
+
+<? $this->renderPartial("_menu", array(
+	'group' => $group,
+)) ?>
+
 <? if (user()->checkAccess('updateGroup', array('id' => $group->id))) {
 	echo CHtml::link("Rediger medlemsliste", array(
 		'editMembers',
 		'url' => $group->url,
 	), array(
-		'class' => 'button'
+		//'class' => 'button',
 	));
 }
 ?>

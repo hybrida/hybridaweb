@@ -17,7 +17,7 @@ class GroupController extends Controller {
 		$data = array();
 
 		// Henter kommiteer
-		$query = "SELECT g.id, g.title, menu.title AS menuTitle FROM groups AS g
+		$query = "SELECT g.url, g.id, g.title, menu.title AS menuTitle FROM groups AS g
                   LEFT JOIN 
                   (SELECT s.title, mg.group 
                   FROM menu_group AS mg 
@@ -32,7 +32,7 @@ class GroupController extends Controller {
 		$data['committee'] = $command->fetchAll(PDO::FETCH_ASSOC);
 
 		// Henter grupper
-		$query = "SELECT g.id, g.title, menu.title AS menuTitle FROM groups AS g
+		$query = "SELECT g.url, g.id, g.title, menu.title AS menuTitle FROM groups AS g
                   LEFT JOIN 
                   (SELECT s.title, mg.group 
                   FROM menu_group AS mg 
@@ -51,7 +51,7 @@ class GroupController extends Controller {
 		$this->render("index", $data);
 	}
 
-	public function actionView($id, $title) {
+	public function actionView2($id, $title) {
 
 		$data = array();
 		$group = new Group($id);
@@ -188,5 +188,12 @@ class GroupController extends Controller {
 		));
 		
 	}
-
+	
+	public function actionView($url) {
+		$group = $this->getGroupByUrl($url);
+		$this->render("view", array(
+			'group' => $group,
+		));
+	}
+	
 }
