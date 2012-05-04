@@ -148,6 +148,7 @@ class GroupController extends Controller {
 
 	public function actionEditMembership($url, $userId) {
 		$group = $this->getGroupByUrl($url);
+		$user = User::model()->findByPk($userId);
 		$this->checkAccessToGroupOrThrowException($group->id);
 		$condition = "groupId = :groupId AND userId = :userId AND end = :end";
 		$membership = GroupMembership::model()->find($condition, array(
@@ -161,6 +162,8 @@ class GroupController extends Controller {
 			$this->redirect($url);
 		}
 		$this->render('editMembership', array(
+			'group' => $group,
+			'user' => $user,
 			'model' => $membership,
 		));
 	}
