@@ -116,7 +116,7 @@ class GroupController extends Controller {
 		}
 		$group = Groups::model()->findByPk($id);
 		$groupForm = new GroupMembersForm($group);
-		$members = $group->getMembersInActiveRecord();
+		$members = $group->getActiveMemberships();
 		$this->saveIfPostRequest($groupForm);
 		$this->render("editMembers", array(
 			'group' => $group,

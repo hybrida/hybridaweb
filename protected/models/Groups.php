@@ -157,6 +157,12 @@ class Groups extends CActiveRecord {
 		}
 		return $membersInActiveRecord;
 	}
+	
+	public function getActiveMemberships() {
+		return GroupMembership::model()->with('user')->findAll("groupId = :groupId AND end = '" .  self::STILL_ACTIVE . "'" , array(
+			'groupId' => $this->id,
+		));
+	}
 
 	public function removeMember($userId) {
 		$condition = "userId = :userId AND groupId = :groupId AND end = '" . self::STILL_ACTIVE . "'";

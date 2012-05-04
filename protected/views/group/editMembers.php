@@ -16,13 +16,16 @@
 	<th>Slett medlem</th>
 	<th>Brukernavn</th>
 	<th>Fullt navn</th>
+	<th>Ble medlem</th>
 </tr>
 
-<? foreach ($members as $member): ?>
+<? foreach ($members as $membership):
+	$user = $membership->user ?>
 	<tr>
-		<td><?= $form->checkbox($groupForm, 'delete[' . $member->id . ']') ?></td>
-		<td><?= $member->username ?></td>
-		<td><?= $member->fullName ?></td>
+		<td><?= $form->checkbox($groupForm, 'delete[' . $user->id . ']') ?></td>
+		<td><?= $user->username ?></td>
+		<td><?= $user->fullName ?></td>
+		<td><?= $membership->start?> </td>
 	</tr>
 <? endforeach; ?>
 </table>

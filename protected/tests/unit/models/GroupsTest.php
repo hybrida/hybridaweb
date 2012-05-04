@@ -123,5 +123,14 @@ class GroupsTest extends CTestCase {
 		$actual = $group->hasEarlierMembershipSameDay($user->id);
 		$this->assertTrue($actual);
 	}
+	
+	public function test_getActiveMemberships_correctNumberOfMemberships() {
+		$group = $this->getGroup();
+		$user = $this->getUser();
+		$group->addMember($user->id);
+		$activeMemberships = $group->getActiveMemberships();
+		$numberOfMemberships = count($activeMemberships);
+		$this->assertEquals(1, $numberOfMemberships);
+	}
 
 }
