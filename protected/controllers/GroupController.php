@@ -179,9 +179,6 @@ class GroupController extends Controller {
 	
 	public function actionMembers($url) {
 		$group = $this->getGroupByUrl($url);
-		if (!app()->gatekeeper->hasGroupAccess($group->id)) {
-			throw new CHttpException(403, "Du har ikke tilgang til denne gruppen");
-		}
 		$this->render('members', array(
 			'group' => $group,
 			'members' => $group->getActiveMemberships(),
