@@ -8,6 +8,7 @@
 		<?= $this->clips['head-facebook'] ?>
         <script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/animations.js"></script>
 	<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/CollapsibleLists.js'></script>
+	<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/e.js'></script>
 	<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/OnloadScheduler.js'></script>
 	<script type="text/javascript" src = '<?=Yii::app()->request->baseUrl?>/scripts/sidebar.js'></script>
         <script type="text/javascript" src = '<?=Yii::app()->request->baseUrl?>/scripts/autocomplete_search.js'></script>

@@ -4,7 +4,7 @@
     <?= 
         CHtml::link(
                 $user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'],
-                array("/profile/view", 'id' => $user['username']));
+                array("/profile/info", 'username' => $user['username']));
     ?>
 
     <!--<a href='<?= $url . $user['username'] ?>/info'><?= $user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'] ?></a>-->
@@ -26,5 +26,3 @@
     <? endforeach ?>
 
 <? endif ?>
-
-<a href='#'><i>Avansert søk</i></a>
