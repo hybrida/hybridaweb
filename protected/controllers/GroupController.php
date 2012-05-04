@@ -111,6 +111,9 @@ class GroupController extends Controller {
     }
 	
 	public function actionEditMembers($id) {
+		if (!user()->checkAccess('updateGroup', array('id' => $id))) {
+			throw new CHttpException(403, "Du har ikke tilgang til å redigere disse medlemslistene");
+		}
 		$group = Groups::model()->findByPk($id);
 		$groupForm = new GroupMembersForm($group);
 		$members = $group->getMembersInActiveRecord();
