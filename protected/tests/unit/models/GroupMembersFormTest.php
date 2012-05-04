@@ -83,7 +83,7 @@ class GroupMembersFormTest extends CTestCase {
 		$u2 = $this->getUser();
 		$group = Util::getGroup();
 		$input = array(
-			'add' => "{$u1->username}\n{$u2->username}",
+			'add' => "{$u1->username}, {$u2->username}",
 		);
 
 		$form = $this->getForm($group);
@@ -105,6 +105,22 @@ class GroupMembersFormTest extends CTestCase {
 		$form = $this->getForm($group);
 		$form->setAttributes($input);
 		$this->assertEquals($list, $form->add);
+	}
+	
+	public function test_add_multiplePeople_whitespaceGarbage() {
+		$u1 = $this->getUser();
+		$u2 = $this->getUser();
+		$u3 = $this->getUser();
+		
+		$input = array(
+			'add' => "   " . $u1->username . " ,  " . $u2->username . "  \n," . $u3->username . "\n,\n",
+		);
+		$group = Util::getGroup();
+		$form = $this->getForm($group);
+		$form->setAttributes($input);
+		$form->save();
+		$members = $group->getMembers();
+		$this->assertEquals(3, count($members));
 	}
 
 }

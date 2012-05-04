@@ -136,7 +136,6 @@ class Groups extends CActiveRecord {
 	
 	private function getCurrentDaysTimestamp() {
 		$date = date('Y-m-d');
-		echo $date;
 		return $date;
 	}
 

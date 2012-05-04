@@ -18,9 +18,12 @@ class GroupMembersForm extends CFormModel {
 	public function add() {
 		if (!$this->add)
 			return;
-		$usernames = explode(PHP_EOL, $this->add);
+		$this->add = str_replace(" ", "", $this->add);
+		$this->add = str_replace("\n", "", $this->add);
+		$usernames = explode(",", $this->add);
 
 		foreach ($usernames as $username) {
+			if ($username == "") continue;
 			$user = User::model()->find("username = :username", array(
 				"username" => $username));
 			if (!$user)

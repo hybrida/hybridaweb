@@ -118,7 +118,7 @@ class GroupsTest extends CTestCase {
 		$group = $this->getGroup();
 		$user = $this->getUser();
 		$actual = $group->hasEarlierMembershipSameDay($user->id);
-		//$this->assertFalse($actual);
+		$this->assertFalse($actual);
 		$group->addMember($user->id);
 		$actual = $group->hasEarlierMembershipSameDay($user->id);
 		$this->assertTrue($actual);

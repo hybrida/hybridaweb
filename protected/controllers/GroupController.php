@@ -126,7 +126,6 @@ class GroupController extends Controller {
 		if (Yii::app()->request->isPostRequest && isset($_POST['GroupMembersForm'])) {
 			$input = $_POST['GroupMembersForm'];
 			var_export($input);
-			
 			$groupForm->setAttributes($input);
 			$groupForm->save();
 			$this->redirect("editMembers");

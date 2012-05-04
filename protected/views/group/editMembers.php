@@ -29,7 +29,7 @@
 
 <h1>Legg til nye medlemmer</h1>
 <p>
-	Skriv inn brukernavn separert med linjeskift
+	Skriv inn brukernavn separert med komma
 </p>
 <?=$form->textArea($groupForm, 'add') ?>
 <br />
