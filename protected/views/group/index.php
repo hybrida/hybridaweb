@@ -11,8 +11,7 @@
 	
 <? foreach ($committee as $group): ?>
 
-<li><a href='<?= Yii::app()->baseURL ?>/group/view/<?=$group['id']?>/<?= $group['menuTitle'] ?>'><?=$group['title']?></a> </li>
-
+<li><?= CHtml::link($group['title'], array("view", 'url' => $group['url'])) ?></li>
 <? endforeach ?>
 
 </ul>
@@ -21,6 +20,6 @@
 
 <? foreach ($groups as $group): ?>
 
-<li><a href='<?= Yii::app()->baseURL ?>/group/view/<?=$group['id']?>/<?= $group['menuTitle'] ?>' ><?=$group['title']?></a> </li>
+<li><?= CHtml::link($group['title'], array("view", 'url' => $group['url'])) ?></li>
 
 <? endforeach ?>

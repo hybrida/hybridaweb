@@ -78,7 +78,7 @@ return array(
 			'assignmentTable' => 'rbac_assignment',
 			// The itemChildTable name (default:authitemchild)
 			'itemChildTable' => 'rbac_itemchild',
-			'defaultRoles' => array('updateOwnProfile', 'webkom'),
+			'defaultRoles' => array('all'),
 		),
 		'gatekeeper' => array(
 			'class' => 'GatekeeperComponent',
@@ -97,7 +97,9 @@ return array(
 				'bk/<action:\w+>' => 'bk/bktool/<action>',
 				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 				'get/<extra:\w+>' => 'ajax/get/<extra>',
-				'group/view/<id:\d+>/<title:\w+>' => 'group/view',
+				'grupper' => 'group/index',
+				'grupper/<url:\w+>' => '/group/view',
+				'grupper/<url:\w+>/<action:\w+>' => 'group/<action>',
 				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
 				'nyheter/<id:\d+>/<title>' => 'news/view',
 				'nyheter' => 'newsfeed/index',

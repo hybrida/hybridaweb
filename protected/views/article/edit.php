@@ -12,7 +12,7 @@
 
 <div class="form">
 	<div class="formHeader">
-		<h1>Artikkel</h1>
+		<h1>Rediger underside</h1>
 	</div>
 	
 	<div class="row">
