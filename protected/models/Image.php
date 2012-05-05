@@ -109,7 +109,7 @@ class Image extends CActiveRecord {
 	public static function getResized($id, $size) {
 		$image = Image::model()->findByPk($id);
 		if ($image == null) {
-			throw new CException("The picture '$size/$id' does not exist");
+			throw new FileNotFoundException("The picture '$size/$id' does not exist");
 		} else if (!Image::sizeExists($size)) {
 			throw new CException("The size '$size' does not exists");
 		}
@@ -123,8 +123,11 @@ class Image extends CActiveRecord {
 		list($width, $height) = self::getSize($size);
 		if ($width) $htmlOptions['width'] = $width;
 		if ($height) $htmlOptions['height'] = $height;
-		$url = self::getViewUrl($id, $size);
-		return CHtml::image($url, "", $htmlOptions);
+		try {
+			$url = self::getViewUrl($id, $size);
+			return CHtml::image($url, "", $htmlOptions);
+		} catch (FileNotFoundException $e) {
+		}
 	}
 	
 	public static function getViewUrl($id, $size) {
@@ -177,6 +180,7 @@ class Image extends CActiveRecord {
 	public function resize($size) {
 		if (!self::sizeExists($size))
 			return;
+		$this->throwExceptionIfFileDoesNotExist();
 		$si = new SimpleImage($this->getFilePath());
 		list($width, $height) = self::getSize($size);
 		if ($height && $width) {
@@ -187,6 +191,12 @@ class Image extends CActiveRecord {
 			$si->resizeToWidth($width);
 		}
 		$si->save($this->getFilePath($size));
+	}
+	
+	private function throwExceptionIfFileDoesNotExist() {
+		if (!file_exists($this->getFilePath())) {
+			throw new FileNotFoundException("The image " . $this->id . " Does not exist");
+		}
 	}
 
 	public static function getSize($size) {
