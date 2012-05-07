@@ -1,15 +1,18 @@
 /* @override
 	http://dev.hybrida.no/style/destroy.css */
 
-table, thead, tbody, tr, td {
+input, body, table, thead, tbody, tr, td {
 	position: relative;
 	padding: 0px;
 	margin: 0;
 }
 
+div.content table, div.content h1, div.content h2, div.content p {
+	margin-left: 7px;
+}
+
 div.content strong {
 	font-size: 1.1em;
-	position: relative;
 	left: 7px;
 }
 

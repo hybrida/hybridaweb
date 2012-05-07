@@ -50,8 +50,13 @@
 	text-align: center;
 }
 
+.form{
+	height: 750px;
+}
+
 .formHeader{
 	padding-left: 4px;
+	background-color: #E1E3E5;
 }
 
 .formElement{
@@ -112,7 +117,6 @@ Forslag til design av nyhetspublisering
 .g-form {
 	margin:0 auto;
 	position:relative;
-	background-color: #fff;
 }
 
 
@@ -145,7 +149,7 @@ Forslag til design av nyhetspublisering
 
 .g-form .errorMessage:before {
 	content: " ";
-	background-image: url("../images/icons/Sign-Error-icon.png");
+	background-image: url("http://icons.iconarchive.com/icons/kyo-tux/phuzion/16/Sign-Error-icon.png");
 	background-repeat: no-repeat;
 	width: 20px;
 	height: 16px;
@@ -171,26 +175,4 @@ Forslag til design av nyhetspublisering
 	float:left;
 	display:block;
 	position:relative;
-}
-
-/* Search and autocomplete */
-
-.ui-autocomplete {
-    
-}
-
-.ui-autocomplete .ui-menu-item {
-    background-color: white;
-    border-bottom: 1px solid #0963C4;
-    list-style: none;
-    width: 155px;
-}
-
-.ui-autocomplete .ui-menu-item:first-child {
-    border-top: 1px solid #0963C4;
-}
-
-.ui-autocomplete, .ui-autocomplete ui-menu-item {
-    margin-left: 0;
-    padding-left: 0;
 }
