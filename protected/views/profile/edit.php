@@ -2,13 +2,11 @@
 
 <h1>Endre profil</h1>
 
-<? $result = $fb->getAccessToken(); ?>
-
 <div class="formSection">
-    <? if(!isset($result)): ?>
+    <? if($hasConnectedToFacebook): ?>
        <div class="fieldDefinition">Facebook:</div>
        <div class="fieldInput">
-            <?= $fb ?>
+            <?= Facebook::authLink() ?>
        </div>
     <? else: ?>
        <div class="inputGroup">
@@ -50,8 +48,8 @@
             Fornavn:
         </div>
         <div class="fieldInput">
-            <?= $form->textField($model, 'firstName') ?>
-            <?= $form->error($model, 'firstName') ?>
+            <?= $form->textField($model, 'user[firstName]') ?>
+            <?= $form->error($model, 'user[firstName]') ?>
         </div>
     </div>
     <div class="inputGroup">
@@ -59,8 +57,8 @@
             Mellomnavn:
         </div>
         <div class="fieldInput">
-            <?= $form->textField($model, 'middleName') ?>
-            <?= $form->error($model, 'middleName') ?>
+            <?= $form->textField($model, 'user[middleName]') ?>
+            <?= $form->error($model, 'user[middleName]') ?>
         </div>
     </div>
     <div class="inputGroup">
@@ -68,8 +66,8 @@
             Etternavn:
         </div>
         <div class="fieldInput">
-            <?= $form->textField($model, 'lastName') ?>
-            <?= $form->error($model, 'lastName') ?>
+            <?= $form->textField($model, 'user[lastName]') ?>
+            <?= $form->error($model, 'user[lastName]') ?>
         </div>
     </div>
     <div class="inputGroup">
@@ -77,8 +75,8 @@
             Ferdig utdannet år: 
         </div>
         <div class="fieldInput">
-            <?= $form->textField($model, 'graduationYear') ?>
-            <?= $form->error($model, 'graduationYear') ?>
+            <?= $form->textField($model, 'user[graduationYear]') ?>
+            <?= $form->error($model, 'user[graduationYear]') ?>
         </div>
     </div>
 
@@ -87,8 +85,8 @@
             Studieretning: 
         </div>
         <div class="fieldInput">
-            <?= $form->dropDownList($model, 'specializationId', $specializations) ?>
-            <?= $form->error($model, 'specializationId') ?>
+            <?= $form->dropDownList($model, 'user[specializationId]', $specializations) ?>
+            <?= $form->error($model, 'user[specializationId]') ?>
         </div>
     </div>
 
@@ -98,13 +96,13 @@
         </div>
         <div class="fieldInput">
             <?=
-            $form->dropDownList($model, 'gender', array(
+            $form->dropDownList($model, 'user[gender]', array(
                 'unknown' => 'Ukjent',
                 'male' => 'Male',
                 'female' => 'Female',
             ))
             ?>
-<?= $form->error($model, 'gender') ?>
+<?= $form->error($model, 'user[gender]') ?>
         </div>
     </div>
 
@@ -113,8 +111,8 @@
             Fødselsdato:
         </div>
         <div class="fieldInput">
-<?= $form->dateField($model, 'birthdate') ?>
-<?= $form->error($model, 'birthdate') ?>
+<?= $form->dateField($model, 'user[birthdate]') ?>
+<?= $form->error($model, 'user[birthdate]') ?>
         </div>
     </div>
 
@@ -127,8 +125,8 @@
     <div class="inputGroup">
         <div class="fieldDefinition">Privat e-postadresse:</div>
         <div class="fieldInput">
-<?= $form->textField($model, 'altEmail') ?>
-<?= $form->error($model, 'altEmail') ?>
+<?= $form->textField($model, 'user[altEmail]') ?>
+<?= $form->error($model, 'user[altEmail]') ?>
         </div>
     </div>
 
@@ -144,12 +142,12 @@
     <div class="inputGroup">
         <div class="fieldDefinition">Kortnummer:</div>
         <div class="fieldInput">
-<?= $form->textField($model, 'cardNumber') ?>
-<?= $form->error($model, 'cardNumber') ?>
+<?= $form->textField($model, 'user[cardNumber]') ?>
+<?= $form->error($model, 'user[cardNumber]') ?>
         </div>
 
         <div class="fieldExplanation">
-<? if (!$model->cardHash): ?>
+<? if (!$model->userModel->cardHash): ?>
                 <p style="color: #f00; font-weight: bold">
                     Du har ikke registrert kortnummer!
                 </p>
@@ -166,8 +164,8 @@
         <div class="fieldDefinition">Om meg:</div>
 
         <div class="fieldInput">
-<?= $form->richTextArea($model, 'description') ?>
-<?= $form->error($model, 'description') ?>
+<?= $form->richTextArea($model, 'user[description]') ?>
+<?= $form->error($model, 'user[description]') ?>
         </div>
 
         <div class="fieldExplanation">
@@ -181,8 +179,8 @@
     <div class="inputGroup">
         <div class="fieldDefinition">Jobber i bedrift:</div>
         <div class="fieldInput">
-<?= $form->dropDownList($model, 'workCompanyID', $companies) ?>
-<?= $form->error($model, 'workCompanyID', $companies) ?>
+<?= $form->dropDownList($model, 'user[workCompanyID]', $companies) ?>
+<?= $form->error($model, 'user[workCompanyID]', $companies) ?>
         </div>
         <div class="fieldExplanation">
             Navnet på bedriften du har blitt ansatt i. Hvis bedriften ikke finnes i databasen,
@@ -193,8 +191,8 @@
     <div class="inputGroup">
         <div class="fieldDefinition">Stillingsbeskrivelse:</div>
         <div class="fieldInput">
-<?= $form->textArea($model, 'workDescription') ?>
-<?= $form->error($model, 'workDescription') ?>
+<?= $form->textArea($model, 'user[workDescription]') ?>
+<?= $form->error($model, 'user[workDescription]') ?>
         </div>
         <div class="fieldExplanation">
             Hva jobber du med? For eksempel offshore konstruksjoner eller NX.
@@ -204,8 +202,8 @@
     <div class="inputGroup">
         <div class="fieldDefinition">Arbeidssted</div>
         <div class="fieldInput">
-<?= $form->textField($model, 'workPlace') ?>
-<?= $form->error($model, 'workPlace') ?>
+<?= $form->textField($model, 'user[workPlace]') ?>
+<?= $form->error($model, 'user[workPlace]') ?>
         </div>
         <div class="fieldExplanation">
             Hvor du jobber (for eksempel Oslo).

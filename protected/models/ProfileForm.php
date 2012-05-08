@@ -6,6 +6,8 @@ class ProfileForm extends CFormModel {
 	public $user;
 	public $facebookUser;
 	private $_facebookUser;
+	
+	public $imageUpload;
 
 	public function __construct($user) {
 		$this->_user = $user;
@@ -28,15 +30,38 @@ class ProfileForm extends CFormModel {
 		return $this->_user;
 	}
 
+	public function getFacebookUserModel() {
+		return $this->_facebookUser;
+	}
+
 	public function setAttributes($values) {
 		foreach ($values as $key => $value) {
-			$this->$key = $value;
+			if (property_exists($this, $key)) {
+				$this->$key = $value;
+			}
 		}
 	}
 
 	public function save() {
+		$this->saveUser();
+		$this->saveFacebookUser();
+	}
+
+	private function saveUser() {
+		$user = $this->_user;
 		$this->_user->setAttributes($this->user);
+		$this->_user->purify();
 		$this->_user->save();
+		try {
+			$image = Image::uploadByModel($this, 'imageUpload', $user->id);
+			$user->imageId = $image->id;
+			$user->save();
+		} catch (NoFileIsUploadedException $ex) {
+			
+		}
+	}
+
+	private function saveFacebookUser() {
 		if ($this->_facebookUser !== null) {
 			$this->_facebookUser->setAttributes($this->facebookUser);
 			$this->_facebookUser->save();

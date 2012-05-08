@@ -44,7 +44,7 @@ class Facebook {
 		$query->execute($array);
 	}
 
-	public function authLink() { //Returnerer link til authentication
+	public static function authLink() { //Returnerer link til authentication
 		$app_id = '202808609747231';
 		$my_url = Yii::app()->createAbsoluteUrl('/facebook/');
 		$dir = Yii::app()->createAbsoluteUrl('/images/facebookconnectlogo.jpg');
