@@ -11,18 +11,6 @@ class ArticleController extends Controller {
 		));
 	}
 
-	public function actionCollection() {
-		$article = new Article();
-		$articleList['menuelements'] = $article->listArticles('wiki');	  //Litt for statisk
-
-		$aId = $articleList[0][0];
-
-		$data = $article->getArticle($aId);
-
-		$this->renderPartial('menu', $articleList);
-		$this->render('view', $data);
-	}
-
 	public function actionCreate($parentId = null) {
 		if (!user()->checkAccess('createArticle')) {
 			throw new CHttpException(403, "Du har ikke tilgang");
@@ -66,7 +54,7 @@ class ArticleController extends Controller {
 		));
 	}
 
-	public function getArticleModel($id) {
+	private function getArticleModel($id) {
 		$model = Article::model()->findByPk($id);
 		if ($model)
 			return $model;
