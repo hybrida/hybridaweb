@@ -141,8 +141,9 @@ class Groups extends CActiveRecord {
 
 	public function getMembers() {
 		$pdo = Yii::app()->db->getPdoInstance();
-		$sql = "SELECT userId FROM group_membership WHERE groupId = :groupId AND end = '" . self::STILL_ACTIVE . "'";
+		$sql = "SELECT userId FROM group_membership WHERE groupId = :groupId AND end = :end";
 		$stmt = $pdo->prepare($sql);
+		$stmt->bindValue("end", self::STILL_ACTIVE);
 		$stmt->bindValue("groupId", $this->id);
 		$stmt->execute();
 		return $stmt->fetchAll(PDO::FETCH_COLUMN);
