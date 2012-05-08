@@ -18,7 +18,9 @@
         </div>
 		<div class="text-content">
 			<? if ($model->imageId):?>
+			<a href="<?=$model->viewUrl?>">
 				<?= Image::tag($model->imageId, 'frontpage') ?>
+			</a>
 			<? endif ?>
             <?= $model->ingress ?>
 			<? if ($model->author): ?>
