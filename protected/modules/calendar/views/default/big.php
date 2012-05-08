@@ -8,7 +8,7 @@
 							'class' => 'calendar-previous-month-button'
 						)) ?>
 					</th>
-				<th colspan="5" class="current-month"><?php echo $calendar->month() ?></th>
+				<th colspan="5" class="current-month"><?= $calendar->month()?> <?=$calendar->year()?></th>
 				<th class="next-month">
 					<?= CHtml::link($calendar->next_month(), "#", array(
 							'class' => 'calendar-next-month-button'

@@ -307,6 +307,10 @@ class Calendar extends Event_Subject {
 
 		return $month;
 	}
+	
+	public function year() {
+		return $this->year;
+	}
 
 
 	/**
