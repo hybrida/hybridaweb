@@ -5,10 +5,7 @@ class ActivitiesFeed extends CWidget {
 	public $limit = 5;
 
 	public function run() {
-		if (!user()->isGuest){
 			$this->runFeed();
-		}
-		
 	}
 	
 	public function runFeed() {
@@ -36,10 +33,8 @@ class SignupFeed extends AbstractFeed {
 		return "SELECT n.id
 			FROM news as n
 			JOIN event as e ON n.parentId = e.id
-			JOIN signup as s ON s.eventId = e.id
 			WHERE e.start > NOW()
 				AND e.status = " . Status::PUBLISHED ."
-				AND s.status = " . Status::PUBLISHED ."
 			ORDER BY n.timestamp ASC";
 	}
 

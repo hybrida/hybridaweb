@@ -7,6 +7,6 @@
 	<? endforeach ?>
 
 	<? if (empty($models)): ?>
-		Du er ikke påmeldt noen arrangementer i fremtiden.
+		Det finnes ingen kommende arrangementer
 	<? endif ?>
 </div>
