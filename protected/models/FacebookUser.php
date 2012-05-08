@@ -6,6 +6,7 @@
  * The followings are the available columns in table 'fb_user':
  * @property integer $userId
  * @property string $fb_token
+ * @property string $postEvents
  */
 class FacebookUser extends CActiveRecord
 {
@@ -34,12 +35,13 @@ class FacebookUser extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('userId, fb_token', 'postEvents', 'required'),
+			array('userId, fb_token', 'required'),
 			array('userId', 'numerical', 'integerOnly'=>true),
 			array('fb_token', 'length', 'max'=>100),
+			array('postEvents', 'length', 'max'=>5),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('userId, fb_token', 'safe', 'on'=>'search'),
+			array('userId, fb_token, postEvents', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,6 +64,7 @@ class FacebookUser extends CActiveRecord
 		return array(
 			'userId' => 'User',
 			'fb_token' => 'Fb Token',
+			'postEvents' => 'Post Events',
 		);
 	}
 
@@ -78,6 +81,7 @@ class FacebookUser extends CActiveRecord
 
 		$criteria->compare('userId',$this->userId);
 		$criteria->compare('fb_token',$this->fb_token,true);
+		$criteria->compare('postEvents',$this->postEvents,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
