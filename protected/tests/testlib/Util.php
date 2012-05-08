@@ -60,6 +60,20 @@ class Util {
 		return $user;
 	}
 	
+	public static function getNewFacebookUser($userId) {
+		$fbUser = new FacebookUser;
+		$fbUser->fb_token = sha1($userId);
+		$fbUser->userId = $userId;
+		$fbUser->postEvents = 'false';
+		return $fbUser;
+	}
+	
+	public static function getFacebookUser($userId) {
+		$fbUser = self::getNewFacebookUser($userId);
+		$fbUser->save();
+		return $fbUser;
+	}
+	
 	public static function getNewGroup() {
 		$group = new Groups;
 		$group->url = $group->title = "test" . Groups::model()->count();

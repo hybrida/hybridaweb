@@ -1,0 +1,37 @@
+<?php
+
+class UtilTest extends PHPUnit_Framework_TestCase {
+
+	private function assertSave($object) {
+		$this->assertTrue($object->save());
+	}
+
+	public function testGetNewNews() {
+		$this->assertSave(Util::getNewNews());
+	}
+
+	public function testGetNewEvent() {
+		$this->assertSave(Util::getNewEvent());
+	}
+
+	public function testGetNewSignup() {
+		$this->assertSave(Util::getNewSignup());
+	}
+	public function testGetNewUser() {
+		$this->assertSave(Util::getNewUser());
+	}
+
+	public function testGetNewGroup() {
+		$this->assertSave(Util::getNewGroup());
+	}
+
+	public function testGetNewArticle() {
+		$this->assertSave(Util::getNewArticle());
+	}
+	
+	public function testGetNewFacebookUser() {
+		$this->assertSave(Util::getNewFacebookUser(Util::getUser()->id));
+	}
+
+
+}
