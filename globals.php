@@ -28,3 +28,7 @@ function param($name)
 {
     return Yii::app()->params[$name];
 }
+
+function url($route,$params=array(),$ampersand='&') {
+	return Yii::app()->createUrl($route, $params, $ampersand);
+}
