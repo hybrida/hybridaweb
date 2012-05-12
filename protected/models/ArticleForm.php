@@ -47,13 +47,9 @@ class ArticleForm extends CFormModel {
 	public function getArticleModel() {
 		return $this->_article;
 	}
-
-	public function setAttributes($values) {
-		foreach ($values as $key => $value) {
-			if (property_exists("ArticleForm", $key)) {
-				$this->$key = $value;
-			}
-		}
+	
+	public function setAttributes($values, $safeOnly = false) {
+		parent::setAttributes($values, $safeOnly);
 	}
 
 }

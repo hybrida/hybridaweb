@@ -42,12 +42,8 @@ class GroupMembersForm extends CFormModel {
 		}
 	}
 
-	public function setAttributes($values) {
-		foreach ($values as $key => $value) {
-			if (property_exists($this, $key)) {
-				$this->$key = $value;
-			}
-		}
+	public function setAttributes($values, $safeOnly = false) {
+		parent::setAttributes($values, $safeOnly);
 	}
 
 }

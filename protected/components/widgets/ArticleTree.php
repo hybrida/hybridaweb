@@ -148,7 +148,7 @@ class Node {
 		self::sortNodes($this->children);
 	}
 
-	private function compare($a, $b) {
+	private static  function compare($a, $b) {
 		return strcmp($a->title, $b->title);
 	}
 }
