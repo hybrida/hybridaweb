@@ -3,7 +3,7 @@
 class UtilTest extends PHPUnit_Framework_TestCase {
 
 	private function assertSave($object) {
-		$this->assertTrue($object->save());
+		$this->assertTrue($object->save(), "Kunne ikke lagre modell: ". print_r($object->errors, true));
 	}
 
 	public function testGetNewNews() {
@@ -31,6 +31,10 @@ class UtilTest extends PHPUnit_Framework_TestCase {
 	
 	public function testGetNewFacebookUser() {
 		$this->assertSave(Util::getNewFacebookUser(Util::getUser()->id));
+	}
+	
+	public function testGetNewComment() {
+		$this->assertSave(Util::getNewComment());
 	}
 
 

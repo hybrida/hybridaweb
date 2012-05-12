@@ -1,5 +1,9 @@
 <?php
 
+
+Yii::import("comment.models.*");
+Yii::import("comment.components.*");
+
 class Util {
 
 	public static function getNewNews() {
@@ -97,5 +101,18 @@ class Util {
 		$article = self::getNewArticle();
 		$article->save();
 		return $article;
+	}
+	
+	public static function getNewComment() {
+		$comment = new Comment;
+		$comment->content = "test";
+		$comment->parentId = 1;
+		return $comment;
+	}
+	
+	public static function getComment() {
+		$comment = self::getNewComment();
+		$comment->save();
+		return $comment;
 	}
 }
