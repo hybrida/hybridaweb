@@ -49,7 +49,10 @@ $(function() {
 function deleteComment(id) {
 	var commentViewBox = $(".comment-view-all");
 	var url = "<?= Yii::app()->createUrl("/comment/default/delete", array('id' => ''))?>/" + id;
-	commentViewBox.load(url);
+	var shouldDelete = confirm("Vil du slette kommentaren?");
+	if (shouldDelete) {
+		commentViewBox.load(url);
+	}
 	
 }
 </script>
