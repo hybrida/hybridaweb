@@ -30,6 +30,7 @@ return array(
 		'ajax',
 		'dev',
 		'bk',
+		'kilt',
 		'bpc',
 		'calendar',
 		'comment',
