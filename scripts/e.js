@@ -354,41 +354,6 @@ function Signup(dn) {
         button.addEventListener('click', fill); }
 	else fill();
 }
-//-----
-function Calendar(dn) {
-	dn = domtb.getFirstElementChild(dn);
-	var temp  = domtb.getChildElements(dn),
-		temp2 = domtb.getChildElements(temp[0]),
-		previous = temp2[0],
-		monthDisplay = temp2[1],
-		next = temp2[2],
-		months = ['Januar', 'Februar', 'Mars', 'April', 'Mai', 'Juni', 'Juli', 'August', 'September', 'Oktober', 'November', 'Desember'],
-		temp3 = new Date(),
-		year = temp3.getFullYear(),
-		month = temp3.getMonth(),     //Viser en måned for tidlig
-		nodes = [], 
-		update;
-	for(var i = 2; i <= 7; i++) {
-		var elements = domtb.getChildElements(temp[i]);
-		for(var j = 0; j < elements.length; j++) nodes.push(elements[j]);
-	}
-	update = function() {
-		xhr.request({
-			'type': 'GET',
-			'url': url+'calendar/?year='+year+'&month='+(month+1),
-			'functions': {
-				'onload': function() {
-					monthDisplay.innerHTML = months[month] + ' ' + year;
-					var response = this.responseText.split(split);
-					for(var i = 0; i < response.length; i++) nodes[i].innerHTML = response[i];
-				}
-			}
-		});
-	}
-	previous.addEventListener('click', function() {month--;if(month < 0) {month = 12;year--}update();});
-	next.addEventListener('click', function() {month++;if(month > 11) {month = 0;year++}update();});
-	update();
-}
 
 function cleanNodeList(nodes) {
 for(var n in nodes) if(nodes[n].v) nodes[n] = nodes[n].v;
@@ -659,7 +624,7 @@ function addAllNodes(nodeName, cls) {
 	for(var i = 0; i < nodes.length; i++) new cls(nodes[i]);
 }
 onload = function() {
-	var addables = {'feed': Feed, 'search': Search, 'comment': Comment, 'slideshow': SlideShow, 'dropdown': Dropdown, 'calendar': Calendar, 'signup': Signup};
+	var addables = { 'search': Search};
 	for(var n in addables) addAllNodes(n, addables[n]);
 	//document.getElementById('mask').style.display = 'none';
 }
