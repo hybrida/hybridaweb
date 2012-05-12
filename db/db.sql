@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 12, 2012 at 06:39 PM
+-- Generation Time: May 12, 2012 at 07:12 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
@@ -601,6 +601,8 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('all', 2, 'Alle studenter har denne access som standard', NULL, NULL),
 ('createArticle', 0, 'Poste artikkel', '', 's:0:"";'),
 ('createNews', 0, 'Poste nyhet', '', 's:0:"";'),
+('deleteComment', 2, NULL, NULL, NULL),
+('deleteOwnComment', 1, NULL, 'return user()->id == $params["authorId"];', NULL),
 ('editor', 2, 'Kan redigere, men ikke lage noe nytt', '', 's:0:"";'),
 ('styret', 2, 'Medlemmer av styret', 'return Yii::app()->gatekeeper->hasGroupAccess(56);', NULL),
 ('updateArticle', 0, '', '', 's:0:"";'),
@@ -635,6 +637,9 @@ INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 ('webkom', 'admin'),
 ('writer', 'createArticle'),
 ('writer', 'createNews'),
+('admin', 'deleteComment'),
+('deleteOwnComment', 'deleteComment'),
+('all', 'deleteOwnComment'),
 ('admin', 'editor'),
 ('styret', 'editor'),
 ('all', 'styret'),
