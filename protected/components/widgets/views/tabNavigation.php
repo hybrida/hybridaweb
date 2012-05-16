@@ -9,6 +9,7 @@
 	<? if (!user()->isGuest): ?>
 		<div><?= CHtml::link("Profil", array("/profile/")); ?></div>
 		<div><?= CHtml::link("Medlemmer", array("/students/")); ?></div> 
+		<div><?= CHtml::link("Kilt", array("/kilt/shop/index")); ?></div> 
 	<? endif ?>
 
 	<div><?= CHtml::link("Bedrift", array("/article/view", 'id' => 2, 'title' => 'Bedrift')); ?></div> 
