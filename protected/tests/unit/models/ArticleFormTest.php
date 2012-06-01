@@ -87,20 +87,21 @@ class ArticleFormTest extends CTestCase {
 
 		$this->assertEquals($access, $form->getArticleModel()->access);
 	}
-
-	public function test_save_access_oldArticle_noAccessChange() {
-		$access = array(1, 2, 3);
+	public function test_save_deleteOldAccess() {
+		$access = array(1,2,3,4);
 		$article = $this->getArticle();
 		$article->access = $access;
 		$article->save();
-		$input = array(
-		);
-
+		echo __METHOD__ . $article->id;
 		$form = $this->getForm($article);
-		$form->setAttributes($input);
+		$form->setAttributes(array(
+			'content' => "halla",
+			'title' => "heisann",
+		));
 		$form->save();
-
-		$this->assertEquals($access, $form->getArticleModel()->access);
+		
+		$article2 = Article::model()->findByPk($article->id);
+		$this->assertEmpty($article2->access);
 	}
 
 	public function test_save_purifiedOutput() {
