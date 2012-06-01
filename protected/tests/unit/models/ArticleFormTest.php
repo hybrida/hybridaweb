@@ -92,7 +92,6 @@ class ArticleFormTest extends CTestCase {
 		$article = $this->getArticle();
 		$article->access = $access;
 		$article->save();
-		echo __METHOD__ . $article->id;
 		$form = $this->getForm($article);
 		$form->setAttributes(array(
 			'content' => "halla",

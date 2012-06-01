@@ -41,8 +41,6 @@ class ArticleForm extends CFormModel {
 			'content' => $this->content,
 			'parentId' => $this->parentId,
 			'shorttitle' => $this->shorttitle));
-		echo $this->_article->id;
-		print_r($this->access);
 		$this->_article->access = $this->access;
 	}
 
