@@ -150,14 +150,14 @@ class Article extends CActiveRecord {
 		return self::$list;
 	}
 
-	private function addRootToList($root) {
+	private static function addRootToList($root) {
 		self::$list[$root->id] = $root->title;
 		foreach ($root->children as $child) {
 			self::addNodeToList($child, $root->title);
 		}
 	}
 
-	private function addNodeToList($node, $prev) {
+	private static function addNodeToList($node, $prev) {
 		$text = $prev . "/" . $node->title;
 		self::$list[$node->id] = $text;
 		foreach ($node->children as $child) {
