@@ -69,7 +69,7 @@
 			<?= $form->labelEx($model, 'news[ingress]'); ?> 
 			<?= $form->textArea($model, "news[ingress]",array(
 				'cols' => '50',
-				'rows' => '8',
+				'rows' => '6',
 				'class'=> 'message',
 			)); ?> 
 			<?= $form->error($model, 'news[ingress]'); ?> 
