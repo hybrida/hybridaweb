@@ -3,7 +3,7 @@
 <h1>Endre profil</h1>
 
 <div class="formSection">
-    <? if($hasConnectedToFacebook): ?>
+    <? if(!$hasConnectedToFacebook): ?>
        <div class="fieldDefinition">Facebook:</div>
        <div class="fieldInput">
             <?= Facebook::authLink() ?>
