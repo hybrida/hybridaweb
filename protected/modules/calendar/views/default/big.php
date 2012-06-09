@@ -3,7 +3,7 @@
 	<table class="big-calendar">
 		<thead>
 			<tr class="navigation">
-				<th class="prev-month">
+				<th class="prev-month" colspan="2">
 					<?= CHtml::link($calendar->prev_month(), "#", array(
 							'class' => 'calendar-previous-month-button'
 						)) ?>
@@ -15,14 +15,17 @@
 						)) ?></th>
 			</tr>
 			<tr class="weekdays">
+				<th></th>
 				<?php foreach ($calendar->days() as $day): ?>
 					<th><?php echo $day ?></th>
 				<?php endforeach ?>
 			</tr>
 		</thead>
 		<tbody>
+			<? $weekNumber = $calendar->firstWeekNumber() ?>
 			<?php foreach ($calendar->weeks() as $week): ?>
 				<tr>
+					<th class="week-number"><?=$weekNumber++?></th>
 					<?php foreach ($week as $day): ?>
 						<?php
 						list($number, $current, $data) = $day;

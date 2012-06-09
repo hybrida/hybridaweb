@@ -187,6 +187,11 @@ class Calendar extends Event_Subject {
 
 		return $month;
 	}
+	
+	public function firstWeekNumber() {
+		$firstDayOfMonth = mktime(0,0,0,$this->month,1,$this->year);
+		return date('W', $firstDayOfMonth);
+	}
 
 	/**
 	 * Calendar_Event factory method.

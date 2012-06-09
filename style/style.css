@@ -1,55 +1,5 @@
 /* @override
 	http://dev.hybrida.no/style/style.css */
-
-.calendar table {
-    text-align: center;
-    margin: 0;
-    padding: 0; 
-}
-
-.calendar a {
-    display: block;
-}
-
-.calendar img {
-    width: auto;
-    height: auto;
-	margin-left: auto;
-	margin-right: auto;
-	vertical-align: middle;
-}
-
-.calendar table#days {
-    margin-top: -2px;
-}
-
-.calendar #days td:hover {
-    background-color: #F1F3F5;
-}
-
-.calendar #days a {
-    color: #FFFFFF;
-    background-color: #335FA5;
-    border: none;
-}
-
-.calendar #days a:hover {
-    color: #000000;
-    background-color: #87ADEA;
-    line-height: 21px;
-    border: 2px solid #335FA5;
-}
-
-.calendar td {
-    line-height: 25px;
-    width: 33px;
-    height: 25px;
-    border: none;
-	padding: 0;
-    background-color: #E1E3E5;
-	text-align: center;
-}
-
 .form{
 	height: 750px;
 }
@@ -98,7 +48,8 @@
 .big-calendar th.current-month {text-align:center; font-size:1.5em;}
 .big-calendar th.next-month {text-align:right;}
 .big-calendar tr.weekdays th {text-align:left;}
-.big-calendar td {width:14%; height:100px; vertical-align:top; border:1px solid #CCC;}
+.big-calendar td {width:13%; height:100px; vertical-align:top; border:1px solid #CCC;}
+.big-calendar th.week-number {width: 5%; font-size: 20px}
 .big-calendar td.today {background:#FFD;}
 .big-calendar td.prev-next {background:#EEE;}
 .big-calendar td.prev-next span.date {color:#9C9C9C;}
