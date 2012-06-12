@@ -1,6 +1,11 @@
 <?php
+$this->pageTitle = "Hybrida pensumsalg";
+$this->layout = "//layouts/doubleColumn";
+?>
+
+<?php
 $this->breadcrumbs=array(
-	'Book Sales',
+	'Bøker' => 'Book Sales',
 );
 
 $this->menu=array(
@@ -9,7 +14,13 @@ $this->menu=array(
 );
 ?>
 
-<h1>Book Sales</h1>
+<h1>Pensumbøker</h1>
+
+<p>
+<?= CHtml::link("Lag annonse", array("booksale/create"), array(
+	'class' => 'button'
+)); ?>
+</p>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,

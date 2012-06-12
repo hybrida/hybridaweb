@@ -1,8 +1,13 @@
 <?php
+$this->pageTitle = "Oppdater annonse";
+$this->layout = "//layouts/doubleColumn";
+?>
+
+<?php
 $this->breadcrumbs=array(
-	'Book Sales'=>array('index'),
+	'Bøker'=>array('index'),
 	$model->title=>array('view','id'=>$model->id),
-	'Update',
+	'Oppdater' => 'Update',
 );
 
 $this->menu=array(
@@ -13,6 +18,6 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update BookSale <?php echo $model->id; ?></h1>
+<h1>Oppdater <?php echo $model->title; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>

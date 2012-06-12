@@ -1,7 +1,12 @@
 <?php
+$this->pageTitle = "Hybrida pensumsalg";
+$this->layout = "//layouts/doubleColumn";
+?>
+
+<?php
 $this->breadcrumbs=array(
-	'Book Sales'=>array('index'),
-	$model->title,
+	'Bøker'=>array('index'),
+	$model->title => $model->id,
 );
 
 $this->menu=array(
@@ -13,17 +18,4 @@ $this->menu=array(
 );
 ?>
 
-<h1>View BookSale #<?php echo $model->id; ?></h1>
-
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id',
-		'title',
-		'content',
-		'price',
-		'author',
-		'imageID',
-		'timestamp',
-	),
-)); ?>
+<?php echo $this->renderPartial('_view', array('data'=>$model)); ?>

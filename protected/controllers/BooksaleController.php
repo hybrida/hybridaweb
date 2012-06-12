@@ -62,6 +62,8 @@ class BooksaleController extends Controller
 	public function actionCreate()
 	{
 		$model=new BookSale;
+                $userId = user()->id;
+                $model->author = $userId;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

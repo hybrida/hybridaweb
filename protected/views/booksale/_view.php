@@ -1,32 +1,33 @@
-<div class="view">
+<div id="newsfeed">
+    <p>
+		<?= CHtml::link("Rediger",array("booksale/update",'id' => $data->id), array(
+			'class' => 'button buttonRightSide'
+		)); ?>
+    </p>
+    <div class="element">
+            <div class="header-wrapper">
+                <div class="header-title">
+                <h1><?php echo CHtml::link($data->title, array('/booksale/'.$data->id)); ?></h1>
+                <br />
+                </div>
+                <div class="header-date">
+                <?= $data->timestamp ?>
+                </div>
+            </div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
+            <b><?php echo CHtml::encode($data->getAttributeLabel('beskrivelse')); ?>:</b>
+            <?= ($data->content); ?>
+            <br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
-	<?php echo CHtml::encode($data->title); ?>
-	<br />
+            <b><?php echo CHtml::encode($data->getAttributeLabel('pris')); ?>:</b>
+            <?php echo CHtml::encode($data->price); ?> Kroner
+            <br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('content')); ?>:</b>
-	<?php echo CHtml::encode($data->content); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('price')); ?>:</b>
-	<?php echo CHtml::encode($data->price); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('author')); ?>:</b>
-	<?php echo CHtml::encode($data->author); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('imageID')); ?>:</b>
-	<?php echo CHtml::encode($data->imageID); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('timestamp')); ?>:</b>
-	<?php echo CHtml::encode($data->timestamp); ?>
-	<br />
-
-
+            <b><?php echo CHtml::encode($data->getAttributeLabel('selger')); ?>:</b>
+            <? $user = User::model()->find('id=:id', array(':id'=>$data->author)) ?>
+            <?= CHtml::link($user->fullName, array(
+                '/profil/'.$user->username,
+            ))?>
+            <br />
+    </div>
 </div>
