@@ -2,7 +2,7 @@
 
 class SiteController extends Controller {
 
-	public static $innsidaLink = "https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=";
+	private static $innsidaLink = "https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=";
 
 	public function actionIndex() {
 		$this->forward("/newsfeed/");
@@ -43,9 +43,9 @@ class SiteController extends Controller {
 	}
 	
 	public function getLoginRedirect($page) {
-		$returnUrl = $_SERVER['SERVER_NAME'] . "/site/innsidalogin,$page";
-
-		//$returnUrl = ''; // Fix. Sjekker om dette fjerner redirecthelvete
+		$innsidaLoginActionUrl = $this->createAbsoluteUrl("/site/innsidalogin");
+		$innsidaLoginActionUrl = str_replace("http://", "", $innsidaLoginActionUrl);
+		$returnUrl = $innsidaLoginActionUrl ."," .$page;
 		
 		$redirectUrl = self::$innsidaLink . $returnUrl;
 
