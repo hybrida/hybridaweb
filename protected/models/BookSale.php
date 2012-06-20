@@ -18,6 +18,8 @@ class BookSale extends CActiveRecord
 	 * Returns the static model of the specified AR class.
 	 * @return BookSale the static model class
 	 */
+	const SOLD = 0;
+	const FOR_SALE = 1;
 	public static function model($className=__CLASS__)
 	{
 		return parent::model($className);
@@ -45,7 +47,8 @@ class BookSale extends CActiveRecord
                         array('price', 'numerical', 'min'=>1, 'max'=>999999),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, title, content, price, author, imageID, timestamp', 'safe', 'on'=>'search'),
+			array('id, title, status, content, price, author, imageID, timestamp', 'safe', 'on'=>'search'),
+			array('status', 'safe'),
 		);
 	}
 
