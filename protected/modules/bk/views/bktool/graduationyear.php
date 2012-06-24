@@ -183,7 +183,7 @@
                 <tr bgcolor='<?= $this->evenRowColour ?>'>
             <? } ?>
                 
-                <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $graduate['imageId'] ?>/size/3'/></td>
+                <td><?= Image::profileTag($graduate['imageId'], 'mini') ?></td>
                 <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
                 <td><?= $graduate['name'] ?></td>
                 <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>

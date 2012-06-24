@@ -64,14 +64,12 @@
 
 <div id="BK-companyoverview-container">
 <p>
-<div id="BK-companyoverview-maintablebox">
-
     <table id="BK-companyoverview-maintable">
         <tr>
             <th><?=CHtml::link('Bedrift', array('companyoverview?orderby=companyName&order='.$_SESSION['order'])) ?></th>
             <th><?=CHtml::link('Status', array('companyoverview?orderby=status&order='.$_SESSION['order'])) ?></th>
             <th><?=CHtml::link('Kontaktet av', array('companyoverview?orderby=firstName&order='.$_SESSION['order'])) ?></th>
-            <th><?=CHtml::link('Dato lagt til', array('companyoverview?orderby=dateAdded&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Sist oppdatert', array('companyoverview?orderby=dateUpdated&order='.$_SESSION['order'])) ?></th>
         </tr>
       
         <? foreach($companies as $company) : ?>
@@ -96,12 +94,10 @@
                 <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                 <td><?= $company['status'] ?></td> 
                 <td><a href='/profile/<?= $company['id'] ?>'><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></a></td>
-                <td><?= $company['dateAdded'] ?></td>
+                <td><?= $company['dateUpdated'] ?></td>
             </tr>
 
         <? endforeach ?>
     </table>
-
-</div>
 </p>
 </div>

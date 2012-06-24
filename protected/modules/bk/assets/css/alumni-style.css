@@ -2,12 +2,6 @@
 
 /*stil for hovedtabellen*/
 
-#BK-alumnilist-alumnilistbox{
-        width: 100%;
-	height: 1000px;
-	overflow-y: scroll;
-	}
-
 #BK-alumnilist-maintable{
 	border-width: 1px;
 	border-spacing: 2px;

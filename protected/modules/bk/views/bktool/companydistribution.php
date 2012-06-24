@@ -13,7 +13,7 @@
 
 <p>
     <? foreach($contactingMembers as $member) : ?>
-        <h3><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $member['imageId'] ?>/size/3'/>
+        <h3><?= Image::profileTag($member['imageId'], 'mini') ?>
         <a href='/profile/<?= $member['id'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></h3>
         
         <p>

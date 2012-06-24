@@ -9,7 +9,7 @@
 <p>
 <h2>
     <? foreach($graduateInfo as $info) : ?>
-        <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $info['imageId'] ?>/size/3'/>
+        <?= Image::profileTag($info['imageId'], 'mini') ?>
         <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
     <? endforeach ?>
 </h2>

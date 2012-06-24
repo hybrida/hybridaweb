@@ -12,17 +12,28 @@
 </h2>
 
 <p>
-    Sist innlogget: 
-    <? foreach($loginInfo as $info) : ?>
-        <?= $info['lastLogin'] ?>
-    <? endforeach ?>
-</p>
-
-<p>
-    Sist oppdatert: 
-    <? foreach($lastUpdateInfo as $info) : ?>
-        <?= $info['latesttimestamp'] ?>
-    <? endforeach ?>
+    <table id='BK-updatedelements-timetable'>
+        <tr>
+            <td>
+                Sist innlogget:
+            </td>
+            <td>
+                <? foreach($loginInfo as $info) : ?>
+                    <?= $info['lastLogin'] ?>
+                <? endforeach ?>
+            </td>
+        </tr>
+        <tr>
+            <td>
+               Sist oppdatert: 
+            </td>
+            <td>
+                <? foreach($lastUpdateInfo as $info) : ?>
+                    <?= $info['latesttimestamp'] ?>
+                <? endforeach ?>
+            </td>
+        </tr>
+    </table>
 </p>
 
 <form name='deleteupdateform' method='post' action='deleteupdateform'>
@@ -36,11 +47,10 @@
 </p>
 
 <p>
-    Fjerning av elementer sletter kun egne oppdateringer, ikke andre medlemmers.
+    Fjerning av elementer sletter kun egne oppdateringer og ikke andre medlemmers.
 </p>
 
 <p>
-<div id="BK-updatedelements-maintablebox">
 <table id="BK-updatedelements-maintable">
     <tr>
         <th>Merk</th>
@@ -49,25 +59,16 @@
         <th><?=CHtml::link('Oppdatert bedrift', array('updates?orderby=companyName')) ?></th>
         <th><?=CHtml::link('Oppdatert av', array('updates?orderby=firstName')) ?></th>
     </tr>
-    <? $counter = 1; ?>
-        
+
     <? foreach($relevantUpdates as $update) : ?>
-
-        <? if($counter % 2){ ?>
-            <tr bgcolor='<?= $this->oddRowColour ?>'>
-        <?	}else{ ?>
-            <tr bgcolor='<?= $this->evenRowColour ?>'>
-        <? } ?>
-                <td><input type='checkbox' name='selectedupdates[]' value='<?= $update['updateId'] ?>' /></td>
-                <td><?= $update['dateAdded'] ?></td>
-                <td><?= $update['description'] ?></td>
-                <td><?=CHtml::link($update['companyName'], array('company?id='.$update['companyId']))?></td>
-                <td><a href='/profile/<?= $update['id'] ?>'> <?= $update['firstName'] ?> <?= $update['middleName'] ?> <?= $update['lastName'] ?></a></td>
-            </tr>
-
-        <? $counter++; ?>
+        <tr>
+            <td><input type='checkbox' name='selectedupdates[]' value='<?= $update['updateId'] ?>' /></td>
+            <td><?= $update['dateAdded'] ?></td>
+            <td><?= $update['description'] ?></td>
+            <td><?=CHtml::link($update['companyName'], array('company?id='.$update['companyId']))?></td>
+            <td><a href='/profile/<?= $update['id'] ?>'> <?= $update['firstName'] ?> <?= $update['middleName'] ?> <?= $update['lastName'] ?></a></td>
+        </tr>
     <? endforeach ?>
 </table>
-</div>
 </p>
 </form>

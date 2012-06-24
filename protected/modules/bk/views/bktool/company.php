@@ -205,7 +205,7 @@
                         <tr>
                             <td>
                                 <p><i>
-                                    <img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $comment['imageId'] ?>/size/3'/>
+                                    <?= Image::profileTag($comment['imageId'], 'mini') ?>
                                     <?= $comment['firstName'] ?> <?= $comment['middleName'] ?> <?= $comment['lastName'] ?>, <?= $comment['timestamp'] ?>
                                 </i></p>
                                 <?= nl2br($comment['content']);?>
@@ -239,7 +239,7 @@
                         <tr bgcolor='<?= $this->evenRowColour ?>'>
                     <? } ?>
                             
-                            <td><img src='<?= Yii::app()->baseUrl ?>/image/view/id/<?= $graduate['imageId'] ?>/size/3'/></td>
+                            <td><?= Image::profileTag($graduate['imageId'], 'mini') ?></td>
                             <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
                             <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear?id='.$graduate['graduationYear']))?></td>
                             <td><?= $graduate['name'] ?></td>

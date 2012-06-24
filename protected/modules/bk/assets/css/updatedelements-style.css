@@ -2,37 +2,36 @@
 
 /*stil for hovedtabellen*/
 
-#BK-updatedelements-maintablebox{
-	width: 100%;
-	height: 1000px;
-	overflow-y: scroll;
-	}
+#BK-updatedelements-maintable {
+    margin: 2em auto;
+    border-collapse: collapse;
+}
 
-#BK-updatedelements-maintable{
-	border-width: 1px;
-	border-spacing: 2px;
-	border-style: outset;
-	border-color: gray;
-	border-collapse: separate;
-	width: 100%;
-	}
-	
-#BK-updatedelements-maintable td{
-	text-align: left;
-	border-width: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
-	}
-	
-#BK-updatedelements-maintable th{
-	text-align: left;
-	border-width: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
-	background-color: white;
-	}
+#BK-updatedelements-maintable *{
+    border: none;
+}
+
+#BK-updatedelements-maintable td {
+    margin:auto;
+    padding: 2px 1.5em; 
+    text-align: left;
+    border-bottom: 1px dotted #0033FF;
+}
+
+#BK-updatedelements-maintable th {
+    padding: 2px 1.5em; 
+    text-align: left;
+    border-bottom: 1px dotted #0033FF; 
+}
+
+
+#BK-updatedelements-maintable tr:hover {
+    background-color: #e1e3e5;
+}
+
+#BK-updatedelements-maintable tr:first-child {
+    background-color: transparent;
+}
 	
 #BK-updatedelements-maintable td input[type=checkbox] { 
 	display: block;
@@ -54,4 +53,13 @@
 	
 #BK-updatedelements-selectiontable input[type=submit] { 
 	font-weight: bolder;
+        width: 200px;
+        height: 40px;
+	}
+        
+/* stil for tabellen med tidspunkter */
+
+#BK-updatedelements-timetable{
+	width: 50%;
+        padding: 10px;
 	}

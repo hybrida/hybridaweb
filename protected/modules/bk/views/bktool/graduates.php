@@ -114,7 +114,6 @@
 <h3>Alumnistudenter:</h3>
 
 <p>
-<div id="BK-alumnilist-alumnilistbox">
 <table id="BK-alumnilist-maintable">
     <tr>
         <th><?=CHtml::link('Navn', array('graduates?orderby=firstName&order='.$_SESSION['order'])) ?></th>
@@ -148,5 +147,4 @@
         <? endforeach ?>
         
     </table>
-</div>
 </p>

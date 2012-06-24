@@ -6,7 +6,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateAdded FROM bk_company 
+        $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateUpdated FROM bk_company 
         LEFT JOIN user ON contactorID = id ORDER BY ".$orderBy." ".$order."";
 
         $query = $this->pdo->prepare($sql);
@@ -161,7 +161,7 @@ class BkTool {
         $data = array();
         $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM user 
                 LEFT JOIN bk_company ON companyID = workCompanyID
-                WHERE graduationYear <= now() ORDER BY ".$orderBy." ".$order."";
+                WHERE graduationYear <= now() AND graduationYear > 2006 ORDER BY ".$orderBy." ".$order."";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

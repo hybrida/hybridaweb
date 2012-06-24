@@ -422,6 +422,18 @@ class Bkforms {
         $query->execute($data);
     }
     
+    public function setCompanyAsUpdated($companyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "UPDATE bk_company SET dateUpdated = now() WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
     public function updateCompanyInformation($companyId, $companyName, $mail, $phonenumber, $adress, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
                 $this->pdo = Yii::app()->db->getPdoInstance();
 

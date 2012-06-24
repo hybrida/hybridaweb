@@ -243,6 +243,8 @@ class BktoolController extends Controller {
                         $bkForms->addCompanyCommentUpdate($id, $member['id']);
                     endforeach;
                     
+                    $bkForms->setCompanyAsUpdated($id);
+                    
                     $this->actionCompany($id);
                 }
         }
