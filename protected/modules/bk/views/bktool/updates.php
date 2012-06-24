@@ -36,6 +36,10 @@
 </p>
 
 <p>
+    Fjerning av elementer sletter kun egne oppdateringer, ikke andre medlemmers.
+</p>
+
+<p>
 <div id="BK-updatedelements-maintablebox">
 <table id="BK-updatedelements-maintable">
     <tr>
