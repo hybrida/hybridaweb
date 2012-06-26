@@ -1,5 +1,6 @@
 <?
 $this->renderPartial("_menu");
+echo "<br>";
 if (count($orders) == 0)
 	echo "Du har ingen bestillinger";
 else
@@ -11,6 +12,7 @@ Dine Bestillinger:
 <br>
 <br>
 <table>
+<? echo CHtml::beginForm('', 'post'); ?>
 	<tr>
 			<td>
 			<b>
@@ -27,6 +29,11 @@ Dine Bestillinger:
 				Antall
 			</b>
 			</td>
+			<td>
+			<b>
+				Slett
+			</b>
+			</td>
 	<tr>
 	<? foreach($orders as $o): ?>
 	<tr>
@@ -37,13 +44,21 @@ Dine Bestillinger:
 			?>
 		</td>
 		<td>
-			<? echo $o['product_size']; ?>
+			<? echo $sizes[$o['product_size']]; ?>
 		</td>
 		<td>
 			<? echo $o['product_quantity']; ?>
 		</td>
+		<td>
+			<? echo CHtml::submitButton('X', 
+					array(
+						'name' => $o['id'],
+						'disabled' => $afterDeadline,
+					)); ?>
+		</td>
 	</tr>
 	<? endforeach; ?>
+<? echo CHtml::endForm(); ?>
 </table>
 <? 
 }
