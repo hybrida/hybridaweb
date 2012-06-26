@@ -3,12 +3,11 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 12, 2012 at 07:12 PM
+-- Generation Time: Jun 27, 2012 at 12:37 AM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -190,7 +189,14 @@ CREATE TABLE IF NOT EXISTS `book_sales` (
   `imageID` int(11) DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `book_sales`
+--
+
+INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
+(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 1, 381, 2, '2012-06-19 22:56:46');
 
 -- --------------------------------------------------------
 
@@ -209,7 +215,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=436 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=443 ;
 
 --
 -- Dumping data for table `comment`
@@ -363,6 +369,56 @@ CREATE TABLE IF NOT EXISTS `image` (
 -- Dumping data for table `image`
 --
 
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kilt_order`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_quantity` int(11) NOT NULL,
+  `product_size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `confirmed` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `kilt_order`
+--
+
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `kilt_product`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `sizes` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data for table `kilt_product`
+--
+
+INSERT INTO `kilt_product` (`id`, `type`, `model`, `sizes`) VALUES
+(1, 'Kilt', 'Gutt', 'Small:Medium:Medium Long:Large:XLarge:XXLarge'),
+(2, 'Kilt', 'Jente', 'Small:Medium:Large:XLarge'),
+(3, 'Kilt', 'Jente Mini', 'Small:Medium:Large'),
+(4, 'Sporran', 'Black Leather', ''),
+(5, 'Sporran', 'Thistle', ''),
+(6, 'Sporran', 'Celtic Circle', ''),
+(7, 'Sokker', 'Vanlig', ''),
+(8, 'Sokker', 'Premium', 'Small:Medium:Large'),
+(9, 'Ekstra', 'Flashes', '');
 
 -- --------------------------------------------------------
 
@@ -889,7 +945,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-05-10 20:02:20', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-06-26 16:19:49', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
