@@ -101,6 +101,7 @@ return array(
 				'grupper' => 'group/index',
 				'grupper/<url:\w+>' => '/group/view',
 				'grupper/<url:\w+>/<action:\w+>' => 'group/<action>',
+				'jobb/<id:\d>/<name>' => '/job/view/',
 				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
 				'nyheter/<id:\d+>/<title>' => 'news/view',
 				'nyheter' => 'newsfeed/index',
