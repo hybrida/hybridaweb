@@ -184,7 +184,7 @@
             <? } ?>
                 
                 <td><?= Image::profileTag($graduate['imageId'], 'mini') ?></td>
-                <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
+                <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
                 <td><?= $graduate['name'] ?></td>
                 <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
                 <td><?= $graduate['workDescription'] ?></td>

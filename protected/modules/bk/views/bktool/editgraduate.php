@@ -10,7 +10,7 @@
 <h2>
     <? foreach($graduateInfo as $info) : ?>
         <?= Image::profileTag($info['imageId'], 'mini') ?>
-        <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+        <a href='/profil/<?= $info['username'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
     <? endforeach ?>
 </h2>
 </p>

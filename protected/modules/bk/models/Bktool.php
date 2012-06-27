@@ -6,7 +6,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT companyID, id, companyName, status, firstName, middleName, lastName, dateUpdated FROM bk_company 
+        $sql = "SELECT companyID, id, username, companyName, status, firstName, middleName, lastName, dateUpdated FROM bk_company 
         LEFT JOIN user ON contactorID = id ORDER BY ".$orderBy." ".$order."";
 
         $query = $this->pdo->prepare($sql);
@@ -159,7 +159,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT id, firstName, middleName, lastName, graduationYear, workDescription, workPlace, companyName, companyID FROM user 
+        $sql = "SELECT id, firstName, middleName, lastName, graduationYear, username, workDescription, workPlace, companyName, companyID FROM user 
                 LEFT JOIN bk_company ON companyID = workCompanyID
                 WHERE graduationYear <= now() AND graduationYear > 2006 ORDER BY ".$orderBy." ".$order."";
 
@@ -177,7 +177,7 @@ class BkTool {
         $data = array(
             'graduationyear' => $year
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.workDescription, un.workPlace, c.companyName, c.companyID,
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.username, un.workDescription, un.workPlace, c.companyName, c.companyID,
                 un.imageId, s.name FROM user AS un 
                 LEFT JOIN bk_company AS c ON c.companyID = un.workCompanyID 
                 LEFT JOIN specialization AS s ON un.specializationId = s.id
@@ -229,7 +229,7 @@ class BkTool {
         $data = array(
             'status' => $status
         );
-        $sql = "SELECT DISTINCT id, imageId, firstName, middleName, lastName
+        $sql = "SELECT DISTINCT id, imageId, firstName, middleName, lastName, username
                 FROM bk_company, user 
                 WHERE contactorID = id AND status = :status ORDER BY firstName ASC";
 
@@ -281,7 +281,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, s.name, un.graduationYear, 
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.username, s.name, un.graduationYear, 
                 un.altEmail, un.imageId, un.workDescription, un.workPlace FROM user AS un
                 LEFT JOIN specialization AS s ON un.specializationId = s.id
                 WHERE un.workCompanyID = :companyId ORDER BY un.graduationYear DESC";
@@ -350,7 +350,7 @@ class BkTool {
         $data = array(
             'currentUserID' => Yii::app()->user->id
         );
-        $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id
+        $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id, un.username
                 FROM bk_company_update AS cu, user AS un, bk_company AS c
                 WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID AND isDeleted = 'false'
                 ORDER BY dateAdded DESC";
@@ -436,7 +436,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, username, firstName, middleName, lastName FROM bk_company, user
+        $sql = "SELECT id, username, firstName, middleName, lastName, username FROM bk_company, user
                 WHERE companyID = :companyId AND contactorID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -453,7 +453,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, user
+        $sql = "SELECT id, firstName, middleName, lastName, username FROM bk_company, user
                 WHERE companyID = :companyId AND updatedByID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -470,7 +470,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT id, firstName, middleName, lastName FROM bk_company, user
+        $sql = "SELECT id, firstName, middleName, lastName, username FROM bk_company, user
                 WHERE companyID = :companyId AND addedByID = id";
 
         $query = $this->pdo->prepare($sql);
@@ -568,7 +568,7 @@ class BkTool {
         $data = array(
             'userId' => $id
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.altEmail, s.name, un.imageId,
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.username, un.altEmail, s.name, un.imageId,
                 c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM user AS un 
                 LEFT JOIN bk_company AS c ON un.workCompanyID = c.companyID
                 LEFT JOIN specialization AS s ON s.id = un.specializationId

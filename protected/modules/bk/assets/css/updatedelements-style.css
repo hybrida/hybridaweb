@@ -3,8 +3,9 @@
 /*stil for hovedtabellen*/
 
 #BK-updatedelements-maintable {
-    margin: 2em auto;
     border-collapse: collapse;
+    width: 100%;
+    text-align: left;
 }
 
 #BK-updatedelements-maintable *{
@@ -12,25 +13,19 @@
 }
 
 #BK-updatedelements-maintable td {
-    margin:auto;
-    padding: 2px 1.5em; 
-    text-align: left;
-    border-bottom: 1px dotted #0033FF;
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
 }
 
 #BK-updatedelements-maintable th {
-    padding: 2px 1.5em; 
-    text-align: left;
-    border-bottom: 1px dotted #0033FF; 
+    color: #009;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
 }
 
 
-#BK-updatedelements-maintable tr:hover {
-    background-color: #e1e3e5;
-}
-
-#BK-updatedelements-maintable tr:first-child {
-    background-color: transparent;
+#BK-updatedelements-maintable tbody tr:hover td, a{
+	color: #009;
 }
 	
 #BK-updatedelements-maintable td input[type=checkbox] { 

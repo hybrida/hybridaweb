@@ -95,8 +95,7 @@
                     <th>Kontaktet av</th>
                     <td>
                         <? foreach($contactor as $info) : ?>
-							<? $url = $this->createUrl('/profile/info', array('username' => $info['username'])) ?>
-                            <a href='<?=$url?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+                            <a href='/profil/<?= $info['username'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
                         <? endforeach ?>
                     </td>
                 </tr>
@@ -120,7 +119,7 @@
                     <th>Sist oppdatert av</th>
                     <td>
                         <? foreach($updater as $info) : ?>
-                            <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+                            <a href='/profil/<?= $info['username'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
                         <? endforeach ?>
                     </td>
                 </tr>
@@ -160,7 +159,7 @@
                     <th>Lagt til av</th>
                     <td>
                         <? foreach($adder as $info) : ?>
-                            <a href='/profile/<?= $info['id'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
+                            <a href='/profil/<?= $info['username'] ?>'><?= $info['firstName'] ?> <?= $info['middleName'] ?> <?= $info['lastName'] ?></a>
                         <? endforeach ?>
                     </td>
                 </tr>
@@ -240,7 +239,7 @@
                     <? } ?>
                             
                             <td><?= Image::profileTag($graduate['imageId'], 'mini') ?></td>
-                            <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
+                            <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
                             <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear?id='.$graduate['graduationYear']))?></td>
                             <td><?= $graduate['name'] ?></td>
                             <td><?= $graduate['altEmail'] ?></td>

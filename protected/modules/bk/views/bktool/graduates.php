@@ -134,7 +134,7 @@
                 <tr bgcolor='<?= $this->evenRowColour ?>'>
             <? } ?>
                     
-                <td><a href='/profile/<?= $graduate['id'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
+                <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
                 <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear?id='.$graduate['graduationYear']))?></td>
                 <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
                 <td><?= $graduate['workDescription'] ?></td>

@@ -66,7 +66,7 @@
             <td><?= $update['dateAdded'] ?></td>
             <td><?= $update['description'] ?></td>
             <td><?=CHtml::link($update['companyName'], array('company?id='.$update['companyId']))?></td>
-            <td><a href='/profile/<?= $update['id'] ?>'> <?= $update['firstName'] ?> <?= $update['middleName'] ?> <?= $update['lastName'] ?></a></td>
+            <td><a href='/profil/<?= $update['username'] ?>'> <?= $update['firstName'] ?> <?= $update['middleName'] ?> <?= $update['lastName'] ?></a></td>
         </tr>
     <? endforeach ?>
 </table>

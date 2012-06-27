@@ -62,7 +62,6 @@
 
 <p><h3>Bedrifter:</h3></p>
 
-<div id="BK-companyoverview-container">
 <p>
     <table id="BK-companyoverview-maintable">
         <tr>
@@ -73,31 +72,30 @@
         </tr>
       
         <? foreach($companies as $company) : ?>
-           
-            <? switch ($company['status']){
-                    case "Aktuell senere": ?>
-                        <tr bgcolor="yellow">
-            <?          break;
-                    case "Blir kontaktet": ?>
-                        <tr bgcolor="#00CC00">
-            <?          break;
-                    case "Ikke kontaktet": ?>
-                        <tr bgcolor='#FFFFFF'>
-            <?          break;
-                    case "Uaktuell": ?>
-                        <tr bgcolor="#FF0033">
-            <?          break;
-                    default: ?>
-                        <tr bgcolor='#FFFFFF'>
-            <? } ?>
-                
+            <tr> 
                 <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
-                <td><?= $company['status'] ?></td> 
-                <td><a href='/profile/<?= $company['id'] ?>'><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></a></td>
+                    <? switch ($company['status']){
+                            case "Aktuell senere": ?>
+                                <td id="BK-companyoverview-aktuell-senere">
+                    <?          break;
+                            case "Blir kontaktet": ?>
+                                <td id="BK-companyoverview-blir-kontaktet">
+                    <?          break;
+                            case "Ikke kontaktet": ?>
+                                <td>
+                    <?          break;
+                            case "Uaktuell": ?>
+                                <td id="BK-companyoverview-uaktuell">
+                    <?          break;
+                            default: ?>
+                                <td>
+                    <? } ?>
+                        <?= $company['status'] ?>
+                    </td> 
+                <td><a href='/profil/<?= $company['username'] ?>'><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></a></td>
                 <td><?= $company['dateUpdated'] ?></td>
             </tr>
 
         <? endforeach ?>
     </table>
 </p>
-</div>

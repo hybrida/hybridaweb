@@ -1,38 +1,39 @@
-/* stil for bedriftsoversikten */
-	
-#BK-companyoverview-container table{
-	border-width: 1px;
-	border-spacing: 2px;
-	border-style: outset;
-	border-collapse: separate;
-	}
-	
-#BK-companyoverview-container td{
-	text-align: left;
-	border-width: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
-	}
-	
-#BK-companyoverview-container th{
-	text-align: left;
-	border-width: 2px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
-	background-color: white;
-	}
+
 	
 /*F�lgende gjelder kun for hovedtabellen*/
-
-#BK-companyoverview-maintable tr:hover {
-	background-color: #CCFFFF;
-	}
 	
 #BK-companyoverview-maintable{
-	width: 100%;
-	}
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
+#BK-companyoverview-maintable *{
+    border: none;
+}
+
+#BK-companyoverview-maintable td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
+}
+
+#BK-companyoverview-maintable th {
+    color: #009;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+        
+#BK-companyoverview-aktuell-senere{
+    color: #FF9900;
+}
+        
+#BK-companyoverview-blir-kontaktet{
+    color: #009900;
+}
+        
+#BK-companyoverview-uaktuell{
+    color: #CC0000;
+}
 
 /*F�lgende gjelder kun for støttetabellen*/
 	

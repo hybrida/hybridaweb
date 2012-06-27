@@ -14,7 +14,7 @@
 <p>
     <? foreach($contactingMembers as $member) : ?>
         <h3><?= Image::profileTag($member['imageId'], 'mini') ?>
-        <a href='/profile/<?= $member['id'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></h3>
+        <a href='/profil/<?= $member['username'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></h3>
         
         <p>
         <div id="BK-companydistribution-container">

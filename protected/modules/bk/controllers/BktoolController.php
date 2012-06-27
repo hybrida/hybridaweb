@@ -92,8 +92,8 @@ class BktoolController extends Controller {
                     case 'firstName':
                         $_SESSION['orderby'] = 'firstName';
                         break;
-                    case 'dateAdded':
-                        $_SESSION['orderby'] = 'dateAdded';
+                    case 'dateUpdated':
+                        $_SESSION['orderby'] = 'dateUpdated';
                         break;
                     default:
                         $_SESSION['orderby'] = 'companyName';
