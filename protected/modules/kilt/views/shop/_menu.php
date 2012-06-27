@@ -12,7 +12,7 @@
 		</td>
 		<td width=33%>
 			<center>
-				<? echo CHtml::link("Total", array('total')); ?>
+				<? echo CHtml::link("Admin", array('admin')); ?>
 			</center>
 		</td>
 	</tr>	

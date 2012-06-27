@@ -2,6 +2,11 @@
 
 class Shop {
 
+	public function isAfterDeadline()
+	{
+		return false;
+	}
+
     public function getCategories(){
         $connection = Yii::app()->db;
 		$sql = "SELECT DISTINCT type FROM kilt_product";
@@ -13,7 +18,7 @@ class Shop {
 	public function getProductsByCategory($category)
 	{
         $connection = Yii::app()->db;
-		$sql = "SELECT * FROM kilt_product WHERE type = :category";
+		$sql = "SELECT id, type, model FROM kilt_product WHERE type = :category";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":category", $category);
 		$data = $command->queryAll(); 
@@ -26,6 +31,29 @@ class Shop {
 		$sql = "SELECT * FROM kilt_product";
 		$command = $connection->createCommand($sql);
 		$data = $command->queryAll(); 
+		foreach($data as $d)
+			$products[$d['id']] = $d;
+        return $products;
+	}
+
+	public function getSizes()
+	{
+        $connection = Yii::app()->db;
+		$sql = "SELECT * FROM kilt_size";
+		$command = $connection->createCommand($sql);
+		$data = $command->queryAll(); 
+		foreach($data as $d)
+			$sizes[$d['id']] = $d['size'];
+        return $sizes;
+	}
+
+	public function getProductSizes($pid)
+	{
+        $connection = Yii::app()->db;
+		$sql = "SELECT size_id FROM kilt_product_size WHERE product_id = :pid";
+		$command = $connection->createCommand($sql);
+		$command = $command->bindParam(":pid", $pid);
+		$data = $command->queryColumn(); 
         return $data;
 	}
 
@@ -48,6 +76,22 @@ class Shop {
         return $data;
 	}
 
+	public function deleteOrder($id)
+	{
+        $connection = Yii::app()->db;
+		$sql = "DELETE FROM kilt_order WHERE id  = :id";
+		$command = $connection->createCommand($sql);
+		$command = $command->bindParam(":id", $id);
+		$data = $command->execute(); 
+	}
+
+	public function deleteOrders()
+	{
+        $connection = Yii::app()->db;
+		$sql = "DELETE FROM kilt_order";
+		$command = $connection->createCommand($sql);
+		$data = $command->execute(); 
+	}
 	public function updateOrder($id, $qnty)
 	{
         $connection = Yii::app()->db;

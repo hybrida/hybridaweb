@@ -31,20 +31,20 @@
 				<?
 				echo "<b>".$p['model']."</b>";
 				echo "<br>"; 
-				echo "Antall"; 
+				echo "Antall "; 
 				echo CHtml::TextField('qnty['.$id.']', $pqnty,
 				 	array( 'size' => 2)); 
-				
-			   if ($p['sizes'] != "")
+//*
+			   if (sizeof($p['sizes']) > 0)
 			   {
-				   	$sizes = array('none' => 'Velg størrelse');
-				   	$exploded = explode(':', $p['sizes']);
-				   	foreach($exploded as $e)
-				   		$sizes[$e] = $e;
+					$sizeNames = array();
+					$sizeNames[-1] = "Velg str.";
+				   	foreach($p['sizes'] as $e)
+				   		$sizeNames[$e] = $sizes[$e];
 				   	echo "<br>";
-				   	echo CHtml::dropDownList('size['.$id.']', $psize, $sizes); 
+				   	echo CHtml::dropDownList('size['.$id.']', $psize, $sizeNames); 
 			   }
-
+/**/
 				if (isset($errors[$p['id']])) 
 				{
 					echo "<font color='red'>";
@@ -54,6 +54,7 @@
 				}
 				?>
 			</center>
+			<br>
 			</td>
 		<? endforeach ?>
 	</tr>
