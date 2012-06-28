@@ -11,7 +11,7 @@
     Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
 </p>
 
-<p><h3>Statistikk:</h3>
+<p><h2>Statistikk:</h2>
 
 <p>
 <table id="BK-alumnilist-supporttable">
@@ -111,40 +111,32 @@
 </table>
 </p>
 				
-<h3>Alumnistudenter:</h3>
+<h2>Alumnistudenter:</h2>
 
 <p>
 <table id="BK-alumnilist-maintable">
     <tr>
         <th><?=CHtml::link('Navn', array('graduates?orderby=firstName&order='.$_SESSION['order'])) ?></th>
-        <th><?=CHtml::link('Uteksamineringsår', array('graduates?orderby=graduationYear&order='.$_SESSION['order'])) ?></th>
+        <th><?=CHtml::link('Avgangsår', array('graduates?orderby=graduationYear&order='.$_SESSION['order'])) ?></th>
         <th><?=CHtml::link('Bedrift', array('graduates?orderby=companyName&order='.$_SESSION['order'])) ?></th>
         <th>Stillingsbeskrivelse</th>
         <th><?=CHtml::link('Arbeidssted', array('graduates?orderby=workPlace&order='.$_SESSION['order'])) ?></th>
         <th>Rediger</th>
     </tr>
-
-        <? $counter = 1; ?>
         
-        <? foreach($graduates as $graduate) : ?>
-           
-            <? if($counter % 2){ ?>
-                <tr bgcolor='<?= $this->oddRowColour ?>'>
-            <?	}else{ ?>
-                <tr bgcolor='<?= $this->evenRowColour ?>'>
-            <? } ?>
-                    
-                <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
-                <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear?id='.$graduate['graduationYear']))?></td>
-                <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
-                <td><?= $graduate['workDescription'] ?></td>
-                <td><?= $graduate['workPlace'] ?></td>
-                <td><?=CHtml::link('Rediger', array('editgraduate?id='.$graduate['id']))?></td>
-            </tr>
+    <? foreach($graduates as $graduate) : ?>
+       <tr>                   
+            <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
+            <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear?id='.$graduate['graduationYear']))?></td>
+            <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
+            <td><?= $graduate['workDescription'] ?></td>
+            <td><?= $graduate['workPlace'] ?></td>
+            <td><?=CHtml::link('Rediger', array('editgraduate?id='.$graduate['id']))?></td>
+        </tr>
 
-            <? $counter++; ?>
-            
-        <? endforeach ?>
+        <? $counter++; ?>
+
+    <? endforeach ?>
         
     </table>
 </p>

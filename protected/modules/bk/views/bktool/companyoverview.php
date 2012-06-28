@@ -11,56 +11,57 @@
 <p>
     <table id="BK-companyoverview-supporttable">
         <tr>
-            <th>Statistikk:</th>
-            <th>Valg:</th>
+            <th id="BK-companyoverview-supporttable-header">Statistikk:</th>
+            <th id="BK-companyoverview-supporttable-header">Valg:</th>
         </tr>
         <tr>
-            <td>
-                <div id="BK-companyoverview-container">
+            <td id="BK-companyoverview-supporttable-element">
                 <table id="BK-companyoverview-statisticstable">
                     
                     <? $sum = 0; ?>
                     
-                     <? foreach($statistics as $stat) : ?>
+                    <? foreach($statistics as $stat) : ?>
+                    <tr>
+                        <td id="BK-companyoverview-numbercolumn"><?= $stat['sum'] ?></td>
            
                         <? switch ($stat['status']){
                                 case "Aktuell senere": ?>
-                                    <tr bgcolor="yellow">
+                                    <td id ="BK-companyoverview-aktuell-senere">
                         <?          break;
                                 case "Blir kontaktet": ?>
-                                    <tr bgcolor="#00CC00">
+                                    <td id="BK-companyoverview-blir-kontaktet">
                         <?          break;
                                 case "Ikke kontaktet": ?>
-                                    <tr bgcolor='#FFFFFF'>
+                                    <td id="BK-companyoverview-ikke-kontaktet">
                         <?          break;
                                 case "Uaktuell": ?>
-                                    <tr bgcolor="#FF0033">
+                                    <td id="BK-companyoverview-uaktuell">
                         <?          break;
                                 default: ?>
-                                    <tr bgcolor='#FFFFFF'>
-                        <? } ?>
-
-                            <td><?= $stat['sum'] ?> <?= $stat['status'] ?></td>
-                        </tr>
+                                    <td>
+                        <? } ?><?= $stat['status'] ?></td>
+                    </tr>
                         
                         <? $sum = $sum + $stat['sum']; ?>
                     <? endforeach ?>
                         
-                    <tr><th><?= $sum ?> Bedrifter totalt</th></tr>
+                    <tr>
+                        <th id="BK-companyoverview-numbercolumn"><?= $sum ?></th>
+                        <th id="BK-companyoverview-totaltext">Bedrifter totalt</th>
+                    </tr>
                 </table>
-                </div>
                 
             </td>
-            <td>
-                <table id="BK-companyoverview-selectiontable">
-                    <tr><td><?=CHtml::link('Legg til bedrift', array('addcompany'))?></td></tr>
-                </table>
+            <td id="BK-companyoverview-supporttable-element">
+                <ul>
+                    <li><?=CHtml::link('Legg til bedrift', array('addcompany'))?></li>
+                </ul>
             </td>
         </tr>
     </table>
 </p>
 
-<p><h3>Bedrifter:</h3></p>
+<p><h2>Bedrifter:</h2></p>
 
 <p>
     <table id="BK-companyoverview-maintable">
@@ -82,7 +83,7 @@
                                 <td id="BK-companyoverview-blir-kontaktet">
                     <?          break;
                             case "Ikke kontaktet": ?>
-                                <td>
+                                <td id="BK-companyoverview-ikke-kontaktet">
                     <?          break;
                             case "Uaktuell": ?>
                                 <td id="BK-companyoverview-uaktuell">

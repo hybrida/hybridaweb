@@ -23,9 +23,12 @@
     border-bottom: 2px solid #6678b1;
 }
 
+#BK-updatedelements-maintable tr:hover{
+	background-color: #e1e3e5;
+}
 
-#BK-updatedelements-maintable tbody tr:hover td, a{
-	color: #009;
+#BK-updatedelements-maintable tr:first-child {
+    background-color: transparent;
 }
 	
 #BK-updatedelements-maintable td input[type=checkbox] { 
