@@ -4,6 +4,6 @@ class DefaultController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+		Yii::app()->request->redirect('/kilt/shop/');
 	}
 }

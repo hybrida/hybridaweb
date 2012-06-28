@@ -2,9 +2,32 @@
 
 class Shop {
 
-	public function isAfterDeadline()
+	public function getTimes()
 	{
-		return false;
+        $connection = Yii::app()->db;
+		$sql = "SELECT * FROM kilt_time";
+		$command = $connection->createCommand($sql);
+		$data = $command->queryAll(); 
+		$times = array();
+		foreach($data as $d)
+			$times[$d['id']] = $d;
+        return $times;
+	}
+	public function getCurrentTime()
+	{
+        $connection = Yii::app()->db;
+		$sql = "SELECT * FROM kilt_time WHERE start <= CURDATE() AND CURDATE() <= end";
+		$command = $connection->createCommand($sql);
+		$data = $command->queryRow(); 
+		return $data;
+	}
+	public function isShopOpen()
+	{
+        $connection = Yii::app()->db;
+		$sql = "SELECT COUNT(*) FROM kilt_time WHERE start <= CURDATE() AND CURDATE() <= end";
+		$command = $connection->createCommand($sql);
+		$data = $command->queryScalar(); 
+        return $data > 0;
 	}
 
     public function getCategories(){
@@ -44,6 +67,7 @@ class Shop {
 		$data = $command->queryAll(); 
 		foreach($data as $d)
 			$sizes[$d['id']] = $d['size'];
+		$sizes[0] = " - ";
         return $sizes;
 	}
 

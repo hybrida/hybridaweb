@@ -1,6 +1,9 @@
 <?
 $this->renderPartial("_menu");
-echo "<br>";
+?>
+<br>
+<center>
+<?
 if (count($orders) == 0)
 	echo "Det er ingen bestillinger";
 else
@@ -11,7 +14,7 @@ Bestillinger:
 </b>
 <br>
 <br>
-<table>
+<table width="100%">
 	<tr>
 			<td>
 			<b>
@@ -53,3 +56,35 @@ Bestillinger:
 <? 
 }
 ?>
+<br>
+<br>
+<b>
+Tider:
+</b>
+<br>
+<br>
+<table width="100%">
+	<tr>
+			<td> <b> Start </b> </td>
+			<td> <b> Slutt </b> </td>
+			<td> <b> Status </b> </td>
+	<tr>
+	<? foreach($times as $t): ?>
+			<tr>
+				<td> <?  echo $t['start']; ?> </td>
+				<td> <?  echo $t['end']; ?> </td>
+				<td>
+					<?
+					$curdate = date('Y-m-d');
+					if ($curdate > $t['end'])
+						echo "Avsluttet";
+					elseif ($curdate < $t['start'])
+						echo "Ikke begynt";
+					else
+						echo "Aktiv";
+					  ?>
+				</td>
+			</tr>
+	<? endforeach; ?>
+</table>
+</center>

@@ -1,6 +1,9 @@
 <?
 $this->renderPartial("_menu");
-echo "<br>";
+?>
+<br>
+<center>
+<?
 if (count($orders) == 0)
 	echo "Du har ingen bestillinger";
 else
@@ -11,7 +14,7 @@ Dine Bestillinger:
 </b>
 <br>
 <br>
-<table>
+<table width="100%">
 <? echo CHtml::beginForm('', 'post'); ?>
 	<tr>
 			<td>
@@ -53,7 +56,7 @@ Dine Bestillinger:
 			<? echo CHtml::submitButton('X', 
 					array(
 						'name' => $o['id'],
-						'disabled' => $afterDeadline,
+						'disabled' => !$isShopOpen,
 					)); ?>
 		</td>
 	</tr>
@@ -62,4 +65,13 @@ Dine Bestillinger:
 </table>
 <? 
 }
+if ($isShopOpen)
+{
+	echo "Du kan endre din bestilling frem til " . $time['end'];
+}
+else
+{
+	echo "Du kan ikke lengre endre din bestilling";
+}
 ?>
+</center>

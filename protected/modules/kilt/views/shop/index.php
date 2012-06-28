@@ -61,6 +61,11 @@
 <? endforeach ?>	
 </table>
 <center>
-<? echo CHtml::submitButton('Bestill', array('id'=>'submit', 'name' =>'submit')); ?>
+<? echo CHtml::submitButton('Bestill', 
+			array('id'=>'submit', 'name' =>'submit', 'disabled' => !$isShopOpen)
+		); 
+	if (!$isShopOpen)
+		echo "<br>Du kan ikke bestille nå";
+?>
 </center>
 <? echo CHtml::endForm(); ?>

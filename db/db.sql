@@ -971,6 +971,166 @@ INSERT INTO `vote` (`pollId`, `userId`, `choice`) VALUES
 (380, 1, 2),
 (15, 1, 1);
 
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `kilt_order`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL,
+  `product_size` int(11) NOT NULL,
+  `product_quantity` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+
+--
+-- Dataark for tabell `kilt_order`
+--
+
+INSERT INTO `kilt_order` (`id`, `user_id`, `product_id`, `product_size`, `product_quantity`) VALUES
+(12, 417, 1, 1, 1),
+(13, 417, 2, 2, 2),
+(14, 417, 3, 4, 3),
+(15, 417, 4, 0, 1),
+(16, 417, 8, 0, 2),
+(17, 417, 9, 0, 3),
+(18, 417, 5, 0, 1),
+(19, 417, 6, 4, 2),
+(20, 417, 7, 0, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `kilt_product`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=33 ;
+
+--
+-- Dataark for tabell `kilt_product`
+--
+
+INSERT INTO `kilt_product` (`id`, `type`, `model`) VALUES
+(1, 'Kilt', 'Gutt'),
+(2, 'Kilt', 'Jente'),
+(3, 'Kilt', 'Jente Mini'),
+(4, 'Sporran', 'Thistle'),
+(5, 'Sokker', 'Vanlig'),
+(6, 'Sokker', 'Premium'),
+(7, 'Ekstra', 'Flashes'),
+(8, 'Sporran', 'Black Leather'),
+(9, 'Sporran', 'Celtic Circle'),
+(10, 'Sporran', 'Celtic Chain'),
+(11, 'Sporran', 'Military Insignia'),
+(12, 'Sporran', 'Double Knot'),
+(13, 'Sporran', 'Knotted Cross'),
+(14, 'Sporran', 'Oval Brass'),
+(15, 'Sporran', 'Ruby Celtic'),
+(16, 'Sporran', 'Maltese Cross'),
+(17, 'Sporran', 'Studded Black'),
+(18, 'Sporran', 'White Day'),
+(19, 'Sporran', 'Silver Studded Dress'),
+(20, 'Sporran', 'Silver Tassels'),
+(21, 'Sporran', 'Black Rabbit'),
+(22, 'Sporran', 'Gray Rabbit'),
+(23, 'Sporran', 'White Rabbit'),
+(24, 'Sporran', 'Shamrock'),
+(25, 'Sporran', 'Maltese Blue'),
+(26, 'Sporran', 'Maltese Kelly'),
+(27, 'Sporran', 'Maltese Red'),
+(28, 'Sporran', 'Buchanan'),
+(29, 'Sporran', 'Lion Crest'),
+(30, 'Sporran', 'Skunk'),
+(31, 'Sporran', 'Thistle Crest'),
+(32, 'Sporran', 'Full Skunk');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `kilt_product_size`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_product_size` (
+  `product_id` int(11) NOT NULL,
+  `size_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dataark for tabell `kilt_product_size`
+--
+
+INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3),
+(1, 4),
+(1, 5),
+(1, 6),
+(2, 1),
+(2, 2),
+(2, 4),
+(2, 5),
+(3, 1),
+(3, 2),
+(3, 4),
+(6, 1),
+(6, 2),
+(6, 4);
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `kilt_size`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_size` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+
+--
+-- Dataark for tabell `kilt_size`
+--
+
+INSERT INTO `kilt_size` (`id`, `size`) VALUES
+(1, 'Small'),
+(2, 'Medium'),
+(3, 'Medium Long'),
+(4, 'Large'),
+(5, 'XLarge'),
+(6, 'XXLarge');
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `kilt_time`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_time` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `start` date NOT NULL,
+  `end` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dataark for tabell `kilt_time`
+--
+
+INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
+(3, '2012-06-01', '2012-06-03'),
+(4, '2012-06-04', '2012-06-29'),
+(5, '2012-06-29', '2012-06-30');
+
 --
 -- Constraints for dumped tables
 --

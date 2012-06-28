@@ -72,6 +72,7 @@ class ShopController extends Controller
 					'errors'     => $errors,
 					'size'       => $size,
 					'qnty'		 => $qnty,
+					'isShopOpen' => $shop->isShopOpen(),
 					));
 	}
 
@@ -81,6 +82,11 @@ class ShopController extends Controller
 			return ($a['product_id'] - $b['product_id']);
 
 		return ($a['product_size'] - $b['product_size']);
+	}
+
+	public function actionInfo()
+	{
+		$this->render('info');
 	}
 
 	public function actionOrders()
@@ -102,7 +108,8 @@ class ShopController extends Controller
 					'orders' => $orders,
 					'products' => $products,
 					'sizes'	=> $sizes,
-					'afterDeadline' => $shop->isAfterDeadline(),
+					'isShopOpen' => $shop->isShopOpen(),
+					'time' => $shop->getCurrentTime(),
 					));
 	}
 
@@ -116,8 +123,6 @@ class ShopController extends Controller
 		$products = $shop->getProducts();
 		$orders = $shop->getOrders();
 		$totalOrders = array();
-		$sizes = $shop->getSizes();
-		$sizes[0] = " - ";
 
 		/*
 		foreach ($products as $p)
@@ -156,7 +161,8 @@ class ShopController extends Controller
 				array(
 					'orders' => $totalOrders,
 					'products' => $products,
-					'sizes' => $sizes,
+					'sizes' => $shop->getSizes(),
+					'times' => $shop->getTimes(),
 					));	
 	}
 }
