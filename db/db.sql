@@ -971,6 +971,7 @@ INSERT INTO `vote` (`pollId`, `userId`, `choice`) VALUES
 (380, 1, 2),
 (15, 1, 1);
 
+
 -- --------------------------------------------------------
 
 --
@@ -983,6 +984,7 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `product_id` int(11) NOT NULL,
   `product_size` int(11) NOT NULL,
   `product_quantity` int(11) NOT NULL,
+  `time_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
 
@@ -990,16 +992,16 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
 -- Dataark for tabell `kilt_order`
 --
 
-INSERT INTO `kilt_order` (`id`, `user_id`, `product_id`, `product_size`, `product_quantity`) VALUES
-(12, 417, 1, 1, 1),
-(13, 417, 2, 2, 2),
-(14, 417, 3, 4, 3),
-(15, 417, 4, 0, 1),
-(16, 417, 8, 0, 2),
-(17, 417, 9, 0, 3),
-(18, 417, 5, 0, 1),
-(19, 417, 6, 4, 2),
-(20, 417, 7, 0, 3);
+INSERT INTO `kilt_order` (`id`, `user_id`, `product_id`, `product_size`, `product_quantity`, `time_id`) VALUES
+(12, 417, 1, 1, 1, 3),
+(13, 417, 2, 2, 2, 3),
+(14, 417, 3, 4, 3, 3),
+(15, 417, 4, 0, 1, 3),
+(16, 417, 8, 0, 2, 4),
+(17, 417, 9, 0, 3, 4),
+(18, 417, 5, 0, 1, 4),
+(19, 417, 6, 4, 2, 5),
+(20, 417, 7, 0, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -1130,7 +1132,6 @@ INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
 (3, '2012-06-01', '2012-06-03'),
 (4, '2012-06-04', '2012-06-29'),
 (5, '2012-06-29', '2012-06-30');
-
 --
 -- Constraints for dumped tables
 --

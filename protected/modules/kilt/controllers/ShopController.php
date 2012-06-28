@@ -100,47 +100,81 @@ class ShopController extends Controller
 		$orders = $shop->getUserOrders();
 		$products = $shop->getProducts();
 		$sizes = $shop->getSizes();
-		$sizes[0] = " - ";
+		$isShopOpen = $shop->isShopOpen();
+		$time = $shop->getCurrentTime();
 
-		usort($orders, array("ShopController", "cmpOrder"));
+		$prevOrders = array();
+		$curOrders = array();
+
+		foreach($orders as $o)
+			if ($isShopOpen && $o['time_id'] == $time['id'])
+				$curOrders[] = $o;
+			else
+				$prevOrders[] = $o;
+
+		usort($prevOrders, array("ShopController", "cmpOrder"));
+		usort($curOrders, array("ShopController", "cmpOrder"));
+
 		$this->render('orders',
 				array(
-					'orders' => $orders,
+					'prevOrders' => $prevOrders,
+					'curOrders' => $curOrders,
 					'products' => $products,
 					'sizes'	=> $sizes,
-					'isShopOpen' => $shop->isShopOpen(),
-					'time' => $shop->getCurrentTime(),
+					'isShopOpen' => $isShopOpen,
+					'time' => $time,
 					));
 	}
 
 	public function actionAdmin()
 	{
 		$shop = new Shop();
+		$showTimeID = -1;
 
-		if (isset($_POST['del']))
-				$shop->deleteOrders();
+		if (sizeof($_POST) > 0)
+			foreach($_POST as $key => $value)
+			{
+				if ($value == "Vis bestillinger")
+					$showTimeID = $key;	
+				elseif ($value == "Opprett tidsrom" && isset($_POST['start']) &&
+													   isset($_POST['end']))
+				{
+$dateRegex = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#";
+					$start = $_POST['start'];
+					$end = $_POST['end'];
 
+					if (preg_match($dateRegex, $start) && 
+						preg_match($dateRegex, $end) && $start < $end)
+						$shop->addTime($start, $end);
+				}
+			}
+
+		$curTime = $shop->getCurrentTime();
+		$sizes = $shop->getSizes();
+		$times = $shop->getTimes();
+		$isShopOpen = $shop->isShopOpen();
+
+		// Hvis tidsintervall ikke er satt og det finnes tidsintervaller
+		if (sizeof($times) > 0 && $showTimeID == -1)
+		{
+			// Hvis et tidintervall er aktivt, vis dette
+			if ($isShopOpen)
+				$showTimeID = $curTime['id'];
+			// Hvis ingen tidsintervaller er aktive
+			else
+			{
+				// Se etter avsluttede tidsintervaller
+				$lastTime = $shop->getLastTime(true);
+				// Hvis ingen avsluttede tidsintervaller, velg siste intervall
+				if (!isset($lastTime['id']))
+					$lastTime = $shop->getLastTime(false);
+				$showTimeID = $lastTime['id'];
+			}
+		}
+		
 		$products = $shop->getProducts();
 		$orders = $shop->getOrders();
 		$totalOrders = array();
-
-		/*
-		foreach ($products as $p)
-		{
-			$pid = $p['id'];
-			$psizes = $shop->getProductSizes($p['id']);
-			if (sizeof($psizes) > 0)
-			{
-				foreach ($psizes as $s)
-				{
-					$sid = $s['id'];
-					$totalOrders[$pid][$sid] = 0;
-				}
-			}
-			else
-				$totalOrders[$pid]['0'] = 0;
-		}
-		*/
 
 		foreach($products as $p)
 			$products[$p['id']] = $p;
@@ -150,6 +184,10 @@ class ShopController extends Controller
 			$id = $o['product_id'];
 			$qnty = $o['product_quantity'];
 			$size = $o['product_size'];
+			$tid = $o['time_id'];
+
+			if ($tid != $showTimeID)
+				continue;
 
 			if (isset($totalOrders[$id][$size]))
 				$totalOrders[$id][$size] += $qnty;
@@ -161,8 +199,9 @@ class ShopController extends Controller
 				array(
 					'orders' => $totalOrders,
 					'products' => $products,
-					'sizes' => $shop->getSizes(),
-					'times' => $shop->getTimes(),
+					'sizes' => $sizes,
+					'times' => $times,
+					'showTimeID' => $showTimeID,
 					));	
 	}
 }

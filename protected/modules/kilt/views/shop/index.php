@@ -32,8 +32,7 @@
 				echo "<b>".$p['model']."</b>";
 				echo "<br>"; 
 				echo "Antall "; 
-				echo CHtml::TextField('qnty['.$id.']', $pqnty,
-				 	array( 'size' => 2)); 
+				echo CHtml::TextField('qnty['.$id.']', $pqnty, array( 'size' => 2)); 
 //*
 			   if (sizeof($p['sizes']) > 0)
 			   {

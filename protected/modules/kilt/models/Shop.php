@@ -2,6 +2,19 @@
 
 class Shop {
 
+	public function addTime($start, $end)
+	{
+        $connection = Yii::app()->db;
+        $data = array(
+            ':start' => $start,
+            ':end' => $end,
+        );
+        $sql = "INSERT INTO kilt_time
+				 ( start,  end) 
+		  VALUES (:start, :end)";
+		$command = $connection->createCommand($sql);
+        $command->execute($data);
+	}
 	public function getTimes()
 	{
         $connection = Yii::app()->db;
@@ -17,6 +30,17 @@ class Shop {
 	{
         $connection = Yii::app()->db;
 		$sql = "SELECT * FROM kilt_time WHERE start <= CURDATE() AND CURDATE() <= end";
+		$command = $connection->createCommand($sql);
+		$data = $command->queryRow(); 
+		return $data;
+	}
+	public function getLastTime($onlyEnded)
+	{
+        $connection = Yii::app()->db;
+		if ($onlyEnded)
+		$sql = "SELECT MAX(id) as id from kilt_time WHERE end < CURDATE()";
+		else
+			$sql = "SELECT MAX(id) as id from kilt_time";
 		$command = $connection->createCommand($sql);
 		$data = $command->queryRow(); 
 		return $data;
@@ -84,7 +108,7 @@ class Shop {
 	public function getOrders()
 	{
         $connection = Yii::app()->db;
-		$sql = "SELECT product_id, product_size, product_quantity FROM kilt_order";
+		$sql = "SELECT * FROM kilt_order";
 		$command = $connection->createCommand($sql);
 		$data = $command->queryAll(); 
         return $data;
@@ -109,24 +133,19 @@ class Shop {
 		$data = $command->execute(); 
 	}
 
-	public function deleteOrders()
-	{
-        $connection = Yii::app()->db;
-		$sql = "DELETE FROM kilt_order";
-		$command = $connection->createCommand($sql);
-		$data = $command->execute(); 
-	}
-	public function updateOrder($id, $qnty)
+	public function updateOrder($id, $qnty, $timeID)
 	{
         $connection = Yii::app()->db;
         $data = array(
             ':product_id' => $id,
             ':product_quantity' => $qnty,
 			':user_id' => Yii::app()->user->id,
+			':time_id' => $timeID,
         );
         $sql = "UPDATE kilt_order
 				SET product_quantity = :product_quantity
-		  		WHERE user_id = :user_id AND product_id = :product_id";
+		  		WHERE user_id = :user_id AND product_id = :product_id
+				AND time_id = :time_id";
 		$command = $connection->createCommand($sql);
         $command->execute($data);
 	}
@@ -134,13 +153,16 @@ class Shop {
 	public function addOrder($id, $qnty, $size)
 	{
 		$orders = $this->getUserOrders();
+		$curTime = $this->getCurrentTime();
+		$timeID = $curTime['id'];
 
 		foreach($orders as $o)
 		{
 			if ($o['product_id'] == $id &&
-				$o['product_size'] == $size)
+				$o['product_size'] == $size &&
+				$o['time_id'] == $timeID)
 			{
-				$this->updateOrder($id, $qnty + $o['product_quantity']);
+				$this->updateOrder($id, $qnty + $o['product_quantity'], $timeID);
 				return;
 			}
 		}
@@ -151,10 +173,11 @@ class Shop {
             ':product_size' => $size,
             ':product_quantity' => $qnty,
 			':user_id' => Yii::app()->user->id,
+			':time_id' => $timeID,
         );
         $sql = "INSERT INTO kilt_order
-				 ( user_id,  product_id,  product_quantity,  product_size) 
-		  VALUES (:user_id, :product_id, :product_quantity, :product_size)";
+			 ( user_id,  product_id,  product_quantity,  product_size,  time_id) 
+	  VALUES (:user_id, :product_id, :product_quantity, :product_size, :time_id)";
 		$command = $connection->createCommand($sql);
         $command->execute($data);
 	}
