@@ -2,31 +2,34 @@
 
 /*stil for hovedtabellen*/
 
-#BK-alumnilist-maintable{
-	border-width: 1px;
-	border-spacing: 2px;
-	border-style: outset;
-	border-color: gray;
-	border-collapse: separate;
-	width: 100%;
-	}
-	
-#BK-alumnilist-maintable td{
-	text-align: left;
-	border-width: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
-	}
-	
-#BK-alumnilist-maintable th{
-	text-align: left;
-	border-width: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
-	background-color: white;
-	}
+#BK-alumnilist-maintable {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: left;
+}
+
+#BK-alumnilist-maintable *{
+    border: none;
+}
+
+#BK-alumnilist-maintable td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
+}
+
+#BK-alumnilist-maintable th {
+    color: #009;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+
+#BK-alumnilist-maintable tr:hover{
+	background-color: #e1e3e5;
+}
+
+#BK-alumnilist-maintable tr:first-child {
+    background-color: transparent;
+}
 	
 /*stil for st�ttetabellen og kolonnene som holder statistikken p� plass*/
 
