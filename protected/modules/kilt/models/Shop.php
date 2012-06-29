@@ -2,6 +2,15 @@
 
 class Shop {
 
+	public function getUserNameByID($id)
+	{
+        $connection = Yii::app()->db;
+		$sql = "SELECT firstName, lastName FROM user WHERE id = :id";
+		$command = $connection->createCommand($sql);
+		$command = $command->bindParam(":id", $id);
+		$data = $command->queryRow(); 
+        return $data;
+	}
 	public function addTime($start, $end)
 	{
         $connection = Yii::app()->db;

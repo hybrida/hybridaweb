@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Vert: localhost
--- Generert den: 28. Jun, 2012 12:13 PM
+-- Generert den: 29. Jun, 2012 17:26 PM
 -- Tjenerversjon: 5.5.16
 -- PHP-Versjon: 5.3.8
 
@@ -381,22 +381,7 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `product_quantity` int(11) NOT NULL,
   `time_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
-
---
--- Dataark for tabell `kilt_order`
---
-
-INSERT INTO `kilt_order` (`id`, `user_id`, `product_id`, `product_size`, `product_quantity`, `time_id`) VALUES
-(12, 417, 1, 1, 1, 3),
-(13, 417, 2, 2, 2, 3),
-(14, 417, 3, 4, 3, 3),
-(15, 417, 4, 0, 1, 3),
-(16, 417, 8, 0, 2, 4),
-(17, 417, 9, 0, 3, 4),
-(18, 417, 5, 0, 1, 4),
-(19, 417, 6, 4, 2, 5),
-(20, 417, 7, 0, 3, 5);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -517,16 +502,7 @@ CREATE TABLE IF NOT EXISTS `kilt_time` (
   `start` date NOT NULL,
   `end` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
---
--- Dataark for tabell `kilt_time`
---
-
-INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
-(3, '2012-06-01', '2012-06-03'),
-(4, '2012-06-04', '2012-06-29'),
-(5, '2012-06-29', '2012-06-30');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 

@@ -9,7 +9,7 @@ class ShopController extends Controller
 		$size = array();
 		$qnty = array();
 		$orders = array();
-		$products = array();
+		$catProducts = array();
 		$categories = $shop->getCategories();
 		$sizes = $shop->getSizes();
 
@@ -61,13 +61,12 @@ class ShopController extends Controller
 				$cp['sizes'] = $shop->getProductSizes($cp['id']);
 				$newCatProducts[] = $cp;
 			}
-			$products[$c] = $newCatProducts;
+			$catProducts[$c] = $newCatProducts;
 		}
 
 		$this->render('index', 
 				array(
-					'categories' => $categories,
-					'products'   => $products,
+					'catProducts'   => $catProducts,
 					'sizes'		 => $sizes,
 					'errors'     => $errors,
 					'size'       => $size,
@@ -103,49 +102,71 @@ class ShopController extends Controller
 		$isShopOpen = $shop->isShopOpen();
 		$time = $shop->getCurrentTime();
 
-		$prevOrders = array();
-		$curOrders = array();
+		$timeOrders = array();
+		$sortedTimeOrders = array();
 
 		foreach($orders as $o)
-			if ($isShopOpen && $o['time_id'] == $time['id'])
-				$curOrders[] = $o;
-			else
-				$prevOrders[] = $o;
+			$timeOrders[$o['time_id']][] = $o;
 
-		usort($prevOrders, array("ShopController", "cmpOrder"));
-		usort($curOrders, array("ShopController", "cmpOrder"));
+		foreach($timeOrders as $to)
+			usort($to, array("ShopController", "cmpOrder"));
 
 		$this->render('orders',
 				array(
-					'prevOrders' => $prevOrders,
-					'curOrders' => $curOrders,
+					'timeOrders' => $timeOrders,
 					'products' => $products,
 					'sizes'	=> $sizes,
 					'isShopOpen' => $isShopOpen,
 					'time' => $time,
+					'times' => $shop->getTimes(),
 					));
 	}
 
 	public function actionAdmin()
 	{
+		$gk = Yii::app()->gatekeeper;
+		$isWebkomMember = $gk->hasGroupAccess(55);
+		if (!$isWebkomMember)
+		{
+			$this->render("error");
+			return;
+		}
+
 		$shop = new Shop();
 		$showTimeID = -1;
+		$showUserID = -1;
 
-		if (sizeof($_POST) > 0)
+		if (isset($_POST['showUser']))
+		{
+			$showUserID = $_POST['newuserid'];
+			$showTimeID = $_POST['timeid'];
+		}
+		elseif (isset($_POST['createTime']) && 
+				isset($_POST['start']) && 
+				isset($_POST['end']))
+		{
+			$dateRegex = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#";
+			$start = $_POST['start'];
+			$end = $_POST['end'];
+
+			if (preg_match($dateRegex, $start) && 
+				preg_match($dateRegex, $end) && 
+				$start < $end)
+				$shop->addTime($start, $end);
+			else
+			{
+				$showUserID = $_POST['userid'];
+				$showTimeID = $_POST['timeid'];
+			}
+		}
+			
+		else
 			foreach($_POST as $key => $value)
 			{
 				if ($value == "Vis bestillinger")
-					$showTimeID = $key;	
-				elseif ($value == "Opprett tidsrom" && isset($_POST['start']) &&
-													   isset($_POST['end']))
 				{
-$dateRegex = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#";
-					$start = $_POST['start'];
-					$end = $_POST['end'];
-
-					if (preg_match($dateRegex, $start) && 
-						preg_match($dateRegex, $end) && $start < $end)
-						$shop->addTime($start, $end);
+					$showTimeID = $key;	
+					$showUserID = $_POST['userid'];
 				}
 			}
 
@@ -175,33 +196,44 @@ $dateRegex = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#
 		$products = $shop->getProducts();
 		$orders = $shop->getOrders();
 		$totalOrders = array();
-
-		foreach($products as $p)
-			$products[$p['id']] = $p;
+		$userOrders = array();
 
 		foreach ($orders as $o)
 		{
+			$uid = $o['user_id'];
 			$id = $o['product_id'];
 			$qnty = $o['product_quantity'];
 			$size = $o['product_size'];
 			$tid = $o['time_id'];
 
-			if ($tid != $showTimeID)
-				continue;
-
-			if (isset($totalOrders[$id][$size]))
-				$totalOrders[$id][$size] += $qnty;
+			if (isset($totalOrders[$tid][$id][$size]))
+				$totalOrders[$tid][$id][$size] += $qnty;
 			else
-				$totalOrders[$id][$size] = $qnty;
+				$totalOrders[$tid][$id][$size] = $qnty;
+
+			$userOrders[$uid][$tid][$id][$size] = $qnty;
 		}
+
+		foreach($userOrders as $uid => $timeOrders)
+		{
+			$name = $shop->getUserNameByID($uid);
+			$userOrders[$uid]['name'] = $name['firstName']." ".
+										$name['lastName'];
+		}
+
+		if (!isset($userOrders[$showUserID][$showTimeID]))
+			$showUserID = -1;
 
 		$this->render('admin', 
 				array(
+					'post' => $_POST,
+					'userOrders' => $userOrders,
 					'orders' => $totalOrders,
 					'products' => $products,
 					'sizes' => $sizes,
 					'times' => $times,
 					'showTimeID' => $showTimeID,
+					'showUserID' => $showUserID,
 					));	
 	}
 }

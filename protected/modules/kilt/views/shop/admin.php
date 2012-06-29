@@ -1,23 +1,46 @@
 <?
 $this->renderPartial("_menu");
+echo "<br>";
+if (!function_exists("preprint")) { 
+    function preprint($s, $return=false) { 
+        $x = "<pre>"; 
+        $x .= print_r($s, 1); 
+        $x .= "</pre>"; 
+        if ($return) return $x; 
+        else print $x; 
+    } 
+}
+
+//preprint($post);
+//preprint($userOrders);
 ?>
-<center>
 <!-- Tids-tabell -->
-<b>
-Tider:
-</b>
-<br>
-<br>
-<? echo CHtml::beginForm('', 'post'); ?>
-<table width="100%">
+<? 
+	echo CHtml::beginForm('', 'post');
+	echo CHtml::textField('timeid', $showTimeID,
+			array('hidden' => true));
+	echo CHtml::textField('userid', $showUserID,
+			array('hidden' => true));
+?>
+<table class="adminTable">
 	<tr>
-			<td> <b> Start </b> </td>
-			<td> <b> Slutt </b> </td>
-			<td> <b> Status </b> </td>
-			<td> <b> Vis </b> </td>
+		<td colspan=4 class="adminTableTitle">
+			Tider
+			<hr>
+		</td>
+	</tr>
 	<tr>
-	<? foreach($times as $t): ?>
-			<tr>
+			<td class="adminTitle">Start  </td>
+			<td class="adminTitle">Slutt  </td>
+			<td class="adminTitle">Status  </td>
+			<td class="adminTitle">Vis  </td>
+	<tr>
+	<? foreach($times as $t):
+		if ($t['id'] == $showTimeID)
+			echo "<tr class=\"active\">";
+		else
+			echo "<tr>";
+	?>
 				<td> <?  echo $t['start']; ?> </td>
 				<td> <?  echo $t['end']; ?> </td>
 				<td>
@@ -32,7 +55,7 @@ Tider:
 					  ?>
 				</td>
 				<td>
-					<? echo CHtml::submitButton('Vis bestillinger', 
+					<? echo CHtml::submitButton('Vis bestillinger',
 						array( 'name' => $t['id'],
 								'disabled' => $t['id'] == $showTimeID)); 
 					?>
@@ -51,64 +74,44 @@ Tider:
 				<td> Ikke opprettet </td>
 				<td>
 					<? echo CHtml::submitButton('Opprett tidsrom', 
-						array( 'name' => 'create')); 
+						array( 'name' => 'createTime')); 
 					?>
 				</td>
 			</tr>
 </table>
-<? echo CHtml::endForm(); ?>
 
 <!-- Bestillings-tabell -->
-<br>
-<br>
 <?
 if ($showTimeID == -1)
-	echo "Du må opprette et tidsrom først";
-elseif (count($orders) == 0)
-	echo "Det er ingen bestillinger i dette tidsrommet";
+	echo "<p class=\"adminText\">Du må opprette et tidsrom først</p>";
+elseif (!isset($orders[$showTimeID]))
+	echo "<p class=\"adminText\">Det er ingen bestillinger i dette tidsrommet</p>";
 else
 {
 ?>
-<b>
-<?
-	echo "Bestillinger i tidsrommet " . $times[$showTimeID]['start'] . " - ";
-	echo $times[$showTimeID]['end'];
-?>
-</b>
-<br>
-<br>
-<table width="100%">
+<table class="adminTable">
 	<tr>
-			<td>
-			<b>
-				Produkt
-			</b>
-			</td>
-			<td>
-			<b>
-				Størrelse
-			</b>
-			</td>
-			<td>
-			<b>
-				Antall
-			</b>
-			</td>
+		<td colspan=3 class="adminTableTitle">
+			<?  echo "Bestillinger"; ?>
+			<hr>
+		</td>
+	</tr>
 	<tr>
-	<? foreach($orders as $id => $size): ?>
+			<td class="adminTitle"> Produkt </td>
+			<td class="adminTitle"> Størrelse </td>
+			<td class="adminTitle"> Antall </td>
+	<tr>
+	<? foreach($orders[$showTimeID] as $id => $size): ?>
 		<? foreach($size as $s => $q): ?>
 			<tr>
-				<td>
+				<td class="adminContent">
 					<?
 					echo $products[$id]['type'] . ": " . $products[$id]['model'];
 					?>
 				</td>
-				<td>
-					<? echo $sizes[$s]; ?>
-				</td>
-				<td>
-					<? echo $q; ?>
-				</td>
+				
+				<td class="adminContent"> <? echo $sizes[$s]; ?> </td>
+				<td class="adminContent"> <? echo $q; ?> </td>
 			</tr>
 		<? endforeach; ?>
 	<? endforeach; ?>
@@ -116,4 +119,53 @@ else
 <? 
 }
 ?>
-</center>
+
+<!-- Bruker-tabell -->
+<?
+	$userDropDown[-1] = "None";
+	foreach($userOrders as $id => $timeOrder)
+		if (isset($timeOrder[$showTimeID]))
+			$userDropDown[$id] = $userOrders[$id]['name'];
+	if ($showUserID != -1)
+	{
+?>
+		<table class="adminTable">
+			<tr>
+				<td colspan=3 class="adminTableTitle">
+					<?  echo "Bestillinger av " . $userOrders[$showUserID]['name']; ?>
+					<hr>
+				</td>
+			</tr>
+			<tr>
+					<td class="adminTitle"> Produkt </td>
+					<td class="adminTitle"> Størrelse </td>
+					<td class="adminTitle"> Antall </td>
+			<tr>
+			<? foreach($userOrders[$showUserID][$showTimeID] as $id => $size): ?>
+				<? foreach($size as $s => $q): ?>
+					<tr>
+						<td class="adminContent">
+							<?
+							echo $products[$id]['type'] . ": " . $products[$id]['model'];
+							?>
+						</td>
+						
+						<td class="adminContent"> <? echo $sizes[$s]; ?> </td>
+						<td class="adminContent"> <? echo $q; ?> </td>
+						<td class="adminTitle">  </td>
+					</tr>
+				<? endforeach; ?>
+			<? endforeach; ?>
+		</table>
+	<? }
+		if (count($userDropDown) > 1)
+		{	
+			echo "<center>";
+			echo "<br>";
+			echo CHtml::dropDownList('newuserid', 0, $userDropDown);
+			echo CHtml::submitButton('Vis brukerens bestillinger', 
+								array( 'name' => 'showUser')); 
+			echo "</center>";
+		}
+		 ?>
+<? echo CHtml::endForm(); ?>

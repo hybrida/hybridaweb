@@ -1,24 +1,14 @@
-<table width=100%>
-	<tr>
-		<td width=25%>
-			<center>
-				<? echo CHtml::link("Shop", array('index')); ?>
-			</center>
-		</td>
-		<td width=25%>
-			<center>
-				<? echo CHtml::link("Info", array('info')); ?>
-			</center>
-		</td>
-		<td width=25%>
-			<center>
-				<? echo CHtml::link("Bestillinger", array('orders')); ?>
-			</center>
-		</td>
-		<td width=25%>
-			<center>
-				<? echo CHtml::link("Admin", array('admin')); ?>
-			</center>
-		</td>
-	</tr>	
-</table>
+<ul id="nav">
+	<li>
+		<? echo CHtml::link("Shop", array('index')); ?>
+	</li>
+	<li>
+		<? echo CHtml::link("Info", array('info')); ?>
+	</li>
+	<li>
+		<? echo CHtml::link("Bestillinger", array('orders')); ?>
+	</li>
+	<li>
+		<? echo CHtml::link("Admin", array('admin')); ?>
+	</li>
+</ul>
