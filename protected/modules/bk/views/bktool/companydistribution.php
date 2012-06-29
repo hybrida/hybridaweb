@@ -17,8 +17,7 @@
         <a href='/profil/<?= $member['username'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></h3>
         
         <p>
-        <div id="BK-companydistribution-container">
-        <table>
+        <table id="BK-companydistribution-maintable">
             <tr>
                 <th>Nr.</th><th>Bedriftsnavn</th><th>Status</th><th>Sist tildelt</th><th>Sist oppdatert</th>
             </tr>
@@ -27,10 +26,25 @@
             
             <? foreach($contactedCompanies as $company) : ?>
                 <? if($company['id'] == $member['id']){ ?>
-                    <tr bgcolor="#00CC00">
+                    <tr>
                         <td><?= $counter ?></td>
                         <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
-                        <td><?= $company['status'] ?></td>
+                        <? switch ($company['status']){
+                                case "Aktuell senere": ?>
+                                    <td id ="BK-companyoverview-aktuell-senere">
+                        <?          break;
+                                case "Blir kontaktet": ?>
+                                    <td id="BK-companyoverview-blir-kontaktet">
+                        <?          break;
+                                case "Ikke kontaktet": ?>
+                                    <td id="BK-companyoverview-ikke-kontaktet">
+                        <?          break;
+                                case "Uaktuell": ?>
+                                    <td id="BK-companyoverview-uaktuell">
+                        <?          break;
+                                default: ?>
+                                    <td>
+                        <? } ?><?= $company['status'] ?></td>
                         <td><?= $company['dateAssigned'] ?></td>
                         <td><?= $company['dateUpdated'] ?></td>
                     </tr>
@@ -39,7 +53,7 @@
                 <? } ?>
             <? endforeach ?>
         </table>
-        </div>
         </p>
+        <br/>
     <? endforeach ?>
 </p>

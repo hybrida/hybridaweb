@@ -61,7 +61,8 @@
     </table>
 </p>
 
-<p><h2>Bedrifter:</h2></p>
+<br/>
+<h2>Bedrifter:</h2>
 
 <p>
     <table id="BK-companyoverview-maintable">

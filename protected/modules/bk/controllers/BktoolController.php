@@ -44,10 +44,46 @@ class BktoolController extends Controller {
                 $bkTool = new Bktool();
 		$data = array();
                 
+                if(!isset($_GET['orderby'])){
+                    $_GET['orderby'] = 'dateAdded';
+                }
+                if(!isset($_GET['order'])){
+                    $_GET['order'] = 'ASC';
+                } 
+                
+                switch($_GET['orderby']){
+                    case 'dateAdded':
+                        $_SESSION['orderby'] = 'dateAdded';
+                        break;
+                    case 'firstName':
+                        $_SESSION['orderby'] = 'firstName';
+                        break;
+                    case 'companyName':
+                        $_SESSION['orderby'] = 'companyName';
+                        break;
+                    case 'description':
+                        $_SESSION['orderby'] = 'description';
+                        break;
+                    default:
+                        $_SESSION['orderby'] = 'dateAdded';
+                        break;
+                }
+                switch($_GET['order']){
+                    case 'ASC':
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                    case 'DESC':
+                        $_SESSION['order'] = 'ASC';
+                        break;
+                    default:
+                        $_SESSION['order'] = 'ASC';
+                        break;
+                }
+                
                 $data['loginInfo'] = $bkTool->getLastLoginCurrentUser();
                 $data['lastUpdateInfo'] = $bkTool->getLatestUpdateTimeStampRelevantForCurrentUser();
                 $data['relevantUpdatesInfo'] = $bkTool->getSumOfUpdatesRelevantForCurrentUser();
-                $data['relevantUpdates'] = $bkTool->getAllUpdatesRelevantForCurrentUser();
+                $data['relevantUpdates'] = $bkTool->getAllUpdatesRelevantForCurrentUser($_SESSION['orderby'], $_SESSION['order']);
                 
 		$this->render('updates', $data);
 	}
@@ -190,6 +226,40 @@ class BktoolController extends Controller {
             
                 $bkTool = new Bktool();
 		$data = array();
+                
+                if(!isset($_GET['orderby'])){
+                    $_GET['orderby'] = 'firstName';
+                }
+                if(!isset($_GET['order'])){
+                    $_GET['order'] = 'DESC';
+                } 
+                
+                switch($_GET['orderby']){
+                    case 'specialization':
+                        $_SESSION['orderby'] = 's.name';
+                        break;
+                    case 'workPlace':
+                        $_SESSION['orderby'] = 'workPlace';
+                        break;
+                    case 'companyName':
+                        $_SESSION['orderby'] = 'companyName';
+                        break;
+                    default:
+                        $_SESSION['orderby'] = 'firstName';
+                        break;
+                }
+                switch($_GET['order']){
+                    case 'ASC':
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                    case 'DESC':
+                        $_SESSION['order'] = 'ASC';
+                        break;
+                    default:
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                }
+                
 		$data['graduationYears'] = $bkTool->getAllGraduationYears();
                 $data['graduatesByYear'] = $bkTool->getNumberOfGraduatesGroupedByYear();
                 $data['employeesByYear'] = $bkTool->getNumberOfEmployedGraduatesGroupedByYear();
@@ -198,7 +268,7 @@ class BktoolController extends Controller {
 		$data['employeesSum'] = $bkTool->getSumOfAllEmployedGraduates();
 		$data['employingCompaniesByYear'] = $bkTool->getEmployingCompaniesByYear($id);
                 $data['employeesSumByYear'] = $bkTool->getSumOfEmployedGraduatesByYear($id);
-                $data['graduatelistByYear'] = $bkTool->getGraduatesByYear($id);
+                $data['graduatelistByYear'] = $bkTool->getGraduatesByYear($id, $_SESSION['orderby'], $_SESSION['order']);
                 $data['graduatesSumByYear'] = $bkTool->getSumOfGraduatesByYear($id);
                 $data['graduationyear'] = $id;
                 

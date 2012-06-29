@@ -54,10 +54,10 @@
 <table id="BK-updatedelements-maintable">
     <tr>
         <th>Merk</th>
-        <th><?=CHtml::link('Tidspunkt', array('updates?orderby=dateAdded')) ?></th>
-        <th><?=CHtml::link('Beskrivelse', array('updates?orderby=description')) ?></th>
-        <th><?=CHtml::link('Oppdatert bedrift', array('updates?orderby=companyName')) ?></th>
-        <th><?=CHtml::link('Oppdatert av', array('updates?orderby=firstName')) ?></th>
+        <th><?=CHtml::link('Tidspunkt', array('updates?orderby=dateAdded&order='.$_SESSION['order'])) ?></th>
+        <th><?=CHtml::link('Beskrivelse', array('updates?orderby=description&order='.$_SESSION['order'])) ?></th>
+        <th><?=CHtml::link('Oppdatert bedrift', array('updates?orderby=companyName&order='.$_SESSION['order'])) ?></th>
+        <th><?=CHtml::link('Oppdatert av', array('updates?orderby=firstName&order='.$_SESSION['order'])) ?></th>
     </tr>
 
     <? foreach($relevantUpdates as $update) : ?>

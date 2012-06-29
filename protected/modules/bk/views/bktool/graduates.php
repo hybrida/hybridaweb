@@ -11,7 +11,9 @@
     Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
 </p>
 
-<p><h2>Statistikk:</h2>
+<h2>Statistikk:</h2>
+
+<h3>Alumnistudenter sortert på år:</h3>
 
 <p>
 <table id="BK-alumnilist-supporttable">
@@ -22,17 +24,9 @@
                     <tr>
                         <th>Årstall</th><th>Antall alumnistudenter</th><th>Antall registrert ansatte alumnistudenter</th>
                     </tr>
-                    
-                     <? $counter = 1; ?>
-        
                     <? foreach($graduationYears as $year) : ?>
 
-                    <? if($counter % 2){ ?>
-                        <tr bgcolor='<?= $this->oddRowColour ?>'>
-                    <?	}else{ ?>
-                        <tr bgcolor='<?= $this->evenRowColour ?>'>
-                    <? } ?>
-                                
+                        <tr> 
                             <td><?=CHtml::link($year['graduationYear'], array('graduationyear?id='.$year['graduationYear']))?></td>
                             <td>
                                 <? foreach($graduatesByYear as $graduate) : ?>
@@ -49,9 +43,6 @@
                                 <? endforeach ?>
                             </td>
                         </tr>
-
-                        <? $counter++; ?>
-
                     <? endforeach ?>
                 </table>
             </div>
@@ -68,6 +59,9 @@
 </table>
 </p>
 
+<br/>
+<h3>Alumnistudenter i bedrifter:</h3>
+
 <p>
 <table id="BK-alumnilist-supporttable">
     <tr>
@@ -81,13 +75,7 @@
                     <? $counter = 1; ?>
         
                     <? foreach($employingCompanies as $company) : ?>
-
-                    <? if($counter % 2){ ?>
-                        <tr bgcolor='<?= $this->oddRowColour ?>'>
-                    <?	}else{ ?>
-                        <tr bgcolor='<?= $this->evenRowColour ?>'>
-                    <? } ?>
-
+                        <tr>
                             <td><?= $counter ?></td>
                             <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                             <td><?= $company['sum'] ?></td>
@@ -110,8 +98,9 @@
     </tr>
 </table>
 </p>
-				
-<h2>Alumnistudenter:</h2>
+
+<br/>
+<h2>Alle alumnistudenter:</h2>
 
 <p>
 <table id="BK-alumnilist-maintable">
