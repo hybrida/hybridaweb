@@ -1,0 +1,132 @@
+/* Navigation bar start*/
+#nav {
+	width: 100%;
+	float: left;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	background-color: #0062C4;
+}
+#nav li 
+{
+	float: left; 
+}
+#nav li a 
+{
+	display: block;
+	padding: 3px 70px;
+	text-decoration: none;
+	color: white;
+}
+#nav li a:hover 
+{
+	text-decoration: underline;
+}
+/* Navigation bar end */
+
+/* shop page start */
+.shopTable
+{
+	width: 100%;
+	margin: 0px;
+}
+
+.shopContent
+{
+	width: 33%;
+	padding-top: 10px;
+	text-align: center;
+	text-size: 1em;
+}
+
+.shopTitle
+{
+	width: 100%;
+	padding-top: 30px;
+	font-size: 3em;
+	text-align: center;
+}
+
+.shopError
+{
+	color: red;
+}
+
+.shopButton
+{
+	padding: 10px 20px;
+}
+/* Shop page end */
+
+/* Order page start */
+.orderText
+{
+	text-align: center;
+}
+
+.orderTable
+{
+	padding-top: 30px;
+	width: 100%;
+}
+
+.orderTableTitle
+{
+	font-weight: bold;
+	text-align: center;
+}
+
+.orderContent
+{
+	width: 25%;
+}
+
+.orderTitle
+{
+	font-weight: bold;
+}
+/* Order page end */
+
+/* Admin page start */
+
+.adminTable
+{
+	padding-top: 30px;
+	width: 100%;
+}
+
+.adminTableTitle
+{
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.adminTitle
+{
+	font-weight: bold;
+}
+
+.adminContent
+{
+	width: 33%;
+}
+
+.adminText
+{
+	text-align: center;
+	margin-top: 30px;
+}
+
+
+/*admin page end */
+
+
+.info
+{
+}
+
+.active
+{
+	background-color: #DDD;
+}

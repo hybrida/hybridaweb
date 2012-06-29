@@ -1,18 +1,16 @@
 <? $this->renderPartial("_menu"); ?>
 <? echo CHtml::beginForm('', 'post'); ?>
-<table width=100%>
-<?foreach($categories as $c):?>
+<table class="shopTable">
+<?foreach($catProducts as $cat => $products):?>
 <? $counter = 0; ?>
 	<tr>
-		<td colspan=3>
-			<center>
-				<h2><? echo $c; ?></h2>
-			</center>
+		<td colspan=3  class="shopTitle">
+				<? echo $cat; ?>
 		</td>
 	</tr>	
 	<tr>
 		<?  
-		foreach($products[$c] as $p):
+		foreach($products as $p):
 
 			if ($counter % 3 == 0 && $counter != 0) 
 				echo "</tr><tr>";
@@ -26,45 +24,49 @@
 			if (isset($size[$id]))
 				$psize= $size[$id];
 		?>
-		<td width=33%>
-			<center>
+		<td class="shopContent">
 				<?
 				echo "<b>".$p['model']."</b>";
 				echo "<br>"; 
 				echo "Antall "; 
 				echo CHtml::TextField('qnty['.$id.']', $pqnty, array( 'size' => 2)); 
-//*
+
 			   if (sizeof($p['sizes']) > 0)
 			   {
 					$sizeNames = array();
 					$sizeNames[-1] = "Velg str.";
-				   	foreach($p['sizes'] as $e)
-				   		$sizeNames[$e] = $sizes[$e];
-				   	echo "<br>";
-				   	echo CHtml::dropDownList('size['.$id.']', $psize, $sizeNames); 
+					foreach($p['sizes'] as $e)
+						$sizeNames[$e] = $sizes[$e];
+					echo "<br>";
+					echo CHtml::dropDownList('size['.$id.']', $psize, $sizeNames); 
 			   }
-/**/
+
 				if (isset($errors[$p['id']])) 
 				{
-					echo "<font color='red'>";
+					echo "<p class=\"shopError\">";
 					foreach($errors[$p['id']] as $e)
 						echo "<br>" . $e;
-					echo "</font>";
+					echo "</p>";
 				}
 				?>
-			</center>
-			<br>
 			</td>
 		<? endforeach ?>
 	</tr>
 <? endforeach ?>	
+	<tr>
+		<td colspan=3  class="shopContent">
+			<? 
+				echo CHtml::submitButton('Bestill', 
+					array('
+						id'=>'submit', 
+						'name' =>'submit', 
+						'disabled' => !$isShopOpen,
+						'class' => 'shopButton',
+				)); 
+				if (!$isShopOpen)
+					echo "<br>Du kan ikke bestille nå";
+			?>
+		</td>
+	</tr>
 </table>
-<center>
-<? echo CHtml::submitButton('Bestill', 
-			array('id'=>'submit', 'name' =>'submit', 'disabled' => !$isShopOpen)
-		); 
-	if (!$isShopOpen)
-		echo "<br>Du kan ikke bestille nå";
-?>
-</center>
 <? echo CHtml::endForm(); ?>

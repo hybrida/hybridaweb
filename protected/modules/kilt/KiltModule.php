@@ -2,6 +2,9 @@
 
 class KiltModule extends CWebModule
 {
+	private $groupId = 57;
+	private $cssDir = "kilt.css";
+
 	public function init()
 	{
 		// this method is called when the module is being created
@@ -18,11 +21,21 @@ class KiltModule extends CWebModule
 	{
 		if(parent::beforeControllerAction($controller, $action))
 		{
-			// this method is called before any module controller action is performed
-			// you may place customized code here
+			$this->initAssets();
+			 if(Yii::app()->user->isGuest)
+				throw new CHttpException("Ingen tilgang", "");
 			return true;
 		}
 		else
 			return false;
+	}
+
+	private function initAssets() {
+		$cs = Yii::app()->getClientScript();
+		$am = Yii::app()->getAssetManager();
+		$path = Yii::getPathOfAlias($this->cssDir);
+		$css = $path . "/shop.css";
+
+		$cs->registerCssFile($am->publish($css));
 	}
 }
