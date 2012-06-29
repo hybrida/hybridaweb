@@ -35,7 +35,7 @@ class BkTool {
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array();
-        $sql = "SELECT DISTINCT graduationYear FROM user WHERE graduationYear <= now() ORDER BY graduationYear DESC";
+        $sql = "SELECT DISTINCT graduationYear FROM user WHERE graduationYear <= now() AND graduationYear > 2006 ORDER BY graduationYear DESC";
                     
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -50,7 +50,7 @@ class BkTool {
 
         $data = array();
         $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user 
-                WHERE graduationYear <= now() GROUP BY graduationYear ORDER BY graduationYear DESC";
+                WHERE graduationYear <= now() AND graduationYear > 2006 GROUP BY graduationYear ORDER BY graduationYear DESC";
                     
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -65,7 +65,7 @@ class BkTool {
 
         $data = array();
         $sql = "SELECT graduationYear, COUNT(DISTINCT id) AS sum FROM user, bk_company 
-                WHERE graduationYear <= now() AND workCompanyID = companyID 
+                WHERE graduationYear <= now() AND graduationYear > 2006 AND workCompanyID = companyID 
                 GROUP BY graduationYear ORDER BY graduationYear DESC";
                     
         $query = $this->pdo->prepare($sql);
@@ -171,7 +171,7 @@ class BkTool {
         return $data;
     }
     
-    public function getGraduatesByYear($year){
+    public function getGraduatesByYear($year, $orderby, $order){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
@@ -181,7 +181,8 @@ class BkTool {
                 un.imageId, s.name FROM user AS un 
                 LEFT JOIN bk_company AS c ON c.companyID = un.workCompanyID 
                 LEFT JOIN specialization AS s ON un.specializationId = s.id
-                WHERE graduationYear = :graduationyear";
+                WHERE graduationYear = :graduationyear
+                ORDER BY ".$orderby." ".$order."";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -344,7 +345,7 @@ class BkTool {
         return $data;
     }
     
-    public function getAllUpdatesRelevantForCurrentUser(){
+    public function getAllUpdatesRelevantForCurrentUser($orderby, $order){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array(
@@ -353,7 +354,7 @@ class BkTool {
         $sql = "SELECT un.firstName, un.middleName, un.lastName, cu.dateAdded, c.companyName, cu.description, cu.updateId, cu.companyId, un.id, un.username
                 FROM bk_company_update AS cu, user AS un, bk_company AS c
                 WHERE cu.relevantForUserId = :currentUserID AND cu.addedById = un.id AND cu.companyId = c.companyID AND isDeleted = 'false'
-                ORDER BY dateAdded DESC";
+                ORDER BY ".$orderby." ".$order."";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -552,7 +553,7 @@ class BkTool {
     
         $data = array();
         $sql = "SELECT DISTINCT graduationYear FROM user
-                WHERE graduationYear IS NOT NULL ORDER BY graduationYear DESC";
+                WHERE graduationYear IS NOT NULL AND graduationYear > 2006 ORDER BY graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

@@ -11,9 +11,10 @@
     Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
 </p>
 
-<p>
-    <h3>Studenter fra hele <?= $this->lineOfStudy ?>:</h3>
-</p>
+
+<h2>Statistikk for studenter fra hele <?= $this->lineOfStudy ?>:</h2>
+
+<h3>Alumnistudenter sortert på år:</h3>
 
 <p>
 <table id="BK-alumnilist-supporttable">
@@ -24,17 +25,9 @@
                     <tr>
                         <th>Årstall</th><th>Antall alumnistudenter</th><th>Antall registrert ansatte alumnistudenter</th>
                     </tr>
-                    
-                     <? $counter = 1; ?>
-        
-                    <? foreach($graduationYears as $year) : ?>
 
-                    <? if($counter % 2){ ?>
-                        <tr bgcolor='<?= $this->oddRowColour ?>'>
-                    <?	}else{ ?>
-                        <tr bgcolor='<?= $this->evenRowColour ?>'>
-                    <? } ?>
-                                
+                    <? foreach($graduationYears as $year) : ?>
+                        <tr>
                             <td><?=CHtml::link($year['graduationYear'], array('graduationyear?id='.$year['graduationYear']))?></td>
                             <td>
                                 <? foreach($graduatesByYear as $graduate) : ?>
@@ -51,9 +44,6 @@
                                 <? endforeach ?>
                             </td>
                         </tr>
-
-                        <? $counter++; ?>
-
                     <? endforeach ?>
                 </table>
             </div>
@@ -70,6 +60,9 @@
 </table>
 </p>
 
+<br/>
+<h3>Alumnistudenter i bedrifter:</h3>
+
 <p>
 <table id="BK-alumnilist-supporttable">
     <tr>
@@ -83,22 +76,14 @@
                     <? $counter = 1; ?>
         
                     <? foreach($employingCompanies as $company) : ?>
-
-                    <? if($counter % 2){ ?>
-                        <tr bgcolor='<?= $this->oddRowColour ?>'>
-                    <?	}else{ ?>
-                        <tr bgcolor='<?= $this->evenRowColour ?>'>
-                    <? } ?>
-
+                        <tr>
                             <td><?= $counter ?></td>
                             <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                             <td><?= $company['sum'] ?></td>
                         </tr>
 
                         <? $counter++; ?>
-
                     <? endforeach ?>
-                    
                 </table>
             </div>
 	</td>
@@ -113,11 +98,12 @@
 </table>
 </p>
 
-<p>
-    <? foreach($graduatesSumByYear as $graduateSum) : ?>
-          <h3>Studenter med uteksamineringsår <?= $graduationyear ?> (<?= $graduateSum['sum'] ?>):</h3>
-    <? endforeach ?>
-</p>
+<br/>
+<? foreach($graduatesSumByYear as $graduateSum) : ?>
+      <h2>Studenter med uteksamineringsår <?= $graduationyear ?> (<?= $graduateSum['sum'] ?>):</h2>
+<? endforeach ?>
+
+<h3>Alumnistudenter i bedrifter:</h3>
 
 <p>
 <table id="BK-alumnilist-supporttable">
@@ -128,26 +114,15 @@
                     <tr>
                         <th>Nr.</th><th>Bedrift</th><th>Antall registrert ansatte alumnistudenter</th>
                     </tr>
-    
                     <? $counter = 1; ?>
-        
                     <? foreach($employingCompaniesByYear as $company) : ?>
-
-                    <? if($counter % 2){ ?>
-                        <tr bgcolor='<?= $this->oddRowColour ?>'>
-                    <?	}else{ ?>
-                        <tr bgcolor='<?= $this->evenRowColour ?>'>
-                    <? } ?>
-
+                        <tr>
                             <td><?= $counter ?></td>
                             <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                             <td><?= $company['sum'] ?></td>
                         </tr>
-
                         <? $counter++; ?>
-
                     <? endforeach ?>
-                    
                 </table>
             </div>
 	</td>
@@ -162,38 +137,35 @@
 </table>
 </p>
 
+<br/>
+<? foreach($graduatesSumByYear as $graduateSum) : ?>
+      <h3>Alle studenter med uteksamineringsår <?= $graduationyear ?> (<?= $graduateSum['sum'] ?>):</h3>
+<? endforeach ?>
+
 <p>
 <table id="BK-alumnilist-maintable">
-    <tr>
-        <th></th>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Navn</th>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Spesialisering</th>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Bedrift</th>
-        <th>Stillingsbeskrivelse</th>
-        <th><a href='<?= Yii::app()->baseUrl ?>/<?= $this->module->id ?>/bktool/graduates'>Arbeidssted</th>
-    </tr>
+    <? foreach($graduatesSumByYear as $graduateSum) : ?>
+        <tr>
+            <th></th>
+            <th><?=CHtml::link('Navn', array('graduationyear?id='.$graduationyear.'&orderby=firstName&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Spesialisering', array('graduationyear?id='.$graduationyear.'&orderby=specialization&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Bedrift', array('graduationyear?id='.$graduationyear.'&orderby=companyName&order='.$_SESSION['order'])) ?></th>
+            <th>Stillingsbeskrivelse</th>
+            <th><?=CHtml::link('Arbeidssted', array('graduationyear?id='.$graduationyear.'&orderby=workPlace&order='.$_SESSION['order'])) ?></th>
+        </tr>
+      
+    <? endforeach ?>
 
-        <? $counter = 1; ?>
-        
-        <? foreach($graduatelistByYear as $graduate) : ?>
-           
-            <? if($counter % 2){ ?>
-                <tr bgcolor='<?= $this->oddRowColour ?>'>
-            <?	}else{ ?>
-                <tr bgcolor='<?= $this->evenRowColour ?>'>
-            <? } ?>
-                
-                <td><?= Image::profileTag($graduate['imageId'], 'mini') ?></td>
-                <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
-                <td><?= $graduate['name'] ?></td>
-                <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
-                <td><?= $graduate['workDescription'] ?></td>
-                <td><?= $graduate['workPlace'] ?></td>
-            </tr>
-
-            <? $counter++; ?>
-            
-        <? endforeach ?>
-        
+    
+    <? foreach($graduatelistByYear as $graduate) : ?>
+        <tr>
+            <td><?= Image::profileTag($graduate['imageId'], 'mini') ?></td>
+            <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
+            <td><?= $graduate['name'] ?></td>
+            <td><?=CHtml::link($graduate['companyName'], array('company?id='.$graduate['companyID']))?></td>
+            <td><?= $graduate['workDescription'] ?></td>
+            <td><?= $graduate['workPlace'] ?></td>
+        </tr>
+    <? endforeach ?>
     </table>
 </p>
