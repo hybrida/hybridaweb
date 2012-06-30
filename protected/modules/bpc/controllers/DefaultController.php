@@ -9,8 +9,18 @@ class DefaultController extends Controller {
 		}
 		$this->render('view', array(
 			'event' => $event,
+                        'newsid' => $this->getNewsID($id),
 		));
 	}
+        
+        private static function getNewsID($bpcID) {
+			$bedpress = EventCompany::model()->with('event')->find('bpcID = ?', array($bpcID));
+            $event = $bedpress->event;
+            $news = News::model()->find("parentId = ? AND parentType = 'event'",array(
+                $event->id
+            ));
+            return $news->id;
+        }
 
 	public function actionToggleAttending($bpcId) {
 		if (user()->isGuest) {

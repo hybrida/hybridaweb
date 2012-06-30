@@ -74,8 +74,8 @@ class ProfileController extends Controller {
 			'facebookUser' => $form->getFacebookUserModel(),
 			'model' => $form,
 			'hasConnectedToFacebook' => $form->getFacebookUserModel() !== null,
-			'specializations' => $this->getSpecializationsList(),
-			'companies' => $this->getCompaniesList(),
+			'specializations' => self::getSpecializationsList(),
+			'companies' => self::getCompaniesList(),
 		));
 	}
 
@@ -117,12 +117,12 @@ class ProfileController extends Controller {
 		$this->render('edit', array(
 			'fb' => $fb->authLink(),
 			'model' => $user,
-			'specializations' => $this->getSpecializationsList(),
-			'companies' => $this->getCompaniesList(),
+			'specializations' => self::getSpecializationsList(),
+			'companies' => self::getCompaniesList(),
 		));
 	}
 
-	public function getSpecializationsList() {
+	public static function getSpecializationsList() {
 		$specs = Specialization::model()->findAll();
 		$array = array();
 		$array[null] = 'Ingen valgt';
@@ -132,7 +132,7 @@ class ProfileController extends Controller {
 		return $array;
 	}
 
-	public function getCompaniesList() {
+	public static function getCompaniesList() {
 		$companies = app()->db->createCommand()
 				->select('companyID, companyName')
 				->from('bk_company')

@@ -8,6 +8,10 @@ $this->beginClip('sidebar'); ?>
 <? $this->endClip() ?>
 
 <h1>Bedpres: <?=$event->title?></h1>
+<? if (user()->checkAccess('admin')): ?>
+        <?= CHtml::link("Rediger",array("/news/edit",'id' => $newsid), array(
+			'class' => 'button buttonRightSide')); ?>
+<? endif; ?>
 
 <img src='<?=$event->logo?>' alt=""/><br>
 

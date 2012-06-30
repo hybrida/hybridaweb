@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 30, 2012 at 12:26 PM
+-- Generation Time: Jun 30, 2012 at 06:31 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
@@ -229,32 +229,52 @@ CREATE TABLE IF NOT EXISTS `comment` (
 
 CREATE TABLE IF NOT EXISTS `event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `bpcID` int(11) DEFAULT NULL,
   `start` datetime DEFAULT NULL,
   `end` datetime DEFAULT NULL,
   `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `bpcID` (`bpcID`)
+  PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=96 ;
 
 --
 -- Dumping data for table `event`
 --
 
-INSERT INTO `event` (`id`, `bpcID`, `start`, `end`, `location`, `status`) VALUES
-(71, NULL, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 0),
-(73, NULL, '2011-11-25 18:15:00', '2011-11-26 13:00:00', 'Gløs', 0),
-(82, NULL, '2012-03-08 00:00:00', '2012-06-07 00:00:00', 'Åre', 2),
-(83, NULL, '2012-12-01 00:00:00', '2013-04-06 00:00:00', 'Kontoret', 0),
-(85, NULL, '2012-02-25 20:00:54', '2012-02-26 02:00:00', 'Lyche', 0),
-(89, NULL, '2012-03-21 14:00:00', '2012-03-21 19:00:00', '', 0),
-(90, NULL, '2012-03-28 11:15:42', '2012-03-29 00:00:00', '', 0),
-(91, 378, '2012-04-19 18:15:00', '2012-04-19 18:15:00', NULL, 0),
-(92, NULL, '2012-04-17 00:00:00', '2012-04-18 00:00:00', 'Kontoret', 0),
-(93, NULL, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'NTNU', 0),
-(94, NULL, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'Sted', 0),
-(95, NULL, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0);
+INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
+(71, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 0),
+(73, '2011-11-25 18:15:00', '2011-11-26 13:00:00', 'Gløs', 0),
+(82, '2012-03-08 00:00:00', '2012-06-07 00:00:00', 'Åre', 2),
+(83, '2012-12-01 00:00:00', '2013-04-06 00:00:00', 'Kontoret', 0),
+(85, '2012-02-25 20:00:54', '2012-02-26 02:00:00', 'Lyche', 0),
+(89, '2012-03-21 14:00:00', '2012-03-21 19:00:00', '', 0),
+(90, '2012-03-28 11:15:42', '2012-03-29 00:00:00', '', 0),
+(91, '2012-04-19 18:15:00', '2012-04-19 18:15:00', NULL, 0),
+(92, '2012-04-17 00:00:00', '2012-04-18 00:00:00', 'Kontoret', 0),
+(93, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'NTNU', 0),
+(94, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'Sted', 0),
+(95, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `event_company`
+--
+
+CREATE TABLE IF NOT EXISTS `event_company` (
+  `eventID` int(11) NOT NULL,
+  `companyID` int(11) DEFAULT NULL,
+  `bpcID` int(11) NOT NULL,
+  PRIMARY KEY (`eventID`),
+  UNIQUE KEY `bpcID` (`bpcID`),
+  KEY `companyID` (`companyID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `event_company`
+--
+
+INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
+(91, NULL, 378);
 
 -- --------------------------------------------------------
 
