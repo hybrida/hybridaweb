@@ -74,8 +74,8 @@ class ProfileController extends Controller {
 			'facebookUser' => $form->getFacebookUserModel(),
 			'model' => $form,
 			'hasConnectedToFacebook' => $form->getFacebookUserModel() !== null,
-			'specializations' => self::getSpecializationsList(),
-			'companies' => self::getCompaniesList(),
+			'specializations' => Html::getSpecializationsDropDownArray(),
+			'companies' => Html::getCompaniesDropDownArray(),
 		));
 	}
 
@@ -117,33 +117,10 @@ class ProfileController extends Controller {
 		$this->render('edit', array(
 			'fb' => $fb->authLink(),
 			'model' => $user,
-			'specializations' => self::getSpecializationsList(),
-			'companies' => self::getCompaniesList(),
+			'specializations' => Html::getSpecializationsDropDownArray(),
+			'companies' => Html::getCompaniesDropDownArray(),
 		));
 	}
 
-	public static function getSpecializationsList() {
-		$specs = Specialization::model()->findAll();
-		$array = array();
-		$array[null] = 'Ingen valgt';
-		foreach ($specs as $spec) {
-			$array[$spec->id] = $spec->name;
-		}
-		return $array;
-	}
-
-	public static function getCompaniesList() {
-		$companies = app()->db->createCommand()
-				->select('companyID, companyName')
-				->from('bk_company')
-				->order('companyName ASC')
-				->queryAll();
-		$array = array();
-		$array[null] = 'Ingen valgt';
-		foreach ($companies as $c) {
-			$array[$c['companyID']] = $c['companyName'];
-		}
-		return $array;
-	}
 
 }

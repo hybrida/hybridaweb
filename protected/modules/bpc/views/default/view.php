@@ -11,6 +11,8 @@ $this->beginClip('sidebar'); ?>
 <? if (user()->checkAccess('admin')): ?>
         <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
 			'class' => 'button buttonRightSide')); ?>
+        <?= CHtml::link("Koble til bedrift",array("edit",'id' => $event->id), array(
+			'class' => 'button buttonRightSide')); ?>
 <? endif; ?>
 
 <? if ($news->imageId): ?>
