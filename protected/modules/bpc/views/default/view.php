@@ -9,11 +9,15 @@ $this->beginClip('sidebar'); ?>
 
 <h1>Bedpres: <?=$event->title?></h1>
 <? if (user()->checkAccess('admin')): ?>
-        <?= CHtml::link("Rediger",array("/news/edit",'id' => $newsid), array(
+        <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
 			'class' => 'button buttonRightSide')); ?>
 <? endif; ?>
 
-<img src='<?=$event->logo?>' alt=""/><br>
+<? if ($news->imageId): ?>
+	<?= Image::tag($news->imageId, 'frontpage') ?>
+<? else: ?>
+	<img src='<?=$event->logo?>' alt=""/><br>
+<? endif ?>
 
 <?=$event->description?>
 

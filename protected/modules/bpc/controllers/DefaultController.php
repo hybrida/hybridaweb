@@ -9,17 +9,17 @@ class DefaultController extends Controller {
 		}
 		$this->render('view', array(
 			'event' => $event,
-                        'newsid' => $this->getNewsID($id),
+            'news' => $this->getNews($id),
 		));
 	}
         
-        private static function getNewsID($bpcID) {
+        private static function getNews($bpcID) {
 			$bedpress = EventCompany::model()->with('event')->find('bpcID = ?', array($bpcID));
             $event = $bedpress->event;
             $news = News::model()->find("parentId = ? AND parentType = 'event'",array(
                 $event->id
             ));
-            return $news->id;
+            return $news;
         }
 
 	public function actionToggleAttending($bpcId) {
