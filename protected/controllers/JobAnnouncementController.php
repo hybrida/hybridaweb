@@ -1,6 +1,6 @@
 <?php
 
-class JobController extends Controller
+class JobAnnouncementController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -57,7 +57,7 @@ class JobController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Job;
+		$model=new JobAnnouncement;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -99,9 +99,9 @@ class JobController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Job']))
+		if(isset($_POST['JobAnnouncement']))
 		{
-			$model->attributes=$_POST['Job'];
+			$model->attributes=$_POST['JobAnnouncement'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 		}
@@ -137,7 +137,7 @@ class JobController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Job');
+		$dataProvider=new CActiveDataProvider('JobAnnouncement');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -148,10 +148,10 @@ class JobController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Job('search');
+		$model=new JobAnnouncement('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Job']))
-			$model->attributes=$_GET['Job'];
+		if(isset($_GET['JobAnnouncement']))
+			$model->attributes=$_GET['JobAnnouncement'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -165,7 +165,7 @@ class JobController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Job::model()->with('company')->findByPk($id);
+		$model=JobAnnouncement::model()->with('company')->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

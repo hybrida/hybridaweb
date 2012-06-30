@@ -2,7 +2,7 @@
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar');
 	$this->widget('application.components.widgets.ActivitiesFeed');
-	$this->widget('application.components.widgets.JobFeed');
+	$this->widget('application.components.widgets.JobAnnouncementFeed');
 $this->endClip()
 ?>
 

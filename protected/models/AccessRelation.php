@@ -12,7 +12,7 @@ class AccessRelation {
 	public function __construct($modelOrType, $id = null) {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 		$this->insertAccessGroups = array();
-		if ($id) {
+		if ($id !== null) {
 			$this->initTypeId($modelOrType, $id);
 		} else {
 			$this->setModel($modelOrType);

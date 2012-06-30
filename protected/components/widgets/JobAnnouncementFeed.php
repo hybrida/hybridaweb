@@ -1,6 +1,6 @@
 <?php
 
-class JobFeed extends CWidget {
+class JobAnnouncementFeed extends CWidget {
 	
 	public $limit = 5;
 
@@ -21,23 +21,23 @@ class JobFeed extends CWidget {
 class JobFeedFinder extends AbstractFeed {
 
 	protected function getActiveRecord($id) {
-		return Job::model()->findByPk($id);
+		return JobAnnouncement::model()->findByPk($id);
 	}
 
 	protected function getMaxElementCount() {
-		return Job::model()->count();
+		return JobAnnouncement::model()->count();
 		
 	}
 
 	protected function getSQL() {
 		return "SELECT id
-			FROM job 
+			FROM job_announcement 
 			WHERE start > NOW()
 			ORDER BY RAND()";
 	}
 
 	protected function getType() {
-		return "job";
+		return "job_announcement";
 	}
 
 }

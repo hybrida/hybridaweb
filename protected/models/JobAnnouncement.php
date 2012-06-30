@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'job':
  * @property integer $id
- * @property integer $companyID
+ * @property integer $companyId
  * @property string $start
  * @property string $end
  * @property string $title
@@ -14,7 +14,7 @@
  * The followings are the available model relations:
  * @property BkCompany $company
  */
-class Job extends CActiveRecord
+class JobAnnouncement extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -30,7 +30,7 @@ class Job extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'job';
+		return 'job_announcement';
 	}
 
 	/**
@@ -41,12 +41,12 @@ class Job extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('companyID, start, end, title, description', 'required'),
-			array('companyID', 'numerical', 'integerOnly'=>true),
+			array('companyId, start, end, title, description', 'required'),
+			array('companyId', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, companyID, start, end, title, description', 'safe', 'on'=>'search'),
+			array('id, companyId, start, end, title, description', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -58,7 +58,7 @@ class Job extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'company' => array(self::BELONGS_TO, 'Company', 'companyID'),
+			'company' => array(self::BELONGS_TO, 'Company', 'companyId'),
 		);
 	}
 
@@ -69,7 +69,7 @@ class Job extends CActiveRecord
 	{
 		return array(
 			'id' => 'ID',
-			'companyID' => 'Company',
+			'companyId' => 'Company',
 			'start' => 'Start',
 			'end' => 'End',
 			'title' => 'Title',
@@ -89,7 +89,7 @@ class Job extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id',$this->id);
-		$criteria->compare('companyID',$this->companyID);
+		$criteria->compare('companyId',$this->companyId);
 		$criteria->compare('start',$this->start,true);
 		$criteria->compare('end',$this->end,true);
 		$criteria->compare('title',$this->title,true);
@@ -101,7 +101,7 @@ class Job extends CActiveRecord
 	}
 	
 	public function getViewUrl() {
-		return Yii::app()->createUrl("/job/view", array(
+		return Yii::app()->createUrl("/jobAnnouncement/view", array(
 					"id" => $this->id,
 					'name' => $this->title,
 				));

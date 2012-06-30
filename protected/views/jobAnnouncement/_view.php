@@ -4,8 +4,8 @@
 	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('companyID')); ?>:</b>
-	<?php echo CHtml::encode($data->companyID); ?>
+	<b><?php echo CHtml::encode($data->getAttributeLabel('companyId')); ?>:</b>
+	<?php echo CHtml::encode($data->companyId); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('start')); ?>:</b>

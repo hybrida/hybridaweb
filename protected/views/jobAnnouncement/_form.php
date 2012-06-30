@@ -19,9 +19,9 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'companyID'); ?>
-            <?= $form->dropDownList($model, 'companyID', $companies) ?>
-		<?php echo $form->error($model,'companyID'); ?>
+		<?php echo $form->labelEx($model,'companyId'); ?>
+            <?= $form->dropDownList($model, 'companyId', $companies) ?>
+		<?php echo $form->error($model,'companyId'); ?>
 	</div>
 
 	<div class="row">
