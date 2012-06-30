@@ -47,6 +47,7 @@ class BkModule extends CWebModule {
 		$cs->registerCssFile($am->publish($url . 'company-style.css'));
 		$cs->registerCssFile($am->publish($url . 'companydistribution-style.css'));
 		$cs->registerCssFile($am->publish($url . 'companyoverview-style.css'));
+                $cs->registerCssFile($am->publish($url . 'index-style.css'));
 		$cs->registerCssFile($am->publish($url . 'updatedelements-style.css'));
 	}
 	

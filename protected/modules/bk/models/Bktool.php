@@ -589,7 +589,7 @@ class BkTool {
         $data = array(
             'groupId' => $id
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, un.lastLogin, un.phoneNumber, mg.comission
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND mg.end IS NULL ORDER BY un.firstname ASC";

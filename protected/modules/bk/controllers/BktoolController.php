@@ -29,7 +29,12 @@ class BktoolController extends Controller {
 	public function actionIndex() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
                 
-		$this->render('index');
+                $bkTool = new Bktool();
+		$data = array();
+                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
+                
+		$this->render('index', $data);
 	}
 
 	public function actionCalendar() {

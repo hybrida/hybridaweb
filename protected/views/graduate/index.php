@@ -2,6 +2,7 @@
 
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); ?>
+<div id="BK-alumnilist-selectionlist">
     <ul>
         <li><b><?= CHtml::link('Alumnioversikt', array('graduate/index')) ?></b></li>
         <li><b>Tidligere klassekull</b></li>
@@ -13,6 +14,7 @@ $this->beginClip('sidebar'); ?>
             </ul>
         </li>
     </ul>
+</div>
 <?
 $this->endClip();
 ?>

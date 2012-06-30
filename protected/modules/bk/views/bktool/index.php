@@ -10,6 +10,34 @@ Denne modulen på nettsiden <?= Yii::app()->name ?> er et administrasjonsverktø
 bedrifter og studenter for å hjelpe <?= $this->title ?> i dets arbeid. Verktøyet er modellert som en egen modul under nettsiden <?= Yii::app()->name ?> 
 for enkelhets skyld.
 </p>
+
+<br/>
+<? foreach($membersSum as $sum) : ?>
+    <h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
+<? endforeach; ?>
+
+<table id="BK-index-activemember-table">
+        <tr>
+            <th></th>
+            <th>Navn</th>
+            <th>Stilling</th>
+            <th>Telefonnummer</th>
+            <th>Brukernavn</th>
+            <th>Sist innlogget</th>
+        </tr>
+        <? foreach ($members as $member): ?>
+            <tr>
+                <td><?= Image::profileTag($member['imageId'], 'mini') ?></td>
+                <td><a href='/profil/<?= $member['username'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></td>
+                <td><?= $member['comission'] ?></td>
+                <td><?= $member['phoneNumber'] ?></td>
+                <td><?= $member['username'] ?></td>
+                <td><?= $member['lastLogin'] ?></td>
+            </tr>
+        <? endforeach; ?>
+</table>
+
+<br/>
 <p>
     <h4>Virkemåten til verktøyet:</h4>
     <ul>
