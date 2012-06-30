@@ -1,5 +1,14 @@
 /*stil for siden med alumnilisten*/
 
+ul{
+    list-style-type: none;
+    padding: 10px, 8px;
+}
+ul li ul li{
+    list-style-type: none;
+    padding: 10px, 8px;
+}
+
 /*stil for hovedtabellen*/
 
 #BK-alumnilist-maintable {

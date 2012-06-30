@@ -94,6 +94,9 @@ return array(
 			'showScriptName' => false,
 			'rules' => array(
 				'artikler/<id:\d+>/<title>' => '/article/view',
+                                'alumni' => '/graduate/index',
+                                'alumni/<id:\d+>' => '/graduate/graduationyear',
+                                'alumni/<action:\w+>' => '/graduate/<action>',
 				'bk' => 'bk/bktool/index',
 				'bk/<action:\w+>' => 'bk/bktool/<action>',
 				'bedpres/<id:\d+>/<title>' => 'bpc/default/view',

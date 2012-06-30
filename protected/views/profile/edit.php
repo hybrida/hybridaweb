@@ -211,7 +211,7 @@
     </div>
 
     <div class="fieldExplanation">
-        Statistikken fra denne undersølsen publiseres i <a href="#">Aluminilisten</a>.
+        Statistikken fra denne undersølsen publiseres i <?= CHtml::link('Alumnilisten', array('graduate/index')) ?>.
     </div>
 
 </div>

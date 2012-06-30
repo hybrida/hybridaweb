@@ -1,5 +1,15 @@
 <? $this->pageTitle = "Klasseliste " . $graduationYear ?>
 
+<?
+$this->layout = "//layouts/doubleColumn";
+$this->beginClip('sidebar'); ?>
+    <ul>
+        <li><b><?= CHtml::link('Alumnioversikt', array('graduate/index')) ?></b></li>
+    </ul>
+<?
+$this->endClip();
+?>
+
 <div class="memberlists">
 <div id='groupNavigation'>
 	<? for ($i = 1; $i <= 5; $i++): ?>
