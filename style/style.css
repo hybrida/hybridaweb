@@ -157,13 +157,13 @@ Forslag til design av nyhetspublisering
 	float:left;
 }
 
-.g-form .input_text {
+.g-form input[type=text] {
 	padding:5px 5px;
 	width:250px;
 	font-size: 0.9em;
 }
 
-.g-form .message{
+.g-form textarea{
 	padding:7px 7px;
 	width:350px;
 	overflow:hidden;
