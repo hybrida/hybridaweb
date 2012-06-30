@@ -1,0 +1,47 @@
+/* stil for tabellen med aktive medlemmer */
+
+#BK-index-activemember-table
+{
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    background: url('/images/bk/LOGO_Hybrida.png') 300px 300px no-repeat;
+    background-position: center center;
+}
+#BK-index-activemember-table th
+{
+	padding: 12px;
+	font-weight: bold;
+	font-size: 14px;
+        border-bottom: 2px solid #6678b1;
+}
+#BK-index-activemember-table td
+{
+	padding: 9px 12px;
+	border-top: 1px solid #fff;
+}
+#BK-index-activemember-table tfoot td
+{
+	font-size: 11px;
+}
+#BK-index-activemember-table tbody td
+{
+	background: url('/images/bk/back.png');
+}
+* html #BK-index-activemember-table tbody td
+{
+	/* 
+	   ----------------------------
+		PUT THIS ON IE6 ONLY STYLE 
+		AS THE RULE INVALIDATES
+		YOUR STYLESHEET
+	   ----------------------------
+	*/
+	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/bk/back.png',sizingMethod='crop');
+	background: none;
+}	
+#BK-index-activemember-table tbody tr:hover td
+{
+	color: #339;
+	background: none;
+}
