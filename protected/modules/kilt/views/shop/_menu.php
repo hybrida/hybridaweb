@@ -1,9 +1,9 @@
 <ul id="nav">
 	<li>
-		<? echo CHtml::link("Shop", array('index')); ?>
+		<? echo CHtml::link("Info", array('index')); ?>
 	</li>
 	<li>
-		<? echo CHtml::link("Info", array('info')); ?>
+		<? echo CHtml::link("Shop", array('shop')); ?>
 	</li>
 	<li>
 		<? echo CHtml::link("Bestillinger", array('orders')); ?>

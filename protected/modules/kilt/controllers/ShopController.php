@@ -2,7 +2,7 @@
 
 class ShopController extends Controller
 {
-	public function actionIndex()
+	public function actionShop()
 	{
 		$shop = new Shop();
 		$errors = array();
@@ -83,7 +83,7 @@ class ShopController extends Controller
 		return ($a['product_size'] - $b['product_size']);
 	}
 
-	public function actionInfo()
+	public function actionIndex()
 	{
 		$this->render('info');
 	}
@@ -140,6 +140,13 @@ class ShopController extends Controller
 		{
 			$showUserID = $_POST['newuserid'];
 			$showTimeID = $_POST['timeid'];
+		}
+		else if (isset($_POST['updateOrder']))
+		{
+			$showUserID = $_POST['userid'];
+			$showTimeID = $_POST['timeid'];
+			foreach($_POST['recv'] as $id => $value)
+				$shop->setOrderRecv($id, $value);
 		}
 		elseif (isset($_POST['createTime']) && 
 				isset($_POST['start']) && 
@@ -202,22 +209,39 @@ class ShopController extends Controller
 		{
 			$uid = $o['user_id'];
 			$id = $o['product_id'];
+			$oid = $o['id'];
 			$qnty = $o['product_quantity'];
 			$size = $o['product_size'];
 			$tid = $o['time_id'];
+			$recv = $o['recieved'];
 
-			if (isset($totalOrders[$tid][$id][$size]))
-				$totalOrders[$tid][$id][$size] += $qnty;
+			if (!isset($totalOrders[$tid][$id][$size]))
+			{
+				$totalOrders[$tid][$id][$size]['qnty'] = 0;
+				$totalOrders[$tid][$id][$size]['recv'] = 0;
+			}
+
+			$totalOrders[$tid][$id][$size]['qnty'] += $qnty;
+
+			$userOrders[$uid][$tid][$id][$size]['qnty'] = $qnty;
+			$userOrders[$uid][$tid][$id][$size]['recv'] = $recv;
+			$userOrders[$uid][$tid][$id][$size]['id'] = $oid;
+
+			if (!isset($userOrders[$uid]['done'][$tid]))
+				$userOrders[$uid]['done'][$tid] = 0;
+
+			if ($recv)
+				$totalOrders[$tid][$id][$size]['recv'] += $qnty;
 			else
-				$totalOrders[$tid][$id][$size] = $qnty;
+				$userOrders[$uid]['done'][$tid] += 1;
 
-			$userOrders[$uid][$tid][$id][$size] = $qnty;
+
 		}
 
 		foreach($userOrders as $uid => $timeOrders)
 		{
 			$name = $shop->getUserNameByID($uid);
-			$userOrders[$uid]['name'] = $name['firstName']." ".
+			$userOrders[$uid]['name'] =	$name['firstName']." ".
 										$name['lastName'];
 		}
 

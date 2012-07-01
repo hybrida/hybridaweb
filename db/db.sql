@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Vert: localhost
--- Generert den: 29. Jun, 2012 23:06 PM
+-- Generert den: 01. Jul, 2012 14:06 PM
 -- Tjenerversjon: 5.5.16
 -- PHP-Versjon: 5.3.8
 
@@ -379,6 +379,7 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `product_size` int(11) NOT NULL,
   `product_quantity` int(11) NOT NULL,
   `time_id` int(11) NOT NULL,
+  `recieved` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
@@ -404,8 +405,7 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`) VALUES
 (2, 'Kilt', 'Jente'),
 (3, 'Kilt', 'Jente Mini'),
 (4, 'Sporran', 'Thistle'),
-(5, 'Sokker', 'Vanlig'),
-(6, 'Sokker', 'Premium'),
+(5, 'Ekstra', 'Sokker'),
 (7, 'Ekstra', 'Flashes'),
 (8, 'Sporran', 'Black Leather'),
 (9, 'Sporran', 'Celtic Circle'),
@@ -461,10 +461,7 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (2, 5),
 (3, 1),
 (3, 2),
-(3, 4),
-(6, 1),
-(6, 2),
-(6, 4);
+(3, 4);
 
 -- --------------------------------------------------------
 

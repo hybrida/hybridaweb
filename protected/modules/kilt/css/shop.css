@@ -109,7 +109,7 @@
 
 .adminContent
 {
-	width: 33%;
+	width: 25%;
 }
 
 .adminText
@@ -124,9 +124,19 @@
 
 .info
 {
+	padding-left: 50px;
+	border: 1px solid black;
 }
 
 .active
 {
 	background-color: #DDD;
+}
+.green
+{
+	background-color: #DFD;
+}
+.red
+{
+	background-color: #FDD;
 }
