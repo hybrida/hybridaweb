@@ -2,6 +2,19 @@
 
 class Shop {
 
+	public function setOrderRecv($id, $value)
+	{
+        $connection = Yii::app()->db;
+        $data = array(
+            ':id' => $id,
+            ':recieved' => $value,
+        );
+        $sql = "UPDATE kilt_order
+				SET recieved = :recieved
+		  		WHERE id = :id";
+		$command = $connection->createCommand($sql);
+        $command->execute($data);
+	}
 	public function getUserNameByID($id)
 	{
         $connection = Yii::app()->db;
