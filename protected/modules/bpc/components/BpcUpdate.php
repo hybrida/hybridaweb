@@ -47,7 +47,11 @@ class BpcUpdate {
 	}
 
 	private function initEvent($bpcID) {
-		$event = Event::model()->find('bpcID = ?', array($bpcID));
+		$bedpress = EventCompany::model()->with('event')->find('bpcID = ?',array($bpcID));
+		$event = false;
+		if ($bedpress) {
+			$event = $bedpress->event;
+		}
 		if ($event) {
 			$this->event = $event;
 		} else {
@@ -76,11 +80,11 @@ class BpcUpdate {
 
 	private function saveEvent($bpc) {
 		$event = $this->event;
-		$event->bpcID = $bpc['id'];
 		$event->start = $bpc['time'];
 		$event->end = $bpc['time']; // FIXME
 		$event->location = $bpc['place'];
 		$event->save();
+		$event->saveBedpress($bpc['id']);
 	}
 
 	private function saveNews($bpc) {

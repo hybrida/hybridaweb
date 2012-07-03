@@ -118,5 +118,29 @@ class Html extends CHtml {
 			$i++;
 		endforeach;
 	}
-	
+
+	public static function getCompaniesDropDownArray() {
+		$companies = app()->db->createCommand()
+				->select('companyID, companyName')
+				->from('bk_company')
+				->order('companyName ASC')
+				->queryAll();
+		$array = array();
+		$array[null] = 'Ingen valgt';
+		foreach ($companies as $c) {
+			$array[$c['companyID']] = $c['companyName'];
+		}
+		return $array;
+	}
+
+	public static function getSpecializationsDropDownArray() {
+		$specs = Specialization::model()->findAll();
+		$array = array();
+		$array[null] = 'Ingen valgt';
+		foreach ($specs as $spec) {
+			$array[$spec->id] = $spec->name;
+		}
+		return $array;
+	}
+
 }

@@ -5,7 +5,6 @@
  *
  * The followings are the available columns in table 'event':
  * @property integer $id
- * @property integer $bpcID
  * @property string $start
  * @property string $end
  * @property string $location
@@ -159,6 +158,25 @@ class Event extends CActiveRecord {
 	
 	private function getUTC($timeString) {
 		return gmdate("Ymd\THis\Z",strtotime($timeString));
+	}
+	
+	public function saveBedpress($bpcID, $companyID='NULL') {
+		$eventCompany = EventCompany::model()->find("bpcID = ?", array(
+			$bpcID,
+		));
+		if ($eventCompany === null) {
+			$eventCompany = new EventCompany;
+		}
+		if ($companyID !== 'NULL') {
+			$eventCompany->companyID = $companyID;
+		}
+		$eventCompany->bpcID = $bpcID;
+		$eventCompany->eventID = $this->id;
+		$eventCompany->save();
+	}
+	
+	public function getBedpress() {
+		return EventCompany::model()->findByPk($this->id);
 	}
 
 }

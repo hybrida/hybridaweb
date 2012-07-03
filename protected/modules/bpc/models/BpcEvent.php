@@ -84,10 +84,6 @@ class BpcEvent extends CModel {
 		return $signupIsOn && $okYear && $hasAccess;
 	}
 	
-	private function pb($b) {
-		return $b ? "true" : "false";
-	}
-	
 	public function getAttending() {
 		return $this->attenders->activeRecords;
 	}

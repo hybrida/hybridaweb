@@ -25,8 +25,9 @@ class NewsController extends Controller {
 		$news = $this->getNewsModelAndThrowExceptionIfNullOrNotAccess($id);
 		$event = $this->getEventByNews($news);
 		if ($event) {
-			if ($event->bpcID) {
-				$this->redirectToBpc($event->bpcID, $news->title);
+			$bedpress = $event->getBedpress();
+			if ($bedpress) {
+				$this->redirectToBpc($bedpress->bpcID, $news->title);
 				return;
 			}
 		}
@@ -160,7 +161,18 @@ class NewsController extends Controller {
 		$this->render("edit", array(
 			'model' => $model,
 			'updated' => $isUpdated,
+			'bedpress' => $this->getBedpressData($model),
 		));
+	}
+	
+	private function getBedpressData($model) {
+		$event = $model->getEventModel();
+		$event = new Event;
+		if ($event->isNewRecord || $event->bpcID === null) {
+			return null;
+		}
+		$companiesList = ProfileController::getCompaniesList();
+		
 	}
 
 	private function redirectAfterEdit($newsEventFormModel) {

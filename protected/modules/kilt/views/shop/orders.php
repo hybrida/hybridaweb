@@ -29,10 +29,10 @@ else
 				<td class="orderTitle">Produkt</td>
 				<td class="orderTitle">Størrelse</td>
 				<td class="orderTitle">Antall</td>
-				<td class="orderTitle"><? if ($curr) echo "Slett"; ?> </td>
+				<td class="orderTitle"><? if ($curr) echo "Slett"; else echo "Hentet"; ?> </td>
 			<tr>
 			<? foreach($orders as $o): ?>
-			<tr>
+			<tr class="<? if (!$curr) echo ($o['recieved']) ? "green" : "red"; ?>">
 				<td class="orderContent">
 					<?
 					$id = $o['product_id'];
@@ -44,7 +44,9 @@ else
 				<td class="orderContent">
 					<? if ($curr) 
 							echo CHtml::submitButton('X', 
-							array( 'name' => $o['id'], 'disabled' => !$curr,)); ?>
+							array( 'name' => $o['id'], 'disabled' => !$curr,));
+						else
+							echo ($o['recieved']) ? "Ja" : "Nei"; ?>
 				</td>
 			</tr>
 			<? endforeach; ?>
