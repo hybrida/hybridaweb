@@ -1,47 +1,44 @@
-/* stil for tabellen med aktive medlemmer */
+/* stil for overskriftene til tabeller */
 
-#BK-index-activemember-table
-{
-    width: 100%;
+#BK-index-header-table{
+    width: 99%;
+}
+
+#BK-index-header-left{
     text-align: left;
+}
+
+#BK-index-header-right{
+    text-align:right;
+}
+
+/* stil for tabellene med medlemmer */
+
+#BK-index-member-table {
     border-collapse: collapse;
-    background: url('/images/bk/LOGO_Hybrida.png') 300px 300px no-repeat;
-    background-position: center center;
+    width: 99%;
+    text-align: left;
 }
-#BK-index-activemember-table th
-{
-	padding: 12px;
-	font-weight: bold;
-	font-size: 14px;
-        border-bottom: 2px solid #6678b1;
+
+#BK-index-member-table *{
+    border: none;
 }
-#BK-index-activemember-table td
-{
-	padding: 9px 12px;
-	border-top: 1px solid #fff;
+
+#BK-index-member-table td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
 }
-#BK-index-activemember-table tfoot td
-{
-	font-size: 11px;
+
+#BK-index-member-table th {
+    color: #009;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
 }
-#BK-index-activemember-table tbody td
-{
-	background: url('/images/bk/back.png');
+
+#BK-index-member-table tr:hover{
+	background-color: #e1e3e5;
 }
-* html #BK-index-activemember-table tbody td
-{
-	/* 
-	   ----------------------------
-		PUT THIS ON IE6 ONLY STYLE 
-		AS THE RULE INVALIDATES
-		YOUR STYLESHEET
-	   ----------------------------
-	*/
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/bk/back.png',sizingMethod='crop');
-	background: none;
-}	
-#BK-index-activemember-table tbody tr:hover td
-{
-	color: #339;
-	background: none;
+
+#BK-index-member-table tr:first-child {
+    background-color: transparent;
 }

@@ -33,6 +33,7 @@ class BktoolController extends Controller {
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
+                $data['formerMembers'] = $bkTool->getAllFormerMembersByGroupId($this->bkGroupId);
                 
 		$this->render('index', $data);
 	}
@@ -668,4 +669,16 @@ class BktoolController extends Controller {
                     $this->actionGraduates();
                 }
         }
+        
+        public function actionEditmembers() {
+            $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+
+            $bkTool = new Bktool();
+            $data = array();
+            $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+            $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
+
+            $this->render('editmembers', $data);
+        }
+
 }

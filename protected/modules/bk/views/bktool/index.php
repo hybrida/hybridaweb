@@ -12,11 +12,20 @@ for enkelhets skyld.
 </p>
 
 <br/>
-<? foreach($membersSum as $sum) : ?>
-    <h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
-<? endforeach; ?>
+<table id="BK-index-header-table">
+    <tr>
+        <td id="BK-index-header-left">
+            <? foreach($membersSum as $sum) : ?>
+                <h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
+            <? endforeach; ?>
+        </td>
+        <td id="BK-index-header-right">
+            <h3><?=CHtml::link('Administrer medlemmer', array('editmembers')) ?></h3>
+        </td>
+    </tr>
+</table>
 
-<table id="BK-index-activemember-table">
+<table id="BK-index-member-table">
         <tr>
             <th></th>
             <th>Navn</th>
@@ -37,6 +46,28 @@ for enkelhets skyld.
         <? endforeach; ?>
 </table>
 
+<br/>
+<h3>Tidligere medlemmer:</h3>
+
+<table id="BK-index-member-table">
+        <tr>
+            <th></th>
+            <th>Navn</th>
+            <th>Stilling</th>
+            <th>Medlem fra</th>
+            <th>Medlem til</th>
+        </tr>
+        <? foreach ($formerMembers as $member): ?>
+            <tr>
+                <td><?= Image::profileTag($member['imageId'], 'mini') ?></td>
+                <td><a href='/profil/<?= $member['username'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></td>
+                <td><?= $member['comission'] ?></td>
+                <td><?= $member['start'] ?></td>
+                <td><?= $member['end'] ?></td>
+            </tr>
+        <? endforeach; ?>
+</table>
+    
 <br/>
 <p>
     <h4>Virkemåten til verktøyet:</h4>

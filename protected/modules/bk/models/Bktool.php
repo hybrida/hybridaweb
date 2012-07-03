@@ -589,10 +589,31 @@ class BkTool {
         $data = array(
             'groupId' => $id
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, un.lastLogin, un.phoneNumber, mg.comission
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, un.lastLogin, un.phoneNumber, mg.comission, mg.start
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
-                AND mg.end IS NULL ORDER BY un.firstname ASC";
+                AND DATE(mg.end) = DATE('0000-00-00')
+                ORDER BY un.firstname ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+        public function getAllFormerMembersByGroupId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'groupId' => $id
+        );
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, mg.comission, mg.start, mg.end
+                FROM user AS un, group_membership AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId
+                AND DATE(mg.end) != DATE('0000-00-00')
+                ORDER BY un.firstname ASC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -611,7 +632,7 @@ class BkTool {
         $sql = "SELECT COUNT(DISTINCT un.id) AS sum
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
-                AND mg.end IS NULL";
+                AND DATE(mg.end) = DATE('0000-00-00')";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
