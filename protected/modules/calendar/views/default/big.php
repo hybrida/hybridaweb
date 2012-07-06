@@ -22,10 +22,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<? $weekNumber = $calendar->firstWeekNumber() ?>
+			<? $weekCounter = 0 ?>
 			<?php foreach ($calendar->weeks() as $week): ?>
 				<tr>
-					<th class="week-number"><?=$weekNumber++?></th>
+					<th class="week-number"><?=$calendar->getWeekNumber($weekCounter++)?></th>
 					<?php foreach ($week as $day): ?>
 						<?php
 						list($number, $current, $data) = $day;

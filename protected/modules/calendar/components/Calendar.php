@@ -188,9 +188,11 @@ class Calendar extends Event_Subject {
 		return $month;
 	}
 	
-	public function firstWeekNumber() {
+	public function getWeekNumber($weekNumberInMonth) {
 		$firstDayOfMonth = mktime(0,0,0,$this->month,1,$this->year);
-		return date('W', $firstDayOfMonth);
+		$weekInSeconds = 60*60*24*7;
+		$firstDayOfMonth += $weekInSeconds * $weekNumberInMonth;
+		return (int) date('W', $firstDayOfMonth);
 	}
 
 	/**
