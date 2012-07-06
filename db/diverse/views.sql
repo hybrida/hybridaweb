@@ -1,3 +1,5 @@
+use hybrida_dev;
+
 DROP VIEW IF EXISTS group_membership_view_active;
 DROP VIEW IF EXISTS group_membership_view;
 DROP VIEW IF EXISTS rbac_assignment_view;
