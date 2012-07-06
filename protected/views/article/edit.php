@@ -5,6 +5,9 @@
 		'id' => 'article_edit-form',
 		//'enableAjaxValidation' => true, // Ødelegger redirect.
 		'enableClientValidation' => true,
+		'htmlOptions' => array(
+			'class' => 'g-form',
+		),
 		'clientOptions' => array(
 			'validateOnSubmit' => true,
 		)));
