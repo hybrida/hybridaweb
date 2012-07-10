@@ -38,7 +38,7 @@ class Notification extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('parentType, parentID, userID, isRead, timestamp', 'required'),
+			array('parentType, parentID, userID', 'required'),
 			array('parentID, userID, isRead', 'numerical', 'integerOnly'=>true),
 			array('parentType', 'length', 'max'=>255),
 			// The following rule is used by search().

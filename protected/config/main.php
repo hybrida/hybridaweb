@@ -108,6 +108,7 @@ return array(
                                 'jobb' => '/jobAnnouncement/index',
 				'jobb/<id:\d>/<name>' => '/jobAnnouncement/view',
 				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
+				'notifications' => '/notifications/default/index',
 				'nyheter/<id:\d+>/<title>' => 'news/view',
 				'nyheter' => 'newsfeed/index',
 				'profil' => '/profile/',
