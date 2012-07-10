@@ -33,19 +33,36 @@ class Notifications {
 		return $listenerIDs;
 	}
 	
-	public static function notify($type, $id, $message) {
+	public static function notify($type, $id, $statusCode) {
 		$listeners = self::getListeners($type, $id);
 		foreach ($listeners as $listener) {
 			$notification = new Notification;
 			$notification->parentID = $id;
 			$notification->parentType = $type;
 			$notification->userID = $listener;
+			$notification->statusCode = $statusCode;
 			$notification->save();
 		}
 	}
 	
-	public function getNotifications($userID) {
+	public static function getAll($userID) {
 		return Notification::model()->findAll("userID = ?", array($userID));
+	}
+	
+	public static function getUnread($userID) {
+		$where = "userID = ? AND isRead = ?";
+		return Notification::model()->findAll($where, array($userID, false));
+	}
+	
+	public static function getMessage($statusCode) {
+		switch ($statusCode) {
+			case 0:
+				return 'Skribenten har endret noe';
+				break;
+			case 1:
+				return 'Ny kommentar';
+				break;
+		}
 	}
 	
 }

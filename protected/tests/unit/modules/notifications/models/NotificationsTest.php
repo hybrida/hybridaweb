@@ -1,4 +1,4 @@
-<?php
+y<?php
 
 Yii::import('notifications.models.*');
 
@@ -32,14 +32,25 @@ class NotificationsTest extends CTestCase {
 		Notifications::addListener('news', $news->id, $user1->id);
 		Notifications::addListener('news', $news->id, $user2->id);
 		
-		Notifications::notify('news', $news->id, 'Nå har noe endra seg vettu');
-		$user1Nots = Notifications::getNotifications($user1->id);
-		$user2Nots = Notifications::getNotifications($user2->id);
-		$user3Nots = Notifications::getNotifications($user3->id);
+		Notifications::notify('news', $news->id, Notification::STATUS_CHANGED);
+		$user1Nots = Notifications::getAll($user1->id);
+		$user2Nots = Notifications::getUnread($user2->id);
+		$user3Nots = Notifications::getAll($user3->id);
 		
 		$this->assertEquals(1, count($user1Nots));
 		$this->assertEquals(1, count($user2Nots));
 		$this->assertEquals(0, count($user3Nots));
+	}
+	
+	public function test_viewUrl_theSameAsNewsViewUrl() {
+		$news = Util::getNews();
+		$user = Util::getUser();
+		Notifications::addListener('news', $news->id, $user->id);
+		Notifications::notify('news', $news->id, Notification::STATUS_CHANGED);
+		$notifications = Notifications::getAll($user->id);
+		$this->assertEquals(1, count($notifications));
+		$notificationViewUrl = $notifications[0]->viewUrl;
+		$this->assertEquals($news->viewUrl, $notificationViewUrl);
 	}
 	
 }

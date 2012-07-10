@@ -10,9 +10,17 @@
  * @property integer $userID
  * @property integer $isRead
  * @property string $timestamp
+ * @property integer $statusCode
  */
 class Notification extends CActiveRecord
 {
+	
+	private $_model = false;
+	
+	private static $MODEL_IS_NOT_SET = false;
+	
+	const STATUS_CHANGED = 0;
+	const STATUS_NEW_COMMENT = 1;
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Notification the static model class
@@ -39,11 +47,11 @@ class Notification extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('parentType, parentID, userID', 'required'),
-			array('parentID, userID, isRead', 'numerical', 'integerOnly'=>true),
+			array('parentID, userID, isRead, statusCode', 'numerical', 'integerOnly'=>true),
 			array('parentType', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, parentType, parentID, userID, isRead, timestamp', 'safe', 'on'=>'search'),
+			array('id, parentType, parentID, userID, isRead, timestamp, statusCode', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,6 +78,7 @@ class Notification extends CActiveRecord
 			'userID' => 'User',
 			'isRead' => 'Is Read',
 			'timestamp' => 'Timestamp',
+			'statusCode' => 'Status Code',
 		);
 	}
 
@@ -90,9 +99,54 @@ class Notification extends CActiveRecord
 		$criteria->compare('userID',$this->userID);
 		$criteria->compare('isRead',$this->isRead);
 		$criteria->compare('timestamp',$this->timestamp,true);
+		$criteria->compare('statusCode',$this->statusCode);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
+	}
+	
+	private function initModel() {
+		$model = null;
+		switch ($this->parentType) {
+			case 'profile':
+				$model = User::model()->findByPk($this->parentID);
+				break;
+			case 'news':
+				$model = News::model()->findByPk($this->parentID);
+				break;
+		}
+		$this->_model = $model;
+	}
+	
+	public function getViewUrl() {
+		if ($this->_model) {
+			return $this->_model->viewUrl;
+		} else if ($this->_model === self::$MODEL_IS_NOT_SET){
+			$this->initModel();
+			return $this->getViewUrl();
+		} else {
+			return '#';
+		}
+	}
+	
+	public function getMessage() {
+		
+		return Notifications::getMessage($this->statusCode) .' - '. $this->getTitle() ;
+	}
+	
+	private function getTitle() {
+		if ($this->_model) {
+			switch ($this->parentType) {
+				case 'news':
+					return 'Nyhet: ' . $this->_model->title;
+					break;
+				case 'profile':
+					return $this->_model->fullname;
+			}
+		} else if ($this->_model === self::$MODEL_IS_NOT_SET) {
+			$this->initModel();
+			return $this->gitTitle();
+		}
 	}
 }
