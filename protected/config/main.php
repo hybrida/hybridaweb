@@ -35,6 +35,7 @@ return array(
 		'calendar',
 		'comment',
 		'search',
+		'notifications',
 		'srbac' => array(
 			'userclass' => 'User', //default: User
 			'userid' => 'id', //default: userid
