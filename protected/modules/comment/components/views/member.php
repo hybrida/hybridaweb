@@ -2,14 +2,12 @@
 
 <div class="comment-view-all"></div>
 
-
-
 <div class="comment-view-form">
-
+	
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
-		'id' => 'comment-form-form-form',
-		'enableAjaxValidation' => false,
+			'id' => 'comment-form-form-form',
+			'enableAjaxValidation' => false,
 			));
 	?>
 	<?= $form->hiddenField($formModel, 'type') ?>
@@ -36,23 +34,25 @@
 	<?php $this->endWidget(); ?>
 
 </div><!-- form -->
-	
-<script lang="javascript" >
-$(function() {
-	var commentViewBox = $(".comment-view-all");
-	commentViewBox.load("<?= Yii::app()->createUrl("/comment/default/view", array(
+
+<?php
+	$commentLoadUrl = Yii::app()->createUrl("/comment/default/view", array(
 			'type' => $formModel->type,
-			'id' => $formModel->id,
-		))?>")
-});
-				
-function deleteComment(id) {
-	var commentViewBox = $(".comment-view-all");
-	var url = "<?= Yii::app()->createUrl("/comment/default/delete", array('id' => ''))?>/" + id;
-	var shouldDelete = confirm("Vil du slette kommentaren?");
-	if (shouldDelete) {
-		commentViewBox.load(url);
+			'id' => $formModel->id));
+	$deleteCommentUrl = Yii::app()->createUrl("/comment/default/delete", array('id' => ''));
+?>
+<script lang="javascript">
+	$(function() {
+		var commentViewBox = $(".comment-view-all");
+		commentViewBox.load("<?= $commentLoadUrl?>");
+	});
+
+	function deleteComment(id) {
+		var commentViewBox = $(".comment-view-all");
+		var url = "<?= $deleteCommentUrl ?>/" + id;
+		var shouldDelete = confirm("Vil du slette kommentaren?");
+		if (shouldDelete) {
+			commentViewBox.load(url);
+		}
 	}
-	
-}
 </script>
