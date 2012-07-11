@@ -47,6 +47,11 @@ class Notifications {
 		}
 	}
 	
+	public static function notifyAndAddListener ($type, $id, $statusCode, $changedByUserID=null) {
+		$this->addListener($type, $id, $changedByUserID);
+		$this->notify($type, $id, $statusCode, $changedByUserID);
+	}
+	
 	public static function getAll($userID) {
 		return Notification::model()->findAll("userID = ?", array($userID));
 	}

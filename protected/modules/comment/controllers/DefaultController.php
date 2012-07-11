@@ -10,8 +10,7 @@ class DefaultController extends Controller {
 		if (isset($_POST['CommentForm'])) {
 			$model->attributes = $_POST['CommentForm'];
 			$model->save();
-			Notifications::addListener($model->type, $model->id, user()->id);
-			Notifications::notify($model->type, $model->id, Notification::STATUS_NEW_COMMENT, user()->id);
+			Notifications::notifyAndAddListener($model->type, $model->id, Notification::STATUS_NEW_COMMENT, user()->id);
 			$this->actionView($model->type, $model->id);
 		} else {
 			throw new CHttpException(500, "Ikke tillat");
