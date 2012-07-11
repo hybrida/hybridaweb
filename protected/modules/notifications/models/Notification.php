@@ -10,6 +10,7 @@
  * @property integer $userID
  * @property integer $isRead
  * @property string $timestamp
+ * @property integer $changedByUserID
  * @property integer $statusCode
  */
 class Notification extends CActiveRecord
@@ -47,11 +48,11 @@ class Notification extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('parentType, parentID, userID', 'required'),
-			array('parentID, userID, isRead, statusCode', 'numerical', 'integerOnly'=>true),
+			array('parentID, userID, isRead, changedByUserID, statusCode', 'numerical', 'integerOnly'=>true),
 			array('parentType', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, parentType, parentID, userID, isRead, timestamp, statusCode', 'safe', 'on'=>'search'),
+			array('id, parentType, parentID, userID, isRead, timestamp, changedByUserID, statusCode', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -63,6 +64,7 @@ class Notification extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'changedByUser' => array(self::BELONGS_TO, 'User', 'changedByUserID'),
 		);
 	}
 
@@ -78,6 +80,7 @@ class Notification extends CActiveRecord
 			'userID' => 'User',
 			'isRead' => 'Is Read',
 			'timestamp' => 'Timestamp',
+			'changedByUserID' => 'Changed By User',
 			'statusCode' => 'Status Code',
 		);
 	}
@@ -149,4 +152,5 @@ class Notification extends CActiveRecord
 			return $this->gitTitle();
 		}
 	}
+	
 }

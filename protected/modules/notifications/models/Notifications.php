@@ -33,14 +33,16 @@ class Notifications {
 		return $listenerIDs;
 	}
 	
-	public static function notify($type, $id, $statusCode) {
+	public static function notify($type, $id, $statusCode, $changedByUserID=null) {
 		$listeners = self::getListeners($type, $id);
 		foreach ($listeners as $listener) {
+			if ($listener == $changedByUserID) continue;
 			$notification = new Notification;
 			$notification->parentID = $id;
 			$notification->parentType = $type;
 			$notification->userID = $listener;
 			$notification->statusCode = $statusCode;
+			$notification->changedByUserID = $changedByUserID;
 			$notification->save();
 		}
 	}
