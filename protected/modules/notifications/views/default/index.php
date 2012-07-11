@@ -1,10 +1,10 @@
-<h1>Varslinger</h1>
-
-
+<?php
+	$deleteUrl = $this->createUrl('delete', array('id' => ''));
+?>
 <script language="javascript">
 	
 	function del (id, element, callback){
-		var url = '<?= $this->createUrl('delete', array('id' => ''))?>/' + id;
+		var url = '<?= $deleteUrl ?>/' + id;
 		var row = element.parentNode.parentNode;
 		row.parentNode.removeChild(row);
 		
@@ -21,6 +21,8 @@
 		});
 	}
 </script>
+
+<h1>Varslinger</h1>
 
 <div class="notificatonIndex">
 	<table id="notificationTable">
