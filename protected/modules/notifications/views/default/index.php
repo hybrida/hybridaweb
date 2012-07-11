@@ -25,23 +25,19 @@
 
 <div class="notificatonIndex">
 	<table id="notificationTable">
-		<tr>
-			<th>Merk som lest</th>
-			<th>Lenke</th>
-			<th>Dato</th>
-			<th>Melding</th>
-			<th>Endret av </th>
-		</tr>
 		<? foreach ($notifications as $notification): ?>
-			<tr>
-				<td><a href="#" class="button"onclick="js:del(<?= $notification->id ?>, this, function(){})">Slett</a></td>
-				<td><a href="#" class="button"onclick="js:go(<?= $notification->id ?>, this, '<?= $notification->viewUrl ?>')">Lenke</a></td>
-				<td><?= $notification->timestamp ?></td>
+				<td><a href="#" class="button"onclick="js:del(<?= $notification->id ?>, this, function(){})">Merk som lest</a></td>
+				<td><a href="#" class="button"onclick="js:go(<?= $notification->id ?>, this, '<?= $notification->viewUrl ?>')">Link</a></td>
+				<td><?= Html::dateToString($notification->timestamp, 'medium') ?></td>
 				<td><?= $notification->message ?></td>
-				<td><?= $notification->changedByUser->fullname ?></td>
+				<td><strong>Fra:</strong> <?= $notification->changedByUser->fullname ?></td>
 			</tr>
 		<? endforeach; ?>
 	</table>
+	
+	<? if (empty($notifications)): ?>
+		Ingen varslinger
+	<? endif; ?>
 </div>
 
 
