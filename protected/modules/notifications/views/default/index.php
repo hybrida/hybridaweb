@@ -5,7 +5,6 @@
 	
 	function del (id, element, callback){
 		var url = '<?= $this->createUrl('delete', array('id' => ''))?>/' + id;
-		console.log(url);
 		var row = element.parentNode.parentNode;
 		row.parentNode.removeChild(row);
 		
