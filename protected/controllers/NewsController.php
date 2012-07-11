@@ -161,18 +161,7 @@ class NewsController extends Controller {
 		$this->render("edit", array(
 			'model' => $model,
 			'updated' => $isUpdated,
-			'bedpress' => $this->getBedpressData($model),
 		));
-	}
-	
-	private function getBedpressData($model) {
-		$event = $model->getEventModel();
-		$event = new Event;
-		if ($event->isNewRecord || $event->bpcID === null) {
-			return null;
-		}
-		$companiesList = ProfileController::getCompaniesList();
-		
 	}
 
 	private function redirectAfterEdit($newsEventFormModel) {
