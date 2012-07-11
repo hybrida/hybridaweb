@@ -1,22 +1,17 @@
-<? 
+<?php
+$this->pageTitle = "Nyhetsstrøm";
 $this->layout = "//layouts/doubleColumn";
+
 $this->beginClip('sidebar');
-	$this->widget('application.components.widgets.ActivitiesFeed');
-	$this->widget('application.components.widgets.JobAnnouncementFeed');
-$this->endClip()
-?>
-
-<? $this->pageTitle = "Nyhetsstrøm" ?>
-
-<?
-// FIXME
-// Forferdelig stygt, men fungerer.
+$this->widget('application.components.widgets.ActivitiesFeed');
+$this->widget('application.components.widgets.JobAnnouncementFeed');
+$this->endClip();
 ?>
 
 <div class="feeds2">
 	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
-		'class' => 'button buttonRightSide',
+			'class' => 'button buttonRightSide',
 	))	?>
 	<? endif ?>
 	<?	$this->renderPartial("_feed", array(
@@ -29,8 +24,11 @@ $this->endClip()
 	'id' => 'fetchNews',
 ))?>
 
-
-<script>
+<?php
+$ajaxFeedUrl = $this->createUrl("feedAjax", array(
+	'offset' => ''));
+?>
+<script language="javascript">
 	var count = <?= $index ?>;
 	$("#fetchNews").click(function fetchNews(){
 		
@@ -39,11 +37,7 @@ $this->endClip()
 				$(".feeds2").append(html);
 			},
 			type: 'get',
-			url: '<?php
-	echo $this->createUrl("feedAjax", array(
-		'offset' => ''
-	))
-?>' + count,
+			url: '<?= $ajaxFeedUrl ?>' + count,
 			data: {
 				index: $(".feeds2 li").size()
 			},
@@ -52,5 +46,4 @@ $this->endClip()
 		});
 		count += <?= $limit ?>;
 	});
-
 </script>
