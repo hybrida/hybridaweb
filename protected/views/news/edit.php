@@ -1,39 +1,41 @@
 <? $this->pageTitle = "Rediger nyhet" ?>
 
+<script type="text/javascript">
+	$(document).ready(function(){
+		var eventButton = $("#NewsEventForm_hasEvent")
+		var signupButton = $("#NewsEventForm_hasSignup")
+
+		var event = $(".event");
+		var signup = $(".signup");
+
+		function updateEvent () {
+			if (eventButton.attr('checked')) {
+				event.show();
+			} else {
+				event.hide();
+				signupButton.attr('checked', false);
+				updateSignup();
+			}
+		}
+
+		function updateSignup (){
+			if (eventButton.attr('checked') && signupButton.attr('checked')) {
+				signup.show()
+			} else if (! signupButton.checked) {
+				signup.hide();
+			}
+		}
+
+		eventButton.click(updateEvent);
+		signupButton.click(updateSignup);
+
+		updateSignup();
+		updateEvent();
+	});
+</script>
+
 <div class="g-form">
-	<script type="text/javascript">
-		$(document).ready(function(){
-			var eventButton = $("#NewsEventForm_hasEvent")
-			var signupButton = $("#NewsEventForm_hasSignup")
-			
-			var event = $(".event");
-			var signup = $(".signup");
-			
-            function updateEvent () {
-				if (eventButton.attr('checked')) {
-					event.show();
-				} else {
-					event.hide();
-					signupButton.attr('checked', false);
-					updateSignup();
-				}
-			}
-			
-			function updateSignup (){
-				if (eventButton.attr('checked') && signupButton.attr('checked')) {
-					signup.show()
-				} else if (! signupButton.checked) {
-					signup.hide();
-				}
-			}
-			
-			eventButton.click(updateEvent);
-			signupButton.click(updateSignup);
-			
-			updateSignup();
-			updateEvent();
-		});
-	</script>
+
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
 		'id' => 'news_edit-form',

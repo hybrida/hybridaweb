@@ -23,7 +23,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 		<meta property="og:type"        content="lfhybrida:event" />
 		<meta property="og:url"         content="<?= Yii::app()->createAbsoluteUrl("/") . $news->viewUrl ?>" />
 		<meta property="og:title"       content="<?= $news->title ?>" />
-                <meta property="og:image"       content="<?= Yii::app()->createAbsoluteUrl("/") ?>/images/mastHeadLogo.png" />
+		<meta property="og:image"       content="<?= Yii::app()->createAbsoluteUrl("/") ?>/images/mastHeadLogo.png" />
 	<? $this->endClip() ?>
 <? endif; ?>
 <?$this->breadcrumbs=array(
