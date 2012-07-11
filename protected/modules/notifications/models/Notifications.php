@@ -48,8 +48,8 @@ class Notifications {
 	}
 	
 	public static function notifyAndAddListener ($type, $id, $statusCode, $changedByUserID=null) {
-		$this->addListener($type, $id, $changedByUserID);
-		$this->notify($type, $id, $statusCode, $changedByUserID);
+		self::addListener($type, $id, $changedByUserID);
+		self::notify($type, $id, $statusCode, $changedByUserID);
 	}
 	
 	public static function getAll($userID) {
