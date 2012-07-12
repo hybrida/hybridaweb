@@ -33,7 +33,7 @@ class Notifications {
 		return $listenerIDs;
 	}
 	
-	public static function notify($type, $id, $statusCode, $changedByUserID=null) {
+	public static function notify($type, $id, $statusCode, $changedByUserID=null, $commentID=null) {
 		$listeners = self::getListeners($type, $id);
 		foreach ($listeners as $listener) {
 			if ($listener == $changedByUserID) continue;
@@ -43,13 +43,14 @@ class Notifications {
 			$notification->userID = $listener;
 			$notification->statusCode = $statusCode;
 			$notification->changedByUserID = $changedByUserID;
+			$notification->commentID = $commentID;
 			$notification->save();
 		}
 	}
 	
-	public static function notifyAndAddListener ($type, $id, $statusCode, $changedByUserID=null) {
+	public static function notifyAndAddListener ($type, $id, $statusCode, $changedByUserID=null, $commentID=null) {
 		self::addListener($type, $id, $changedByUserID);
-		self::notify($type, $id, $statusCode, $changedByUserID);
+		self::notify($type, $id, $statusCode, $changedByUserID, $commentID);
 	}
 	
 	public static function getAll($userID) {

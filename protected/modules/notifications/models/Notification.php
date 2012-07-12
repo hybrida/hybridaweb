@@ -52,7 +52,7 @@ class Notification extends CActiveRecord
 			array('parentType', 'length', 'max'=>255),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id, parentType, parentID, userID, isRead, timestamp, changedByUserID, statusCode', 'safe', 'on'=>'search'),
+			array('id, parentType, parentID, userID, isRead, timestamp, changedByUserID, commentID, statusCode', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -123,14 +123,20 @@ class Notification extends CActiveRecord
 	}
 	
 	public function getViewUrl() {
+		$url = "";
 		if ($this->_model) {
-			return $this->_model->viewUrl;
+			$url =  $this->_model->viewUrl;
 		} else if ($this->_model === self::$MODEL_IS_NOT_SET){
 			$this->initModel();
 			return $this->getViewUrl();
 		} else {
-			return '#';
+			$url = '#';
 		}
+		
+		if ($this->commentID !== null) {
+			$url .= "#comment-" . $this->commentID;
+		}
+		return $url;
 	}
 	
 	public function getMessage() {

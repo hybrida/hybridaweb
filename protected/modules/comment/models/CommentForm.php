@@ -7,6 +7,8 @@ class CommentForm extends CFormModel {
 	public $content = "";
 	public $author = "";
 	public $timestamp = "";
+	
+	private $commentID = null;
 
 	public function rules() {
 		return array(
@@ -18,14 +20,20 @@ class CommentForm extends CFormModel {
 
 	public function save() {
 		$purifier = new CHtmlPurifier;
-		Yii::app()->db->createCommand()
-				->insert('comment', array(
-					'parentId' => $this->id,
-					'parentType' => $this->type,
-					'content' => $purifier->purify($this->content),
-					'authorId' => user()->id,
-					'timestamp' => new CDbExpression('NOW()'),
-				));
+		$comment = new Comment;
+		$comment->setAttributes(array(
+			'parentId' => $this->id,
+			'parentType' => $this->type,
+			'content' => $purifier->purify($this->content),
+			'authorId' => user()->id,
+			'timestamp' => new CDbExpression('NOW()'),
+		));
+		$comment->save();
+		$this->commentID = $comment->id;
+	}
+	
+	public function getCommentID() {
+		return $this->commentID;
 	}
 
 }

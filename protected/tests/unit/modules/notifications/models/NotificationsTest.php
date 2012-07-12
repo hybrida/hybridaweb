@@ -53,4 +53,26 @@ class NotificationsTest extends CTestCase {
 		$this->assertEquals($news->viewUrl, $notificationViewUrl);
 	}
 	
+	public function test_notify_commentIdIsSentAndViewUrlHasChanged() {
+		$user1 = Util::getUser();
+		$user2 = Util::getUser();
+		$news = Util::getNews();
+		
+		Notifications::addListener('news', $news->id, $user1->id);
+		Notifications::addListener('news', $news->id, $user2->id);
+		
+		Notifications::notify('news', $news->id, Notification::STATUS_CHANGED, $user1->id, 50);
+		
+		$notifications = Notifications::getUnread($user2->id);
+		$this->assertEquals(1, count($notifications), "User didn't get notified");
+		
+		$notif = $notifications[0];
+		$this->assertEquals(50, $notif->commentID);
+		
+		$newsUrl = $news->viewUrl;
+		$notifUrl = $notif->viewUrl;
+		$this->assertEquals($newsUrl . "#comment-50", $notifUrl);
+	}
+	
+	
 }
