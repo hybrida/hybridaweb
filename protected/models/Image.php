@@ -132,7 +132,7 @@ class Image extends CActiveRecord {
 	
 	public static function getViewUrl($id, $size) {
 		$image = self::getResized($id, $size);
-		return self::getRelativeFilePath($id, $size);
+		return Yii::app()->baseUrl . self::getRelativeFilePath($id, $size);
 	}
 	
 	public static function getRelativeFilePath($id, $size) {
