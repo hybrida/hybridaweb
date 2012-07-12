@@ -12,30 +12,27 @@ class DefaultController extends Controller {
 			'news' => $this->getNews($id),
 		));
 	}
-	
+
 	public function actionEdit($id) {
+		if (!user()->checkAccess('admin')) {
+			throw new CHttpException(400, 'Du har ikke tilgang til å endre dette');
+		}
 		$eventCompany = EventCompany::model()->find('bpcID = ?', array($id));
 		if ($eventCompany === null) {
 			throw new CHttpException(404, "Kunne ikke finne bedpress");
 		}
-		
+
 		if (Yii::app()->request->isPostRequest) {
-			print_r($_POST);
 			$input = $_POST['EventCompany'];
-			$event = EventCompany::model()->find('bpcID = ?', array(
-				$input['bpcID'],
-			));
-			if (!$event) {
-				throw new CException("Bedpressen du prøver å endre finnes ikke");
-			}
-			$event->setAttributes($input, false);
-			$event->save();
+			$eventCompany->setAttributes($input, false);
+			$eventCompany->save();
 			$this->redirect($this->createUrl('view', array('id' => $id)));
 			Yii::app()->end();
 		}
-		
+
 		$this->render('eventCompanyForm', array(
 			'model' => $eventCompany,
+			'news' => $this->getNews($id),
 		));
 	}
 
@@ -43,7 +40,7 @@ class DefaultController extends Controller {
 		$bedpress = EventCompany::model()->with('event')->find('bpcID = ?', array($bpcID));
 		$event = $bedpress->event;
 		$news = News::model()->find("parentId = ? AND parentType = 'event'", array(
-				$event->id));
+			$event->id));
 		return $news;
 	}
 
