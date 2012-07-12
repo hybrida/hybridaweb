@@ -1,5 +1,6 @@
 <? foreach ($models as $model): ?>
     <div class="comment">
+		<a name="comment-<?=$model->id?>" />
         <div class="comment-left">
             <div class="profile-image">
                 <?= Image::profileTag($model->author->imageId, 'small') ?>
