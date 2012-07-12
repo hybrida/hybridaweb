@@ -1,6 +1,10 @@
 <h1>Kommentarer</h1>
 
-<div class="comment-view-all"></div>
+<div class="comment-view-all">
+	<?$this->render("comment.views.default._comments", array(
+		'models' => Comment::getAll($formModel->type, $formModel->id),
+	));?>
+</div>
 
 <div class="comment-view-form">
 	
@@ -56,9 +60,6 @@
 			});
 			return false;
 		});
-
-		var commentViewBox = $(".comment-view-all");
-		commentViewBox.load("<?= $loadUrl ?>");
 	});
 
 	function deleteComment(id) {

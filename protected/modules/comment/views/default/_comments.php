@@ -1,5 +1,6 @@
 <? foreach ($models as $model): ?>
     <div class="comment">
+		<a name="comment-<?=$model->id?>" />
         <div class="comment-left">
             <div class="profile-image">
                 <?= Image::profileTag($model->author->imageId, 'small') ?>
@@ -14,7 +15,7 @@
             </div>
             <div class="commentContent">
                 <?= $model->content ?>
-			<? if ($this->hasDeleteAccess($model)): ?>
+			<? if ($model->hasDeleteAccess()): ?>
 				<button onclick="deleteComment(<?=$model->id?>)">Slett</button>
 			<? endif; ?>
             </div>

@@ -1,0 +1,55 @@
+.notificationIndex {
+	margin: 1em;
+}
+
+.notificationIndex h1 {
+	border-bottom: 2px solid #0066CC;
+	padding-left: 0.5em;
+}
+
+.notificationIndex .row {
+	height: 1.5em;
+	border-left: 2px solid #06C;
+	margin: 0.2em 0;
+	padding-left: 1em;
+}
+
+.notificationIndex .date {
+	color: #999;
+	width: 8em;
+	display: block;
+	float: left;
+}
+
+.notificationIndex .changedByAuthor {
+	display: block;
+	float: left;
+}
+
+.notificationIndex .statusMessage {
+	display: block;
+	float: left;
+	margin: 0 0.5em;
+
+}
+
+.notificationIndex .link {
+	display: block;
+	float: left;
+}
+
+.notificationIndex .delete {
+	display: block;
+	float:right;
+	margin: 0 1em;
+}
+
+.notificationIndex .delete a {
+	padding: 0.3em;
+	font-size: 14px;
+	background-color: #f00;
+	color: #000;
+	font-weight: bolder;
+	border-radius: 7px;
+	text-decoration: none;
+}

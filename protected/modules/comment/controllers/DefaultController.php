@@ -1,5 +1,7 @@
 <?php
 
+Yii::import('notifications.models.*');
+
 class DefaultController extends Controller {
 
 	public function actionSubmit() {
@@ -8,6 +10,7 @@ class DefaultController extends Controller {
 		if (isset($_POST['CommentForm'])) {
 			$model->attributes = $_POST['CommentForm'];
 			$model->save();
+			Notifications::notifyAndAddListener($model->type, $model->id, Notification::STATUS_NEW_COMMENT, user()->id, $model->commentID);
 			$this->actionView($model->type, $model->id);
 		} else {
 			throw new CHttpException(500, "Ikke tillat");
@@ -16,17 +19,12 @@ class DefaultController extends Controller {
 
 	public function actionDelete($id) {
 		$model = Comment::model()->findByPk($id);
-		if (!$this->hasDeleteAccess($model)) {
+		if (!$model->hasDeleteAccess()) {
 			throw new CHttpException(403, "Du har ikke rettigheter for å slette denne kommentaren");
 		}
 		$model->delete();
 		$this->actionView($model->parentType, $model->parentId);
 	}
-	
-	public function hasDeleteAccess($model) {
-		return Yii::app()->user->checkAccess("deleteComment", array('authorId' => $model->authorId));
-	}
-
 
 	public function actionView($type, $id) {
 		$this->renderPartial("_comments", array(
