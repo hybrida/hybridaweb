@@ -60,8 +60,11 @@ class Notifications {
 	}
 
 	public static function getUnread($userID) {
-		$where = "userID = ? AND isRead = ?";
-		return Notification::model()->findAll($where, array($userID, false));
+		$criteria = new CDbCriteria();
+		$criteria->compare('userID', $userID);
+		$criteria->compare('isRead', 0); // burde stått false istendefor 0, men det funket ikke
+		$criteria->order = 'timestamp DESC';
+		return Notification::model()->findAll($criteria);
 	}
 
 	public static function getRead($userID, $limit) {
@@ -69,6 +72,7 @@ class Notifications {
 		$criteria->limit = $limit;
 		$criteria->compare('userID', $userID);
 		$criteria->compare('isRead', true);
+		$criteria->order = 'timestamp DESC';
 		return Notification::model()->findAll($criteria);
 	}
 

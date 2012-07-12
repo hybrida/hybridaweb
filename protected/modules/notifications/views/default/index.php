@@ -24,7 +24,7 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 
 <div class="notificationIndex">
 	<h1>Ulest</h1>
-
+	
 	<? foreach ($unread as $notification): ?>
 		<div class="row">
 			<div class="date">
