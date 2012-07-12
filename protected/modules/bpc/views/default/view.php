@@ -16,9 +16,9 @@ $this->beginClip('sidebar'); ?>
 <? endif; ?>
 
 <? if ($news->imageId): ?>
-	<?= Image::tag($news->imageId, 'frontpage') ?>
+	<?= Image::tag($news->imageId, 'frontpage') ?><br/>
 <? else: ?>
-	<img src='<?=$event->logo?>' alt=""/><br>
+	<img src='<?=$event->logo?>' alt=""/><br/>
 <? endif ?>
 
 <?=$event->description?>
