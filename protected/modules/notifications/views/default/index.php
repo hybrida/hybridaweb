@@ -1,5 +1,5 @@
 <?php
-	$deleteUrl = $this->createUrl('delete', array('id' => ''));
+$deleteUrl = $this->createUrl('delete', array('id' => ''));
 ?>
 <script language="javascript">
 	
@@ -22,24 +22,54 @@
 	}
 </script>
 
-<h1>Varslinger</h1>
+<div class="notificationIndex">
+<h1>Ulest</h1>
 
-<div class="notificatonIndex">
-	<table id="notificationTable">
-		<? foreach ($notifications as $notification): ?>
-				<td><a href="#" class="button"onclick="js:del(<?= $notification->id ?>, this, function(){})">Merk som lest</a></td>
-				<td><a href="#" class="button"onclick="js:go(<?= $notification->id ?>, this, '<?= $notification->viewUrl ?>')">Link</a></td>
-				<td><?= Html::dateToString($notification->timestamp, 'medium') ?></td>
-				<td><?= $notification->message ?></td>
-				<td><strong>Fra:</strong> <?= $notification->changedByUser->fullname ?></td>
-			</tr>
+	<? foreach ($unread as $notification): ?>
+		<div class="row">
+			<div class="date">
+				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
+			</div>			<div class="changedByAuthor"><?= $notification->changedByUser->fullName ?></div>
+			<div class="statusMessage">
+				<?= $notification->message ?>
+			</div>
+			<div class="link">
+				<a href="#"onclick="js:go(<?= $notification->id ?>, this, '<?= $notification->viewUrl ?>')">
+					<?= $notification->title ?>
+				</a>
+			</div>
+			<div class="delete">
+				<a href="#" onclick="js:del(<?= $notification->id ?>, this, function(){})">
+					X
+				</a>
+			</div>
+		</div>
+	<? endforeach; ?>
+
+	<? if (empty($unread)): ?>
+		Ingen varslinger
+	<? endif; ?>
+
+	<h1>Lest</h1>
+
+		<? foreach ($read as $notification): ?>
+		<div class="row">
+			<div class="date">
+				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
+			</div>
+			<div class="changedByAuthor"><?= $notification->changedByUser->fullName ?></div>
+			<div class="statusMessage">kommenterte på</div>
+			<div class="link">
+				<a href="#"onclick="js:go(<?= $notification->id ?>, this, '<?= $notification->viewUrl ?>')">
+					<?= $notification->title ?>
+				</a>
+			</div>
+		</div>
 		<? endforeach; ?>
-	</table>
-	
-	<? if (empty($notifications)): ?>
+
+	<? if (empty($read)): ?>
 		Ingen varslinger
 	<? endif; ?>
 </div>
-
 
 

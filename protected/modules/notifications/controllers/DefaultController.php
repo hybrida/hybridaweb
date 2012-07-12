@@ -3,9 +3,11 @@
 class DefaultController extends Controller {
 
 	public function actionIndex() {
-		$notifications = Notifications::getUnread(user()->id);
+		$unread = Notifications::getUnread(user()->id);
+		$read = Notifications::getRead(user()->id, 10);
 		$this->render('index', array(
-			'notifications' => $notifications,
+			'unread' => $unread,
+			'read' => $read,
 		));
 	}
 

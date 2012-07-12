@@ -141,21 +141,21 @@ class Notification extends CActiveRecord
 	
 	public function getMessage() {
 		
-		return Notifications::getMessage($this->statusCode) .' - '. $this->getTitle() ;
+		return Notifications::getMessage($this->statusCode);
 	}
 	
-	private function getTitle() {
+	public function getTitle() {
 		if ($this->_model) {
 			switch ($this->parentType) {
 				case 'news':
-					return 'Nyhet: ' . $this->_model->title;
+					return $this->_model->title;
 					break;
 				case 'profile':
-					return $this->_model->fullname;
+					return 'profilen til ' . $this->_model->fullname;
 			}
 		} else if ($this->_model === self::$MODEL_IS_NOT_SET) {
 			$this->initModel();
-			return $this->gitTitle();
+			return $this->getTitle();
 		}
 	}
 	
