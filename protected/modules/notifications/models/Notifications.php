@@ -30,6 +30,7 @@ class Notifications {
 			'id' => $id,
 		));
 		$listenerIDs = $stmt->fetchAll(PDO::FETCH_COLUMN);
+		if ($type == 'profile') $listenerIDs[] = $id;
 
 		return $listenerIDs;
 	}
