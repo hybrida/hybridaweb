@@ -23,13 +23,20 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 </script>
 
 <div class="notificationIndex">
-<h1>Ulest</h1>
+	<h1>Ulest</h1>
 
 	<? foreach ($unread as $notification): ?>
 		<div class="row">
 			<div class="date">
 				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
-			</div>			<div class="changedByAuthor"><?= $notification->changedByUser->fullName ?></div>
+			</div>			
+			<div class="changedByAuthor">				
+				<?=
+				Html::link($notification->changedByUser->fullName, array(
+					$notification->changedByUser->viewUrl
+				))
+				?>
+			</div>
 			<div class="statusMessage">
 				<?= $notification->message ?>
 			</div>
@@ -52,20 +59,26 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 
 	<h1>Lest</h1>
 
-		<? foreach ($read as $notification): ?>
+	<? foreach ($read as $notification): ?>
 		<div class="row">
 			<div class="date">
 				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
 			</div>
-			<div class="changedByAuthor"><?= $notification->changedByUser->fullName ?></div>
+			<div class="changedByAuthor">
+				<?=
+				Html::link($notification->changedByUser->fullName, array(
+					$notification->changedByUser->viewUrl
+				))
+				?>
+			</div>
 			<div class="statusMessage">kommenterte på</div>
 			<div class="link">
-				<a href="#"onclick="js:go(<?= $notification->id ?>, this, '<?= $notification->viewUrl ?>')">
+				<a href="<?= $notification->viewUrl ?>">
 					<?= $notification->title ?>
 				</a>
 			</div>
 		</div>
-		<? endforeach; ?>
+	<? endforeach; ?>
 
 	<? if (empty($read)): ?>
 		Ingen varslinger

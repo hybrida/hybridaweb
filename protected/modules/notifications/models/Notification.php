@@ -125,7 +125,11 @@ class Notification extends CActiveRecord
 	public function getViewUrl() {
 		$url = "";
 		if ($this->_model) {
-			$url =  $this->_model->viewUrl;
+			if ($this->_model->tableName() == 'user') {
+				$url = Yii::app()->createUrl("/profile/comment", array('username' => $this->_model->username));
+			} else {
+				$url =  $this->_model->viewUrl;
+			}
 		} else if ($this->_model === self::$MODEL_IS_NOT_SET){
 			$this->initModel();
 			return $this->getViewUrl();
