@@ -15,7 +15,7 @@
             </div>
             <div class="commentContent">
                 <?= $model->content ?>
-			<? if ($this->hasDeleteAccess($model)): ?>
+			<? if ($model->hasDeleteAccess()): ?>
 				<button onclick="deleteComment(<?=$model->id?>)">Slett</button>
 			<? endif; ?>
             </div>

@@ -102,6 +102,10 @@ class Comment extends CActiveRecord {
 		}
 		return parent::beforeSave();
 	}
+	
+	public function hasDeleteAccess() {
+		return Yii::app()->user->checkAccess("deleteComment", array('authorId' => $this->authorId));
+	}
 
 	public function delete() {
 		$this->isDeleted = "true";

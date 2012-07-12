@@ -19,15 +19,11 @@ class DefaultController extends Controller {
 
 	public function actionDelete($id) {
 		$model = Comment::model()->findByPk($id);
-		if (!$this->hasDeleteAccess($model)) {
+		if (!$model->hasDeleteAccess()) {
 			throw new CHttpException(403, "Du har ikke rettigheter for å slette denne kommentaren");
 		}
 		$model->delete();
 		$this->actionView($model->parentType, $model->parentId);
-	}
-
-	public function hasDeleteAccess($model) {
-		return Yii::app()->user->checkAccess("deleteComment", array('authorId' => $model->authorId));
 	}
 
 	public function actionView($type, $id) {
