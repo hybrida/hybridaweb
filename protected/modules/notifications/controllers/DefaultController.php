@@ -2,6 +2,22 @@
 
 class DefaultController extends Controller {
 
+	public function filters() {
+		return array(
+			'accessControl',
+		);
+	}
+
+	public function accessRules() {
+		return array(
+			array('allow',
+				'actions' => array("index", "delete"),
+				'users' => array('@'),
+			),
+			array('deny'),
+		);
+	}
+
 	public function actionIndex() {
 		$unread = Notifications::getUnread(user()->id);
 		$read = Notifications::getRead(user()->id, 10);
