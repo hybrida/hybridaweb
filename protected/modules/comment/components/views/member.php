@@ -24,11 +24,7 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::ajaxSubmitButton("Send", Yii::app()->createUrl("/comment/default/submit") ,array(
-			'update' => '.comment-view-all',
-		), array(
-			'class' => 'comment-form-submit'
-		)) ?>
+		<input type="submit" id="comment-submit" value="Send" />
 	</div>
 
 	<?php $this->endWidget(); ?>
@@ -36,20 +32,38 @@
 </div><!-- form -->
 
 <?php
-	$commentLoadUrl = Yii::app()->createUrl("/comment/default/view", array(
+	$loadUrl = Yii::app()->createUrl("/comment/default/view", array(
 			'type' => $formModel->type,
 			'id' => $formModel->id));
-	$deleteCommentUrl = Yii::app()->createUrl("/comment/default/delete", array('id' => ''));
+	$deleteUrl = Yii::app()->createUrl("/comment/default/delete", array('id' => ''));
+	$submitUrl = Yii::app()->createUrl("/comment/default/submit");
 ?>
 <script lang="javascript">
-	$(function() {
+
+	$(document).ready(function() {
+		jQuery('body')
+		.undelegate('#comment-submit','click')
+		.delegate('#comment-submit','click',function(){
+			$.ajax({
+				'type':'POST',
+				'url':'<?= $submitUrl ?>',
+				'cache':false,
+				'data': $(this).parents("form").serialize(),
+				'success':function(html){
+					$(".comment-view-all").html(html)
+					$("#CommentForm_content").val("")
+				}
+			});
+			return false;
+		});
+
 		var commentViewBox = $(".comment-view-all");
-		commentViewBox.load("<?= $commentLoadUrl?>");
+		commentViewBox.load("<?= $loadUrl ?>");
 	});
 
 	function deleteComment(id) {
 		var commentViewBox = $(".comment-view-all");
-		var url = "<?= $deleteCommentUrl ?>/" + id;
+		var url = "<?= $deleteUrl ?>/" + id;
 		var shouldDelete = confirm("Vil du slette kommentaren?");
 		if (shouldDelete) {
 			commentViewBox.load(url);
