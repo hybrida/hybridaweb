@@ -45,7 +45,7 @@
 }
 
 .notificationIndex .delete a {
-	padding: 0.3em;
+	padding: 0.3em 0.6em;
 	font-size: 14px;
 	background-color: #f00;
 	color: #000;
