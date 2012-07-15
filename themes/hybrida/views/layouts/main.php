@@ -19,6 +19,7 @@
 
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/style.css" />
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/controller.css" />
+		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/hintList.css" />
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/layout.css" />
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/destroy.css" />
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/fonts/fonts.css" />
