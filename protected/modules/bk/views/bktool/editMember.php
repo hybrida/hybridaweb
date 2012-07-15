@@ -5,13 +5,17 @@
 
 <h2>Rediger medlem</h2>
 
-<form name='editmemberform' method='post' action='editmemberform'>
+<form name='editmemberform' method='post'
+    <? foreach($membershipInfo as $member) : ?>
+        action="editmemberform?id=<?= $member['id'] ?>"
+    <? endforeach ?>
+    >
     <? foreach($membershipInfo as $member) : ?>
         <h2><?= Image::profileTag($member['imageId'], 'mini') ?>
         <a href='/profil/<?= $member['username'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></h2>
     <br/>
     <p>
-        Når sluttdato for medlemskap blir satt, flyttes medlemmet til listen over tidligere medlemmer.
+        Når sluttdato for medlemskap blir satt, flyttes medlemmet til listen over tidligere medlemmer og status til alle bedrifter som medlemmet kontakter settes til 'Aktuell senere'.
     </p>
     <h3>
     <br/>
@@ -21,7 +25,7 @@
                 Stilling
             </th>
             <td>
-                <input name="commision" type="text" value='<?= $member['comission'] ?>' class="textfield" maxlength="50" />
+                <input name="comission" type="text" value='<?= $member['comission'] ?>' class="textfield" maxlength="50" />
             </td>
         </tr>
         <tr>
@@ -42,6 +46,14 @@
         </tr>
     </table
     </h3>
+    
+    <? if(isset($errordata['starttimeerror'])){ ?>
+        <br/><div id="BK-add-errormessage"><i><u><?= $errordata['starttimeerror'] ?></u></i></div>
+        
+    <? } if(isset($errordata['endtimeerror'])) { ?>
+        <br/><div id="BK-add-errormessage"><i><u><?= $errordata['endtimeerror'] ?></u></i></div>
+    <? } ?>
+        
     <? endforeach ?>
     
     <p id="BK-index-editmember-button" align="center">

@@ -68,8 +68,17 @@
                 <th>Bedrift</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
                 <th>
                     <? foreach($graduateInfo as $info) : ?>
-                        <input type='text' name='workcompany' value='<?= $info['companyName'] ?>' maxlength="255" /> 
-                        Characters (255)<br/><div id="BK-add-errormessage"><i><u><?= $errordata['workcompanyerror'] ?></u></i></div>
+                        <select name="workcompanyid">
+                            <option value="0">Ingen valgt</option>
+                            <? foreach($companiesList as $company) : ?>
+                                <? if($info['workCompanyID'] == $company['companyID']){?>
+                                        <option value="<?= $company['companyID'] ?>" selected><?= $company['companyName'] ?></option>
+                                    <? }else{ ?>
+                                        <option value="<?= $company['companyID'] ?>"><?= $company['companyName'] ?></option>
+                                    <? } ?>
+                             <? endforeach ?>
+                        </select>
+                        <br/><div id="BK-add-errormessage"><i><u><?= $errordata['workcompanyerror'] ?></u></i></div>
                     <? endforeach ?>
                 </th>
             </tr>

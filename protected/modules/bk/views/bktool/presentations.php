@@ -6,6 +6,3 @@
 
 <h2>Bedriftspresentasjoner</h2>
 
-<p>
-    Valg: Legg til bedriftspresentasjon
-</p>

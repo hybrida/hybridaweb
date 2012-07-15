@@ -22,7 +22,7 @@
 		<th>Bedriftsnavn*</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input type='text' name='editedcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" /> Characters (255)<br/>
+                        <input type='text' name='editedcompany' value='<?= $info['companyName'] ?>' maxlength="255"/> Characters (255)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['editedcompanyerror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>
@@ -106,12 +106,21 @@
             <tr>
                 <th>Undergruppe av</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
                 <th>
-                    <input type='text' name='parentcompany' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
-                        <? foreach($parentCompanyName as $info) : ?>           
-                            value='<?= $info['companyName'] ?>'
+                    <select name="parentcompanyid">
+                        <option value="0">Ingen valgt</option>
+
+                        <? foreach($companiesList as $company) : ?>
+                            <option value="<?= $company['companyID'] ?>"
+
+                                <? foreach($parentCompanyId as $info) : ?>
+                                    <? if($info['companyID'] == $company['companyID']){?>
+                                        selected
+                                    <? } ?>
+                                <? endforeach ?>
+                            ><?= $company['companyName'] ?></option>
                         <? endforeach ?>
-                    />  Characters (255)<br/>
-                    <div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
+                    </select>
+                    <br/><div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
 		</th>
             </tr>
         </table>

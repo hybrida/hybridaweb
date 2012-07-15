@@ -65,8 +65,13 @@
             <tr>
                 <th>Undergruppe av</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
                 <th>
-                    <input type='text' name='parentcompany' maxlength="255"/>  Characters (255)<br/>
-                    <div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
+                    <select name="parentcompanyid">
+                            <option value="0">Ingen valgt</option>
+                            <? foreach($companiesList as $company) : ?>
+                                <option value="<?= $company['companyID'] ?>"><?= $company['companyName'] ?></option>
+                             <? endforeach ?>
+                    </select>
+                    <br/><div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
                 </th>
             </tr>
         </table>

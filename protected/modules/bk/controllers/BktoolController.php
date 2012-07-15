@@ -332,7 +332,8 @@ class BktoolController extends Controller {
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
-                $data['parentCompanyName'] = $bkTool->getParentCompanyBySubCompanyId($id);
+                $data['parentCompanyId'] = $bkTool->getParentCompanyBySubCompanyId($id);
+                $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
                 $data['relevantSpecializations'] = $bkTool->getRelevantSpecializationsByCompanyId($id);
                 $data['status'] = $bkTool->getStatusByCompanyId($id);
                 $data['contactor'] = $bkTool->getContactorByCompanyId($id);
@@ -368,7 +369,7 @@ class BktoolController extends Controller {
                 else{
                     if($bkForms->isCompanyInDatabase($_POST['editedcompany']) && $companyName != $_POST['editedcompany']){
                         $errordata['error'] = true;
-                        $errordata['addedcompanyerror'] = 'Bedriften finnes allerede i databasen';
+                        $errordata['editedcompanyerror'] = 'Bedriften finnes allerede i databasen';
                     }
                 }
                 
@@ -388,31 +389,14 @@ class BktoolController extends Controller {
                     }
                 }
                 
-                if(!$bkForms->isInputFieldEmpty($_POST['parentcompany'])){
-                    if($bkForms->isCompanyInDatabase($_POST['parentcompany'])){
-                        
-                        $data['parentcompany'] = $bkTool->getCompanyIdByCompanyName($_POST['parentcompany']);
-                        
-                        foreach ($data['parentcompany'] as $company) :
-                            $parentCompanyId = $company['companyID'];
-                        endforeach;
-                    }
-                    else{
-                        $errordata['error'] = true;
-                        $errordata['parentcompanyerror'] = 'Bedriften finnes ikke i databasen';
-                    }
+                if($bkForms->isCompanySet($_POST['parentcompanyid'])){
+                    $parentCompanyId = $_POST['parentcompanyid'];
                 }
                 
                 if(isset($errordata['error'])){
                     $this->actionEditcompany($id, $errordata);
                 }
                 else{
-                    $data['parentcompany'] = $bkTool->getCompanyIdByCompanyName($_POST['parentcompany']);
-                    
-                    foreach ($data['parentcompany'] as $company) :
-                        $parentCompanyId = $company['companyID'];
-                    endforeach;
-                    
                     $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
                     foreach ($data['members'] as $member) :
 
@@ -444,7 +428,9 @@ class BktoolController extends Controller {
                             $bkForms->addCompanyHomepageUpdate($member['id'], $id);
                         }
                         if($bkForms->hasCompanyParentCompanyChanged($id, $parentCompanyId)){
-                            $bkForms->addCompanyParentCompanyUpdate($member['id'], $id);
+                            if($bkForms->isCompanySet($parentCompanyId)){
+                                $bkForms->addCompanyParentCompanyUpdate($member['id'], $id);
+                            }
                         }
                         if(isset($_POST['contactor']) && $bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
                             $bkForms->addCompanyContactorUpdate($member['id'], $id);         
@@ -483,6 +469,7 @@ class BktoolController extends Controller {
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
+                $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
                 $data['errordata'] = $errordata;
                 
                 $this->render('addcompany', $data); 
@@ -528,19 +515,8 @@ class BktoolController extends Controller {
                     }
                 }
                 
-                if(!$bkForms->isInputFieldEmpty($_POST['parentcompany'])){
-                    if($bkForms->isCompanyInDatabase($_POST['parentcompany'])){
-                        
-                        $data['parentcompany'] = $bkTool->getCompanyIdByCompanyName($_POST['parentcompany']);
-                        
-                        foreach ($data['parentcompany'] as $company) :
-                            $parentCompanyId = $company['companyID'];
-                        endforeach;
-                    }
-                    else{
-                        $errordata['error'] = true;
-                        $errordata['parentcompanyerror'] = 'Bedriften finnes ikke i databasen';
-                    }
+                if($bkForms->isCompanySet($_POST['parentcompanyid'])){
+                    $parentCompanyId = $_POST['parentcompanyid'];
                 }
                 
                 if(isset($errordata['error'])){
@@ -593,7 +569,7 @@ class BktoolController extends Controller {
                         if(!$bkForms->isInputFieldEmpty($_POST['homepage'])){
                             $bkForms->addCompanyHomepageUpdate($member['id'], $companyId);
                         }
-                        if(!$bkForms->isInputFieldEmpty($_POST['parentcompany'])){
+                        if($bkForms->isCompanySet($_POST['parentcompanyid'])){
                             $bkForms->addCompanyParentCompanyUpdate($member['id'], $companyId);
                         }
                         if(isset($_POST['contactor'])){
@@ -617,6 +593,7 @@ class BktoolController extends Controller {
                 $data['specializationNamesSum'] = $bkTool->getSumOfAllDistinctSpecializationNames();
                 $data['graduationYears'] = $bkTool->getAllSelectableGraduationYears();
                 $data['graduateInfo'] = $bkTool->getGraduateInfoByUserId($id);
+                $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
                 $data['errordata'] = $errordata;
                 
                 $this->render('editgraduate', $data); 
@@ -627,14 +604,6 @@ class BktoolController extends Controller {
                 $bkTool = new Bktool();
 		$data = array();
 		$errordata = array();
-                $companyId = 0;
-                
-                if(!$bkForms->isInputFieldEmpty($_POST['workcompany'])){
-                    if(!$bkForms->isCompanyInDatabase($_POST['workcompany'])){
-                        $errordata['error'] = true;
-                        $errordata['workcompanyerror'] = 'Bedriften finnes ikke i databasen';
-                    }
-                }
                 
                 if(isset($errordata['error'])){ 
                     $this->actionEditgraduate($id, $errordata);
@@ -646,29 +615,23 @@ class BktoolController extends Controller {
                     $bkForms->updateGraduateWorkPlace($id, $_POST['workplace']);
                     $bkForms->updateGraduateGraduationYear($id, $_POST['graduationyear']);
                     
-                    $data['thiscompany'] = $bkTool->getCompanyIdByCompanyName($_POST['workcompany']);
-                    
-                    foreach ($data['thiscompany'] as $company) :
-                        $companyId = $company['companyID'];
-                    endforeach;
-                    
-                    if($bkForms->hasGraduateWorkCompanyChanged($id, $_POST['workcompany'])){
-                    
-                        $bkForms->updateGraduateWorkCompany($id, $companyId);
-                        
-                        if($companyId != 0){
-                            $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
-                            foreach ($data['members'] as $member) :
-                                $bkForms->addCompanyGraduateUpdate($member['id'], $companyId);
-                            endforeach;
+                    if($bkForms->hasGraduateWorkCompanyChanged($id, $_POST['workcompanyid'])){
+                            
+                        $bkForms->updateGraduateWorkCompany($id, $_POST['workcompanyid']);
+
+                        if($bkForms->isCompanySet($_POST['workcompanyid'])){
+                                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                                foreach ($data['members'] as $member) :
+                                    $bkForms->addCompanyGraduateUpdate($member['id'], $_POST['workcompanyid']);
+                                endforeach;
                         }
-                    }
-                    
-                    $this->actionGraduates();
                 }
+                    
+                $this->actionGraduates();
+            }
         }
         
-        public function actionEditmembers() {
+        public function actionEditmembers($errordata=null) {
             $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
 
             $bkTool = new Bktool();
@@ -677,27 +640,96 @@ class BktoolController extends Controller {
             $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
             $data['formerMembers'] = $bkTool->getAllFormerMembersByGroupId($this->bkGroupId);
             $data['userList'] = $bkTool->getUsersDropDownArray();
+            $data['errordata'] = $errordata;
             $data['model'] = $bkTool;
 
             $this->render('editmembers', $data);
         }
         
         public function actionEditmembersform() {
-           $this->actionEditmembers();
+            $bkTool = new Bktool();
+            $bkForms = new Bkforms();
+            $data = array();
+            $errordata = array();
+            $i = 0;
+            
+            if(isset($_POST['selectedmembers'])){
+                foreach ($_POST['selectedmembers'] as $memberId) :
+                    $bkForms->deleteMemberById($memberId, $this->bkGroupId);
+                    $bkForms->changeContactingStatusOnRemovalByMemberId($memberId);
+                endforeach;
+            }
+            
+            foreach ($_POST['addedmembers'] as $memberId) :
+                if($memberId != 0){
+                    if(!$bkForms->isAlreadyGroupMember($memberId, $this->bkGroupId)){
+                        $bkForms->addGroupMember($memberId, $this->bkGroupId, $_POST['addedcomissions'][$i]);
+                    }
+                    else{
+                        $data['member'] = $bkTool->getMemberNameById($memberId);
+                        foreach ($data['member'] as $member) :
+                            $errordata[$i] = 'Brukeren '.$member['firstName'].' '.$member['middleName'].' '.$member['lastName'].' er allerede et medlem og ble ikke lagt til';
+                        endforeach;
+                    }
+                }
+            $i += 1;
+            endforeach;
+            
+            $this->actionEditmembers($errordata);
         }
 
-        public function actionEditmember($id) {
+        public function actionEditmember($id, $errordata=null) {
             $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
 
             $bkTool = new Bktool();
             $data = array();
             $data['membershipInfo'] = $bkTool->getMembershipInfoById($id, $this->bkGroupId);
+            $data['errordata'] = $errordata;
 
             $this->render('editmember', $data);
         }
         
-        public function actionEditmemberform() {
-            $this->actionEditmembers();
+        public function actionEditmemberform($id) {
+            $bkForms = new Bkforms();
+            $errordata = array();
+            
+            if($_POST['start'] != ''){
+                if(!strtotime($_POST['start'])){
+                    $errordata['error'] = true;
+                    $errordata['starttimeerror'] = 'Ugyldig startdato, bruk formatet YYYY-MM-DD.';
+                }
+            }
+            else {
+                $errordata['error'] = true;
+                $errordata['starttimeerror'] = 'Medlemskapet må starte fra en dato.';
+            }
+            
+            if($_POST['end'] != ''){
+                if(strtotime($_POST['end'])){
+                    if(date("Y-m-d", strtotime($_POST['end'])) < date("Y-m-d", strtotime($_POST['start']))){
+                        $errordata['error'] = true;
+                        $errordata['endtimeerror'] = 'Ugyldig sluttdato, sluttdato må være etter startdato.'; 
+                    }
+                }
+                else{
+                    $errordata['error'] = true;
+                    $errordata['endtimeerror'] = 'Ugyldig sluttdato, bruk formatet YYYY-MM-DD.';
+                }
+            }
+            
+            if(isset($errordata['error'])){
+                $this->actionEditmember($id, $errordata);
+            }
+            else {
+                if($_POST['end'] == ''){
+                    $enddate = '0000-00-00';
+                }
+                else{
+                    $enddate = date("Y-m-d", strtotime($_POST['end']));
+                    $bkForms->changeContactingStatusOnRemovalByMemberId($id);
+                }
+                $bkForms->updateMembershipInfo($id, $this->bkGroupId, date("Y-m-d", strtotime($_POST['start'])), $enddate, $_POST['comission']);
+                $this->actionEditmembers();
+            }
         }
-
 }

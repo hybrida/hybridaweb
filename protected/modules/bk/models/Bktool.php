@@ -570,7 +570,7 @@ class BkTool {
             'userId' => $id
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.username, un.altEmail, s.name, un.imageId,
-                c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM user AS un 
+                c.companyName, un.workDescription, un.workPlace, un.graduationYear, un.workCompanyID FROM user AS un 
                 LEFT JOIN bk_company AS c ON un.workCompanyID = c.companyID
                 LEFT JOIN specialization AS s ON s.id = un.specializationId
                 WHERE un.id = :userId";
@@ -693,32 +693,70 @@ class BkTool {
         return $data; 
     }
     
-    public static function getCompaniesDropDownArray() {
-            $companies = app()->db->createCommand()
-                            ->select('companyID, companyName')
-                            ->from('bk_company')
-                            ->order('companyName ASC')
-                            ->queryAll();
-            $array = array();
-            $array[null] = 'Ingen valgt';
-            foreach ($companies as $company) {
-                    $array[$company['companyID']] = $company['companyName'];
-            }
-            return $array;
+    public function getAllCompanyPresentations(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, mg.comission, mg.start, mg.end
+                FROM user AS un, group_membership AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId AND un.id = :userId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
     }
     
-    public static function getUsersDropDownArray() {
-        $members = app()->db->createCommand()
-                        ->select('id, firstName, middleName, lastName')
-                        ->from('user')
-                        ->where('graduationYear > 2006')
-                        ->order('firstName ASC')
-                        ->queryAll();
-        $array = array();
-        $array[null] = 'Ingen valgt';
-        foreach ($members as $member) {
-                $array[$member['id']] = $member['firstName']." ".$member['middleName']." ".$member['lastName'];
-        }
-        return $array;
+    public function getCompaniesDropDownArray() {
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT companyID, companyName
+                FROM bk_company
+                ORDER BY companyName ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+
+    public function getUsersDropDownArray() {
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT id, firstName, middleName, lastName
+                FROM user
+                WHERE graduationYear > 2006
+                ORDER BY firstName ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getMemberNameById($memberId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'memberId' => $memberId
+        );
+        $sql = "SELECT id, firstName, middleName, lastName
+                FROM user
+                WHERE id = :memberId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
     }
 }
