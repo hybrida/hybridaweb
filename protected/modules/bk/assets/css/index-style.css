@@ -42,3 +42,72 @@
 #BK-index-member-table tr:first-child {
     background-color: transparent;
 }
+
+#BK-index-checkboxcell {
+    text-align: center;
+}
+
+#BK-index-membertable td input[type=checkbox] { 
+	display: block;
+	position: relative;
+	margin-left:auto; 
+	margin-right:auto;
+	}
+        
+/* stil for tabellen med knapp og tillegging av medlemmer */
+
+#BK-index-member-supporttable { 
+	width: 100%;
+	}
+        
+#BK-index-member-supporttable input[type=submit] { 
+	height: 81px;
+	width: 200px;
+	font-weight: bolder;
+	}
+        
+#BK-index-buttoncell { 
+	text-align: center; 
+        vertical-align: middle;
+	}
+        
+/* stil for tabellen med tillegging av medlemmer */
+
+#BK-index-addmember-table{
+        text-align: left;
+        width: 100%;
+}
+
+#BK-index-addmember-table td {
+       
+}
+
+#BK-index-addmember-table input[type=text] { 
+	width: 100%;
+	}
+        
+#BK-index-addmember-table select { 
+	width: 100%;
+	}
+        
+/* stil for tabellen for redigering av et medlem */
+
+#BK-index-editmember-table {
+        width: 60%;
+	text-align: left;
+	}
+        
+#BK-index-editmember-table td {
+        padding: 5px 0px;
+	}
+        
+#BK-index-editmember-table input[type=text] { 
+	width: 100%;
+        height: 25px;
+	}
+        
+#BK-index-editmember-button input[type=submit] {
+	height: 50px;
+	width: 133px;
+	font-weight: bolder;
+	}

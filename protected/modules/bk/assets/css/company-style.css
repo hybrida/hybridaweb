@@ -1,120 +1,210 @@
-#BK-company-informationtable{
-	border-width: 1px;
-	border-spacing: 2px;
-	border-style: outset;
-	border-color: gray;
-	border-collapse: separate;
+/*tabellen som holder de øverste kolonnene på plass */
+
+#BK-company-uppertable{
+        padding: 0px 8px;
 	width: 100%;
+        text-align: justify;
 	}
+        
+#BK-company-uppertable td{
+        height: 100%;
+        padding: 0px 3px;
+        width: 50%; 
+	}
+        
+#BK-company-column{
+    vertical-align: text-top;
+    border-width: 2px;
+    border-spacing: 2px;
+    border-style: outset;
+    border-color: gray;
+    width: 100%;
+}
+
+/* tabellen som holder all informasjon*/
+
+#BK-company-informationtable{
+        padding: 0px 10px;
+        border-collapse: collapse;
+	width: 95%;
+	}
+        
+#BK-company-informationtable *{
+    border: none;
+}
 	
 #BK-company-informationtable td{
 	text-align: left;
 	width: 50%;
-	border-width: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
+	padding: 5px;
+        border-bottom: 1px solid #ccc;
 	}
 
 #BK-company-informationtable th{
+    text-align: left;
+    width: 50%;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
+        
+#BK-company-aktuell-senere{
+    color: #FF9900;
+    font-weight: bold;
+    text-align: left;
+}
+        
+#BK-company-blir-kontaktet{
+    color: #009900;
+    font-weight: bold;
+    text-align: left;
+}
+
+#BK-company-ikke-kontaktet{
+    font-weight: bold;
+    text-align: left;
+}
+        
+#BK-company-uaktuell{
+    color: #CC0000;
+    font-weight: bold;
+    text-align: left;
+}
+
+/* tabellen som inneholder bedriftspresentasjoner*/
+
+#BK-company-presentationtable{
+        padding: 0px 10px;
+	width: 100%;  
+}
+        
+#BK-company-presentationtable *{
+    border: none;
+}
+	
+#BK-company-presentationtable td{
 	text-align: left;
 	width: 50%;
-	border-width: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
+	padding: 4px;
+        border-bottom: 1px solid #ccc;
 	}
-	
-/* hovedtabellen som plasserer alle elementene*/
-	
-#BK-company-maintable{
-	width: 100%;
-	}
-        
-#BK-company-maintable td{
-        vertical-align: text-top;
-	border-width: 2px;
-	border-spacing: 2px;
-	border-style: outset;
-	border-color: gray;
-	width: 50%;
-	}
-        
-#BK-company-maintable textarea:hover {
-	height: 150px;
-	width: 100%;
-	max-width: 100%;
-	}
-        
-#BK-company-maintable textarea{
-	width: 100%;
-	}
-	
-#BK-company-maintable input[type=submit] { 
-	font-weight: bolder;
-	}
-        
-#BK-company-scrollcontainer{
-        height: 500px;
-	overflow-y: scroll;
-	}
-        
+
+#BK-company-presentationtable th{
+    text-align: left;
+    width: 50%;
+    padding: 4px;
+    border-bottom: 2px solid #6678b1;
+}
+
 /* kolonnene med redigeringslinker*/
+
+#BK-company-centertable{
+        padding: 0px 8px;
+	width: 100%;
+        text-align: justify;
+	}
+        
+#BK-company-centertable td{
+        height: 100%;
+        padding: 0px 3px;
+        width: 50%; 
+	}
 	
 #BK-company-editinglinks{
         text-align: center;
 	}
-	
-/* tabellen som inneholder kommentarene*/
+        
+/* tabellen som inneholder rammen rundt kommentarområdet */
 
 #BK-company-commenttable{
-	border-width: 1px;
-	border-spacing: 2px;
-	border-style: outset;
-	border-color: gray;
-	border-collapse: separate;
-	background-color: white;
+        padding: 0px 8px;
 	width: 100%;
+        text-align: justify;
 	}
-	
+        
 #BK-company-commenttable td{
-	text-align: left;
-	border-width: 1px;
-	border-bottom: 3px;
-	padding: 5px;
-	border-style: inset;
-	border-color: gray;
+        height: 100%;
+        padding: 0px 3px;
+        width: 100%; 
 	}
-
-/* tabellen som inneholder alumnistudentene og bedriftspresentasjoner*/
-
-#BK-company-listtable{
-	border-width: 1px;
-	border-spacing: 2px;
-	border-style: outset;
-	border-color: gray;
-	border-collapse: separate;
-	width: 100%;
+        
+#BK-company-commenttable textarea{
+        height: 150px;
+	width: 99%;
+	max-width: 99%;
+	}
+        
+#BK-company-commenttable input[type=submit] {
+    	height: 50px;
+	width: 150px;
+	font-weight: bolder;
 	}
 	
-#BK-company-listtable td{
-	text-align: center;
-	border-width: 1px;
-	border-bottom: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
+/* tabellen som inneholder alle kommentarene*/
+
+#BK-company-commentstable{
+    width: 99%;
+    text-align: left;
+    border-collapse: collapse;
+}
+
+#BK-company-commentstable td{
+	padding: 8px;
+        border-bottom: 1px solid #fff;
+	border-top: 1px solid #fff;
+	background: #e8edff url('/images/bk/gradback.png') repeat-x;
+}
+
+#BK-company-commentstable i{
+	font-size: 16px;
+}
+        
+#BK-company-commentscontainer{
+        height: 500px;
+	overflow-y: scroll;
+	}
+
+/* tabellen som inneholder rammen rundt alumniområdet */
+
+#BK-company-graduatetable{
+        padding: 0px 8px;
+	width: 100%;
 	}
         
-#BK-company-listtable th{
-	text-align: center;
-	border-width: 1px;
-	border-bottom: 1px;
-	padding: 1px;
-	border-style: inset;
-	border-color: gray;
+#BK-company-graduatetable td{
+        padding: 0px 3px;
 	}
+/* tabellen som inneholder alle alumnistudentene*/
         
-#BK-company-listtable img{
-	vertical-align: text-top;
+#BK-company-graduatestable {
+    border-collapse: collapse;
+    text-align: left;
+    width: 99%;
+}
+
+#BK-company-graduatestable *{
+    border: none;
+}
+
+#BK-company-graduatestable td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
+}
+
+#BK-company-graduatestable th {
+    color: #009;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+
+#BK-company-graduatestable tr:hover{
+	background-color: #e1e3e5;
+}
+
+#BK-company-graduatestable tr:first-child {
+    background-color: transparent;
+}
+
+#BK-company-alumnicontainer{
+        height: 400px;
+	overflow-y: scroll;
 	}

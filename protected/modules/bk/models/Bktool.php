@@ -613,7 +613,7 @@ class BkTool {
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND DATE(mg.end) != DATE('0000-00-00')
-                ORDER BY un.firstname ASC";
+                ORDER BY mg.end ASC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -672,5 +672,53 @@ class BkTool {
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         
         return $data; 
+    }
+    
+   public function getMembershipInfoById($id, $groupId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'userId' => $id,
+            'groupId' => $groupId
+        );
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, mg.comission, mg.start, mg.end
+                FROM user AS un, group_membership AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId AND un.id = :userId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public static function getCompaniesDropDownArray() {
+            $companies = app()->db->createCommand()
+                            ->select('companyID, companyName')
+                            ->from('bk_company')
+                            ->order('companyName ASC')
+                            ->queryAll();
+            $array = array();
+            $array[null] = 'Ingen valgt';
+            foreach ($companies as $company) {
+                    $array[$company['companyID']] = $company['companyName'];
+            }
+            return $array;
+    }
+    
+    public static function getUsersDropDownArray() {
+        $members = app()->db->createCommand()
+                        ->select('id, firstName, middleName, lastName')
+                        ->from('user')
+                        ->where('graduationYear > 2006')
+                        ->order('firstName ASC')
+                        ->queryAll();
+        $array = array();
+        $array[null] = 'Ingen valgt';
+        foreach ($members as $member) {
+                $array[$member['id']] = $member['firstName']." ".$member['middleName']." ".$member['lastName'];
+        }
+        return $array;
     }
 }
