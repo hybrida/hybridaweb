@@ -155,6 +155,9 @@ class Notification extends CActiveRecord
 					return $this->_model->title;
 					break;
 				case 'profile':
+					if ($this->parentID === user()->id) {
+						return 'Veggen din';
+					}
 					return 'profilen til ' . $this->_model->fullname;
 			}
 		} else if ($this->_model === self::$MODEL_IS_NOT_SET) {
