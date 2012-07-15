@@ -6,8 +6,6 @@ class BktoolController extends Controller {
         protected $lineOfStudy = 'Ingeniørvitenskap og IKT';
         protected $organisationName = 'Hybrida';
         protected $bkGroupId = 57;
-        protected $oddRowColour = '#CCFFFF';
-        protected $evenRowColour = '#FFFFFF';
         
         public function getNumberOfRelevantUpdatesAsString(){
             $bkTool = new Bktool();
@@ -33,6 +31,7 @@ class BktoolController extends Controller {
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
+                $data['formerMembers'] = $bkTool->getAllFormerMembersByGroupId($this->bkGroupId);
                 
 		$this->render('index', $data);
 	}
@@ -668,4 +667,37 @@ class BktoolController extends Controller {
                     $this->actionGraduates();
                 }
         }
+        
+        public function actionEditmembers() {
+            $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+
+            $bkTool = new Bktool();
+            $data = array();
+            $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+            $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
+            $data['formerMembers'] = $bkTool->getAllFormerMembersByGroupId($this->bkGroupId);
+            $data['userList'] = $bkTool->getUsersDropDownArray();
+            $data['model'] = $bkTool;
+
+            $this->render('editmembers', $data);
+        }
+        
+        public function actionEditmembersform() {
+           $this->actionEditmembers();
+        }
+
+        public function actionEditmember($id) {
+            $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+
+            $bkTool = new Bktool();
+            $data = array();
+            $data['membershipInfo'] = $bkTool->getMembershipInfoById($id, $this->bkGroupId);
+
+            $this->render('editmember', $data);
+        }
+        
+        public function actionEditmemberform() {
+            $this->actionEditmembers();
+        }
+
 }

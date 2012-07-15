@@ -16,13 +16,14 @@
 </p>
 
 <p>
-<div id="BK-add-container">
-    <form name="editgraduateform" method="post"
-        <? foreach($graduateInfo as $info) : ?>
-            action="editgraduateform?id=<?= $info['id'] ?>"
-        <? endforeach ?>
-        >
-        <table>
+
+<form name="editgraduateform" method="post"
+    <? foreach($graduateInfo as $info) : ?>
+        action="editgraduateform?id=<?= $info['id'] ?>"
+    <? endforeach ?>
+    >
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Alternativ-Email</th>
                 <th>
@@ -31,35 +32,53 @@
                     <? endforeach ?>
                 </th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Spesialisering</th>
                 <th>
                     <? foreach($specializationNamesSum as $info) : ?>
                         <select name="specialization" size="<?= $info['sum'] ?>">
-                            
+
                             <? foreach($specializationNames as $name) : ?>
                                 <option value="<?= $name['id'] ?>"
-                                        
+
                                     <? foreach($graduateInfo as $info) : ?>
                                         <?= ($name['name'] == $info['name'] ? "selected" : ""); ?>
                                     <? endforeach ?>
-                                        
+
                                 ><?= $name['name'] ?></option>
                             <? endforeach ?> 
-                                
+
                     <? endforeach ?>
                         </select>
                 </th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
-                <th>Bedrift</br>(Man kan kun velge bedrifter som allerede finnes i databasen)</th>
+                <th>Bedrift</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
                 <th>
                     <? foreach($graduateInfo as $info) : ?>
-                        <input type='text' name='workcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)"> 
+                        <input type='text' name='workcompany' value='<?= $info['companyName'] ?>' maxlength="255" /> 
                         Characters (255)<br/><div id="BK-add-errormessage"><i><u><?= $errordata['workcompanyerror'] ?></u></i></div>
                     <? endforeach ?>
-		</th>
+                </th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Stillingsbeskrivelse</th>
                 <th>
@@ -68,6 +87,12 @@
                     <? endforeach ?>
                 </th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Arbeidssted</th>
                 <th>
@@ -76,27 +101,34 @@
                     <? endforeach ?>
                 </th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Uteksamineringsår</th>
                 <th>
                     <select name="graduationyear" size="10"> 
                         <? foreach($graduationYears as $year) : ?>
                             <option value="<?= $year['graduationYear'] ?>" align="center"
-                                    
+
                                 <? foreach($graduateInfo as $info) : ?>
                                     <?= ($year['graduationYear'] == $info['graduationYear'] ? "selected" : ""); ?>
 
                                 <? endforeach ?>
-                                            
+
                             ><?= $year['graduationYear'] ?></option>
                         <? endforeach ?>
                     </select>                    
                 </th>
             </tr>
         </table>
-                
-        <p align="center" >
-            <input type="submit" name="Submit" value="Utfør endringer" />
-	</p>
-    </form>
-</div>
+    </div>
+    
+    <br/>
+    <p id="BK-add-button" align="center" >
+        <input type="submit" name="Submit" value="Utfør endringer" />
+    </p>
+</form>

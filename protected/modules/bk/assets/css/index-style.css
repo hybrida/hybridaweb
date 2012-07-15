@@ -1,47 +1,113 @@
-/* stil for tabellen med aktive medlemmer */
+/* stil for overskriftene til tabeller */
 
-#BK-index-activemember-table
-{
-    width: 100%;
+#BK-index-header-table{
+    width: 99%;
+}
+
+#BK-index-header-left{
     text-align: left;
+}
+
+#BK-index-header-right{
+    text-align:right;
+}
+
+/* stil for tabellene med medlemmer */
+
+#BK-index-member-table {
     border-collapse: collapse;
-    background: url('/images/bk/LOGO_Hybrida.png') 300px 300px no-repeat;
-    background-position: center center;
+    width: 99%;
+    text-align: left;
 }
-#BK-index-activemember-table th
-{
-	padding: 12px;
-	font-weight: bold;
-	font-size: 14px;
-        border-bottom: 2px solid #6678b1;
+
+#BK-index-member-table *{
+    border: none;
 }
-#BK-index-activemember-table td
-{
-	padding: 9px 12px;
-	border-top: 1px solid #fff;
+
+#BK-index-member-table td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
 }
-#BK-index-activemember-table tfoot td
-{
-	font-size: 11px;
+
+#BK-index-member-table th {
+    color: #009;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
 }
-#BK-index-activemember-table tbody td
-{
-	background: url('/images/bk/back.png');
+
+#BK-index-member-table tr:hover{
+	background-color: #e1e3e5;
 }
-* html #BK-index-activemember-table tbody td
-{
-	/* 
-	   ----------------------------
-		PUT THIS ON IE6 ONLY STYLE 
-		AS THE RULE INVALIDATES
-		YOUR STYLESHEET
-	   ----------------------------
-	*/
-	filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='/images/bk/back.png',sizingMethod='crop');
-	background: none;
-}	
-#BK-index-activemember-table tbody tr:hover td
-{
-	color: #339;
-	background: none;
+
+#BK-index-member-table tr:first-child {
+    background-color: transparent;
 }
+
+#BK-index-checkboxcell {
+    text-align: center;
+}
+
+#BK-index-membertable td input[type=checkbox] { 
+	display: block;
+	position: relative;
+	margin-left:auto; 
+	margin-right:auto;
+	}
+        
+/* stil for tabellen med knapp og tillegging av medlemmer */
+
+#BK-index-member-supporttable { 
+	width: 100%;
+	}
+        
+#BK-index-member-supporttable input[type=submit] { 
+	height: 81px;
+	width: 200px;
+	font-weight: bolder;
+	}
+        
+#BK-index-buttoncell { 
+	text-align: center; 
+        vertical-align: middle;
+	}
+        
+/* stil for tabellen med tillegging av medlemmer */
+
+#BK-index-addmember-table{
+        text-align: left;
+        width: 100%;
+}
+
+#BK-index-addmember-table td {
+       
+}
+
+#BK-index-addmember-table input[type=text] { 
+	width: 100%;
+	}
+        
+#BK-index-addmember-table select { 
+	width: 100%;
+	}
+        
+/* stil for tabellen for redigering av et medlem */
+
+#BK-index-editmember-table {
+        width: 60%;
+	text-align: left;
+	}
+        
+#BK-index-editmember-table td {
+        padding: 5px 0px;
+	}
+        
+#BK-index-editmember-table input[type=text] { 
+	width: 100%;
+        height: 25px;
+	}
+        
+#BK-index-editmember-button input[type=submit] {
+	height: 50px;
+	width: 133px;
+	font-weight: bolder;
+	}
