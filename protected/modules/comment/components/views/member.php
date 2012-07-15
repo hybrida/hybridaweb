@@ -60,6 +60,20 @@
 			});
 			return false;
 		});
+		
+		function flashComment(commentName) {
+			var element = $('.' + commentName);
+			element.css('background-color', '#ffc');
+			element.animate({
+				backgroundColor: '#fff'
+			}, 2000, 'easeInOutSine');
+		}
+		
+		function flashCurrentComment() {
+			var commentName = window.location.hash.substring(1);
+			flashComment(commentName)
+		}
+		flashCurrentComment();
 	});
 
 	function deleteComment(id) {

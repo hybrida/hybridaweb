@@ -1,5 +1,5 @@
 <? foreach ($models as $model): ?>
-    <div class="comment">
+	<div class="comment comment-<?=$model->id?>">
 		<a name="comment-<?=$model->id?>" />
         <div class="comment-left">
             <div class="profile-image">
