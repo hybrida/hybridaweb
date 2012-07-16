@@ -351,7 +351,7 @@ class BktoolController extends Controller {
                     $bkForms->addCompanyComment($_POST['comment'], $id);
                     
                     $bkTool = new Bktool();
-                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                     foreach ($data['members'] as $member) :
                         $bkForms->addCompanyCommentUpdate($id, $member['id']);
                     endforeach;
@@ -368,7 +368,7 @@ class BktoolController extends Controller {
             
                 $bkTool = new Bktool();
 		$data = array();
-                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
                 $data['parentCompanyId'] = $bkTool->getParentCompanyBySubCompanyId($id);
@@ -436,7 +436,7 @@ class BktoolController extends Controller {
                     $this->actionEditcompany($id, $errordata);
                 }
                 else{
-                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                     foreach ($data['members'] as $member) :
 
                         if($bkForms->hasCompanyNameChanged($id, $_POST['editedcompany'])){
@@ -505,7 +505,7 @@ class BktoolController extends Controller {
             
                 $bkTool = new Bktool();
 		$data = array();
-                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstName', 'ASC');
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
@@ -582,7 +582,7 @@ class BktoolController extends Controller {
                         endforeach;
                     }
                     
-                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                     foreach ($data['members'] as $member) :
                         $bkForms->addCompanyInsertionUpdate($member['id'], $companyId);
                         $bkForms->addCompanyStatusUpdate($member['id'], $companyId);
@@ -659,7 +659,7 @@ class BktoolController extends Controller {
                         $bkForms->updateGraduateWorkCompany($id, $_POST['workcompanyid']);
 
                         if($bkForms->isCompanySet($_POST['workcompanyid'])){
-                                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                                 foreach ($data['members'] as $member) :
                                     $bkForms->addCompanyGraduateUpdate($member['id'], $_POST['workcompanyid']);
                                 endforeach;
