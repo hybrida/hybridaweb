@@ -16,6 +16,7 @@
     <br/>
     <p>
         Når sluttdato for medlemskap blir satt, flyttes medlemmet til listen over tidligere medlemmer og status til alle bedrifter som medlemmet kontakter settes til 'Aktuell senere'.
+        Alle oppdateringer knyttet til medlemmet blir slettet.
     </p>
     <h3>
     <br/>

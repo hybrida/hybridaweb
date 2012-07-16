@@ -27,9 +27,48 @@ class BktoolController extends Controller {
 	public function actionIndex() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
                 
+                if(!isset($_GET['orderby'])){
+                    $_GET['orderby'] = 'firstName';
+                }
+                if(!isset($_GET['order'])){
+                    $_GET['order'] = 'DESC';
+                } 
+                
+                switch($_GET['orderby']){
+                    case 'comission':
+                        $_SESSION['orderby'] = 'comission';
+                        break;
+                    case 'firstName':
+                        $_SESSION['orderby'] = 'firstName';
+                        break;
+                    case 'phoneNumber':
+                        $_SESSION['orderby'] = 'phoneNumber';
+                        break;
+                    case 'username':
+                        $_SESSION['orderby'] = 'username';
+                        break;
+                    case 'lastLogin':
+                        $_SESSION['orderby'] = 'lastLogin';
+                        break;
+                    default:
+                        $_SESSION['orderby'] = 'firstName';
+                        break;
+                }
+                switch($_GET['order']){
+                    case 'ASC':
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                    case 'DESC':
+                        $_SESSION['order'] = 'ASC';
+                        break;
+                    default:
+                        $_SESSION['order'] = 'DESC';
+                        break;
+                }
+                
                 $bkTool = new Bktool();
 		$data = array();
-                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+                $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, $_SESSION['orderby'], $_SESSION['order']);
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['formerMembers'] = $bkTool->getAllFormerMembersByGroupId($this->bkGroupId);
                 
@@ -633,10 +672,46 @@ class BktoolController extends Controller {
         
         public function actionEditmembers($errordata=null) {
             $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+            
+            if(!isset($_GET['orderby'])){
+                $_GET['orderby'] = 'firstName';
+            }
+            if(!isset($_GET['order'])){
+                $_GET['order'] = 'DESC';
+            } 
+
+            switch($_GET['orderby']){
+                case 'comission':
+                    $_SESSION['orderby'] = 'comission';
+                    break;
+                case 'firstName':
+                    $_SESSION['orderby'] = 'firstName';
+                    break;
+                case 'start':
+                    $_SESSION['orderby'] = 'start';
+                    break;
+                case 'username':
+                    $_SESSION['orderby'] = 'username';
+                    break;
+                default:
+                    $_SESSION['orderby'] = 'firstName';
+                    break;
+            }
+            switch($_GET['order']){
+                case 'ASC':
+                    $_SESSION['order'] = 'DESC';
+                    break;
+                case 'DESC':
+                    $_SESSION['order'] = 'ASC';
+                    break;
+                default:
+                    $_SESSION['order'] = 'DESC';
+                    break;
+            }
 
             $bkTool = new Bktool();
             $data = array();
-            $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId);
+            $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, $_SESSION['orderby'], $_SESSION['order']);
             $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
             $data['formerMembers'] = $bkTool->getAllFormerMembersByGroupId($this->bkGroupId);
             $data['userList'] = $bkTool->getUsersDropDownArray();
@@ -657,6 +732,7 @@ class BktoolController extends Controller {
                 foreach ($_POST['selectedmembers'] as $memberId) :
                     $bkForms->deleteMemberById($memberId, $this->bkGroupId);
                     $bkForms->changeContactingStatusOnRemovalByMemberId($memberId);
+                    $bkForms->deleteAllUpdatesRelevantToUser($memberId);
                 endforeach;
             }
             
@@ -727,6 +803,7 @@ class BktoolController extends Controller {
                 else{
                     $enddate = date("Y-m-d", strtotime($_POST['end']));
                     $bkForms->changeContactingStatusOnRemovalByMemberId($id);
+                    $bkForms->deleteAllUpdatesRelevantToUser($id);
                 }
                 $bkForms->updateMembershipInfo($id, $this->bkGroupId, date("Y-m-d", strtotime($_POST['start'])), $enddate, $_POST['comission']);
                 $this->actionEditmembers();

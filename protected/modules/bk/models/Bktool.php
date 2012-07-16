@@ -583,7 +583,7 @@ class BkTool {
         return $data;   
     }
     
-    public function getAllActiveMembersByGroupId($id){
+    public function getAllActiveMembersByGroupId($id, $orderby, $order){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array(
@@ -593,7 +593,7 @@ class BkTool {
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND DATE(mg.end) = DATE('0000-00-00')
-                ORDER BY un.firstname ASC";
+                ORDER BY ".$orderby." ".$order."";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -613,7 +613,7 @@ class BkTool {
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
                 AND DATE(mg.end) != DATE('0000-00-00')
-                ORDER BY mg.end ASC";
+                ORDER BY mg.end DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

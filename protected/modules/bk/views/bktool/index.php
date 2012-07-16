@@ -28,11 +28,11 @@ for enkelhets skyld.
 <table id="BK-index-member-table">
         <tr>
             <th></th>
-            <th>Navn</th>
-            <th>Stilling</th>
-            <th>Telefonnummer</th>
-            <th>Brukernavn</th>
-            <th>Sist innlogget</th>
+            <th><?=CHtml::link('Navn', array('index?orderby=firstName&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Stilling', array('index?orderby=comission&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Telefonnummer', array('index?orderby=phoneNumber&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Brukernavn', array('index?orderby=username&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Sist innlogget', array('index?orderby=lastLogin&order='.$_SESSION['order'])) ?></th>
         </tr>
         <? foreach ($members as $member): ?>
             <tr>
@@ -72,8 +72,7 @@ for enkelhets skyld.
 <p>
     <h4>Virkemåten til verktøyet:</h4>
     <ul>
-        <p><li>Kun medlemmer av gruppen til <?= $this->title ?> på nettsiden <?= Yii::app()->name ?> har tilgang til dette verktøyet. 
-               Medlemmer administreres på <?=CHtml::link('Gruppesiden', array('/group')) ?> som andre grupper.</li></p>
+        <p><li>Kun medlemmer av gruppen til <?= $this->title ?> på nettsiden <?= Yii::app()->name ?> har tilgang til dette verktøyet.</li></p>
         <p><li>Alle med tilgang til denne modulen kan redigere, legge til og fjerne elementer.</li></p>
         <p><li>Alle endringer i modulen blir sporet og kommer som oppdateringer i feeden under <?=CHtml::link('Oppdateringer', array('updates')) ?> 
                 for hvert enkelt medlem.</li></p>
@@ -91,7 +90,6 @@ for enkelhets skyld.
                 Alle bedriftspresentasjoner vil uansett publiseres under <?=CHtml::link('Presentasjoner', array('presentations')) ?>, 
                 men kun presentasjoner med bedriftsnavn som tilsvarer et bedriftsnavn vi har i databasen vil kunne linkes til en bedrift.</li></p>
         <p><li>Statistikk over lønn til alumnistudenter har ikke blitt implementert i skrivende stund, selv om dette burde gjennomføres.</li></p>
-        <p><li>Hittil har funksjonalitet blitt prioritert over layout. Men hvis noen har lyst til å endre layouten i modulen er det fritt frem for dette.</li></p>
     </ul>
 </p>
 <p>

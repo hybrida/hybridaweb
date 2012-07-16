@@ -44,6 +44,18 @@ class Bkforms {
         $query->execute($data);
     }
     
+    public function deleteAllUpdatesRelevantToUser($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'userId' => $id
+        );
+        $sql = "UPDATE bk_company_update SET isDeleted = 'true' WHERE relevantForUserId = :userId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
     public function deleteUpdateByUpdateId($id){
         $this->pdo = Yii::app()->db->getPdoInstance();
 

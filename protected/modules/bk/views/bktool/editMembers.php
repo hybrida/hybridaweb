@@ -6,6 +6,7 @@
 <h2>Administrer medlemmer</h2>
 <p>
     Sletting av et medlem flytter medlemmet til listen over tidligere medlemmer og setter status til alle bedrifter som medlemmet kontakter til 'Aktuell senere'.
+    Alle oppdateringer knyttet til medlemmet blir slettet.
 </p>
 
 <form name='editmembersform' method='post' action='editmembersform'>
@@ -53,10 +54,10 @@
     <table id="BK-index-member-table">
             <tr>
                 <th></th>
-                <th>Navn</th>
-                <th>Stilling</th>
-                <th>Brukernavn</th>
-                <th>Medlem fra</th>
+                <th><?=CHtml::link('Navn', array('editmembers?orderby=firstName&order='.$_SESSION['order'])) ?></th>
+                <th><?=CHtml::link('Stilling', array('editmembers?orderby=comission&order='.$_SESSION['order'])) ?></th>
+                <th><?=CHtml::link('Brukernavn', array('editmembers?orderby=username&order='.$_SESSION['order'])) ?></th>
+                <th><?=CHtml::link('Medlem fra', array('editmembers?orderby=start&order='.$_SESSION['order'])) ?></th>
                 <th>Rediger</th>
                 <th>Slett</th>
             </tr>
