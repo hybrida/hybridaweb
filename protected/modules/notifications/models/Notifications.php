@@ -3,21 +3,30 @@
 class Notifications {
 
 	public static function addListener($type, $id, $userID) {
-		$where = "parentType = :type AND parentID = :id AND userID = :userID";
-		$listener = NotificationListener::model()->find($where, array(
-			'type' => $type,
-			'id' => $id,
-			'userID' => $userID,
-				));
-
-		if ($listener !== null) {
+		if (self::isUserAlreadyListening($type, $id, $userID)) {
 			return;
 		}
-		$listener = new NotificationListener;
-		$listener->parentType = $type;
-		$listener->parentID = $id;
-		$listener->userID = $userID;
-		$listener->save();
+		self::addNewListener($type, $id, $userID);
+	}
+
+	private static function addNewListener($type, $id, $userID) {
+		$sql = "INSERT INTO notification_listener
+				(parentType, parentID, userID) VALUES
+				(:type, :id, :userID)";
+		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$stmt->bindValue("type", $type);
+		$stmt->bindValue("id", $id);
+		$stmt->bindValue("userID", $userID);
+		$stmt->execute();
+	}
+
+	private static function isUserAlreadyListening($type, $id, $userID) {
+		$where = "parentType = :type AND parentID = :id AND userID = :userID";
+		$listenerCount = NotificationListener::model()->count($where, array(
+			'type' => $type,
+			'id' => $id,
+			'userID' => $userID));
+		return $listenerCount == 1;
 	}
 
 	public static function getListeners($type, $id) {
@@ -27,25 +36,27 @@ class Notifications {
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->execute(array(
 			'type' => $type,
-			'id' => $id,
-		));
+			'id' => $id	));
 		$listenerIDs = $stmt->fetchAll(PDO::FETCH_COLUMN);
-		if ($type == 'profile' && !in_array($id, $listenerIDs)){
-			$listenerIDs[] = $id;
-		}
-
+		self::appendProfileOwnerToListenerIDs($type, $id, $listenerIDs);
 		return $listenerIDs;
 	}
 
+	private static function appendProfileOwnerToListenerIDs($type, $id, & $listenerIDs) {
+		if ($type == 'profile' && !in_array($id, $listenerIDs)) {
+			$listenerIDs[] = $id;
+		}
+	}
+
 	public static function notify($type, $id, $statusCode, $changedByUserID = null, $commentID = null) {
-		$listeners = self::getListeners($type, $id);
-		foreach ($listeners as $listener) {
-			if ($listener == $changedByUserID)
+		$listenerIDs = self::getListeners($type, $id);
+		foreach ($listenerIDs as $listenerID) {
+			if ($listenerID == $changedByUserID)
 				continue;
 			$notification = new Notification;
 			$notification->parentID = $id;
 			$notification->parentType = $type;
-			$notification->userID = $listener;
+			$notification->userID = $listenerID;
 			$notification->statusCode = $statusCode;
 			$notification->changedByUserID = $changedByUserID;
 			$notification->commentID = $commentID;
@@ -81,10 +92,10 @@ class Notifications {
 
 	public static function getMessage($statusCode) {
 		switch ($statusCode) {
-			case 0:
+			case Notification::STATUS_CHANGED:
 				return 'gjorde en endring på';
 				break;
-			case 1:
+			case Notification::STATUS_NEW_COMMENT:
 				return 'kommenterte på';
 				break;
 		}
