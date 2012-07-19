@@ -1,17 +1,19 @@
 <h1>Kommentarer</h1>
 
 <div class="comment-view-all">
-	<?$this->render("comment.views.default._comments", array(
+	<?php
+	$this->render("comment.views.default._comments", array(
 		'models' => Comment::getAll($formModel->type, $formModel->id),
-	));?>
+	));
+	?>
 </div>
 
 <div class="comment-view-form">
-	
+
 	<?php
 	$form = $this->beginWidget('ActiveForm', array(
-			'id' => 'comment-form-form-form',
-			'enableAjaxValidation' => false,
+		'id' => 'comment-form-form-form',
+		'enableAjaxValidation' => false,
 			));
 	?>
 	<?= $form->hiddenField($formModel, 'type') ?>
@@ -24,11 +26,11 @@
 			'rows' => 10,
 		));
 		?>
-		<?php echo $form->error($formModel, 'content'); ?>
+		<?= $form->error($formModel, 'content'); ?>
 	</div>
 
-	<div class="row buttons">
-		<input type="submit" id="comment-submit" value="Send" />
+	<div class="row">
+		<input type="submit" id="comment-submit" value="Send" class="button" />
 	</div>
 
 	<?php $this->endWidget(); ?>
@@ -36,52 +38,53 @@
 </div><!-- form -->
 
 <?php
-	$loadUrl = Yii::app()->createUrl("/comment/default/view", array(
-			'type' => $formModel->type,
-			'id' => $formModel->id));
-	$deleteUrl = Yii::app()->createUrl("/comment/default/delete", array('id' => ''));
-	$submitUrl = Yii::app()->createUrl("/comment/default/submit");
+$deleteUrl = Yii::app()->createUrl("/comment/default/delete", array('id' => ''));
+$submitUrl = Yii::app()->createUrl("/comment/default/submit");
 ?>
 <script lang="javascript">
-
 	$(document).ready(function() {
-		jQuery('body')
-		.undelegate('#comment-submit','click')
-		.delegate('#comment-submit','click',function(){
-			$.ajax({
-				'type':'POST',
-				'url':'<?= $submitUrl ?>',
-				'cache':false,
-				'data': $(this).parents("form").serialize(),
-				'success':function(html){
-					$(".comment-view-all").html(html)
-					$("#CommentForm_content").val("")
-				}
+		
+		function attachSubmitAction() {
+			jQuery('body')
+			.undelegate('#comment-submit','click')
+			.delegate('#comment-submit','click',function(){
+				$.ajax({
+					'type':'POST',
+					'url':'<?= $submitUrl ?>',
+					'cache':false,
+					'data': $(this).parents("form").serialize(),
+					'success':function(html){
+						$(".comment-view-all").html(html)
+						$("#CommentForm_content").val("")
+					}
+				});
+				return false;
 			});
-			return false;
-		});
+		}
 		
 		function flashComment(commentName) {
-			var element = $('.' + commentName);
-			element.css('background-color', '#ffc');
-			element.animate({
+			var comment = $('.' + commentName);
+			comment.css('background-color', '#ffa');
+			comment.animate({
 				backgroundColor: '#fff'
-			}, 2000, 'easeInOutSine');
+			}, 3000, 'easeInOutSine');
 		}
 		
 		function flashCurrentComment() {
 			var commentName = window.location.hash.substring(1);
 			flashComment(commentName)
 		}
+		
+		attachSubmitAction();
 		flashCurrentComment();
 	});
-
+	
 	function deleteComment(id) {
-		var commentViewBox = $(".comment-view-all");
+		var commentViewAll = $(".comment-view-all");
 		var url = "<?= $deleteUrl ?>/" + id;
 		var shouldDelete = confirm("Vil du slette kommentaren?");
 		if (shouldDelete) {
-			commentViewBox.load(url);
+			commentViewAll.load(url);
 		}
 	}
 </script>
