@@ -11,19 +11,25 @@ class BpcUpdate {
 			'request' => 'get_events',
 			'event' => $bpcID,
 		);
-		$data = BpcCore::doRequest($postData);
-		if (isset($data['event'][0])) {
-			$event = $data['event'][0];
+		$response = $this->getBpcResponse($postData);
+		if (isset($response['event'][0])) {
+			$event = $response['event'][0];
 			$this->updateBedpres($event);
 		}
+	}
+	
+	protected function getBpcResponse($postdata) {
+		$request = new BpcRequest($postdata);
+		$request->send();
+		return $request->getResponse();
 	}
 
 	public function updateAll() {
 		$postData = array(
 			'request' => 'get_events',
 		);
-		$data = BpcCore::doRequest($postData);
-		$this->updateAllBedpresses($data);
+		$response = $this->getBpcResponse($postData);
+		$this->updateAllBedpresses($response);
 	}
 
 	private function updateAllBedpresses($data) {
@@ -98,9 +104,9 @@ class BpcUpdate {
 		$news->save();
 	}
 	
-	private function shortenIngress($string) {
-		$len = strlen($string);
-		if ($len < $this->MAX_INGRESS_LENGTH) return $string;
-		return substr($string, 0,$this->MAX_INGRESS_LENGTH) . "...";
+	private function shortenIngress($description) {
+		$descriptionLength = strlen($description);
+		if ($descriptionLength < $this->MAX_INGRESS_LENGTH) return $description;
+		return substr($description, 0,$this->MAX_INGRESS_LENGTH) . "...";
 	}
 }
