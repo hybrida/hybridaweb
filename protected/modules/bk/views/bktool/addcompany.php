@@ -11,13 +11,14 @@
 </p>
 
 <p>
-<div id="BK-add-container">
-    <form name="addcompanyform" method="post" action="addcompanyform">
-	<table>
+
+<form name="addcompanyform" method="post" action="addcompanyform">
+    <div id="BK-add-container">
+	<table id="BK-add-table">
             <tr>
 		<th>Bedriftsnavn*</th>
 		<th>
-                    <input type='text' name='addedcompany' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" /> Characters (255)<br/>
+                    <input type='text' name='addedcompany' maxlength="255" /> Characters (255)<br/>
                     <div id="BK-add-errormessage"><i><u><?= $errordata['addedcompanyerror'] ?></u></i></div>
                 </th>
             </tr>
@@ -34,7 +35,7 @@
             </tr>
             <tr>
 		<th>Adresse</th>
-		<th><input name="adress" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
+		<th><input name="address" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
             </tr>
             <tr>
                 <th>Postboks</th>
@@ -55,13 +56,30 @@
                 <th>Hjemmeside</th>
                 <th><input name="homepage" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
-                <th>Undergruppe av</br>(Man kan kun velge bedrifter som allerede finnes i databasen)</th>
+                <th>Undergruppe av</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
                 <th>
-                    <input type='text' name='parentcompany' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)"/>  Characters (255)<br/>
-                    <div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
+                    <select name="parentcompanyid">
+                            <option value="0">Ingen valgt</option>
+                            <? foreach($companiesList as $company) : ?>
+                                <option value="<?= $company['companyID'] ?>"><?= $company['companyName'] ?></option>
+                             <? endforeach ?>
+                    </select>
+                    <br/><div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
                 </th>
             </tr>
+        </table>
+    </div>
+        
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
 		<th>Relevant for studieretning</th>
 		<th>
@@ -70,6 +88,12 @@
                     <? endforeach ?> 
 		</th>
             </tr>
+        </table>
+    </div>
+        
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Kontaktet av</br>(Man kan kun velge personer som er aktive medlemmer av gruppen til <?= $this->title ?>)</th>
 		<th>
@@ -86,22 +110,30 @@
                         </select>
                 </th>
             </tr>
+        </table>
+    </div>
+        
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Status</br>("Ikke kontaktet" er standardvalg i databasen)</th>
                 <th>
                     <select name="status" size="4">	
-                        <option value="Aktuell senere" style="background:yellow;">Aktuell senere</option>
-			<option value="Blir kontaktet" style="background:#00CC00;">Blir kontaktet</option>				
-			<option value="Ikke kontaktet" style="background:white;" selected>Ikke kontaktet</option>	
-			<option value="Uaktuell" style="background:#FF0033;">Uaktuell</option>					
+                        <option value="Aktuell senere" style="color:#FF9900;">Aktuell senere</option>
+			<option value="Blir kontaktet" style="color:#009900;">Blir kontaktet</option>				
+			<option value="Ikke kontaktet" selected>Ikke kontaktet</option>	
+			<option value="Uaktuell" style="color:#CC0000;">Uaktuell</option>					
                     </select>
 		</th>
             </tr>
         </table>
+        </table>
+    </div>
         
-        <p align="center" >
-            <input type="submit" name="Submit" value="Legg til bedrift" />
-	</p>
-    </form>
-</div>
+    <br/>
+    <p id="BK-add-button" align="center" >
+        <input type="submit" name="Submit" value="Legg til bedrift" />
+    </p>
+</form>
 </p>

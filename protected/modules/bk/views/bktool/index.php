@@ -12,18 +12,27 @@ for enkelhets skyld.
 </p>
 
 <br/>
-<? foreach($membersSum as $sum) : ?>
-    <h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
-<? endforeach; ?>
+<table id="BK-index-header-table">
+    <tr>
+        <td id="BK-index-header-left">
+            <? foreach($membersSum as $sum) : ?>
+                <h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
+            <? endforeach; ?>
+        </td>
+        <td id="BK-index-header-right">
+            <h3><?=CHtml::link('Administrer medlemmer', array('editmembers')) ?></h3>
+        </td>
+    </tr>
+</table>
 
-<table id="BK-index-activemember-table">
+<table id="BK-index-member-table">
         <tr>
             <th></th>
-            <th>Navn</th>
-            <th>Stilling</th>
-            <th>Telefonnummer</th>
-            <th>Brukernavn</th>
-            <th>Sist innlogget</th>
+            <th><?=CHtml::link('Navn', array('index?orderby=firstName&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Stilling', array('index?orderby=comission&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Telefonnummer', array('index?orderby=phoneNumber&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Brukernavn', array('index?orderby=username&order='.$_SESSION['order'])) ?></th>
+            <th><?=CHtml::link('Sist innlogget', array('index?orderby=lastLogin&order='.$_SESSION['order'])) ?></th>
         </tr>
         <? foreach ($members as $member): ?>
             <tr>
@@ -38,11 +47,32 @@ for enkelhets skyld.
 </table>
 
 <br/>
+<h3>Tidligere medlemmer:</h3>
+
+<table id="BK-index-member-table">
+        <tr>
+            <th></th>
+            <th>Navn</th>
+            <th>Stilling</th>
+            <th>Medlem fra</th>
+            <th>Medlem til</th>
+        </tr>
+        <? foreach ($formerMembers as $member): ?>
+            <tr>
+                <td><?= Image::profileTag($member['imageId'], 'mini') ?></td>
+                <td><a href='/profil/<?= $member['username'] ?>'> <?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></a></td>
+                <td><?= $member['comission'] ?></td>
+                <td><?= $member['start'] ?></td>
+                <td><?= $member['end'] ?></td>
+            </tr>
+        <? endforeach; ?>
+</table>
+    
+<br/>
 <p>
     <h4>Virkemåten til verktøyet:</h4>
     <ul>
-        <p><li>Kun medlemmer av gruppen til <?= $this->title ?> på nettsiden <?= Yii::app()->name ?> har tilgang til dette verktøyet. 
-               Medlemmer administreres på <?=CHtml::link('Gruppesiden', array('/group')) ?> som andre grupper.</li></p>
+        <p><li>Kun medlemmer av gruppen til <?= $this->title ?> på nettsiden <?= Yii::app()->name ?> har tilgang til dette verktøyet.</li></p>
         <p><li>Alle med tilgang til denne modulen kan redigere, legge til og fjerne elementer.</li></p>
         <p><li>Alle endringer i modulen blir sporet og kommer som oppdateringer i feeden under <?=CHtml::link('Oppdateringer', array('updates')) ?> 
                 for hvert enkelt medlem.</li></p>
@@ -60,7 +90,6 @@ for enkelhets skyld.
                 Alle bedriftspresentasjoner vil uansett publiseres under <?=CHtml::link('Presentasjoner', array('presentations')) ?>, 
                 men kun presentasjoner med bedriftsnavn som tilsvarer et bedriftsnavn vi har i databasen vil kunne linkes til en bedrift.</li></p>
         <p><li>Statistikk over lønn til alumnistudenter har ikke blitt implementert i skrivende stund, selv om dette burde gjennomføres.</li></p>
-        <p><li>Hittil har funksjonalitet blitt prioritert over layout. Men hvis noen har lyst til å endre layouten i modulen er det fritt frem for dette.</li></p>
     </ul>
 </p>
 <p>

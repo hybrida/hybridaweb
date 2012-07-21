@@ -265,7 +265,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT companyID, companyName, adress, phoneNumber, homepage, mail, postbox, postnumber, postplace
+        $sql = "SELECT companyID, companyName, address, phoneNumber, homepage, mail, postbox, postnumber, postplace
                 FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
@@ -570,7 +570,7 @@ class BkTool {
             'userId' => $id
         );
         $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.username, un.altEmail, s.name, un.imageId,
-                c.companyName, un.workDescription, un.workPlace, un.graduationYear FROM user AS un 
+                c.companyName, un.workDescription, un.workPlace, un.graduationYear, un.workCompanyID FROM user AS un 
                 LEFT JOIN bk_company AS c ON un.workCompanyID = c.companyID
                 LEFT JOIN specialization AS s ON s.id = un.specializationId
                 WHERE un.id = :userId";
@@ -583,16 +583,37 @@ class BkTool {
         return $data;   
     }
     
-    public function getAllActiveMembersByGroupId($id){
+    public function getAllActiveMembersByGroupId($id, $orderby, $order){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
         $data = array(
             'groupId' => $id
         );
-        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, un.lastLogin, un.phoneNumber, mg.comission
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, un.lastLogin, un.phoneNumber, mg.comission, mg.start
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
-                AND mg.end IS NULL ORDER BY un.firstname ASC";
+                AND DATE(mg.end) = DATE('0000-00-00')
+                ORDER BY ".$orderby." ".$order."";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+        public function getAllFormerMembersByGroupId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'groupId' => $id
+        );
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, mg.comission, mg.start, mg.end
+                FROM user AS un, group_membership AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId
+                AND DATE(mg.end) != DATE('0000-00-00')
+                ORDER BY mg.end DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -611,7 +632,7 @@ class BkTool {
         $sql = "SELECT COUNT(DISTINCT un.id) AS sum
                 FROM user AS un, group_membership AS mg
                 WHERE un.id = mg.userId AND mg.groupId = :groupId
-                AND mg.end IS NULL";
+                AND DATE(mg.end) = DATE('0000-00-00')";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -644,6 +665,92 @@ class BkTool {
             'companyId' => $id
         );
         $sql = "SELECT companyName FROM bk_company WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+   public function getMembershipInfoById($id, $groupId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'userId' => $id,
+            'groupId' => $groupId
+        );
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, mg.comission, mg.start, mg.end
+                FROM user AS un, group_membership AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId AND un.id = :userId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getAllCompanyPresentations(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT un.id, un.firstName, un.middleName, un.lastName, un.imageId, un.username, mg.comission, mg.start, mg.end
+                FROM user AS un, group_membership AS mg
+                WHERE un.id = mg.userId AND mg.groupId = :groupId AND un.id = :userId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getCompaniesDropDownArray() {
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT companyID, companyName
+                FROM bk_company
+                ORDER BY companyName ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+
+    public function getUsersDropDownArray() {
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT id, firstName, middleName, lastName
+                FROM user
+                WHERE graduationYear > 2006
+                ORDER BY firstName ASC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getMemberNameById($memberId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'memberId' => $memberId
+        );
+        $sql = "SELECT id, firstName, middleName, lastName
+                FROM user
+                WHERE id = :memberId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

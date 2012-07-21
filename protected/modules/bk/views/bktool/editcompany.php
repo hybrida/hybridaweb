@@ -11,18 +11,18 @@
 </p>
 
 <p>
-<div id="BK-add-container">
-    <form name="editcompanyform" method="post"
-        <? foreach($companyContactInfo as $info) : ?>
-            action="editcompanyform?id=<?= $info['companyID'] ?>"
-        <? endforeach ?>
-        >
-	<table>
+<form name="editcompanyform" method="post"
+    <? foreach($companyContactInfo as $info) : ?>
+        action="editcompanyform?id=<?= $info['companyID'] ?>"
+    <? endforeach ?>
+    >
+    <div id="BK-add-container">
+	<table id="BK-add-table">
             <tr>
 		<th>Bedriftsnavn*</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input type='text' name='editedcompany' value='<?= $info['companyName'] ?>' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" /> Characters (255)<br/>
+                        <input type='text' name='editedcompany' value='<?= $info['companyName'] ?>' maxlength="255"/> Characters (255)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['editedcompanyerror'] ?></u></i></div>
                     <? endforeach ?>
 		</th>
@@ -54,7 +54,7 @@
 		<th>Adresse</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name="adress" type="text" class="textfield" value='<?= $info['adress'] ?>' maxlength="255" /> Characters (255)
+                        <input name="address" type="text" class="textfield" value='<?= $info['address'] ?>' maxlength="255" /> Characters (255)
                     <? endforeach ?>
 		</th>
             </tr>
@@ -97,17 +97,38 @@
                     <? endforeach ?>
 		</th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
-                <th>Undergruppe av</br>(Man kan kun velge bedrifter som allerede finnes i databasen)</th>
+                <th>Undergruppe av</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
                 <th>
-                    <input type='text' name='parentcompany' maxlength="255" onkeyup="ajax_showOptions(this, 'getCompanies', event)" 
-                        <? foreach($parentCompanyName as $info) : ?>           
-                            value='<?= $info['companyName'] ?>'
+                    <select name="parentcompanyid">
+                        <option value="0">Ingen valgt</option>
+
+                        <? foreach($companiesList as $company) : ?>
+                            <option value="<?= $company['companyID'] ?>"
+
+                                <? foreach($parentCompanyId as $info) : ?>
+                                    <? if($info['companyID'] == $company['companyID']){?>
+                                        selected
+                                    <? } ?>
+                                <? endforeach ?>
+                            ><?= $company['companyName'] ?></option>
                         <? endforeach ?>
-                    />  Characters (255)<br/>
-                    <div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
+                    </select>
+                    <br/><div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
 		</th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
 		<th>Relevant for studieretning</th>
 		<th>
@@ -122,6 +143,12 @@
                     <? endforeach ?> 
 		</th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Kontaktet av</br>(Man kan kun velge personer som er aktive medlemmer av gruppen til <?= $this->title ?>)</th>
 		<th>
@@ -142,29 +169,35 @@
                         </select>
                 </th>
             </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
             <tr>
                 <th>Status</br>("Ikke kontaktet" er standardvalg i databasen)</th>
                 <th>
                     <select name="status" size="4">	
-                        <option value="Aktuell senere" style="background:yellow;"
+                        <option value="Aktuell senere" style="color:#FF9900;"
                             <? foreach($status as $info) : ?>
                                 <?= ("Aktuell senere" == $info['status'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Aktuell senere
 			</option>
-			<option value="Blir kontaktet" style="background:#00CC00;"
+			<option value="Blir kontaktet" style="color:#009900;"
                             <? foreach($status as $info) : ?>
                                 <?= ("Blir kontaktet" == $info['status'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Blir kontaktet
 			</option>				
-			<option value="Ikke kontaktet" style="background:white;" 
+			<option value="Ikke kontaktet"
                             <? foreach($status as $info) : ?>
                                 <?= ("Ikke kontaktet" == $info['status'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Ikke kontaktet
 			</option>	
-			<option value="Uaktuell" style="background:#FF0033;"
+			<option value="Uaktuell" style="color:#CC0000;"
                             <? foreach($status as $info) : ?>
                                 <?= ("Uaktuell" == $info['status'] ? "selected" : ""); ?>
                             <? endforeach ?>
@@ -174,10 +207,11 @@
 		</th>
             </tr>
         </table>
-        
-        <p align="center" >
-            <input type="submit" name="Submit" value="Utfør endringer" />
-	</p>
-    </form>
-</div>
+    </div>
+    
+    <br/>
+    <p id="BK-add-button" align="center" >
+        <input type="submit" name="Submit" value="Utfør endringer" />
+    </p>
+</form>
 </p>
