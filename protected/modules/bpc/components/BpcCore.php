@@ -8,6 +8,12 @@ if (!function_exists("curl_init") || !function_exists("curl_setopt") || !functio
 	     On debian-based systems, this is simply done by "aptitude install php5-curl"');
 
 class BpcCore {
+	
+	public static function doRequest($postdata) {
+		$request = new BpcRequest($postdata);
+		$request->send();
+		return $request->getResponse();
+	}
 
 	public static function addAttending($bpcID, $userID) {
 		$user = User::model()->findByPk($userID);
