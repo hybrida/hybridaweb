@@ -4,26 +4,35 @@ class BpcUpdate {
 
 	private $news;
 	private $event;
-	private $MAX_INGRESS_LENGTH = 700;
+	private $signup;
+
+	const MAX_INGRESS_LENGTH = 700;
 
 	public function update($bpcID) {
 		$postData = array(
 			'request' => 'get_events',
 			'event' => $bpcID,
 		);
-		$data = BpcCore::doRequest($postData);
-		if (isset($data['event'][0])) {
-			$event = $data['event'][0];
+		$response = $this->getBpcResponse($postData);
+		if (isset($response['event'][0])) {
+			$event = $response['event'][0];
 			$this->updateBedpres($event);
 		}
+	}
+
+	protected function getBpcResponse($postdata) {
+		$request = new BpcRequest($postdata);
+		$request->send();
+		$response = $request->getResponse();
+		return $response;
 	}
 
 	public function updateAll() {
 		$postData = array(
 			'request' => 'get_events',
 		);
-		$data = BpcCore::doRequest($postData);
-		$this->updateAllBedpresses($data);
+		$response = $this->getBpcResponse($postData);
+		$this->updateAllBedpresses($response);
 	}
 
 	private function updateAllBedpresses($data) {
@@ -35,10 +44,11 @@ class BpcUpdate {
 		}
 	}
 
-	private function updateBedpres($bedpresData) {
-		$this->init($bedpresData['id']);
-		$this->saveEvent($bedpresData);
-		$this->saveNews($bedpresData);
+	private function updateBedpres($bedpressData) {
+		$this->init($bedpressData['id']);
+		$this->saveEvent($bedpressData);
+		$this->saveSignup($bedpressData);
+		$this->saveNews($bedpressData);
 	}
 
 	public function init($bpcID) {
@@ -47,15 +57,17 @@ class BpcUpdate {
 	}
 
 	private function initEvent($bpcID) {
-		$bedpress = EventCompany::model()->with('event')->find('bpcID = ?',array($bpcID));
+		$bedpress = EventCompany::model()->with('event')->find('bpcID = ?', array($bpcID));
 		$event = false;
 		if ($bedpress) {
 			$event = $bedpress->event;
 		}
 		if ($event) {
 			$this->event = $event;
+			$this->signup = $event->signup;
 		} else {
 			$this->event = new Event;
+			$this->signup = new Signup;
 		}
 	}
 
@@ -87,9 +99,19 @@ class BpcUpdate {
 		$event->saveBedpress($bpc['id']);
 	}
 
+	private function saveSignup($bpc) {
+		$signup = $this->signup;
+		$signup->close = $bpc['deadline'];
+		$signup->open = $bpc['registration_start'];
+		$signup->spots = $bpc['seats'];
+		$signup->eventId = $this->event->id;
+		$signup->status = Status::DELETED; //All signups happens through bpc
+		$signup->save();
+	}
+
 	private function saveNews($bpc) {
 		$news = $this->news;
-		$news->title = 'Bedpres: '.$bpc['title'];
+		$news->title = 'Bedpress: ' . $bpc['title'];
 		$news->content = $bpc['description_formatted'];
 		$news->ingress = $this->shortenIngress($bpc['description']);
 		$news->setParent('event', $this->event->id);
@@ -97,10 +119,12 @@ class BpcUpdate {
 		$news->authorId = null;
 		$news->save();
 	}
-	
-	private function shortenIngress($string) {
-		$len = strlen($string);
-		if ($len < $this->MAX_INGRESS_LENGTH) return $string;
-		return substr($string, 0,$this->MAX_INGRESS_LENGTH) . "...";
+
+	private function shortenIngress($description) {
+		$descriptionLength = strlen($description);
+		if ($descriptionLength < self::MAX_INGRESS_LENGTH)
+			return $description;
+		return substr($description, 0, self::MAX_INGRESS_LENGTH) . "...";
 	}
+
 }

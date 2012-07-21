@@ -50,9 +50,11 @@ class BpcEvent extends CModel {
 			'request' => 'get_events',
 			'event' => $this->id,
 		);
-		$request = BpcCore::doRequest($postdata);
-		if (!isset($request['error'])) {
-			$eventData = $request['event'][0];
+		$request = new BpcRequest($postdata);
+		$request->send();
+		$response = $request->getResponse();
+		if (!isset($response['error'])) {
+			$eventData = $response['event'][0];
 			$this->exists = true;
 			$this->setAttributes($eventData, false);
 			$this->attenders = new BpcAttending($this->id);
