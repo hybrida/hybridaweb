@@ -54,7 +54,7 @@
 		<th>Adresse</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name="adress" type="text" class="textfield" value='<?= $info['adress'] ?>' maxlength="255" /> Characters (255)
+                        <input name="address" type="text" class="textfield" value='<?= $info['address'] ?>' maxlength="255" /> Characters (255)
                     <? endforeach ?>
 		</th>
             </tr>

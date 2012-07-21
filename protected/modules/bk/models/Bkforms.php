@@ -213,24 +213,24 @@ class Bkforms {
         $query->execute($data);
     }
     
-    public function insertCompanyInformation($companyName, $mail, $phonenumber, $adress, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
+    public function insertCompanyInformation($companyName, $mail, $phonenumber, $address, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
             'companyName' => $companyName,
             'mail' => $mail,
             'phonenumber' => $phonenumber,
-            'adress' => $adress,
+            'address' => $address,
             'postbox' => $postbox,
             'postnumber' => $postnumber,
             'postplace' => $postplace,
             'homepage' => $homepage,
             'parentCompanyId' => $parentCompanyId,
             'status' => $status,
-            'addedById' => Yii::app()->user->id
+            'currentUserId' => Yii::app()->user->id
         );
-        $sql = "INSERT INTO bk_company (companyName, mail, phonenumber, adress, postbox, postnumber, postplace, homepage, subgroupOfID, status, addedByID, dateAdded, dateUpdated) 
-		VALUES (:companyName, :mail, :phonenumber, :adress, :postbox, :postnumber, :postplace, :homepage, :parentCompanyId, :status, :addedById, now(), now())";
+        $sql = "INSERT INTO bk_company (companyName, mail, phonenumber, address, postbox, postnumber, postplace, homepage, subgroupOfID, status, addedByID, updatedByID, dateAdded, dateUpdated) 
+		VALUES (:companyName, :mail, :phonenumber, :address, :postbox, :postnumber, :postplace, :homepage, :parentCompanyId, :status, :currentUserId, :currentUserId, now(), now())";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -323,7 +323,7 @@ class Bkforms {
         $query->execute($data);
     }
     
-    public function addCompanyAdressUpdate($relevantUserId, $companyId){
+    public function addCompanyAddressUpdate($relevantUserId, $companyId){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
@@ -455,7 +455,7 @@ class Bkforms {
         $query->execute($data);
     }
     
-    public function updateCompanyInformation($companyId, $companyName, $mail, $phonenumber, $adress, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
+    public function updateCompanyInformation($companyId, $companyName, $mail, $phonenumber, $address, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
                 $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
@@ -463,7 +463,7 @@ class Bkforms {
             'companyName' => $companyName,
             'mail' => $mail,
             'phonenumber' => $phonenumber,
-            'adress' => $adress,
+            'address' => $address,
             'postbox' => $postbox,
             'postnumber' => $postnumber,
             'postplace' => $postplace,
@@ -472,7 +472,7 @@ class Bkforms {
             'status' => $status,
             'updatedById' => Yii::app()->user->id
         );
-        $sql = "UPDATE bk_company SET companyName = :companyName, mail = :mail, phoneNumber = :phonenumber, adress = :adress, postbox = :postbox,
+        $sql = "UPDATE bk_company SET companyName = :companyName, mail = :mail, phoneNumber = :phonenumber, address = :address, postbox = :postbox,
                 postnumber = :postnumber, postplace = :postplace, homepage = :homepage, subgroupOfID = :parentCompanyId, status = :status,
                 updatedByID = :updatedById, dateUpdated = now() WHERE companyID = :companyId";
 
@@ -590,13 +590,13 @@ class Bkforms {
         endforeach;
     }
     
-    public function hasCompanyAdressChanged($companyId, $adress){
+    public function hasCompanyAddressChanged($companyId, $address){
         $this->pdo = Yii::app()->db->getPdoInstance();
 
         $data = array(
             'companyId' => $companyId
         );
-        $sql = "SELECT adress FROM bk_company WHERE companyID = :companyId";
+        $sql = "SELECT address FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -604,7 +604,7 @@ class Bkforms {
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         
         foreach ($data as $company) :
-            if($company['adress'] != $adress){
+            if($company['address'] != $address){
                 return true;
             }
         endforeach;

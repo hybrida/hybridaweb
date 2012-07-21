@@ -265,7 +265,7 @@ class BkTool {
         $data = array(
             'companyId' => $id
         );
-        $sql = "SELECT companyID, companyName, adress, phoneNumber, homepage, mail, postbox, postnumber, postplace
+        $sql = "SELECT companyID, companyName, address, phoneNumber, homepage, mail, postbox, postnumber, postplace
                 FROM bk_company WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);

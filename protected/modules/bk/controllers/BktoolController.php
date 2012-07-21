@@ -451,8 +451,8 @@ class BktoolController extends Controller {
                         if($_POST['phonenumber'] > 0 && $bkForms->hasCompanyPhoneNumberChanged($id, $_POST['phonenumber'])){
                             $bkForms->addCompanyPhonenumberUpdate($member['id'], $id);
                         }
-                        if($bkForms->hasCompanyAdressChanged($id, $_POST['adress'])){
-                            $bkForms->addCompanyAdressUpdate($member['id'], $id);
+                        if($bkForms->hasCompanyAddressChanged($id, $_POST['address'])){
+                            $bkForms->addCompanyAddressUpdate($member['id'], $id);
                         }
                         if($bkForms->hasCompanyPostboxChanged($id, $_POST['postbox'])){
                             $bkForms->addCompanyPostboxUpdate($member['id'], $id);
@@ -493,7 +493,7 @@ class BktoolController extends Controller {
                         $bkForms->nullifyAllCompanySpecializationsByCompanyId($id);
                     }
                     
-                    $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['adress'], 
+                    $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'], 
                                 $_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status']);
                     
                     $this->actionCompany($id);
@@ -562,7 +562,7 @@ class BktoolController extends Controller {
                     $this->actionAddcompany($errordata);
                 }
                 else {
-                    $bkForms->insertCompanyInformation($_POST['addedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['adress'], 
+                    $bkForms->insertCompanyInformation($_POST['addedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'], 
                                 $_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status']);
                     
                     
@@ -593,8 +593,8 @@ class BktoolController extends Controller {
                         if(!$bkForms->isInputFieldEmpty($_POST['phonenumber'])){
                             $bkForms->addCompanyPhonenumberUpdate($member['id'], $companyId);
                         }
-                        if(!$bkForms->isInputFieldEmpty($_POST['adress'])){
-                            $bkForms->addCompanyAdressUpdate($member['id'], $companyId);
+                        if(!$bkForms->isInputFieldEmpty($_POST['address'])){
+                            $bkForms->addCompanyAddressUpdate($member['id'], $companyId);
                         }
                         if(!$bkForms->isInputFieldEmpty($_POST['postbox'])){
                             $bkForms->addCompanyPostboxUpdate($member['id'], $companyId);

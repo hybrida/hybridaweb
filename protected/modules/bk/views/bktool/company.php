@@ -37,7 +37,7 @@
                 <th>Adresse</th>
                 <td>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <?= $info['adress'] ?>
+                        <?= $info['address'] ?>
                     <? endforeach ?>
                 </td>
             </tr>

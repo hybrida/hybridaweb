@@ -35,7 +35,7 @@
             </tr>
             <tr>
 		<th>Adresse</th>
-		<th><input name="adress" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
+		<th><input name="address" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
             </tr>
             <tr>
                 <th>Postboks</th>
