@@ -67,6 +67,8 @@ class BpcUpdate {
 			$this->signup = $event->signup;
 		} else {
 			$this->event = new Event;
+		}
+		if (!$this->signup) {
 			$this->signup = new Signup;
 		}
 	}
