@@ -20,7 +20,7 @@ class BpcRequest {
 
 	private function setPostdata($postdata) {
 		$this->initCommonPostdata();
-		array_merge($this->postdata, $postdata);
+		$this->postdata = array_merge($this->postdata, $postdata);
 	}
 
 	private function initCommonPostdata() {

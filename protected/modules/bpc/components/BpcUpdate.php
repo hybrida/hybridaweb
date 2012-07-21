@@ -21,7 +21,9 @@ class BpcUpdate {
 	protected function getBpcResponse($postdata) {
 		$request = new BpcRequest($postdata);
 		$request->send();
-		return $request->getResponse();
+		$response = $request->getResponse();
+		var_export($response);
+		return $response;
 	}
 
 	public function updateAll() {
