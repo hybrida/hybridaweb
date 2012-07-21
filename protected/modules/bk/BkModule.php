@@ -6,9 +6,6 @@ class BkModule extends CWebModule {
 	private $groupId = 57;
 
 	public function init() {
-		// this method is called when the module is being created
-		// you may place code here to customize the module or the application
-		// import the module-level models and components
 		$this->setImport(array(
 			'bk.models.*',
 			'bk.components.*',
@@ -24,20 +21,23 @@ class BkModule extends CWebModule {
 		else
 			return false;
 	}
-	
+
 	private function throwErrorIfNotBedkomMember() {
-		$gk = app()->gatekeeper;
-		$isBedkomMember = $gk->hasGroupAccess($this->groupId);
-		if (!$isBedkomMember) {
-			throw new CHttpException("Ingen tilgang", "Kun for medlemmer av Bedriftskomiteen");
+		if (user()->isGuest || !$this->isFormerOrCurrentBedkomMember()) {
+			throw new CHttpException(
+					400, "Kun for medlemmer av Bedriftskomiteen");
 		}
+	}
+
+	private function isFormerOrCurrentBedkomMember() {
+		return Yii::app()->gatekeeper->hasBeenGroupMember($this->groupId);
 	}
 
 	private function initAssets() {
 		$this->initCssAssets();
 		$this->initScriptAssets();
 	}
-	
+
 	private function initCssAssets() {
 		$url = $this->getAssetsDir() . "/css/";
 		$cs = Yii::app()->getClientScript();
@@ -47,10 +47,10 @@ class BkModule extends CWebModule {
 		$cs->registerCssFile($am->publish($url . 'company-style.css'));
 		$cs->registerCssFile($am->publish($url . 'companydistribution-style.css'));
 		$cs->registerCssFile($am->publish($url . 'companyoverview-style.css'));
-                $cs->registerCssFile($am->publish($url . 'index-style.css'));
+		$cs->registerCssFile($am->publish($url . 'index-style.css'));
 		$cs->registerCssFile($am->publish($url . 'updatedelements-style.css'));
 	}
-	
+
 	private function initScriptAssets() {
 		$url = $this->getAssetsDir() . "/scripts/";
 		$cs = Yii::app()->getClientScript();
@@ -59,7 +59,7 @@ class BkModule extends CWebModule {
 		$cs->registerScriptFile($am->publish($url . 'ajax-dynamic-list.js'));
 	}
 
-        public function getAssetsDir() {
+	public function getAssetsDir() {
 		return Yii::getPathOfAlias($this->_assetsDir);
 	}
 

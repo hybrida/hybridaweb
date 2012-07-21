@@ -19,5 +19,16 @@ class GatekeeperComponent extends CApplicationComponent {
 	public function hasAccess($id) {
 		return $this->gatekeeper->hasAccess($id);
 	}
+	
+	public function hasBeenGroupMember($groupId) {
+		$condition = "userID = :userID AND groupID = :groupID";
+		$params = array(
+			'userID' => user()->id,
+			'groupID' => $groupId,
+		);
+		$numberOfMemberships = (int) GroupMembership::model()->count(
+				$condition, $params);
+		return $numberOfMemberships > 0;
+	}
 
 }
