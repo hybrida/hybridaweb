@@ -12,11 +12,21 @@ class ShopController extends Controller
 		$catProducts = array();
 		$categories = $shop->getCategories();
 		$sizes = $shop->getSizes();
+		$curTime = $shop->getCurrentTime();
+		$curTimeID = $curTime['id'];
+		$userComments = $shop->getUserComments();
+		$isShopOpen = $shop->isShopOpen();
+		$comment = "";
+		if ($isShopOpen && isset($userComments[$curTimeID]))
+			$comment = $userComments[$curTimeID];
+
+		
 
 		if (isset($_POST['submit']))
 		{
 			$size    = $_POST['size'];
 			$qnty    = $_POST['qnty'];
+			$newComment = $_POST['comment'];
 
 			foreach ($qnty as $id => $q)
 			{
@@ -39,6 +49,21 @@ class ShopController extends Controller
 					$orders[] = array('id' => $id,
 									 'qnty' => $q,
 									 'size' => $size[$id]);
+			}
+
+			if ($newComment != $comment)
+			{
+				if (empty($comment))
+					$shop->insertComment($newComment, $curTimeID);
+				elseif (empty($newComment))
+					$shop->deleteComment($curTimeID);
+				else
+					$shop->updateComment($newComment, $curTimeID);
+
+				$userComments = $shop->getUserComments();
+				$comment = "";
+				if (isset($userComments[$curTimeID]))
+					$comment = $userComments[$curTimeID];
 			}
 
 			// Bare bestill dersom det ikke var noen feil
@@ -71,7 +96,8 @@ class ShopController extends Controller
 					'errors'     => $errors,
 					'size'       => $size,
 					'qnty'		 => $qnty,
-					'isShopOpen' => $shop->isShopOpen(),
+					'isShopOpen' => $isShopOpen,
+					'comment'    => $comment,
 					));
 	}
 
@@ -94,13 +120,17 @@ class ShopController extends Controller
 
 		if (sizeof($_POST) > 0)
 			foreach($_POST as $key => $value)
-				$shop->deleteOrder($key);
+				if ($value == "Fjern produkt")
+					$shop->deleteOrder($key);
+				elseif ($value == "Fjern info")
+					$shop->deleteComment($key);
 
 		$orders = $shop->getUserOrders();
 		$products = $shop->getProducts();
 		$sizes = $shop->getSizes();
 		$isShopOpen = $shop->isShopOpen();
 		$time = $shop->getCurrentTime();
+		$comments = $shop->getUserComments();
 
 		$timeOrders = array();
 		$sortedTimeOrders = array();
@@ -111,6 +141,9 @@ class ShopController extends Controller
 		foreach($timeOrders as $to)
 			usort($to, array("ShopController", "cmpOrder"));
 
+		foreach($comments as $tid => $c)
+			$timeOrders[$tid][] = array();
+
 		$this->render('orders',
 				array(
 					'timeOrders' => $timeOrders,
@@ -119,6 +152,7 @@ class ShopController extends Controller
 					'isShopOpen' => $isShopOpen,
 					'time' => $time,
 					'times' => $shop->getTimes(),
+					'comments'    => $comments,
 					));
 	}
 
@@ -204,6 +238,10 @@ class ShopController extends Controller
 		$orders = $shop->getOrders();
 		$totalOrders = array();
 		$userOrders = array();
+		$comments = array();
+
+		if ($showTimeID != -1)
+			$comments = $shop->getCommentsByTimeID($showTimeID);
 
 		foreach ($orders as $o)
 		{
@@ -248,12 +286,21 @@ class ShopController extends Controller
 		if (!isset($userOrders[$showUserID][$showTimeID]))
 			$showUserID = -1;
 
+		$commentsByName = array();
+		foreach($comments as $c)
+		{
+			$name = $shop->getUserNameByID($c['user_id']);
+			$name = $name['firstName']." ".  $name['lastName'];
+			$commentsByName[$name] = $c['comment'];
+		}
+
 		$this->render('admin', 
 				array(
 					'post' => $_POST,
 					'userOrders' => $userOrders,
 					'orders' => $totalOrders,
 					'products' => $products,
+					'comments' => $commentsByName,
 					'sizes' => $sizes,
 					'times' => $times,
 					'showTimeID' => $showTimeID,

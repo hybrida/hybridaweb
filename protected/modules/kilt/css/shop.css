@@ -25,10 +25,11 @@
 /* Navigation bar end */
 
 /* shop page start */
+
 .shopTable
 {
 	width: 100%;
-	margin: 0px;
+	margin-left: 0 !important;
 }
 
 .shopContent
@@ -139,4 +140,12 @@
 .red
 {
 	background-color: #FDD;
+}
+
+textarea
+{
+	width: 80%;
+	height: 80px;
+	margin-left: 30px;
+	margin-right: 30px;
 }

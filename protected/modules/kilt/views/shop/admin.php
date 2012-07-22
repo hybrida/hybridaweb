@@ -11,7 +11,7 @@ if (!function_exists("preprint")) {
     } 
 }
 
-//preprint($post);
+//preprint($comments);
 //preprint($userOrders);
 ?>
 <!-- Tids-tabell -->
@@ -211,3 +211,37 @@ else
 		}
 	 ?>
 <? echo CHtml::endForm(); ?>
+
+<!-- Kommentar-tabell -->
+<?
+if ($showTimeID == -1)
+{}
+elseif (count($comments) == 0)
+	echo "<p class=\"adminText\">Det er ingen kommentarer i dette tidsrommet</p>";
+else
+{
+?>
+<table class="adminTable">
+	<tr>
+		<td colspan=4 class="adminTableTitle">
+			<?  echo "Kommentarer"; ?>
+			<hr>
+		</td>
+	</tr>
+	<tr>
+			<td class="adminTitle"> Navn </td>
+			<td class="adminTitle" colspan=3> Kommentar </td>
+	<tr>
+	<? foreach($comments as $name => $c): ?>
+		<tr><td colspan=2><br></td></tr>
+		<tr>
+			<td width="25%">
+				<?  echo $name; ?>
+			</td>
+			<td width=75%> <? echo $c; ?> </td>
+		</tr>
+	<? endforeach; ?>
+</table>
+<? 
+}
+?>

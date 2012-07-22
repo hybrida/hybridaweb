@@ -52,7 +52,18 @@
 			</td>
 		<? endforeach ?>
 	</tr>
+
 <? endforeach ?>	
+	<tr>
+		<td colspan=3  class="shopTitle">
+				Annet
+		</td>
+	</tr>	
+	<tr>
+		<td colspan=3  class="shopTitle">
+			<? echo CHtml::textArea('comment', $comment); ?>
+		</td>
+	</tr>	
 	<tr>
 		<td colspan=3  class="shopContent">
 			<? 

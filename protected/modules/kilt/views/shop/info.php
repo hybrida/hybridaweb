@@ -37,6 +37,10 @@ $this->renderPartial("_menu");
 	<p>
 		For priser se sidene til <a href="http://www.sportkilt.com">Sportkilt</a>
 	</p>
+	<p>
+		Om du vil ha noe annet fra sportkilt.com, spesielle ønsker osv, kan du skrive ekstra info under Annet når du bestiller
+		så skal vi se hva vi kan få til.
+	</p>
 
 	<h2> Størrelser</h2>
 	
