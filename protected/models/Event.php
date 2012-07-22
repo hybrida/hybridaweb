@@ -160,7 +160,7 @@ class Event extends CActiveRecord {
 		return gmdate("Ymd\THis\Z",strtotime($timeString));
 	}
 	
-	public function saveBedpress($bpcID, $companyID='NULL') {
+	public function saveBedpres($bpcID, $companyID='NULL') {
 		$eventCompany = EventCompany::model()->find("bpcID = ?", array(
 			$bpcID,
 		));

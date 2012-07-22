@@ -32,10 +32,10 @@ class BpcUpdate {
 			'request' => 'get_events',
 		);
 		$response = $this->getBpcResponse($postData);
-		$this->updateAllBedpresses($response);
+		$this->updateAllBedpreses($response);
 	}
 
-	private function updateAllBedpresses($data) {
+	private function updateAllBedpreses($data) {
 		if (!isset($data['event'])) {
 			return;
 		}
@@ -44,11 +44,11 @@ class BpcUpdate {
 		}
 	}
 
-	private function updateBedpres($bedpressData) {
-		$this->init($bedpressData['id']);
-		$this->saveEvent($bedpressData);
-		$this->saveSignup($bedpressData);
-		$this->saveNews($bedpressData);
+	private function updateBedpres($bedpresData) {
+		$this->init($bedpresData['id']);
+		$this->saveEvent($bedpresData);
+		$this->saveSignup($bedpresData);
+		$this->saveNews($bedpresData);
 	}
 
 	public function init($bpcID) {
@@ -57,10 +57,10 @@ class BpcUpdate {
 	}
 
 	private function initEvent($bpcID) {
-		$bedpress = EventCompany::model()->with('event')->find('bpcID = ?', array($bpcID));
+		$bedpres = EventCompany::model()->with('event')->find('bpcID = ?', array($bpcID));
 		$event = false;
-		if ($bedpress) {
-			$event = $bedpress->event;
+		if ($bedpres) {
+			$event = $bedpres->event;
 		}
 		if ($event) {
 			$this->event = $event;
@@ -98,7 +98,7 @@ class BpcUpdate {
 		$event->end = $bpc['time']; // FIXME
 		$event->location = $bpc['place'];
 		$event->save();
-		$event->saveBedpress($bpc['id']);
+		$event->saveBedpres($bpc['id']);
 	}
 
 	private function saveSignup($bpc) {
@@ -113,7 +113,7 @@ class BpcUpdate {
 
 	private function saveNews($bpc) {
 		$news = $this->news;
-		$news->title = 'Bedpress: ' . $bpc['title'];
+		$news->title = 'Bedpres: ' . $bpc['title'];
 		$news->content = $bpc['description_formatted'];
 		$news->ingress = $this->shortenIngress($bpc['description']);
 		$news->setParent('event', $this->event->id);

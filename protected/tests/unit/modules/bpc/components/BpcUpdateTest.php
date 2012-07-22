@@ -38,7 +38,7 @@ class BpcUpdateTest extends CTestCase {
 		$news = News::model()->find('parentType = "event" AND parentID = ?', array($eventID));
 		$this->assertNotNull($news);
 		$this->assertEquals($this->bedpress['description_formatted'], $news->content);
-		$this->assertEquals('Bedpress: ' . $this->bedpress['title'], $news->title);
+		$this->assertEquals('Bedpres: ' . $this->bedpress['title'], $news->title);
 		$this->assertEquals($this->bedpress['description'], $news->ingress); // Ingressen er for liten
 	}
 
