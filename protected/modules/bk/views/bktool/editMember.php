@@ -45,7 +45,7 @@
                 <input name="end" type="text" value="<?= ($member['end'] != '0000-00-00' ? $member['end'] : '' ) ?>" class="textfield" maxlength="10" />
             </td>
         </tr>
-    </table
+    </table>
     </h3>
     
     <? if(isset($errordata['starttimeerror'])){ ?>
