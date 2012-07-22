@@ -3,3 +3,6 @@ nbproject
 runtime
 .swp
 upc/
+.metadata/
+.project
+.buildpath
