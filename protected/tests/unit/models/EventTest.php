@@ -55,37 +55,37 @@ class EventTest extends CTestCase {
 		$this->assertEquals(null, $event->id);
 	}
 	
-	public function test_saveBedpress_numberOfEventCompanyRowsIncreasesByOne() {
+	public function test_saveBedpres_numberOfEventCompanyRowsIncreasesByOne() {
 		$count = EventCompany::model()->count();
 		$event = Util::getEvent();
-		$event->saveBedpress(rand(0,10000000));
+		$event->saveBedpres(rand(0,10000000));
 		$newCount = EventCompany::model()->count();
 		
 		$this->assertEquals($newCount, $count + 1, "The bedpress didn't get saved");
 	}
 	
 	
-	public function test_saveBedpress() {
+	public function test_saveBedpres() {
 		$randomNumber = rand(0,10000);
 		$secondRandomNumber = rand(0,100);
 		$event = $this->getNewEvent();
 		$event->save();
-		$event->saveBedpress($randomNumber, $secondRandomNumber);
+		$event->saveBedpres($randomNumber, $secondRandomNumber);
 		
 		$event2 = Event::model()->findByPk($event->id);
 		$bedpress = $event2->getBedpress();
 		$this->assertEquals($randomNumber, $bedpress->bpcID);
 	}
 	
-	public function test_saveBedpress_companyID_dont_change_when_saved_if_record_exists_and_companyID_isnt_specified() {
+	public function test_saveBedpres_companyID_dont_change_when_saved_if_record_exists_and_companyID_isnt_specified() {
 		$randomNumber = rand(0,10000);
 		$randomNumber2 = rand(0,10000);
 		$event = $this->getNewEvent();
 		$event->save();
-		$event->saveBedpress($randomNumber, $randomNumber2);
+		$event->saveBedpres($randomNumber, $randomNumber2);
 		
 		$event2 = Event::model()->findByPk($event->id);
-		$event2->saveBedpress($randomNumber);
+		$event2->saveBedpres($randomNumber);
 		
 		$event3 = Event::model()->findByPk($event->id);
 		$bedpress = $event3->getBedpress();
@@ -93,15 +93,15 @@ class EventTest extends CTestCase {
 		$this->assertEquals($randomNumber2, $bedpress->companyID);
 	}
 	
-	public function test_saveBedpress_changeCompanyIDToNull() {
+	public function test_saveBedpres_changeCompanyIDToNull() {
 		$randomNumber = rand(0,10000);
 		$randomNumber2 = rand(0,10000);
 		$event = $this->getNewEvent();
 		$event->save();
-		$event->saveBedpress($randomNumber, $randomNumber2);
+		$event->saveBedpres($randomNumber, $randomNumber2);
 		
 		$event2 = Event::model()->findByPk($event->id);
-		$event2->saveBedpress($randomNumber, null);
+		$event2->saveBedpres($randomNumber, null);
 		
 		$event3 = Event::model()->findByPk($event->id);
 		$bedpress = $event3->getBedpress();
