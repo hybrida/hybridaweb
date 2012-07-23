@@ -8,6 +8,7 @@ $this->widget('application.components.widgets.JobAnnouncementFeed');
 $this->endClip();
 ?>
 
+<div class="newsfeedIndex">
 <div class="feeds2">
 	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
@@ -47,3 +48,4 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 		count += <?= $limit ?>;
 	});
 </script>
+</div>

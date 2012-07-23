@@ -1,0 +1,12 @@
+.widget-articletree li{
+	list-style-type: none;
+	font-size: 18px;
+}
+
+.widget-articletree li a, .widget-articletree .current {
+	padding-left: 15px;
+}
+
+.widget-articletree li.hasChildren > a, .widget-articletree li.hasChildren > .current {
+	background: url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif') left center no-repeat;
+}

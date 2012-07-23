@@ -1,0 +1,58 @@
+.newsfeedIndex .element {
+	margin: 50px 30px;
+	height: auto;
+	width: auto;
+}
+.newsfeedIndex .header-wrapper {
+	border-bottom: 2px solid #0062c4;
+	margin-bottom: 0;
+	padding-bottom: 0;
+    overflow: hidden;
+    display: inline-block; /* Necessary to trigger "hasLayout" in IE */
+    display: block; /* Sets element back to block */
+}
+.newsfeedIndex .header-title {
+	float:left;
+	width: 400px;
+	margin-left: 20px;
+}
+
+.newsfeedIndex .element a {
+	text-decoration: none;
+	color: black;
+}
+
+.newsfeedIndex .header-title h1 {
+	margin: 0;
+	padding: 0;
+	font-weight: normal;
+}
+
+.newsfeedIndex .header-date {
+	float:right;
+	display: inline;
+	margin-top: 20px;
+	font-style: italic;
+	margin-right: 3px;
+}
+
+.newsfeedIndex .text-content {
+	margin-left: 20px;
+	margin-top: 0.4em;
+}
+
+.newsfeedIndex .text-content img {
+	clear: both;
+	margin: 10px auto;
+	display: block;
+}
+
+.newsfeedIndex .author {
+    font-style: italic;
+    position: relative;
+    padding-top: 10px;
+}
+
+.newsfeedIndex .author:before {
+    content: "Skrevet av ";
+}

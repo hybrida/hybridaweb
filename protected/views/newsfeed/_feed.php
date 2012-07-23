@@ -1,4 +1,3 @@
-<div id="newsfeed">
 <? if (empty($models)): ?>
     <p>
         Ingen flere nyheter
@@ -30,4 +29,3 @@
 		</div>
     </div>
 <? endforeach ?>
-</div>

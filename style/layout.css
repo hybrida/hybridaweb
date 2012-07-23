@@ -145,28 +145,6 @@ div.searchBox{
     text-decoration: underline;
 }
 
-.button {
-    min-width: 80px;
-    text-align: center;
-    
-    padding: 5px;
-    /* background-color: rgb(0, 73, 147); mork blaa */
-	background-color: rgb(0, 98, 196);
-    color: white;
-    
-    /* Overriding for <input>-buttons */
-    border: none;
-}
-
-/* Hovers handeled by animations.js */
-
-.buttonRightSide {
-    float: right;
-    margin-top: 5px;
-    display: block;
-    clear: both;
-}
-
 #edit a {
     display: block;
     padding: 5px;
@@ -202,23 +180,6 @@ div.searchBox{
 	background-color: white;
 }
 
-.feedTitle {
-	
-}
-
-.widget-articletree li{
-	list-style-type: none;
-	font-size: 18px;
-}
-
-.widget-articletree li a, .widget-articletree .current {
-	padding-left: 15px;
-}
-
-.widget-articletree li.hasChildren > a, .widget-articletree li.hasChildren > .current {
-	background: url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif') left center no-repeat;
-}
-
 .rightBar{
     width: 230px;
 	position: fixed;
@@ -250,3 +211,11 @@ li.collapsibleListClosed{
 }
 
 /* @end */
+
+.layout-loggedIn{
+    height: 25px;
+    font: 20px 'Gill';
+    font-weight: lighter;
+    float: right;
+    padding: 0px 2px 0px 0px;
+}

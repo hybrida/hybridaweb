@@ -17,15 +17,13 @@
 			OnloadScheduler.schedule(function(){ CollapsibleLists.apply(); });
 		</script>
 
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/style.css" />
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/controller.css" />
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/hintList.css" />
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/layout.css" />
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/destroy.css" />
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/fonts/fonts.css" />
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/pageContent.css" />
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/classList.css" />
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/widget-comment.css" />
+		
+		<? if (YII_DEBUG):?>
+			<?= CssIncluder::getCssTagsFromStyleDirectory(); ?>
+		<? else: ?>
+			<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/all-TIMESTAMP.css" />
+		<?endif ?>
 		
 		<!-- google analytics -->
 		<script type="text/javascript">
@@ -57,7 +55,7 @@
 					<nav>
 						<? $this->widget("application.components.widgets.TabNavigation"); ?>
 					</nav>
-					<div class="loggedIn">
+					<div class="layout-loggedIn">
 						<? $this->widget("application.components.widgets.UserOptions") ?>
 					</div>
 				</div>

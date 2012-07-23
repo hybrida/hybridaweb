@@ -1,0 +1,17 @@
+nav .navItems div {
+    height: 25px;
+    font: 20px 'Gill';
+    font-weight: lighter;
+    float: left;
+    border-style: solid;
+    border-color: #FFFFFF;
+    border-top-width: 0px;
+    border-bottom-width: 0px;
+    border-left-width: 0px;
+    border-right-width: 1px;
+    padding: 0px 11px 0px 10px;
+}
+
+nav .navItems div.last {
+    border-right-style: none;
+}
