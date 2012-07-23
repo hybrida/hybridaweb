@@ -1,1 +1,0 @@
-<? $this->widget('application.components.widgets.ActivitiesCalendar'); ?>
