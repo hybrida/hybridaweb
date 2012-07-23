@@ -44,24 +44,24 @@
 	font-size: 1em;
 }
 
-div.accessItem {
+.accessField div.accessItem {
 	display: block;
 	clear: both;
 }
 
-div.accessName {
+.accessField div.accessName {
 	float: left;
 	margin-left: 5px;
 }
 
-input.accessInput {
+.accessField input.accessInput {
 	float:left;
 }
 
-div.accessField div#Grupper div.accessName {
+.accessField div#Grupper div.accessName {
 	width: 5em;
 }
 
-div#Spesialisering div.accessName {
+.accessField div#Spesialisering div.accessName {
 	width: 11em;
 }

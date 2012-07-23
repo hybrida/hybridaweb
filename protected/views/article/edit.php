@@ -13,10 +13,7 @@
 		)));
 	?>
 
-<div class="form">
-	<div class="formHeader">
 		<h1>Rediger underside</h1>
-	</div>
 	
 	<div class="row">
 		<?= $form->labelEx($model, 'Tittel: ') ?>
@@ -42,19 +39,14 @@
 		<?php echo $form->error($model, 'content'); ?>
 	</div>
 	
-	<div class="formBoxRow">
+	<div class="row">
 		<?php echo $form->labelEx($model, 'Tilganger: '); ?>
 		<?php echo $form->accessField($model, 'access'); ?>
 		<?php echo $form->error($model, 'access'); ?>				
 	</div>
 
-	<div class="formElement">
-		<div class="formSubmit">
-			<?php echo CHtml::submitButton('Lagre', array(
-				'class'=> 'button'
-			)); ?>
-		</div>
-	</div>
-</div>
+	<?php echo CHtml::submitButton('Lagre', array(
+		'class'=> 'button'
+	)); ?>
 
 <? $this->endWidget() ?>
