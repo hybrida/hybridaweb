@@ -14,7 +14,7 @@ else
 				<td colspan=4 class="orderTableTitle">
 					<?
 						if ($curr)
-							echo "Dine nåværende bestillinger:";
+							echo "Dine bestillinger:";
 						else
 						{
 							echo "Dine bestillinger i tidsrommet ";
@@ -31,7 +31,7 @@ else
 				<td class="orderTitle">Antall</td>
 				<td class="orderTitle"><? if ($curr) echo "Slett"; else echo "Hentet"; ?> </td>
 			<tr>
-			<? foreach($orders as $o): ?>
+			<? foreach($orders as $o): if(empty($o)) break; ?>
 			<tr class="<? if (!$curr) echo ($o['recieved']) ? "green" : "red"; ?>">
 				<td class="orderContent">
 					<?
@@ -43,13 +43,32 @@ else
 				<td class="orderContent"> <? echo $o['product_quantity']; ?> </td>
 				<td class="orderContent">
 					<? if ($curr) 
-							echo CHtml::submitButton('X', 
+							echo CHtml::submitButton('Fjern produkt', 
 							array( 'name' => $o['id'], 'disabled' => !$curr,));
 						else
 							echo ($o['recieved']) ? "Ja" : "Nei"; ?>
 				</td>
 			</tr>
 			<? endforeach; ?>
+			<? if (isset($comments[$time_id])){ ?>
+			<tr>
+				<td colspan=4>
+					<hr>
+				</td>
+			<tr>
+			<tr>
+				<td><b>Info</b></td>
+				<td colspan=2>
+					<? echo $comments[$time_id]; ?>
+				</td>
+				<td>
+					<? if ($curr) 
+							echo CHtml::submitButton('Fjern info', 
+							array( 'name' => $time_id, 'disabled' => !$curr,));
+					?>
+				</td>
+			<tr>
+			<? } ?>
 		</table> 
 	<? endforeach;?>
 <?  echo CHtml::endForm(); ?>
