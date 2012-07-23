@@ -41,17 +41,17 @@
 	</head>
 
 	<body>
-		<div class="headerStripe">
-			<div class="header">
+		<div class="layout-headerStripe">
+			<div class="layout-header">
 				<a href="<?=Yii::app()->request->baseUrl?>" 
-						><img class="header-banner" src="<?= Yii::app()->request->baseUrl ?>/images/BannerLarge.png" alt="" /></a>
+						><img class="layout-headerBanner" src="<?= Yii::app()->request->baseUrl ?>/images/BannerLarge.png" alt="" /></a>
 				<div class="searchWrap">
 					<? $this->widget('search.components.SearchWidget') ?>
 				</div>
 			</div>
 
-			<div class="headerBottomStripe">
-				<div class="menu">
+			<div class="layout-headerBottomStripe">
+				<div class="layout-menu">
 					<nav>
 						<? $this->widget("application.components.widgets.TabNavigation"); ?>
 					</nav>
@@ -62,7 +62,7 @@
 			</div>
 		</div>
 
-		<div class="mainWrap">
+		<div class="layout-mainWrap">
 			<?= $content ?>
 		</div>
 

@@ -228,3 +228,38 @@ table#membertable *{
     display: block;
     clear: both;
 }
+
+
+.collapsibleList li{
+  list-style: none;
+  
+  cursor:auto;
+}
+
+li.collapsibleListOpen{
+  list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+  cursor:pointer;
+}
+
+li.collapsibleListClosed{
+  list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+  cursor:pointer;
+}
+
+.barTitle{
+	color: #000000;
+	width: 170px;
+	border-bottom: 2px solid #0063c5;
+	margin: 2em 1em 0 1em;
+	padding-bottom: 0;
+	padding-left: 1em;
+	padding-right: 1em;
+	height: 1.5em;
+}
+
+.barText{
+	margin-bottom: 0;
+	margin-left: 2em;
+	margin-right: 10px;
+	margin-top: 0.5em;
+}

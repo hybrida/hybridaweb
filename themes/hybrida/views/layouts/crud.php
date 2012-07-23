@@ -1,5 +1,5 @@
 <?php $this->beginContent('//layouts/main'); ?>
-            <div class="content">	
+            <div class="layout-content">	
                 <?php if (isset($this->breadcrumbs)): ?>
                     <?php
                     $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -10,7 +10,7 @@
                 <?= $content ?>
             </div>
 
-            <div class="rightBar">
+            <div class="layout-rightBar">
 		<div id="sidebar">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(

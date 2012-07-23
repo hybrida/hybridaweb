@@ -31,3 +31,30 @@ ul#hintList li.highlight a {
 	background-color: #87ADEA;
 	text-decoration:underline;
 }
+
+.searchWrap{
+    vertical-align: top;
+	position: relative;
+	padding: 0;
+	float: none;
+	bottom: 60px;
+	left: 845px;
+	width: 135px;
+}
+
+div.search {
+	width: 130px;
+	float: left;
+}
+
+.search input {
+	width: 100px;
+	float: left;
+}
+
+div.searchImg input{
+    width: 24px;
+    padding-top: 1px;
+	position: relative;
+	float: right;
+}

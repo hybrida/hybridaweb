@@ -1,5 +1,5 @@
 <?php $this->beginContent('//layouts/main'); ?>
-            <div class="content">	
+            <div class="layout-content">	
                 <?php if (isset($this->breadcrumbs) && isset($this->breadcrumbOptions)): ?>
                     <?php
                     $this->widget('application.components.widgets.BreadCrumb', array(
@@ -11,7 +11,7 @@
                 <?= $content ?>
             </div>
 
-            <div class="rightBar">
+            <div class="layout-rightBar">
 				<?= $this->clips['sidebar'] ?>
             </div>
 <?php $this->endContent(); ?>
