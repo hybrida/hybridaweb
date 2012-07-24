@@ -160,12 +160,26 @@
         </p>
     </td>
     <td id="BK-company-column">
-                <h3>Registrerte bedriftspresentasjoner</h3>
+            <div id="BK-company-presentationscontainer">
+            <? foreach($presentationsCount as $count) : ?>
+                <h3>Registrerte bedriftspresentasjoner (<?= $count['sum'] ?>)</h3>
+            <? endforeach ?>
+            
                 <table id="BK-company-presentationtable">
                     <tr>
                         <th>Dato</th>
                     </tr>
+                    <? foreach($presentationDates as $date) : ?>
+                        <tr><td>
+                            <? if($date['bpcID'] > 0){ ?>
+                                <?=CHtml::link($date['start'], array('/bedpres/'.$date['bpcID'].'/'.$date['title']))?>
+                            <? }else{ ?>
+                                <?= $date['start'] ?>
+                            <? } ?>
+                        </td></tr>
+                    <? endforeach ?>
                 </table>
+            </div>
         </td>
     </tr>
 </table>

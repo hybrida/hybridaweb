@@ -759,4 +759,78 @@ class BkTool {
         
         return $data; 
     }
+    
+    public function getAllCompanyEvents(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT n.title, c.companyName, e.start, YEAR(e.start) AS year, c.companyID, ec.bpcID
+                FROM news AS n, event AS e, event_company AS ec 
+                LEFT JOIN bk_company AS c ON ec.companyID = c.companyID 
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID
+                ORDER BY e.start DESC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getPresentationsSumForAllYears(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT COUNT(n.title) AS sum, YEAR(e.start) AS year
+                FROM news AS n, event AS e, event_company AS ec 
+                LEFT JOIN bk_company AS c ON ec.companyID = c.companyID 
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID
+                GROUP BY year
+                ORDER BY e.start DESC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
+    
+    public function getPresentationDatesByCompanyId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT n.title, e.start, ec.bpcID
+                FROM news AS n, event AS e, event_company AS ec 
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId
+                ORDER BY e.start DESC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getPresentationsCountByCompanyId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT COUNT(n.title) AS sum
+                FROM news AS n, event AS e, event_company AS ec 
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
 }

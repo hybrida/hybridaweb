@@ -260,8 +260,13 @@ class BktoolController extends Controller {
 
 	public function actionPresentations() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
+                
+                $bkTool = new Bktool();
+		$data = array();
+                $data['companyEvents'] = $bkTool->getAllCompanyEvents();
+                $data['years'] = $bkTool->getPresentationsSumForAllYears();
             
-		$this->render('presentations');
+		$this->render('presentations', $data);
 	}
 
         public function actionGraduationyear($id) {
@@ -325,6 +330,8 @@ class BktoolController extends Controller {
 		$data = array();
                 $data['companyId'] = $id;
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
+                $data['presentationDates'] = $bkTool->getPresentationDatesByCompanyId($id);
+                $data['presentationsCount'] = $bkTool->getPresentationsCountByCompanyId($id);
                 $data['employedGraduates'] = $bkTool->getEmployedGraduatesByCompanyId($id);
                 $data['employedGraduatesSum'] = $bkTool->getSumOfEmployedGraduatesByCompanyId($id);
                 $data['parentCompanyName'] = $bkTool->getParentCompanyBySubCompanyId($id);

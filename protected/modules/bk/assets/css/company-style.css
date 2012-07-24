@@ -34,11 +34,11 @@
 }
 	
 #BK-company-informationtable td{
-	text-align: left;
-	width: 50%;
-	padding: 5px;
-        border-bottom: 1px solid #ccc;
-	}
+    text-align: left;
+    width: 50%;
+    padding: 5px;
+    border-bottom: 1px solid #ccc;
+}
 
 #BK-company-informationtable th{
     text-align: left;
@@ -73,27 +73,38 @@
 /* tabellen som inneholder bedriftspresentasjoner*/
 
 #BK-company-presentationtable{
-        padding: 0px 10px;
-	width: 100%;  
+	width: 100%;
+        text-align: center;
 }
         
 #BK-company-presentationtable *{
     border: none;
 }
 	
-#BK-company-presentationtable td{
-	text-align: left;
-	width: 50%;
-	padding: 4px;
-        border-bottom: 1px solid #ccc;
-	}
+#BK-company-presentationtable td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
+}
 
-#BK-company-presentationtable th{
-    text-align: left;
-    width: 50%;
-    padding: 4px;
+#BK-company-presentationtable th {
+    color: #009;
+    padding: 10px 8px;
     border-bottom: 2px solid #6678b1;
 }
+
+#BK-company-presentationtable tr:hover{
+    background-color: #e1e3e5;
+}
+
+#BK-company-presentationtable tr:first-child {
+    background-color: transparent;
+}
+
+
+#BK-company-presentationscontainer{
+        height: 100%;
+	overflow-y: scroll;
+	}
 
 /* kolonnene med redigeringslinker*/
 

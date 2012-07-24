@@ -1,0 +1,30 @@
+/* stil for siden med oversikt over bedriftspresentasjoner */
+        
+#BK-presentationstable{
+    border-collapse: collapse;
+    text-align: left;
+    width: 100%;
+}
+
+#BK-presentationstable *{
+    border: none;
+}
+
+#BK-presentationstable td {
+    border-bottom: 1px solid #ccc;
+    padding: 6px 8px;
+}
+
+#BK-presentationstable th {
+    color: #009;
+    padding: 10px 8px;
+    border-bottom: 2px solid #6678b1;
+}
+
+#BK-presentationstable tr:hover{
+	background-color: #e1e3e5;
+}
+
+#BK-presentationstable tr:first-child {
+    background-color: transparent;
+}
