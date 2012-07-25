@@ -1,7 +1,7 @@
 
-<div class='barTitle'>Arrangementer</div>
+<div class='g-barTitle'>Arrangementer</div>
 
-<div class="barText">
+<div class="g-barText">
 	<? foreach ($models as $model): ?>
 		<?= CHtml::link($model->title, $model->viewUrl) ?> <br>
 	<? endforeach ?>

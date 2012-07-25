@@ -169,7 +169,7 @@ li.collapsibleListClosed{
 	cursor:pointer;
 }
 
-.barTitle{
+.g-barTitle{
 	color: #000000;
 	width: 170px;
 	border-bottom: 2px solid #0063c5;
@@ -180,7 +180,7 @@ li.collapsibleListClosed{
 	height: 1.5em;
 }
 
-.barText{
+.g-barText{
 	margin-bottom: 0;
 	margin-left: 2em;
 	margin-right: 10px;
