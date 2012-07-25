@@ -55,29 +55,29 @@
 	height:150px;
 }
 
-table#membertable {
+table.g-membertable {
     margin: 2em auto;
     border-collapse: collapse;
 }
 
-table#membertable *{
+table.g-membertable *{
     border: none;
 }
 
-#membertable td {
+.g-membertable td {
     margin: 0;
 }
 
-#membertable th, #membertable td {
+.g-membertable th, .g-membertable td {
     padding: 2px 1.5em; 
 }
 
 
-#membertable tr:hover {
+.g-membertable tr:hover {
     background-color: #e1e3e5;
 }
 
-#membertable tr:first-child {
+.g-membertable tr:first-child {
     background-color: transparent;
 }
 

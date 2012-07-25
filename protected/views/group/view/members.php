@@ -6,7 +6,7 @@
 
 <h2>Medlemmer </h2>
 
-<div id="membertable">
+<div class="g-membertable">
     <table>
         
         <tr>

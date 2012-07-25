@@ -22,7 +22,7 @@ $this->endClip();
 </div>
 
 
-<table id="membertable">
+<table class="g-membertable">
     <tr>
         <th></th><th>Navn</th><th>Medlemskap</th><th>Spesialisering</th>
     </tr>
