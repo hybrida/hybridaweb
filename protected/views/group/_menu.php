@@ -1,6 +1,6 @@
 
-<div id='groupNavigation'>
+<div id='g-groupNavigation'>
 	<?=CHtml::link('Medlemmer', array('/group/members', 'url' => $group->url), array(
-		'class' => 'groupNavigationItem',
+		'class' => 'g-groupNavigationItem',
 	))?>
 </div>

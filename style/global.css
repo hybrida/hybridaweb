@@ -135,7 +135,7 @@ table.g-membertable *{
 	top:1px;
 }
 
-#groupNavigation {
+#g-groupNavigation {
     font-size: 1em;
     clear: both;
     background-color: #0062c4;
@@ -143,14 +143,14 @@ table.g-membertable *{
     text-align: center;
 }
 
-#groupNavigation > .groupNavigationItem {
+#g-groupNavigation > .g-groupNavigationItem {
     margin-left: 5px;
     padding: 5px;
     color: white;
     text-decoration: none;
 }
 
-#groupNavigation > .groupNavigationItem:hover{
+#g-groupNavigation > .g-groupNavigationItem:hover{
     background-color: black;
 }
 

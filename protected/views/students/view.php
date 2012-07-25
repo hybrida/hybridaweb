@@ -11,12 +11,12 @@ $this->endClip();
 ?>
 
 <div class="memberlists">
-<div id='groupNavigation'>
+<div id='g-groupNavigation'>
 	<? for ($i = 1; $i <= 5; $i++): ?>
 		<?=	CHtml::link("$i. klasse", array(
 			"students/view",
 			'id' => YearConverter::classYearToGraduationYear($i)), array(
-			'class' => 'groupNavigationItem')) ?>
+			'class' => 'g-groupNavigationItem')) ?>
 	<? endfor ?>
 
 </div>
