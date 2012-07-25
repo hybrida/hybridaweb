@@ -18,7 +18,7 @@ $this->menu=array(
 
 <p>
 <?= CHtml::link("Lag annonse", array("booksale/create"), array(
-	'class' => 'button'
+	'class' => 'g-button'
 )); ?>
 </p>
 

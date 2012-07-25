@@ -30,7 +30,7 @@
 	</div>
 
 	<div class="row">
-		<input type="submit" id="comment-submit" value="Send" class="button" />
+		<input type="submit" id="comment-submit" value="Send" class="g-button" />
 	</div>
 
 	<?php $this->endWidget(); ?>

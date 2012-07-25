@@ -46,7 +46,7 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 				</a>
 			</div>
 			<div class="delete">
-				<a href="#" class="deleteButton" onclick="js:del(<?= $notification->id ?>, this, function(){})">
+				<a href="#" class="g-deleteButton" onclick="js:del(<?= $notification->id ?>, this, function(){})">
 					X
 				</a>
 			</div>

@@ -6,7 +6,7 @@
 <? if (user()->checkAccess('updateProfile', array('username' => $user->username))): ?>
 	
 	<?= CHtml::link('Edit', array('edit', 'username' => $user->username), array(
-		'class' => 'button buttonRightSide',
+		'class' => 'g-button g-buttonRightSide',
 	));?>
 <? endif ?>
 

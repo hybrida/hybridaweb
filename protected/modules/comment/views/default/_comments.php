@@ -13,7 +13,7 @@
 				<span class="comment-date">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<?= Html::dateToString($model->timestamp, 'long') ?></span>
 				<? if ($model->hasDeleteAccess()): ?>
-					<button class="deleteButton" onclick="deleteComment(<?= $model->id ?>)">X</button>
+					<button class="g-deleteButton" onclick="deleteComment(<?= $model->id ?>)">X</button>
 				<? endif; ?>
 			</div>
 			<div class="commentContent">

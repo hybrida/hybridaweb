@@ -231,7 +231,7 @@
 </div>
 <?=
 CHtml::submitButton('Lagre', array(
-    'class' => 'button',
+    'class' => 'g-button',
 ))
 ?>
 

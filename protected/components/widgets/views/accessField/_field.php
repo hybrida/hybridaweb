@@ -1,6 +1,6 @@
 <div class="accessSub">
 	<?= CHtml::button('X',array(
-		'class' => 'button buttonRightSide',
+		'class' => 'g-button g-buttonRightSide',
 		'onclick' => "js:$(this).closest('div').remove()",
 	)) ?>
 	<? if ($sub != 0): ?>

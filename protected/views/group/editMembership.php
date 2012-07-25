@@ -25,9 +25,9 @@
 	</div>
 
 
-	<div class="row buttons">
+	<div class="row">
 		<?php echo CHtml::submitButton('Submit', array(
-			'class' => 'button'
+			'class' => 'g-button'
 		)); ?>
 	</div>
 

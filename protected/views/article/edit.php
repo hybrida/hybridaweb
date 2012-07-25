@@ -46,7 +46,7 @@
 	</div>
 
 	<?php echo CHtml::submitButton('Lagre', array(
-		'class'=> 'button'
+		'class'=> 'g-button'
 	)); ?>
 
 <? $this->endWidget() ?>

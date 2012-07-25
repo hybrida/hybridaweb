@@ -37,7 +37,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 <? if ($hasEditAccess): ?>
 	<p>
 		<?= CHtml::link("Rediger",array("news/edit",'id' => $news->id), array(
-			'class' => 'button buttonRightSide'
+			'class' => 'g-button g-buttonRightSide'
 		)); ?>
 	</p>
 <? endif ?>
@@ -69,7 +69,7 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 		Html::link(
 				$isAttending ? "Meld meg av" : "Meld meg på", array(
 			'toggleAttending', 'eventId' => $event->id),  array(
-			'class' => 'button',
+			'class' => 'g-button',
 		))
 		?><p></p>
 	<? endif; ?>

@@ -81,7 +81,7 @@ table#membertable *{
     background-color: transparent;
 }
 
-.button {
+.g-button {
     min-width: 80px;
     text-align: center;
 
@@ -94,14 +94,14 @@ table#membertable *{
     border: none;
 }
 
-.buttonRightSide {
+.g-buttonRightSide {
     float: right;
     margin-top: 5px;
     display: block;
     clear: both;
 }
 
-.deleteButton {
+.g-deleteButton {
 	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
 	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
 	box-shadow:inset 0px 1px 0px 0px #f29c93;
@@ -123,14 +123,14 @@ table#membertable *{
 	text-shadow:1px 1px 0px #b23e35;
 }
 
-.deleteButton:hover {
+.g-deleteButton:hover {
 	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
 	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
 	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
 	background-color:#ce0100;
 }
 
-.deleteButton:active {
+.g-deleteButton:active {
 	position:relative;
 	top:1px;
 }

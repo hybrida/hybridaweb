@@ -1,7 +1,7 @@
 <div id="newsfeed">
     <p>
 		<?= CHtml::link("Rediger",array("booksale/update",'id' => $data->id), array(
-			'class' => 'button buttonRightSide'
+			'class' => 'g-button g-buttonRightSide'
 		)); ?>
     </p>
     <div class="element">

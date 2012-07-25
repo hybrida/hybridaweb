@@ -10,9 +10,9 @@ $this->beginClip('sidebar'); ?>
 <h1>Bedpres: <?=$event->title?></h1>
 <? if (user()->checkAccess('admin')): ?>
         <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
-			'class' => 'button buttonRightSide')); ?>
+			'class' => 'g-button g-buttonRightSide')); ?>
         <?= CHtml::link("Koble til bedrift",array("edit",'id' => $event->id), array(
-			'class' => 'button buttonRightSide')); ?>
+			'class' => 'g-button g-buttonRightSide')); ?>
 <? endif; ?>
 
 <? if ($news->imageId): ?>
@@ -43,7 +43,7 @@ $this->beginClip('sidebar'); ?>
 		Html::link(
 				$event->isAttending(user()->id) ? "Meld meg av" : "Meld meg på", array(
 			'toggleAttending', 'bpcId' => $event->id),  array(
-			'class' => 'button',
+			'class' => 'g-button',
 		))
 		?>
 	<? endif; ?>

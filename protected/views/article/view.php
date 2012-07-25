@@ -21,13 +21,13 @@ $this->endClip()
 <? if ($hasEditAccess): ?>
 	<p>
 	<?= CHtml::link("Lag underside", array("article/create", 'parentId' => $article->id), array(
-		'class' => 'button buttonRightSide'
+		'class' => 'g-button g-buttonRightSide'
 	)); ?>
 	</p>
 		
 	<p>
 	<?= CHtml::link("Rediger siden",array("article/edit",'id' => $article->id), array(
-		'class' => 'button buttonRightSide'
+		'class' => 'g-button g-buttonRightSide'
 	)); ?>
 	</p>
 <? endif ?>

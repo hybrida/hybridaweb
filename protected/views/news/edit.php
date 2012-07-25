@@ -170,7 +170,7 @@
 	</div>
 
 			<?= CHtml::submitButton('Lagre', array(
-				'class'=> 'button'
+				'class'=> 'g-button'
 			)); ?>
 
 	<?php $this->endWidget(); ?>

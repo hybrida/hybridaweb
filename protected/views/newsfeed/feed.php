@@ -12,7 +12,7 @@ $this->endClip();
 <div class="feeds2">
 	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
-			'class' => 'button buttonRightSide',
+			'class' => 'g-button g-buttonRightSide',
 	))	?>
 	<? endif ?>
 	<?	$this->renderPartial("_feed", array(
@@ -21,7 +21,7 @@ $this->endClip();
 
 </div>
 <?=CHtml::button('Vis flere', array(
-	'class' => 'button buttonRightSide',
+	'class' => 'g-button g-buttonRightSide',
 	'id' => 'fetchNews',
 ))?>
 

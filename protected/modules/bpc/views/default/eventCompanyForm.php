@@ -23,7 +23,7 @@
 
 	<div class="row buttons">
 		<?=	CHtml::submitButton('Submit', array(
-			'class' => 'button'
+			'class' => 'g-button'
 		)) ?>
 	</div>
 

@@ -13,7 +13,7 @@
 
 <?=
 CHtml::button('Legg til nytt tilgangsfelt', array(
-	'class' => "button fetchNewAccessBlock{$this->id}",
+	'class' => "g-button fetchNewAccessBlock{$this->id}",
 ))
 ?>
 

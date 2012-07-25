@@ -8,8 +8,6 @@
 	echo CHtml::link("Rediger medlemsliste", array(
 		'editMembers',
 		'url' => $group->url,
-	), array(
-		//'class' => 'button',
 	));
 }
 ?>
