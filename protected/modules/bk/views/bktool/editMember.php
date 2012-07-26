@@ -16,7 +16,7 @@
     <br/>
     <p>
         Når sluttdato for medlemskap blir satt, flyttes medlemmet til listen over tidligere medlemmer og status til alle bedrifter som medlemmet kontakter settes til 'Aktuell senere'.
-        Alle oppdateringer knyttet til medlemmet blir slettet.
+        Alle oppdateringer knyttet til medlemmet blir slettet. Tidligere medlemmer har også tilgang til BK-modulen.
     </p>
     <h3>
     <br/>

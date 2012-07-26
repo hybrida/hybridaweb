@@ -6,7 +6,7 @@
 <h2>Administrer medlemmer</h2>
 <p>
     Sletting av et medlem flytter medlemmet til listen over tidligere medlemmer og setter status til alle bedrifter som medlemmet kontakter til 'Aktuell senere'.
-    Alle oppdateringer knyttet til medlemmet blir slettet.
+    Alle oppdateringer knyttet til medlemmet blir slettet. Tidligere medlemmer har også tilgang til BK-modulen.
 </p>
 
 <form name='editmembersform' method='post' action='editmembersform'>
@@ -74,7 +74,7 @@
             <? endforeach; ?>
     </table>
 </form>
-    
+
 <br/>
 <h3>Tidligere medlemmer:</h3>
 
