@@ -72,7 +72,8 @@ for enkelhets skyld.
 <p>
     <h4>Virkemåten til verktøyet:</h4>
     <ul>
-        <p><li>Kun medlemmer av gruppen til <?= $this->title ?> på nettsiden <?= Yii::app()->name ?> har tilgang til dette verktøyet.</li></p>
+        <p><li>Kun medlemmer av gruppen til <?= $this->title ?> på nettsiden <?= Yii::app()->name ?> har tilgang til dette verktøyet. Dette gjelder både
+                aktive og tidligere medlemmer.</li></p>
         <p><li>Alle med tilgang til denne modulen kan redigere, legge til og fjerne elementer.</li></p>
         <p><li>Alle endringer i modulen blir sporet og kommer som oppdateringer i feeden under <?=CHtml::link('Oppdateringer', array('updates')) ?> 
                 for hvert enkelt medlem.</li></p>
