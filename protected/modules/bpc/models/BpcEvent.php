@@ -82,8 +82,8 @@ class BpcEvent extends CModel {
 		$classYear = $user->classYear;
 		$signupIsOn = $this->registration_started == 1 && $this->deadline_passed == 0;
 		$okYear = $classYear >= $this->min_year && $classYear <= $this->max_year;
-		$hasAccess = app()->gatekeeper->hasPostAccess('bpc', $this->id);
-		return $signupIsOn && $okYear && $hasAccess;
+		$availableSeats = $this->seats_available > 0;
+		return $signupIsOn && $okYear && $availableSeats;
 	}
 	
 	public function getAttending() {
