@@ -1,5 +1,6 @@
 var inDuration = 0;
 var outDuration = 0;
+var buttonClassSelector = '.g-button';
 
 // var inDuration = 'fast';
 // var outDuration = 'medium';
@@ -9,7 +10,7 @@ var defaultLinkBackgroundColor = "rgb(0, 98, 196)"
 var hoverLinkBackgroundColor = "black";
 
 $('document').ready(function(){
-    $('.button').hover(function(){
+    $(buttonClassSelector).hover(function(){
 		$(this).css({
 				'cursor': 'pointer'
 			});
@@ -34,6 +35,6 @@ $('document').ready(function(){
 		);
     });
     
-    $('.button').css({textDecoration: "underline"});
+    $(buttonClassSelector).css({textDecoration: "underline"});
     
 });
