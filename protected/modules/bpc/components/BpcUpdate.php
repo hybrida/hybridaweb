@@ -113,13 +113,18 @@ class BpcUpdate {
 
 	private function saveNews($bpc) {
 		$news = $this->news;
-		$news->title = 'Bedpres: ' . $bpc['title'];
+		$news->title = $this->getNewsTitle($bpc['title']);
 		$news->content = $bpc['description_formatted'];
 		$news->ingress = $this->shortenIngress($bpc['description']);
 		$news->setParent('event', $this->event->id);
 		$news->save();
 		$news->authorId = null;
 		$news->save();
+	}
+	
+	private function getNewsTitle($bpcTitle) {
+		$title =  'Bedpres: ' . $bpcTitle;
+		return substr($title,0, 50);
 	}
 
 	private function shortenIngress($description) {
