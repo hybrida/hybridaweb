@@ -178,5 +178,9 @@ class Event extends CActiveRecord {
 	public function getBedpress() {
 		return EventCompany::model()->findByPk($this->id);
 	}
+	
+	public function getNews() {
+		return News::model()->find("parentType = 'event' AND parentId = ?", array($this->id));
+	}
 
 }
