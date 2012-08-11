@@ -160,9 +160,14 @@ class Groups extends CActiveRecord {
 	}
 	
 	public function getActiveMemberships() {
-		return GroupMembership::model()->with('user')->findAll("groupId = :groupId AND end = '" .  self::STILL_ACTIVE . "'" , array(
-			'groupId' => $this->id,
-		));
+		$criteria = new CDbCriteria();
+		$criteria->condition = "groupId = :groupId AND end = :stillActive";
+		$criteria->params = array(
+			':groupId' => $this->id,
+			':stillActive' => self::STILL_ACTIVE,
+		);
+		$criteria->order = "firstName ASC";
+		return GroupMembership::model()->with('user')->findAll($criteria);
 	}
 
 	public function removeMember($userId) {
