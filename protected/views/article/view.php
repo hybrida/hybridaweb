@@ -17,25 +17,26 @@ $this->beginClip('sidebar');
 $this->endClip()
  
 ?>
+<div class="articleIndex">
+	<? if ($hasEditAccess): ?>
+		<p>
+		<?= CHtml::link("Lag underside", array("article/create", 'parentId' => $article->id), array(
+			'class' => 'g-button g-buttonRightSide'
+		)); ?>
+		</p>
 
-<? if ($hasEditAccess): ?>
-	<p>
-	<?= CHtml::link("Lag underside", array("article/create", 'parentId' => $article->id), array(
-		'class' => 'g-button g-buttonRightSide'
-	)); ?>
-	</p>
-		
-	<p>
-	<?= CHtml::link("Rediger siden",array("article/edit",'id' => $article->id), array(
-		'class' => 'g-button g-buttonRightSide'
-	)); ?>
-	</p>
-<? endif ?>
-<div id="article">	
-	<div id="article-title">
-		<h1><?= $article->title ?> </h1>
-	</div>
-	<div id="article-content">
-		<?= $article->content ?>
+		<p>
+		<?= CHtml::link("Rediger siden",array("article/edit",'id' => $article->id), array(
+			'class' => 'g-button g-buttonRightSide'
+		)); ?>
+		</p>
+	<? endif ?>
+	<div id="article">
+		<div id="article-title">
+			<h1><?= $article->title ?> </h1>
+		</div>
+		<div id="article-content">
+			<?= $article->content ?>
+		</div>
 	</div>
 </div>
