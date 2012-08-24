@@ -12,6 +12,7 @@ class AccessField extends CWidget {
 
 	public function init() {
 		$this->initNameID();
+		$this->initAccess();
 	}
 
 	public function initNameID() {
@@ -20,6 +21,38 @@ class AccessField extends CWidget {
 			CHtml::resolveNameID($this->model, $this->attribute, $array);
 			$this->name = $array['name'];
 			$this->id = $array['id'];
+		}
+	}
+
+	public function initAccess() {
+		if (!$this->model) {
+			$this->access = array();
+			return;
+		}
+		$this->initAccessOnModel();
+	}
+
+	private function initAccessOnModel() {
+		$path = explode('[', str_replace("]", "", $this->attribute));
+		if (method_exists($this->model, "getAccess")) {
+			$access = $this->model->getAccess();
+		} else {
+			$access = $this->model->getAttributes();
+			foreach ($path as $p) {
+				$access = $access[$p];
+			}
+		}
+		$this->access = $access;
+		$this->initAccessSubs();
+	}
+
+	private function initAccessSubs() {
+		if (empty($this->access)) {
+			$this->sub = 1;
+		} else if (is_array($this->access[0])) {
+			$this->sub = count($this->access);
+		} else {
+			$this->sub = 1;
 		}
 	}
 
