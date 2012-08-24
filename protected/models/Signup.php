@@ -159,6 +159,7 @@ class Signup extends CActiveRecord {
 	}
 
 	public function removeAttender($userId) {
+		if (!$this->signoff) return;
 		Yii::app()->db->createCommand()
 			->update('signup_membership', array('signedOff' => 'true',), 'eventId = :eventId AND userId = :userId', array(
 				':eventId' => $this->eventId,
@@ -265,6 +266,10 @@ class Signup extends CActiveRecord {
 		app()->gatekeeper->hasPostAccess('signup', $this->eventId) &&
 		app()->gatekeeper->hasPostAccess('event', $this->eventId) &&
 		!user()->isGuest;
+	}
+	
+	public function canUnattend() {
+		return $this->signoff === 'true' || $this->signoff === true;
 	}
 
 }
