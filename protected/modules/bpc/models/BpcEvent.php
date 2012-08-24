@@ -24,7 +24,6 @@ class BpcEvent extends CModel {
 	public $is_advertised;
 	public $logo;
 	private $exists = false;
-	
 	private $attenders;
 	private $waiters;
 
@@ -35,7 +34,7 @@ class BpcEvent extends CModel {
 		}
 		return null;
 	}
-	
+
 	public static function getByRequest($request) {
 		
 	}
@@ -78,40 +77,44 @@ class BpcEvent extends CModel {
 
 	public function canAttend($userId) {
 		$user = User::model()->findByPk($userId);
-		if (!$user) return false;
+		if (!$user) {
+			return false;
+		}
 		$classYear = $user->classYear;
-		$signupIsOn = $this->registration_started == 1 && $this->deadline_passed == 0;
+		$signupIsOn = $this->isOpen();
 		$okYear = $classYear >= $this->min_year && $classYear <= $this->max_year;
 		$availableSeats = $this->seats_available > 0;
 		return $signupIsOn && $okYear && $availableSeats;
 	}
-	
+
+	public function isOpen() {
+		return $this->registration_started == 1 && $this->deadline_passed == 0;
+	}
+
 	public function getAttending() {
 		return $this->attenders->activeRecords;
 	}
-	
+
 	public function getAttendingByYear() {
 		return $this->attenders->getActiveRecordsInYearArray();
 	}
-	
+
 	public function getWaiting() {
 		return $this->waiters->activeRecords;
 	}
-	
+
 	public function getWaitingByYear() {
 		return $this->waiters->getActiveRecordsInYearArray();
 	}
-	
-		
+
 	public function addAttending($userId) {
 		BpcCore::addAttending($this->id, $userId);
 	}
-	
+
 	public function removeAttending($userId) {
 		BpcCore::removeAttending($this->id, $userId);
 	}
-	
-	
+
 	public function isAttending($userId) {
 		$user = User::model()->findByPk($userId);
 		if (!$user) {
@@ -121,12 +124,12 @@ class BpcEvent extends CModel {
 		$isAttending = $this->attenders->contains($user->username);
 		return $isWaiting || $isAttending;
 	}
-	
+
 	public function getViewUrl() {
 		return Yii::app()->createUrl('/bpc/default/view', array(
-			'id' => $this->id,
-			'title' => $this->title,
-		));
+					'id' => $this->id,
+					'title' => $this->title,
+				));
 	}
 
 }
