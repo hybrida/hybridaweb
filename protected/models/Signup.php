@@ -153,8 +153,8 @@ class Signup extends CActiveRecord {
 	}
 
 	private function addBpcAttender($userID) {
-		if ($this->isBpc()) {
-			BpcCore::addAttending($this->event->bpcID, $userID);
+		if ($this->isBpcEvent()) {
+			BpcCore::addAttending($this->event->eventCompany->bpcID, $userID);
 		}
 	}
 
@@ -167,13 +167,13 @@ class Signup extends CActiveRecord {
 	}
 
 	private function removeBpcAttender($userID) {
-		if ($this->isBpc()) {
-			BpcCore::removeAttending($this->event->bpcID, $userID);
+		if ($this->isBpcEvent()) {
+			BpcCore::removeAttending($this->event->eventCompany->bpcID, $userID);
 		}
 	}
 
-	private function isBpc() {
-		return $this->event != null && $this->event->bpcID;
+	private function isBpcEvent() {
+		return $this->event != null && $this->event->isBpcEvent();
 	}
 
 	public function removeAllAttenders() {
