@@ -86,9 +86,13 @@ class BpcEvent extends CModel {
 		$availableSeats = $this->seats_available > 0;
 		return $signupIsOn && $okYear && $availableSeats;
 	}
-
+	
 	public function isOpen() {
 		return $this->registration_started == 1 && $this->deadline_passed == 0;
+	}
+	
+	public function canUnattend() {
+		return $this->isOpen();
 	}
 
 	public function getAttending() {

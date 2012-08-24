@@ -22,7 +22,15 @@ class BpcEventTest extends CTestCase {
 	private function canAttend() {
 		return $this->event->canAttend($this->user->id);
 	}
-
+	
+	private function assertCanUnattend($bool) {
+		return $this->assertEquals($bool, $this->canUnattend());
+	}
+	
+	private function canUnattend() {
+		return $this->event->canUnattend();
+	}
+	
 	public function test_canAttend_userHasAccess_true() {
 		$this->event->seats_available = 1;
 		$this->event->seats = 2;
@@ -47,7 +55,7 @@ class BpcEventTest extends CTestCase {
 		$this->assertCanAttend(false);
 	}
 	
-	public function test_canAttend_signupIsClosed_false() {
+	public function test_canAttend_deadlineHasPassed_false() {
 		$this->event->deadline_passed = 1;
 		$this->assertCanAttend(false);
 	}
@@ -55,6 +63,20 @@ class BpcEventTest extends CTestCase {
 	public function test_canAttend_registrationHasntStarted_false() {
 		$this->event->registration_started = 0;
 		$this->assertCanAttend(false);
+	}
+	
+	public function test_canUnattend_registrationHasntStarted_false() {
+		$this->event->registration_started = 0;
+		$this->assertCanUnattend(false);
+	}
+	
+	public function test_canUnattend_deadlineHasPassed_false() {
+		$this->event->deadline_passed = 1;
+		$this->assertCanUnattend(false);
+	}
+	
+	public function test_canUnattend_registrationIsOpen_true() {
+		$this->assertCanUnattend(true);
 	}
 	
 	public function getEvent() {
