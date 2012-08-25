@@ -11,8 +11,5 @@ INSERT INTO hybrida_dev.rbac_assignment SELECT * FROM hybrida.rbac_assignment;
 DELETE FROM hybrida_dev.group_membership;
 INSERT INTO hybrida_dev.group_membership SELECT * FROM hybrida.group_membership;
 
-DELETE FROM hybrida_dev.articles;
-INSERT INTO hybrida_dev.articles SELECT * FROM hybrida.articles
-
-DELETE FROM hybrida_dev.news;
-INSERT INTO hybrida_dev.news SELECT * FROM hybrida.news
+DELETE FROM hybrida_dev.user;
+INSERT INTO hybrida_dev.user SELECT * FROM hybrida.user;
