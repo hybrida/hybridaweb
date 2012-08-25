@@ -14,6 +14,7 @@ return array(
 	'preload' => array('log'),
 	'import' => array(
 		'application.models.*',
+		'application.components.widgets.*',
 		'application.components.*',
 		'application.components.helpers.*',
 		'application.exceptions.*',

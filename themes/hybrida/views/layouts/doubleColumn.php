@@ -13,5 +13,6 @@
 
             <div class="layout-rightBar">
 				<?= $this->clips['sidebar'] ?>
+				<? $this->widget('IKTRingenAdvertisement') ?>
             </div>
 <?php $this->endContent(); ?>
