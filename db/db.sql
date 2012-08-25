@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 3.4.5
+-- version 3.3.7deb7
 -- http://www.phpmyadmin.net
 --
--- Vert: localhost
--- Generert den: 22. Jul, 2012 15:08 PM
--- Tjenerversjon: 5.5.16
--- PHP-Versjon: 5.3.8
+-- Host: localhost
+-- Generation Time: Aug 25, 2012 at 09:10 AM
+-- Server version: 5.1.61
+-- PHP Version: 5.3.3-7+squeeze8
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -19,13 +18,13 @@ SET time_zone = "+00:00";
 --
 -- Database: `hybrida_dev`
 --
-
 CREATE DATABASE `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida_dev`;
+
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `access_relations`
+-- Table structure for table `access_relations`
 --
 
 CREATE TABLE IF NOT EXISTS `access_relations` (
@@ -37,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `access_relations`
+-- Dumping data for table `access_relations`
 --
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
@@ -50,7 +49,7 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `article`
+-- Table structure for table `article`
 --
 
 CREATE TABLE IF NOT EXISTS `article` (
@@ -65,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=76 ;
 
 --
--- Dataark for tabell `article`
+-- Dumping data for table `article`
 --
 
 INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `content`, `author`, `timestamp`) VALUES
@@ -98,7 +97,7 @@ INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `content`, `auth
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `bk_company`
+-- Table structure for table `bk_company`
 --
 
 CREATE TABLE IF NOT EXISTS `bk_company` (
@@ -121,16 +120,16 @@ CREATE TABLE IF NOT EXISTS `bk_company` (
   `subgroupOfID` int(11) DEFAULT NULL,
   PRIMARY KEY (`companyID`),
   KEY `contactorID` (`contactorID`,`addedByID`,`updatedByID`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=221 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=219 ;
 
 --
--- Dataark for tabell `bk_company`
+-- Dumping data for table `bk_company`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `bk_company_specialization`
+-- Table structure for table `bk_company_specialization`
 --
 
 CREATE TABLE IF NOT EXISTS `bk_company_specialization` (
@@ -140,7 +139,7 @@ CREATE TABLE IF NOT EXISTS `bk_company_specialization` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `bk_company_specialization`
+-- Dumping data for table `bk_company_specialization`
 --
 
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
@@ -168,7 +167,7 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `bk_company_update`
+-- Table structure for table `bk_company_update`
 --
 
 CREATE TABLE IF NOT EXISTS `bk_company_update` (
@@ -181,16 +180,16 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   `isDeleted` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
   PRIMARY KEY (`updateId`),
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14778 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14610 ;
 
 --
--- Dataark for tabell `bk_company_update`
+-- Dumping data for table `bk_company_update`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `book_sales`
+-- Table structure for table `book_sales`
 --
 
 CREATE TABLE IF NOT EXISTS `book_sales` (
@@ -206,16 +205,16 @@ CREATE TABLE IF NOT EXISTS `book_sales` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
--- Dataark for tabell `book_sales`
+-- Dumping data for table `book_sales`
 --
 
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
-(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 1, 381, 2, '2012-06-19 20:56:46');
+(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 1, 381, 2, '2012-06-19 22:56:46');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `comment`
+-- Table structure for table `comment`
 --
 
 CREATE TABLE IF NOT EXISTS `comment` (
@@ -229,16 +228,16 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=444 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=446 ;
 
 --
--- Dataark for tabell `comment`
+-- Dumping data for table `comment`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `event`
+-- Table structure for table `event`
 --
 
 CREATE TABLE IF NOT EXISTS `event` (
@@ -248,10 +247,10 @@ CREATE TABLE IF NOT EXISTS `event` (
   `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=96 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=98 ;
 
 --
--- Dataark for tabell `event`
+-- Dumping data for table `event`
 --
 
 INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
@@ -266,12 +265,14 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (92, '2012-04-17 00:00:00', '2012-04-18 00:00:00', 'Kontoret', 0),
 (93, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'NTNU', 0),
 (94, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'Sted', 0),
-(95, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0);
+(95, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0),
+(96, '2012-09-13 18:15:00', '2012-09-13 18:15:00', 'Unknown', 0),
+(97, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'arst', 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `event_company`
+-- Table structure for table `event_company`
 --
 
 CREATE TABLE IF NOT EXISTS `event_company` (
@@ -284,16 +285,17 @@ CREATE TABLE IF NOT EXISTS `event_company` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `event_company`
+-- Dumping data for table `event_company`
 --
 
 INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
-(90, 13, 378);
+(90, 13, 378),
+(96, 5, 381);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `fb_user`
+-- Table structure for table `fb_user`
 --
 
 CREATE TABLE IF NOT EXISTS `fb_user` (
@@ -304,13 +306,13 @@ CREATE TABLE IF NOT EXISTS `fb_user` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `fb_user`
+-- Dumping data for table `fb_user`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `gallery`
+-- Table structure for table `gallery`
 --
 
 CREATE TABLE IF NOT EXISTS `gallery` (
@@ -323,7 +325,7 @@ CREATE TABLE IF NOT EXISTS `gallery` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
 --
--- Dataark for tabell `gallery`
+-- Dumping data for table `gallery`
 --
 
 INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
@@ -337,7 +339,26 @@ INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `groups`
+-- Table structure for table `group_membership`
+--
+
+CREATE TABLE IF NOT EXISTS `group_membership` (
+  `groupId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `start` date NOT NULL DEFAULT '0000-00-00',
+  `end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`groupId`,`userId`,`end`,`start`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `group_membership`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `groups`
 --
 
 CREATE TABLE IF NOT EXISTS `groups` (
@@ -353,7 +374,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
 
 --
--- Dataark for tabell `groups`
+-- Dumping data for table `groups`
 --
 
 INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
@@ -365,26 +386,7 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `group_membership`
---
-
-CREATE TABLE IF NOT EXISTS `group_membership` (
-  `groupId` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `start` date NOT NULL DEFAULT '0000-00-00',
-  `end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`groupId`,`userId`,`end`,`start`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dataark for tabell `group_membership`
---
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `image`
+-- Table structure for table `image`
 --
 
 CREATE TABLE IF NOT EXISTS `image` (
@@ -400,17 +402,14 @@ CREATE TABLE IF NOT EXISTS `image` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
 
 --
--- Dataark for tabell `image`
+-- Dumping data for table `image`
 --
 
-INSERT INTO `image` (`id`, `title`, `oldName`, `galleryId`, `userId`, `timestamp`) VALUES
-(28, '14022011008.jpg', '14022011008.jpg', NULL, 381, '2012-07-05 07:16:02'),
-(29, 'aker- solutions.jpg', 'aker- solutions.jpg', NULL, 381, '2012-07-12 13:09:15');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `job_announcement`
+-- Table structure for table `job_announcement`
 --
 
 CREATE TABLE IF NOT EXISTS `job_announcement` (
@@ -422,24 +421,17 @@ CREATE TABLE IF NOT EXISTS `job_announcement` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `companyId` (`companyId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `job_announcement`
+--
+
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `kilt_comment`
---
-
-CREATE TABLE IF NOT EXISTS `kilt_comment` (
-  `user_id` int(11) NOT NULL,
-  `comment` text COLLATE utf8_unicode_ci NOT NULL,
-  `time_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `kilt_order`
+-- Table structure for table `kilt_order`
 --
 
 CREATE TABLE IF NOT EXISTS `kilt_order` (
@@ -449,15 +441,18 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `product_quantity` int(11) NOT NULL,
   `product_size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
-  `time_id` int(11) NOT NULL,
-  `recieved` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+
+--
+-- Dumping data for table `kilt_order`
+--
+
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `kilt_product`
+-- Table structure for table `kilt_product`
 --
 
 CREATE TABLE IF NOT EXISTS `kilt_product` (
@@ -466,10 +461,10 @@ CREATE TABLE IF NOT EXISTS `kilt_product` (
   `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `sizes` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
--- Dataark for tabell `kilt_product`
+-- Dumping data for table `kilt_product`
 --
 
 INSERT INTO `kilt_product` (`id`, `type`, `model`, `sizes`) VALUES
@@ -479,39 +474,14 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `sizes`) VALUES
 (4, 'Sporran', 'Black Leather', ''),
 (5, 'Sporran', 'Thistle', ''),
 (6, 'Sporran', 'Celtic Circle', ''),
-(7, 'Ekstra', 'Sokker', ''),
-(8, 'Ekstra', 'Flashes', ''),
-(62, 'Sporran', 'Black Leather', ''),
-(63, 'Sporran', 'Thistle', ''),
-(64, 'Sporran', 'Celtic Circle', ''),
-(65, 'Sporran', 'Celtic Chain', ''),
-(66, 'Sporran', 'Military Insignia', ''),
-(67, 'Sporran', 'Double Knot', ''),
-(68, 'Sporran', 'Knotted Cross', ''),
-(69, 'Sporran', 'Oval Brass', ''),
-(70, 'Sporran', 'Ruby Celtic Cross', ''),
-(71, 'Sporran', 'Maltese Cross', ''),
-(72, 'Sporran', 'Studded Black Leather', ''),
-(73, 'Sporran', 'White Day', ''),
-(74, 'Sporran', 'Silver Studded Dress', ''),
-(75, 'Sporran', 'Silver Tassels', ''),
-(76, 'Sporran', 'Black Rabbit', ''),
-(77, 'Sporran', 'Gray Rabbit', ''),
-(78, 'Sporran', 'White Rabbit', ''),
-(79, 'Sporran', 'Shamrock', ''),
-(80, 'Sporran', 'Maltese Blue', ''),
-(81, 'Sporran', 'Maltese Kelly', ''),
-(82, 'Sporran', 'Maltese Red', ''),
-(83, 'Sporran', 'Buchanan Crest', ''),
-(84, 'Sporran', 'Lion Crest', ''),
-(85, 'Sporran', 'Skunk', ''),
-(86, 'Sporran', 'Thistle Crest', ''),
-(87, 'Sporran', 'Full Skunk', '');
+(7, 'Sokker', 'Vanlig', ''),
+(8, 'Sokker', 'Premium', 'Small:Medium:Large'),
+(9, 'Ekstra', 'Flashes', '');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `kilt_product_size`
+-- Table structure for table `kilt_product_size`
 --
 
 CREATE TABLE IF NOT EXISTS `kilt_product_size` (
@@ -520,7 +490,7 @@ CREATE TABLE IF NOT EXISTS `kilt_product_size` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `kilt_product_size`
+-- Dumping data for table `kilt_product_size`
 --
 
 INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
@@ -536,12 +506,15 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (2, 5),
 (3, 1),
 (3, 2),
-(3, 4);
+(3, 4),
+(6, 1),
+(6, 2),
+(6, 4);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `kilt_size`
+-- Table structure for table `kilt_size`
 --
 
 CREATE TABLE IF NOT EXISTS `kilt_size` (
@@ -551,7 +524,7 @@ CREATE TABLE IF NOT EXISTS `kilt_size` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
--- Dataark for tabell `kilt_size`
+-- Dumping data for table `kilt_size`
 --
 
 INSERT INTO `kilt_size` (`id`, `size`) VALUES
@@ -565,7 +538,7 @@ INSERT INTO `kilt_size` (`id`, `size`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `kilt_time`
+-- Table structure for table `kilt_time`
 --
 
 CREATE TABLE IF NOT EXISTS `kilt_time` (
@@ -573,103 +546,19 @@ CREATE TABLE IF NOT EXISTS `kilt_time` (
   `start` date NOT NULL,
   `end` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `kilt_time`
+--
+
+INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
+(1, '2012-01-01', '2012-10-10');
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `menu_group`
---
-
-CREATE TABLE IF NOT EXISTS `menu_group` (
-  `group` int(11) NOT NULL,
-  `site` int(11) NOT NULL,
-  `contentId` int(11) DEFAULT NULL,
-  `sort` int(11) NOT NULL,
-  PRIMARY KEY (`group`,`site`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dataark for tabell `menu_group`
---
-
-INSERT INTO `menu_group` (`group`, `site`, `contentId`, `sort`) VALUES
-(55, 447, NULL, 0),
-(55, 448, NULL, 1),
-(55, 449, 47, 2),
-(55, 450, NULL, 3),
-(56, 451, NULL, 0),
-(56, 452, NULL, 1),
-(56, 453, 48, 2),
-(56, 454, NULL, 3),
-(57, 455, NULL, 0),
-(57, 456, NULL, 1),
-(57, 457, 49, 2),
-(57, 458, NULL, 3),
-(58, 459, NULL, 0),
-(58, 460, NULL, 1),
-(58, 461, 50, 2),
-(58, 462, NULL, 3),
-(1, 2, 3, 4),
-(57, 463, NULL, 5),
-(56, 464, NULL, 5),
-(57, 465, NULL, 6),
-(57, 466, NULL, 7),
-(57, 467, NULL, 8);
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `menu_top`
---
-
-CREATE TABLE IF NOT EXISTS `menu_top` (
-  `menu` int(11) NOT NULL AUTO_INCREMENT,
-  `site` int(11) NOT NULL,
-  `id` int(11) DEFAULT NULL,
-  `sort` int(11) NOT NULL,
-  PRIMARY KEY (`menu`,`site`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
-
---
--- Dataark for tabell `menu_top`
---
-
-INSERT INTO `menu_top` (`menu`, `site`, `id`, `sort`) VALUES
-(1, 1, NULL, 1),
-(2, 2, NULL, 2),
-(3, 3, NULL, 3),
-(4, 4, 1, 5);
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `menu_top_sub`
---
-
-CREATE TABLE IF NOT EXISTS `menu_top_sub` (
-  `menuId` int(11) NOT NULL,
-  `site` int(11) NOT NULL,
-  `id` int(11) DEFAULT NULL,
-  `sort` int(11) NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dataark for tabell `menu_top_sub`
---
-
-INSERT INTO `menu_top_sub` (`menuId`, `site`, `id`, `sort`) VALUES
-(2, 2, NULL, 1),
-(1, 1, NULL, 1),
-(3, 3, NULL, 1),
-(4, 194, NULL, 1),
-(5, 4, NULL, 1),
-(6, 194, NULL, 1);
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `news`
+-- Table structure for table `news`
 --
 
 CREATE TABLE IF NOT EXISTS `news` (
@@ -686,29 +575,31 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=374 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=376 ;
 
 --
--- Dataark for tabell `news`
+-- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `timestamp`, `status`) VALUES
 (40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, '2011-07-17 22:34:51', 0),
 (41, 73, 'event', 'Generalforsamling', NULL, 'Generalforsamling i Hybrida', '', 326, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, '2011-11-26 20:02:14', 0),
-(367, 90, 'event', 'Bedpres: Aker Solutions MMO', 29, 'Aker Solutions AS er et ledende globalt oljeserviceselskap som leverer ingeniørtjenester, teknologier, produktløsninger samt løsninger for levetidsforlengelse og økt utvinningsgrad for olje- og gassindustrien. Aker Solutions'' Teknologi-avdeling er et nyskapende og lærerikt miljø...', '<p>\n	Aker Solutions AS er et ledende globalt oljeserviceselskap som leverer ingeniørtjenester, teknologier, produktløsninger samt løsninger for levetidsforlengelse og økt utvinningsgrad for olje- og gassindustrien. Aker Solutions'' Teknologi-avdeling er et nyskapende og lærerikt miljø der vi jobber med varierte og utfordrende oppgaver knyttet mot offshorenæringen. Fagområder som kan nevnes er:<br /><br />\n	· strukturanalyser av flytere og faste installasjoner<br />\n	· design og analyser av stigerør og kabler<br />\n	· avanserte hydrodynamiske analyser</p>\n<p>\n	<br />\n	Etter presentasjonen blir det servert pizza i Kjelkantina og påfølgende Aarhønebingo.</p>\n', NULL, '2012-03-29 12:57:48', 0),
+(367, 90, 'event', 'Bedpres: Aker Solutions MMO', NULL, 'Aker Solutions AS er et ledende globalt oljeserviceselskap som leverer ingeniørtjenester, teknologier, produktløsninger samt løsninger for levetidsforlengelse og økt utvinningsgrad for olje- og gassindustrien. Aker Solutions'' Teknologi-avdeling er et nyskapende og lærerikt miljø...', '<p>\n	Aker Solutions AS er et ledende globalt oljeserviceselskap som leverer ingeniørtjenester, teknologier, produktløsninger samt løsninger for levetidsforlengelse og økt utvinningsgrad for olje- og gassindustrien. Aker Solutions'' Teknologi-avdeling er et nyskapende og lærerikt miljø der vi jobber med varierte og utfordrende oppgaver knyttet mot offshorenæringen. Fagområder som kan nevnes er:<br /><br />\n	· strukturanalyser av flytere og faste installasjoner<br />\n	· design og analyser av stigerør og kabler<br />\n	· avanserte hydrodynamiske analyser</p>\n<p>\n	<br />\n	Etter presentasjonen blir det servert pizza i Kjelkantina og påfølgende Aarhønebingo.</p>\n', NULL, '2012-03-29 12:57:48', 0),
 (364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>\n	Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>\n	Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p>\n	<strong>Lycheburger </strong>Lyches ubestridte klassiker. Med aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter. kr 109.</p>\n<p>\n	<strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli, pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.  kr 99</p>\n<p>\n	<strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår. Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte mandelpoteter. kr 129</p>\n<p>\n	<strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr 129</p>\n<p>\n	<strong><em>Dessertvalg:</em></strong></p>\n<p>\n	<strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr 45</p>\n<p>\n	<strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p>\n	 </p>\n<p>\n	Betaling skjer på Hybridas konto: 0539.26.44913 Prisen avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn + halvingfest</p>\n<p>\n	 </p>\n', 367, '2012-02-17 19:09:39', 0),
 (366, 89, 'event', 'Komitefest!', NULL, 'Det arrangeres komitefest for hybrida kommitémedlemmer 15. mars på kjellerne.', '', 381, '2012-02-28 13:23:04', 0),
 (368, NULL, NULL, 'Den gamle siden', NULL, 'Den gamle siden vil ikke lenger bli vedlikeholdt, men finnes på <a href="http://www.hybrida.ntnu.no">http://www.hybrida.ntnu.no</a>', '<p>\n	 .</p>\n', 353, '2012-04-25 23:17:43', 0),
 (369, NULL, NULL, 'Lesesal-IRC', NULL, 'Kjeder du deg på lesesalen? Skulle du ønske at det var mulig å snakke med andre hybrider på lesesalen? Da er lesesal-IRC noe for deg!', '<p>\n	 </p>\n<p>\n	Etter noe nedetid er IRC-serveren opp å går igjen. Koble deg på med:</p>\n<p>\n	Server: irc.hybrida.no</p>\n<p>\n	Port: 6667</p>\n<p>\n	Kanal: #lesesalen</p>\n<p>\n	De som ikke har brukt IRC før kan ta en titt her: <a href="https://cbe002.chat.mibbit.com/">https://cbe002.chat.mibbit.com/</a> (velg tilkobling med server)</p>\n', 331, '2012-05-02 12:09:02', 0),
 (370, NULL, NULL, 'Reisebrev fra Asia', NULL, 'Her kommer Marius Røed sitt reisebrev fra Asia. Jeg fikk dette videresendt fra Update^K-redaktør, Eirik.', '<p>\n	Gå inn på <a href="/profil/mariuroe">bloggen til Marius</a> og se selv</p>\n', NULL, '2012-05-04 14:00:07', 0),
 (371, 91, 'event', '17. mai-tog', NULL, '17. mai-toget begynner klokken 13.00 utenfor Nidarosdomen. Oppmøte: 12.45.\n\nVi går uansett vær!', '<p>\n	Møt opp og bli med i 17. mai-tog!</p>\n', 370, '2012-05-17 00:39:04', 0),
-(373, NULL, NULL, 'Dette er bare en beta', NULL, 'Denne siden er bare en beta, gå <a href="http://hybrida.no">hit</a> for å komme til hovedsiden', '<p>\n	Ja</p>\n', 381, '2025-07-05 07:18:12', 0);
+(373, NULL, NULL, 'Dette er bare en beta', NULL, 'Denne siden er bare en beta, gå <a href="http://hybrida.no">hit</a> for å komme til hovedsiden', '<p>\n	Ja</p>\n', 381, '2025-07-05 07:18:12', 0),
+(374, 96, 'event', 'Bedpres: Capgemini', NULL, 'Capgemini', '<p>Capgemini</p>\n', NULL, '2012-07-21 11:22:01', 0),
+(375, 97, 'event', 'Testevent', NULL, 'oaietno', '<p>\n	awtaw</p>\n', 381, '2012-08-24 08:55:52', 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `news_group`
+-- Table structure for table `news_group`
 --
 
 CREATE TABLE IF NOT EXISTS `news_group` (
@@ -717,7 +608,7 @@ CREATE TABLE IF NOT EXISTS `news_group` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `news_group`
+-- Dumping data for table `news_group`
 --
 
 INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
@@ -727,7 +618,7 @@ INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `notification`
+-- Table structure for table `notification`
 --
 
 CREATE TABLE IF NOT EXISTS `notification` (
@@ -741,12 +632,17 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `commentID` int(11) DEFAULT NULL,
   `statusCode` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `notification`
+--
+
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `notification_listener`
+-- Table structure for table `notification_listener`
 --
 
 CREATE TABLE IF NOT EXISTS `notification_listener` (
@@ -756,70 +652,20 @@ CREATE TABLE IF NOT EXISTS `notification_listener` (
   `parentID` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `parentID` (`parentID`,`userID`,`parentType`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
+
+--
+-- Dumping data for table `notification_listener`
+--
+
+INSERT INTO `notification_listener` (`id`, `userID`, `parentType`, `parentID`) VALUES
+(33, 381, 'news', 370),
+(32, 381, 'profile', 381);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `order`
---
-
-CREATE TABLE IF NOT EXISTS `order` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) DEFAULT NULL,
-  `order` mediumtext CHARACTER SET utf8 COLLATE utf8_unicode_ci,
-  `timestamp` datetime DEFAULT NULL,
-  `paid` enum('true','false') CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
-  PRIMARY KEY (`id`),
-  KEY `userId` (`userId`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `poll`
---
-
-CREATE TABLE IF NOT EXISTS `poll` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- Dataark for tabell `poll`
---
-
-INSERT INTO `poll` (`id`, `title`) VALUES
-(1, 'Lommelerke');
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `poll_option`
---
-
-CREATE TABLE IF NOT EXISTS `poll_option` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `pollId` int(11) DEFAULT NULL,
-  `name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `color` char(6) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `pollId` (`pollId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
-
---
--- Dataark for tabell `poll_option`
---
-
-INSERT INTO `poll_option` (`id`, `pollId`, `name`, `color`) VALUES
-(1, 1, 'Ja takk!', 'FF0000'),
-(2, 1, 'mesa be gay', '4A7F6B');
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `rbac_assignment`
+-- Table structure for table `rbac_assignment`
 --
 
 CREATE TABLE IF NOT EXISTS `rbac_assignment` (
@@ -831,13 +677,13 @@ CREATE TABLE IF NOT EXISTS `rbac_assignment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `rbac_assignment`
+-- Dumping data for table `rbac_assignment`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `rbac_item`
+-- Table structure for table `rbac_item`
 --
 
 CREATE TABLE IF NOT EXISTS `rbac_item` (
@@ -850,7 +696,7 @@ CREATE TABLE IF NOT EXISTS `rbac_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `rbac_item`
+-- Dumping data for table `rbac_item`
 --
 
 INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
@@ -876,7 +722,7 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `rbac_itemchild`
+-- Table structure for table `rbac_itemchild`
 --
 
 CREATE TABLE IF NOT EXISTS `rbac_itemchild` (
@@ -887,7 +733,7 @@ CREATE TABLE IF NOT EXISTS `rbac_itemchild` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `rbac_itemchild`
+-- Dumping data for table `rbac_itemchild`
 --
 
 INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
@@ -917,7 +763,7 @@ INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `signup`
+-- Table structure for table `signup`
 --
 
 CREATE TABLE IF NOT EXISTS `signup` (
@@ -931,7 +777,7 @@ CREATE TABLE IF NOT EXISTS `signup` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `signup`
+-- Dumping data for table `signup`
 --
 
 INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
@@ -948,12 +794,14 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (91, 1, '2012-04-12 12:00:00', '2012-04-19 12:00:00', 'false', 0),
 (92, 20, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'true', 0),
 (93, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'true', 0),
-(94, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'false', 0);
+(94, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'false', 0),
+(96, 2, '2012-07-20 11:00:00', '2012-09-12 11:00:00', 'false', 2),
+(97, 1, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'false', 0);
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `signup_membership`
+-- Table structure for table `signup_membership`
 --
 
 CREATE TABLE IF NOT EXISTS `signup_membership` (
@@ -964,88 +812,13 @@ CREATE TABLE IF NOT EXISTS `signup_membership` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dataark for tabell `signup_membership`
+-- Dumping data for table `signup_membership`
 --
 
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `site`
---
-
-CREATE TABLE IF NOT EXISTS `site` (
-  `siteId` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `path` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
-  `id` int(11) DEFAULT NULL,
-  `subId` int(11) DEFAULT NULL,
-  PRIMARY KEY (`siteId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=469 ;
-
---
--- Dataark for tabell `site`
---
-
-INSERT INTO `site` (`siteId`, `title`, `path`, `id`, `subId`) VALUES
-(1, 'Hjem', 'newsfeed', NULL, NULL),
-(2, 'Profil', 'profile', NULL, NULL),
-(4, 'Om Oss', 'article', 3, NULL),
-(6, 'Personer', 'article', NULL, NULL),
-(3, 'Grupper', 'group', NULL, NULL),
-(462, 'Medlemmer', 'group', NULL, 4),
-(461, 'Info', 'group', NULL, 3),
-(460, 'Nyheter', 'group', NULL, 2),
-(459, 'Kommentarer', 'group', NULL, 1),
-(458, 'Medlemmer', 'group', NULL, 4),
-(457, 'Info', 'group', NULL, 3),
-(456, 'Nyheter', 'group', NULL, 2),
-(455, 'Kommentarer', 'group', NULL, 1),
-(454, 'Medlemmer', 'group', NULL, 4),
-(453, 'Info', 'group', NULL, 3),
-(452, 'Nyheter', 'group', NULL, 2),
-(451, 'Kommentarer', 'group', NULL, 1),
-(450, 'Medlemmer', 'group', NULL, 4),
-(449, 'Info', 'group', NULL, 3),
-(448, 'Nyheter', 'group', NULL, 2),
-(447, 'Kommentarer', 'group', NULL, 1),
-(463, 'Kalender', 'group', NULL, 5),
-(464, 'Kalender', 'group', NULL, 5),
-(465, 'Bedrifter', 'group', NULL, 6),
-(466, 'Alumni', 'group', NULL, 7),
-(467, 'Oppdateringer', 'group', NULL, 8),
-(468, 'Bedrift', 'group', NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `site_content`
---
-
-CREATE TABLE IF NOT EXISTS `site_content` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `filename` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
-  `description` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
-
---
--- Dataark for tabell `site_content`
---
-
-INSERT INTO `site_content` (`id`, `filename`, `description`) VALUES
-(1, 'comments', 'Side med kommentarer'),
-(2, 'news', 'Side med nyheter'),
-(3, 'article', 'Artikkelside'),
-(4, 'members', 'Side med medlemmer'),
-(5, 'calendar', 'Kalenderside'),
-(6, 'companies', 'Side med bedrifter'),
-(7, 'graduates', 'Alumniside'),
-(8, 'updates', 'Side med oppdateringer');
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `specialization`
+-- Table structure for table `specialization`
 --
 
 CREATE TABLE IF NOT EXISTS `specialization` (
@@ -1057,7 +830,7 @@ CREATE TABLE IF NOT EXISTS `specialization` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
 
 --
--- Dataark for tabell `specialization`
+-- Dumping data for table `specialization`
 --
 
 INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
@@ -1074,28 +847,7 @@ INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tabellstruktur for tabell `tag`
---
-
-CREATE TABLE IF NOT EXISTS `tag` (
-  `id` int(11) NOT NULL,
-  `ownerId` int(11) NOT NULL,
-  `contentType` enum('news','article') COLLATE utf8_unicode_ci NOT NULL,
-  `tagType` enum('wiki','group') COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dataark for tabell `tag`
---
-
-INSERT INTO `tag` (`id`, `ownerId`, `contentType`, `tagType`) VALUES
-(48, 0, 'article', ''),
-(49, 0, 'article', '');
-
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -1120,62 +872,35 @@ CREATE TABLE IF NOT EXISTS `user` (
   `altEmail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=469 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=521 ;
 
 --
--- Dataark for tabell `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', NULL, 2015, 'true', 'male', NULL, NULL, '2012-07-12 13:48:13', '123123', '<br />', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', 41, NULL, '2012-08-24 20:09:29', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
--- --------------------------------------------------------
-
 --
--- Tabellstruktur for tabell `vote`
---
-
-CREATE TABLE IF NOT EXISTS `vote` (
-  `pollId` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `choice` int(11) NOT NULL,
-  PRIMARY KEY (`pollId`,`userId`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
---
--- Dataark for tabell `vote`
---
-
-INSERT INTO `vote` (`pollId`, `userId`, `choice`) VALUES
-(1, 1, 1),
-(1, 327, 2),
-(380, 1, 2),
-(15, 1, 1);
-
---
--- Begrensninger for dumpede tabeller
+-- Constraints for dumped tables
 --
 
 --
--- Begrensninger for tabell `job_announcement`
+-- Constraints for table `job_announcement`
 --
 ALTER TABLE `job_announcement`
   ADD CONSTRAINT `job_announcement_ibfk_1` FOREIGN KEY (`companyId`) REFERENCES `bk_company` (`companyID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `rbac_assignment`
+-- Constraints for table `rbac_assignment`
 --
 ALTER TABLE `rbac_assignment`
   ADD CONSTRAINT `rbac_assignment_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Begrensninger for tabell `rbac_itemchild`
+-- Constraints for table `rbac_itemchild`
 --
 ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
