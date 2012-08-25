@@ -7,6 +7,9 @@ $this->beginClip('sidebar'); ?>
 	))  ?>
 <? $this->endClip() ?>
 
+
+<div class="bedpresView">
+
 <h1>Bedpres: <?=$event->title?></h1>
 <? if (user()->checkAccess('admin')): ?>
         <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
@@ -15,11 +18,13 @@ $this->beginClip('sidebar'); ?>
 			'class' => 'g-button g-buttonRightSide')); ?>
 <? endif; ?>
 
-<? if ($news->imageId): ?>
-	<?= Image::tag($news->imageId, 'frontpage') ?><br/>
-<? else: ?>
-	<img src='<?=$event->logo?>' alt=""/><br/>
-<? endif ?>
+<div class="headerImage">
+	<? if ($news->imageId): ?>
+		<?= Image::tag($news->imageId, 'frontpage') ?><br/>
+	<? else: ?>
+		<img src='<?=$event->logo?>' alt=""/><br/>
+	<? endif ?>
+</div>
 
 <?=$event->description?>
 
@@ -52,3 +57,5 @@ $this->beginClip('sidebar'); ?>
 			Du må logge inn for å se listen over påmeldte
 		</p>
 <? endif ?>
+
+</div>
