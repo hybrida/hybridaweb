@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 25, 2012 at 09:34 AM
+-- Generation Time: Aug 25, 2012 at 10:52 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
@@ -382,6 +382,27 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 (55, 0, 'Webkom', 381, 'true', 'webkom'),
 (56, 0, 'Styret', 363, 'false', 'styret'),
 (57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bk');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `iktringen_membership`
+--
+
+CREATE TABLE IF NOT EXISTS `iktringen_membership` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `companyId` int(11) DEFAULT NULL,
+  `start` date DEFAULT NULL,
+  `end` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `company` (`companyId`,`start`,`end`),
+  KEY `fk_iktringen_membership_bk_company1_idx` (`companyId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+
+--
+-- Dumping data for table `iktringen_membership`
+--
+
 
 -- --------------------------------------------------------
 
@@ -885,6 +906,12 @@ INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `sp
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `iktringen_membership`
+--
+ALTER TABLE `iktringen_membership`
+  ADD CONSTRAINT `fk_iktringen_membership_bk_company1` FOREIGN KEY (`companyId`) REFERENCES `bk_company` (`companyID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `job_announcement`
