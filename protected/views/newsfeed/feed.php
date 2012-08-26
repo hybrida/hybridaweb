@@ -4,7 +4,8 @@ $this->layout = "//layouts/doubleColumn";
 
 $this->beginClip('sidebar');
 $this->widget('application.components.widgets.ActivitiesFeed');
-$this->widget('application.components.widgets.JobAnnouncementFeed');
+Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
+$this->widget('JobAnnouncementFeed');
 $this->endClip();
 ?>
 
