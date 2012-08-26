@@ -81,7 +81,11 @@
 		<div class="row">
 			<?= $form->labelEx($model, 'news[content]'); ?> 
 			<?= $form->richTextArea($model, "news[content]",array('class'=>'message')); ?>
-			<?= $form->error($model, 'news[content]'); ?> 
+			<? /*
+			 * Her er det ingen validering (ingen $form>error)
+			 * Dette er fordi validering ikke går hånd i hånd med
+			 * CKEditor. 
+			 */?> 
 		</div>
 	
 		<div class="row">
