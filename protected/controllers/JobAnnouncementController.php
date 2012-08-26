@@ -62,13 +62,13 @@ class JobAnnouncementController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Job']))
+		if(isset($_POST['JobAnnouncement']))
 		{
-			$model->attributes=$_POST['Job'];
+			$model->attributes=$_POST['JobAnnouncement'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
-		}
-
+			}
+			
 		$this->render('create',array(
 			'model'=>$model,
 			'companies' => $this->getCompaniesList(),
