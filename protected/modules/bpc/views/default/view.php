@@ -43,15 +43,13 @@ $this->beginClip('sidebar'); ?>
 <h1>På venteliste:</h1>
 	<?= Html::userListByYear($event->getWaitingByYear()) ?>
 
-	<? if($event->canAttend(user()->id)): ?>
-		<?=
-		Html::link(
-				$event->isAttending(user()->id) ? "Meld meg av" : "Meld meg på", array(
-			'toggleAttending', 'bpcId' => $event->id),  array(
-			'class' => 'g-button',
-		))
-		?>
-	<? endif; ?>
+	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
+	<? if (!$isAttending && $event->canAttend(user()->id)): ?>
+		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
+	<? elseif ($isAttending && $event->canUnattend()): ?>
+		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
+	<? endif ?>
+
 <? else: ?>
 		<p>
 			Du må logge inn for å se listen over påmeldte

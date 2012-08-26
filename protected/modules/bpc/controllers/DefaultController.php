@@ -10,6 +10,7 @@ class DefaultController extends Controller {
 		$this->render('view', array(
 			'event' => $event,
 			'news' => $this->getNews($id),
+			'isAttending' => $event->isAttending(user()->id),
 		));
 	}
 
@@ -50,11 +51,14 @@ class DefaultController extends Controller {
 		}
 		$userId = user()->id;
 		$event = new BpcEvent($bpcId);
-		if ($event->canAttend($userId)) {
-			if (!$event->isAttending($userId)) {
-				$event->addAttending($userId);
-			} else {
+		$isAttending = $event->isAttending($userId);
+		if ($isAttending) {
+			if ($event->canUnattend()) {
 				$event->removeAttending($userId);
+			}
+		} else {
+			if ($event->canAttend($userId)){
+				$event->addAttending($userId);
 			}
 		}
 		$url = $this->createUrl('view', array('id' => $bpcId));

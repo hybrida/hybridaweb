@@ -5,8 +5,8 @@ class BpcRequest {
 	private static $foreningID = 12;
 	private static $handshakeID = '27ede510ee989207365b8e9eef46309a82b8e7de';
 	private static $responseMethod = 'serialized_array';
-//	private static $requestUrl = 'https://bpc.timini.no/bpc_testing/remote/';
-	private static $requestUrl = 'https://bpc.timini.no/remote/';
+//	private static $requestUrl = 'http://testing.bedriftspresentasjon.no/remote/';
+	private static $requestUrl = 'http://www.bedriftspresentasjon.no/remote/';
 	private static $isDebug = false;
 	private static $timing = false;
 	private static $version = '1.1';
