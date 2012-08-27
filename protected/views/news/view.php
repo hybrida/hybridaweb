@@ -57,8 +57,9 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 
 <p><strong><?=$news->ingress?></strong></p>
 
-<?=$news->content?>
-
+<article>
+	<?=$news->content?>
+</article>
 
 <? if ($signup): ?>
 	<h1> Påmeldte: </h1>
