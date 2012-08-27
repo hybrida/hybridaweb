@@ -86,11 +86,11 @@ class BpcEvent extends CModel {
 		$availableSeats = $this->seats_available > 0;
 		return $signupIsOn && $okYear && $availableSeats;
 	}
-	
+
 	public function isOpen() {
 		return $this->registration_started == 1 && $this->deadline_passed == 0;
 	}
-	
+
 	public function canUnattend() {
 		return $this->isOpen();
 	}
@@ -134,6 +134,39 @@ class BpcEvent extends CModel {
 					'id' => $this->id,
 					'title' => $this->title,
 				));
+	}
+
+	public function getGoogleCalendarUrl() {
+		$startTime= strtotime($this->time);
+		$endTime = $startTime + 3600*4;
+		$from = $this->getUTC($startTime);
+		$to = $this->getUTC($endTime);
+		$details = $this->description_formatted;
+		do {
+			$old = $details;
+			$details = str_replace(PHP_EOL.PHP_EOL, PHP_EOL, $old);
+		} while ($old !== $details);
+		$details = strip_tags($details);
+		$details = trim($details);
+		$details = str_replace(PHP_EOL, "%0A", $details);
+		$details = $this->spaceToUrl($details);
+
+		return "http://www.google.com/calendar/event?action=TEMPLATE" .
+				"&text={$this->spaceToUrl($this->title)}" .
+				"&dates={$from}/{$to}" .
+				"&details={$details}" .
+				"&location={$this->spaceToUrl($this->place)}" .
+				"&trp=true" .
+				"&sprop=http%3A%2F%2Fhybrida.no" .
+				"&sprop=name:Hybrida";
+	}
+	
+	private function spaceToUrl($text) {
+		return str_replace(" ", "%20", $text);
+	}
+	
+	private function getUTC($time) {
+		return gmdate("Ymd\THis\Z",$time);
 	}
 
 }

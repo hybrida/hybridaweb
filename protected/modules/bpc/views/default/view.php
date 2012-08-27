@@ -26,7 +26,9 @@ $this->beginClip('sidebar'); ?>
 	<? endif ?>
 </div>
 
-<?=$event->description?>
+<article>
+	<?=$event->description?>
+</article>
 
 <h1> Påmeldte: </h1>
 <? if (!user()->isGuest): ?>
