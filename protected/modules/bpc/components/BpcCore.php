@@ -29,7 +29,7 @@ class BpcCore {
 			'request' => 'add_attending',
 			'fullname' => $user->fullName,
 			'username' => $user->username,
-			'card_no' => (float) $user->cardHash,
+			'card_no' => $user->cardHash,
 			'event' => $bpcID,
 			'year' => $user->classYear,
 		);
