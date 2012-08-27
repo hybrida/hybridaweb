@@ -31,7 +31,7 @@ class BpcCore {
 			'username' => $user->username,
 			'card_no' => (float) $user->cardHash,
 			'event' => $bpcID,
-			'year' => 2, //FIXME
+			'year' => $user->classYear,
 		);
 		BpcCore::doRequest($inData);
 	}
