@@ -19,11 +19,13 @@ $this->beginClip('sidebar'); ?>
 <? endif; ?>
 
 <div class="headerImage">
-	<? if ($news->imageId): ?>
-		<?= Image::tag($news->imageId, 'frontpage') ?><br/>
-	<? else: ?>
-		<img src='<?=$event->logo?>' alt=""/><br/>
-	<? endif ?>
+	<a href="<?=$event->web_page?>">
+		<? if ($news->imageId): ?>
+			<?= Image::tag($news->imageId, 'frontpage') ?><br/>
+		<? else: ?>
+			<img src='<?=$event->logo?>' alt=""/><br/>
+		<? endif ?>
+	</a>
 </div>
 
 <article>
