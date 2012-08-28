@@ -62,11 +62,10 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 </article>
 
 <? if ($signup): ?>
+	<h1> Påmeldte: </h1>
 	<? if (user()->isGuest): ?>
 		<p>Du må logge inn for å se listen over påmeldte</p>
 	<? else: ?>
-		<h1> Påmeldte: </h1>
-
 		<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
 
 		<? $url = $this->createUrl('toggleAttending', array('eventId' => $event->id)) ?>
