@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 25, 2012 at 10:52 PM
+-- Generation Time: Aug 28, 2012 at 07:03 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
@@ -209,7 +209,7 @@ CREATE TABLE IF NOT EXISTS `book_sales` (
 --
 
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
-(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 1, 381, 2, '2012-06-19 22:56:46');
+(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 22:56:46');
 
 -- --------------------------------------------------------
 
@@ -247,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=98 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=99 ;
 
 --
 -- Dumping data for table `event`
@@ -266,8 +266,9 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (93, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'NTNU', 0),
 (94, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'Sted', 0),
 (95, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0),
-(96, '2012-09-13 18:15:00', '2012-09-13 18:15:00', 'Unknown', 0),
-(97, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'arst', 0);
+(96, '2012-09-13 18:15:00', '2012-09-13 18:15:00', 'R2', 0),
+(97, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'arst', 0),
+(98, '2012-09-18 18:15:00', '2012-09-18 18:15:00', 'Gløs', 0);
 
 -- --------------------------------------------------------
 
@@ -290,7 +291,8 @@ CREATE TABLE IF NOT EXISTS `event_company` (
 
 INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
 (90, 13, 378),
-(96, 5, 381);
+(96, 5, 381),
+(98, NULL, 411);
 
 -- --------------------------------------------------------
 
@@ -596,7 +598,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=376 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=377 ;
 
 --
 -- Dumping data for table `news`
@@ -614,8 +616,9 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (370, NULL, NULL, 'Reisebrev fra Asia', NULL, 'Her kommer Marius Røed sitt reisebrev fra Asia. Jeg fikk dette videresendt fra Update^K-redaktør, Eirik.', '<p>\n	Gå inn på <a href="/profil/mariuroe">bloggen til Marius</a> og se selv</p>\n', NULL, '2012-05-04 14:00:07', 0),
 (371, 91, 'event', '17. mai-tog', NULL, '17. mai-toget begynner klokken 13.00 utenfor Nidarosdomen. Oppmøte: 12.45.\n\nVi går uansett vær!', '<p>\n	Møt opp og bli med i 17. mai-tog!</p>\n', 370, '2012-05-17 00:39:04', 0),
 (373, NULL, NULL, 'Dette er bare en beta', NULL, 'Denne siden er bare en beta, gå <a href="http://hybrida.no">hit</a> for å komme til hovedsiden', '<p>\n	Ja</p>\n', 381, '2025-07-05 07:18:12', 0),
-(374, 96, 'event', 'Bedpres: Capgemini', NULL, 'Capgemini', '<p>Capgemini</p>\n', NULL, '2012-07-21 11:22:01', 0),
-(375, 97, 'event', 'Testevent', NULL, 'oaietno', '<p>\n	awtaw</p>\n', 381, '2012-08-24 08:55:52', 0);
+(374, 96, 'event', 'Bedpres: Capgemini', NULL, '<p>\r\nHybrida Bedriftskomité inviterer til bedriftspresentasjon med Capgemini den 13. september.\r\n</p>\r\n\r\n</p>\r\nPresentasjonen starter kl. 18:15 i R2. </br>\r\nEtter presentasjonen blir det middag, og anledning til å bli kjent med bedriften på Graffi Solsiden. \r\nDet blir satt opp buss fra Realfagsbygget til Graffi.\r\n</p>\r\n\r\n<p>\r\nDørene til presentasjonen åpner et kvarter før presentasjonen starter og lukkes ved presentasjonens start.\r\n</p>\r\n\r\n<p>\r\nBedriftspresentasjonen er i første omgang åpen for 3.-5. klasse.\r\n</p>\r\nVel møtt! ', '<p>\nHybrida Bedriftskomité inviterer til bedriftspresentasjon med Capgemini den 13. september.\n</p>\n\n<p></p>\nPresentasjonen starter kl. 18:15 i R2. </br>\nEtter presentasjonen blir det middag, og anledning til å bli kjent med bedriften på Graffi Solsiden. \nDet blir satt opp buss fra Realfagsbygget til Graffi.\n</p></p>\n\n<p>\nDørene til presentasjonen åpner et kvarter før presentasjonen starter og lukkes ved presentasjonens start.\n</p>\n\n<p>\nBedriftspresentasjonen er i første omgang åpen for 3.-5. klasse.\n</p>\n\n<p>Vel møtt!</p>\n', NULL, '2012-07-21 11:22:01', 0),
+(375, 97, 'event', 'Testevent', NULL, 'oaietno', '<p>\n	awtaw</p>\n', 381, '2012-08-24 08:55:52', 0),
+(376, 98, 'event', 'Bedpres: EDR Medeso', NULL, 'EDR', '<p>EDR</p>\n', NULL, '2012-08-27 22:37:25', 0);
 
 -- --------------------------------------------------------
 
@@ -816,7 +819,7 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (92, 20, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'true', 0),
 (93, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'true', 0),
 (94, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'false', 0),
-(96, 2, '2012-07-20 11:00:00', '2012-09-12 11:00:00', 'false', 2),
+(98, 1, '2012-08-27 11:00:00', '2012-09-17 11:00:00', 'false', 2),
 (97, 1, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'false', 0);
 
 -- --------------------------------------------------------
@@ -900,7 +903,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', NULL, NULL, '2012-08-25 09:25:44', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', NULL, NULL, '2012-08-28 18:58:59', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 --
