@@ -62,17 +62,19 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 </article>
 
 <? if ($signup): ?>
-	<h1> Påmeldte: </h1>
-	<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
-	
-	
-	<? $url = $this->createUrl('toggleAttending', array('eventId' => $event->id)) ?>
-	<? if (!$isAttending && $signup->canAttend(user()->id)): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
-		<p></p>
-	<? elseif ($isAttending && $signup->canUnattend()): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
-		<p></p>	
+	<? if (user()->isGuest): ?>
+		<p>Du må logge inn for å se listen over påmeldte</p>
+	<? else: ?>
+		<h1> Påmeldte: </h1>
+
+		<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
+
+		<? $url = $this->createUrl('toggleAttending', array('eventId' => $event->id)) ?>
+		<? if (!$isAttending && $signup->canAttend(user()->id)): ?>
+			<a href="<?=$url?>" class='g-button'>Meld meg på</a>
+		<? elseif ($isAttending && $signup->canUnattend()): ?>
+			<a href="<?=$url?>" class='g-button'>Meld meg av</a>
+		<? endif ?>
 	<? endif ?>
 <? endif ?>
 
