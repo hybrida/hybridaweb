@@ -63,6 +63,9 @@ class NewsController extends Controller {
 
 	private function getNewsModelAndThrowExceptionIfNullOrNotAccess($id) {
 		$news = News::model()->with('author')->findByPk($id);
+		if ($news->status != Status::PUBLISHED) {
+			$news = null;
+		}
 
 		if (!$news)
 			throw new CHttpException('Nyheten finnes ikke');
