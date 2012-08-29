@@ -35,6 +35,7 @@ class SignupFeed extends AbstractFeed {
 			JOIN event as e ON n.parentId = e.id
 			WHERE e.start > NOW()
 				AND e.status = " . Status::PUBLISHED ."
+				AND n.status = " . Status::PUBLISHED ."
 			ORDER BY n.timestamp ASC";
 	}
 
