@@ -80,8 +80,7 @@ class BpcEventTest extends CTestCase {
 	}
 	
 	public function getEvent() {
-		$dummy = 10;
-		$event = new BpcEvent($dummy);
+		$event = new BpcEventMock();
 		$event->setAttributes(array(
 			'id' => '381',
 			'title' => 'Capgemini',
@@ -108,4 +107,10 @@ class BpcEventTest extends CTestCase {
 		return $event;
 	}
 
+}
+
+class BpcEventMock extends BpcEvent {
+	public function __construct() {
+		
+	}
 }
