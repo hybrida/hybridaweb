@@ -108,6 +108,7 @@ return array(
 				'grupper/<url:\w+>' => '/group/view',
 				'grupper/<url:\w+>/<action:\w+>' => 'group/<action>',
 				'jobb' => 'jobAnnouncement/jobAnnouncement/index',
+				'jobb/<action:\w+>' => 'jobAnnouncement/jobAnnouncement/<action>',
 				'jobb/<id:\d>/<name>' => 'jobAnnouncement/jobAnnouncement/view',
 				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
 				'notifications' => '/notifications/default/index',
