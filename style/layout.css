@@ -8,11 +8,8 @@ html{
 
 body {
 	height: 100%;
-}
-
-body, .layout-mainWrap{
-    padding: 0px;
-    margin: 0px;
+	padding: 0;
+	margin: 0;
 }
 
 .layout-headerStripe{
@@ -36,18 +33,6 @@ body, .layout-mainWrap{
 	width: auto;
 	margin-right: auto;
 	margin-left: auto;
-}
-
-.layout-mainWrap {
-	position: absolute;
-	top: 90px;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: #ffffff;
-    margin-left: auto; 
-    margin-right: auto;
-    width: 980px;
 }
 
 .layout-header{
@@ -103,6 +88,28 @@ body, .layout-mainWrap{
     text-decoration: underline;
 }
 
+.layout-loggedIn{
+    height: 25px;
+    font: 20px 'Gill';
+    font-weight: lighter;
+    float: right;
+    padding: 0px 2px 0px 0px;
+}
+
+.layout-mainWrap {
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 90px;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+    width: 980px;
+}
+
 .layout-content{
 	width: 750px;
 	background-color: white;
@@ -120,12 +127,4 @@ body, .layout-mainWrap{
 	margin-left: auto;
 	margin-right: auto;
 	background-color: #ffffff;
-}
-
-.layout-loggedIn{
-    height: 25px;
-    font: 20px 'Gill';
-    font-weight: lighter;
-    float: right;
-    padding: 0px 2px 0px 0px;
 }
