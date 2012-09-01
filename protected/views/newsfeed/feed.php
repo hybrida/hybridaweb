@@ -10,7 +10,7 @@ $this->endClip();
 ?>
 
 <div class="newsfeedIndex">
-<div class="feeds2">
+<div class="feeds">
 	<? if ($hasPublishAccess): ?>
 	<?=	CHtml::link("Publiser", array("news/create"), array(
 			'class' => 'g-button g-buttonRightSide',
@@ -36,12 +36,12 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 		
 		$.ajax({
 			success: function(html){
-				$(".feeds2").append(html);
+				$(".feeds").append(html);
 			},
 			type: 'get',
 			url: '<?= $ajaxFeedUrl ?>' + count,
 			data: {
-				index: $(".feeds2 li").size()
+				index: $(".feeds li").size()
 			},
 			cache: false,
 			dataType: 'html'
