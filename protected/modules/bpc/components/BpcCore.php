@@ -22,7 +22,7 @@ class BpcCore {
 		}
 		
 		if ($user->cardHash == "" || $user->cardHash == null) {
-			throw new CHttpException("Du må legge inn kortnummer først", "Du har ikke lagt inn noe kortnummer");
+			throw new CHttpException("403", "Du har ikke lagt inn noe kortnummer. Dette gjøres på profilredigeringssiden");
 		}
 		
 		$inData = array(
