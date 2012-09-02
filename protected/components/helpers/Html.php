@@ -98,11 +98,17 @@ class Html extends CHtml {
 	
 	public static function userListByYear($usersByYear) {
 		$i = 1;
+		$userYear = user()->classYear;
 		foreach($usersByYear as $year): 
 			if (!empty($year)):
 				?>
 				<ul class="collapsibleList">
-				<li><h3> <?= $i ?>. årskurs </h3>
+				<? if ($i == $userYear): ?>
+					<li class="collapsibleListClosed">
+				<? else: ?>
+					<li>
+				<? endif ?>
+				<h3> <?= $i ?>. årskurs (<?= count($year) ?>)</h3>
 				<ul>
 				<?
 				foreach ($year as $user): 
