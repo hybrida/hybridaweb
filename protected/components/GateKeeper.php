@@ -6,6 +6,7 @@ class GateKeeper {
 	private $userId;
 	private $access;
 	private $isGuest;
+	private $classYear;
 
 	public function __construct() {
 		$this->isGuest = Yii::app()->user->isGuest;
@@ -25,6 +26,7 @@ class GateKeeper {
 		$this->user = User::model()->findByPk(user()->id);
 		$this->userId = $this->user->id;
 		$this->access = $this->user->access;
+		$this->classYear = $this->user->classYear;
 	}
 	
 	public function hasPostAccess($type, $id) {
@@ -96,6 +98,10 @@ class GateKeeper {
 	
 	public function getUserId() {
 		return $this->userId;
+	}
+	
+	public function getClassYear() {
+		return $this->classYear;
 	}
 	
 	protected function setAccess($access) {
