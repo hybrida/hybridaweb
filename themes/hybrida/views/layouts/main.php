@@ -9,7 +9,7 @@
 		<?= $this->clips['head-facebook'] ?>
 
 		<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/animations.js"></script>
-		<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/CollapsibleLists.js'></script>
+		<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/collapsible_lists.js'></script>
 		<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/e.js'></script>
 
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/fonts/fonts.css" />
