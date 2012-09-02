@@ -84,7 +84,9 @@ class BpcEvent extends CModel {
 		$signupIsOn = $this->isOpen();
 		$okYear = $classYear >= $this->min_year && $classYear <= $this->max_year;
 		$availableSeats = $this->seats_available > 0;
-		return $signupIsOn && $okYear && $availableSeats;
+		$isWaitingList = (int)$this->waitlist_enabled === 1;
+		$availableSeatsOrWaitingList = $availableSeats || $isWaitingList;
+		return $signupIsOn && $okYear && $availableSeatsOrWaitingList;
 	}
 
 	public function isOpen() {
