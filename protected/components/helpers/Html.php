@@ -106,13 +106,13 @@ class Html extends CHtml {
 				<? if ($i == $userYear): ?>
 					<li class="collapsibleListClosed">
 				<? else: ?>
-					<li>
+					<li class="collapsibleListOpen">
 				<? endif ?>
 				<h3> <?= $i ?>. årskurs (<?= count($year) ?>)</h3>
 				<ul>
 				<?
 				foreach ($year as $user): 
-					?><li>
+					?><li class="node">
 						<?= Image::profileTag($user->imageId, 'mini') ?>
 						<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
 					</li><?
