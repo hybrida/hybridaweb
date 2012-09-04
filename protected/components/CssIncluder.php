@@ -7,8 +7,10 @@ class CssIncluder {
 		$styleDir = dirname(Yii::app()->basePath) . "/style/";
 		$directoryHandle = opendir($styleDir);
 		while ($file = readdir($directoryHandle)) {
-			if ($file == "." || $file == "..")
+			$fullPathName = $styleDir . $file;
+			if ($file == "." || $file == ".." || is_dir($fullPathName)) {
 				continue;
+			}
 			$output .= CHtml::cssFile(Yii::app()->baseUrl . "/style/" . $file) . PHP_EOL;
 		}
 		return $output;
