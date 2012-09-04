@@ -27,7 +27,7 @@
 		<p>
 			Vi skal nå sjekke grunnleggende kunnskap om Internett. Oppgaven er enkel: kom til neste side.
 		</p>
-		<p><a class="feillink" href="http://www.youtube.com/watch?v=oHg5SJYRHA0">Link</a></p>
+		<p><a class="feillink" href="http://www.youtube.com/watch?v=dQw4w9WgXcQ">Link</a></p>
 		
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempus, mi eu egestas scelerisque, nunc arcu condimentum ante, in tristique justo eros eget diam. Maecenas id nisl et dui ultrices semper eget sed magna. Nunc non mi leo, ut convallis augue. Mauris accumsan, odio in posuere interdum, nulla tellus convallis nisl, nec dictum nulla enim suscipit tellus. Ut pretium tincidunt arcu, sodales sagittis diam suscipit quis. Fusce non risus dolor. Quisque rutrum iaculis tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
