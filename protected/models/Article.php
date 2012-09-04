@@ -11,6 +11,7 @@ Yii::import('application.components.widgets.ArticleTree');
  * @property string $title
  * @property string $shorttitle
  * @property string $content
+ * @property string $phpFile
  * @property integer $author
  * @property string $timestamp
  * @property array $access
@@ -33,6 +34,7 @@ class Article extends CActiveRecord {
 			array('title', 'length', 'max' => 30),
 			array('shorttitle', 'length', 'max' => 15),
 			array('parentId', 'numerical', 'integerOnly' => true),
+			array('phpFile', 'length','max' => 30),
 			array('author', 'numerical', 'integerOnly' => true),
 			array('title, shorttitle, content, timestamp', 'safe'),
 			array('id, parentId, title, shorttitle, content, author, timestamp', 'safe', 'on' => 'search'),
@@ -52,6 +54,7 @@ class Article extends CActiveRecord {
 			'title' => 'Title',
 			'shorttitle' => 'ShortTitle',
 			'content' => 'Content',
+			'phpFile' => 'phpFile',
 			'author' => 'Author',
 			'timestamp' => 'Timestamp',
 		);
@@ -65,6 +68,7 @@ class Article extends CActiveRecord {
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('shorttitle', $this->shorttitle, true);
 		$criteria->compare('content', $this->content, true);
+		$criteria->compare('phpFile', $this->phpFile);
 		$criteria->compare('author', $this->author);
 		$criteria->compare('timestamp', $this->timestamp, true);
 
@@ -112,6 +116,7 @@ class Article extends CActiveRecord {
 		$this->parentId = $purifier->purify($this->parentId);
 		$this->content = $purifier->purify($this->content);
 		$this->title = $purifier->purify($this->title);
+		$this->phpFile = $purifier->purify($this->phpFile);
 		$this->shorttitle = $purifier->purify($this->shorttitle);
 	}
 
@@ -141,13 +146,9 @@ class Article extends CActiveRecord {
 			return Article::traverseToRoot($curId, $parId);
 		}
 	}
-
-	public function getTitle() {
-		return $this->title;
-	}
 	
-	public function getShortTitle() {
-		return $this->shorttitle;
+	public function getPhpFilePath() {
+		return 'files/php/'.$this->phpFile.'.php';				
 	}
 
 	public function getViewUrl() {

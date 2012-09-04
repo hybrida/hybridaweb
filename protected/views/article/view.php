@@ -36,7 +36,11 @@ $this->endClip()
 			<h1><?= $article->title ?> </h1>
 		</div>
 		<div id="article-content">
-			<?= $article->content ?>
+			<? if($article->phpFile): ?>
+				<?= include $article->phpFilePath ?>
+			<? else: ?>
+				<?= $article->content ?>
+			<? endif ?>
 		</div>
 	</div>
 </div>

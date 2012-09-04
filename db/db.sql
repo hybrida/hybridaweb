@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `shorttitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
+  `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `author` int(11) NOT NULL,
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
