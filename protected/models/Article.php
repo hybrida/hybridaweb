@@ -121,6 +121,26 @@ class Article extends CActiveRecord {
 				));
 		return $children;
 	}
+	
+	public static function getRootTitle($currentId, $currentParent) {
+		$rootId = $currentId;
+		
+		if ($currentParent)
+			$rootId = Article::traverseToRoot($currentId, $currentParent);
+	
+		return Article::model()->findByPk($rootId)->title;		
+	}
+	
+	private static function traverseToRoot($curId, $parId) {
+		if ($parId == null) {
+			return $curId;
+		} else {
+			$curId = $parId;
+			$parArt = Article::model()->findByPk($parId);
+			$parId = $parArt->parentId;
+			return Article::traverseToRoot($curId, $parId);
+		}
+	}
 
 	public function getTitle() {
 		return $this->title;

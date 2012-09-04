@@ -17,8 +17,7 @@ class BpcAttendingTest extends PHPUnit_Framework_TestCase {
 		$u3 = $this->getUser();
 		$u3->setClassYear(2);
 		
-		$dummyNumber = 0;
-		$mock = new BpcAttendingMock($dummyNumber);
+		$mock = new BpcAttendingMock();
 		$mock->list = array($u1, $u2, $u3);
 		$userInYearArray = $mock->getActiveRecordsInYearArray();
 		$this->assertContains($u1, $userInYearArray[1]);
@@ -37,5 +36,8 @@ class BpcAttendingMock extends BpcAttending {
 	public $list;
 	public function getActiveRecords() {
 		return $this->list;
+	}
+	public function __construct() {
+		
 	}
 }

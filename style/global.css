@@ -164,9 +164,17 @@ li.collapsibleListOpen{
 	cursor:pointer;
 }
 
+li.collapsibleListOpen .node {
+	display:block;
+}
+
 li.collapsibleListClosed{
 	list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
 	cursor:pointer;
+}
+
+li.collapsibleListClosed .node {
+	display:none;
 }
 
 .g-barTitle{

@@ -1,5 +1,7 @@
 <?php
 
+Yii::import('jobAnnouncement.models.JobAnnouncement');
+
 class JobAnnouncementFeed extends CWidget {
 	
 	public $limit = 5;
@@ -11,7 +13,7 @@ class JobAnnouncementFeed extends CWidget {
 	public function runFeed() {
 		$feed = new JobFeedFinder($this->limit);
 		$elements = $feed->getElements();
-		$this->render('jobFeed', array(
+		$this->render('jobAnnouncement.views.jobFeed', array(
 			'models' => $elements,
 		));
 	}

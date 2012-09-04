@@ -1,5 +1,5 @@
 
-<div class='g-barTitle'><?= Html::link("Utlyste jobber", array("/jobAnnouncement/index")) ?></div>
+<div class='g-barTitle'><?= Html::link("Utlyste jobber", array("/jobAnnouncement/jobAnnouncement/index")) ?></div>
 
 <div class="g-barText">
 	<? foreach ($models as $model): ?>

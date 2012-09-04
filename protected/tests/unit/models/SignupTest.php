@@ -133,5 +133,62 @@ class SignupTest extends CTestCase {
 		$user = $this->getUser();
 		$this->assertFalse($signup->isAttending($user->id));
 	}
+	
+	public function test_removeAttender_signoffIsFalse_nothingIsDone() {
+		$signup = $this->getSignup();
+		$signup->signoff = false;
+		$signup->save();
+		$user = $this->getUser();
+		$signup->addAttender($user->id);
+		
+		$this->assertEquals(1, $signup->getAttendingCount());		
+		
+		$signup->removeAttender($user->id);
+		$this->assertEquals(1, $signup->getAttendingCount());
+	}
+	
+	public function test_canUnattend_signoffIsFalse_false() {
+		$signup = $this->getSignup();
+		$signup->signoff = false;
+		$signup->save();
+		$user = $this->getUser();
+		$signup->addAttender($user->id);
+		
+		$this->assertEquals(1, $signup->getAttendingCount());
+		$this->assertFalse($signup->canUnattend());
+	}
+	
+	public function test_canUnattend_signoffIsTrue_true() {
+		$signup = $this->getSignup();
+		$signup->signoff = true;
+		$signup->save();
+		$user = $this->getUser();
+		$signup->addAttender($user->id);
+		
+		$this->assertEquals(1, $signup->getAttendingCount());
+		$this->assertTrue($signup->canUnattend());
+	}
+	
+		public function test_canUnattend_signoffIsFalseString_false() {
+		$signup = $this->getSignup();
+		$signup->signoff = "false";
+		$signup->save();
+		$user = $this->getUser();
+		$signup->addAttender($user->id);
+		
+		$this->assertEquals(1, $signup->getAttendingCount());
+		$this->assertFalse($signup->canUnattend());
+	}
+	
+	public function test_canUnattend_signoffIsTrueString_true() {
+		$signup = $this->getSignup();
+		$signup->signoff = "true";
+		$signup->save();
+		$user = $this->getUser();
+		$signup->addAttender($user->id);
+		
+		$this->assertEquals(1, $signup->getAttendingCount());
+		$this->assertTrue($signup->canUnattend());
+	}
 
 }

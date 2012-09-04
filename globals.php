@@ -32,3 +32,22 @@ function param($name)
 function url($route,$params=array(),$ampersand='&') {
 	return Yii::app()->createUrl($route, $params, $ampersand);
 }
+
+function debug($name, $output, $die=false) {
+	$trace = debug_backtrace();
+	$lastTrace = $trace[1];
+	$function = $trace[1]['function'] . "()";
+	if (isset($lastTrace['class'])) {
+		$function = $lastTrace['class'] . "::" . $function;
+	}
+	echo '<div style="border:1px #888 solid; background-color: #cff; margin:1em;">';
+	echo "<Strong>Name:</strong> " . $name . "<br/>\n";
+	echo "<Strong>Called from:</strong> " . $function . "<br/>\n";
+	if ($output === true) $output = "true";
+	if ($output === false) $output = "false";
+	if ($output === null) $output = "null";
+	$output = print_r($output, true);
+	echo "<strong>Output:</strong>\n<pre>$output</pre>";
+	echo "</div>";
+	if ($die) die();
+}

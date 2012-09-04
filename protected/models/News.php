@@ -179,9 +179,10 @@ class News extends CActiveRecord {
 
 	public static function getNewsBetween($from, $to) {
 		$sql = "SELECT news.id FROM news
-			JOIN event ON news.parentId = event.id AND news.parentType = 'event'
-			WHERE event.start >= :start AND event.start < :end
-			OR event.end >= :start AND event.end < :end";
+					JOIN event ON news.parentId = event.id AND news.parentType = 'event'
+					WHERE news.status = " . Status::PUBLISHED . "
+						AND (event.start >= :start AND event.start < :end
+						OR event.end >= :start AND event.end < :end)";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->bindParam(":start", $from);
 		$stmt->bindParam(":end", $to);

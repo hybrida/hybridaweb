@@ -11,6 +11,6 @@
                 <?= $content ?>
             </div>
 			<div class="layout-rightBar">
-			
+				<? $this->widget('IKTRingenAdvertisement') ?>
             </div>
 <?php $this->endContent(); ?>

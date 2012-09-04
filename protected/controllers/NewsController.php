@@ -50,7 +50,7 @@ class NewsController extends Controller {
 		if (!$event) {
 			return null;
 		}
-		return $this->getSignupByEventId($event->id);
+		return $this->getPublishedAccessibleSignup($event->id);
 	}
 
 	private function redirectToBpc($id, $title) {
@@ -63,6 +63,9 @@ class NewsController extends Controller {
 
 	private function getNewsModelAndThrowExceptionIfNullOrNotAccess($id) {
 		$news = News::model()->with('author')->findByPk($id);
+		if ($news->status != Status::PUBLISHED) {
+			$news = null;
+		}
 
 		if (!$news)
 			throw new CHttpException('Nyheten finnes ikke');
@@ -90,22 +93,28 @@ class NewsController extends Controller {
 			return;
 		}
 		$userId = user()->id;
-		$signup = $this->getSignupByEventId($eventId);
+		$signup = $this->getPublishedAccessibleSignup($eventId);
 		if (!$signup) {
 			return;
 		}
+		$this->toggleAttending($signup, $userId);
+		$this->redirectToNewsByEventId($eventId);
+	}
+	
+	private function toggleAttending($signup, $userId) {
 		$isAttending = $signup->isAttending($userId);
-		if ($signup->canAttend($userId)) {
-			if ($isAttending) {
+		if ($isAttending) {
+			if ($signup->canUnattend()) {
 				$signup->removeAttender($userId);
-			} else {
+			}
+		} else {
+			if ($signup->canAttend($userId)) {
 				$signup->addAttender($userId);
 			}
 		}
-		$this->redirectToNewsByEventId($eventId);
 	}
 
-	private function getSignupByEventId($eventId) {
+	private function getPublishedAccessibleSignup($eventId) {
 		$signup = Signup::model()->findByPk($eventId);
 		if ($signup &&
 				$signup->status == Status::PUBLISHED &&

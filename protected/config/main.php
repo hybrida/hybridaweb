@@ -14,6 +14,7 @@ return array(
 	'preload' => array('log'),
 	'import' => array(
 		'application.models.*',
+		'application.components.widgets.*',
 		'application.components.*',
 		'application.components.helpers.*',
 		'application.exceptions.*',
@@ -36,6 +37,7 @@ return array(
 		'comment',
 		'search',
 		'notifications',
+		'jobAnnouncement',
 		'srbac' => array(
 			'userclass' => 'User', //default: User
 			'userid' => 'id', //default: userid
@@ -105,8 +107,9 @@ return array(
 				'grupper' => 'group/index',
 				'grupper/<url:\w+>' => '/group/view',
 				'grupper/<url:\w+>/<action:\w+>' => 'group/<action>',
-				'jobb' => '/jobAnnouncement/index',
-				'jobb/<id:\d>/<name>' => '/jobAnnouncement/view',
+				'jobb' => 'jobAnnouncement/jobAnnouncement/index',
+				'jobb/<action:\w+>' => 'jobAnnouncement/jobAnnouncement/<action>',
+				'jobb/<id:\d>/<name>' => 'jobAnnouncement/jobAnnouncement/view',
 				'bilde/<size:\w+>/<id:\d+>' => 'image/view',
 				'notifications' => '/notifications/default/index',
 				'nyheter/<id:\d+>/<title>' => 'news/view',

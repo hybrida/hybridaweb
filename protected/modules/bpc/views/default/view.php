@@ -7,6 +7,9 @@ $this->beginClip('sidebar'); ?>
 	))  ?>
 <? $this->endClip() ?>
 
+
+<div class="bedpresView">
+
 <h1>Bedpres: <?=$event->title?></h1>
 <? if (user()->checkAccess('admin')): ?>
         <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
@@ -15,13 +18,19 @@ $this->beginClip('sidebar'); ?>
 			'class' => 'g-button g-buttonRightSide')); ?>
 <? endif; ?>
 
-<? if ($news->imageId): ?>
-	<?= Image::tag($news->imageId, 'frontpage') ?><br/>
-<? else: ?>
-	<img src='<?=$event->logo?>' alt=""/><br/>
-<? endif ?>
+<div class="headerImage">
+	<a href="<?=$event->web_page?>">
+		<? if ($news->imageId): ?>
+			<?= Image::tag($news->imageId, 'frontpage') ?><br/>
+		<? else: ?>
+			<img src='<?=$event->logo?>' alt=""/><br/>
+		<? endif ?>
+	</a>
+</div>
 
-<?=$event->description?>
+<article>
+	<?=$event->description?>
+</article>
 
 <h1> Påmeldte: </h1>
 <? if (!user()->isGuest): ?>
@@ -38,17 +47,17 @@ $this->beginClip('sidebar'); ?>
 <h1>På venteliste:</h1>
 	<?= Html::userListByYear($event->getWaitingByYear()) ?>
 
-	<? if($event->canAttend(user()->id)): ?>
-		<?=
-		Html::link(
-				$event->isAttending(user()->id) ? "Meld meg av" : "Meld meg på", array(
-			'toggleAttending', 'bpcId' => $event->id),  array(
-			'class' => 'g-button',
-		))
-		?>
-	<? endif; ?>
+	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
+	<? if (!$isAttending && $event->canAttend(user()->id)): ?>
+		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
+	<? elseif ($isAttending && $event->canUnattend()): ?>
+		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
+	<? endif ?>
+
 <? else: ?>
 		<p>
 			Du må logge inn for å se listen over påmeldte
 		</p>
 <? endif ?>
+
+</div>

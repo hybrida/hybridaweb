@@ -24,7 +24,6 @@ class BpcEvent extends CModel {
 	public $is_advertised;
 	public $logo;
 	private $exists = false;
-	
 	private $attenders;
 	private $waiters;
 
@@ -35,7 +34,7 @@ class BpcEvent extends CModel {
 		}
 		return null;
 	}
-	
+
 	public static function getByRequest($request) {
 		
 	}
@@ -78,40 +77,50 @@ class BpcEvent extends CModel {
 
 	public function canAttend($userId) {
 		$user = User::model()->findByPk($userId);
-		if (!$user) return false;
+		if (!$user) {
+			return false;
+		}
 		$classYear = $user->classYear;
-		$signupIsOn = $this->registration_started == 1 && $this->deadline_passed == 0;
+		$signupIsOn = $this->isOpen();
 		$okYear = $classYear >= $this->min_year && $classYear <= $this->max_year;
 		$availableSeats = $this->seats_available > 0;
-		return $signupIsOn && $okYear && $availableSeats;
+		$isWaitingList = (int)$this->waitlist_enabled === 1;
+		$availableSeatsOrWaitingList = $availableSeats || $isWaitingList;
+		return $signupIsOn && $okYear && $availableSeatsOrWaitingList;
 	}
-	
+
+	public function isOpen() {
+		return $this->registration_started == 1 && $this->deadline_passed == 0;
+	}
+
+	public function canUnattend() {
+		return $this->isOpen();
+	}
+
 	public function getAttending() {
 		return $this->attenders->activeRecords;
 	}
-	
+
 	public function getAttendingByYear() {
 		return $this->attenders->getActiveRecordsInYearArray();
 	}
-	
+
 	public function getWaiting() {
 		return $this->waiters->activeRecords;
 	}
-	
+
 	public function getWaitingByYear() {
 		return $this->waiters->getActiveRecordsInYearArray();
 	}
-	
-		
+
 	public function addAttending($userId) {
 		BpcCore::addAttending($this->id, $userId);
 	}
-	
+
 	public function removeAttending($userId) {
 		BpcCore::removeAttending($this->id, $userId);
 	}
-	
-	
+
 	public function isAttending($userId) {
 		$user = User::model()->findByPk($userId);
 		if (!$user) {
@@ -121,12 +130,45 @@ class BpcEvent extends CModel {
 		$isAttending = $this->attenders->contains($user->username);
 		return $isWaiting || $isAttending;
 	}
-	
+
 	public function getViewUrl() {
 		return Yii::app()->createUrl('/bpc/default/view', array(
-			'id' => $this->id,
-			'title' => $this->title,
-		));
+					'id' => $this->id,
+					'title' => $this->title,
+				));
+	}
+
+	public function getGoogleCalendarUrl() {
+		$startTime= strtotime($this->time);
+		$endTime = $startTime + 3600*4;
+		$from = $this->getUTC($startTime);
+		$to = $this->getUTC($endTime);
+		$details = $this->description_formatted;
+		do {
+			$old = $details;
+			$details = str_replace(PHP_EOL.PHP_EOL, PHP_EOL, $old);
+		} while ($old !== $details);
+		$details = strip_tags($details);
+		$details = trim($details);
+		$details = str_replace(PHP_EOL, "%0A", $details);
+		$details = $this->spaceToUrl($details);
+
+		return "http://www.google.com/calendar/event?action=TEMPLATE" .
+				"&text={$this->spaceToUrl($this->title)}" .
+				"&dates={$from}/{$to}" .
+				"&details={$details}" .
+				"&location={$this->spaceToUrl($this->place)}" .
+				"&trp=true" .
+				"&sprop=http%3A%2F%2Fhybrida.no" .
+				"&sprop=name:Hybrida";
+	}
+	
+	private function spaceToUrl($text) {
+		return str_replace(" ", "%20", $text);
+	}
+	
+	private function getUTC($time) {
+		return gmdate("Ymd\THis\Z",$time);
 	}
 
 }

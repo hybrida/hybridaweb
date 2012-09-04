@@ -1,4 +1,4 @@
-<div class="g-barTitle">Sider</div>
+<div class="g-barTitle"><h3><?= Article::getRootTitle($article->id, $article->parentId) ?></h3></div>
 
 
 <div id="sidebarToBeUpdated">

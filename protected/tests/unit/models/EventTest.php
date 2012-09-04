@@ -108,5 +108,18 @@ class EventTest extends CTestCase {
 		
 		$this->assertEquals(null, $bedpress->companyID);
 	}
+	
+	public function test_isBpcEvent_noBpcEvent_false() {
+		$event = $this->getNewEvent();
+		$event->save();
+		$this->assertFalse($event->isBpcEvent());
+	}
+	
+	public function test_isBpcEvent_bedpressExists_true() {
+		$event = $this->getNewEvent();
+		$event->save();
+		$event->saveBedpres(rand(0,1000), rand(0,1000000));
+		$this->assertTrue($event->isBpcEvent());
+	}
 
 }

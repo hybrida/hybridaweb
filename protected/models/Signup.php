@@ -90,8 +90,8 @@ class Signup extends CActiveRecord {
 		$criteria->compare('active', $this->active);
 
 		return new CActiveDataProvider($this, array(
-					'criteria' => $criteria,
-				));
+			'criteria' => $criteria,
+		));
 	}
 
 	public function afterConstruct() {
@@ -123,29 +123,29 @@ class Signup extends CActiveRecord {
 		$stmt->bindValue(':eid', $this->eventId);
 		$stmt->bindValue(':uid', $userId);
 		$stmt->execute();
-		
+
 		$news = $this->getNews();
 		if ($news) {
-                    $array = array('uID' => $userId);
-                    $sql = "SELECT postEvents FROM fb_user WHERE userId = :uID";
-                    $query = Yii::app()->db->getPdoInstance()->prepare($sql);
-                    $query->execute($array);
-                    $result = $query->fetch(PDO::FETCH_ASSOC);
-                    if ($result['postEvents']==true){
-                        $this->pushToFacebook($news->absoluteUrl);
-                    }
+			$array = array('uID' => $userId);
+			$sql = "SELECT postEvents FROM fb_user WHERE userId = :uID";
+			$query = Yii::app()->db->getPdoInstance()->prepare($sql);
+			$query->execute($array);
+			$result = $query->fetch(PDO::FETCH_ASSOC);
+			if ($result['postEvents'] == true) {
+				$this->pushToFacebook($news->absoluteUrl);
+			}
 		}
-                
+
 		if ($addBPC) {
 			$this->addBpcAttender($userId);
 		}
 	}
-        
-        public function pushToFacebook($eventId){
-            $fb = new Facebook;
-            $fb->setAttending($eventId);
-        }
-		
+
+	public function pushToFacebook($eventId) {
+		$fb = new Facebook;
+		$fb->setAttending($eventId);
+	}
+
 	public function getNews() {
 		return News::model()->find("parentId = ? AND parentType = 'event'", array(
 			$this->eventId,
@@ -153,32 +153,33 @@ class Signup extends CActiveRecord {
 	}
 
 	private function addBpcAttender($userID) {
-		if ($this->isBpc()) {
-			BpcCore::addAttending($this->event->bpcID, $userID);
+		if ($this->isBpcEvent()) {
+			BpcCore::addAttending($this->event->eventCompany->bpcID, $userID);
 		}
 	}
 
 	public function removeAttender($userId) {
+		if (!$this->signoff) return;
 		Yii::app()->db->createCommand()
-				->update('signup_membership', array('signedOff' => 'true',), 'eventId = :eventId AND userId = :userId', array(
-					':eventId' => $this->eventId,
-					':userId' => $userId));
+			->update('signup_membership', array('signedOff' => 'true',), 'eventId = :eventId AND userId = :userId', array(
+				':eventId' => $this->eventId,
+				':userId' => $userId));
 		$this->removeBpcAttender($userId);
 	}
 
 	private function removeBpcAttender($userID) {
-		if ($this->isBpc()) {
-			BpcCore::removeAttending($this->event->bpcID, $userID);
+		if ($this->isBpcEvent()) {
+			BpcCore::removeAttending($this->event->eventCompany->bpcID, $userID);
 		}
 	}
 
-	private function isBpc() {
-		return $this->event != null && $this->event->bpcID;
+	private function isBpcEvent() {
+		return $this->event != null && $this->event->isBpcEvent();
 	}
 
 	public function removeAllAttenders() {
 		Yii::app()->db->createCommand()
-				->update('signup_membership', array('signedOff' => 'true'), 'eventId = :eid', array(':eid' => $this->eventId));
+			->update('signup_membership', array('signedOff' => 'true'), 'eventId = :eid', array(':eid' => $this->eventId));
 	}
 
 	public function getAttendingCount() {
@@ -219,11 +220,11 @@ class Signup extends CActiveRecord {
 		}
 		return $attenders;
 	}
-	
+
 	public function getAttendersFiveYearArrays() {
 		$attenders = $this->getAttenders();
 		$attendersArrays = array();
-		for ($i=1; $i<=5; $i++) {
+		for ($i = 1; $i <= 5; $i++) {
 			$year = array();
 			foreach ($attenders as $attender) {
 				if ($attender->classYear == $i) {
@@ -247,12 +248,12 @@ class Signup extends CActiveRecord {
 			':eventId' => $this->eventId,
 		));
 		$data = $stmt->fetch();
-		return !empty($data);
+		return!empty($data);
 	}
 
 	public function isOpen() {
 		return time() > strtotime($this->open) &&
-				time() < strtotime($this->close);
+		time() < strtotime($this->close);
 	}
 
 	public function hasFreeSpots() {
@@ -260,11 +261,15 @@ class Signup extends CActiveRecord {
 	}
 
 	public function canAttend() {
-		return 	$this->isOpen() &&
-				$this->hasFreeSpots() &&
-				app()->gatekeeper->hasPostAccess('signup', $this->eventId) &&
-				app()->gatekeeper->hasPostAccess('event', $this->eventId) &&
-				!user()->isGuest;
+		return $this->isOpen() &&
+		$this->hasFreeSpots() &&
+		app()->gatekeeper->hasPostAccess('signup', $this->eventId) &&
+		app()->gatekeeper->hasPostAccess('event', $this->eventId) &&
+		!user()->isGuest;
+	}
+	
+	public function canUnattend() {
+		return $this->signoff === 'true' || $this->signoff === true;
 	}
 
 }

@@ -37,7 +37,7 @@ $this->endClip();
 				<td class="nameCell"><?= CHtml::link($user['firstName'] . " " . $user['middleName'] . " " . $user['lastName'], array('/profile/info', 'username' => $user['username'])) ?></a></td>
 
 				<td class="isMemberCell">
-					<? if ($user['member']) { ?>
+					<? if ($user['member'] == 'true') { ?>
 						Medlem
 					<? } else { ?>
 						Ikke medlem

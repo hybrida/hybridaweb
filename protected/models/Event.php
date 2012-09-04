@@ -55,6 +55,7 @@ class Event extends CActiveRecord {
 		// class name for the relations automatically generated below.
 		return array(
 			'signup' => array(self::BELONGS_TO, 'Signup', 'id'),
+			'eventCompany' => array(self::BELONGS_TO, 'EventCompany', 'id'),
 		);
 	}
 
@@ -177,6 +178,13 @@ class Event extends CActiveRecord {
 	
 	public function getBedpress() {
 		return EventCompany::model()->findByPk($this->id);
+	}
+	
+	public function isBpcEvent() {
+		if ($this->eventCompany) {
+			return $this->eventCompany->bpcID != null;
+		}
+		return false;
 	}
 	
 	public function getNews() {

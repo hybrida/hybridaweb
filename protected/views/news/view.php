@@ -57,22 +57,24 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 
 <p><strong><?=$news->ingress?></strong></p>
 
-<?=$news->content?>
-
+<article>
+	<?=$news->content?>
+</article>
 
 <? if ($signup): ?>
 	<h1> Påmeldte: </h1>
-	<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
-	
-	<? if ($signup->canAttend(user()->id)): ?>
-		<?=
-		Html::link(
-				$isAttending ? "Meld meg av" : "Meld meg på", array(
-			'toggleAttending', 'eventId' => $event->id),  array(
-			'class' => 'g-button',
-		))
-		?><p></p>
-	<? endif; ?>
+	<? if (user()->isGuest): ?>
+		<p>Du må logge inn for å se listen over påmeldte</p>
+	<? else: ?>
+		<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
+
+		<? $url = $this->createUrl('toggleAttending', array('eventId' => $event->id)) ?>
+		<? if (!$isAttending && $signup->canAttend(user()->id)): ?>
+			<a href="<?=$url?>" class='g-button'>Meld meg på</a>
+		<? elseif ($isAttending && $signup->canUnattend()): ?>
+			<a href="<?=$url?>" class='g-button'>Meld meg av</a>
+		<? endif ?>
+	<? endif ?>
 <? endif ?>
 
 <?$this->widget('comment.components.commentWidget', array(

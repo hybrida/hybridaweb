@@ -22,16 +22,16 @@ class BpcCore {
 		}
 		
 		if ($user->cardHash == "" || $user->cardHash == null) {
-			throw new CHttpException("Du må legge inn kortnummer først", "Du har ikke lagt inn noe kortnummer");
+			throw new CHttpException("403", "Du har ikke lagt inn noe kortnummer. Dette gjøres på profilredigeringssiden");
 		}
 		
 		$inData = array(
 			'request' => 'add_attending',
 			'fullname' => $user->fullName,
 			'username' => $user->username,
-			'card_no' => (float) $user->cardHash,
+			'card_no' => $user->cardHash,
 			'event' => $bpcID,
-			'year' => 2, //FIXME
+			'year' => $user->classYear,
 		);
 		BpcCore::doRequest($inData);
 	}

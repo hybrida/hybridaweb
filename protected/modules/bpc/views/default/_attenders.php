@@ -11,4 +11,9 @@
 		<strong>Fra: </strong><i><?= Html::dateToString($event->registration_start, 'long') ?></i> <br>
 		<strong>Til: </strong><i><?= Html::dateToString($event->deadline, 'long') ?></i> <br>
 	</div>
+	
+	<div class="g-barTitle">Google kalender</div>
+	<div class="g-barText">
+		<a href="<?=$event->googleCalendarUrl?>" target="_blank">Legg til i kalender</a>
+	</div>
 </div>
