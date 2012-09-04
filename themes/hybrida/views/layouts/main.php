@@ -15,7 +15,8 @@
 		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/fonts/fonts.css" />
 		
 		<? if (YII_DEBUG):?>
-			<?= CssIncluder::getCssTagsFromStyleDirectory(); ?>
+			<? CssIncluder::registerDirectory("style") ?>
+			<?= CssIncluder::printCssTags() ?>
 		<? else: ?>
 			<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/all-TIMESTAMP.css" />
 		<?endif ?>
