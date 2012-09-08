@@ -7,7 +7,7 @@ class DefaultController extends Controller
 		$this->renderPartial('index');
 	}
 	
-	public function actionTask2() {
+	public function actionTask2_super_top_secret_underground_abcdefghijklmnopqrsteuvwxyz_boom_qwfpgj() {
 		$hacker = new PHPHacker;
 		$answer = null;
 		
