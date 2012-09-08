@@ -19,20 +19,30 @@ class PHPHacker extends CFormModel {
 	}
 
 	public function runCode() {
-		ob_start();
-		eval($this->php);
-		$this->output = ob_get_contents();
-		ob_clean();
+		if ($this->numberOfShoutsInCode() > 10) {
+			return "Det var en fryktelig lang tekst. Dette orker jeg ikke lese. Snakkes!";
+		}
+		$this->evaluateCode();
 		if (self::$counter == 20) {
 			return "Greit da!\npassordet er: password";
-		}
-		elseif(self::$counter < 20 ) {
-			return "Neida neida. Dette holder ikke. passordet er hemmelig";
+		} elseif (self::$counter < 20) {
+			return "Neida neida. Gir ikke etter for bare bittelite mas. passordet er hemmelig det!";
 		} else {
 			return "Du maser jo altformye! Dette orker jeg ikke!
 				Jeg er overopphetet og stikker nordover. Snakkes...";
 		}
 	}
 	
-	
+	private function numberOfShoutsInCode() {
+		$matches = array();
+		return preg_match_all("*shout*", $this->php, $matches);
+	}
+
+	private function evaluateCode() {
+		ob_start();
+		eval($this->php);
+		$this->output = ob_get_contents();
+		ob_clean();
+	}
+
 }
