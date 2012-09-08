@@ -73,17 +73,4 @@ class ArticleTest extends CTestCase {
 		$this->assertEquals($expected, $article->shorttitle);
 	}
 
-	public function test_purify_addStyleToContent_styleIsNotStripped() {
-		$article = $this->getArticle();
-		$style = "<h1>Hei</h1><style>h1 {font-size: 20px}</style>";
-		$stripped = "<h1>Hei</h1>";
-		$article->title = $style;
-		$article->content = $style;
-		$article->shorttitle = $style;
-		$article->purify();
-		$this->assertEquals($style, $article->content);
-		$this->assertEquals($stripped, $article->title);
-		$this->assertEquals($stripped, $article->shorttitle);
-	}
-
 }
