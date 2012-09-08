@@ -37,7 +37,7 @@
 
 		<p>Curabitur eu risus ut sapien sagittis dapibus id sed sem. Ut sem magna, mattis eu scelerisque pharetra, adipiscing vel purus. Nulla mollis, justo eu placerat vulputate, magna purus mattis sem, ut imperdiet quam massa id felis. Curabitur ligula dui, pulvinar id porta eu, posuere id turpis. Aliquam elementum ultricies aliquet. Nunc sit amet turpis ac lorem iaculis dapibus vitae ut eros. Suspendisse ut odio metus, non ultrices dui. Sed quam quam, euismod a tincidunt a, volutpat in mauris. Vestibulum suscipit pharetra mi ac suscipit. In hac habitasse platea dictumst.</p>
 		
-		<a class="riktiglink" href="www.dereskalhit.no">Men er nok her dere egentlig skal</a>
+		<a class="riktiglink" href="<?= $this->createUrl('task2') ?>">Men er nok her dere egentlig skal</a>
 
 		<p>Morbi vel nisl rutrum arcu faucibus adipiscing. Integer tempus leo sed justo feugiat in posuere velit hendrerit. Maecenas at volutpat odio. Nunc ut imperdiet enim. Morbi sagittis consequat lacus sit amet lobortis. Praesent congue, diam id dignissim pretium, enim metus elementum ipsum, at ultrices arcu tellus tincidunt mi. Praesent mollis facilisis molestie. Integer facilisis, dui vitae mollis mollis, justo nisl egestas nibh, sed congue lectus nulla quis nunc. Quisque et ante risus, ac convallis metus. Nullam pharetra accumsan nibh non semper. Nam ultrices sem lacus, at suscipit lectus. Integer elit metus, luctus et lobortis et, tristique sit amet mi. Nulla mollis vestibulum ante at commodo. Integer eget risus velit.</p>
 
