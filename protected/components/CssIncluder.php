@@ -7,7 +7,7 @@ class CssIncluder {
 	public static function printCssTags() {
 		$output = "";
 		foreach (self::$cssFiles as $file) {
-			$output .= CHtml::cssFile(Yii::app()->baseUrl . $file) . PHP_EOL;
+			$output .= CHtml::cssFile(Yii::app()->baseUrl ."/". $file) . PHP_EOL;
 		}
 		return $output;
 	}
