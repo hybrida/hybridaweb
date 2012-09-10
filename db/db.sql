@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Vert: localhost
--- Generert den: 04. Sep, 2012 13:18 PM
+-- Generert den: 10. Sep, 2012 14:33 PM
 -- Tjenerversjon: 5.5.16
 -- PHP-Versjon: 5.3.8
 
@@ -19,6 +19,7 @@ SET time_zone = "+00:00";
 --
 -- Database: `hybrida_dev`
 --
+
 CREATE DATABASE `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida_dev`;
 -- --------------------------------------------------------
@@ -58,7 +59,6 @@ CREATE TABLE IF NOT EXISTS `article` (
   `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `shorttitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
-  `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `author` int(11) NOT NULL,
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
@@ -448,11 +448,65 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `time_id` int(11) NOT NULL,
   `product_quantity` int(11) NOT NULL,
   `product_size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=22 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
+
+-- --------------------------------------------------------
+
+--
+-- Tabellstruktur for tabell `kilt_product`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_product` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=88 ;
+
+--
+-- Dataark for tabell `kilt_product`
+--
+
+INSERT INTO `kilt_product` (`id`, `type`, `model`) VALUES
+(1, 'Kilt', 'Gutt'),
+(2, 'Kilt', 'Jente'),
+(3, 'Kilt', 'Jente Mini'),
+(4, 'Sporran', 'Black Leather'),
+(5, 'Sporran', 'Thistle'),
+(6, 'Sporran', 'Celtic Circle'),
+(7, 'Ekstra', 'Sokker'),
+(9, 'Ekstra', 'Flashes'),
+(62, 'Sporran', 'Black Leather'),
+(63, 'Sporran', 'Thistle'),
+(64, 'Sporran', 'Celtic Circle'),
+(65, 'Sporran', 'Celtic Chain'),
+(66, 'Sporran', 'Military Insignia'),
+(67, 'Sporran', 'Double Knot'),
+(68, 'Sporran', 'Knotted Cross'),
+(69, 'Sporran', 'Oval Brass'),
+(70, 'Sporran', 'Ruby Celtic Cross'),
+(71, 'Sporran', 'Maltese Cross'),
+(72, 'Sporran', 'Studded Black Leather'),
+(73, 'Sporran', 'White Day'),
+(74, 'Sporran', 'Silver Studded Dress'),
+(75, 'Sporran', 'Silver Tassels'),
+(76, 'Sporran', 'Black Rabbit'),
+(77, 'Sporran', 'Gray Rabbit'),
+(78, 'Sporran', 'White Rabbit'),
+(79, 'Sporran', 'Shamrock'),
+(80, 'Sporran', 'Maltese Blue'),
+(81, 'Sporran', 'Maltese Kelly'),
+(82, 'Sporran', 'Maltese Red'),
+(83, 'Sporran', 'Buchanan Crest'),
+(84, 'Sporran', 'Lion Crest'),
+(85, 'Sporran', 'Skunk'),
+(86, 'Sporran', 'Thistle Crest'),
+(87, 'Sporran', 'Full Skunk');
 
 -- --------------------------------------------------------
 
@@ -482,10 +536,7 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (2, 5),
 (3, 1),
 (3, 2),
-(3, 4),
-(6, 1),
-(6, 2),
-(6, 4);
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -523,13 +574,6 @@ CREATE TABLE IF NOT EXISTS `kilt_time` (
   `end` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
-
---
--- Dataark for tabell `kilt_time`
---
-
-INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
-(1, '2012-01-01', '2012-10-10');
 
 -- --------------------------------------------------------
 
@@ -879,59 +923,6 @@ ALTER TABLE `rbac_assignment`
 ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
--- --------------------------------------------------------
-
---
--- Tabellstruktur for tabell `kilt_product`
---
-
-CREATE TABLE IF NOT EXISTS `kilt_product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
-
---
--- Dataark for tabell `kilt_product`
---
-
-INSERT INTO `kilt_product` (`id`, `type`, `model`) VALUES
-(1, 'Kilt', 'Gutt'),
-(2, 'Kilt', 'Jente'),
-(3, 'Kilt', 'Jente Mini'),
-(4, 'Sporran', 'Black Leather'),
-(5, 'Sporran', 'Thistle'),
-(6, 'Sporran', 'Celtic Circle'),
-(7, 'Ekstra', 'Sokker'),
-(9, 'Ekstra', 'Flashes'),
-(62, 'Sporran', 'Black Leather'),
-(63, 'Sporran', 'Thistle'),
-(64, 'Sporran', 'Celtic Circle'),
-(65, 'Sporran', 'Celtic Chain'),
-(66, 'Sporran', 'Military Insignia'),
-(67, 'Sporran', 'Double Knot'),
-(68, 'Sporran', 'Knotted Cross'),
-(69, 'Sporran', 'Oval Brass'),
-(70, 'Sporran', 'Ruby Celtic Cross'),
-(71, 'Sporran', 'Maltese Cross'),
-(72, 'Sporran', 'Studded Black Leather'),
-(73, 'Sporran', 'White Day'),
-(74, 'Sporran', 'Silver Studded Dress'),
-(75, 'Sporran', 'Silver Tassels'),
-(76, 'Sporran', 'Black Rabbit'),
-(77, 'Sporran', 'Gray Rabbit'),
-(78, 'Sporran', 'White Rabbit'),
-(79, 'Sporran', 'Shamrock'),
-(80, 'Sporran', 'Maltese Blue'),
-(81, 'Sporran', 'Maltese Kelly'),
-(82, 'Sporran', 'Maltese Red'),
-(83, 'Sporran', 'Buchanan Crest'),
-(84, 'Sporran', 'Lion Crest'),
-(85, 'Sporran', 'Skunk'),
-(86, 'Sporran', 'Thistle Crest'),
-(87, 'Sporran', 'Full Skunk');
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

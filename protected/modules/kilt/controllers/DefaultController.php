@@ -6,4 +6,4 @@ class DefaultController extends Controller
 	{
 		Yii::app()->request->redirect('/kilt/shop/');
 	}
-}
+ }

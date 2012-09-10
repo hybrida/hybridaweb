@@ -43,10 +43,10 @@
 
 				if (isset($errors[$p['id']])) 
 				{
-					echo "<p class=\"shopError\">";
+					echo "<font class=\"shopError\">";
 					foreach($errors[$p['id']] as $e)
 						echo "<br>" . $e;
-					echo "</p>";
+					echo "</font>";
 				}
 				?>
 			</td>

@@ -2,20 +2,30 @@
 
 class ShopController extends Controller
 {
+	public function actionIndex()
+	{
+		$this->render('info');
+	}
+
 	public function actionShop()
 	{
-		$shop = new Shop();
 		$errors = array();
 		$size = array();
 		$qnty = array();
 		$orders = array();
-		$catProducts = array();
-		$categories = $shop->getCategories();
-		$sizes = $shop->getSizes();
-		$curTime = $shop->getCurrentTime();
+
+		$shopHelper = new ShopHelper();
+		$categories = $shopHelper->getCategories();
+		$sizes = $shopHelper->getSizes();
+
+
+		$timeHelper = new TimeHelper();
+		$curTime = $timeHelper->getCurrentTime();
+		$isShopOpen = $timeHelper->isShopOpen();
 		$curTimeID = $curTime['id'];
-		$userComments = $shop->getUserComments();
-		$isShopOpen = $shop->isShopOpen();
+
+		$commentHelper = new CommentHelper();
+		$userComments = $commentHelper->getUserComments();
 		$comment = "";
 		if ($isShopOpen && isset($userComments[$curTimeID]))
 			$comment = $userComments[$curTimeID];
@@ -54,13 +64,13 @@ class ShopController extends Controller
 			if ($newComment != $comment)
 			{
 				if (empty($comment))
-					$shop->insertComment($newComment, $curTimeID);
+					$commentHelper->insertComment($newComment, $curTimeID);
 				elseif (empty($newComment))
-					$shop->deleteComment($curTimeID);
+					$commentHelper->deleteComment($curTimeID);
 				else
-					$shop->updateComment($newComment, $curTimeID);
+					$commentHelper->updateComment($newComment, $curTimeID);
 
-				$userComments = $shop->getUserComments();
+				$userComments = $commentHelper->getUserComments();
 				$comment = "";
 				if (isset($userComments[$curTimeID]))
 					$comment = $userComments[$curTimeID];
@@ -69,8 +79,10 @@ class ShopController extends Controller
 			// Bare bestill dersom det ikke var noen feil
 			if (count($errors) == 0 && count($orders) > 0)
 			{
+			   $orderHelper = new OrderHelper();
+
 				foreach($orders as $o)
-					$shop->addOrder($o['id'], $o['qnty'], $o['size']);
+				   $orderHelper->addOrder($o['id'], $curTimeID, $o['qnty'], $o['size']);
 
 				$this->actionOrders();
 				return;
@@ -78,20 +90,21 @@ class ShopController extends Controller
 		}
 
 		// Les inn produkter fordelt på kategori og ta med størrelser
-		foreach($categories as $c)
+		$categoryProducts = array();
+		foreach($categories as $category)
 		{
-			$newCatProducts = array();
-			foreach ($shop->getProductsByCategory($c) as $cp)
+			$newCategoryProducts = array();
+			foreach ($shopHelper->getProductsByCategory($category) as $categoryProduct)
 			{
-				$cp['sizes'] = $shop->getProductSizes($cp['id']);
-				$newCatProducts[] = $cp;
+				$categoryProduct['sizes'] = $shopHelper->getProductSizes($categoryProduct['id']);
+				$newCategoryProducts[] = $categoryProduct;
 			}
-			$catProducts[$c] = $newCatProducts;
+			$categoryProducts[$category] = $newCategoryProducts;
 		}
 
 		$this->render('index', 
 				array(
-					'catProducts'   => $catProducts,
+					'catProducts'   => $categoryProducts,
 					'sizes'		 => $sizes,
 					'errors'     => $errors,
 					'size'       => $size,
@@ -109,55 +122,58 @@ class ShopController extends Controller
 		return ($a['product_size'] - $b['product_size']);
 	}
 
-	public function actionIndex()
-	{
-		$this->render('info');
-	}
-
 	public function actionOrders()
 	{
-		$shop = new Shop();
+		$shopHelper = new ShopHelper();
+		$commentHelper = new commentHelper();
+		$orderHelper = new orderHelper();
+		$timeHelper = new timeHelper();
 
 		if (sizeof($_POST) > 0)
 			foreach($_POST as $key => $value)
 				if ($value == "Fjern produkt")
-					$shop->deleteOrder($key);
+				   $orderHelper->deleteOrder($key);
 				elseif ($value == "Fjern info")
-					$shop->deleteComment($key);
+					$commentHelper->deleteComment($key);
 
-		$orders = $shop->getUserOrders();
-		$products = $shop->getProducts();
-		$sizes = $shop->getSizes();
-		$isShopOpen = $shop->isShopOpen();
-		$time = $shop->getCurrentTime();
-		$comments = $shop->getUserComments();
+		$products = $shopHelper->getProducts();
+		$sizes    = $shopHelper->getSizes();
+
+		$isShopOpen = $timeHelper->isShopOpen();
+		$time       = $timeHelper->getCurrentTime();
+
+		$comments = $commentHelper->getUserComments();
+
+		$orders = $orderHelper->getUserOrders();
 
 		$timeOrders = array();
-		$sortedTimeOrders = array();
-
+		// Sort orders by time_id
 		foreach($orders as $o)
 			$timeOrders[$o['time_id']][] = $o;
 
+		// Sort  orders by product_id within times
 		foreach($timeOrders as $to)
 			usort($to, array("ShopController", "cmpOrder"));
 
+		// Sort comments by time_id
 		foreach($comments as $tid => $c)
 			$timeOrders[$tid][] = array();
 
 		$this->render('orders',
 				array(
 					'timeOrders' => $timeOrders,
-					'products' => $products,
-					'sizes'	=> $sizes,
+					'products'   => $products,
+					'sizes'	     => $sizes,
 					'isShopOpen' => $isShopOpen,
-					'time' => $time,
-					'times' => $shop->getTimes(),
-					'comments'    => $comments,
+					'time'       => $time,
+					'times'      => $timeHelper->getTimes(),
+					'comments'   => $comments,
 					));
 	}
 
 	public function actionAdmin()
 	{
+	   // Sjekker om brukeren har tilgang
 		$gk = Yii::app()->gatekeeper;
 		$isWebkomMember = $gk->hasGroupAccess(55);
 		if (!$isWebkomMember)
@@ -166,34 +182,43 @@ class ShopController extends Controller
 			return;
 		}
 
-		$shop = new Shop();
+		$shopHelper = new ShopHelper();
+		$orderHelper = new OrderHelper();
+		$timeHelper = new TimeHelper();
+
+		// default values
 		$showTimeID = -1;
 		$showUserID = -1;
 
 		if (isset($_POST['showUser']))
 		{
+		   // An user has been selected in the dropdown
 			$showUserID = $_POST['newuserid'];
 			$showTimeID = $_POST['timeid'];
 		}
 		else if (isset($_POST['updateOrder']))
 		{
+		   // An order has been checked/unchecked
 			$showUserID = $_POST['userid'];
 			$showTimeID = $_POST['timeid'];
 			foreach($_POST['recv'] as $id => $value)
-				$shop->setOrderRecv($id, $value);
+				$orderHelper->setOrderRecv($id, $value);
 		}
 		elseif (isset($_POST['createTime']) && 
 				isset($_POST['start']) && 
 				isset($_POST['end']))
 		{
+		   // A new time-interval has been added
 			$dateRegex = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#";
 			$start = $_POST['start'];
 			$end = $_POST['end'];
 
+			// The time is in an accepted format
 			if (preg_match($dateRegex, $start) && 
 				preg_match($dateRegex, $end) && 
 				$start < $end)
-				$shop->addTime($start, $end);
+				$timeHelper->addTime($start, $end);
+			// The time-format is not accepted, fails silently
 			else
 			{
 				$showUserID = $_POST['userid'];
@@ -204,6 +229,7 @@ class ShopController extends Controller
 		else
 			foreach($_POST as $key => $value)
 			{
+			   // Et tidsintervall har blitt valgt
 				if ($value == "Vis bestillinger")
 				{
 					$showTimeID = $key;	
@@ -211,10 +237,11 @@ class ShopController extends Controller
 				}
 			}
 
-		$curTime = $shop->getCurrentTime();
-		$sizes = $shop->getSizes();
-		$times = $shop->getTimes();
-		$isShopOpen = $shop->isShopOpen();
+		$curTime    = $timeHelper->getCurrentTime();
+		$times      = $timeHelper->getTimes();
+		$isShopOpen = $timeHelper->isShopOpen();
+
+		$sizes = $shopHelper->getSizes();
 
 		// Hvis tidsintervall ikke er satt og det finnes tidsintervaller
 		if (sizeof($times) > 0 && $showTimeID == -1)
@@ -226,22 +253,26 @@ class ShopController extends Controller
 			else
 			{
 				// Se etter avsluttede tidsintervaller
-				$lastTime = $shop->getLastTime(true);
+				$lastTime = $timeHelper->getLastTime(true);
 				// Hvis ingen avsluttede tidsintervaller, velg siste intervall
 				if (!isset($lastTime['id']))
-					$lastTime = $shop->getLastTime(false);
+					$lastTime = $timeHelper->getLastTime(false);
 				$showTimeID = $lastTime['id'];
 			}
 		}
 		
-		$products = $shop->getProducts();
-		$orders = $shop->getOrders();
+		$products = $shopHelper->getProducts();
+		$orders = $orderHelper->getOrders();
+
 		$totalOrders = array();
 		$userOrders = array();
 		$comments = array();
 
 		if ($showTimeID != -1)
-			$comments = $shop->getCommentsByTimeID($showTimeID);
+		  {
+			 $commentHelper = new CommentHelper();
+			 $comments = $commentHelper->getCommentsByTimeID($showTimeID);
+		  }
 
 		foreach ($orders as $o)
 		{
@@ -251,7 +282,7 @@ class ShopController extends Controller
 			$qnty = $o['product_quantity'];
 			$size = $o['product_size'];
 			$tid = $o['time_id'];
-			$recv = $o['recieved'];
+			$recv = $o['confirmed'];
 
 			if (!isset($totalOrders[$tid][$id][$size]))
 			{
@@ -278,7 +309,7 @@ class ShopController extends Controller
 
 		foreach($userOrders as $uid => $timeOrders)
 		{
-			$name = $shop->getUserNameByID($uid);
+			$name = $shopHelper->getUserNameByID($uid);
 			$userOrders[$uid]['name'] =	$name['firstName']." ".
 										$name['lastName'];
 		}
@@ -289,7 +320,7 @@ class ShopController extends Controller
 		$commentsByName = array();
 		foreach($comments as $c)
 		{
-			$name = $shop->getUserNameByID($c['user_id']);
+			$name = $shopHelper->getUserNameByID($c['user_id']);
 			$name = $name['firstName']." ".  $name['lastName'];
 			$commentsByName[$name] = $c['comment'];
 		}

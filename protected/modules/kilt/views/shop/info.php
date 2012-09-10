@@ -1,9 +1,10 @@
 <?
 $this->renderPartial("_menu");
 ?>
+
 <br>
 
-<div class"info">
+<div class="info">
 	<h2> Info </h2>
 	<p>
 		Nå har du endelig mulighet til å skaffe deg Hybrida-kilten.
