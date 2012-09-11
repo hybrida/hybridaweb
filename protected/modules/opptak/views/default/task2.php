@@ -10,9 +10,30 @@
 		padding: 2em;
 		margin: 2em;
 	}
+	
+	.hack {
+		padding: 0.5em;
+		margin: 2em;
+		background-color: #DFD;
+	}
+	.hack div {
+		font-weight: bold;
+	}
 </style>
 
 <h1>Hacking</h1>
+
+<?if (count($hacks) > 0): ?>
+
+	<? foreach ($hacks as $hack): ?>
+		<div class="hack">
+			<div>Du har blitt hacket!</div>
+			<?= $hack->content ?>
+		</div>
+
+	<? endforeach ?>
+
+<? endif ?>
 
 <? if ($answer != null): ?>
 <div class="answer">

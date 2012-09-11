@@ -24,7 +24,7 @@ class PHPHacker extends CFormModel {
 		}
 		$this->evaluateCode();
 		if (self::$counter == 20) {
-			return "Greit da!\npassordet er: password";
+			return "Greit da!\nDu kan gå" . CHtml::link("videre" , array("/opptak/default/task3_super_secret"));
 		} elseif (self::$counter < 20) {
 			return "Neida neida. Gir ikke etter for bare bittelite mas. passordet er hemmelig det!";
 		} else {
