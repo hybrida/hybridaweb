@@ -39,7 +39,7 @@
 	<body>
 		<div class="layout-headerStripe">
 			<div class="layout-header">
-				<a href="<?=Yii::app()->request->baseUrl?>" 
+				<a href="<?=Yii::app()->request->baseUrl?>/" 
 						><img class="layout-headerBanner" src="<?= Yii::app()->request->baseUrl ?>/images/BannerLarge.png" alt="" /></a>
 				<div class="searchWrap">
 					<? $this->widget('search.components.SearchWidget') ?>
