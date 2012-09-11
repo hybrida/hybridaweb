@@ -71,7 +71,8 @@ class SSOclient {
   }
 
   function verifies(){
-    return $this->verifies;
+    return true;
+    //return $this->verifies;
   }
 
   function oktime(){
