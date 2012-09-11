@@ -16,31 +16,37 @@
 		<h1>Rediger underside</h1>
 	
 	<div class="row">
-		<?= $form->labelEx($model, 'Tittel: ') ?>
+		<?= $form->labelEx($model, 'Tittel') ?>
 		<?= $form->textField($model, 'title') ?>
 		<?= $form->error($model, 'title') ?>
 	</div>
 		
 	<div class="row">
-		<?= $form->labelEx($model, 'Forkortet tittel: ') ?>
+		<?= $form->labelEx($model, 'shorttitle') ?>
 		<?= $form->textField($model, 'shorttitle') ?>
 		<?= $form->error($model, 'shorttitle') ?>
 	</div>
 	
 	<div class="row">
-		<?= $form->labelEx($model, 'Foreldreartikkel: ') ?>
+		<?= $form->labelEx($model, 'Foreldreartikkel') ?>
 		<?= $form->dropDownList($model, 'parentId', Article::getTreeList()) ?>
 		<?= $form->error($model, 'parentId') ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model, 'Innhold: '); ?>
+		<?= $form->labelEx($model, 'phpFile') ?>
+		<?= $form->textField($model, 'phpFile') ?>
+		<?= $form->error($model, 'phpFile') ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model, 'Innhold'); ?>
 		<?php echo $form->richTextArea($model, 'content'); ?>
 		<?php echo $form->error($model, 'content'); ?>
 	</div>
 	
 	<div class="row">
-		<?php echo $form->labelEx($model, 'Tilganger: '); ?>
+		<?php echo $form->labelEx($model, 'Tilganger'); ?>
 		<?php echo $form->accessField($model, 'access'); ?>
 		<?php echo $form->error($model, 'access'); ?>				
 	</div>

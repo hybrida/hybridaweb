@@ -3,13 +3,13 @@
 class ArticleForm extends CFormModel {
 
 	private $_article;
-	
 	public $access = array();
 	public $author;
 	public $content;
 	public $parentId;
 	public $shorttitle;
 	public $title;
+	public $phpFile;
 
 	public function __construct(Article $article, $scenario = '') {
 		parent::__construct($scenario);
@@ -27,6 +27,7 @@ class ArticleForm extends CFormModel {
 		$this->parentId = $this->_article->parentId;
 		$this->shorttitle = $this->_article->shorttitle;
 		$this->access = $this->_article->access;
+		$this->phpFile = $this->_article->phpFile;
 	}
 
 	public function save() {
@@ -40,14 +41,16 @@ class ArticleForm extends CFormModel {
 			'title' => $this->title,
 			'content' => $this->content,
 			'parentId' => $this->parentId,
-			'shorttitle' => $this->shorttitle));
+			'shorttitle' => $this->shorttitle,
+			'phpFile' => $this->phpFile
+		));
 		$this->_article->access = $this->access;
 	}
 
 	public function getArticleModel() {
 		return $this->_article;
 	}
-	
+
 	public function setAttributes($values, $safeOnly = false) {
 		$this->access = array();
 		parent::setAttributes($values, $safeOnly);
