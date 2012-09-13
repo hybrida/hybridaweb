@@ -35,7 +35,6 @@ return array(
 		'bpc',
 		'calendar',
 		'comment',
-                'opptak',
 		'search',
 		'notifications',
 		'jobAnnouncement',
