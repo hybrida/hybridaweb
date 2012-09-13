@@ -45,7 +45,11 @@
 							<? if (!empty($output)): ?>
 								<ul class="output">
 								<? for ($i = 0; $i < count($title); $i++): ?>
-									<li><a href="<?=$output[$i]?>"><?= $title[$i] ?></a></li>
+									<? if ($output[$i] == "#"): ?>
+										<li><?= $title[$i] ?></li>
+									<? else: ?>
+										<li><a href="<?=$output[$i]?>"><?= $title[$i] ?></a></li>
+									<? endif ?>
 								<? endfor ?>
 								</ul>
 							<? endif ?>

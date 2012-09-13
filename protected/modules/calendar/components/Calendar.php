@@ -216,7 +216,12 @@ class Calendar extends Event_Subject {
 		switch ($name) {
 			case 'today':
 				// Add an event for the current day
-				$this->attach($this->event()->condition('timestamp', strtotime('today'))->add_class('today')->title('Today'));
+				$this->attach($this->event()
+						->condition('timestamp', strtotime('today'))
+						->add_class('today')
+						->title('I dag')
+						->output("#")
+						);
 				break;
 			case 'prev-next':
 				// Add an event for padding days

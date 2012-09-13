@@ -24,7 +24,25 @@ class ArticleFormTest extends CTestCase {
 		$this->assertEquals($title, $form->title);
 		$this->assertEquals($content, $form->content);
 	}
+
+	public function test_fieldsAreSetCorrectly_containsPhpFile() {
+		$article = $this->getArticle();
+		$article->phpFile = "styret";
+		$form = $this->getForm($article);
+		$this->assertEquals("styret", $form->phpFile);
+	}
 	
+	public function test_fieldsAreSetOnInput_phpFile() {
+		$input = array(
+			'phpFile' => 'styret2',
+		);
+		$article = $this->getArticle();
+		$form = $this->getForm($article);
+		$form->setAttributes($input);
+		$this->assertEquals("styret2", $form->phpFile);
+	}
+	
+
 	public function test_fieldsAreSetOnInput() {
 		$info = "sigurd";
 		$article = $this->getArticle();
@@ -37,7 +55,7 @@ class ArticleFormTest extends CTestCase {
 		$this->assertEquals($info, $form->title);
 		$this->assertEquals($info, $form->content);
 	}
-	
+
 	public function test_setUnvalidProperty() {
 		$article = $this->getArticle();
 		$form = $this->getForm($article);
@@ -73,6 +91,17 @@ class ArticleFormTest extends CTestCase {
 		$this->assertEquals($title, $form->getArticleModel()->title);
 		$this->assertEquals($content, $form->getArticleModel()->content);
 	}
+	
+	public function test_save_phpFile() {
+		$article = $this->getArticle();
+		$form = $this->getForm($article);
+		$form->phpFile = "styret";
+		$form->save();
+		
+		$article = Article::model()->findByPk($article->id);
+		$this->assertEquals("styret", $article->phpFile);
+		
+	}
 
 	public function test_save_access_newArticle() {
 		$access = array(1, 2, 3);
@@ -87,8 +116,9 @@ class ArticleFormTest extends CTestCase {
 
 		$this->assertEquals($access, $form->getArticleModel()->access);
 	}
+
 	public function test_save_deleteOldAccess() {
-		$access = array(1,2,3,4);
+		$access = array(1, 2, 3, 4);
 		$article = $this->getArticle();
 		$article->access = $access;
 		$article->save();
@@ -98,7 +128,7 @@ class ArticleFormTest extends CTestCase {
 			'title' => "heisann",
 		));
 		$form->save();
-		
+
 		$article2 = Article::model()->findByPk($article->id);
 		$this->assertEmpty($article2->access);
 	}
@@ -108,14 +138,14 @@ class ArticleFormTest extends CTestCase {
 		$article = $this->getArticle();
 		$form = $this->getForm($article);
 		$form->setAttributes(array(
-				'content' => $content,
+			'content' => $content,
 		));
 		$form->save();
-		
+
 		$art = Article::model()->findByPk($article->id);
-		$this->assertEquals("hei",$art->content);
-		
+		$this->assertEquals("hei", $art->content);
 	}
+
 	public function test_getArticle() {
 		$article = $this->getArticle();
 		$form = $this->getForm($article);
