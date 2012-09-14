@@ -143,6 +143,10 @@ $referatMapper = getReferatFolders($folderPath);
 	}
 </style>
 
+<div>
+	<?= $article->content ?>
+</div>
+
 
 <? foreach ($referatMapper as $mappe): ?>
 	<div class="mappe">
