@@ -67,6 +67,7 @@ class Referat {
 	public $fileName;
 	public $date;
 	public $time;
+	public $extra;
 
 	public function __construct($fileName) {
 		$this->fileName = $fileName;
@@ -82,6 +83,9 @@ class Referat {
 			$this->time = 0;
 		} else {
 			$this->time = mktime(0, 0, 0, $ex[1], $ex[2], $ex[0]);
+		}
+		if (isset($ex[3])) {
+			$this->extra = $ex[3];
 		}
 		$date = date('Y-m-d H:i:s', $this->time);
 		$this->date = Html::dateToString($date);
@@ -110,25 +114,32 @@ $referatMapper = getReferatFolders($folderPath);
 		overflow: auto;
 
 	}
-	.referat {
+	.referat a {
+		width: 200px;
 		float: left;
-		width: 100px;
-		height: 150px;
-		margin: 1em;
-		padding: 1em;
-		background-color: #FDF;
+		padding: 0.5em;
+		margin: 0.5em;
+		background-color: #eee;
 		overflow: auto;
+		border-radius: 0.5em;
+
 	}
 
-	.referat img {
-		display: block;
-		width: 100px;
+	.referat a img {
+		width: 20px;
+		height: 20px;
+		position: relative;
+		top: 2px;
 	}
 
 	.referat a {
 		color: #000;
 		font-size: 18px;
 		text-decoration: none;
+	}
+
+	.referat a:hover {
+		background-color: #D9D9D9;
 	}
 </style>
 
@@ -137,13 +148,16 @@ $referatMapper = getReferatFolders($folderPath);
 	<div class="mappe">
 		<h2><?= $mappe->year . " " . $mappe->season ?></h2>
 
-	<? foreach ($mappe->referater as $referat): ?>
+		<? foreach ($mappe->referater as $referat): ?>
 			<div class="referat">
 				<a href="<?= $folderUrl ?><?= $mappe->yearSeason ?>/<?= $referat->fileName ?>">
-					<img src="/images/mastHeadLogo.png" />	
-		<?= $referat->date ?>
+					<img src="/images/pdf-icon.png" />	
+					<?= $referat->date ?>
+					<div class="extra">
+						<?= $referat->extra ?>
+					</div>
 				</a>
 			</div>
-	<? endforeach ?>
+		<? endforeach ?>
 	</div>
 <? endforeach ?>
