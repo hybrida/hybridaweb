@@ -16,8 +16,9 @@ function getDirContents($folderPath) {
 function referatFolderComparator($folder1, $folder2) {
 	$yearDiff = $folder2->year - $folder1->year;
 	if ($yearDiff == 0) {
-		if ($folder2->season == 'v')
+		if ($folder2->season == 'Høst') {
 			return 1;
+		}
 		return -1;
 	}
 	return $yearDiff;
