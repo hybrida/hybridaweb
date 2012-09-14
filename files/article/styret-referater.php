@@ -16,7 +16,8 @@ function getDirContents($folderPath) {
 function referatFolderComparator($folder1, $folder2) {
 	$yearDiff = $folder2->year - $folder1->year;
 	if ($yearDiff == 0) {
-		if ($folder2->season == 'v') return 1;
+		if ($folder2->season == 'v')
+			return 1;
 		return -1;
 	}
 	return $yearDiff;
@@ -54,7 +55,7 @@ class ReferatFolder {
 			$this->referater[] = new Referat($ref);
 		}
 	}
-	
+
 	private function sortReferater() {
 		usort($this->referater, "referatComparator");
 	}
@@ -76,7 +77,12 @@ class Referat {
 		$explode = explode(".", $fileName);
 		$dateString = $explode[0];
 		$ex = explode("-", $dateString);
-		$this->time = mktime(0, 0, 0, $ex[1], $ex[2], $ex[0]);
+		if (count($ex) < 3) {
+			debug("Invalid Filename: " . $fileName, $ex);
+			$this->time = 0;
+		} else {
+			$this->time = mktime(0, 0, 0, $ex[1], $ex[2], $ex[0]);
+		}
 		$date = date('Y-m-d H:i:s', $this->time);
 		$this->date = Html::dateToString($date);
 	}
@@ -131,13 +137,13 @@ $referatMapper = getReferatFolders($folderPath);
 	<div class="mappe">
 		<h2><?= $mappe->year . " " . $mappe->season ?></h2>
 
-		<? foreach ($mappe->referater as $referat): ?>
+	<? foreach ($mappe->referater as $referat): ?>
 			<div class="referat">
 				<a href="<?= $folderUrl ?><?= $mappe->yearSeason ?>/<?= $referat->fileName ?>">
 					<img src="/images/mastHeadLogo.png" />	
-					<?= $referat->date ?>
+		<?= $referat->date ?>
 				</a>
 			</div>
-		<? endforeach ?>
+	<? endforeach ?>
 	</div>
 <? endforeach ?>
