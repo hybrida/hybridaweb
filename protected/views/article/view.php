@@ -37,7 +37,7 @@ $this->endClip()
 		</div>
 		<div id="article-content">
 			<? if($article->phpFile): ?>
-				<?= include $article->phpFilePath ?>
+				<? include $article->phpFilePath ?>
 			<? else: ?>
 				<?= $article->content ?>
 			<? endif ?>
