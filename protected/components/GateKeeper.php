@@ -28,7 +28,7 @@ class GateKeeper {
 	}
 
 	public function hasPostAccess($type, $id) {
-		$userAccess = $this->separateInSubGroups($this->access);
+		$userAccess = $this->separateInAccessIntervals($this->access);
 		$postAccess = $this->getAccessRelations($type, $id);
 		if (!empty($postAccess)) {
 			if ($this->doesAccessHaveSuperGroups($postAccess)) {
@@ -43,25 +43,25 @@ class GateKeeper {
 
 	private function someSuperGroupsHasAccess($userAccess, $postAccess) {
 		$hasAccess = false;
-		foreach ($postAccess as $postAccessSubGroup) {
-			$hasAccess |= $this->superGroupHasAccess($userAccess, $postAccessSubGroup);
+		foreach ($postAccess as $postAccessSuperGroup) {
+			$hasAccess |= $this->superGroupHasAccess($userAccess, $postAccessSuperGroup);
 		}
 		return $hasAccess;
 	}
 
 	private function superGroupHasAccess($userAccess, $postAccess) {
-		$postAccess = $this->separateInSubGroups($postAccess);
+		$postAccess = $this->separateInAccessIntervals($postAccess);
 		$success = true;
 		foreach ($postAccess as $groupKey => $postAccessGroup) {
 			if (!array_key_exists($groupKey, $userAccess)) {
 				return false;
 			}
-			$success = $success && $this->hasAccessOneGroup($userAccess[$groupKey], $postAccessGroup);
+			$success = $success && $this->hasAccessOneInterval($userAccess[$groupKey], $postAccessGroup);
 		}
 		return $success == true;
 	}
 
-	private function hasAccessOneGroup($userAccess, $postAccess) {
+	private function hasAccessOneInterval($userAccess, $postAccess) {
 		if (empty($postAccess)) {
 			return true;
 		}
@@ -70,7 +70,7 @@ class GateKeeper {
 		return !empty($union);
 	}
 
-	private function separateInSubGroups($access) {
+	private function separateInAccessIntervals($access) {
 		$array = array();
 		foreach ($access as $id) {
 			$i = floor($id / 1000);
