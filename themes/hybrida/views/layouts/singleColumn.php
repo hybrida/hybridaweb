@@ -15,7 +15,9 @@
 				
 				<div class="g-barTitle"></div>
 				<div class="g-barText">
-					<img src="/images/sit.png" />
+					<a href="http://www.sit.no">
+						<img src="/images/sit.png" />
+					</a>
 				</div>
             </div>
 <?php $this->endContent(); ?>
