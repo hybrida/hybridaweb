@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 11, 2012 at 01:40 PM
+-- Generation Time: Sep 15, 2012 at 04:07 PM
 -- Server version: 5.1.61
 -- PHP Version: 5.3.3-7+squeeze8
 
@@ -31,15 +31,15 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
   `id` int(11) NOT NULL,
   `access` int(11) NOT NULL,
   `type` enum('article','event','image','news','signup') COLLATE utf8_unicode_ci NOT NULL,
-  `sub_id` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`id`,`type`,`access`,`sub_id`)
+  `super_id` int(11) NOT NULL DEFAULT '1',
+  PRIMARY KEY (`id`,`type`,`access`,`super_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `access_relations`
 --
 
-INSERT INTO `access_relations` (`id`, `access`, `type`, `sub_id`) VALUES
+INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (24, 4055, 'news', 0),
 (40, 2, 'news', 0),
 (41, 2, 'news', 0),
@@ -449,6 +449,24 @@ CREATE TABLE IF NOT EXISTS `job_announcement` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `kilt_comment`
+--
+
+CREATE TABLE IF NOT EXISTS `kilt_comment` (
+  `id` int(11) NOT NULL,
+  `comment` text COLLATE utf8_unicode_ci NOT NULL,
+  `time_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `kilt_comment`
+--
+
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kilt_order`
 --
 
@@ -456,11 +474,12 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `time_id` int(11) NOT NULL,
   `product_quantity` int(11) NOT NULL,
   `product_size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
 
 --
 -- Dumping data for table `kilt_order`
@@ -477,24 +496,48 @@ CREATE TABLE IF NOT EXISTS `kilt_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `sizes` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=88 ;
 
 --
 -- Dumping data for table `kilt_product`
 --
 
-INSERT INTO `kilt_product` (`id`, `type`, `model`, `sizes`) VALUES
-(1, 'Kilt', 'Gutt', 'Small:Medium:Medium Long:Large:XLarge:XXLarge'),
-(2, 'Kilt', 'Jente', 'Small:Medium:Large:XLarge'),
-(3, 'Kilt', 'Jente Mini', 'Small:Medium:Large'),
-(4, 'Sporran', 'Black Leather', ''),
-(5, 'Sporran', 'Thistle', ''),
-(6, 'Sporran', 'Celtic Circle', ''),
-(7, 'Sokker', 'Vanlig', ''),
-(8, 'Sokker', 'Premium', 'Small:Medium:Large'),
-(9, 'Ekstra', 'Flashes', '');
+INSERT INTO `kilt_product` (`id`, `type`, `model`) VALUES
+(1, 'Kilt', 'Gutt'),
+(2, 'Kilt', 'Jente'),
+(3, 'Kilt', 'Jente Mini'),
+(4, 'Sporran', 'Black Leather'),
+(5, 'Sporran', 'Thistle'),
+(6, 'Sporran', 'Celtic Circle'),
+(7, 'Ekstra', 'Sokker'),
+(9, 'Ekstra', 'Flashes'),
+(62, 'Sporran', 'Black Leather'),
+(63, 'Sporran', 'Thistle'),
+(64, 'Sporran', 'Celtic Circle'),
+(65, 'Sporran', 'Celtic Chain'),
+(66, 'Sporran', 'Military Insignia'),
+(67, 'Sporran', 'Double Knot'),
+(68, 'Sporran', 'Knotted Cross'),
+(69, 'Sporran', 'Oval Brass'),
+(70, 'Sporran', 'Ruby Celtic Cross'),
+(71, 'Sporran', 'Maltese Cross'),
+(72, 'Sporran', 'Studded Black Leather'),
+(73, 'Sporran', 'White Day'),
+(74, 'Sporran', 'Silver Studded Dress'),
+(75, 'Sporran', 'Silver Tassels'),
+(76, 'Sporran', 'Black Rabbit'),
+(77, 'Sporran', 'Gray Rabbit'),
+(78, 'Sporran', 'White Rabbit'),
+(79, 'Sporran', 'Shamrock'),
+(80, 'Sporran', 'Maltese Blue'),
+(81, 'Sporran', 'Maltese Kelly'),
+(82, 'Sporran', 'Maltese Red'),
+(83, 'Sporran', 'Buchanan Crest'),
+(84, 'Sporran', 'Lion Crest'),
+(85, 'Sporran', 'Skunk'),
+(86, 'Sporran', 'Thistle Crest'),
+(87, 'Sporran', 'Full Skunk');
 
 -- --------------------------------------------------------
 
@@ -524,10 +567,7 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (2, 5),
 (3, 1),
 (3, 2),
-(3, 4),
-(6, 1),
-(6, 2),
-(6, 4);
+(3, 4);
 
 -- --------------------------------------------------------
 
@@ -570,8 +610,6 @@ CREATE TABLE IF NOT EXISTS `kilt_time` (
 -- Dumping data for table `kilt_time`
 --
 
-INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
-(1, '2012-01-01', '2012-10-10');
 
 -- --------------------------------------------------------
 

@@ -119,19 +119,19 @@ class AccessRelation {
 	}
 
 	private function getInsertPdoStatement() {
-		$sql = "INSERT INTO access_relations (id, access, type, sub_id) 
-				VALUES	( :id, :access, :type, :sub_id)";
+		$sql = "INSERT INTO access_relations (id, access, type, super_id) 
+				VALUES	( :id, :access, :type, :super_id)";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(":id", $this->id);
 		$stmt->bindValue(":type", $this->type);
-		$stmt->bindValue(":sub_id", 1);
+		$stmt->bindValue(":super_id", 1);
 		return $stmt;
 	}
 
 	private function performInsertGroup($insertAccess, $stmt, $key) {
 		$access = null;
 		$stmt->bindParam(':access', $access);
-		$stmt->bindParam(':sub_id', $key);
+		$stmt->bindParam(':super_id', $key);
 		$insertArray = array_unique($insertAccess);
 		foreach ($insertArray as $access) {
 			if (key_exists($key, $this->accessGroups)) {
@@ -152,7 +152,7 @@ class AccessRelation {
 	}
 
 	private function fetch() {
-		$sql = "SELECT access, sub_id FROM access_relations
+		$sql = "SELECT access, super_id FROM access_relations
 					WHERE id = :id AND type = :type";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindParam(":id", $this->id);
@@ -166,7 +166,7 @@ class AccessRelation {
 	private function putIntoGroupsFromFetchAssoc($accessArray) {
 		$accessGroups = array();
 		foreach ($accessArray as $access) {
-			$group = $access['sub_id'];
+			$group = $access['super_id'];
 			$value = $access['access'];
 			$accessGroups[$group][] = $value;
 		}
