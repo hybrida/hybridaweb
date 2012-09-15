@@ -12,5 +12,10 @@
             </div>
 			<div class="layout-rightBar">
 				<? $this->widget('IKTRingenAdvertisement') ?>
+				
+				<div class="g-barTitle"></div>
+				<div class="g-barText">
+					<img src="/images/sit.png" />
+				</div>
             </div>
 <?php $this->endContent(); ?>
