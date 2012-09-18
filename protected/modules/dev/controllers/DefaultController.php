@@ -61,5 +61,9 @@ class DefaultController extends Controller {
 	public function actionAccess() {
 		$this->render('testAccess');
 	}
+        
+        public function actionHtml() {
+            $this->renderPartial('html');
+        }
 
 }
