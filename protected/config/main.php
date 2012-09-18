@@ -118,6 +118,8 @@ return array(
 				'profil/<username:\w+>' => '/profile/info/',
 				'profil/<username:\w+>/<action:\w+>' => 'profile/<action>/',
 				'kalender' => '/calendar/default/index',
+                            'test' => 'dev/default/test',
+                            'html' => 'dev/default/html',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
