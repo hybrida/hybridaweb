@@ -83,10 +83,10 @@ class OrderHelper
         $connection = Yii::app()->db;
         $data = array(
             ':id' => $id,
-            ':recieved' => $value,
+            ':confirmed' => $value,
         );
         $sql = "UPDATE kilt_order
-				SET recieved = :recieved
+			    SET confirmed = :confirmed
 		  		WHERE id = :id";
 		$command = $connection->createCommand($sql);
         $command->execute($data);

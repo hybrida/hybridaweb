@@ -24,7 +24,7 @@ class ShopHelper {
 	public function getProductsByCategory($category)
 	{
         $connection = Yii::app()->db;
-		$sql = "SELECT id, type, model FROM kilt_product WHERE type = :category";
+		$sql = "SELECT * FROM kilt_product WHERE type = :category";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":category", $category);
 		$data = $command->queryAll(); 
