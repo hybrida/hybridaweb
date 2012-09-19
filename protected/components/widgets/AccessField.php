@@ -112,7 +112,9 @@ class AccessField extends CWidget {
 
 	private function getYears() {
 		$years = array();
-		for ($i = 2012; $i <= 2016; $i++) {
+		$firstGraduationYear = YearConverter::classYearToGraduationYear(5);
+		$secondGraduationYear = YearConverter::classYearToGraduationYear(1);
+		for ($i = $firstGraduationYear; $i <= $secondGraduationYear; $i++) {
 			$years[$i] = $i;
 		}
 		return $years;
