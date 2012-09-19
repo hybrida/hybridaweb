@@ -1,7 +1,19 @@
-<? $this->renderPartial("_menu"); ?>
-<? echo CHtml::beginForm('', 'post'); ?>
-<? $scaleArray = array('height' => '130px', 'style' => 'max-width: 130px'); ?>
-<? if (!$isShopOpen) echo '<br><center><font class="shopError">Du kan ikke bestille enda</font></center>';?>
+<? 
+   if (!function_exists("preprint")) { 
+	   function preprint($s, $return=false) { 
+		   $x = "<pre>"; 
+		   $x .= print_r($s, 1); 
+		   $x .= "</pre>"; 
+		   if ($return) return $x; 
+		   else print $x; 
+	   } 
+   }
+   $this->renderPartial("_menu");
+   echo CHtml::beginForm('', 'post');
+   $scaleArray = array('height' => '130px', 'style' => 'max-width: 130px');
+   if (!$isShopOpen) 
+		 echo '<br><center><font class="shopError">Du kan ikke bestille enda</font></center>';
+?>
 <table class="shopTable">
 <?foreach($catProducts as $cat => $products):?>
 <? $counter = 0; ?>

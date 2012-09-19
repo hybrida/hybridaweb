@@ -40,17 +40,25 @@ class TimeHelper
 	  return $data;
    }
 
-   // Returns the last time-interval. if onlyEnded == true, it only returns time-intervals
-   // that has not ended
-   public function getLastTime($onlyEnded)
+   public function getCurrentTimeID()
    {
 	  $connection = Yii::app()->db;
-	  if ($onlyEnded)
-		 $sql = "SELECT MAX(id) as id from kilt_time WHERE end < CURDATE()";
-	  else
-		 $sql = "SELECT MAX(id) as id from kilt_time";
+	  $sql = "SELECT id FROM kilt_time WHERE start <= CURDATE() AND CURDATE() <= end";
 	  $command = $connection->createCommand($sql);
-	  $data = $command->queryRow(); 
+	  $data = $command->queryScalar(); 
+	  if ($data == "")
+	  	$data = -1;
+	  return $data;
+   }
+
+   // Returns the last time-interval. if onlyEnded == true, it only returns time-intervals
+   // that has not ended
+   public function getLastTimeID()
+   {
+	  $connection = Yii::app()->db;
+	  $sql = "SELECT MAX(id) as id from kilt_time";
+	  $command = $connection->createCommand($sql);
+	  $data = $command->queryScalar(); 
 	  return $data;
    }
 

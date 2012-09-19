@@ -32,7 +32,7 @@ else
 				<td class="orderTitle"><? if ($curr) echo "Slett"; else echo "Hentet"; ?> </td>
 			<tr>
 			<? foreach($orders as $o): if(empty($o)) break; ?>
-			<tr class="<? if (!$curr) echo ($o['recieved']) ? "green" : "red"; ?>">
+			<tr class="<? if (!$curr) echo ($o['confirmed']) ? "green" : "red"; ?>">
 				<td class="orderContent">
 					<?
 					$id = $o['product_id'];
@@ -46,7 +46,7 @@ else
 							echo CHtml::submitButton('Fjern produkt', 
 							array( 'name' => $o['id'], 'disabled' => !$curr,));
 						else
-							echo ($o['recieved']) ? "Ja" : "Nei"; ?>
+							echo ($o['confirmed']) ? "Ja" : "Nei"; ?>
 				</td>
 			</tr>
 			<? endforeach; ?>
