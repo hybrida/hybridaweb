@@ -1,14 +1,7 @@
-<ul id="nav">
-	<li>
-		<? echo CHtml::link("Info", array('index')); ?>
-	</li>
-	<li>
-		<? echo CHtml::link("Shop", array('shop')); ?>
-	</li>
-	<li>
-		<? echo CHtml::link("Bestillinger", array('orders')); ?>
-	</li>
-	<li>
-		<? echo CHtml::link("Admin", array('admin')); ?>
-	</li>
-</ul>
+
+<div id='g-groupNavigation'>
+	 <?=CHtml::link("Info", 			array('index'), 	array('class' => 'g-groupNavigationItem')); ?>
+	 <?=CHtml::link("Shop", 			array('shop'), 		array('class' => 'g-groupNavigationItem')); ?>
+	 <?=CHtml::link("Bestillinger", 	array('orders'), 	array('class' => 'g-groupNavigationItem')); ?>
+	 <?=CHtml::link("Admin", 			array('admin'), 	array('class' => 'g-groupNavigationItem')); ?>
+</div>

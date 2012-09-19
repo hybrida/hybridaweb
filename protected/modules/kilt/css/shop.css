@@ -40,6 +40,11 @@
 	text-size: 1em;
 }
 
+.shopLink
+{
+   text-decoration: none;
+}
+
 .shopTitle
 {
 	width: 100%;
@@ -89,7 +94,6 @@
 /* Order page end */
 
 /* Admin page start */
-
 .adminTable
 {
 	padding-top: 30px;
@@ -121,7 +125,6 @@
 
 
 /*admin page end */
-
 
 .info
 {
