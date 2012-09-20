@@ -79,6 +79,16 @@
             <?= $form->error($model, 'user[graduationYear]') ?>
         </div>
     </div>
+    <div class="inputGroup">
+        <div class="fieldDefinition">
+			Telefonnummer
+        </div>
+        <div class="fieldInput">
+            <?= $form->textField($model, 'user[phoneNumber]') ?>
+            <?= $form->error($model, 'user[phoneNumber]') ?>
+        </div>
+    </div>
+
 
     <div class="inputGroup">
         <div class="fieldDefinition">
