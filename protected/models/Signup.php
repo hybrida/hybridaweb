@@ -231,6 +231,7 @@ class Signup extends CActiveRecord {
 					array_push($year, $attender);
 				}
 			}
+			usort($year, array(__CLASS__, "userListingComparator"));
 			array_push($attendersArrays, $year);
 		}
 		return $attendersArrays;
@@ -270,6 +271,18 @@ class Signup extends CActiveRecord {
 	
 	public function canUnattend() {
 		return $this->signoff === 'true' || $this->signoff === true;
+	}
+
+	private static function userListingComparator($user1, $user2) {
+        if ($user1->firstName == $user2->firstName) {
+			if ($user1->lastName == $user2->lastName)
+				return 0;
+			else {
+                return ($user1->lastName > $user2->lastName) ? 1 : -1;
+            }
+		} else {
+			return ($user1->firstName > $user2->firstName) ? 1 : -1;
+		}
 	}
 
 }
