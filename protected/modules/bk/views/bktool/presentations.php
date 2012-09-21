@@ -7,7 +7,7 @@
 <h2>Bedriftspresentasjoner</h2>
 
 <p>
-    Dette er en oversikt over alle bedriftspresentasjoner som er registrert på denne nettsiden. Arrangementer må knyttes til bedrifter manuelt siden dette ikke er mulig å gjøre fra nettsidene til <a href="http://bpc.timini.no/">The Bedpres Central</a>.
+    Dette er en oversikt over alle bedriftspresentasjoner som er registrert på denne nettsiden. Arrangementer må knyttes til bedrifter manuelt siden dette ikke er mulig å gjøre fra nettsidene til <a href="http://www.bedriftspresentasjon.no">The Bedpres Central</a>.
 </p>
 
 <br/>
