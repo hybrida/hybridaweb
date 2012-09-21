@@ -20,13 +20,13 @@ class ShopController extends Controller
 
 		$sizes = $shopHelper->getSizes();
 		$categoryProducts = $shopHelper->getProductsIndexedByCategory();
+		$imagePrefix = $shopHelper->getImageDir();
 
 		$curTimeID = $timeHelper->getCurrentTimeID();
 		$isShopOpen = $timeHelper->isShopOpen();
 
 		$comment = $commentHelper->getUserCommentByTimeID($curTimeID);
 
-		$imagePrefix = $shopHelper->getImageDir();
 		
 
 		if (isset($_POST['submit']))

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Vert: localhost
--- Generert den: 21. Sep, 2012 15:34 PM
+-- Generert den: 21. Sep, 2012 22:51 PM
 -- Tjenerversjon: 5.5.16
 -- PHP-Versjon: 5.3.8
 
@@ -163,7 +163,7 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 --
 
 INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
-(1, 'Kilt', 'Gutt', 'products/K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
+(1, 'Kilt', 'Gutt', 'K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
 (2, 'Kilt', 'Jente', '2009093012423778237_med.jpg', '4061/Irisher-Women%27s-Kilt.html'),
 (3, 'Kilt', 'Jente Mini', '2009101514272187719_med.jpg', '4561/Irisher-Mini-Kilt.html'),
 (6, 'Sporran', 'Black Leather', '2009032717231692517_med.jpg', '1911/Black-Leather-Sporran.html'),
@@ -183,7 +183,7 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (99, 'Sporran', 'White Rabbit', '2009032717301821464_lrg.jpg', '2191/White-Rabbit-Sporran.html'),
 (100, 'Sporran', 'White Rabbit w/ Black Tassels', '2010081811431185197_lrg.jpg', '9532/White-Rabbit-Sporran-with-Black-Tas'),
 (101, 'Ekstra', 'Sokker', '2011091315270667842_med.jpg', '721/Kilt-Hose---Regular.html'),
-(102, 'Ekstra', 'Flashes', 'products/FL_SOL.jpg', '631/Flashes----Solid-Color.html');
+(102, 'Ekstra', 'Flashes', 'FL_SOL.jpg', '631/Flashes----Solid-Color.html');
 
 --
 -- Dataark for tabell `kilt_product_size`
