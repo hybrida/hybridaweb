@@ -84,7 +84,7 @@ class OrderHelper
 		return ($a['product_size'] - $b['product_size']);
 	}
 
-	public function getUserOrdersIndexedByTime()
+	public function getUserOrders()
 	{
         $connection = Yii::app()->db;
 		$userId = Yii::app()->user->id;
@@ -92,6 +92,12 @@ class OrderHelper
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":user_id", $userId);
 		$data = $command->queryAll(); 
+		return $data;
+	}
+
+	public function getUserOrdersIndexedByTime()
+	{
+	   $data = $this->getUserOrders();
 		$timeOrders = array();
 		foreach($data as $d) {
 			$timeOrders[$d['time_id']][] = $d;
