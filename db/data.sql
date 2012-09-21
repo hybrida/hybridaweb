@@ -1,12 +1,30 @@
+-- phpMyAdmin SQL Dump
+-- version 3.4.5
+-- http://www.phpmyadmin.net
+--
+-- Vert: localhost
+-- Generert den: 21. Sep, 2012 15:34 PM
+-- Tjenerversjon: 5.5.16
+-- PHP-Versjon: 5.3.8
+
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+--
+-- Database: `hybrida_dev`
+--
 USE `hybrida_dev`;
+
+--
+-- Dataark for tabell `access_relations`
+--
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (24, 4055, 'news', 0),
@@ -14,6 +32,10 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (41, 2, 'news', 0),
 (85, 2014, 'signup', 1),
 (85, 4055, 'signup', 0);
+
+--
+-- Dataark for tabell `article`
+--
 
 INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `content`, `phpFile`, `author`, `timestamp`) VALUES
 (56, 1, 'Lenker', NULL, '<p>\n</p><table cellspacing="6"><tr><td width="150"><a href="http://www.ntnu.no/studier/ingeniorvitenskap-ikt">I &amp; IKT på ntnu.no</a>\n</td>\n<td>\nRekrutterings- og infosider.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studieinformasjon/timeplan/">Timeplaner</a>\n</td><td>\nTimeplanene til alle klassetrinn.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studentservice/">Studentservice</a>\n</td><td>\nSvarer på alle spørsmål du måtte ha som NTNU-student.\n</td></tr><tr><td>\n<a href="http://www.studweb.ntnu.no">ITEAs infoweb</a>\n</td><td>\nInformasjonsbase for IT-systemet\n</td></tr><tr><td>\n<a href="http://www.orakel.ntnu.no">Orakeltjenesten</a>\n</td><td>\nSupport for IT-systemer under NTNU\n</td></tr><tr><td>\n<a href="http://www.samfundet.no">\nStudentersamfundet i Trondhjem</a>\n</td><td>\nNorges største og studentersamfunn.\n</td></tr><tr><td>\n<a href="http://www.universitetsavisa.no">Universitesavisa</a>\n</td><td>\nNyheter fra campus.\n</td></tr><tr><td>\n<a href="http://www.underdusken.no">Under Dusken</a>\n</td><td>\nTrondheims studentavis\n</td></tr><tr><td>\n<a href="http://www.studentrad.no/">Studentrådene</a>\n</td><td>\nStudentrådene ved NTNU\n</td></tr></table>', NULL, 381, '2012-03-07'),
@@ -42,6 +64,14 @@ INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `content`, `phpF
 (72, 70, 'Update^k', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<h2>\n	Linjeforeningsavisen Update^k</h2>\n<p class="MsoNormal">\n	<span class="apple-style-span"><span style="color:#000000;">Gjennom et samarbeid med linjeforeningens avis, Update<sup>K</sup>, kan Hybrida Bedriftskomité tilby annonsering og dekning av bedriften. Update<sup>K</sup> gis ut til alle studenter ved I&amp;IKT seks ganger årlig. Deadline for hver av avisens utgaver kan fåes ved etterspørsel.</span></span></p>\n<p>\n	<img alt="Update" height="270" src="/upc/files/ringen/images/update_fremsider.png" width="242" /></p>\n<p class="MsoNormal">\n	<span class="apple-style-span"><span style="color:#000000;">Som medlem av I&amp;IKT-ringen vil bedriftene få sin logo trykt i avisen i hver utgave. I tillegg er det også mulig for bedriften å publisere informasjon gjennom intervjuer og artikler med mer. Skulle man ønske å utlyse sommerjobb/jobbannonser er dette selvfølgelig også mulig å gjøre.</span></span></p>\n<p class="MsoNormal">\n	<span class="apple-style-span"><span style="color:#000000;">Hvis man ønsker annonsering i forbindelse med et spesielt arrangement kan avisen også tilby dekning av dette arrangement på forhånd. Dette kan for eksempel være en artikkel hvor man går kort inn på hva bedriften gjør, hvordan det er å jobbe der og informerer om kommende arrangementer.</span></span></p>\n<p class="MsoNormal">\n	 </p>\n', NULL, 293, '2012-05-08'),
 (74, 2, 'Medlemmer', NULL, '<h2>\n	Medlemmer i Hybrida Bedriftskomité</h2>\n<p>\n	Hybrida Bedriftskomité jobber for å øke kontakten mellom bedrifter og studenter ved Ingeniørvitenskap og IKT. Vi har også som mål å gjøre linjen bedre kjent og spre kunnskap om hvilken kompetanse en I&amp;IKT-student innehar.</p>\n<p>\n	 </p>\n<p>\n	Liste med bilde, navn og stilling til alle i komiteen her</p>\n', NULL, 293, '2012-05-08');
 
+--
+-- Dataark for tabell `bk_company`
+--
+
+--
+-- Dataark for tabell `bk_company_specialization`
+--
+
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (1, 1),
 (1, 2),
@@ -64,8 +94,24 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (108, 3),
 (108, 4);
 
+--
+-- Dataark for tabell `bk_company_update`
+--
+
+--
+-- Dataark for tabell `book_sales`
+--
+
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
-(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 22:56:46');
+(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 20:56:46');
+
+--
+-- Dataark for tabell `comment`
+--
+
+--
+-- Dataark for tabell `event`
+--
 
 INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (71, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 0),
@@ -82,6 +128,13 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (97, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'arst', 0),
 (99, '2012-09-01 00:00:00', '2015-09-01 00:00:00', 'Lesesalen', 0);
 
+--
+-- Dataark for tabell `fb_user`
+--
+
+--
+-- Dataark for tabell `gallery`
+--
 
 INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
 (22, 1, 'HELLO', NULL, '2011-04-03 23:24:42'),
@@ -91,20 +144,23 @@ INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
 (18, 1, 'lol', NULL, '2011-04-03 20:56:39'),
 (23, 1, 'bears', NULL, '2011-04-03 23:39:46');
 
+--
+-- Dataark for tabell `group_membership`
+--
+
+--
+-- Dataark for tabell `groups`
+--
+
 INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 (58, 0, 'UpdateK', 381, 'false', 'updatek'),
 (55, 0, 'Webkom', 381, 'true', 'webkom'),
 (56, 0, 'Styret', 363, 'false', 'styret'),
 (57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bk');
 
-
-
-
-
-INSERT INTO `kilt_order` (`id`, `user_id`, `product_id`, `time_id`, `product_quantity`, `product_size`, `confirmed`) VALUES
-(26, 381, 1, 2, 2, '5', 0),
-(27, 381, 72, 2, 8, '0', 0),
-(28, 381, 9, 2, 7, '0', 0);
+--
+-- Dataark for tabell `kilt_product`
+--
 
 INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (1, 'Kilt', 'Gutt', 'products/K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
@@ -129,6 +185,10 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (101, 'Ekstra', 'Sokker', '2011091315270667842_med.jpg', '721/Kilt-Hose---Regular.html'),
 (102, 'Ekstra', 'Flashes', 'products/FL_SOL.jpg', '631/Flashes----Solid-Color.html');
 
+--
+-- Dataark for tabell `kilt_product_size`
+--
+
 INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (1, 1),
 (1, 2),
@@ -144,6 +204,10 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (3, 2),
 (3, 4);
 
+--
+-- Dataark for tabell `kilt_size`
+--
+
 INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (1, 'Small'),
 (2, 'Medium'),
@@ -152,8 +216,9 @@ INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (5, 'XLarge'),
 (6, 'XXLarge');
 
-INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
-(2, '2012-09-10', '2012-10-10');
+--
+-- Dataark for tabell `news`
+--
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `timestamp`, `status`) VALUES
 (40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, '2011-07-17 22:34:51', 0),
@@ -169,14 +234,29 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (375, 97, 'event', 'Testevent', NULL, 'oaietno', '<p>\n	awtaw</p>\n', 381, '2012-08-24 08:55:52', 0),
 (377, 99, 'event', 'Evig event', NULL, 'Event som brukes til testing only', '<p>\n	Denne hendelsen med påmelding er åpen frem til 2015. Veldig nyttig til testing</p>\n', 381, '2012-09-11 13:39:55', 0);
 
+--
+-- Dataark for tabell `news_group`
+--
+
 INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
 (3, 56),
 (38, 55);
 
+--
+-- Dataark for tabell `notification_listener`
+--
 
 INSERT INTO `notification_listener` (`id`, `userID`, `parentType`, `parentID`) VALUES
 (33, 381, 'news', 370),
 (32, 381, 'profile', 381);
+
+--
+-- Dataark for tabell `rbac_assignment`
+--
+
+--
+-- Dataark for tabell `rbac_item`
+--
 
 INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('admin', 2, 'Administrator', '', 's:0:"";'),
@@ -197,6 +277,10 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('updateProfile', 0, '', '', 's:0:"";'),
 ('webkom', 2, 'Medlemmer av webkom', 'return Yii::app()->gatekeeper->hasGroupAccess(55);', NULL),
 ('writer', 2, 'Kan publisere', '', 's:0:"";');
+
+--
+-- Dataark for tabell `rbac_itemchild`
+--
 
 INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 ('webkom', 'admin'),
@@ -222,6 +306,10 @@ INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 ('admin', 'writer'),
 ('styret', 'writer');
 
+--
+-- Dataark for tabell `signup`
+--
+
 INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
 (71, 47, '2011-12-07 22:25:40', '2012-01-01 22:35:00', 'false', 0),
 (73, 200, '2011-11-20 00:00:00', '2011-11-24 17:00:00', 'false', 0),
@@ -241,6 +329,14 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (97, 1, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'false', 0),
 (99, 10000, '2012-09-01 00:00:00', '2015-09-01 00:00:00', 'true', 0);
 
+--
+-- Dataark for tabell `signup_membership`
+--
+
+--
+-- Dataark for tabell `specialization`
+--
+
 INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (1, 10, 'Geomatikk'),
 (2, 11, 'Marin Teknikk'),
@@ -252,4 +348,14 @@ INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (8, NULL, 'Produktutvikling og Materialer'),
 (9, NULL, 'Varme- og Strømningsteknikk');
 
+--
+-- Dataark for tabell `user`
+--
+
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', NULL, NULL, '2012-09-21 16:33:12', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
