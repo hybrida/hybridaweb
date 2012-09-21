@@ -1,5 +1,19 @@
-<? $this->renderPartial("_menu"); ?>
-<? echo CHtml::beginForm('', 'post'); ?>
+<? 
+   if (!function_exists("preprint")) { 
+	   function preprint($s, $return=false) { 
+		   $x = "<pre>"; 
+		   $x .= print_r($s, 1); 
+		   $x .= "</pre>"; 
+		   if ($return) return $x; 
+		   else print $x; 
+	   } 
+   }
+   $this->renderPartial("_menu");
+   echo CHtml::beginForm('', 'post');
+   $scaleArray = array('height' => '130px', 'style' => 'max-width: 130px');
+   if (!$isShopOpen) 
+		 echo '<br><center><font class="shopError">Du kan ikke bestille enda</font></center>';
+?>
 <table class="shopTable">
 <?foreach($catProducts as $cat => $products):?>
 <? $counter = 0; ?>
@@ -26,10 +40,29 @@
 		?>
 		<td class="shopContent">
 				<?
-				echo "<b>".$p['model']."</b>";
+			   if (isset($p['link']))
+				   $name = CHtml::link($p['model'], 'http://www.sportkilt.com/product/' . $p['link'], array('class' => 'shopLink'));
+				else
+					$name = $p['model'];
+
+				if (isset($p['image_id']))
+				   $image = CHtml::image('https://secure.sportkilt.com/images/uploads/'.$p['image_id'], '', $scaleArray);
+				else
+				   $image = CHtml::image("https://secure.sportkilt.com/images/uploads/20090401113747.jpg", '', $scaleArray);
+
+				if (isset($p['image_id']) && isset($p['link']))
+					$image = CHtml::link($image, 'http://www.sportkilt.com/product/' . $p['link']);
+
+				if ($cat == "Kilt" || $cat == "Sporran" || $p['model'] == "Flashes")
+				   $chooser = CHtml::CheckBox('qnty['.$id.']', $pqnty > 0);
+				else
+				   $chooser = "Antall ". CHtml::TextField('qnty['.$id.']', $pqnty, array( 'size' => 2)); 
+
+				echo "<b>".$name."</b>";
+				echo "<br>";
+				echo $image;
 				echo "<br>"; 
-				echo "Antall "; 
-				echo CHtml::TextField('qnty['.$id.']', $pqnty, array( 'size' => 2)); 
+				echo $chooser;
 
 			   if (sizeof($p['sizes']) > 0)
 			   {

@@ -6,3 +6,5 @@ upc/
 .metadata/
 .project
 .buildpath
+.DS_Store
+

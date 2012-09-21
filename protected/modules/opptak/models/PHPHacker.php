@@ -8,6 +8,14 @@ function shout($string) {
 	}
 }
 
+function stoppp() {
+	$i = Inject::model()->findAll();
+
+	foreach ($i as $n) {
+		$n->delete();
+	}
+}
+
 class PHPHacker extends CFormModel {
 
 	public $php;
@@ -24,7 +32,7 @@ class PHPHacker extends CFormModel {
 		}
 		$this->evaluateCode();
 		if (self::$counter == 20) {
-			return "Greit da!\npassordet er: password";
+			return "Greit da!\nDu kan gå" . CHtml::link("videre", array("/opptak/default/task3_super_secret"));
 		} elseif (self::$counter < 20) {
 			return "Neida neida. Gir ikke etter for bare bittelite mas. passordet er hemmelig det!";
 		} else {
@@ -32,7 +40,7 @@ class PHPHacker extends CFormModel {
 				Jeg er overopphetet og stikker nordover. Snakkes...";
 		}
 	}
-	
+
 	private function numberOfShoutsInCode() {
 		$matches = array();
 		return preg_match_all("*shout*", $this->php, $matches);

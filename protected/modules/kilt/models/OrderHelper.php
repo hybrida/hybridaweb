@@ -2,6 +2,15 @@
 
 class OrderHelper
 {
+	public function getUserNameByID($id) {
+        $connection = Yii::app()->db;
+		$sql = "SELECT firstName, lastName FROM user WHERE id = :id";
+		$command = $connection->createCommand($sql);
+		$command = $command->bindParam(":id", $id);
+		$data = $command->queryRow(); 
+        return $data;
+	}
+
 	public function getOrders()
 	{
         $connection = Yii::app()->db;
@@ -67,6 +76,14 @@ class OrderHelper
         $command->execute($data);
 	}
 
+	public function cmpOrder($a, $b)
+	{
+		if ($a['product_id'] != $b['product_id'])
+			return ($a['product_id'] - $b['product_id']);
+
+		return ($a['product_size'] - $b['product_size']);
+	}
+
 	public function getUserOrders()
 	{
         $connection = Yii::app()->db;
@@ -75,7 +92,20 @@ class OrderHelper
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":user_id", $userId);
 		$data = $command->queryAll(); 
-        return $data;
+		return $data;
+	}
+
+	public function getUserOrdersIndexedByTime()
+	{
+	   $data = $this->getUserOrders();
+		$timeOrders = array();
+		foreach($data as $d) {
+			$timeOrders[$d['time_id']][] = $d;
+		}
+		foreach($timeOrders as $to) {
+			usort($to, array("OrderHelper", "cmpOrder"));
+		}
+        return $timeOrders;
 	}
 
 	public function setOrderRecv($id, $value)
@@ -83,10 +113,10 @@ class OrderHelper
         $connection = Yii::app()->db;
         $data = array(
             ':id' => $id,
-            ':recieved' => $value,
+            ':confirmed' => $value,
         );
         $sql = "UPDATE kilt_order
-				SET recieved = :recieved
+			    SET confirmed = :confirmed
 		  		WHERE id = :id";
 		$command = $connection->createCommand($sql);
         $command->execute($data);

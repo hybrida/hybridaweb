@@ -148,7 +148,7 @@ class Article extends CActiveRecord {
 	}
 	
 	public function getPhpFilePath() {
-		return 'files/php/'.$this->phpFile.'.php';				
+		return 'files/article/'.$this->phpFile.'.php';				
 	}
 
 	public function getViewUrl() {

@@ -5,24 +5,35 @@ class Install {
 	public $sqlDir;
 
 	public function __construct() {
-		$this->sqlDir = Yii::getPathOfAlias('webroot.db') . "/db.sql";
+		$this->sqlDir = Yii::getPathOfAlias('webroot.db') . "/";
 	}
 
 	public function install() {
-		$sql = $this->getContentOfSQLFile();
-		$stmt = Yii::app()->db->createCommand($sql);
-		$stmt->execute();
+		$structure = $this->sqlDir . "structure.sql";
+		$data = $this->sqlDir . "data.sql";
+		$this->executeSqlFile($structure);
+		$this->executeSqlFile($data);
 	}
 
-	public function getContentOfSQLFile() {
-		return file_get_contents($this->sqlDir);
+	private function executeSqlFile($filePath) {
+		echo __METHOD__ . "() " .$filePath . PHP_EOL;
+		$sql = $this->getContentOfSQLFile($filePath);
+		$this->executeSql($sql);
+	}
+
+	public function getContentOfSQLFile($file) {
+		return file_get_contents($file);
+	}
+
+	private function executeSql($sql) {
+		$stmt = Yii::app()->db->createCommand($sql);
+		$stmt->execute();
 	}
 
 	public function update() {
 		$sqlDrop = "DROP DATABASE IF EXISTS `hybrida_dev`;\n";
-		$sql = $sqlDrop . $this->getContentOfSQLFile();
-		$stmt = Yii::app()->db->createCommand($sql);
-		$stmt->execute();
+		$this->executeSql($sqlDrop);
+		$this->install();
 	}
 
 }
