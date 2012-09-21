@@ -45,4 +45,9 @@ class ShopHelper {
 		$sizes[0] = " - ";
         return $sizes;
 	}
+
+	public function getImageDir()
+	{
+	   return "/images/kilt/produkter/";
+	}
 }

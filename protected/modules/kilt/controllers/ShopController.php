@@ -25,6 +25,8 @@ class ShopController extends Controller
 		$isShopOpen = $timeHelper->isShopOpen();
 
 		$comment = $commentHelper->getUserCommentByTimeID($curTimeID);
+
+		$imagePrefix = $shopHelper->getImageDir();
 		
 
 		if (isset($_POST['submit']))
@@ -84,6 +86,7 @@ class ShopController extends Controller
 
 		$this->render('index', 
 				array(
+				    'imagePrefix'=> $imagePrefix,
 				    'catProducts'=> $categoryProducts,
 					'sizes'		 => $sizes,
 					'errors'     => $errors,
