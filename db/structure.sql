@@ -1,3 +1,4 @@
+SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -197,14 +198,16 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `product_size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
 
 CREATE TABLE IF NOT EXISTS `kilt_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `model` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
+  `image_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
+  `link` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=88 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=103 ;
 
 CREATE TABLE IF NOT EXISTS `kilt_product_size` (
   `product_id` int(11) NOT NULL,
@@ -222,7 +225,7 @@ CREATE TABLE IF NOT EXISTS `kilt_time` (
   `start` date NOT NULL,
   `end` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -353,3 +356,4 @@ ALTER TABLE `rbac_assignment`
 ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;

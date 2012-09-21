@@ -101,42 +101,33 @@ INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 
 
 
+INSERT INTO `kilt_order` (`id`, `user_id`, `product_id`, `time_id`, `product_quantity`, `product_size`, `confirmed`) VALUES
+(26, 381, 1, 2, 2, '5', 0),
+(27, 381, 72, 2, 8, '0', 0),
+(28, 381, 9, 2, 7, '0', 0);
 
-INSERT INTO `kilt_product` (`id`, `type`, `model`) VALUES
-(1, 'Kilt', 'Gutt'),
-(2, 'Kilt', 'Jente'),
-(3, 'Kilt', 'Jente Mini'),
-(4, 'Sporran', 'Black Leather'),
-(5, 'Sporran', 'Thistle'),
-(6, 'Sporran', 'Celtic Circle'),
-(7, 'Ekstra', 'Sokker'),
-(9, 'Ekstra', 'Flashes'),
-(62, 'Sporran', 'Black Leather'),
-(63, 'Sporran', 'Thistle'),
-(64, 'Sporran', 'Celtic Circle'),
-(65, 'Sporran', 'Celtic Chain'),
-(66, 'Sporran', 'Military Insignia'),
-(67, 'Sporran', 'Double Knot'),
-(68, 'Sporran', 'Knotted Cross'),
-(69, 'Sporran', 'Oval Brass'),
-(70, 'Sporran', 'Ruby Celtic Cross'),
-(71, 'Sporran', 'Maltese Cross'),
-(72, 'Sporran', 'Studded Black Leather'),
-(73, 'Sporran', 'White Day'),
-(74, 'Sporran', 'Silver Studded Dress'),
-(75, 'Sporran', 'Silver Tassels'),
-(76, 'Sporran', 'Black Rabbit'),
-(77, 'Sporran', 'Gray Rabbit'),
-(78, 'Sporran', 'White Rabbit'),
-(79, 'Sporran', 'Shamrock'),
-(80, 'Sporran', 'Maltese Blue'),
-(81, 'Sporran', 'Maltese Kelly'),
-(82, 'Sporran', 'Maltese Red'),
-(83, 'Sporran', 'Buchanan Crest'),
-(84, 'Sporran', 'Lion Crest'),
-(85, 'Sporran', 'Skunk'),
-(86, 'Sporran', 'Thistle Crest'),
-(87, 'Sporran', 'Full Skunk');
+INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
+(1, 'Kilt', 'Gutt', 'products/K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
+(2, 'Kilt', 'Jente', '2009093012423778237_med.jpg', '4061/Irisher-Women%27s-Kilt.html'),
+(3, 'Kilt', 'Jente Mini', '2009101514272187719_med.jpg', '4561/Irisher-Mini-Kilt.html'),
+(6, 'Sporran', 'Black Leather', '2009032717231692517_med.jpg', '1911/Black-Leather-Sporran.html'),
+(7, 'Sporran', 'Thistle', '2009031615002744559_med.jpg', '2151/Thistle-Sporran.html'),
+(8, 'Sporran', 'Black Rabbit', '2009032814104598125_med.jpg', '1921/Black-Rabbit-Sporran.html'),
+(88, 'Sporran', 'Brown Embossed Leather', '2010102716562446500_med.jpg', '9635/Brown-Embossed-Leather-Sporran.html'),
+(89, 'Sporran', 'Brown Saddle Leather', '2010102716592540116_med.jpg', '9636/Brown-Saddle-Leather-Sporran.html'),
+(90, 'Sporran', 'Celtic Targe', '2009082012450734919_med.jpg', '8891/Celtic-Targe.html'),
+(91, 'Sporran', 'Embossed Leather', '2009082013402527525_med.jpg', '7791/Embossed-Leather-Sporran.html'),
+(92, 'Sporran', 'Gray Rabbit', '2009032814214886947_med.jpg', '1981/Gray-Rabbit-Sporran.html'),
+(93, 'Sporran', 'Green Shamrock', '2009042115485662384_med.jpg', '7751/Green-Shamrock-Sporran.html'),
+(94, 'Sporran', 'Scot Flag', '2009113015520130428_med.jpg', '7631/Scot-Flag-Sporran.html'),
+(95, 'Sporran', 'Silver Shamrock', '2009042116113679463_lrg.jpg', '7761/Silver-Shamrock-Sporran.html'),
+(96, 'Sporran', 'Silver Studded Dress', '2009032813342330180_lrg.jpg', '2121/Silver-Studded-Dress-Sporran.html'),
+(97, 'Sporran', 'Studded Black', '2009032814030513419_lrg.jpg', '2141/Studded-Black-Leather.html'),
+(98, 'Sporran', 'Studded White', '2009113015542623397_lrg.jpg', '9101/Studded-White-Thistle.html'),
+(99, 'Sporran', 'White Rabbit', '2009032717301821464_lrg.jpg', '2191/White-Rabbit-Sporran.html'),
+(100, 'Sporran', 'White Rabbit w/ Black Tassels', '2010081811431185197_lrg.jpg', '9532/White-Rabbit-Sporran-with-Black-Tas'),
+(101, 'Ekstra', 'Sokker', '2011091315270667842_med.jpg', '721/Kilt-Hose---Regular.html'),
+(102, 'Ekstra', 'Flashes', 'products/FL_SOL.jpg', '631/Flashes----Solid-Color.html');
 
 INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (1, 1),
@@ -161,6 +152,8 @@ INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (5, 'XLarge'),
 (6, 'XXLarge');
 
+INSERT INTO `kilt_time` (`id`, `start`, `end`) VALUES
+(2, '2012-09-10', '2012-10-10');
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `timestamp`, `status`) VALUES
 (40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, '2011-07-17 22:34:51', 0),
