@@ -92,10 +92,13 @@ class OrderHelper
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":user_id", $userId);
 		$data = $command->queryAll(); 
-		foreach($data as $d)
+		$timeOrders = array();
+		foreach($data as $d) {
 			$timeOrders[$d['time_id']][] = $d;
-		foreach($timeOrders as $to)
+		}
+		foreach($timeOrders as $to) {
 			usort($to, array("OrderHelper", "cmpOrder"));
+		}
         return $timeOrders;
 	}
 

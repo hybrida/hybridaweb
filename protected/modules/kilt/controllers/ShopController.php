@@ -98,9 +98,9 @@ class ShopController extends Controller
 	public function actionOrders()
 	{
 		$shopHelper = new ShopHelper();
-		$commentHelper = new commentHelper();
-		$orderHelper = new orderHelper();
-		$timeHelper = new timeHelper();
+		$commentHelper = new CommentHelper();
+		$orderHelper = new OrderHelper();
+		$timeHelper = new TimeHelper();
 
 		if (sizeof($_POST) > 0)
 			foreach($_POST as $key => $value)
