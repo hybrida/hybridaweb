@@ -185,7 +185,6 @@ class ShopController extends Controller
 				if ($value == "Vis bestillinger")
 				{
 					$showTimeID = $key;	
-					$showUserID = $_POST['userid'];
 				}
 			}
 

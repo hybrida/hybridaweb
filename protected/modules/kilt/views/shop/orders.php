@@ -14,7 +14,7 @@ else
 				<td colspan=4 class="orderTableTitle">
 					<?
 						if ($curr)
-							echo "Dine bestillinger:";
+						   echo "Dine aktive bestillinger:";
 						else
 						{
 							echo "Dine bestillinger i tidsrommet ";
