@@ -127,7 +127,7 @@ class ShopController extends Controller
 					'isShopOpen' => $isShopOpen,
 					'time'       => $time,
 					'times'      => $times,
-					'comments'   => $timeComments,
+					'timeComments'   => $timeComments,
 					));
 	}
 
