@@ -33,7 +33,7 @@ function url($route,$params=array(),$ampersand='&') {
 	return Yii::app()->createUrl($route, $params, $ampersand);
 }
 
-function debug($name, $output, $die=false) {
+function debug($output, $name="") {
 	$trace = debug_backtrace();
 	$lastTrace = $trace[1];
 	$function = $trace[1]['function'] . "()";
@@ -49,5 +49,4 @@ function debug($name, $output, $die=false) {
 	$output = print_r($output, true);
 	echo "<strong>Output:</strong>\n<pre>$output</pre>";
 	echo "</div>";
-	if ($die) die();
 }

@@ -80,7 +80,7 @@ class Referat {
 		$dateString = $explode[0];
 		$ex = explode("-", $dateString);
 		if (count($ex) < 3) {
-			debug("Invalid Filename: " . $fileName, $ex);
+			debug($ex, "Invalid Filename: " . $fileName);
 			$this->time = 0;
 		} else {
 			$this->time = mktime(0, 0, 0, $ex[1], $ex[2], $ex[0]);
