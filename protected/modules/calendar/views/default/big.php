@@ -5,13 +5,13 @@
 			<tr class="navigation">
 				<th class="prev-month" colspan="2">
 					<?= CHtml::link($calendar->prev_month(), "#", array(
-							'class' => 'calendar-previous-month-button'
+							'class' => 'calendar-previous-month-button g-button'
 						)) ?>
 					</th>
 				<th colspan="5" class="current-month"><?= $calendar->month()?> <?=$calendar->year()?></th>
 				<th class="next-month">
 					<?= CHtml::link($calendar->next_month(), "#", array(
-							'class' => 'calendar-next-month-button'
+							'class' => 'calendar-next-month-button g-button'
 						)) ?></th>
 			</tr>
 			<tr class="weekdays">

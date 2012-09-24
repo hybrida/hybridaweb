@@ -13,10 +13,14 @@ body {
 }
 
 .layout-wrap {
-	width: 800px;
+	width: 1000px;
 	margin: 50px auto;
+	border-radius: 2px;
 }
 
+.layout-head .layout-banner {
+	margin-bottom: -30px;
+}
 
 .layout-head .layout-banner h1 {
 	display: inline;

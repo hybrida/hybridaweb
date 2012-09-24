@@ -1,4 +1,8 @@
 /* Calendar Styles */
+
+.calendarData {
+	padding: 0.5em;
+}
 .big-calendar {width:98%; border-collapse:collapse;}
 .big-calendar tr.navigation th {padding-bottom:20px;}
 .big-calendar th.prev-month {text-align:left;}

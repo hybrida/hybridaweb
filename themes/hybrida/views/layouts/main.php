@@ -47,10 +47,7 @@
 							alt="" />
 						<h1>Hybrida</h1>
 					</a>
-					<div class="searchWrap">
-						<? $this->widget('search.components.SearchWidget') ?>
-					</div>
-				</div><br clear="all" />
+ 				</div><br clear="all" />
 				<div class="layout-headBottom">
 					<div class="layout-menu">
 						<nav>
