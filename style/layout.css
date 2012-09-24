@@ -30,12 +30,12 @@ a {
 .layout-head .layout-banner h1 {
 	display: inline;
 	text-transform: uppercase;
-	font-size: 70px;
+	font-size: 90px;
 	color: white;
 	position: relative;
 	top: -15px;
 	font-weigth: bolder;
-	text-shadow: 0 0 5px white;
+	text-shadow: 0 0 5px black;
 }
 
 .layout-head .layout-banner a {
