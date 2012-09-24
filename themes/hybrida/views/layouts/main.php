@@ -4,23 +4,23 @@
 		<title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="Hybrida er linjeforeningen for 
-				studieprogrammet Ingeniørvitenskap & IKT ved NTNU i Trondheim." />
+			  studieprogrammet Ingeniørvitenskap & IKT ved NTNU i Trondheim." />
 
 		<?= $this->clips['head-facebook'] ?>
 
-		<script type="text/javascript" src="<?=Yii::app()->request->baseUrl?>/scripts/animations.js"></script>
-		<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/collapsible_lists.js'></script>
-		<script type = 'text/javascript' src = '<?=Yii::app()->request->baseUrl?>/scripts/e.js'></script>
+		<script type="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/animations.js"></script>
+		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/collapsible_lists.js'></script>
+		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/e.js'></script>
 
-		<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/fonts/fonts.css" />
-		
-		<? if (YII_DEBUG):?>
+		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
+
+		<? if (YII_DEBUG): ?>
 			<? CssIncluder::registerDirectory("style") ?>
 			<?= CssIncluder::printCssTags() ?>
 		<? else: ?>
-			<link rel="stylesheet" type="text/css" href="<?=Yii::app()->request->baseUrl?>/style/all-TIMESTAMP.css" />
-		<?endif ?>
-		
+			<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/all-TIMESTAMP.css" />
+		<? endif ?>
+
 		<!-- google analytics -->
 		<script type="text/javascript">
 			var _gaq = _gaq || [];
@@ -37,29 +37,33 @@
 	</head>
 
 	<body>
-		<div class="layout-headerStripe">
-			<div class="layout-header">
-				<a href="<?=Yii::app()->request->baseUrl?>/" 
-						><img class="layout-headerBanner" src="<?= Yii::app()->request->baseUrl ?>/images/BannerLarge.png" alt="" /></a>
-				<div class="searchWrap">
-					<? $this->widget('search.components.SearchWidget') ?>
-				</div>
-			</div>
-
-			<div class="layout-headerBottomStripe">
-				<div class="layout-menu">
-					<nav>
-						<? $this->widget("application.components.widgets.TabNavigation"); ?>
-					</nav>
-					<div class="layout-loggedIn">
-						<? $this->widget("application.components.widgets.UserOptions") ?>
+		<div class="layout-wrap">
+			<div class="layout-head">
+				<div class="layout-banner">
+					<a href="<?= Yii::app()->request->baseUrl ?>/">
+						<img 
+							class="layout-headerBanner" 
+							src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" 
+							alt="" />
+						<h1>Hybrida</h1>
+					</a>
+					<div class="searchWrap">
+						<? $this->widget('search.components.SearchWidget') ?>
+					</div>
+				</div><br clear="all" />
+				<div class="layout-headBottom">
+					<div class="layout-menu">
+						<nav>
+							<? $this->widget("application.components.widgets.TabNavigation"); ?>
+						</nav>
+						<br/>
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div class="layout-mainWrap">
-			<?= $content ?>
+			<div class="layout-mainWrap">
+				<?= $content ?>
+			</div>
 		</div>
 
 	</body>

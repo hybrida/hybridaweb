@@ -1,5 +1,5 @@
 html{
-	background-color: #DDE8F3;
+	background-color: #fafafa;
     /* Gill standard, ikke serif */
     font-family: "Gill";
     /*font-weight: lighter;*/
@@ -12,119 +12,30 @@ body {
 	margin: 0;
 }
 
-.layout-headerStripe{
-    height: 90px;
-    background-color: #0062C4;
-	position: fixed;
-	z-index: 2000;
-	width: 100%;
+.layout-wrap {
+	width: 800px;
+	margin: 50px auto;
 }
 
-.layout-header img.layout-headerBanner {
-	float: left;
-}
 
-.layout-headerBottomStripe{
-    background-image:url('../images/black_trans_25.png');
-    background-repeat:repeat-x;
-    height: 23px;
+.layout-head .layout-banner h1 {
+	display: inline;
+	text-transform: uppercase;
+	font-size: 70px;
+	color: black;
 	position: relative;
-	bottom: 23px;
-	width: auto;
-	margin-right: auto;
-	margin-left: auto;
+	top: -15px;
+	font-weigth: bolder;
 }
 
-.layout-header{
-    margin-left: auto; 
-    margin-right: auto;
-    width: 980px;
-    height: 90px;
+.layout-head .layout-banner a {
+	text-decoration: none;
 }
 
-.layout-header h1 {
-    float: left;
-    width: 450px;
-    height: 90px;
-    color: #FFFFFF;
-    text-transform: uppercase;
-    font: 90px 'DIN-Medium';
-	margin: 0;
-}
-
-.layout-header img {
-	height: 90px;
-	border: 0px;
-	width: 980px;
-}
-
-.layout-menu{
-	width: 980px;
-    color: #FFFFFF;
-	height: 23px;
-	position: relative;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.layout-menu nav {
-	width: 838px;
-	margin-left: auto;
-}
-
-.layout-menu a:visited {
-    color:#FFFFFF;
-}
-.layout-menu a:link {
-    color:#FFFFFF;
-}
-
-.layout-menu a {
-    text-decoration: none;
-    color: #FFF;
-}
-
-.layout-menu a:hover {
-    text-decoration: underline;
-}
-
-.layout-loggedIn{
-    height: 25px;
-    font: 20px 'Gill';
-    font-weight: lighter;
-    float: right;
-    padding: 0px 2px 0px 0px;
+.layout-head .layout-banner h1:visited {
+	color: black;
 }
 
 .layout-mainWrap {
-	margin: 0;
-	padding: 0;
-	position: absolute;
-	top: 90px;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background-color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-    width: 980px;
-}
-
-.layout-content{
-	width: 750px;
-	background-color: white;
-}
-
-.layout-rightBar{
-    width: 230px;
-	position: fixed;
-	top: 90px;
-	right: 0;
-	bottom: 0;
-	left: 750px;
-	overflow-y: auto;
-	border-left: 1px solid #0062c4;
-	margin-left: auto;
-	margin-right: auto;
-	background-color: #ffffff;
+	box-shadow: 0 0 15px #888;
 }

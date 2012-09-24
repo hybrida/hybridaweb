@@ -8,7 +8,10 @@ Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 $this->widget('JobAnnouncementFeed');
 $this->endClip();
 ?>
-
+				<img 
+					src="/images/800x299.jpg"
+					alt=""
+					/>
 <div class="newsfeedIndex">
 <div class="feeds">
 	<? if ($hasPublishAccess): ?>
