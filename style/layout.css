@@ -1,6 +1,6 @@
 html{
 	
-	background: url("/images/bg.jpg");
+	background: url("/images/bg.jpg") fixed;
     /* Gill standard, ikke serif */
     font-family: "Gill";
     /*font-weight: lighter;*/
