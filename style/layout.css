@@ -1,5 +1,6 @@
 html{
-	background-color: #fafafa;
+	
+	background: url("/images/bg.jpg") fixed;
     /* Gill standard, ikke serif */
     font-family: "Gill";
     /*font-weight: lighter;*/
@@ -29,11 +30,12 @@ a {
 .layout-head .layout-banner h1 {
 	display: inline;
 	text-transform: uppercase;
-	font-size: 70px;
-	color: black;
+	font-size: 90px;
+	color: white;
 	position: relative;
 	top: -15px;
 	font-weigth: bolder;
+	text-shadow: 0 0 5px black;
 }
 
 .layout-head .layout-banner a {
