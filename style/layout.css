@@ -12,6 +12,11 @@ body {
 	margin: 0;
 }
 
+a {
+	text-decoration: none;
+	color: #888;
+}
+
 .layout-wrap {
 	width: 1000px;
 	margin: 50px auto;
@@ -42,4 +47,22 @@ body {
 
 .layout-mainWrap {
 	box-shadow: 0 0 15px #888;
+	overflow: auto;
+	border-radius: 3px;
+}
+
+.layout-content {
+	width: 750px;
+	float:left;
+	border-right: 1px solid #ddd;
+}
+
+.layout-rightBar  {
+	width: 249px;
+	border-left: 1px solid #ddd;
+	float:left;
+	margin-left: -1px;
+}
+
+.layout-menu {
 }

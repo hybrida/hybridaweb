@@ -6,9 +6,10 @@
 	margin-bottom: 50px;
 	height: auto;
 	width: auto;
+	border-radius: 2px;
 }
 .newsfeedIndex .header-wrapper {
-	border-bottom: 2px solid #0062c4;
+	border-bottom: 1px solid #ccc;
 	margin-bottom: 0;
 	padding-bottom: 0;
     overflow: hidden;

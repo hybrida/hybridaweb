@@ -196,7 +196,7 @@ li.collapsibleListClosed .node {
 .g-barTitle{
 	color: #000000;
 	width: 170px;
-	border-bottom: 2px solid #0063c5;
+	border-bottom: 1px solid #ccc;
 	margin: 2em 1em 0 1em;
 	padding-bottom: 0;
 	padding-left: 1em;

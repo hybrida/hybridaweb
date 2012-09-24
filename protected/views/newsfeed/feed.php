@@ -7,10 +7,10 @@ $this->widget('application.components.widgets.ActivitiesFeed');
 Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 $this->widget('JobAnnouncementFeed');
 $this->endClip();
-?>
-				<img 
+?>				<img 
 					src="/images/800x299.jpg"
 					alt=""
+					width="750"
 					/>
 <div class="newsfeedIndex">
 <div class="feeds">
