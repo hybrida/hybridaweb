@@ -202,6 +202,7 @@ li.collapsibleListClosed .node {
 	padding-left: 1em;
 	padding-right: 1em;
 	height: 1.5em;
+	font-weight: bold;
 }
 
 .g-barText{
