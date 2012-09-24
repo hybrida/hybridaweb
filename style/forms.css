@@ -55,4 +55,6 @@
 	width:350px;
 	overflow:hidden;
 	height:150px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
 }
