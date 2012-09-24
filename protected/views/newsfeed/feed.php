@@ -2,7 +2,16 @@
 $this->pageTitle = "Nyhetsstrøm";
 $this->layout = "//layouts/newsfeed";
 
-$this->beginClip('sidebar');
+$this->beginClip('sidebar'); ?>
+	<? if ($hasPublishAccess): ?>
+	<fieldset class="g-adminSet">
+		<legend>Admin</legend>
+	<?=	CHtml::link("Publiser", array("news/create"), array(
+			'class' => 'g-button',
+	))	?>
+		</fieldset>
+	<? endif ?>
+<?
 $this->widget('application.components.widgets.ActivitiesFeed');
 Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 $this->widget('JobAnnouncementFeed');
@@ -10,11 +19,6 @@ $this->endClip();
 ?>				
 <div class="newsfeedIndex">
 <div class="feeds">
-	<? if ($hasPublishAccess): ?>
-	<?=	CHtml::link("Publiser", array("news/create"), array(
-			'class' => 'g-button g-buttonRightSide',
-	))	?>
-	<? endif ?>
 	<?	$this->renderPartial("_feed", array(
 		'models' => $models,
 	));	?>

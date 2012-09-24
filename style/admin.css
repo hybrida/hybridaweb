@@ -1,0 +1,9 @@
+.g-adminSet {
+	border-radius: 2px;
+	border-color: #ccc;
+}
+
+.g-adminSet .g-button {
+	display: compact;
+	margin: 10px auto;
+}

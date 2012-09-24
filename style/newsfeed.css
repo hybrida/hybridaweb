@@ -1,9 +1,10 @@
 .newsfeedIndex {
-    padding: 0 2em;
+    padding: 1em 2em;
 }
 
 .newsfeedIndex .element {
-	margin-bottom: 50px;
+	margin-top: 20px;
+	margin-bottom: 30px;
 	height: auto;
 	width: auto;
 	border-radius: 2px;
