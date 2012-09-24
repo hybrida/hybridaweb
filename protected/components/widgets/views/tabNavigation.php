@@ -1,5 +1,4 @@
 <div class="navItems">
-	<div><?= CHtml::link("Forsiden", array("/newsfeed/index")); ?></div> 
 	<div><?= CHtml::link("Kalender", array("/calendar/default/index")); ?></div> 
 
 	<? if (app()->gatekeeper->hasGroupAccess(57)): ?>
