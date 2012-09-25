@@ -18,6 +18,8 @@ class Html extends CHtml {
 			return date('n.m.Y', $date);
 		if ($format == 'medium')
 			return date('j. ', $date) . self::$shortMonthNames[$month - 1] . date(' Y', $date);
+		if ($format == 'mediumlong')
+			return date('j. ', $date) . self::$longMonthNames[$month - 1] . date(' Y', $date);
 		if ($format == 'long')
 			return date('j. ', $date) . self::$longMonthNames[$month - 1] . date(' Y H:i', $date);
 		else
