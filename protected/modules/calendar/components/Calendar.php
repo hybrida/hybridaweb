@@ -288,7 +288,7 @@ class Calendar extends Event_Subject {
 	 * @param   string     String to show before the month name
 	 * @return  string     Month name
 	 */
-	public function prev_month($length = TRUE, $before = '&lsaquo; ') {
+	public function prev_month($length = TRUE, $before = '&lsaquo;&nbsp;') {
 		$months = Html::getLongMonthNames();
 		$next = $this->month - 1;
 		if ($this->month == 1) {
@@ -332,7 +332,7 @@ class Calendar extends Event_Subject {
 	 * @param   string     String to show after the month name
 	 * @return  string     Month name
 	 */
-	public function next_month($length = TRUE, $after = ' &rsaquo;') {
+	public function next_month($length = TRUE, $after = '&nbsp;&rsaquo;') {
 		$months = Html::getLongMonthNames();
 		$next = $this->month + 1;
 		if ($this->month == 12) {
