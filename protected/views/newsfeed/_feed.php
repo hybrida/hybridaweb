@@ -30,7 +30,16 @@
 						<?= Html::dateToString($model->timestamp, 'mediumlong') ?>
 					</span>
 				</div>
-			<? endif ?>
+			<? else: ?>
+				<div class="author">
+					Hybrida
+					den
+					<span class="date">
+						<?= Html::dateToString($model->timestamp, 'mediumlong') ?>
+					</span>
+				</div>
+			<? endif?>
+
 		</div>
 	</div>
 <? endforeach ?>
