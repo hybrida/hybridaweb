@@ -10,7 +10,6 @@
 	border-radius: 2px;
 }
 .newsfeedIndex .header-wrapper {
-	border-bottom: 1px solid #ccc;
 	margin-bottom: 0;
 	padding-bottom: 0;
     overflow: hidden;
@@ -54,11 +53,23 @@
 }
 
 .newsfeedIndex .author {
-    font-style: italic;
-    position: relative;
-    padding-top: 10px;
+    padding-top: 5px;
+	text-transform: uppercase;
+	color: #888;
+	border-top: 1px solid #ccc;
+	padding-bottom: 5px;
+	margin-top: 9px;
+	font-size: 0.6em;
+}
+
+.newsfeedIndex .author a {
+	color: #00509e;
+}
+
+.newsfeedIndex .date {
+	color: black;
 }
 
 .newsfeedIndex .author:before {
-    content: "Skrevet av ";
+	content: "skrevet av";
 }
