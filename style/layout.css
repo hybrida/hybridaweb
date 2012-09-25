@@ -41,6 +41,7 @@ a {
 	font-weight: bold;
 	position: relative;
 	left: 0.3em;
+	text-shadow: 0 0 5px black;
 }
 
 .layout-banner {
