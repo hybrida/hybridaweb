@@ -2,8 +2,17 @@
 $this->pageTitle = $news->title ;
 $this->layout = "//layouts/doubleColumn" ;
  
-$this->beginClip('sidebar'); 
-	$this->renderPartial('_view_sidebar', array(
+$this->beginClip('sidebar'); ?>
+<? if ($hasEditAccess): ?>
+	<fieldset class="g-adminSet">
+		<legend>Admin</legend>
+		<?= CHtml::link("Rediger",array("news/edit",'id' => $news->id), array(
+			'class' => 'g-button'
+		)); ?>
+	</fieldset>
+<? endif ?>
+
+<? $this->renderPartial('_view_sidebar', array(
 		'signup' => $signup,
 		'event' => $event,
 		'isAttending' => $isAttending,
@@ -33,14 +42,6 @@ prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/
 <div class="newsIndex">
 
 <h1><?=$news->title?></h1>
-
-<? if ($hasEditAccess): ?>
-	<p>
-		<?= CHtml::link("Rediger",array("news/edit",'id' => $news->id), array(
-			'class' => 'g-button g-buttonRightSide'
-		)); ?>
-	</p>
-<? endif ?>
 
 <? if ($news->author): ?>
 <strong>Skribent:</strong> <?= CHtml::link($news->author->fullName, array(
