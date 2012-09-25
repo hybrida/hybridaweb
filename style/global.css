@@ -43,6 +43,7 @@ table.g-membertable *{
 }
 
 .g-button:hover {
+	cursor: pointer;
 	background: #3b8add; /* Old browsers */
 	background: -moz-linear-gradient(top,  #3b8add 0%, #2f5eaf 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3b8add), color-stop(100%,#2f5eaf)); /* Chrome,Safari4+ */
