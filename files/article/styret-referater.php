@@ -122,7 +122,7 @@ $referatMapper = getReferatFolders($folderPath);
 		margin: 0.5em;
 		background-color: #eee;
 		overflow: auto;
-		border-radius: 0.5em;
+		border-radius: 2px;
 
 	}
 
@@ -145,7 +145,7 @@ $referatMapper = getReferatFolders($folderPath);
 </style>
 
 <div>
-	<?= $article->content ?>
+	<?= $this->content ?>
 </div>
 
 
