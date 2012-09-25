@@ -36,6 +36,7 @@ $this->renderPartial("_menu");
 		</ul>
 	</p>
 	<p>
+		Sokkene fåes bare i hvitt, vi skal jo ikke ha noen som går rundt med røde sokker!
 		For priser vennligst følg linkene til <a href="http://www.sportkilt.com">Sportkilt</a> da de kan endres.
 	</p>
 	<p>
@@ -52,43 +53,43 @@ $this->renderPartial("_menu");
 				<td width="200">
 					Størrelse</td>
 				<td width="200">
-					Tommer rundt livet</td>
+				   Centimeter rundt livet</td>
 			</tr>
 			<tr>
 				<td>
 					Small (S)</td>
 				<td>
-					25-30&quot;</td>
+					 63,5 - 76</td>
 			</tr>
 			<tr>
 				<td>
 					Medium (M)</td>
 				<td>
-					27-33&quot;</td>
+					68,5 - 84</td>
 			</tr>
 			<tr>
 				<td>
 					Medium Long (ML)</td>
 				<td>
-					27-33&quot;</td>
+					68,5 - 84</td>
 			</tr>
 			<tr>
 				<td>
 					Large (L)</td>
 				<td>
-					34-38&quot;</td*/>
+					86,5 - 96,5</td*/>
 			</tr>
 			<tr>
 				<td>
 					Extra Large (XL)</td>
 				<td>
-					39-46&quot;</td>
+					99,0 - 117</td>
 			</tr>
 			<tr>
 				<td>
 					Extra Extra Large (XXL)</td>
 				<td>
-					47-54&quot;</td>
+					119,5 - 147</td>
 			</tr>
 		</tbody>
 	</table>
@@ -107,25 +108,25 @@ $this->renderPartial("_menu");
 				<td>
 					Small</td>
 				<td>
-					25-30&quot;</td>
+					63,5 - 76</td>
 			</tr>
 			<tr>
 				<td>
 					Medium</td>
 				<td>
-					27-33&quot;</td>
+					68,5 - 84</td>
 			</tr>
 			<tr>
 				<td>
 					Large</td>
 				<td>
-					34-38&quot;</td>
+					86,5 - 96,5</td>
 			</tr>
 			<tr>
 				<td>
 					Extra Large</td>
 				<td>
-					39-44&quot;</td>
+					99,0 - 112</td>
 			</tr>
 		</tbody>
 	</table>
