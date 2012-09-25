@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/animations.js"></script>
 		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/collapsible_lists.js'></script>
 		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/e.js'></script>
+		
 
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
 
@@ -20,6 +21,16 @@
 		<? else: ?>
 			<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/all-TIMESTAMP.css" />
 		<? endif ?>
+			
+		<? if (isset($_GET['matrix']) && $_GET['matrix'] == "true") {
+			$_SESSION['matrix'] = true;
+		} elseif (isset($_GET['matrix'])) {
+			$_SESSION['matrix'] = false;
+		} ?>
+			
+		<? if (isset($_SESSION['matrix']) && $_SESSION['matrix'] == true): ?>
+			<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/hidden/matrix.css" />
+		<?endif ?>
 
 		<!-- google analytics -->
 		<script type="text/javascript">
