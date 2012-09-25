@@ -34,8 +34,7 @@
 
 .shopContent
 {
-	width: 33%;
-	padding-top: 10px;
+	width: 25%;
 	text-align: center;
 	text-size: 1em;
 }
@@ -48,7 +47,6 @@
 .shopTitle
 {
 	width: 100%;
-	padding-top: 30px;
 	font-size: 3em;
 	text-align: center;
 }
