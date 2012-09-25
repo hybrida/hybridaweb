@@ -27,15 +27,35 @@ a {
 	margin-bottom: -30px;
 }
 
+.layout-head img {
+	float: left;
+}
+
+.layout-head .layout-headerBannerText {
+	float: left;
+}
+
+.layout-headerBannerSubText {
+	font-size: 20px;
+	color: white;
+	font-weight: bold;
+	position: relative;
+	left: 0.3em;
+}
+
+.layout-banner {
+	margin-bottom: 10px;
+}
+
 .layout-head .layout-banner h1 {
 	display: inline;
 	text-transform: uppercase;
 	font-size: 90px;
 	color: white;
-	position: relative;
-	top: -15px;
 	font-weigth: bolder;
 	text-shadow: 0 0 5px black;
+	position: relative;
+	top: 25px;
 }
 
 .layout-head .layout-banner a {
@@ -67,4 +87,5 @@ a {
 }
 
 .layout-menu {
+	margin-top: 10px;
 }

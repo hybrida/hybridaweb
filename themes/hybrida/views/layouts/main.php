@@ -56,7 +56,12 @@
 							class="layout-headerBanner" 
 							src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" 
 							alt="" />
-						<h1>Hybrida</h1>
+						<div class="layout-headerBannerText">
+							<h1>Hybrida</h1>
+							<div class="layout-headerBannerSubText">
+								Linjeforening for Ingeniørvitenskap &amp; IKT
+							</div>
+						</div>
 					</a>
  				</div><br clear="all" />
 				<div class="layout-headBottom">
