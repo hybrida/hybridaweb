@@ -12,13 +12,13 @@
 <?foreach($catProducts as $cat => $products):?>
    <? $counter = 0; ?>
    <tr>
-	  <td colspan=3  class="shopTitle">
+	  <td colspan=4  class="shopTitle">
 		 <?= $cat; ?>
 	  </td>
    </tr>	
    <tr>
    <?  foreach($products as $p): ?>
-	  <? if ($counter % 3 == 0 && $counter != 0): ?>
+	  <? if ($counter % 4 == 0 && $counter != 0): ?>
 		 </tr><tr>
 	  <? endif; ?>
 	  <? $counter++;
@@ -36,11 +36,7 @@
 			$name = CHtml::link($p['model'], $urlPrefix . $p['link'], array('class' => 'shopLink'));
 			$image = CHtml::image($imagePrefix . $p['image_id'], '', array('height' => '130px', 'style' => 'max-width: 130px'));
 			$imageLink = CHtml::link($image, $urlPrefix . $p['link']);
-
-			if ($cat == "Kilt" || $cat == "Sporran" || $p['model'] == "Flashes")
-			   $chooser = CHtml::CheckBox('qnty['.$id.']', $pqnty > 0);
-			else
-			   $chooser = "Antall ". CHtml::TextField('qnty['.$id.']', $pqnty, array( 'size' => 2)); 
+			$chooser = CHtml::CheckBox('qnty['.$id.']', $pqnty > 0);
 		 ?>
 
 		 <b> <?= $name ?> </b>
@@ -72,17 +68,17 @@
    </tr>
 <? endforeach ?>	
    <tr>
-	  <td colspan=3  class="shopTitle">
+	  <td colspan=4  class="shopTitle">
 		 Annet
 	  </td>
    </tr>	
    <tr>
-	  <td colspan=3  class="shopTitle">
+	  <td colspan=4  class="shopTitle">
 		 <?= CHtml::textArea('comment', $comment); ?>
 	  </td>
    </tr>	
    <tr>
-	  <td colspan=3  class="shopContent">
+	  <td colspan=4  class="shopContent">
 		 <?= CHtml::submitButton('Bestill', array(' id'=>'submit', 'name' =>'submit', 'disabled' => !$isShopOpen, 'class' => 'shopButton',)); ?>
 		 <? if (!$isShopOpen): ?>
 			<br> Du kan ikke bestille nå

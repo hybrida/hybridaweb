@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Vert: localhost
--- Generert den: 21. Sep, 2012 22:51 PM
+-- Generert den: 25. Sep, 2012 11:01 AM
 -- Tjenerversjon: 5.5.16
 -- PHP-Versjon: 5.3.8
 
@@ -166,6 +166,7 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (1, 'Kilt', 'Gutt', 'K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
 (2, 'Kilt', 'Jente', '2009093012423778237_med.jpg', '4061/Irisher-Women%27s-Kilt.html'),
 (3, 'Kilt', 'Jente Mini', '2009101514272187719_med.jpg', '4561/Irisher-Mini-Kilt.html'),
+(4, 'Kilt', 'Jente Ultra Mini', '2009110513225539131_med.jpg', '5061/Irisher-Ultra-Mini-Kilt.html'),
 (6, 'Sporran', 'Black Leather', '2009032717231692517_med.jpg', '1911/Black-Leather-Sporran.html'),
 (7, 'Sporran', 'Thistle', '2009031615002744559_med.jpg', '2151/Thistle-Sporran.html'),
 (8, 'Sporran', 'Black Rabbit', '2009032814104598125_med.jpg', '1921/Black-Rabbit-Sporran.html'),
@@ -181,9 +182,10 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (97, 'Sporran', 'Studded Black', '2009032814030513419_lrg.jpg', '2141/Studded-Black-Leather.html'),
 (98, 'Sporran', 'Studded White', '2009113015542623397_lrg.jpg', '9101/Studded-White-Thistle.html'),
 (99, 'Sporran', 'White Rabbit', '2009032717301821464_lrg.jpg', '2191/White-Rabbit-Sporran.html'),
-(100, 'Sporran', 'White Rabbit w/ Black Tassels', '2010081811431185197_lrg.jpg', '9532/White-Rabbit-Sporran-with-Black-Tas'),
+(100, 'Sporran', 'White Rabbit w/ Black Tassels', '2010081811431185197_lrg.jpg', '9532/White-Rabbit-Sporran-with-Black-Tassels.html'),
 (101, 'Ekstra', 'Sokker', '2011091315270667842_med.jpg', '721/Kilt-Hose---Regular.html'),
-(102, 'Ekstra', 'Flashes', 'FL_SOL.jpg', '631/Flashes----Solid-Color.html');
+(102, 'Ekstra', 'Flashes', 'FL_SOL.jpg', '631/Flashes----Solid-Color.html'),
+(103, 'Ekstra', 'Women''s Knee-Hi', '2009031615001048102_med.jpg', '1451/Women''s-Knee-Hi-Socks.html');
 
 --
 -- Dataark for tabell `kilt_product_size`
@@ -202,7 +204,15 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (2, 5),
 (3, 1),
 (3, 2),
-(3, 4);
+(3, 4),
+(4, 1),
+(4, 2),
+(4, 4),
+(4, 5),
+(3, 5),
+(103, 2),
+(103, 4),
+(103, 5);
 
 --
 -- Dataark for tabell `kilt_size`
