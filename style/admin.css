@@ -4,6 +4,6 @@
 }
 
 .g-adminSet .g-button {
-	display: compact;
+	display: block;
 	margin: 10px auto;
 }
