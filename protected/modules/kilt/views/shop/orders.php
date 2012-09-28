@@ -8,6 +8,7 @@
 <? foreach($times as $t): ?>
 	<? $time_id = $t['id']; ?>
 	<? $curr = $time_id == $time['id']; ?>
+	<? if (!(isset($timeOrders[$time_id])) && !(isset($timeComments[$time_id]))) continue; ?>
 	<table class="orderTable">
 			<tr>
 			<td colspan=4 class="orderTableTitle">
