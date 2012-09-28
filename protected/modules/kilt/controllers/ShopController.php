@@ -31,9 +31,11 @@ class ShopController extends Controller
 
 		if (isset($_POST['submit']))
 		{
+			$qnty = array();
 			$size    = $_POST['size'];
-			$qnty    = $_POST['qnty'];
 			$newComment = $_POST['comment'];
+			if (isset($_POST['qnty']))
+				$qnty    = $_POST['qnty'];
 
 			foreach ($qnty as $id => $q)
 			{

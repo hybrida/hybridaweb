@@ -67,7 +67,7 @@
 				<?= CHtml::submitButton('Fjern info', array( 'name' => $time_id, 'disabled' => !$curr,));?>
 			<? endif; ?>
 			</td>
-		<tr>
+		</tr>
 	</table> 
 <? endforeach;?>
 <? echo CHtml::endForm(); ?>
