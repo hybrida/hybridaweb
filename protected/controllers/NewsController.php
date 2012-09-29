@@ -63,14 +63,11 @@ class NewsController extends Controller {
 
 	private function getNewsModelAndThrowExceptionIfNullOrNotAccess($id) {
 		$news = News::model()->with('author')->findByPk($id);
-		if ($news->status != Status::PUBLISHED) {
-			$news = null;
-		}
 
-		if (!$news)
-			throw new CHttpException('Nyheten finnes ikke');
+		if (!$news || $news->status != Status::PUBLISHED)
+			throw new CHttpException(404, 'Nyheten finnes ikke');
 		if (!app()->gatekeeper->hasPostAccess('news', $news->id))
-			throw new CHttpException('Ingen tilgang');
+			throw new CHttpException(401, 'Ingen tilgang');
 		return $news;
 	}
 
@@ -140,7 +137,7 @@ class NewsController extends Controller {
 
 	public function actionEdit($id) {
 		if (!user()->checkAccess('updateNews', array('id' => $id))) {
-			throw new CHttpException(403, "Du har ikke tilgang til å endre denne nyheten");
+			throw new CHttpException(401, "Du har ikke tilgang til å endre denne nyheten");
 		}
 		$model = $this->getNewsModel($id);
 		$this->renderNewsEventForm($model);
