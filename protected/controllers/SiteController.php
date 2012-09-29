@@ -31,8 +31,8 @@ class SiteController extends Controller {
 			user()->login($identity);
 			$this->redirect($returnUrl);
 		} else {
-			throw new CHttpException("Logg inn ikke vellykket"
-					.$identity->errorMessage);
+			throw new CHttpException(401,
+					"Logg inn ikke vellykket" . $identity->errorMessage);
 		}
 	}
 

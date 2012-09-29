@@ -148,7 +148,7 @@ class NewsController extends Controller {
 		if ($model)
 			return $model;
 		else
-			throw new CHttpException("Nyheten finnes ikke");
+			throw new CHttpException(404,"Nyheten finnes ikke");
 	}
 
 	private function renderNewsEventForm($inputModel) {

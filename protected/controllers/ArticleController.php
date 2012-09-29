@@ -13,7 +13,7 @@ class ArticleController extends Controller {
 
 	public function actionCreate($parentId = null) {
 		if (!user()->checkAccess('createArticle')) {
-			throw new CHttpException(403, "Du har ikke tilgang");
+			throw new CHttpException(401, "Du har ikke tilgang");
 		}
 
 		$model = new Article;
@@ -23,7 +23,7 @@ class ArticleController extends Controller {
 
 	public function actionEdit($id) {
 		if (!user()->checkAccess('updateArticle', array('id' => $id))) {
-			throw new CHttpException(403, "Du har ikke tilgang");
+			throw new CHttpException(401, "Du har ikke tilgang");
 		}
 
 		$model = $this->getArticleModel($id);
@@ -33,9 +33,9 @@ class ArticleController extends Controller {
 	private function getArticleModelAndThrowExceptionIfNullOrNotAccess($id) {
 		$article = Article::model()->findByPk($id);
 		if (!$article)
-			throw new CHttpException('Artikkelen finnes ikke');
+			throw new CHttpException(404, 'Artikkelen finnes ikke');
 		if (!app()->gatekeeper->hasPostAccess('article', $article->id))
-			throw new CHttpException('Ingen tilgang');
+			throw new CHttpException(401,'Ingen tilgang');
 		return $article;
 	}
 
@@ -59,7 +59,7 @@ class ArticleController extends Controller {
 		if ($model)
 			return $model;
 		else
-			throw new CHttpException("Artikkelen finnes ikke");
+			throw new CHttpException(404,"Artikkelen finnes ikke");
 	}
 
 }
