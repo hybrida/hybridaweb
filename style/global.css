@@ -73,37 +73,49 @@ table.g-membertable *{
 }
 
 .g-deleteButton {
-	-moz-box-shadow:inset 0px 1px 0px 0px #f29c93;
-	-webkit-box-shadow:inset 0px 1px 0px 0px #f29c93;
-	box-shadow:inset 0px 1px 0px 0px #f29c93;
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #fe1a00), color-stop(1, #ce0100) );
-	background:-moz-linear-gradient( center top, #fe1a00 5%, #ce0100 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fe1a00', endColorstr='#ce0100');
-	background-color:#fe1a00;
-	-moz-border-radius:6px;
-	-webkit-border-radius:6px;
-	border-radius:6px;
-	border:1px solid #d83526;
+	border-radius:2px;
+	border: 0;
 	display:inline-block;
-	color:#000000;
-	font-family:arial;
+	color: white;
 	font-size:15px;
 	font-weight:bold;
-	padding:2px 5px;
+	padding:0.2em 0.6em;
 	text-decoration:none;
-	text-shadow:1px 1px 0px #b23e35;
+}
+
+.g-deleteButton {
+	background: #e02323;
+	background: -moz-linear-gradient(top,  #e02323 1%, #b22121 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#e02323), color-stop(100%,#b22121));
+	background: -webkit-linear-gradient(top,  #e02323 1%,#b22121 100%);
+	background: -o-linear-gradient(top,  #e02323 1%,#b22121 100%);
+	background: -ms-linear-gradient(top,  #e02323 1%,#b22121 100%);
+	background: linear-gradient(to bottom,  #e02323 1%,#b22121 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e02323', endColorstr='#b22121',GradientType=0 );
 }
 
 .g-deleteButton:hover {
-	background:-webkit-gradient( linear, left top, left bottom, color-stop(0.05, #ce0100), color-stop(1, #fe1a00) );
-	background:-moz-linear-gradient( center top, #ce0100 5%, #fe1a00 100% );
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ce0100', endColorstr='#fe1a00');
-	background-color:#ce0100;
+	cursor: pointer;
+	background: #bf1e1e;
+	background: -moz-linear-gradient(top,  #bf1e1e 1%, #961e1e 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#bf1e1e), color-stop(100%,#961e1e));
+	background: -webkit-linear-gradient(top,  #bf1e1e 1%,#961e1e 100%);
+	background: -o-linear-gradient(top,  #bf1e1e 1%,#961e1e 100%);
+	background: -ms-linear-gradient(top,  #bf1e1e 1%,#961e1e 100%);
+	background: linear-gradient(to bottom,  #bf1e1e 1%,#961e1e 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bf1e1e', endColorstr='#961e1e',GradientType=0 );
 }
 
 .g-deleteButton:active {
-	position:relative;
-	top:1px;
+	background: #a31a1a;
+	background: -moz-linear-gradient(top,  #a31a1a 1%, #7a1818 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#a31a1a), color-stop(100%,#7a1818));
+	background: -webkit-linear-gradient(top,  #a31a1a 1%,#7a1818 100%);
+	background: -o-linear-gradient(top,  #a31a1a 1%,#7a1818 100%);
+	background: -ms-linear-gradient(top,  #a31a1a 1%,#7a1818 100%);
+	background: linear-gradient(to bottom,  #a31a1a 1%,#7a1818 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a31a1a', endColorstr='#7a1818',GradientType=0 );
+
 }
 
 #g-groupNavigation {
