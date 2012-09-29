@@ -1,6 +1,6 @@
 html{
 	
-	background: url("/images/bg.jpg") fixed;
+	background: url("/images/office.png") fixed;
     /* Gill standard, ikke serif */
     font-family: "Gill";
     /*font-weight: lighter;*/
@@ -68,7 +68,7 @@ a {
 }
 
 .layout-mainWrap {
-	box-shadow: 0 0 15px #888;
+	box-shadow: 0 0 15px black;
 	overflow: auto;
 	border-radius: 3px;
 	background-color: white;
