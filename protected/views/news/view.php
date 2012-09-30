@@ -50,6 +50,12 @@ $this->breadcrumbs = array(
 
 	<h1><?= $news->title ?></h1>
 
+	<? if ($news->imageId): ?>
+		<div class="headerImage">
+			<?= Image::tag($news->imageId, "frontpage") ?>
+		</div>
+	<? endif; ?>
+
 	<? if ($news->author): ?>
 		<div class="author">
 			<?= Image::profileTag($news->author->imageId, "mini") ?>
@@ -63,12 +69,6 @@ $this->breadcrumbs = array(
 			</div>
 		</div>
 	<? endif ?>
-
-	<? if ($news->imageId): ?>
-		<div class="headerImage">
-			<?= Image::tag($news->imageId, "frontpage") ?>
-		</div>
-	<? endif; ?>
 
 	<article>
 		<div class="ingress">

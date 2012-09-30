@@ -20,13 +20,6 @@
 	display: block;
 	padding-right: 1em;
 }
-
-.newsView .author a {
-}
-
-.newsView .author .class {
-}
-
 .newsView article .ingress {
 	font-weight: bold;
 }
