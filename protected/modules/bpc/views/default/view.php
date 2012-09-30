@@ -53,7 +53,7 @@ $this->beginClip('sidebar'); ?>
 	<? elseif ($isAttending && $event->canUnattend()): ?>
 		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
 	<? endif ?>
-
+<p></p>
 <? else: ?>
 		<p>
 			Du må logge inn for å se listen over påmeldte
