@@ -29,42 +29,11 @@ a {
 
 .layout-head img {
 	float: left;
-}
-
-.layout-head .layout-headerBannerText {
-	float: left;
-}
-
-.layout-headerBannerSubText {
-	font-size: 20px;
-	color: white;
-	font-weight: bold;
-	position: relative;
-	left: 0.3em;
-	text-shadow: 0 0 5px black;
+	border: 0;
 }
 
 .layout-banner {
 	margin-bottom: 10px;
-}
-
-.layout-head .layout-banner h1 {
-	display: inline;
-	text-transform: uppercase;
-	font-size: 90px;
-	color: white;
-	font-weigth: bolder;
-	text-shadow: 0 0 5px black;
-	position: relative;
-	top: 25px;
-}
-
-.layout-head .layout-banner a {
-	text-decoration: none;
-}
-
-.layout-head .layout-banner h1:visited {
-	color: black;
 }
 
 .layout-mainWrap {
