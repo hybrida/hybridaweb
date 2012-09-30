@@ -1,7 +1,25 @@
-.newsIndex {
+.newsView {
 	margin: auto 1em;
 }
 
-.newsIndex .headerImage img {
-	margin-left: 1em;
+.newsView .headerImage img {
+	margin-left: 0em;
+}
+
+.newsView .author {
+	padding: 0.3em;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	overflow: auto;
+	width: 350px;
+	margin-bottom: 1em;
+}
+
+.newsView .author img {
+	float: left;
+	display: block;
+	padding-right: 1em;
+}
+.newsView article .ingress {
+	font-weight: bold;
 }

@@ -52,7 +52,10 @@
 		</tr>
 		<? endforeach; ?>
 		<? comments: ?>
-		<? if (!isset($timeComments[$time_id])) echo "</table>"; continue; ?>
+		<? if (!isset($timeComments[$time_id])): ?>
+	</table>
+<? continue ?>
+		<? endif?>
 		<tr>
 			<td colspan=4>
 				<hr>
