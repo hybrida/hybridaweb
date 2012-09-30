@@ -158,7 +158,8 @@ class Image extends CActiveRecord {
 				$url = "unknown_profile";
 				break;
 		}
-		return CHtml::image("/images/$url.jpg");
+		$htmlOptions = self::$sizes[$size];
+		return CHtml::image("/images/$url.jpg", "Profile picture", $htmlOptions);
 	}
 
 	public static function getImageDir() {
