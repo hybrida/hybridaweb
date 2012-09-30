@@ -2,11 +2,15 @@
 <div class='g-barTitle'>Arrangementer</div>
 
 <div class="g-barText">
-	<? foreach ($models as $model): ?>
-		<?= CHtml::link($model->title, $model->viewUrl) ?> <br>
-	<? endforeach ?>
+	<ul>
+		<? foreach ($models as $model): ?>
+			<li>
+				<?= CHtml::link($model->title, $model->viewUrl) ?>
+			</li>
+		<? endforeach ?>
 
-	<? if (empty($models)): ?>
-		Det finnes ingen kommende arrangementer
-	<? endif ?>
+		<? if (empty($models)): ?>
+			<li>Det finnes ingen kommende arrangementer</li>
+		<? endif ?>
+	</ul>
 </div>

@@ -175,6 +175,24 @@ li.collapsibleListClosed .node {
 .g-barText{
 	margin-bottom: 0;
 	margin-left: 2em;
-	margin-right: 10px;
+	margin-right: 1em;
 	margin-top: 0.5em;
+}
+
+.g-barText ul {
+	padding: 0;
+}
+
+.g-barText ul li {
+	list-style: none;
+}
+
+.g-barText a {
+	display: block;
+	border-radius: 2px;
+	padding: 0.2em 0.5em;
+}
+
+.g-barText a:hover {
+	background-color: #d9d9d9;
 }
