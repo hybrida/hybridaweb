@@ -56,19 +56,25 @@ $this->breadcrumbs = array(
 		</div>
 	<? endif; ?>
 
-	<? if ($news->author): ?>
-		<div class="author">
+	<div class="author">
+		<? if ($news->author): ?>
 			<?= Image::profileTag($news->author->imageId, "mini") ?>
 			<div class="name">
 				<strong>Skribent: </strong>
 				<?= CHtml::link($news->author->fullName, $news->author->viewUrl) ?>
 			</div>
-			<div class="date">
-				<strong>Publisert: </strong>
-				<?= Html::dateToString($news->timestamp, 'mediumlong') ?>
+		<? else: ?>
+			<?= Html::image("/images/logo_mini.png", "Profilbilde") ?>
+			<div class="name">
+				<strong>Skribent: </strong>
+				Hybrida
 			</div>
+		<? endif ?>
+		<div class="date">
+			<strong>Publisert: </strong>
+			<?= Html::dateToString($news->timestamp, 'mediumlong') ?>
 		</div>
-	<? endif ?>
+	</div>
 
 	<article>
 		<div class="ingress">
