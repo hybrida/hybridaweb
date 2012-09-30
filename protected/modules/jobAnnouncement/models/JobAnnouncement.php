@@ -101,7 +101,7 @@ class JobAnnouncement extends CActiveRecord
 	}
 	
 	public function getViewUrl() {
-		return Yii::app()->createUrl("/jobAnnouncement/view", array(
+		return Yii::app()->createUrl("jobAnnouncement/jobAnnouncement/view", array(
 					"id" => $this->id,
 					'name' => $this->title,
 				));
