@@ -40,7 +40,7 @@
 						}
 						?>
 						<td class="day <?php echo implode(' ', $classes) ?>">
-							<span class="date" title="<?php echo implode(' / ', $title) ?>"><?php echo $number ?></span>
+							<span class="date <?= !$current ? "notThisMonth" : "" ?>" title="<?php echo implode(' / ', $title) ?>"><?php echo $number ?></span>
 							<div class="day-content">
 							<? if (!empty($output)): ?>
 								<ul class="output">
