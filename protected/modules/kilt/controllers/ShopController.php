@@ -27,8 +27,6 @@ class ShopController extends Controller
 
 		$comment = $commentHelper->getUserCommentByTimeID($curTimeID);
 
-		
-
 		if (isset($_POST['submit']))
 		{
 			$qnty = array();
