@@ -1,7 +1,6 @@
 
 <div class='g-barTitle'>Arrangementer</div>
-
-<div class="g-barText">
+<div class="widget-activitiesFeed">
 	<ul>
 		<? foreach ($models as $model): ?>
 			<li>
