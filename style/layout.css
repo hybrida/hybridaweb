@@ -1,6 +1,6 @@
 html{
 	
-	background: url("/images/bg.jpg") fixed;
+	background: url("/images/office.png") fixed;
     /* Gill standard, ikke serif */
     font-family: "Gill";
     /*font-weight: lighter;*/
@@ -15,6 +15,7 @@ body {
 
 a {
 	text-decoration: none;
+	color: #00509e;
 }
 
 .layout-wrap {
@@ -29,46 +30,15 @@ a {
 
 .layout-head img {
 	float: left;
-}
-
-.layout-head .layout-headerBannerText {
-	float: left;
-}
-
-.layout-headerBannerSubText {
-	font-size: 20px;
-	color: white;
-	font-weight: bold;
-	position: relative;
-	left: 0.3em;
-	text-shadow: 0 0 5px black;
+	border: 0;
 }
 
 .layout-banner {
 	margin-bottom: 10px;
 }
 
-.layout-head .layout-banner h1 {
-	display: inline;
-	text-transform: uppercase;
-	font-size: 90px;
-	color: white;
-	font-weigth: bolder;
-	text-shadow: 0 0 5px black;
-	position: relative;
-	top: 25px;
-}
-
-.layout-head .layout-banner a {
-	text-decoration: none;
-}
-
-.layout-head .layout-banner h1:visited {
-	color: black;
-}
-
 .layout-mainWrap {
-	box-shadow: 0 0 15px #888;
+	box-shadow: 0 0 15px black;
 	overflow: auto;
 	border-radius: 3px;
 	background-color: white;

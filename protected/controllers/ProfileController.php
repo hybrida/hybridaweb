@@ -44,8 +44,8 @@ class ProfileController extends Controller {
 			':username' => $username,
 				));
 		if (!$user) {
-			throw new CHttpException("Brukeren finnes ikke",
-					"Brukeren du søkte etter finnes ikke");
+			throw new CHttpException(404,
+					"Brukeren du søkte etter fines ikke");
 		}
 		return $user;
 	}
@@ -64,7 +64,7 @@ class ProfileController extends Controller {
 
 	public function actionEdit($username) {
 		if (!$this->hasUpdateProfileAccess($username)) {
-			throw new CHttpException(403, "Du har ikke tilgang til å endre denne profilen");
+			throw new CHttpException(401, "Du har ikke tilgang til å endre denne profilen");
 		}
 		$user = $this->getUserOrThrowException($username);
 		$form = new ProfileForm($user);

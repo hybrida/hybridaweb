@@ -19,7 +19,7 @@
 				<?= $this->clips['sidebar'] ?>
 				<? $this->widget('IKTRingenAdvertisement') ?>
 				
-				<div class="g-barTitle"></div>
+				<div class="g-barTitle">Sponsorer</div>
 				<div class="g-barText">
 					<a href="http://www.sit.no">
 						<img src="/images/sit.png" />

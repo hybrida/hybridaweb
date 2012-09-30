@@ -54,14 +54,8 @@
 					<a href="<?= Yii::app()->request->baseUrl ?>/">
 						<img 
 							class="layout-headerBanner" 
-							src="<?= Yii::app()->request->baseUrl ?>/images/mastHeadLogo.png" 
+							src="<?= Yii::app()->request->baseUrl ?>/images/logo_head.png"
 							alt="" />
-						<div class="layout-headerBannerText">
-							<h1>Hybrida</h1>
-							<div class="layout-headerBannerSubText">
-								Linjeforening for Ingeniørvitenskap &amp; IKT
-							</div>
-						</div>
 					</a>
  				</div><br clear="all" />
 				<div class="layout-headBottom">
