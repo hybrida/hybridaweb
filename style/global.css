@@ -137,6 +137,25 @@ table.g-membertable *{
     background-color: black;
 }
 
+
+.g-sidebarNav ul {
+	padding-left: 1em;
+}
+
+.g-sidebarNav ul li {
+	list-style: none;
+}
+
+.g-sidebarNav ul li a {
+	padding: 0.3em 0.8em;
+	display: block;
+	border-radius: 2px;
+}
+
+.g-sidebarNav ul li a:hover {
+	background-color: #e5e5e5;
+}
+
 .collapsibleList li{
 	list-style: none;
 	cursor:auto;

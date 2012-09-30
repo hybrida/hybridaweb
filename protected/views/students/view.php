@@ -3,23 +3,27 @@
 <?
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); ?>
-    <ul>
-        <li><b><?= CHtml::link('Alumnioversikt', array('graduate/index')) ?></b></li>
-    </ul>
+<div class="g-barTitle">Avgangsår</div>
+<div class="g-sidebarNav">
+	<ul>
+		<? for ($i = 1; $i <= 5; $i++): ?>
+			<li>
+				<?=	CHtml::link("$i. klasse", array(
+					"students/view",
+					'id' => YearConverter::classYearToGraduationYear($i)), array(
+					'class' => 'g-groupNavigationItem')) ?>
+			</li>
+		<? endfor ?>
+		<li>
+			<?= CHtml::link('Alumnioversikt', array('graduate/index')) ?>
+		</li>
+	</ul>
+</div>
 <?
 $this->endClip();
 ?>
 
 <div class="memberlists">
-<div id='g-groupNavigation'>
-	<? for ($i = 1; $i <= 5; $i++): ?>
-		<?=	CHtml::link("$i. klasse", array(
-			"students/view",
-			'id' => YearConverter::classYearToGraduationYear($i)), array(
-			'class' => 'g-groupNavigationItem')) ?>
-	<? endfor ?>
-
-</div>
 
 
 <table class="g-membertable">
