@@ -1,85 +1,98 @@
-<?php 
-$this->pageTitle = $news->title ;
-$this->layout = "//layouts/doubleColumn" ;
- 
-$this->beginClip('sidebar'); ?>
+<?php
+$this->pageTitle = $news->title;
+$this->layout = "//layouts/doubleColumn";
+
+$this->beginClip('sidebar');
+?>
 <? if ($hasEditAccess): ?>
 	<fieldset class="g-adminSet">
 		<legend>Admin</legend>
-		<?= CHtml::link("Rediger",array("news/edit",'id' => $news->id), array(
+		<?=
+		CHtml::link("Rediger", array("news/edit", 'id' => $news->id), array(
 			'class' => 'g-button'
-		)); ?>
+		));
+		?>
 	</fieldset>
 <? endif ?>
 
-<? $this->renderPartial('_view_sidebar', array(
-		'signup' => $signup,
-		'event' => $event,
-		'isAttending' => $isAttending,
-	));
-	?>
-	<?
-	$this->widget('application.components.widgets.ActivitiesFeed');
-$this->endClip()
-?>
-<? if ($event): ?>
+<?
+$this->renderPartial('_signup_sidebar', array(
+	'signup' => $signup,
+	'event' => $event,
+	'isAttending' => $isAttending,
+));
+
+$this->widget('application.components.widgets.ActivitiesFeed');
+$this->endClip();
+
+if ($event): ?>
 	<? $this->beginClip('head-tag') ?>
-prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#"
+	prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#"
 	<? $this->endClip() ?>
 
 	<? $this->beginClip('head-facebook') ?>
-		<meta property="fb:app_id"      content="202808609747231" />
-		<meta property="og:type"        content="lfhybrida:event" />
-		<meta property="og:url"         content="<?= Yii::app()->createAbsoluteUrl("/") . $news->viewUrl ?>" />
-		<meta property="og:title"       content="<?= $news->title ?>" />
-		<meta property="og:image"       content="<?= Yii::app()->createAbsoluteUrl("/") ?>/images/mastHeadLogo.png" />
+	<meta property="fb:app_id"      content="202808609747231" />
+	<meta property="og:type"        content="lfhybrida:event" />
+	<meta property="og:url"         content="<?= Yii::app()->createAbsoluteUrl("/") . $news->viewUrl ?>" />
+	<meta property="og:title"       content="<?= $news->title ?>" />
+	<meta property="og:image"       content="<?= Yii::app()->createAbsoluteUrl("/") ?>/images/mastHeadLogo.png" />
 	<? $this->endClip() ?>
 <? endif; ?>
-<?$this->breadcrumbs=array(
+
+
+<?
+$this->breadcrumbs = array(
 	$news->title => $news->viewUrl,
-);?>
+);
+?>
 
-<div class="newsIndex">
+<div class="newsView">
 
-<h1><?=$news->title?></h1>
+	<h1><?= $news->title ?></h1>
 
-<? if ($news->author): ?>
-<strong>Skribent:</strong> <?= CHtml::link($news->author->fullName, array(
-	'/profile/view/',
-	'username' => $news->author->username,
-	))?>
-<? endif ?>
-
-<? if ($news->imageId): ?>
-<div class="headerImage">
-	<br/><?= Image::tag($news->imageId, "frontpage") ?>
-</div>
-<? endif; ?>
-
-<p><strong><?=$news->ingress?></strong></p>
-
-<article>
-	<?=$news->content?>
-</article>
-
-<? if ($signup): ?>
-	<h1> Påmeldte: </h1>
-	<? if (user()->isGuest): ?>
-		<p>Du må logge inn for å se listen over påmeldte</p>
-	<? else: ?>
-		<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
-
-		<? $url = $this->createUrl('toggleAttending', array('eventId' => $event->id)) ?>
-		<? if (!$isAttending && $signup->canAttend(user()->id)): ?>
-			<a href="<?=$url?>" class='g-button'>Meld meg på</a>
-		<? elseif ($isAttending && $signup->canUnattend()): ?>
-			<a href="<?=$url?>" class='g-button'>Meld meg av</a>
-		<? endif ?>
+	<? if ($news->author): ?>
+		<div class="author">
+			<?= Image::profileTag($news->author->imageId, "mini") ?>
+			<div class="name">
+				<strong>Skribent: </strong>
+				<?= CHtml::link($news->author->fullName, $news->author->viewUrl) ?>
+			</div>
+			<div class="date">
+				<strong>Publisert: </strong>
+				<?= Html::dateToString($news->timestamp, 'mediumlong') ?>
+			</div>
+		</div>
 	<? endif ?>
-<? endif ?>
 
-<?$this->widget('comment.components.commentWidget', array(
-	'id' => $news->id,
-	'type' => 'news',
-)); ?>
+	<? if ($news->imageId): ?>
+		<div class="headerImage">
+			<?= Image::tag($news->imageId, "frontpage") ?>
+		</div>
+	<? endif; ?>
+
+	<article>
+		<div class="ingress">
+			<?= $news->ingress ?>
+		</div>
+
+		<div class="content">
+			<?= $news->content ?>
+		</div>
+	</article>
+
+	<? if ($signup): ?>
+		<?
+		$this->renderPartial('_signup', array(
+			'signup' => $signup,
+			'isAttending' => $isAttending,
+		))
+		?>
+	<? endif ?>
+
+	<?
+	$this->widget('comment.components.commentWidget', array(
+		'id' => $news->id,
+		'type' => 'news',
+	));
+	?>
 </div>
