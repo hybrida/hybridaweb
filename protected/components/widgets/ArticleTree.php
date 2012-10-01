@@ -79,7 +79,7 @@ class ArticleTree extends CWidget {
 		if (empty($relevantArticles))
 			return;
 		
-		echo "\n<ul class=\"widget-articletree\">\n";
+		echo "\n<div class='g-sidebarNav'><ul class=\"widget-articletree g-sidebarNav\">\n";
 		foreach ($relevantArticles[0] as $node) {
                         if (!empty($node->children))
                             echo "<li class = \"hasChildren\">";
@@ -94,7 +94,7 @@ class ArticleTree extends CWidget {
 			}
 			echo "</li>\n";
 		}
-		echo "</ul>\n";
+		echo "</ul>\n</div>";
 	}
 
 	private function printNode($node) {
