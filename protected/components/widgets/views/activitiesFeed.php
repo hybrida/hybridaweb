@@ -1,6 +1,6 @@
 
 <div class='g-barTitle'>Arrangementer</div>
-<div class="widget-activitiesFeed">
+<div class="g-sidebarNav">
 	<ul>
 		<? foreach ($models as $model): ?>
 			<li>
