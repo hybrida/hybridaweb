@@ -236,6 +236,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `ingress` text COLLATE utf8_unicode_ci,
   `content` mediumtext COLLATE utf8_unicode_ci,
   `authorId` int(11) DEFAULT NULL,
+  `weight` int(11) NOT NULL,
   `timestamp` datetime DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
