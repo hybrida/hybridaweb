@@ -8,6 +8,7 @@
 	height: auto;
 	width: auto;
 	border-radius: 2px;
+	text-align: justify;
 }
 .newsfeedIndex .header-wrapper {
 	margin-bottom: 0;

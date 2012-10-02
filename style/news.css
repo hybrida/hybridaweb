@@ -20,6 +20,12 @@
 	display: block;
 	padding-right: 1em;
 }
+
+.newsView article {
+	text-align: justify;
+}
+
 .newsView article .ingress {
 	font-weight: bold;
 }
+
