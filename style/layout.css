@@ -20,12 +20,11 @@ a {
 
 .layout-wrap {
 	width: 1000px;
-	margin: 50px auto;
+	margin:0 auto;
 	border-radius: 2px;
 }
 
 .layout-head .layout-banner {
-	margin-bottom: -30px;
 }
 
 .layout-head img {
