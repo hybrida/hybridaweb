@@ -152,6 +152,12 @@ table.g-membertable *{
 	border-radius: 2px;
 }
 
+.g-sidebarNav ul li .current {
+	padding: 0.2em 0.8em;
+	display: block;
+	border-radius: 2px;
+}
+
 .g-sidebarNav ul li a:hover {
 	background-color: #e5e5e5;
 }
