@@ -36,7 +36,7 @@ class SignupFeed extends AbstractFeed {
 			WHERE e.start > NOW()
 				AND e.status = " . Status::PUBLISHED ."
 				AND n.status = " . Status::PUBLISHED ."
-			ORDER BY n.timestamp ASC";
+			ORDER BY e.start ASC";
 	}
 
 	protected function getType() {
