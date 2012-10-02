@@ -13,7 +13,7 @@ class NewsFeed extends AbstractFeed {
 	protected function getSQL() {
 		return "SELECT id FROM `news`
 				WHERE `status` = " . Status::PUBLISHED . "
-				ORDER BY `timestamp` DESC";
+				ORDER BY `weight` DESC, `timestamp` DESC";
 	}
 
 	protected function getType() {

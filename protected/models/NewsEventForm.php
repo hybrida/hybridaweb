@@ -43,6 +43,8 @@ class NewsEventForm extends CFormModel {
 		return array(
 			'news[title]' => 'Tittel',
 			'news[ingress]' => 'Ingress',
+            'news[weight]' => 'Vekting',
+            'news[status]' => 'Status',
 			'news[content]' => 'Innhold',
 			'event[start]' => 'Start',
 			'event[end]' => 'Slutt',

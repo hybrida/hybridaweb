@@ -6,6 +6,7 @@
     <th>Forfatter</th>
     <th class="admin-ingress">Ingress</th>
     <th>Status</th>
+    <th>Vekt</th>
     <th>Rediger</th>
     </tr>
 <? foreach ($news as $newsItem): ?>
@@ -18,6 +19,7 @@
     <td><?= $newsItem->ingress ?></td>
     </td>
     <td><?= $newsItem->statusName ?></td>
+    <td><?= $newsItem->weight ?></td>
     <td>
         <? if (user()->checkAccess('updateNews', array('id' => $newsItem->id))): ?>
             <?=

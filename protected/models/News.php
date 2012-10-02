@@ -14,6 +14,7 @@
  * @property string $timestamp
  * @property array $access
  * @property integer $status
+ * @property integer $weight
  */
 class News extends CActiveRecord {
 
@@ -41,7 +42,7 @@ class News extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('parentId, imageId, authorId, status', 'numerical', 'integerOnly' => true),
+			array('parentId, imageId, authorId, status, weight', 'numerical', 'integerOnly' => true),
 			array('parentType', 'length', 'max' => 7),
 			array('title', 'length', 'max' => 50),
 			array('title, imageId, ingress, content, timestamp', 'safe'),
@@ -72,6 +73,7 @@ class News extends CActiveRecord {
 			'content' => 'Content',
 			'ingress' => 'Ingress',
             'status' => 'Status',
+            'weight' => 'Weight',
 			'authorId' => 'Author',
 			'timestamp' => 'Timestamp',
 		);

@@ -78,6 +78,12 @@
 		</div>
     
         <div class="row">
+            <?= $form->labelEx($model, 'news[weight]'); ?>
+            <?= $form->textField($model, 'news[weight]', array('class' => 'input_text')) ?>
+            <?= $form->error($model, 'news[weight]'); ?>
+        </div>
+    
+        <div class="row">
             <?= $form->labelEx($model, 'news[status]'); ?>
             <?= $form->radioButtonList($model, 'news[status]', array(
                 Status::DELETED => 'Deleted',
