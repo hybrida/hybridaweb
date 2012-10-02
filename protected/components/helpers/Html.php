@@ -115,7 +115,7 @@ class Html extends CHtml {
 				<?
 				foreach ($year as $user): 
 					?><li class="node">
-						<?= Image::profileTag($user->imageId, 'mini') ?>
+						<?= CHtml::link(Image::profileTag($user->imageId, 'mini'), $user->viewUrl) ?>
 						<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
 					</li><?
 				endforeach;
