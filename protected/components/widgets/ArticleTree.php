@@ -5,7 +5,6 @@
  * Lager et statisk tre av artiklene i databasen og vil i
  * run-metoden skrive ut alle som skal skrives ut i forhold
  * til hvor i treet brukeren er.
- * @author krisvage
  */
 class ArticleTree extends CWidget {
 
@@ -41,13 +40,16 @@ class ArticleTree extends CWidget {
 
 				$key = array_search($article, $articles);
 				unset($articles[$key]);
-				$branchOfArticleTree[] = new Node(
-								$article->id,
-								$article->parentId,
-								$article->title,
-								$article->shorttitle,
-								self::treeBuilder($articles, $article->id)
-				);
+                
+                if (app()->gatekeeper->hasPostAccess('article', $article->id)) {
+                    $branchOfArticleTree[] = new Node(
+                                    $article->id,
+                                    $article->parentId,
+                                    $article->title,
+                                    $article->shorttitle,
+                                    self::treeBuilder($articles, $article->id)
+                    );
+                }
 			}
 		}
 		return $branchOfArticleTree;
@@ -55,9 +57,6 @@ class ArticleTree extends CWidget {
 
 	public function run() {
 		$currentArticles = $this->findRelevantArticles($this->articleTree, $this->currentId);
-		/*echo "<h4>";
-		$this->printNode($currentArticles[0]);
-		echo "</h4>";*/
 		$this->printArticleTree($currentArticles[1]);
 	}
 
