@@ -13,6 +13,7 @@
  * @property integer $authorId
  * @property string $timestamp
  * @property array $access
+ * @property integer $status
  */
 class News extends CActiveRecord {
 
@@ -40,7 +41,7 @@ class News extends CActiveRecord {
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('parentId, imageId, authorId', 'numerical', 'integerOnly' => true),
+			array('parentId, imageId, authorId, status', 'numerical', 'integerOnly' => true),
 			array('parentType', 'length', 'max' => 7),
 			array('title', 'length', 'max' => 50),
 			array('title, imageId, ingress, content, timestamp', 'safe'),
@@ -70,6 +71,7 @@ class News extends CActiveRecord {
 			'imageId' => 'Image',
 			'content' => 'Content',
 			'ingress' => 'Ingress',
+            'status' => 'Status',
 			'authorId' => 'Author',
 			'timestamp' => 'Timestamp',
 		);
@@ -149,6 +151,22 @@ class News extends CActiveRecord {
 	public function getParentId() {
 		return $this->parentId;
 	}
+    
+    public function getStatusName() {
+        switch ($this->status) {
+            case Status::PUBLISHED:
+                return "Published";
+                break;
+            case Status::DRAFT:
+                return "Draft";
+                break;
+            case Status::DELETED:
+                return "Deleted";
+                break;
+            default:
+                break;
+        }
+    }
 
 	public function getAuthorName() {
 		$authorId = User::model()->findByPk($this->authorId);

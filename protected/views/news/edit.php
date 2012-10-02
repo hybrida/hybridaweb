@@ -76,6 +76,16 @@
 			)); ?> 
 			<?= $form->error($model, 'news[ingress]'); ?> 
 		</div>
+    
+        <div class="row">
+            <?= $form->labelEx($model, 'news[status]'); ?>
+            <?= $form->radioButtonList($model, 'news[status]', array(
+                Status::DELETED => 'Deleted',
+                Status::DRAFT => 'Draft',
+                Status::PUBLISHED => 'Published',
+            )); ?>
+            <?= $form->error($model, 'news[status]'); ?>
+        </div>
 
 				
 		<div class="row">
