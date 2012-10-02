@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=446 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=448 ;
 
 CREATE TABLE IF NOT EXISTS `event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=100 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=108 ;
 
 CREATE TABLE IF NOT EXISTS `event_company` (
   `eventID` int(11) NOT NULL,
@@ -169,7 +169,7 @@ CREATE TABLE IF NOT EXISTS `image` (
   PRIMARY KEY (`id`),
   KEY `albumId` (`galleryId`,`userId`),
   KEY `userId` (`userId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=48 ;
 
 CREATE TABLE IF NOT EXISTS `job_announcement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -180,7 +180,7 @@ CREATE TABLE IF NOT EXISTS `job_announcement` (
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `companyId` (`companyId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 CREATE TABLE IF NOT EXISTS `kilt_comment` (
   `id` int(11) NOT NULL,
@@ -207,7 +207,7 @@ CREATE TABLE IF NOT EXISTS `kilt_product` (
   `image_id` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   `link` varchar(40) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=103 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=104 ;
 
 CREATE TABLE IF NOT EXISTS `kilt_product_size` (
   `product_id` int(11) NOT NULL,
@@ -236,13 +236,13 @@ CREATE TABLE IF NOT EXISTS `news` (
   `ingress` text COLLATE utf8_unicode_ci,
   `content` mediumtext COLLATE utf8_unicode_ci,
   `authorId` int(11) DEFAULT NULL,
-  `weight` int(11) NOT NULL,
+  `weight` int(11) NOT NULL DEFAULT '0',
   `timestamp` datetime DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=378 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=387 ;
 
 CREATE TABLE IF NOT EXISTS `news_group` (
   `newsId` int(11) NOT NULL,
@@ -269,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `notification_listener` (
   `parentID` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `parentID` (`parentID`,`userID`,`parentType`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
 
 CREATE TABLE IF NOT EXISTS `rbac_assignment` (
   `itemname` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -343,6 +343,13 @@ CREATE TABLE IF NOT EXISTS `user` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=521 ;
+
+CREATE TABLE IF NOT EXISTS `user_password` (
+  `userId` int(11) NOT NULL,
+  `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `expired` tinyint(1) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 
 ALTER TABLE `iktringen_membership`
