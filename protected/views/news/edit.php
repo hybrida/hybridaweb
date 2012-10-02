@@ -83,13 +83,18 @@
             <?= $form->error($model, 'news[weight]'); ?>
         </div>
     
-        <div class="row">
+        <div class="row radio-status">
             <?= $form->labelEx($model, 'news[status]'); ?>
+            <br/>
+            <p class="radio-item">
             <?= $form->radioButtonList($model, 'news[status]', array(
                 Status::DELETED => 'Deleted',
                 Status::DRAFT => 'Draft',
                 Status::PUBLISHED => 'Published',
+            ), array(
+                'separator'=>'</p><p class="radio-item">'
             )); ?>
+            </p>
             <?= $form->error($model, 'news[status]'); ?>
         </div>
 
