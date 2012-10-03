@@ -2,6 +2,17 @@
 <? $this->layout = "//layouts/doubleColumn" ?>
 <? 
 $this->beginClip('sidebar'); ?>
+
+<? if (user()->checkAccess('admin')): ?>
+	<fieldset class="g-adminSet">
+		<legend>Admin</legend>
+        <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
+			'class' => 'g-button')); ?>
+        <?= CHtml::link("Koble til bedrift",array("edit",'id' => $event->id), array(
+			'class' => 'g-button')); ?>
+	</fieldset>
+<? endif; ?>
+
 	<? $this->renderPartial("_attenders", array(
 		'event' => $event,
 	))  ?>
@@ -11,12 +22,6 @@ $this->beginClip('sidebar'); ?>
 <div class="bedpresView">
 
 <h1>Bedpres: <?=$event->title?></h1>
-<? if (user()->checkAccess('admin')): ?>
-        <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
-			'class' => 'g-button g-buttonRightSide')); ?>
-        <?= CHtml::link("Koble til bedrift",array("edit",'id' => $event->id), array(
-			'class' => 'g-button g-buttonRightSide')); ?>
-<? endif; ?>
 
 <div class="headerImage">
 	<a href="<?=$event->web_page?>">
