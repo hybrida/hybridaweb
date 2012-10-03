@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `book_sales` (
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
-  `parentType` enum('profile','gallery','image','group','company','news') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parentType` enum('profile','gallery','image','group','company','news','bedpres') COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
   `authorId` int(11) DEFAULT NULL,
   `timestamp` datetime DEFAULT NULL,

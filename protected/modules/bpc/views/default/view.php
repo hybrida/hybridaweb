@@ -59,5 +59,11 @@ $this->beginClip('sidebar'); ?>
 			Du må logge inn for å se listen over påmeldte
 		</p>
 <? endif ?>
+		
+		
+	<? $this->widget('comment.components.CommentWidget', array(
+		'type' => 'bedpres',
+		'id'=> $event->id,
+	)) ?>
 
 </div>
