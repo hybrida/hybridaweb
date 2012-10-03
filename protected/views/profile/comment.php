@@ -3,7 +3,7 @@
 	'user' => $user,
 ))?>
 
-<? $this->widget('comment.components.commentWidget',array(
+<? $this->widget('comment.components.CommentWidget',array(
 	'id' => $user->id,
 	'type' => 'profile',
 )) ?>

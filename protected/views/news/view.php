@@ -96,7 +96,7 @@ $this->breadcrumbs = array(
 	<? endif ?>
 
 	<?
-	$this->widget('comment.components.commentWidget', array(
+	$this->widget('comment.components.CommentWidget', array(
 		'id' => $news->id,
 		'type' => 'news',
 	));
