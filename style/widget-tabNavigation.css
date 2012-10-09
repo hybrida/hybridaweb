@@ -1,4 +1,8 @@
 .layout-menu nav {
+	box-shadow: 0 0 7px black;
+}
+
+.layout-menu nav {
 	background: #185c9b;
 	background: -moz-linear-gradient(top,  #185c9b 0%, #003b8e 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#003b8e), color-stop(100%,#185c9b));
@@ -24,9 +28,15 @@
 	margin-left: -1px;
 	/*margin-right: 5px;*/
 	border-right: 2px solid rgba(0,0,0,0.3);
-
- }
+}
  
+.layout-menu nav .navItems .userOptions a {
+	border-right: none;
+	border-left: 2px solid rgba(0,0,0,0.3);
+	margin-right: 0;
+	margin-left: 0;
+}
+
  .layout-menu nav .navItems div.userOptions {
 	 display: inline;
 	 float: right;

@@ -57,7 +57,8 @@
 							src="<?= Yii::app()->request->baseUrl ?>/images/logo_head.png"
 							alt="" />
 					</a>
- 				</div><br clear="all" />
+ 				</div>
+				<br clear="all" />
 				<div class="layout-headBottom">
 					<div class="layout-menu">
 						<nav>
