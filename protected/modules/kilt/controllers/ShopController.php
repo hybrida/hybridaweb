@@ -255,6 +255,17 @@ class ShopController extends Controller
 			ksort($timeOrders);
 		}
 
+		foreach($userOrders as &$userTimeOrders) 
+		{
+			foreach($userTimeOrders as &$userTimeProductOrders) 
+			{
+				if (!is_array($userTimeProductOrders))
+					continue;
+				ksort($userTimeProductOrders);
+			}
+			ksort($userTimeOrders);
+		}
+
 
 		if (!isset($userOrders[$showUserID][$showTimeID]))
 			$showUserID = -1;
