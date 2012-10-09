@@ -15,7 +15,7 @@
     <p id="text">Men siden eksisterer ikke</p>
     <ul>
     <li>Sjekk at du har skrevet inn riktig adresse</li>
-    <li>Hvis du fulgte en død link, vær vennelig å repporter dette ved å brukte feedback-knappen til venstre</li>
+    <li>Hvis du fulgte en død link, vær vennlig å rapportere dette ved å bruke feedback-knappen til venstre</li>
     </ul>
 <? endif; ?>
 
