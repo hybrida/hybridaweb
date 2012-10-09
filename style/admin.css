@@ -8,10 +8,30 @@
 	margin: 10px auto;
 }
 
-.adminView th.admin-ingress {
-    width: 50px;
+.adminView table {
+    border-collapse: collapse;
 }
 
-.adminView .g-form .radio-item {
-    margin-left: 100px;
+.adminView td {
+    padding: 1em;
+}
+
+.adminView th {
+    padding: 1em;
+}
+
+.adminView tr {
+    text-align: center;
+}
+
+.adminView tr:nth-child(odd) {
+    background-color: #f6f6f6;
+}
+
+.adminView tr:nth-child(even) {
+    background-color: #ffffff;
+}
+
+.adminView td.date {
+    width: 80px;
 }

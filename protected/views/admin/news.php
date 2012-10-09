@@ -6,10 +6,9 @@
             <th>Title</th>
             <th>Forfatter</th>
             <th>Dato</th>
-            <th class="admin-ingress">Ingress</th>
-            <th>Status</th>
             <th>Vekt</th>
-            <th>Rediger</th>
+            <th>Status</th>
+            <th>
         </tr>
         <? foreach ($news as $newsItem): ?>
             <tr>
@@ -19,10 +18,10 @@
                         <?= CHtml::link($newsItem->author->fullName, $newsItem->author->viewUrl) ?>
                     <? endif ?>
                 </td>
-                <td><?= $newsItem->timestamp ?></td>
-                <td><?= Html::truncate($newsItem->ingress, 100, "...") ?></td>
-                <td><?= $newsItem->statusName ?></td>
+                <? $time = Html::truncate($newsItem->timestamp, 10, "") ?>
+                <td class="date"><time datetime="<?= $time ?>"><?= $time ?></time></td>
                 <td><?= $newsItem->weight ?></td>
+                <td><?= $newsItem->statusName ?></td>
                 <td>
                     <? if (user()->checkAccess('updateNews', array('id' => $newsItem->id))): ?>
                         <?=
@@ -34,6 +33,5 @@
                 </td>
             </tr>
         <? endforeach ?>
-        </tbody>
     </table>
 </div>
