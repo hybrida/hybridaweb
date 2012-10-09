@@ -48,7 +48,11 @@ $this->breadcrumbs = array(
 
 <div class="newsView">
 
-	<h1><?= $news->title ?></h1>
+    <? if ($news->status == Status::DRAFT): ?>
+        <h1><?= $news->title ?> <span style="color:red">[UTKAST!]</span> </h1>
+    <? else: ?>
+        <h1><?= $news->title ?></h1>
+    <? endif ?>
 
 	<? if ($news->imageId): ?>
 		<div class="headerImage">

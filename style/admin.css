@@ -8,10 +8,10 @@
 	margin: 10px auto;
 }
 
-th.admin-ingress {
+.adminView th.admin-ingress {
     width: 50px;
 }
 
-.radio-item {
+.adminView .g-form .radio-item {
     margin-left: 100px;
 }

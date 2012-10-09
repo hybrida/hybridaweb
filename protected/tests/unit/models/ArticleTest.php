@@ -34,11 +34,12 @@ class ArticleTest extends CTestCase {
         
         
         $article = $this->getNewArticle();
-        $article->phpFile = "styre_referater";
-        $expected = "";
-        $actual = self::getTemplateContent($article);
-        
-        $this->assertEquals($expected, $actual);
+        $article->phpFile = "styret_om_oss";
+        try {
+            self::getTemplateContent($article);
+        } catch (Exception $e) {
+            $this->fail('Should have succeded');
+        }
         
         
         $this->assertArticleName("/etc/hosts");

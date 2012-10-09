@@ -64,7 +64,7 @@ class NewsController extends Controller {
 	private function getNewsModelAndThrowExceptionIfNullOrNotAccess($id) {
 		$news = News::model()->with('author')->findByPk($id);
 
-		if (!$news || $news->status != Status::PUBLISHED)
+		if (!$news || $news->status == Status::DELETED)
 			throw new CHttpException(404, 'Nyheten finnes ikke');
 		if (!app()->gatekeeper->hasPostAccess('news', $news->id))
 			throw new CHttpException(401, 'Ingen tilgang');

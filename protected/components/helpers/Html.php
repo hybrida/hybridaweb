@@ -150,5 +150,12 @@ class Html extends CHtml {
 		}
 		return $array;
 	}
-
+    
+    public static function truncate($string, $length, $omission) {
+        if (strlen($string) > $length) {
+            return substr($string, 0, $length).$omission;
+        } else {
+            return $string;
+        }
+    }
 }

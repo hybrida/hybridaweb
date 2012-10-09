@@ -96,6 +96,7 @@ return array(
 			'urlFormat' => 'path',
 			'showScriptName' => false,
 			'rules' => array(
+                'admin/articles' => '/admin/articles',
                 'admin/news' => '/admin/news',
 				'artikler/<id:\d+>/<title>' => '/article/view',
 				'alumni' => '/graduate/index',
