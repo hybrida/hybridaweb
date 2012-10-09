@@ -17,9 +17,9 @@ class OrderHelper
 	public function getOrders()
 	{
         $connection = Yii::app()->db;
-		$sql = "SELECT * FROM kilt_order WHERE status = :status";
+		$sql = "SELECT * FROM kilt_order WHERE status = :enabled";
 		$command = $connection->createCommand($sql);
-		$command = $command->bindParam(":status", $this->statusPublished);
+		$command = $command->bindParam(":enabled", $this->statusPublished);
 		$data = $command->queryAll(); 
         return $data;
 	}
@@ -73,11 +73,11 @@ class OrderHelper
             ':product_quantity' => $qnty,
 			':user_id' => Yii::app()->user->id,
 			':time_id' => $tid,
-			':status' => $this->statusPublished,
+			':enabled' => $this->statusPublished,
         );
         $sql = "INSERT INTO kilt_order
 			 ( user_id,  product_id,  product_quantity,  product_size,  time_id,  status) 
-	  VALUES (:user_id, :product_id, :product_quantity, :product_size, :time_id, :status)";
+	  VALUES (:user_id, :product_id, :product_quantity, :product_size, :time_id, :enabled)";
 		$command = $connection->createCommand($sql);
         $command->execute($data);
 	}
@@ -94,10 +94,10 @@ class OrderHelper
 	{
         $connection = Yii::app()->db;
 		$userId = Yii::app()->user->id;
-		$sql = "SELECT * FROM kilt_order WHERE user_id = :user_id AND status = :status";
+		$sql = "SELECT * FROM kilt_order WHERE user_id = :user_id AND status = :enabled";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":user_id", $userId);
-		$command = $command->bindParam(":status", $this->statusPublished);
+		$command = $command->bindParam(":enabled", $this->statusPublished);
 		$data = $command->queryAll(); 
 		return $data;
 	}

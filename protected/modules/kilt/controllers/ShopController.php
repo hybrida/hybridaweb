@@ -27,6 +27,8 @@ class ShopController extends Controller
 
 		$comment = $commentHelper->getUserCommentByTimeID($curTimeID);
 
+		$changed = false;
+
 		if (isset($_POST['submit']))
 		{
 			$qnty = array();
@@ -60,6 +62,8 @@ class ShopController extends Controller
 
 			if ($newComment != $comment)
 			{
+				$changed = true;
+
 				if (empty($comment))
 					$commentHelper->insertComment($newComment, $curTimeID);
 				elseif (empty($newComment))
@@ -78,24 +82,29 @@ class ShopController extends Controller
 				foreach($orders as $o)
 				   $orderHelper->addOrder($o['id'], $curTimeID, $o['qnty'], $o['size']);
 
-				$this->actionOrders();
-				return;
+				$changed = true;
 			}
+			elseif (count($errors) > 0)
+				$changed = false;
 		}
 
-
-		$this->render('index', 
+		if ($changed)
+			$this->actionOrders();
+		else
+		{
+			$this->render('index', 
 				array(
-				    'imagePrefix'=> $imagePrefix,
-				    'catProducts'=> $categoryProducts,
-					'sizes'		 => $sizes,
-					'errors'     => $errors,
-					'size'       => $size,
-					'qnty'		 => $qnty,
-					'isShopOpen' => $isShopOpen,
-					'comment'    => $comment,
-					'timeID'	 => $curTimeID,
-					));
+						'imagePrefix'=> $imagePrefix,
+						'catProducts'=> $categoryProducts,
+						'sizes'		 => $sizes,
+						'errors'     => $errors,
+						'size'       => $size,
+						'qnty'		 => $qnty,
+						'isShopOpen' => $isShopOpen,
+						'comment'    => $comment,
+						'timeID'	 => $curTimeID,
+						));
+		}
 	}
 
 	public function actionOrders()
