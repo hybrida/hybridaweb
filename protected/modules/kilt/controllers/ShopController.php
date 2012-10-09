@@ -248,6 +248,13 @@ class ShopController extends Controller
 		   	}
 		}
 
+		foreach($totalOrders as &$timeOrders) {
+			foreach ($timeOrders as &$productOrders) {
+				ksort($productOrders);
+				}
+			ksort($timeOrders);
+		}
+
 
 		if (!isset($userOrders[$showUserID][$showTimeID]))
 			$showUserID = -1;
