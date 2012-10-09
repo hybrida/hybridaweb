@@ -102,7 +102,7 @@ class OrderHelper
 		foreach($data as $d) {
 			$timeOrders[$d['time_id']][] = $d;
 		}
-		foreach($timeOrders as $to) {
+		foreach($timeOrders as &$to) {
 			usort($to, array("OrderHelper", "cmpOrder"));
 		}
         return $timeOrders;
