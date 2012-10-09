@@ -37,9 +37,9 @@ a {
 }
 
 .layout-mainWrap {
-	box-shadow: 0 0 15px black;
+	box-shadow: 0 0 7px black;
 	overflow: auto;
-	border-radius: 3px;
+	border-radius: 0;
 	background-color: white;
 }
 
