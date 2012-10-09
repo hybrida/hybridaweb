@@ -2,6 +2,9 @@
 
 class OrderHelper
 {
+	private $statusPublished = Status::PUBLISHED;
+	private $statusDeleted = Status::DELETED;
+
 	public function getUserNameByID($id) {
         $connection = Yii::app()->db;
 		$sql = "SELECT firstName, lastName FROM user WHERE id = :id";
@@ -14,8 +17,9 @@ class OrderHelper
 	public function getOrders()
 	{
         $connection = Yii::app()->db;
-		$sql = "SELECT * FROM kilt_order";
+		$sql = "SELECT * FROM kilt_order WHERE status = :status";
 		$command = $connection->createCommand($sql);
+		$command = $command->bindParam(":status", $this->statusPublished);
 		$data = $command->queryAll(); 
         return $data;
 	}
@@ -23,55 +27,57 @@ class OrderHelper
 	public function deleteOrder($id)
 	{
         $connection = Yii::app()->db;
-		$sql = "DELETE FROM kilt_order WHERE id  = :id";
+		$sql = "UPDATE kilt_order
+				SET status = :deleted
+				WHERE id = :id";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":id", $id);
+		$command = $command->bindParam(":deleted", $this->statusDeleted);
 		$data = $command->execute(); 
 	}
 
-	public function updateOrder($id, $qnty, $timeID)
+	public function updateOrder($id, $qnty)
 	{
         $connection = Yii::app()->db;
         $data = array(
-            ':product_id' => $id,
+            ':id' => $id,
             ':product_quantity' => $qnty,
-			':user_id' => Yii::app()->user->id,
-			':time_id' => $timeID,
         );
         $sql = "UPDATE kilt_order
 				SET product_quantity = :product_quantity
-		  		WHERE user_id = :user_id AND product_id = :product_id
-				AND time_id = :time_id";
+		  		WHERE id = :id";
 		$command = $connection->createCommand($sql);
         $command->execute($data);
 	}
 
-	public function addOrder($id, $tid, $qnty, $size)
+	public function addOrder($pid, $tid, $qnty, $size)
 	{
 		$orders = $this->getUserOrders();
 
 		foreach($orders as $o)
 		{
-			if ($o['product_id'] == $id &&
+			if ($o['product_id'] == $pid &&
 				$o['product_size'] == $size &&
-				$o['time_id'] == $tid)
+				$o['time_id'] == $tid &&
+				$o['status'] == $this->statusPublished)
 			{
-				$this->updateOrder($id, $qnty + $o['product_quantity'], $tid);
+				$this->updateOrder($o['id'], $qnty + $o['product_quantity']);
 				return;
 			}
 		}
 
         $connection = Yii::app()->db;
         $data = array(
-            ':product_id' => $id,
+            ':product_id' => $pid,
             ':product_size' => $size,
             ':product_quantity' => $qnty,
 			':user_id' => Yii::app()->user->id,
 			':time_id' => $tid,
+			':status' => $this->statusPublished,
         );
         $sql = "INSERT INTO kilt_order
-			 ( user_id,  product_id,  product_quantity,  product_size,  time_id) 
-	  VALUES (:user_id, :product_id, :product_quantity, :product_size, :time_id)";
+			 ( user_id,  product_id,  product_quantity,  product_size,  time_id,  status) 
+	  VALUES (:user_id, :product_id, :product_quantity, :product_size, :time_id, :status)";
 		$command = $connection->createCommand($sql);
         $command->execute($data);
 	}
@@ -88,9 +94,10 @@ class OrderHelper
 	{
         $connection = Yii::app()->db;
 		$userId = Yii::app()->user->id;
-		$sql = "SELECT * FROM kilt_order WHERE user_id = :user_id";
+		$sql = "SELECT * FROM kilt_order WHERE user_id = :user_id AND status = :status";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":user_id", $userId);
+		$command = $command->bindParam(":status", $this->statusPublished);
 		$data = $command->queryAll(); 
 		return $data;
 	}
