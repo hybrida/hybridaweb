@@ -59,6 +59,8 @@ class TimeHelper
 	  $sql = "SELECT MAX(id) as id from kilt_time";
 	  $command = $connection->createCommand($sql);
 	  $data = $command->queryScalar(); 
+	  if ($data == "")
+		  $data = -1;
 	  return $data;
    }
 
