@@ -186,7 +186,8 @@ CREATE TABLE IF NOT EXISTS `kilt_comment` (
   `id` int(11) NOT NULL,
   `comment` text COLLATE utf8_unicode_ci NOT NULL,
   `time_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `kilt_order` (
@@ -197,6 +198,7 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `product_quantity` int(11) NOT NULL,
   `product_size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `confirmed` tinyint(1) NOT NULL,
+  `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
 
