@@ -18,13 +18,7 @@ class ShopController extends Controller
 		$commentHelper = new CommentHelper();
 		$timeHelper = new TimeHelper();
 
-		$sizes = $shopHelper->getSizes();
-		$categoryProducts = $shopHelper->getProductsIndexedByCategory();
-		$imagePrefix = $shopHelper->getImageDir();
-
 		$curTimeID = $timeHelper->getCurrentTimeID();
-		$isShopOpen = $timeHelper->isShopOpen();
-
 		$comment = $commentHelper->getUserCommentByTimeID($curTimeID);
 
 		$changed = false;
@@ -92,17 +86,16 @@ class ShopController extends Controller
 			$this->actionOrders();
 		else
 		{
-			$this->render('index', 
-				array(
-						'imagePrefix'=> $imagePrefix,
-						'catProducts'=> $categoryProducts,
-						'sizes'		 => $sizes,
+			$this->render('index', array(
+						'imagePrefix'=> $shopHelper->getImageDir(),
+						'catProducts'=> $shopHelper->getProductsIndexedByCategory(),
+						'sizes'		 => $shopHelper->getSizes(),
+						'isShopOpen' => $timeHelper->isShopOpen(),
+						'timeID'	 => $curTimeID,
+						'comment'    => $comment,
 						'errors'     => $errors,
 						'size'       => $size,
 						'qnty'		 => $qnty,
-						'isShopOpen' => $isShopOpen,
-						'comment'    => $comment,
-						'timeID'	 => $curTimeID,
 						));
 		}
 	}
