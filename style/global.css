@@ -30,7 +30,6 @@ table.g-membertable *{
 	font-weight: 550;
 	padding: 5px 15px;
 	border: 0;
-	border-radius: 0;
 	margin-right: 5px;
 	background: #185c9b;
 	background: -moz-linear-gradient(top,  #185c9b 0%, #003b8e 100%);
@@ -73,7 +72,6 @@ table.g-membertable *{
 }
 
 .g-deleteButton {
-	border-radius:0;
 	border: 0;
 	display:inline-block;
 	color: white;
@@ -149,13 +147,11 @@ table.g-membertable *{
 .g-sidebarNav ul li a {
 	padding: 0.2em 0.8em;
 	display: block;
-	border-radius: 2px;
 }
 
 .g-sidebarNav ul li .current {
 	padding: 0.2em 0.8em;
 	display: block;
-	border-radius: 2px;
 }
 
 .g-sidebarNav ul li a:hover {

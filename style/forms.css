@@ -47,7 +47,6 @@
 	width:250px;
 	font-size: 0.9em;
 	border: 1px solid #ccc;
-	border-radius: 2px;
 }
 
 .g-form textarea{
@@ -56,5 +55,4 @@
 	overflow:hidden;
 	height:150px;
 	border: 1px solid #ccc;
-	border-radius: 2px;
 }

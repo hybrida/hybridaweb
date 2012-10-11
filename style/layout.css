@@ -21,7 +21,6 @@ a {
 .layout-wrap {
 	width: 1000px;
 	margin:0 auto;
-	border-radius: 2px;
 }
 
 .layout-head .layout-banner {
@@ -39,7 +38,6 @@ a {
 .layout-mainWrap {
 	box-shadow: 0 0 7px black;
 	overflow: auto;
-	border-radius: 0;
 	background-color: white;
 }
 
