@@ -39,6 +39,7 @@ a {
 	box-shadow: 0 0 7px black;
 	overflow: auto;
 	background-color: white;
+	border-radius: 2px;
 }
 
 .layout-content {
