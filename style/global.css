@@ -74,6 +74,7 @@ table.g-membertable *{
 
 .g-deleteButton {
 	border: 0;
+	border-radius: 2px;
 	display:inline-block;
 	color: white;
 	font-size:15px;
@@ -94,7 +95,6 @@ table.g-membertable *{
 }
 
 .g-deleteButton:hover {
-	border-radius: 2px;
 	cursor: pointer;
 	background: #bf1e1e;
 	background: -moz-linear-gradient(top,  #bf1e1e 1%, #961e1e 100%);
