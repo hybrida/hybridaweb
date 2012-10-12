@@ -1,30 +1,12 @@
--- phpMyAdmin SQL Dump
--- version 3.4.5
--- http://www.phpmyadmin.net
---
--- Vert: localhost
--- Generert den: 25. Sep, 2012 11:01 AM
--- Tjenerversjon: 5.5.16
--- PHP-Versjon: 5.3.8
-
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `hybrida_dev`
---
 USE `hybrida_dev`;
-
---
--- Dataark for tabell `access_relations`
---
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (24, 4055, 'news', 0),
@@ -32,10 +14,6 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (41, 2, 'news', 0),
 (85, 2014, 'signup', 1),
 (85, 4055, 'signup', 0);
-
---
--- Dataark for tabell `article`
---
 
 INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `content`, `phpFile`, `author`, `timestamp`) VALUES
 (56, 1, 'Lenker', NULL, '<p>\n</p><table cellspacing="6"><tr><td width="150"><a href="http://www.ntnu.no/studier/ingeniorvitenskap-ikt">I &amp; IKT på ntnu.no</a>\n</td>\n<td>\nRekrutterings- og infosider.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studieinformasjon/timeplan/">Timeplaner</a>\n</td><td>\nTimeplanene til alle klassetrinn.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studentservice/">Studentservice</a>\n</td><td>\nSvarer på alle spørsmål du måtte ha som NTNU-student.\n</td></tr><tr><td>\n<a href="http://www.studweb.ntnu.no">ITEAs infoweb</a>\n</td><td>\nInformasjonsbase for IT-systemet\n</td></tr><tr><td>\n<a href="http://www.orakel.ntnu.no">Orakeltjenesten</a>\n</td><td>\nSupport for IT-systemer under NTNU\n</td></tr><tr><td>\n<a href="http://www.samfundet.no">\nStudentersamfundet i Trondhjem</a>\n</td><td>\nNorges største og studentersamfunn.\n</td></tr><tr><td>\n<a href="http://www.universitetsavisa.no">Universitesavisa</a>\n</td><td>\nNyheter fra campus.\n</td></tr><tr><td>\n<a href="http://www.underdusken.no">Under Dusken</a>\n</td><td>\nTrondheims studentavis\n</td></tr><tr><td>\n<a href="http://www.studentrad.no/">Studentrådene</a>\n</td><td>\nStudentrådene ved NTNU\n</td></tr></table>', NULL, 381, '2012-03-07'),
@@ -52,7 +30,7 @@ INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `content`, `phpF
 (65, 62, 'Medlemmer', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<h3>\n	Oversikt over bedriftene som er medlemmer i I&amp;IKT-ringen.</h3>\n<p>\n	 </p>\n<p>\n	Her skal det være:</p>\n<p>\n	Logo, navn og link til hjemmeside for hver av medlemsbedriftene</p>\n', NULL, 293, '2012-05-05'),
 (66, 62, 'Årsmeldinger', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<h3>\n	Årsmeldingene er en årlige rapporter levert av I&amp;IKT-ringen som oppsummerer årets aktiviteter i samarbeidet.</h3>\n<p>\n	 </p>\n<p>\n	Her skal det være en liste over og link til alle årsmeldingene som blir publisert av I&amp;IKT-ringen, med illustrasjonsbilde</p>\n', NULL, 293, '2012-05-05'),
 (61, 55, 'Kontoret', NULL, '<table border="0" cellspacing="1"><tr><th>Fra hovedbygget:</th>\n<th></th>\n<th>Fra stripa, sentralbygget, realfagsbygget, lesesalen:</th>\n</tr><tr><td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/1a_fra_plenen.jpg" alt="1a_fra_plenen.jpg" /></td>\n<td></td>\n<td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/1b_fra_stripa.jpg" alt="1b_fra_stripa.jpg" /></td>\n\n</tr><tr><td>1a) Dette ser du når du kommer<br /> fra plenen bak hovedbygget.<br /></td>\n<td></td>\n<td>1b) Dette ser du når du kommer<br /> fra stripa/sentralbygget.<br /></td>\n</tr><tr><td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/2_dor_1.jpg" alt="2_dor_1.jpg" /></td>\n<td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/3_trapp.jpg" alt="3_trapp.jpg" /></td>\n<td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/4_dor_2.jpg" alt="4_dor_2.jpg" /></td>\n</tr><tr><td>2) Gå inn denne døra.<br /></td>\n<td>3) Gå ned denne trappa.<br /></td>\n<td>4) Ta til høyre og gå inn denne døra.<br /></td>\n</tr><tr><td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/5_dorhandtak.jpg" alt="5_dorhandtak.jpg" /></td>\n<td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/6_gang.jpg" alt="6_gang.jpg" /></td>\n<td><img src="http://www.hybrida.ntnu.no/bilder/til_kontoret/7_kontoret.jpg" alt="7_kontoret.jpg" /></td>\n</tr><tr><td>5) Den er åpen frem til klokka 16.</td>\n<td>6) Gå inn denne gangen.</td>\n<td>7) Gå inn andre dør til høyre.</td>\n</tr></table>', NULL, 381, '2012-03-07'),
-(60, 59, 'Referater', NULL, '<h1>Våren 2012</h1>\n<ul><li><a href="/upc/files/styret/referater/2012v/2012-05-04.pdf">2012-05-04.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2012v/2012.03.20.pdf">2012.03.20.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2012v/2012.03.06.pdf">2012.03.06.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2012v/2012.02.23.pdf">2012.02.23.pdf</a></li>\n</ul><h1>Høsten 2009</h1>\n<ul><li><a href="/upc/files/styret/referater/2009h/2009-11-23.pdf">2009-11-23.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009h/2009-11-09.pdf">2009-11-09.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009h/2009-10-26.pdf">2009-10-26.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009h/2009-10-21.pdf">2009-10-21.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009h/2009-10-14.pdf">2009-10-14.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009h/2009-09-07.pdf">2009-09-07.pdf</a></li>\n</ul><h1>Våren 2009</h1>\n<ul><li><a href="/upc/files/styret/referater/2009v/2009-05-06.pdf">2009-05-06.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009v/2009-04-24.pdf">2009-04-24.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009v/2009-03-27.pdf">2009-03-27.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009v/2009-03-13.pdf">2009-03-13.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009v/2009-02-27.pdf">2009-02-27.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009v/2009-02-13.pdf">2009-02-13.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2009v/2009-02-06.pdf">2009-02-06.pdf</a></li>\n</ul><h1>Høsten 2008</h1>\n<ul><li>	<a href="/upc/files/styret/referater/2008h/2008-11-18.pdf">2008-11-18.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-11-11.pdf">2008-11-11.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-11-10-genfors.pdf">2008-11-10-genfors.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-11-04.pdf">2008-11-04.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-10-30.pdf">2008-10-30.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-10-28.pdf">2008-10-28.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-10-21.pdf">2008-10-21.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-10-09.pdf">2008-10-09.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-10-07.pdf">2008-10-07.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2008h/2008-09-23.pdf">2008-09-23.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2008h/2008-08-27.pdf">2008-08-27.pdf</a></li>\n</ul><h1>Våren 2008</h1>\n<ul><li><a href="/upc/files/styret/referater/2008v/2008-05-13.pdf">2008-05-13.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2008v/2008-04-25.pdf">2008-04-25.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2008v/2008-04-16-genfors.pdf">2008-04-16-genfors.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2008v/2008-04-11.pdf">2008-04-11.pdf</a></li>\n	<li><a href="/upc/files/styret/referater/2008v/2008-04-04.pdf">2008-04-04.pdf</a></li>\n</ul><h1>Våren 2007</h1>\n<ul><li>	<a href="/upc/files/styret/referater/2007v/2007-24-04.pdf">2007-24-04.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2007v/2007-17-04.pdf">2007-17-04.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2007v/2007-14-01.pdf">2007-14-01.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2007v/2007-04-17.txt">2007-04-17.txt</a></li>\n	<li>	<a href="/upc/files/styret/referater/2007v/2007-03-27-genfors.pdf">2007-03-27-genfors.pdf</a></li>\n</ul><h1>Høsten 2006</h1>\n<ul><li>	<a href="/upc/files/styret/referater/2006h/2006-11-06.pdf">2006-11-06.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-10-30.pdf">2006-10-30.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-10-23.pdf">2006-10-23.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-10-16.pdf">2006-10-16.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-10-09.pdf">2006-10-09.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-10-02.pdf">2006-10-02.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-09-25.pdf">2006-09-25.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-09-18.pdf">2006-09-18.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-08-29.pdf">2006-08-29.pdf</a></li>\n	<li>	<a href="/upc/files/styret/referater/2006h/2006-08-10.pdf">2006-08-10.pdf</a></li>\n</ul>', NULL, 381, '2012-03-07'),
+(60, 59, 'Referater', NULL, '<p>\n\nHer kommer alle styret-referatene til Hybrida\n</p>', 'styret-referater', 381, '2012-03-07'),
 (62, NULL, 'I&amp;IKT-ringen', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<h2>\n	<strong>Velkommen til I&amp;IKT-ringen</strong></h2>\n<p>\n	I&amp;IKT-ringen er et samarbeid mellom næringslivet og sivilingeniørstudiet Ingeniørvitenskap og IKT (I&amp;IKT) ved NTNU. Samarbeidet skal gjøre studiet bedre og sørge for en fremdeles sterk rekruttering av høy kvalitet til næringslivet.</p>\n<p>\n	 </p>\n<p>\n	 </p>\n<p>\n	 </p>\n<p>\n	Her skal det være en feed med innlegg som viser hva som er aktuelt i I&amp;IKT-ringen.</p>\n<p>\n	 </p>\n', NULL, 381, '2012-05-05'),
 (63, 62, 'Styret', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<p>\n	Styret i er en samling av representanter fra NTNU og næringslivet og er det overordnede organet i I&amp;IKT-ringen.</p>\n<p>\n	 </p>\n<p>\n	<strong>Styreleder</strong></p>\n<p>\n	Navn, bakgrunnsorganisasjon</p>\n<p>\n	 </p>\n<p>\n	<strong>Representanter fra næringslivet</strong></p>\n<p>\n	Navn, bedrift</p>\n<p>\n	 </p>\n<p>\n	<strong>Representanter fra NTNU</strong></p>\n<p>\n	Navn, stilling</p>\n', NULL, 381, '2012-05-05'),
 (67, 62, 'Kontaktinformasjon', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<p>\n	<strong>Daglig leder</strong></p>\n<p>\n	 </p>\n<p>\n	<strong>Studieprogramleder</strong></p>\n<p>\n	 </p>\n<p>\n	<strong>Studentenes bedriftskontakt</strong></p>\n<p>\n	Hybrida Bedriftskomité v/ Bedriftskomitésjef Åsmund Pedersen Hugo</p>\n<p>\n	Mail: <a href="mailto:hybrida-bedrift@list.stud.ntnu.no">hybrida-bedrift@list.stud.ntnu.no</a></p>\n<p>\n	Tlf: 98 60 42 66</p>\n<p>\n	 </p>\n<p>\n	<strong>Webansvarlig</strong></p>\n', NULL, 293, '2012-05-05'),
@@ -63,14 +41,6 @@ INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `content`, `phpF
 (71, 70, 'Presentasjoner', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<h2>\n	Bedriftspresentasjoner</h2>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">Hybrida Bedriftskomités primære metode for å promotere bedrifter ovenfor studenter er å arrangere bedriftspresentasjoner.</span></p>\n<p>\n	 </p>\n<p class="MsoNormal">\n	<b><span lang="no-nyn" xml:lang="no-nyn">Om bedriftspresentasjoner</span></b></p>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">En bedriftspresentasjon går i hovedsak ut på at bedriften besøker NTNU for å presentere seg for studentene. Et slikt besøk innebærer først og fremst en presentasjon der bedriften holder foredrag for utvalgte studenter. Det er også mulig å rette seg spesielt mot studenter fra en gitt fordypning. I tillegg er det vanlig med påfølgende bespisning, og mange bedrifter velger å ha jobbsamtaler/intervjuer tilknyttet besøket.</span></p>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">Hensikten er først og fremst rekruttering, men en bedriftspresentasjon gir også god markedsføring mot kommende sivilingeniører. Hybrida Bedriftskomité tar seg av all praktisk organisering, bedriften trenger kun å møte opp forberedt med en presentasjon.</span></p>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">Presentasjonen varer vanligvis i én forelesingstime (45 minutter) og avholdes oftest i auditorium. Her er de fleste audiovisuelle hjelpemidler tilgjengelig (PC/projektor. Dersom bedriften har spesielle ønsker vil vi selvsagt forsøke å etterkomme disse. De fleste presentasjoner begynner 17:15 eller 18:15, da dette passer godt med timeplanen til studentene.</span></p>\n<p>\n	 </p>\n<p class="MsoNormal">\n	<b><span lang="no-nyn" xml:lang="no-nyn">Bespisning</span></b></p>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">De aller fleste bedrifter velger å spandere mat og drikke etter presentasjonen. Her har vi flere samarbeidspartnere og kan blant annet tilby rimelige alternativer fra SiT (Studentsamskipnaden i Trondheim), som holder til på Gløshaugen. I tillegg til SiT er også serveringsalternativer ved restauranter i Trondheim sentrum aktuelle.</span></p>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">Noen bedrifter ønsker fri bar, andre vil ha et fast antall enheter i form av drikkebonger. Bespisningen gir bedriften en fin mulighet til å snakke direkte med studentene i uformelle omgivelser. Det er ofte i den forbindelse interesserte melder seg til jobbsamtaler.</span></p>\n<p>\n	 </p>\n<p class="MsoNormal">\n	<b><span lang="no-nyn" xml:lang="no-nyn">Kostnadsinformasjon ved bedriftspresentasjon</span></b></p>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">Fast honorar til Hybrida Bedriftskomité som arrangør, er 150 kr per besøkende gjest, honorargrensen er på 10 000 kr. Dette betyr at Hybrida Bedriftskomité ikke kommer til å kreve mer enn 10 000 kr totalt i honorar for et arrangement, uavhengig om antall besøkende tilsier mer. Dette honoraret er støtte til Hybrida som går til studentene på I&amp;IKT.</span></p>\n<p class="MsoNormal">\n	<span lang="no-nyn" xml:lang="no-nyn">Kostnader knyttet til mat og drikke på serveringssteder kommer i tillegg til honoraret. Oppdaterte menyer og priser for ulike serveringssteder kan fåes av Hybrida Bedriftskomité på forespørsel, da de hele tiden er utsatt for endringer.</span></p>\n<p class="MsoNormal">\n	 </p>\n', NULL, 293, '2012-05-08'),
 (72, 70, 'Update^k', NULL, '<p>\n	<img alt="Logo" height="191" src="/upc/files/ringen/images/iktlogo_planet.png" width="256" /></p>\n<h2>\n	Linjeforeningsavisen Update^k</h2>\n<p class="MsoNormal">\n	<span class="apple-style-span"><span style="color:#000000;">Gjennom et samarbeid med linjeforeningens avis, Update<sup>K</sup>, kan Hybrida Bedriftskomité tilby annonsering og dekning av bedriften. Update<sup>K</sup> gis ut til alle studenter ved I&amp;IKT seks ganger årlig. Deadline for hver av avisens utgaver kan fåes ved etterspørsel.</span></span></p>\n<p>\n	<img alt="Update" height="270" src="/upc/files/ringen/images/update_fremsider.png" width="242" /></p>\n<p class="MsoNormal">\n	<span class="apple-style-span"><span style="color:#000000;">Som medlem av I&amp;IKT-ringen vil bedriftene få sin logo trykt i avisen i hver utgave. I tillegg er det også mulig for bedriften å publisere informasjon gjennom intervjuer og artikler med mer. Skulle man ønske å utlyse sommerjobb/jobbannonser er dette selvfølgelig også mulig å gjøre.</span></span></p>\n<p class="MsoNormal">\n	<span class="apple-style-span"><span style="color:#000000;">Hvis man ønsker annonsering i forbindelse med et spesielt arrangement kan avisen også tilby dekning av dette arrangement på forhånd. Dette kan for eksempel være en artikkel hvor man går kort inn på hva bedriften gjør, hvordan det er å jobbe der og informerer om kommende arrangementer.</span></span></p>\n<p class="MsoNormal">\n	 </p>\n', NULL, 293, '2012-05-08'),
 (74, 2, 'Medlemmer', NULL, '<h2>\n	Medlemmer i Hybrida Bedriftskomité</h2>\n<p>\n	Hybrida Bedriftskomité jobber for å øke kontakten mellom bedrifter og studenter ved Ingeniørvitenskap og IKT. Vi har også som mål å gjøre linjen bedre kjent og spre kunnskap om hvilken kompetanse en I&amp;IKT-student innehar.</p>\n<p>\n	 </p>\n<p>\n	Liste med bilde, navn og stilling til alle i komiteen her</p>\n', NULL, 293, '2012-05-08');
-
---
--- Dataark for tabell `bk_company`
---
-
---
--- Dataark for tabell `bk_company_specialization`
---
 
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (1, 1),
@@ -94,24 +64,8 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (108, 3),
 (108, 4);
 
---
--- Dataark for tabell `bk_company_update`
---
-
---
--- Dataark for tabell `book_sales`
---
-
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
-(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 20:56:46');
-
---
--- Dataark for tabell `comment`
---
-
---
--- Dataark for tabell `event`
---
+(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 22:56:46');
 
 INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (71, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 0),
@@ -120,21 +74,27 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (83, '2012-12-01 00:00:00', '2013-04-06 00:00:00', 'Kontoret', 0),
 (85, '2012-02-25 20:00:54', '2012-02-26 02:00:00', 'Lyche', 0),
 (89, '2012-03-21 14:00:00', '2012-03-21 19:00:00', '', 0),
-(91, '2012-04-19 18:15:00', '2012-04-19 18:15:00', NULL, 0),
+(100, '2012-10-02 18:15:00', '2012-10-02 18:15:00', 'S4', 0),
+(91, '2012-04-19 18:15:00', '2012-04-19 18:15:00', '', 0),
 (92, '2012-04-17 00:00:00', '2012-04-18 00:00:00', 'Kontoret', 0),
 (93, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'NTNU', 0),
 (94, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'Sted', 0),
 (95, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0),
 (97, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'arst', 0),
-(99, '2012-09-01 00:00:00', '2015-09-01 00:00:00', 'Lesesalen', 0);
+(99, '2013-09-01 00:00:00', '2015-09-01 00:00:00', 'Lesesalen', 0),
+(103, '2012-10-04 17:15:00', '2012-10-04 17:15:00', 'R2', 0),
+(101, '2012-10-15 18:15:00', '2012-10-15 18:15:00', 'R2', 0),
+(102, '2012-10-23 18:15:00', '2012-10-23 18:15:00', 'R2', 0);
 
---
--- Dataark for tabell `fb_user`
---
-
---
--- Dataark for tabell `gallery`
---
+INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
+(100, NULL, 411),
+(101, NULL, 415),
+(102, NULL, 416),
+(103, NULL, 438),
+(104, NULL, 120),
+(105, NULL, 122),
+(106, NULL, 98),
+(107, NULL, 92);
 
 INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
 (22, 1, 'HELLO', NULL, '2011-04-03 23:24:42'),
@@ -144,23 +104,34 @@ INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
 (18, 1, 'lol', NULL, '2011-04-03 20:56:39'),
 (23, 1, 'bears', NULL, '2011-04-03 23:39:46');
 
---
--- Dataark for tabell `group_membership`
---
-
---
--- Dataark for tabell `groups`
---
-
 INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 (58, 0, 'UpdateK', 381, 'false', 'updatek'),
 (55, 0, 'Webkom', 381, 'true', 'webkom'),
 (56, 0, 'Styret', 363, 'false', 'styret'),
 (57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bk');
 
---
--- Dataark for tabell `kilt_product`
---
+
+INSERT INTO `image` (`id`, `title`, `oldName`, `galleryId`, `userId`, `timestamp`) VALUES
+(30, '01525_bluewhiteworld_1680x1050.jpg', '01525_bluewhiteworld_1680x1050.jpg', NULL, 381, '2012-09-25 22:32:32'),
+(31, '01_1680x1050.jpg', '01_1680x1050.jpg', NULL, 381, '2012-09-25 22:32:42'),
+(32, 'konimap_01.png', 'konimap_01.png', NULL, 381, '2012-09-25 22:33:23'),
+(33, 'deepseahuntingNy21680.jpg', 'deepseahuntingNy21680.jpg', NULL, 381, '2012-09-25 22:33:53'),
+(34, 'responsible_parents_1680x10.jpg', 'responsible_parents_1680x10.jpg', NULL, 381, '2012-09-25 22:34:06'),
+(35, '1796_theblackpositive_1680x1050.jpg', '1796_theblackpositive_1680x1050.jpg', NULL, 381, '2012-09-26 07:46:15'),
+(36, 'Suprise-1680x1050.jpg', 'Suprise-1680x1050.jpg', NULL, 381, '2012-09-26 07:46:35'),
+(37, '1906_stabilis_1680x1050.jpg', '1906_stabilis_1680x1050.jpg', NULL, 381, '2012-09-26 07:46:44'),
+(38, 'feeding_time_1680x1050.jpg', 'feeding_time_1680x1050.jpg', NULL, 381, '2012-09-30 17:05:59'),
+(39, '1680x1050px.jpg', '1680x1050px.jpg', NULL, 381, '2012-09-30 17:52:11'),
+(40, '01517_boardingthestars_1680x1050.jpg', '01517_boardingthestars_1680x1050.jpg', NULL, 381, '2012-09-30 21:20:29'),
+(41, '313614_2445231695164_868435650_n.jpg', '313614_2445231695164_868435650_n.jpg', NULL, 381, '2012-09-30 21:24:46'),
+(42, 'Campus_NTNU_Gløshaugen_flyfoto.JPG', 'Campus_NTNU_Gløshaugen_flyfoto.JPG', NULL, 381, '2012-09-30 22:56:44'),
+(43, 'Campus_NTNU_Gløshaugen_flyfoto.JPG', 'Campus_NTNU_Gløshaugen_flyfoto.JPG', NULL, 381, '2012-09-30 22:56:59'),
+(44, 'TrondheimNidelva-improved.jpg', 'TrondheimNidelva-improved.jpg', NULL, 381, '2012-09-30 22:57:15'),
+(45, 'vevsjef.jpg', 'vevsjef.jpg', NULL, 381, '2012-10-01 23:01:49'),
+(46, '3485.jpg', '3485.jpg', NULL, 381, '2012-10-01 23:02:35'),
+(47, '01517_boardingthestars_1680x1050.jpg', '01517_boardingthestars_1680x1050.jpg', NULL, 381, '2012-10-01 23:03:57');
+
+
 
 INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (1, 'Kilt', 'Gutt', 'K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
@@ -182,14 +153,10 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (97, 'Sporran', 'Studded Black', '2009032814030513419_lrg.jpg', '2141/Studded-Black-Leather.html'),
 (98, 'Sporran', 'Studded White', '2009113015542623397_lrg.jpg', '9101/Studded-White-Thistle.html'),
 (99, 'Sporran', 'White Rabbit', '2009032717301821464_lrg.jpg', '2191/White-Rabbit-Sporran.html'),
-(100, 'Sporran', 'White Rabbit w/ Black Tassels', '2010081811431185197_lrg.jpg', '9532/White-Rabbit-Sporran-with-Black-Tassels.html'),
+(100, 'Sporran', 'White Rabbit w/ Black Tassels', '2010081811431185197_lrg.jpg', '9532/White-Rabbit-Sporran-with-Black-Tas'),
 (101, 'Ekstra', 'Sokker', '2011091315270667842_med.jpg', '721/Kilt-Hose---Regular.html'),
 (102, 'Ekstra', 'Flashes', 'FL_SOL.jpg', '631/Flashes----Solid-Color.html'),
 (103, 'Ekstra', 'Women''s Knee-Hi', '2009031615001048102_med.jpg', '1451/Women''s-Knee-Hi-Socks.html');
-
---
--- Dataark for tabell `kilt_product_size`
---
 
 INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (1, 1),
@@ -214,10 +181,6 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (103, 4),
 (103, 5);
 
---
--- Dataark for tabell `kilt_size`
---
-
 INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (1, 'Small'),
 (2, 'Medium'),
@@ -226,47 +189,35 @@ INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (5, 'XLarge'),
 (6, 'XXLarge');
 
---
--- Dataark for tabell `news`
---
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `weight`, `timestamp`, `status`) VALUES
 (40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, 0, '2011-07-17 22:34:51', 0),
 (41, 73, 'event', 'Generalforsamling', NULL, 'Generalforsamling i Hybrida', '', 326, 0, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, 0, '2011-11-26 20:02:14', 0),
+(379, 101, 'event', 'Bedpres: Jotne EPM Technology', 33, 'Bedriftspresentasjon med Jotne EPM Technology', '<p>Bedriftspresentasjon med Jotne EPM Technology</p>\n', NULL, 0, '2012-09-25 20:25:01', 0),
+(380, 102, 'event', 'Bedpres: IPRES', 34, 'Bedriftspresentasjon med IPRES', '<p>Bedriftspresentasjon med IPRES</p>\n', NULL, 0, '2012-09-25 20:25:01', 0),
 (364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>\n	Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>\n	Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p>\n	<strong>Lycheburger </strong>Lyches ubestridte klassiker. Med aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter. kr 109.</p>\n<p>\n	<strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli, pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.  kr 99</p>\n<p>\n	<strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår. Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte mandelpoteter. kr 129</p>\n<p>\n	<strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr 129</p>\n<p>\n	<strong><em>Dessertvalg:</em></strong></p>\n<p>\n	<strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr 45</p>\n<p>\n	<strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p>\n	 </p>\n<p>\n	Betaling skjer på Hybridas konto: 0539.26.44913 Prisen avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn + halvingfest</p>\n<p>\n	 </p>\n', 367, 0, '2012-02-17 19:09:39', 0),
 (366, 89, 'event', 'Komitefest!', NULL, 'Det arrangeres komitefest for hybrida kommitémedlemmer 15. mars på kjellerne.', '', 381, 0, '2012-02-28 13:23:04', 0),
 (368, NULL, NULL, 'Den gamle siden', NULL, 'Den gamle siden vil ikke lenger bli vedlikeholdt, men finnes på <a href="http://www.hybrida.ntnu.no">http://www.hybrida.ntnu.no</a>', '<p>\n	 .</p>\n', 353, 0, '2012-04-25 23:17:43', 0),
 (369, NULL, NULL, 'Lesesal-IRC', NULL, 'Kjeder du deg på lesesalen? Skulle du ønske at det var mulig å snakke med andre hybrider på lesesalen? Da er lesesal-IRC noe for deg!', '<p>\n	 </p>\n<p>\n	Etter noe nedetid er IRC-serveren opp å går igjen. Koble deg på med:</p>\n<p>\n	Server: irc.hybrida.no</p>\n<p>\n	Port: 6667</p>\n<p>\n	Kanal: #lesesalen</p>\n<p>\n	De som ikke har brukt IRC før kan ta en titt her: <a href="https://cbe002.chat.mibbit.com/">https://cbe002.chat.mibbit.com/</a> (velg tilkobling med server)</p>\n', 331, 0, '2012-05-02 12:09:02', 0),
 (370, NULL, NULL, 'Reisebrev fra Asia', NULL, 'Her kommer Marius Røed sitt reisebrev fra Asia. Jeg fikk dette videresendt fra Update^K-redaktør, Eirik.', '<p>\n	Gå inn på <a href="/profil/mariuroe">bloggen til Marius</a> og se selv</p>\n', NULL, 0, '2012-05-04 14:00:07', 0),
-(371, 91, 'event', '17. mai-tog', NULL, '17. mai-toget begynner klokken 13.00 utenfor Nidarosdomen. Oppmøte: 12.45.\n\nVi går uansett vær!', '<p>\n	Møt opp og bli med i 17. mai-tog!</p>\n', 370, 0, '2012-05-17 00:39:04', 0),
-(373, NULL, NULL, 'Dette er bare en beta', NULL, 'Denne siden er bare en beta, gå <a href="http://hybrida.no">hit</a> for å komme til hovedsiden', '<p>\n	Ja</p>\n', 381, 0, '2025-07-05 07:18:12', 0),
-(375, 97, 'event', 'Testevent', NULL, 'oaietno', '<p>\n	awtaw</p>\n', 381, 0, '2012-08-24 08:55:52', 0),
-(377, 99, 'event', 'Evig event', NULL, 'Event som brukes til testing only', '<p>\n	Denne hendelsen med påmelding er åpen frem til 2015. Veldig nyttig til testing</p>\n', 381, 0, '2012-09-11 13:39:55', 0);
-
---
--- Dataark for tabell `news_group`
---
+(371, 91, 'event', '17. mai-tog', 37, '17. mai-toget begynner klokken 13.00 utenfor Nidarosdomen. Oppmøte: 12.45.\n\nVi går uansett vær!', '<p>\n	Møt opp og bli med i 17. mai-tog!</p>\n', 370, 0, '2012-05-17 00:39:04', 0),
+(373, NULL, NULL, 'Dette er bare en beta', 31, 'Denne siden er bare en beta, gå til <a href="http://hybrida.no">hybrida.no</a> for å komme til hovedsiden', '', 381, 0, '2025-07-05 07:18:12', 0),
+(375, 97, 'event', 'Testevent', 36, 'oaietno', '<p>\n	awtaw</p>\n', 381, 0, '2012-08-24 08:55:52', 0),
+(378, 100, 'event', 'Bedpres: EDR Medeso', 32, '<p>EDR&Medeso er en ledende leverandør av programvareløsninger og konsulenttjenester innen BIM, strukturanalyser og dynamikk. Vi har over 25 års erfaring med 3D programvare og forhandler blant annet Tekla og SAP2000, som er markedsledende innen struktur-BIM og jordskjelvsberegninger.</p>\r\n\r\n<p>Vårt hovedkontor for BIM er i Oslo, her jobber i dag 11 ingeniører innenfor bygg, offshore, konstruksjonsteknikk og BIM. Som ansatt hos oss blir du del av et internasjonalt, faglig sterkt og ungt miljø. Du vil jobbe på spennende prosjekter innenfor samferdsel, bygg eller offshore for kunder som Aas Jakobsen, Multiconsult, Norconsult, Reinertsen, Skanska, Rambøll og Spenncon.</p>\r\n\r\n<p>Vår BIM-...', '<p>EDR&Medeso er en ledende leverandør av programvareløsninger og konsulenttjenester innen BIM, strukturanalyser og dynamikk. Vi har over 25 års erfaring med 3D programvare og forhandler blant annet Tekla og SAP2000, som er markedsledende innen struktur-BIM og jordskjelvsberegninger.</p>\n\n<p>Vårt hovedkontor for BIM er i Oslo, her jobber i dag 11 ingeniører innenfor bygg, offshore, konstruksjonsteknikk og BIM. Som ansatt hos oss blir du del av et internasjonalt, faglig sterkt og ungt miljø. Du vil jobbe på spennende prosjekter innenfor samferdsel, bygg eller offshore for kunder som Aas Jakobsen, Multiconsult, Norconsult, Reinertsen, Skanska, Rambøll og Spenncon.</p>\n\n<p>Vår BIM-avdeling er i kraftig vekst og vi er interessert i deg som går på konstruksjonsteknikk med fordypning innen stål eller betong. Eller du som fordyper deg innen programmering men har grunnleggende kunnskaper i bygg og anleggsteknikk</p>\n\n<hr>\n\n<p>Bedriftspresentasjonen er åpen for 4. - 5. klasse I & IKT og 4. - 5. klasse Bygg med spesialisering innen konstruksjonsteknikk og bør helst ha full fordypning innen betong eller stål.</p>\n\n<p>\nDet blir servering av pizza og vinlotteri på kjelhuset i etterkant av presentasjonen.\n</p>\n', NULL, 0, '2012-09-25 20:25:01', 0),
+(377, 99, 'event', 'Evig event', 35, 'Event som kun brukes til testing', '<p>\n	Denne hendelsen med påmelding er åpen frem til 2015. Veldig nyttig til testing</p>\n', 381, 0, '2012-09-11 13:39:55', 0),
+(382, NULL, NULL, 'Trenger ikke nytt passord likevel', 44, '<p>\nNTNU har nettopp gått tilbake på deres beslutning om å stenge ned den gamle innloggingstjenesten, så det er ikke lenger noe akutt behov for å legge inn nytt passord.\n\nDe har gitt beskjed om at de kommer til å  videreføre den nåværende tjenesten intil videre, så da kommer vi til å benytte den.\n</p>\n\n<p>\nBeklager alt maset.\n</p>', '<p>\n	Hvis det skulle være at NTNU etter en tid velger å avslutte innloggingstjenesten, som opprinnelig var planen, kan det hende vi kommer til å gå over til å bruke eget hybrida-passord, slik som er praksis hos en del andre linjeforeninger, men det er altså ikke vits i å styre med dette lenger nå.</p>\n<p>\n	Vi kommer ikke til å slette de nye passordene på grunn av dette.</p>\n<p>\n	Om NTNU gjør en ny beslutning vil vi gi beskjed om dette i god tid.</p>\n', 381, 0, '2012-09-28 00:30:22', 0),
+(386, NULL, NULL, 'Lipsum', 38, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium fermentum augue, eget fermentum neque venenatis et. Donec mollis tristique sagittis. Fusce quis sapien non felis aliquet suscipit. In id odio nisi, non sodales ipsum. Duis at est nunc, ut tincidunt nunc. Duis quis orci lectus. Fusce lobortis, diam dapibus condimentum lobortis, leo orci blandit dolor, quis suscipit massa mi nec ligula. Nunc ligula tellus, ultrices a vehicula sed, pretium quis velit. Pellentesque tellus odio, consectetur dapibus sodales ac, luctus nec enim.', '<p>\n	Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pulvinar ipsum in odio accumsan sit amet tincidunt mauris posuere. Aliquam mollis luctus risus eget posuere. Donec eleifend purus id arcu consectetur eget tempor felis euismod. Nam tempus gravida justo, sit amet imperdiet libero tristique nec. Donec varius eleifend fermentum. Aenean sit amet sapien diam. Sed dolor orci, pharetra vel volutpat non, ornare nec orci.</p>\n<p>\n	Duis eget arcu sed quam cursus placerat a non leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla facilisi. Mauris eget orci vitae ante imperdiet rhoncus. Integer id nisi magna. Donec sagittis ornare dolor. Morbi id purus non felis adipiscing molestie.</p>\n<p>\n	Phasellus nec leo elit. Praesent lectus metus, rhoncus euismod gravida eu, venenatis a sapien. Praesent at lectus ipsum. Curabitur tempor odio sit amet dui fringilla imperdiet. Vestibulum vehicula eleifend elit eget consequat. Phasellus hendrerit velit eget dolor convallis eu tincidunt lorem tristique. Etiam odio dui, rutrum id molestie ut, egestas vitae velit.</p>\n<p>\n	Proin nisl dolor, imperdiet non eleifend eget, euismod vel sem. Nulla at nibh eget quam gravida convallis in nec dolor. Nullam odio magna, ullamcorper ac tempor sed, dignissim at mi. In bibendum mauris vitae massa tempus ac auctor neque varius. Aenean tincidunt dolor euismod nisi molestie quis placerat mi placerat. Mauris libero dolor, mollis in consectetur nec, fringilla et arcu. Sed scelerisque sodales augue et placerat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut lobortis laoreet tortor nec venenatis. Fusce lobortis pharetra libero, ut accumsan urna venenatis eu. Mauris non nisi magna. Vivamus condimentum feugiat congue. Suspendisse bibendum molestie augue non molestie.</p>\n', 381, 0, '2012-09-27 17:05:35', 0);
 
 INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
 (3, 56),
 (38, 55);
 
---
--- Dataark for tabell `notification_listener`
---
 
 INSERT INTO `notification_listener` (`id`, `userID`, `parentType`, `parentID`) VALUES
 (33, 381, 'news', 370),
-(32, 381, 'profile', 381);
-
---
--- Dataark for tabell `rbac_assignment`
---
-
---
--- Dataark for tabell `rbac_item`
---
+(32, 381, 'profile', 381),
+(34, 381, 'news', 386);
 
 INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('admin', 2, 'Administrator', '', 's:0:"";'),
@@ -287,10 +238,6 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('updateProfile', 0, '', '', 's:0:"";'),
 ('webkom', 2, 'Medlemmer av webkom', 'return Yii::app()->gatekeeper->hasGroupAccess(55);', NULL),
 ('writer', 2, 'Kan publisere', '', 's:0:"";');
-
---
--- Dataark for tabell `rbac_itemchild`
---
 
 INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 ('webkom', 'admin'),
@@ -316,10 +263,6 @@ INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
 ('admin', 'writer'),
 ('styret', 'writer');
 
---
--- Dataark for tabell `signup`
---
-
 INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
 (71, 47, '2011-12-07 22:25:40', '2012-01-01 22:35:00', 'false', 0),
 (73, 200, '2011-11-20 00:00:00', '2011-11-24 17:00:00', 'false', 0),
@@ -337,15 +280,12 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (94, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'false', 0),
 (98, 1, '2012-08-27 11:00:00', '2012-09-17 11:00:00', 'false', 2),
 (97, 1, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'false', 0),
-(99, 10000, '2012-09-01 00:00:00', '2015-09-01 00:00:00', 'true', 0);
-
---
--- Dataark for tabell `signup_membership`
---
-
---
--- Dataark for tabell `specialization`
---
+(99, 10000, '2012-09-01 00:00:00', '2015-09-01 00:00:00', 'true', 0),
+(102, 1, '2012-08-31 11:00:00', '2012-10-23 11:00:00', 'false', 2),
+(103, 50, '2012-09-27 15:00:00', '2012-10-04 11:00:00', 'false', 2),
+(101, 1, '2012-08-31 11:00:00', '2012-10-15 11:00:00', 'false', 2),
+(100, 30, '2012-09-24 11:00:00', '2012-10-01 11:00:00', 'false', 2),
+(107, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 2);
 
 INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (1, 10, 'Geomatikk'),
@@ -358,14 +298,10 @@ INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (8, NULL, 'Produktutvikling og Materialer'),
 (9, NULL, 'Varme- og Strømningsteknikk');
 
---
--- Dataark for tabell `user`
---
-
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', NULL, NULL, '2012-09-21 16:33:12', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', 47, NULL, '2012-10-11 13:44:23', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
 (466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
+(293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
+SET FOREIGN_KEY_CHECKS=1;
