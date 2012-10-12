@@ -64,7 +64,7 @@ class ProfileController extends Controller {
 
 	public function actionEdit($username) {
 		if (!$this->hasUpdateProfileAccess($username)) {
-			throw new CHttpException(401, "Du har ikke tilgang til å endre denne profilen");
+			throw new CHttpException(403, "Du har ikke tilgang til å endre denne profilen");
 		}
 		$user = $this->getUserOrThrowException($username);
 		$form = new ProfileForm($user);
