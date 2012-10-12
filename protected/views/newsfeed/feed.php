@@ -37,7 +37,8 @@ $this->endClip();
 
 </div>
 <?=CHtml::button('Vis flere', array(
-	'class' => 'g-button g-buttonRightSide',
+	'class' => 'g-button',
+	'style' => 'display: block; width: 100%;',
 	'id' => 'fetchNews',
 ))?>
 
