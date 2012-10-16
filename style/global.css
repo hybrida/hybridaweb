@@ -200,3 +200,20 @@ li.collapsibleListClosed .node {
 	margin-right: 1em;
 	margin-top: 0.5em;
 }
+
+.clearfix:after{
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	font-size: 0;
+	overflow:hidden;
+}
+
+/* Settes på container som inneholder flytende elementer:
+<div id="container" class="clearfix">
+  <div id="rail" style="float: left;"></div>
+  <div id="content" style="float: left;"></div>
+</div>
+*/
