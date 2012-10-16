@@ -11,7 +11,7 @@ class AdminController extends Controller {
 		return array(
 			array('allow',
 				'actions' => array("news", "articles"),
-				'roles' => array('admin'),
+				'roles' => array('editor'),
 			),
 			array('deny'),
 		);
