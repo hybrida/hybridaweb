@@ -121,7 +121,7 @@ class BooksaleController extends Controller
 				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 		}
 		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+			throw new CHttpException(400,'Ugyldig handling');
 	}
 
 	/**
@@ -159,7 +159,7 @@ class BooksaleController extends Controller
 	{
 		$model=BookSale::model()->findByPk($id);
 		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
+			throw new CHttpException(404,'Siden finnes ikke');
 		return $model;
 	}
 

@@ -18,7 +18,7 @@ class DevModule extends CWebModule {
 		$badServerName = "/hybrida.no/";
 		$isBadServer = preg_match($badServerName, $serverName);
 		if ($isBadServer) {
-			throw new CHttpException('Ingen tilgang', "Denne siden er kun tilgjengelig for webkom-medlemmer");
+			throw new CHttpException(403, "Kun for medlemmer av webkomiteen");
 		}
 	}
 

@@ -132,7 +132,7 @@ class GroupController extends Controller {
 	private function getGroupByUrl($url) {
 		$group = Groups::model()->find("url = ?", array($url));
 		if (!$group)
-			throw new CHttpException(404, "Denne gruppen finnes ikke");
+			throw new CHttpException(404, "Gruppen finnes ikke");
 		return $group;
 	}
 

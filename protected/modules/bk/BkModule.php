@@ -25,7 +25,7 @@ class BkModule extends CWebModule {
 	private function throwErrorIfNotBedkomMember() {
 		if (user()->isGuest || !$this->isFormerOrCurrentBedkomMember()) {
 			throw new CHttpException(
-					400, "Kun for medlemmer av Bedriftskomiteen");
+					403, "Kun for medlemmer av Bedriftskomiteen");
 		}
 	}
 

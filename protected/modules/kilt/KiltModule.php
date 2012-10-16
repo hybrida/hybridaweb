@@ -23,7 +23,7 @@ class KiltModule extends CWebModule
 		{
 			$this->initAssets();
 			 if(Yii::app()->user->isGuest)
-				throw new CHttpException("Ingen tilgang", "");
+				throw new CHttpException(403, "Du har ikke tilgang");
 			return true;
 		}
 		else

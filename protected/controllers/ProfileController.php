@@ -45,7 +45,7 @@ class ProfileController extends Controller {
 				));
 		if (!$user) {
 			throw new CHttpException(404,
-					"Brukeren du søkte etter fines ikke");
+					"Brukeren finnes ikke");
 		}
 		return $user;
 	}

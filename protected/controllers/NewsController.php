@@ -67,7 +67,7 @@ class NewsController extends Controller {
 		if (!$news || $news->status == Status::DELETED)
 			throw new CHttpException(404, 'Nyheten finnes ikke');
 		if (!app()->gatekeeper->hasPostAccess('news', $news->id))
-			throw new CHttpException(403, 'Ingen tilgang');
+			throw new CHttpException(403, 'Du har ikke tilgang');
 		return $news;
 	}
 

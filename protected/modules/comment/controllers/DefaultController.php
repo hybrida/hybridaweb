@@ -13,14 +13,14 @@ class DefaultController extends Controller {
 			Notifications::notifyAndAddListener($model->type, $model->id, Notification::STATUS_NEW_COMMENT, user()->id, $model->commentID);
 			$this->actionView($model->type, $model->id);
 		} else {
-			throw new CHttpException(500, "Ikke tillat");
+			throw new CHttpException(403, "Du har ikke tilgang");
 		}
 	}
 
 	public function actionDelete($id) {
 		$model = Comment::model()->findByPk($id);
 		if (!$model->hasDeleteAccess()) {
-			throw new CHttpException(403, "Du har ikke rettigheter for å slette denne kommentaren");
+			throw new CHttpException(403, "Du har ikke tilgang til å slette denne kommentaren");
 		}
 		$model->delete();
 		$this->actionView($model->parentType, $model->parentId);

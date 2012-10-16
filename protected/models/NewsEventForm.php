@@ -138,7 +138,7 @@ class NewsEventForm extends CFormModel {
 
 	public function save() {
 		if (Yii::app()->user->isGuest) {
-			throw new CHttpException("Du må være logget inn for å lage en nyhet");
+			throw new CHttpException(403, "Du må være logget inn for å lage en nyhet");
 		}
 		$this->saveEvent();
 		$this->saveSignup();

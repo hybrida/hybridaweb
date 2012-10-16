@@ -5,7 +5,7 @@ class DefaultController extends Controller {
 	public function actionView($id) {
 		$event = BpcEvent::getById($id);
 		if (!$event) {
-			throw new CHttpException(404, "Denne bedriftspresentasjonen finnes ikke");
+			throw new CHttpException(404, "Bedriftspresentasjonen finnes ikke");
 		}
 		$this->render('view', array(
 			'event' => $event,
@@ -16,11 +16,11 @@ class DefaultController extends Controller {
 
 	public function actionEdit($id) {
 		if (!user()->checkAccess('updateBedpres')) {
-			throw new CHttpException(400, 'Du har ikke tilgang til å endre dette');
+			throw new CHttpException(403, 'Du har ikke tilgang til å endre dette');
 		}
 		$eventCompany = EventCompany::model()->find('bpcID = ?', array($id));
 		if ($eventCompany === null) {
-			throw new CHttpException(404, "Kunne ikke finne bedpress");
+			throw new CHttpException(404, "Bedriftspresentasjonen finnes ikke");
 		}
 
 		if (Yii::app()->request->isPostRequest) {
