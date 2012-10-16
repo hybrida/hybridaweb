@@ -15,7 +15,7 @@ class DefaultController extends Controller {
 	}
 
 	public function actionEdit($id) {
-		if (!user()->checkAccess('admin')) {
+		if (!user()->checkAccess('updateBedpres')) {
 			throw new CHttpException(400, 'Du har ikke tilgang til å endre dette');
 		}
 		$eventCompany = EventCompany::model()->find('bpcID = ?', array($id));

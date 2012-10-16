@@ -3,10 +3,10 @@
 <? 
 $this->beginClip('sidebar'); ?>
 
-<? if (user()->checkAccess('admin')): ?>
+<? if (user()->checkAccess('updateBedpres')): ?>
 	<fieldset class="g-adminSet">
 		<legend>Admin</legend>
-        <?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
+		<?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
 			'class' => 'g-button')); ?>
         <?= CHtml::link("Koble til bedrift",array("edit",'id' => $event->id), array(
 			'class' => 'g-button')); ?>
