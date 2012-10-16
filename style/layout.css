@@ -40,6 +40,11 @@ a {
 	overflow: auto;
 	background-color: white;
 	border-radius: 2px;
+	padding-bottom: 20px;
+}
+
+#marginmaker {
+	margin-top: 20px;
 }
 
 .layout-content {
