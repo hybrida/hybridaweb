@@ -73,7 +73,7 @@
 				<?= $content ?>
 			</div>
 			
-			<div id="marginmaker"></div>
+			<div id="layout-marginMaker"></div>
 		</div>
 
 	</body>
