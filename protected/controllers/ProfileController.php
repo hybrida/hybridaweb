@@ -20,6 +20,10 @@ class ProfileController extends Controller {
 				'actions' => array("index", "info", "view", "edit", "comment"),
 				'users' => array('@'),
 			),
+			array('allow',
+				'actions' => array('changeMember'),
+				'roles' => array('admin'),
+			),
 			array('deny'),
 		);
 	}
@@ -91,6 +95,39 @@ class ProfileController extends Controller {
 			'username' => $user->username,
 				));
 		$this->redirect($url);
+	}
+	
+	public function actionChangeMember($firstName="", $lastName="") {
+		$msg = '';
+		$user = User::model()->find('firstName =? AND lastName = ?',array(
+			$firstName, $lastName
+		));
+		if (Yii::app()->request->isPostRequest && $user != null) {
+			$isMember = isset($_POST['isMember']);
+			$isNotMember = isset($_POST['isNotMember']);
+			if ($isMember == $isNotMember){
+				throw new CHttpException(400, "Kan ikke være både medlem og".
+						" ikke-medlem");
+			}
+			$isMemberText = $isMember ? "<span class='member'>medlem</span>" :
+				"<span class='notmember'>ikke medlem</span>";
+			if ($isMember) {
+				$user->member = 'true';
+				
+			} else {
+				$user->member = 'false';
+			}
+			if (!$user->save()){
+				throw new CHttpException(500, "Det ble ikke lagret at ".
+						$user->fullName." har status " . $isMemberText);
+			}
+			$msg = $user->fullName . " har nå status: " . $isMemberText;
+		}
+		$this->render('changeMember', array(
+			'user' => $user,
+			'message' => $msg,
+		));
+		
 	}
 
 	public function old() {
