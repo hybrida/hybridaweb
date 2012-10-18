@@ -21,11 +21,12 @@
 		.notmember {
 			background-color: red;
 		}
-		
+
 		span.member, span.notmember {
 			font-size: 20px;
 		}
 	</style>
+
 
 	<? if ($user): ?>
 		<h1>Endre medlemsskap</h1>
@@ -51,12 +52,15 @@
 	<? endif ?>
 
 	<h1>Søk</h1>
-	<form method="get">
+	<form method="get" name="search">
 		<input type="text" placeholder="Fornavn" name="firstName"/>
 		<input type="text" placeholder="Etternavn" name="lastName" />
 		<input type="submit"/>
 	</form>
 
+	<script type="text/javascript" language="JavaScript">
+		document.forms['search'].elements['firstName'].focus();
+	</script>
 	<br/>
 	<br/>
 	<br/>
