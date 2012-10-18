@@ -69,7 +69,7 @@
 				</div>
 			</div>
 
-			<div class="layout-mainWrap clearfix">
+			<div class="layout-mainWrap g-clearfix">
 				<?= $content ?>
 			</div>
 			
