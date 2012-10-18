@@ -53,13 +53,12 @@
 
 	<h1>Søk</h1>
 	<form method="get" name="search">
-		<input type="text" placeholder="Fornavn" name="firstName"/>
-		<input type="text" placeholder="Etternavn" name="lastName" />
+		<input type="text" placeholder="Navn" name="name"/>
 		<input type="submit"/>
 	</form>
 
 	<script type="text/javascript" language="JavaScript">
-		document.forms['search'].elements['firstName'].focus();
+		document.forms['search'].elements['name'].focus();
 	</script>
 	<br/>
 	<br/>

@@ -84,7 +84,8 @@ class ProfileController extends Controller {
 	}
 
 	public function saveFormAndRedirectIfPostRequest(ProfileForm $form) {
-		if (!isset($_POST['ProfileForm']))	return;
+		if (!isset($_POST['ProfileForm']))
+			return;
 		$form->setAttributes($_POST['ProfileForm']);
 		$form->save();
 		$this->redirectToProfile($form->getUserModel());
@@ -96,30 +97,37 @@ class ProfileController extends Controller {
 				));
 		$this->redirect($url);
 	}
-	
-	public function actionChangeMember($firstName="", $lastName="") {
+
+	public function actionChangeMember($name = "") {
+		$explode = explode(' ', $name);
+		if (count($explode) < 2) {
+			$firstName = "";
+			$lastName = "";
+		} else {
+			$firstName = $explode[0];
+			$lastName = $explode[1];
+		}
 		$msg = '';
-		$user = User::model()->find('firstName =? AND lastName = ?',array(
+		$user = User::model()->find('firstName =? AND lastName = ?', array(
 			$firstName, $lastName
-		));
+				));
 		if (Yii::app()->request->isPostRequest && $user != null) {
 			$isMember = isset($_POST['isMember']);
 			$isNotMember = isset($_POST['isNotMember']);
-			if ($isMember == $isNotMember){
-				throw new CHttpException(400, "Kan ikke være både medlem og".
+			if ($isMember == $isNotMember) {
+				throw new CHttpException(400, "Kan ikke være både medlem og" .
 						" ikke-medlem");
 			}
 			$isMemberText = $isMember ? "<span class='member'>medlem</span>" :
-				"<span class='notmember'>ikke medlem</span>";
+					"<span class='notmember'>ikke medlem</span>";
 			if ($isMember) {
 				$user->member = 'true';
-				
 			} else {
 				$user->member = 'false';
 			}
-			if (!$user->save()){
-				throw new CHttpException(500, "Det ble ikke lagret at ".
-						$user->fullName." har status " . $isMemberText);
+			if (!$user->save()) {
+				throw new CHttpException(500, "Det ble ikke lagret at " .
+						$user->fullName . " har status " . $isMemberText);
 			}
 			$msg = $user->fullName . " har nå status: " . $isMemberText;
 		}
@@ -127,7 +135,6 @@ class ProfileController extends Controller {
 			'user' => $user,
 			'message' => $msg,
 		));
-		
 	}
 
 	public function old() {
@@ -158,6 +165,5 @@ class ProfileController extends Controller {
 			'companies' => Html::getCompaniesDropDownArray(),
 		));
 	}
-
 
 }
