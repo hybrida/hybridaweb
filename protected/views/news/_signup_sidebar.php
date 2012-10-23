@@ -7,16 +7,19 @@
 	</div>
 
 	<? if ($signup): ?>
-		<div class="g-barTitle">Påmelding:</div>
-		<div class="g-barText">
-			<strong>Påmeldte: </strong> <i><?= $signup->attendingCount ?> av <?= $signup->spots ?></i> <br/>
-            <progress max="<?= $signup->spots ?>" value="<?= $signup->attendingCount ?>">
-                <!-- Fallback for gamle browsere -->
-                <?= Html::truncate((100 * ($signup->attendingCount / $signup->spots)), 4, "") ?>%
-            </progress><br />
-			<strong>Fra: </strong><i><?= Html::dateToString($signup->open, 'long') ?></i> <br>
-			<strong>Til: </strong><i><?= Html::dateToString($signup->close, 'long') ?></i> <br>
-		</div>
+        <div class="g-barTitle">Påmelding:</div>
+                <div class="g-barText">
+                    <strong>Påmeldte: </strong> <br/>
+                    
+                    <div class="progressbar" style="text-align: center">
+                        <span class="Text"><?= $signup->attendingCount ?> / <?= $signup->spots ?></span>
+                        <span class="<?= $signup->AttendingColorClass ?>" style="width: <?= $signup->AttendingFraction?>%"></span>
+                        
+                        
+                    </div>
+                    <strong>Fra: </strong><i><?= Html::dateToString($signup->open, 'long') ?></i> <br>
+                    <strong>Til: </strong><i><?= Html::dateToString($signup->close, 'long') ?></i> <br>
+                </div>
 	<? endif ?>
 	<div class="g-barTitle">Google calendar</div>
 	<div class="g-barText">
