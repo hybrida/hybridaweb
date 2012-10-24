@@ -175,6 +175,21 @@ class User extends CActiveRecord {
 			return array();
 		}
 	}
+	
+	public function getGenderInNorwegian() {
+		$englishGender = $this->gender;
+		$norwegianGender = null;
+		
+		if ($englishGender == "male") {
+			$norwegianGender = "Mann";
+		} elseif ($englishGender == "female") {
+			$norwegianGender = "Kvinne";
+		} else {
+			$norwegianGender = "Ukjent";
+		}
+		
+		return $norwegianGender;
+	}
 
 	private function getGroupsAccess() {
 		$groups = GroupMembership::model()->findAll("userId = :id AND end IS NULL", array(
