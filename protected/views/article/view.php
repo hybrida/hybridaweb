@@ -29,11 +29,6 @@ $this->endClip()
 ?>
 <div class="articleIndex">
 	<div id="article">
-		<div id="article-title">
-			<h1><?= $article->title ?></h1>
-		</div>
-		<div id="article-content">
-            <? ArticleTemplateRenderer::render($article) ?>
-		</div>
+		<? ArticleTemplateRenderer::render($article) ?>
 	</div>
 </div>

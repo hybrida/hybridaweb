@@ -3,7 +3,13 @@
 class ArticleTemplateRenderer {
     public static function render($article) {
         if ($article->phpFile == null) {
-            echo $article->content;
+            echo
+                "<div id='article-title'>".
+                    "<h1>".$article->title."</h1>".
+                "</div>".
+                "<div id='article-content'>".
+                    $article->content.
+                "</div>";
             return;
         }
         
