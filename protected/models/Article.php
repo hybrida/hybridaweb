@@ -155,34 +155,6 @@ class Article extends CActiveRecord {
         return $modifiedPath;
 	}
     
-    public function printTemplateContent() {
-        if ($this->phpFile == null) {
-            echo $this->content;
-            return;
-        }
-        
-        $phpFilePath = $this->phpFilePath;
-        
-        if ($this->illegalPHP() || !file_exists($phpFilePath)) {
-            $message = "The content of this article has been corrupted";
-            throw new CHttpException(500, $message);
-        }
-        
-        include $phpFilePath;
-    }
-
-    private function illegalPHP() {
-        $pattern = "/^[a-zA-Z0-9-_]+$/";
-        // Allows only letters A-Z, a-z and numbers 0-9 for a word of any length.
-        $subject = $this->phpFile;
-        
-        if (preg_match($pattern, $subject)) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-    
 	public function getViewUrl() {
 		return Yii::app()->createUrl("article/view", array(
 					"id" => $this->id,
