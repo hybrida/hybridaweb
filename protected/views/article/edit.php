@@ -39,12 +39,12 @@
 		<?= $form->error($model, 'phpFile') ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model, 'Innhold'); ?>
-		<?php echo $form->richTextArea($model, 'content'); ?>
-		<?php echo $form->error($model, 'content'); ?>
-	</div>
-	
+    <div class="row">
+        <?= $form->labelEx($articleText, 'content') ?>
+        <?= $form->richTextArea($articleText, 'content') ?>
+        <?= $form->error($articleText, 'content') ?>
+    </div>
+
 	<div class="row">
 		<?php echo $form->labelEx($model, 'Tilganger'); ?>
 		<?php echo $form->accessField($model, 'access'); ?>
