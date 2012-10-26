@@ -7,17 +7,17 @@ class BreadCrumb extends CWidget {
 	public $firstCrumb;
 	public $options = array();
 	private $defaults = array();
-	
+
 	public function init() {
-		$this->firstCrumb = CHtml::link("Hjem", array('site/index'));
+		$this->firstCrumb = CHtml::link("Hjem", "/" . Yii::app()->baseUrl);
 	}
 
 	public function run() {
-		if (!empty($this->links)){
+		if (!empty($this->links)) {
 			$this->render('breadCrumb');
 		}
 	}
-	
+
 	public function option($opt) {
 		if (isset($this->options[$opt])) {
 			return $this->options[$opt];
