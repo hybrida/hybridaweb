@@ -1,6 +1,6 @@
 <?php
 $this->breadcrumbs = array(
-	'Jobs' => array('index'),
+	'Stillingsutlysninger'=>array('index'),
 	$model->company->companyName . ": " . $model->title => array('view', 'id' => $model->id),
 );
 
