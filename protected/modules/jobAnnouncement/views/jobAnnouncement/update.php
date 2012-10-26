@@ -1,8 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'Jobs'=>array('index'),
-	$model->title=>array('view','id'=>$model->id),
-	'Update',
+	'Stillingsutlysninger'=>array('index'),
+	$model->company->companyName . ": " . $model->title => array('view', 'id' => $model->id),
+	'Oppdater' => null,
 );
 
 $this->menu=array(
@@ -13,7 +13,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Update Job <?php echo $model->id; ?></h1>
+<h1>Oppdater stillingsutlysning <?php echo $model->title; ?></h1>
 
 <?php echo $this->renderPartial('_form', array(
 	'model'=>$model,

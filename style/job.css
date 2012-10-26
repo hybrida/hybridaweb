@@ -1,0 +1,33 @@
+/*
+Denne CSS-filen stilsetter alt som har med stillingsutlysninger å gjøre
+Det vil si alt som kommer fra modulen jobAnnouncement
+*/
+
+.jobAnnouncementIndex {
+	margin: auto 1em;
+}
+
+.jobAnnouncementIndex .view {
+	background-color: #ddd;
+	padding: 0.3em;
+	margin-top: 0.6em;
+	border-radius: 2px;
+}
+
+.jobAnnouncementIndex .view .left {
+	width: 80px;
+	height: 80px;
+	margin-right: 10px;
+	float:left;
+	background-color: white;
+	border-radius: 2px;
+}
+
+.jobAnnouncementIndex .view .right {
+	float:left;
+}
+
+.jobAnnouncementView {
+	margin: auto 1em;
+}
+
