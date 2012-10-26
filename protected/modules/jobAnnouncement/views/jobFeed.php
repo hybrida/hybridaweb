@@ -8,7 +8,7 @@
 	<? endforeach ?>
 
 	<? if (empty($models)): ?>
-		<li>Det er ingen utlyste jobber</li>
+		<li>Det er ingen utlyste stillinger</li>
 	<? endif ?>
 	</ul>
 </div>
