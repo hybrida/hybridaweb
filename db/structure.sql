@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=108 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=109 ;
 
 CREATE TABLE IF NOT EXISTS `event_company` (
   `eventID` int(11) NOT NULL,
@@ -111,6 +111,13 @@ CREATE TABLE IF NOT EXISTS `event_company` (
   UNIQUE KEY `bpcID` (`bpcID`),
   KEY `companyID` (`companyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `event_company_old` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `companyId` int(11) NOT NULL,
+  `date` datetime NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `fb_user` (
   `userId` int(11) NOT NULL,
@@ -244,7 +251,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=387 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=388 ;
 
 CREATE TABLE IF NOT EXISTS `news_group` (
   `newsId` int(11) NOT NULL,

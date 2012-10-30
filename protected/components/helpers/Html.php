@@ -10,6 +10,14 @@ class Html extends CHtml {
 			'jan.', 'feb.', "mar.", "apr.","mai","jun.","jul.",
 			"aug.","sep.","okt.", "nov.", "des."
 		);
+        
+        public static function externalLink($text, $url, $htmlOptions){
+            $urlStartsWithHttp = preg_match("/^http:\/\//", $url);
+            if (!$urlStartsWithHttp) {
+                $url = "http://" . $url;
+            }
+            return CHtml::link($text, $url, $htmlOptions);
+        }
 	
 	public static function dateToString($dateString, $format='medium') {
 		$date = strtotime($dateString);
