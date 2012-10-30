@@ -22,12 +22,12 @@
 
 #BK-alumnilist-maintable td {
     border-bottom: 1px solid #ccc;
-    padding: 6px 8px;
+    padding: 6px 4px;
 }
 
 #BK-alumnilist-maintable th {
     color: #009;
-    padding: 10px 8px;
+    padding: 10px 4px;
     border-bottom: 2px solid #6678b1;
 }
 
