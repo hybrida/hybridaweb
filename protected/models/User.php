@@ -28,7 +28,7 @@
  * @property Access $access
  */
 class User extends CActiveRecord {
-	
+
 	public $cardNumber;
 	public $imageUpload;
 
@@ -57,8 +57,8 @@ class User extends CActiveRecord {
 			array('username, firstName, lastName, member', 'required'),
 			array('specializationId, imageId, phoneNumber, workCompanyID, cardNumber', 'numerical', 'integerOnly' => true),
 			array('username', 'length', 'max' => 10),
-			array('cardNumber','length','max' => 8),
-			array('cardNumber','length','min' => 5),
+			array('cardNumber', 'length', 'max' => 8),
+			array('cardNumber', 'length', 'min' => 5),
 			array('firstName, middleName, lastName', 'length', 'max' => 75),
 			array('graduationYear', 'length', 'max' => 4),
 			array('member', 'length', 'max' => 5),
@@ -144,7 +144,7 @@ class User extends CActiveRecord {
 					'criteria' => $criteria,
 				));
 	}
-	
+
 	public function purify() {
 		$p = new CHtmlPurifier;
 		$this->altEmail = $p->purify($this->altEmail);
@@ -174,6 +174,21 @@ class User extends CActiveRecord {
 		} else {
 			return array();
 		}
+	}
+	
+	public function getGenderInNorwegian() {
+		$englishGender = $this->gender;
+		$norwegianGender = null;
+		
+		if ($englishGender == "male") {
+			$norwegianGender = "Mann";
+		} elseif ($englishGender == "female") {
+			$norwegianGender = "Kvinne";
+		} else {
+			$norwegianGender = "Ukjent";
+		}
+		
+		return $norwegianGender;
 	}
 
 	private function getGroupsAccess() {
@@ -209,25 +224,25 @@ class User extends CActiveRecord {
 	public function getFullName() {
 		return $this->firstName . " " . $this->middleName . " " . $this->lastName;
 	}
-        
-        public function getUsername() {
-            return $this->username;
-        }
-	
+
+	public function getUsername() {
+		return $this->username;
+	}
+
 	public function getViewUrl() {
 		return Yii::app()->createUrl('/profile/info', array(
-			'username' => $this->username,
-		));
+					'username' => $this->username,
+				));
 	}
-	
+
 	public function getClassYear() {
 		return YearConverter::graduationYearToClassYear($this->graduationYear);
 	}
-	
+
 	public function setClassYear($classYear) {
 		$this->graduationYear = YearConverter::classYearToGraduationYear($classYear);
 	}
-	
+
 	protected function beforeSave() {
 		if ($this->cardNumber) {
 			$this->cardHash = sha1($this->cardNumber);

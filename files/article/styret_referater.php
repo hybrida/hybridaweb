@@ -143,26 +143,30 @@ $referatMapper = getReferatFolders($folderPath);
 		background-color: #D9D9D9;
 	}
 </style>
-
-<div>
-	<?= $this->content ?>
+<div id="article-title">
+	<h1><?= $article->title?></h1>
 </div>
+<div id="articl-content">
 
-
-<? foreach ($referatMapper as $mappe): ?>
-	<div class="mappe">
-		<h2><?= $mappe->year . " " . $mappe->season ?></h2>
-
-		<? foreach ($mappe->referater as $referat): ?>
-			<div class="referat">
-				<a href="<?= $folderUrl ?><?= $mappe->yearSeason ?>/<?= $referat->fileName ?>">
-					<img src="/images/pdf-icon.png" />	
-					<?= $referat->date ?>
-					<div class="extra">
-						<?= $referat->extra ?>
-					</div>
-				</a>
-			</div>
-		<? endforeach ?>
+	<div>
+		<?= $article->content ?>
 	</div>
-<? endforeach ?>
+
+	<? foreach ($referatMapper as $mappe): ?>
+		<div class="mappe">
+			<h2><?= $mappe->year . " " . $mappe->season ?></h2>
+
+			<? foreach ($mappe->referater as $referat): ?>
+				<div class="referat">
+					<a href="<?= $folderUrl ?><?= $mappe->yearSeason ?>/<?= $referat->fileName ?>">
+						<img src="/images/pdf-icon.png" />	
+						<?= $referat->date ?>
+						<div class="extra">
+							<?= $referat->extra ?>
+						</div>
+					</a>
+				</div>
+			<? endforeach ?>
+		</div>
+	<? endforeach ?>
+</div>
