@@ -13,7 +13,6 @@
 
 #BK-alumnilist-maintable {
     border-collapse: collapse;
-    width: 99%;
     text-align: left;
 }
 
@@ -51,10 +50,9 @@
 /*stil for st�ttetabellen og kolonnene som holder statistikken p� plass*/
 
 #BK-alumnilist-supporttable{
-        border-style: outset;
-        border-color: #6678b1;
-	width: 99%;
-	}
+	border-style: outset;
+	border-color: #6678b1;
+}
 	
 #BK-alumnilist-cumulationrow{
 	border-width: 2px;
@@ -76,7 +74,7 @@
         
 #BK-alumnilist-yeartable {
     border-collapse: collapse;
-    width: 99%;
+
 }
 
 #BK-alumnilist-yeartable *{
@@ -112,7 +110,7 @@
         
 #BK-alumnilist-companytable {
     border-collapse: collapse;
-    width: 99%;
+
 }
 
 #BK-alumnilist-companytable *{

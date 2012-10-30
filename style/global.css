@@ -118,6 +118,10 @@ table.g-membertable *{
 
 }
 
+.layout-content > #g-groupNavigation {
+	margin: 0;
+}
+
 #g-groupNavigation {
     font-size: 1em;
     clear: both;
@@ -203,11 +207,11 @@ li.collapsibleListClosed .node {
 
 .g-clearfix:after{
 	/* Settes på container som inneholder flytende elementer:
-	* <div id="container" class="g-clearfix">
-	*   <div id="rail" style="float: left;"></div>
-	*   <div id="content" style="float: left;"></div>
-	* </div>
-	*/
+	 * <div id="container" class="g-clearfix">
+	 *   <div id="rail" style="float: left;"></div>
+	 *   <div id="content" style="float: left;"></div>
+	 * </div>
+	 */
 	clear: both;
 	content: ".";
 	display: block;

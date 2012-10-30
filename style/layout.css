@@ -53,6 +53,10 @@ a {
 	border-right: 1px solid #ddd;
 }
 
+.layout-content > * {
+	margin: 30px;
+}
+
 .layout-rightBar  {
 	width: 249px;
 	border-left: 1px solid #ddd;

@@ -21,3 +21,7 @@
     padding:0 15px 0 0;
     background:url('/images/icons/crumbs.gif') no-repeat right center;
 }
+
+.layout-content > #breadCrumb {
+	margin: 0;
+}
