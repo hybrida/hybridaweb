@@ -64,7 +64,8 @@
                 <th>Hjemmeside</th>
                 <td>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <a href="<?= $info['homepage'] ?>"><?= $info['homepage'] ?></a>
+                        <?= Html::externalLink($info['homepage'], $info['homepage'], null)?>
+                        
                     <? endforeach ?>
                 </td>
             </tr>

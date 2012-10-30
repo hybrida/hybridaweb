@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
-	'Jobs'=>array('index'),
-	'Create',
+	'Stillingsutlysninger'=>array('index'),
+	'Lag ny' => array('create'),
 );
 
 $this->menu=array(
@@ -10,7 +10,7 @@ $this->menu=array(
 );
 ?>
 
-<h1>Create Job</h1>
+<h1>Lag ny stillingsutlysning</h1>
 
 <?php echo $this->renderPartial('_form', array(
 	'model'=>$model,

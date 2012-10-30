@@ -26,10 +26,13 @@ $this->renderPartial('_header', array(
 		<td>Telefon: </td>
 		<td> <?= $user->phoneNumber ?></td>
 	</tr>
+	
+	<? if ($user->gender != "unknown") { ?>
     <tr>
 		<td>Kjønn: </td>
-		<td> <?= $user->gender ?></td>
+		<td> <?= $user->getGenderInNorwegian() ?></td>
 	</tr>
+	<? } ?>
 	
 	<? if ($user->birthdate != '0000-00-00'): ?>
 		<tr>

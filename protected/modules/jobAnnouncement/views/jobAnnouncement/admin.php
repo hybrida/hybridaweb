@@ -1,13 +1,10 @@
 <?php
 $this->breadcrumbs=array(
-	'Jobs'=>array('index'),
-	'Manage',
+	'Stillingsutlysninger'=>array('index'),
+	'Admin' => array('admin'),
 );
 
-$this->menu=array(
-	array('label'=>'List Job', 'url'=>array('index')),
-	array('label'=>'Create Job', 'url'=>array('create')),
-);
+$this->renderPartial('_sidebar');
 
 Yii::app()->clientScript->registerScript('search', "
 $('.search-button').click(function(){
