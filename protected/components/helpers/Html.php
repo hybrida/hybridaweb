@@ -11,7 +11,7 @@ class Html extends CHtml {
 			"aug.","sep.","okt.", "nov.", "des."
 		);
         
-        public static function externalLink($text, $url, $htmlOptions){
+        public static function externalLink($text, $url, $htmlOptions=array()){
             $urlStartsWithHttp = preg_match("/^http:\/\//", $url);
             if (!$urlStartsWithHttp) {
                 $url = "http://" . $url;
