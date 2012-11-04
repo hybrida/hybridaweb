@@ -7,7 +7,7 @@ class IKTRingenAdvertisement extends CWidget {
 
 	public function init() {
 		$criteria = new CDbCriteria();
-		$criteria->order = "companyName ASC";
+		$criteria->order = "RAND()";
 
 		$this->models = IKTRingenMembership::model()->with('company')->findAll($criteria);
 		$this->companies = $this->separateCompaniesFromModels($this->models);
