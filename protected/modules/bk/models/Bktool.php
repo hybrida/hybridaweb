@@ -230,7 +230,7 @@ class BkTool {
         $data = array(
             'status' => $status
         );
-        $sql = "SELECT DISTINCT id, imageId, firstName, middleName, lastName, username
+        $sql = "SELECT DISTINCT id, user.imageId, firstName, middleName, lastName, username
                 FROM bk_company, user 
                 WHERE contactorID = id AND status = :status ORDER BY firstName ASC";
 
