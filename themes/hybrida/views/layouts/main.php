@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
 <html>
 	<head <?= $this->clips['head-tag'] ?> >
-		<title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
 		<meta name="description" content="Hybrida er linjeforeningen for 
-			  studieprogrammet Ingeniørvitenskap & IKT ved NTNU i Trondheim." />
+			  studieprogrammet Ingeniørvitenskap og IKT ved NTNU i Trondheim." />
 
 		<?= $this->clips['head-facebook'] ?>
 
@@ -69,9 +69,11 @@
 				</div>
 			</div>
 
-			<div class="layout-mainWrap">
+			<div class="layout-mainWrap g-clearfix">
 				<?= $content ?>
 			</div>
+			
+			<div id="layout-marginMaker"></div>
 		</div>
 
 	</body>

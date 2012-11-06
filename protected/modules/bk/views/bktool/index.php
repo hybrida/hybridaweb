@@ -12,18 +12,17 @@ for enkelhets skyld.
 </p>
 
 <br/>
-<table id="BK-index-header-table">
-    <tr>
-        <td id="BK-index-header-left">
-            <? foreach($membersSum as $sum) : ?>
-                <h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
-            <? endforeach; ?>
-        </td>
-        <td id="BK-index-header-right">
-            <h3><?=CHtml::link('Administrer medlemmer', array('editmembers')) ?></h3>
-        </td>
-    </tr>
-</table>
+<div id="BK-index-members" class="g-clearfix">
+	<div id="BK-index-members-left">
+		<? foreach ($membersSum as $sum) : ?>
+			<h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
+		<? endforeach; ?>
+	</div>
+	<div id="BK-index-members-right">
+		<h3><?= CHtml::link('Administrer medlemmer', array('editmembers')) ?></h3>
+	</div>
+</div>
+
 
 <table id="BK-index-member-table">
         <tr>

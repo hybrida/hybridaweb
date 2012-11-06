@@ -118,11 +118,15 @@ table.g-membertable *{
 
 }
 
+.layout-content > #g-groupNavigation {
+	margin: 0;
+}
+
 #g-groupNavigation {
     font-size: 1em;
     clear: both;
-    background-color: #0062c4;
-    padding: 5px;
+    background-color: #00509e;
+    padding: 6px 5px;
     text-align: center;
 }
 
@@ -199,4 +203,20 @@ li.collapsibleListClosed .node {
 	margin-left: 2em;
 	margin-right: 1em;
 	margin-top: 0.5em;
+}
+
+.g-clearfix:after{
+	/* Settes på container som inneholder flytende elementer:
+	 * <div id="container" class="g-clearfix">
+	 *   <div id="rail" style="float: left;"></div>
+	 *   <div id="content" style="float: left;"></div>
+	 * </div>
+	 */
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+	font-size: 0;
+	overflow:hidden;
 }

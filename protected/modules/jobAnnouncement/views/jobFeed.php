@@ -1,5 +1,5 @@
 
-<div class='g-barTitle'><?= Html::link("Utlyste jobber", array("/jobAnnouncement/jobAnnouncement/index")) ?></div>
+<div class='g-barTitle'><?= Html::link("Stillingsutlysninger", array("/jobAnnouncement/jobAnnouncement/index")) ?></div>
 
 <div class="g-sidebarNav">
 	<ul>
@@ -8,7 +8,7 @@
 	<? endforeach ?>
 
 	<? if (empty($models)): ?>
-		<li>Det er ingen utlyste jobber</li>
+		<li>Det er ingen utlyste stillinger</li>
 	<? endif ?>
 	</ul>
 </div>

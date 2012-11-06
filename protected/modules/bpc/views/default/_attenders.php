@@ -8,6 +8,7 @@
 	<div class="g-barTitle">Påmelding:</div>
 	<div class="g-barText">
 		<strong>Påmeldte: </strong> <i><?= $event->this_attending ?> av <?= $event->seats ?></i> <br/>
+		<strong>Venteliste: </strong> <i><?= $event->count_waiting ?> av <?= $event->seats ?></i> <br/>
 		<strong>Fra: </strong><i><?= Html::dateToString($event->registration_start, 'long') ?></i> <br>
 		<strong>Til: </strong><i><?= Html::dateToString($event->deadline, 'long') ?></i> <br>
 	</div>

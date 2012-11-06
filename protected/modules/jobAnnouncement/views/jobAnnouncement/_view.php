@@ -1,28 +1,31 @@
-<div class="view">
+<div class="view g-clearfix">
+	<div class="left">
+		<a href="<?= $this->createUrl('view', array('id' => $data->id)) ?>">
+			<img src="/images/company_logo_default.png"
+				 alt="default company logo" />
+		</a>
+	</div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->id), array('view', 'id'=>$data->id)); ?>
-	<br />
+	<div class="right">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('companyId')); ?>:</b>
-	<?php echo CHtml::encode($data->companyId); ?>
-	<br />
+		<div class="title">
+			<strong>Tittel:</strong>
+			<?= CHtml::link($data->title, array('view', 'id' => $data->id)) ?>
+		</div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('start')); ?>:</b>
-	<?php echo CHtml::encode($data->start); ?>
-	<br />
+		<div class="company">
+			<strong>Bedrift:</strong>
+			<?= $data->company->companyName ?>
+		</div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('end')); ?>:</b>
-	<?php echo CHtml::encode($data->end); ?>
-	<br />
+		<div class="start">
+			<strong>Starttidspunkt:</strong>
+			<?= Html::dateToString($data->start, 'mediumlong') ?>
+		</div>
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('title')); ?>:</b>
-	<?php echo CHtml::encode($data->title); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
-	<?php echo CHtml::encode($data->description); ?>
-	<br />
-
-
+		<div class="end">
+			<strong>Sluttidspunkt:</strong>
+			<?= Html::dateToString($data->end, 'mediumlong') ?>
+		</div>
+	</div>
 </div>

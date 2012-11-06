@@ -53,6 +53,11 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 		$.ajax({
 			success: function(html){
 				$(".feeds").append(html);
+                
+                if (html.indexOf("Ingen flere nyheter") != -1) {
+                    $("#fetchNews").off('click');
+                    $("#fetchNews").remove();
+                }
 			},
 			type: 'get',
 			url: '<?= $ajaxFeedUrl ?>' + count,

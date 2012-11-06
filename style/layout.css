@@ -40,12 +40,21 @@ a {
 	overflow: auto;
 	background-color: white;
 	border-radius: 2px;
+	padding-bottom: 20px;
+}
+
+.layout-marginMaker {
+	margin-top: 20px;
 }
 
 .layout-content {
 	width: 750px;
 	float:left;
 	border-right: 1px solid #ddd;
+}
+
+.layout-content > * {
+	margin: 30px;
 }
 
 .layout-rightBar  {

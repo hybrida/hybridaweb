@@ -284,5 +284,19 @@ class Signup extends CActiveRecord {
 			return ($user1->firstName > $user2->firstName) ? 1 : -1;
 		}
 	}
+        
+        public function getAttendingFraction(){
+            return 100*($this->attendingCount / $this->spots);
+        }
+        
+        public function getAttendingColorClass(){
+            if ($this->AttendingFraction == 100) {
+                return "red";
+            }elseif ($this->AttendingFraction > 75) {
+                return "orange";
+            }else {
+                return "green";
+            }
+        }
 
 }
