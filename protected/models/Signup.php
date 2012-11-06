@@ -286,7 +286,6 @@ class Signup extends CActiveRecord {
 	}
         
         public function getAttendingFraction(){
-            return 76;
             return 100*($this->attendingCount / $this->spots);
         }
         

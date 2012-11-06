@@ -9,13 +9,9 @@
 	<? if ($signup): ?>
         <div class="g-barTitle">Påmelding:</div>
                 <div class="g-barText">
-                    <strong>Påmeldte: </strong> <br/>
-                    
+                    <strong>Påmeldte: </strong> <?= $signup->attendingCount ?> / <?= $signup->spots ?> <br/>             
                     <div class="progressbar" style="text-align: center">
-                        <span class="Text"><?= $signup->attendingCount ?> / <?= $signup->spots ?></span>
                         <span class="<?= $signup->AttendingColorClass ?>" style="width: <?= $signup->AttendingFraction?>%"></span>
-                        
-                        
                     </div>
                     <strong>Fra: </strong><i><?= Html::dateToString($signup->open, 'long') ?></i> <br>
                     <strong>Til: </strong><i><?= Html::dateToString($signup->close, 'long') ?></i> <br>

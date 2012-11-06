@@ -111,7 +111,7 @@
 .progressbar span.red {
 	background-color: #f0a3a3;
 	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f0a3a3),color-stop(1, #f42323));
-	background-image: -webkit-linear-gradient(top, #f0a3a3, #f42323);
+	background-image: -webkit-linear-gradient(top, #F17D7D, #f42323);
         background-image: -moz-linear-gradient(top, #f0a3a3, #f42323);
         background-image: -ms-linear-gradient(top, #f0a3a3, #f42323);
         background-image: -o-linear-gradient(top, #f0a3a3, #f42323);
@@ -127,7 +127,5 @@
        
 }
 
-.progressbar span.Text {
-    
-}
+
 
