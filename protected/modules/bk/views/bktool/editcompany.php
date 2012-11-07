@@ -11,7 +11,7 @@
 </p>
 
 <p>
-<form name="editcompanyform" method="post"
+<form name="editcompanyform" method="post" enctype="multipart/form-data"
     <? foreach($companyContactInfo as $info) : ?>
         action="editcompanyform?id=<?= $info['companyID'] ?>"
     <? endforeach ?>
@@ -100,6 +100,24 @@
         </table>
     </div>
     
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
+			<tr>
+				<th>
+					Logo
+				</th>
+				<th>
+					<? if ($logo !== false): ?>
+						<?= Image::tag($logo, "small") ?>
+					<? endif; ?>
+					<br/>
+					<?= CHtml::fileField('logo', 'logo', array('id'=>'logo')); ?>
+				</th>
+			</tr>
+        </table>
+    </div>
+
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">

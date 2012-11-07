@@ -374,7 +374,7 @@ class BktoolController extends Controller {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
             
                 $bkTool = new Bktool();
-		$data = array();
+				$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
@@ -385,6 +385,14 @@ class BktoolController extends Controller {
                 $data['contactor'] = $bkTool->getContactorByCompanyId($id);
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 $data['errordata'] = $errordata;
+
+				$data['logo'] = $bkTool->getLogoById($id);
+				if ($data['logo'] != false)
+				{
+					$image = Image::model()->findByPk($data['logo']);
+					if(!$image->hasSize("small"))
+						$image->resize("small");
+				}
                 
                 $this->render('editcompany', $data);
         }
@@ -403,6 +411,12 @@ class BktoolController extends Controller {
                 $companyName;
                 
                 $data['thiscompany'] = $bkTool->getCompanyNameByCompanyId($id);
+
+				$logo = CUploadedFile::getInstanceByName('logo');
+				if ($logo !== null) {
+					$image = Image::uploadAndSave($logo, Yii::app()->user->id);
+					$bkForms->setLogoById($id, $image->id);
+				}
                     
                 foreach ($data['thiscompany'] as $company) :
                     $companyName = $company['companyName'];
@@ -499,6 +513,8 @@ class BktoolController extends Controller {
                     if(!isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, array())){
                         $bkForms->nullifyAllCompanySpecializationsByCompanyId($id);
                     }
+
+
                     
                     $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'], 
                                 $_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status']);
@@ -534,6 +550,7 @@ class BktoolController extends Controller {
                 $parentCompanyId = 0;
                 $companyId;
                 
+
                 if($bkForms->isInputFieldEmpty($_POST['addedcompany'])){
                     $errordata['error'] = true;
                     $errordata['addedcompanyerror'] = 'Bedriftsnavnet mangler';
@@ -579,6 +596,12 @@ class BktoolController extends Controller {
                         $companyId = $company['companyID'];
                     endforeach;
                     
+					$logo = CUploadedFile::getInstanceByName('logo');
+					if ($logo !== null) {
+						$image = Image::uploadAndSave($logo, Yii::app()->user->id);
+						$bkForms->setLogoById($companyId, $image->id);
+					}
+
                     if(isset($_POST['contactor'])){
                         $bkForms->updateCompanyContactor($companyId, $_POST['contactor']);
                     }

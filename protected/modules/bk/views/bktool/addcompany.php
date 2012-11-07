@@ -12,7 +12,7 @@
 
 <p>
 
-<form name="addcompanyform" method="post" action="addcompanyform">
+<form name="addcompanyform" method="post" action="addcompanyform" enctype="multipart/form-data">
     <div id="BK-add-container">
 	<table id="BK-add-table">
             <tr>
@@ -59,6 +59,19 @@
         </table>
     </div>
     
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
+			<tr>
+				<th>
+					Logo
+				</th>
+				<th>
+					<?= CHtml::fileField('logo', 'logo', array('id'=>'logo')); ?>
+				</th>
+			</tr>
+        </table>
+    </div>
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">

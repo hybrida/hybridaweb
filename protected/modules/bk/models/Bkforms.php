@@ -2,6 +2,12 @@
 
 class Bkforms {
     
+    public function setLogoById($id, $pid){
+        $connection = Yii::app()->db;
+        $sql = "UPDATE bk_company SET imageId = ". $pid . " WHERE companyID = " . $id;
+		$command = $connection->createCommand($sql);
+        $command->execute();
+    }
     public function addCompanyComment($comment, $id){
         $this->pdo = Yii::app()->db->getPdoInstance();
 

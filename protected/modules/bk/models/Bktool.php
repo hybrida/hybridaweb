@@ -311,6 +311,14 @@ class BkTool {
         return $data;     
     }
     
+    public function getLogoById($id){
+        $connection = Yii::app()->db;
+        $sql = "SELECT imageId FROM bk_company WHERE companyID = " . $id;
+		$command = $connection->createCommand($sql);
+        $data = $command->queryScalar();
+        
+        return $data;     
+    }
     public function getLatestUpdateTimeStampRelevantForCurrentUser(){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
