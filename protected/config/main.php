@@ -32,6 +32,7 @@ return array(
 		'dev',
 		'bk',
 		'kilt',
+		'gallery',
 		'bpc',
 		'calendar',
 		'comment',
@@ -109,6 +110,13 @@ return array(
 				'grupper' => 'group/index',
 				'grupper/<url:\w+>' => '/group/view',
 				'grupper/<url:\w+>/<action:\w+>' => 'group/<action>',
+
+				'gallery' => 'gallery/album',
+				'gallery/<id:\d+>' => 'gallery/album/view',
+				'gallery/<id:\d+>/<pid:\d+>' => 'gallery/album/picview',
+				'gallery/<action:\w+>' => 'gallery/album/<action>',
+				'gallery/<action:\w+>/<id:\d+>' => 'gallery/album/<action>',
+
 				'jobb' => 'jobAnnouncement/jobAnnouncement/index',
 				'jobb/<id:\d>/<name>' => 'jobAnnouncement/jobAnnouncement/view',
 				'jobb/<action:\w+>' => 'jobAnnouncement/jobAnnouncement/<action>',
@@ -147,12 +155,13 @@ return array(
 					'class' => 'CFileLogRoute',
 					'levels' => 'error, warning',
 				),
-			// uncomment the following to show log messages on web pages
-			/*
-			  array(
-			  'class'=>'CWebLogRoute',
-			  ),
-			 */
+				/*
+			    array(
+				    'class'=>'CFileLogRoute',
+					'levels' => 'trace, error, warning',
+					'categories'=>'vardump',
+			    ),
+				*/
 			),
 		),
 		'clientScript' => array(
