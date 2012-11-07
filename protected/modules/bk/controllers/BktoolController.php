@@ -343,6 +343,7 @@ class BktoolController extends Controller {
                 $data['adder'] = $bkTool->getPersonWhichAddedCompanyByCompanyId($id);
                 $data['commentsSum'] = $bkTool->getSumOfAllCommentsByCompanyId($id);
                 $data['comments'] = $bkTool->getAllCommentsByCompanyId($id);
+                $data['logo'] = $bkTool->getLogoById($id);
                 
                 $this->render('company', $data);
         }
@@ -387,12 +388,6 @@ class BktoolController extends Controller {
                 $data['errordata'] = $errordata;
 
 				$data['logo'] = $bkTool->getLogoById($id);
-				if ($data['logo'] != false)
-				{
-					$image = Image::model()->findByPk($data['logo']);
-					if(!$image->hasSize("small"))
-						$image->resize("small");
-				}
                 
                 $this->render('editcompany', $data);
         }

@@ -1,12 +1,21 @@
 <?php $this->renderPartial("_menu", array()); ?>
 
-<h1>
-    <?= $this->title ?>
-</h1>
+<? if ($logo != false): ?>
+<div style="float: right;">
+	<br>
+	<?= Image::tag($logo, "sidebar"); ?>
+</div>
+<? endif; ?>
 
-<? foreach($companyContactInfo as $info) : ?>
-    <h2><?= $info['companyName'] ?></h2>
-<? endforeach ?>
+<div style="float: left;">
+	<h1>
+		<?= $this->title ?>
+	</h1>
+
+	<? foreach($companyContactInfo as $info) : ?>
+		<h2><?= $info['companyName'] ?></h2>
+	<? endforeach ?>
+</div>
 
 <p>
 <table id="BK-company-uppertable">

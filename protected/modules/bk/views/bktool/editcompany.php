@@ -109,7 +109,7 @@
 				</th>
 				<th>
 					<? if ($logo !== false): ?>
-						<?= Image::tag($logo, "small") ?>
+						<?= Image::tag($logo, "sidebar") ?>
 					<? endif; ?>
 					<br/>
 					<?= CHtml::fileField('logo', 'logo', array('id'=>'logo')); ?>
