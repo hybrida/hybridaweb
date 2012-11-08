@@ -37,9 +37,10 @@ $this->beginClip('sidebar');
 			<? $this->widget('application.extensions.Plupload.PluploadWidget', array(
 			   'config' => array(
 					'url' => $this->createUrl('upload'),
-					'chunk_size' => '1mb',
+					'chunk_size' => '8mb',
 					'autostart' => true,
 					'jquery_ui' => false,
+					'filters' => array( array('title' => 'Bildefiler', 'extensions' =>'jpg,jpeg,gif,png'),   ),
 			   ),
 			   'id' => 'uploader'
 			)); ?>
@@ -56,6 +57,15 @@ $this->beginClip('sidebar');
 			<?= $error ?>
 		<br>
 	<? endforeach; ?>
+	</p>
+
+	<p>
+	OBS:
+		<ul>
+			<li> Vent til alle bildene er lastet før du trykker <?= $new ? 'Opprett' : 'Lagre'?> </li>
+			<li> Bare filtypene gif, png og jpg er støttet </li>
+			<li> Om du skulle glemme tittel etter å ha lastet opp bildene, trenger du ikke laste dem opp på nytt. Bare trykk <?= $new ? 'Opprett' : 'Lagre'?></li>
+		</ul>
 	</p>
 
 	</div><!-- form -->

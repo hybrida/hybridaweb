@@ -79,15 +79,13 @@ class AlbumController extends Controller
 				$model = Album::model()->findByPk($_POST['new']);
 
 			$model->attributes=$_POST['Album'];
-			$images = $this->getUploads();
+			$imageIDs = $this->getUploads();
 
 			if($model->save())
 			{
-				foreach ($images as $image) {
-					$uploadedFile = Image::uploadAndSave($image, Yii::app()->user->id, true);
-					$model->addAlbumImageRelation($uploadedFile->id);
+				foreach ($imageIDs as $imageID) {
+					$model->addAlbumImageRelation($imageID);
 				}
-				$this->clearUploads();
 				$this->redirect('/gallery/'.$model->id);
 			}
 			else {
@@ -105,34 +103,17 @@ class AlbumController extends Controller
 	private function getUploads()
 	{
 		// Read files
-		$list = array();
+		$files = array();
 		if (Yii::app()->user->hasState("uploadedfile")) {
 			$files = Yii::app()->user->getState("uploadedfile");
-			foreach ($files as $file) {
-				$fullName = $file['path'] . "\\" . $file['name'];
-				if (file_exists($fullName)) {
-					$list[] = new CUploadedFile( $file['name'], 
-						$fullName, filetype($fullName), filesize($fullName), 0);
-				}
-			}
 		}
 
-		return $list;
-	}
-
-	private function clearUploads()
-	{
 		// Clear files
 		if (Yii::app()->user->hasState("uploadedfile")) {
-			$files = Yii::app()->user->getState("uploadedfile");
-			foreach ($files as $file) {
-				$fullName = $file['path'] . "\\" . $file['name'];
-				if (file_exists($fullName)) {
-					@unlink($fullName);
-				}
-			}
 			Yii::app()->user->setState('uploadedfile', null);
 		}
+
+		return $files;
 	}
 
 	public function actionUpload()
@@ -243,15 +224,28 @@ class AlbumController extends Controller
 			// Do whatever you need with the uploaded file, which has $originalname as the original file name
 			// and is located at $targetDir . DIRECTORY_SEPARATOR . $fileName
 			// **********************************************************************************************
-			$user = Yii::app()->user;
-			if ($user->hasState("uploadedfile"))
-				$files = $user->getState("uploadedfile");
-			else
-				$files = array();
 
-			if (array_search($fileName, $files) === FALSE)
-				$files[] = array('path' => $targetDir, 'name' => $fileName);
-			$user->setState("uploadedfile", $files);
+			$ext = strtolower(end(explode('.', $fileName)));
+
+			if (in_array($ext, array('png', 'jpg', 'jpeg', 'gif')))
+			{
+				$user = Yii::app()->user;
+				$fullName = $targetDir. "\\" . $fileName;
+				if (file_exists($fullName)) {
+					$image = new CUploadedFile( $fileName, $fullName, filetype($fullName), filesize($fullName), 0);
+					$uploadedFile = Image::uploadAndSave($image, $user->id, true);
+					$uploadedFile->resize("gallery_thumb");
+
+					if ($user->hasState("uploadedfile"))
+						$files = $user->getState("uploadedfile");
+					else
+						$files = array();
+
+					if (array_search($uploadedFile->id, $files) === FALSE)
+						$files[] = $uploadedFile->id;
+					$user->setState("uploadedfile", $files);
+				}
+			}
 		}
 
 		// Return response
