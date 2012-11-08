@@ -3,9 +3,7 @@
 class AlbumController extends Controller
 {
 	private $imageIDs = array();
-	/**
-	 * @return array action filters
-	 */
+
 	public function filters()
 	{
 		return array(
@@ -13,11 +11,6 @@ class AlbumController extends Controller
 		);
 	}
 
-	/**
-	 * Specifies the access control rules.
-	 * This method is used by the 'accessControl' filter.
-	 * @return array access control rules
-	 */
 	public function accessRules()
 	{
 		return array(
@@ -39,32 +32,32 @@ class AlbumController extends Controller
 		);
 	}
 
-	/**
-	 * Displays a particular model.
-	 * @param integer $id the ID of the model to be displayed
-	 */
 	public function actionView($id)
 	{
+		$album = $this->loadModel($id);
+		$album->getImages();
+
 		$this->render('view',array(
-			'album'=>$this->loadModel($id),
+			'album'=> $album,
 		));
 	}
+
 	public function actionPicview($id, $pid)
 	{
+		$album = $this->loadModel($id);
+		$album->getImages();
+
 		$this->render('picview',array(
-			'album'=>$this->loadModel($id),
+			'album'=>$album,
 			'image'=>Image::model()->findByPk($pid)
 		));
 	}
 
-	public function trace($a)
+	private function trace($a)
 	{
 		echo Yii::trace(CVarDumper::dumpAsString($a),'vardump');
 	}
-	/**
-	 * Creates a new model.
-	 * If creation is successful, the browser will be redirected to the 'view' page.
-	 */
+
 	public function actionCreate()
 	{
 		$model=new Album;
@@ -75,42 +68,20 @@ class AlbumController extends Controller
 
 		if(isset($_POST['Album']))
 		{
-			// Read files
-			$list = array();
-			if (Yii::app()->user->hasState("uploadedfile")) {
-				$files = Yii::app()->user->getState("uploadedfile");
-				foreach ($files as $file) {
-					$fullName = $file['path'] . "/" . $file['name'];
-					if (file_exists($fullName)) {
-						$list[] = new CUploadedFile( $file['name'], 
-							$fullName, filetype($fullName), filesize($fullName), 0);
-					}
-				}
-			}
-
-			// Clear files
-			if (Yii::app()->user->hasState("uploadedfile")) {
-				$files = Yii::app()->user->getState("uploadedfile");
-				foreach ($files as $file) {
-				if (file_exists($fullName)) {
-					$fullName = $file['path'] . "/" . $file['name'];
-					@unlink($fullName);
-				}
-				}
-				Yii::app()->user->setState('uploadedfile', null);
-			}
 
 			$model->attributes=$_POST['Album'];
+			$images = $this->getUploads();
 
-			if (count($list) == 0)
+			if (count($images) == 0)
 				$errors[] = "Albumet må ha minst ett bilde";
 			elseif($model->save())
 			{
-				foreach ($list as $file) {
-					$uploadedFile = Image::uploadAndSave($file, Yii::app()->user->id);
+				foreach ($images as $image) {
+					$uploadedFile = Image::uploadAndSave($image, Yii::app()->user->id, true);
 					$model->addAlbumImageRelation($uploadedFile->id);
 				}
-				$this->redirect('/gallery/'.$model->id);
+				$this->clearUploads();
+				//$this->redirect('/gallery/'.$model->id);
 			}
 			else {
 				$error[] = "Albumer må ha tittel";
@@ -121,6 +92,39 @@ class AlbumController extends Controller
 			'model'=>$model,
 			'errors' => $errors
 		));
+	}
+
+	private function getUploads()
+	{
+		// Read files
+		$list = array();
+		if (Yii::app()->user->hasState("uploadedfile")) {
+			$files = Yii::app()->user->getState("uploadedfile");
+			foreach ($files as $file) {
+				$fullName = $file['path'] . "\\" . $file['name'];
+				if (file_exists($fullName)) {
+					$list[] = new CUploadedFile( $file['name'], 
+						$fullName, filetype($fullName), filesize($fullName), 0);
+				}
+			}
+		}
+
+		return $list;
+	}
+
+	private function clearUploads()
+	{
+		// Clear files
+		if (Yii::app()->user->hasState("uploadedfile")) {
+			$files = Yii::app()->user->getState("uploadedfile");
+			foreach ($files as $file) {
+				$fullName = $file['path'] . "\\" . $file['name'];
+				if (file_exists($fullName)) {
+					@unlink($fullName);
+				}
+			}
+			Yii::app()->user->setState('uploadedfile', null);
+		}
 	}
 
 	public function actionUpload()
@@ -283,7 +287,9 @@ class AlbumController extends Controller
 		if(Yii::app()->request->isPostRequest)
 		{
 			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+			$model = $this->loadModel($id);
+			$model->delAlbumRelations();
+			$model->delAlbum();
 
 			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 			if(!isset($_GET['ajax']))
@@ -298,9 +304,16 @@ class AlbumController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Album');
+		$criteria=new CDbCriteria;
+		$criteria->condition='status=:status';
+		$criteria->params=array(':status'=>Status::PUBLISHED);
+		$albums = Album::model()->findAll($criteria);
+		foreach($albums as $album)
+		{
+			$album->getImages();
+		}
 		$this->render('index',array(
-			'albums'=>$dataProvider->getData(),
+			'albums'=> $albums,
 		));
 	}
 

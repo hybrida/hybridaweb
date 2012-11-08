@@ -4,10 +4,6 @@ class GalleryModule extends CWebModule
 {
 	public function init()
 	{
-		// this method is called when the module is being created
-		// you may place code here to customize the module or the application
-
-		// import the module-level models and components
 		$this->setImport(array(
 			'gallery.models.*',
 			'gallery.components.*',
@@ -16,13 +12,26 @@ class GalleryModule extends CWebModule
 
 	public function beforeControllerAction($controller, $action)
 	{
+
 		if(parent::beforeControllerAction($controller, $action))
 		{
-			// this method is called before any module controller action is performed
-			// you may place customized code here
+			$this->registerCss();
 			return true;
 		}
 		else
 			return false;
+	}
+
+	public function registerCss()
+	{
+		$assetDir = "gallery.assets";
+		$url = Yii::getPathOfAlias($assetDir)."/css/";
+		$cssFile = "gallery.css";
+
+
+		$cs = Yii::app()->getClientScript();
+		$am = Yii::app()->getAssetManager();
+		$localPath = $am->publish($url. $cssFile);
+		$cs->registerCssFile($localPath);
 	}
 }

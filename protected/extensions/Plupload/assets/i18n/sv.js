@@ -1,12 +1,12 @@
 ﻿// .po file like language pack
 plupload.addI18n({
-	'Select files' : 'Välj filer',
-	'Add files to the upload queue and click the start button.' : 'Lägg till filer till kön och tryck på start.',
-	'Filename' : 'Filnamn',
+	'Select files' : 'Velg filer',
+	'Add files to the upload queue and click the start button.' : 'Legg til filer og trykk start',
+	'Filename' : 'Filnavn',
 	'Status' : 'Status',
-	'Size' : 'Storlek',
-	'Add files' : 'Lägg till filer',
-	'Stop current upload' : 'Stoppa uppladdningen',
-	'Start uploading queue' : 'Starta uppladdningen',
+	'Size' : 'Størrelse',
+	'Add files' : 'Legg til filer',
+	'Stop current upload' : 'Stopp opplastningen',
+	'Start uploading queue' : 'Start opplastningen',
 	'Drag files here.' : 'Dra filer hit'
 });

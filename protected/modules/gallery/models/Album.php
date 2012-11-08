@@ -13,6 +13,24 @@
 class Album extends CActiveRecord
 {
 	private $statusDisabled = Status::DELETED;
+	private $statusPublished = Status::PUBLISHED;
+	public $images;
+
+	public function getImages()
+	{
+		$this->images = array();
+        $connection = Yii::app()->db;
+		$sql = "SELECT image_id
+				FROM album_image
+				WHERE album_id = :album_id
+				AND status = :status";
+		$command = $connection->createCommand($sql);
+		$command = $command->bindParam(":album_id", $this->getAttribute("id"));
+		$command = $command->bindParam(":status", $this->statusPublished);
+		$data = $command->queryColumn();
+		foreach ($data as $imageID)
+			$this->images[] = Image::model()->findByPk($imageID);
+	}
 
 	 public function addAlbumImageRelation($pid)
 	 {
@@ -29,6 +47,16 @@ class Album extends CActiveRecord
         $connection = Yii::app()->db;
 		$sql = "UPDATE album_image SET status = :disabled 
 				WHERE album_id = :album_id";
+		$command = $connection->createCommand($sql);
+		$command = $command->bindParam(":album_id", $this->getAttribute("id"));
+		$command = $command->bindParam(":disabled", $this->statusDisabled);
+		$command->execute(); 
+	 }
+	 public function delAlbum()
+	 {
+        $connection = Yii::app()->db;
+		$sql = "UPDATE album SET status = :disabled 
+				WHERE id = :album_id";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":album_id", $this->getAttribute("id"));
 		$command = $command->bindParam(":disabled", $this->statusDisabled);
@@ -80,7 +108,6 @@ class Album extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'images' => array(self::MANY_MANY, 'Image', 'album_image(album_id, image_id)')
 		);
 	}
 

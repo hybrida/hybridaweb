@@ -15,14 +15,28 @@ $this->beginClip('sidebar');
 <? $this->endClip(); ?>
 
 <div class="albumIndex">
-	<h1>Albums</h1>
+	<h1>Galleri</h1>
 
 	<? foreach($albums as $album): ?>
-		<?= CHtml::link($album['title'], $album['id']) ?>
-		<ul>
-		<? foreach($album['images'] as $image): ?>
-			<li><?= $image['title'] ?></li>
-		<? endforeach; ?>
-		</ul>
+			<h2>
+				<?= CHtml::link($album->title, $album->id) ?>
+			</h2>
+			<div style="width: 100%;">
+				<div style="width: 33%; float: left;">
+					<? if (count($album->images) > 1): ?>
+						<?= CHtml::link(Image::tag($album->images[1]->id, "gallery_thumb"), $album->id . "/" . $album->images[1]->id); ?>
+					<? endif; ?>
+				</div>
+				<div style="width: 33%; float: left;">
+					<? if (count($album->images) > 0): ?>
+						<?= CHtml::link(Image::tag($album->images[0]->id, "gallery_thumb"), $album->id . "/" . $album->images[0]->id); ?>
+					<? endif; ?>
+				</div>
+				<div style="width: 33%; float: left;">
+					<? if (count($album->images) > 2): ?>
+						<?= CHtml::link(Image::tag($album->images[2]->id, "gallery_thumb"), $album->id . "/" . $album->images[2]->id); ?>
+					<? endif; ?>
+				</div>
+			</div>
 	<? endforeach; ?>
 </div>

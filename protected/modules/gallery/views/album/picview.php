@@ -7,11 +7,11 @@ $this->beginClip('sidebar');
 <div class="g-sidebarNav">
 	<ul>
 		<li>
-			<?= CHtml::link('Create', '') ?>
-			<?= CHtml::link('Manage', '') ?>
-			<?= CHtml::link('Update', '') ?>
-			<?= CHtml::link('List', '') ?>
-			<?= CHtml::link('Delete', '')?>
+			<?= CHtml::link('Galleri', '/gallery/') ?>
+			<?= CHtml::link('Album', '/gallery/'.$album->id) ?>
+		<br>
+		<li>
+			<?= CHtml::link('Slett', '')?>
 		</li>
 	</ul>
 </div>
@@ -21,5 +21,5 @@ $this->beginClip('sidebar');
 <div class="albumPicview">
 	<h1>Picture</h1>
 
-	<?= $image['title'] ?>
+	<?= Image::tag($image->id, "gallery_big") ?>
 </div>

@@ -155,13 +155,11 @@ return array(
 					'class' => 'CFileLogRoute',
 					'levels' => 'error, warning',
 				),
-				/*
 			    array(
-				    'class'=>'CFileLogRoute',
-					'levels' => 'trace, error, warning',
+				    'class'=>'CWebLogRoute',
+					'levels' => 'trace',
 					'categories'=>'vardump',
 			    ),
-				*/
 			),
 		),
 		'clientScript' => array(
