@@ -23,7 +23,7 @@ class AlbumController extends Controller
 				'users'=>array('@'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete', 'picdelete'),
 				'users'=>array('admin'),
 			),
 			array('deny',	// deny all users
@@ -47,9 +47,16 @@ class AlbumController extends Controller
 		$album = $this->loadModel($id);
 		$album->getImages();
 
+		$image = Image::model()->findByPk($pid);
+
+		$userId = $image->userId;
+		$userModel = User::model()->findByPk($userId);
+		$user = $userModel->getFullName();
+
 		$this->render('picview',array(
 			'album'=>$album,
-			'image'=>Image::model()->findByPk($pid)
+			'image'=>$image,
+			'user' => $user,
 		));
 	}
 
@@ -68,29 +75,30 @@ class AlbumController extends Controller
 
 		if(isset($_POST['Album']))
 		{
+			if ($_POST['new'] > 0)
+				$model = Album::model()->findByPk($_POST['new']);
 
 			$model->attributes=$_POST['Album'];
 			$images = $this->getUploads();
 
-			if (count($images) == 0)
-				$errors[] = "Albumet må ha minst ett bilde";
-			elseif($model->save())
+			if($model->save())
 			{
 				foreach ($images as $image) {
 					$uploadedFile = Image::uploadAndSave($image, Yii::app()->user->id, true);
 					$model->addAlbumImageRelation($uploadedFile->id);
 				}
 				$this->clearUploads();
-				//$this->redirect('/gallery/'.$model->id);
+				$this->redirect('/gallery/'.$model->id);
 			}
 			else {
-				$error[] = "Albumer må ha tittel";
+				$error[] = "Albumet må ha tittel";
 			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
-			'errors' => $errors
+			'errors' => $errors,
+			'new' => 1,
 		));
 	}
 
@@ -261,19 +269,13 @@ class AlbumController extends Controller
 	public function actionUpdate($id)
 	{
 		$model=$this->loadModel($id);
+		$model->getImages();
+		$errors = array();
 
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
-
-		if(isset($_POST['Album']))
-		{
-			$model->attributes=$_POST['Album'];
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->id));
-		}
-
-		$this->render('update',array(
+		$this->render('create',array(
 			'model'=>$model,
+			'errors' => $errors,
+			'new' => 0,
 		));
 	}
 
@@ -298,6 +300,21 @@ class AlbumController extends Controller
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
+	public function actionPicdelete($id, $pid)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$model = $this->loadModel($id);
+			$model->delAlbumImageRelation($pid);
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect('/gallery/'.$model->id);
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
 
 	/**
 	 * Lists all models.
@@ -307,6 +324,7 @@ class AlbumController extends Controller
 		$criteria=new CDbCriteria;
 		$criteria->condition='status=:status';
 		$criteria->params=array(':status'=>Status::PUBLISHED);
+		$criteria->order = 'id DESC';
 		$albums = Album::model()->findAll($criteria);
 		foreach($albums as $album)
 		{

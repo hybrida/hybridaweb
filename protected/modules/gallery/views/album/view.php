@@ -7,14 +7,15 @@ $this->beginClip('sidebar');
 <div class="g-sidebarNav">
 	<ul>
 		<li>
-			<?= CHtml::link('Create', '') ?>
-			<?= CHtml::link('Manage', '') ?>
-			<?= CHtml::link('Update', '') ?>
-			<?= CHtml::link('List', '') ?>
-			<?= CHtml::link('Delete', '#', 
+			<?= CHtml::link('Galleri', '/gallery/') ?>
+		</li>
+		<br>
+		<li>
+			<?= CHtml::link('Legg til bilder', 'update/'.$album->id) ?>
+			<?= CHtml::link('Slett album', '#', 
 				array(
 					'submit'=>array('delete','id'=>$album->id),
-					'confirm'=>'Are you sure you want to delete this item?'))?>
+					'confirm'=>'Er du sikker på at du vil slette dette albumet?'))?>
 		</li>
 	</ul>
 </div>
@@ -22,12 +23,19 @@ $this->beginClip('sidebar');
 <? $this->endClip(); ?>
 
 <div class="albumView">
-	<h1>Album</h1>
-
-	<?= $album->title ?>
-	<ul>
-	<? foreach($album->images as $image): ?>
-		<li><?= CHtml::link($image->title, $album->id."/".$image->id) ?></li>
-	<? endforeach; ?>
-	</ul>
+	<h1><?= $album->title ?></h1>
+		<div style="width: 100%; height: 229px;">
+			<? $c = 0; ?>
+			<? foreach($album->images as $image): ?>
+				<? if ($c % 3 == 0 && $c > 0): ?>
+					</div> <div style="width: 100%;">
+				<? endif; ?>
+				<div style="width: 33%; float: left;">
+					<?= CHtml::link(Image::tag($image->id, "gallery_thumb"), $album->id."/".$image->id) ?>
+				</div>
+				<? $c++; ?>
+			<? endforeach; ?>
+			</div>
+		</tr>
+	</table>
 </div>

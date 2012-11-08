@@ -6,3 +6,7 @@
 	text-align: center;
 	margin-bottom: 30px;
 }
+
+.albumView table{
+	width: 100%;
+}

@@ -21,6 +21,12 @@ $this->beginClip('sidebar');
 			<h2>
 				<?= CHtml::link($album->title, $album->id) ?>
 			</h2>
+			<? if(count($album->images) == 0): ?>
+				<div style="width: 100%;">
+					Tomt, <?= CHtml::link('legg til bilder', 'update/'.$album->id) ?> 
+				</div>
+				<? continue; ?>
+			<? endif; ?>
 			<div style="width: 100%;">
 				<div style="width: 33%; float: left;">
 					<? if (count($album->images) > 1): ?>
@@ -38,5 +44,6 @@ $this->beginClip('sidebar');
 					<? endif; ?>
 				</div>
 			</div>
+			<br style="clear: both;">
 	<? endforeach; ?>
 </div>

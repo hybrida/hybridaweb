@@ -116,6 +116,7 @@ return array(
 				'gallery/<id:\d+>/<pid:\d+>' => 'gallery/album/picview',
 				'gallery/<action:\w+>' => 'gallery/album/<action>',
 				'gallery/<action:\w+>/<id:\d+>' => 'gallery/album/<action>',
+				'gallery/<action:\w+>/<id:\d+>/<pid:\d+>' => 'gallery/album/<action>',
 
 				'jobb' => 'jobAnnouncement/jobAnnouncement/index',
 				'jobb/<id:\d>/<name>' => 'jobAnnouncement/jobAnnouncement/view',

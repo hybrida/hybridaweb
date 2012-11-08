@@ -1,18 +1,45 @@
-<?php
-$this->breadcrumbs=array(
-	'Albums'=>array('index'),
-	$model->title=>array('view','id'=>$model->id),
-	'Update',
-);
+<div class="updateAlbum">
+	<h1>Endre Album</h1>
 
-$this->menu=array(
-	array('label'=>'List Album', 'url'=>array('index')),
-	array('label'=>'Create Album', 'url'=>array('create')),
-	array('label'=>'View Album', 'url'=>array('view', 'id'=>$model->id)),
-	array('label'=>'Manage Album', 'url'=>array('admin')),
-);
-?>
+	<div class="form">
 
-<h1>Update Album <?php echo $model->id; ?></h1>
+	<?php $form=$this->beginWidget('CActiveForm', array(
+		'id'=>'album-form',
+		'enableAjaxValidation'=>false,
+		'htmlOptions' => array('enctype' => 'multipart/form-data'),
+	)); ?>
 
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+
+
+		<div class="row">
+			Albumtittel
+			<?php echo $form->textField($model,'title'); ?>
+		</div>
+
+		<div class="row">
+			<? $this->widget('application.extensions.Plupload.PluploadWidget', array(
+			   'config' => array(
+					'url' => $this->createUrl('upload'),
+					'chunk_size' => '1mb',
+					'autostart' => true,
+					'jquery_ui' => false,
+			   ),
+			   'id' => 'uploader'
+			)); ?>
+		</div>
+
+		<div class="row buttons">
+			<?php echo CHtml::submitButton('Lagre'); ?>
+		</div>
+
+	<?php $this->endWidget(); ?>
+
+	<p class="error">
+	<? foreach($errors as $error): ?>
+			<?= $error ?>
+		<br>
+	<? endforeach; ?>
+	</p>
+
+	</div><!-- form -->
+</div>
