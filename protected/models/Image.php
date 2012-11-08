@@ -19,6 +19,8 @@ class Image extends CActiveRecord {
 		'mini' => array('width' => 40, 'height' => 40),
 		'frontpage' => array('width' => 600, 'height' => 150),
 		'sidebar' => array('width' => 150),
+		'gallery_thumb' => array('width' => 200, 'height' => 200),
+		'gallery_big' => array('width' => 700),
 	);
 
 	/**
@@ -217,14 +219,17 @@ class Image extends CActiveRecord {
 		return $image;
 	}
 
-	public static function uploadAndSave($uploadedFile, $userId) {
+	public static function uploadAndSave($uploadedFile, $userId, $useRename = false) {
 		$image = new Image();
 		$image->oldName = $uploadedFile;
 		if (!$image->oldName) {
 			throw new NoFileIsUploadedException();
 		}
 		$image->save();
-		$image->oldName->saveAs($image->getFilePath());
+		if (!$useRename)
+			$image->oldName->saveAs($image->getFilePath());
+		else
+			$ren = rename($image->oldName->tempName, $image->getFilePath());
 		$image->title = $image->oldName;
 		$image->timestamp = new CDbExpression("NOW()");
 		$image->userId = $userId;
