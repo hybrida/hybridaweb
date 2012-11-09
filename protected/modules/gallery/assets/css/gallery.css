@@ -10,3 +10,7 @@
 .albumView table{
 	width: 100%;
 }
+
+.albumPicview img {
+	border: 1px solid black;
+}
