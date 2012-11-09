@@ -32,10 +32,26 @@ class AlbumController extends Controller
 		);
 	}
 
+	public function actionIndex()
+	{
+		$this->pageTitle = ("Galleri");
+		$criteria=new CDbCriteria;
+		$criteria->condition='status=:status';
+		$criteria->params=array(':status'=>Status::PUBLISHED);
+		$criteria->order = 'id DESC';
+		$albums = Album::model()->findAll($criteria);
+		foreach($albums as $album)
+			$album->getImages();
+		$this->render('index',array(
+			'albums'=> $albums,
+		));
+	}
+
 	public function actionView($id)
 	{
 		$album = $this->loadModel($id);
 		$album->getImages();
+		$this->pageTitle = ($album->title);
 
 		$this->render('view',array(
 			'album'=> $album,
@@ -46,6 +62,7 @@ class AlbumController extends Controller
 	{
 		$album = $this->loadModel($id);
 		$album->getImages();
+		$this->pageTitle = ($album->title);
 
 		$image = Image::model()->findByPk($pid);
 
@@ -60,18 +77,11 @@ class AlbumController extends Controller
 		));
 	}
 
-	private function trace($a)
-	{
-		echo Yii::trace(CVarDumper::dumpAsString($a),'vardump');
-	}
-
 	public function actionCreate()
 	{
 		$model=new Album;
 		$errors = array();
-
-		// Uncomment the following line if AJAX validation is needed
-		// $this->performAjaxValidation($model);
+		$this->pageTitle = ("Nytt album");
 
 		if(isset($_POST['Album']))
 		{
@@ -100,6 +110,47 @@ class AlbumController extends Controller
 		));
 	}
 
+	public function actionUpdate($id)
+	{
+		$this->pageTitle = "Last opp";
+		$model=$this->loadModel($id);
+		$model->getImages();
+		$errors = array();
+
+		$this->render('create',array(
+			'model'=>$model,
+			'errors' => $errors,
+			'new' => 0,
+		));
+	}
+
+	public function actionDelete($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			$model = $this->loadModel($id);
+			$model->delAlbumRelations();
+			$model->delAlbum();
+
+			$this->redirect('/gallery/');
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+
+	public function actionPicdelete($id, $pid)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			$model = $this->loadModel($id);
+			$model->delAlbumImageRelation($pid);
+
+			$this->redirect('/gallery/'.$model->id);
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+
 	private function getUploads()
 	{
 		// Read files
@@ -114,6 +165,14 @@ class AlbumController extends Controller
 		}
 
 		return $files;
+	}
+
+	public function loadModel($id)
+	{
+		$model=Album::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
 	}
 
 	public function actionUpload()
@@ -253,120 +312,5 @@ class AlbumController extends Controller
 
 		echo CJavaScript::jsonEncode($ret);
 		Yii::app()->end(); 
-	}
-
-	/**
-	 * Updates a particular model.
-	 * If update is successful, the browser will be redirected to the 'view' page.
-	 * @param integer $id the ID of the model to be updated
-	 */
-	public function actionUpdate($id)
-	{
-		$model=$this->loadModel($id);
-		$model->getImages();
-		$errors = array();
-
-		$this->render('create',array(
-			'model'=>$model,
-			'errors' => $errors,
-			'new' => 0,
-		));
-	}
-
-	/**
-	 * Deletes a particular model.
-	 * If deletion is successful, the browser will be redirected to the 'admin' page.
-	 * @param integer $id the ID of the model to be deleted
-	 */
-	public function actionDelete($id)
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$model = $this->loadModel($id);
-			$model->delAlbumRelations();
-			$model->delAlbum();
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect('/gallery/');
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-	public function actionPicdelete($id, $pid)
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$model = $this->loadModel($id);
-			$model->delAlbumImageRelation($pid);
-
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect('/gallery/'.$model->id);
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	/**
-	 * Lists all models.
-	 */
-	public function actionIndex()
-	{
-		$criteria=new CDbCriteria;
-		$criteria->condition='status=:status';
-		$criteria->params=array(':status'=>Status::PUBLISHED);
-		$criteria->order = 'id DESC';
-		$albums = Album::model()->findAll($criteria);
-		foreach($albums as $album)
-		{
-			$album->getImages();
-		}
-		$this->render('index',array(
-			'albums'=> $albums,
-		));
-	}
-
-	/**
-	 * Manages all models.
-	 */
-	public function actionAdmin()
-	{
-		$model=new Album('search');
-		$model->unsetAttributes();	// clear any default values
-		if(isset($_GET['Album']))
-			$model->attributes=$_GET['Album'];
-
-		$this->render('admin',array(
-			'model'=>$model,
-		));
-	}
-
-	/**
-	 * Returns the data model based on the primary key given in the GET variable.
-	 * If the data model is not found, an HTTP exception will be raised.
-	 * @param integer the ID of the model to be loaded
-	 */
-	public function loadModel($id)
-	{
-		$model=Album::model()->findByPk($id);
-		if($model===null)
-			throw new CHttpException(404,'The requested page does not exist.');
-		return $model;
-	}
-
-	/**
-	 * Performs the AJAX validation.
-	 * @param CModel the model to be validated
-	 */
-	protected function performAjaxValidation($model)
-	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='album-form')
-		{
-			echo CActiveForm::validate($model);
-			Yii::app()->end();
-		}
 	}
 }
