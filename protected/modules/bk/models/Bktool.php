@@ -313,7 +313,7 @@ class BkTool {
     
     public function getLogoById($id){
         $connection = Yii::app()->db;
-        $sql = "SELECT imageId FROM bk_company WHERE companyID = " . $id;
+        $sql = "SELECT imageID FROM bk_company WHERE companyID = " . $id;
 		$command = $connection->createCommand($sql);
         $data = $command->queryScalar();
         

@@ -96,7 +96,7 @@ class AlbumController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 			'errors' => $errors,
-			'new' => 1,
+			'new' => isset($_POST['new']) ? $_POST['new'] == 0 : 1,
 		));
 	}
 

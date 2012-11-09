@@ -4,7 +4,7 @@ class Bkforms {
     
     public function setLogoById($id, $pid){
         $connection = Yii::app()->db;
-        $sql = "UPDATE bk_company SET imageId = ". $pid . " WHERE companyID = " . $id;
+        $sql = "UPDATE bk_company SET imageID = ". $pid . " WHERE companyID = " . $id;
 		$command = $connection->createCommand($sql);
         $command->execute();
     }
