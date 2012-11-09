@@ -289,7 +289,7 @@ class AlbumController extends Controller
 			if (in_array($ext, array('png', 'jpg', 'jpeg', 'gif')))
 			{
 				$user = Yii::app()->user;
-				$fullName = $targetDir. "\\" . $fileName;
+				$fullName = $targetDir. "/" . $fileName;
 				if (file_exists($fullName)) {
 					$image = new CUploadedFile( $fileName, $fullName, filetype($fullName), filesize($fullName), 0);
 					$uploadedFile = Image::uploadAndSave($image, $user->id, true);
