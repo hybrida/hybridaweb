@@ -7,7 +7,7 @@ $this->beginClip('sidebar');
 <div class="g-sidebarNav">
 	<ul>
 		<li>
-			<?= CHtml::link('Opprett album', 'create') ?>
+			<?= CHtml::link('Opprett album', '/gallery/create') ?>
 		</li>
 	</ul>
 </div>
@@ -19,28 +19,28 @@ $this->beginClip('sidebar');
 
 	<? foreach($albums as $album): ?>
 			<h2>
-				<?= CHtml::link($album->title, $album->id) ?>
+				<?= CHtml::link($album->title, "/gallery/" . $album->id) ?>
 			</h2>
 			<? if(count($album->images) == 0): ?>
 				<div style="width: 100%;">
-					Tomt, <?= CHtml::link('legg til bilder', 'update/'.$album->id) ?> 
+					Tomt, <?= CHtml::link('legg til bilder', '/gallery/update/'.$album->id) ?> 
 				</div>
 				<? continue; ?>
 			<? endif; ?>
 			<div style="width: 100%;">
 				<div style="width: 33%; float: left;">
 					<? if (count($album->images) > 1): ?>
-						<?= CHtml::link(Image::tag($album->images[1]->id, "gallery_thumb"), $album->id . "/" . $album->images[1]->id); ?>
+						<?= CHtml::link(Image::tag($album->images[1]->id, "gallery_thumb"), "/gallery/".$album->id . "/" . $album->images[1]->id); ?>
 					<? endif; ?>
 				</div>
 				<div style="width: 33%; float: left;">
 					<? if (count($album->images) > 0): ?>
-						<?= CHtml::link(Image::tag($album->images[0]->id, "gallery_thumb"), $album->id . "/" . $album->images[0]->id); ?>
+						<?= CHtml::link(Image::tag($album->images[0]->id, "gallery_thumb"), "/gallery/".$album->id . "/" . $album->images[0]->id); ?>
 					<? endif; ?>
 				</div>
 				<div style="width: 33%; float: left;">
 					<? if (count($album->images) > 2): ?>
-						<?= CHtml::link(Image::tag($album->images[2]->id, "gallery_thumb"), $album->id . "/" . $album->images[2]->id); ?>
+						<?= CHtml::link(Image::tag($album->images[2]->id, "gallery_thumb"), "/gallery/".$album->id . "/" . $album->images[2]->id); ?>
 					<? endif; ?>
 				</div>
 			</div>
