@@ -15,23 +15,28 @@ class GalleryModule extends CWebModule
 
 		if(parent::beforeControllerAction($controller, $action))
 		{
-			$this->registerCss();
+			$this->registerFiles();
 			return true;
 		}
 		else
 			return false;
 	}
 
-	public function registerCss()
+	public function registerFiles()
 	{
 		$assetDir = "gallery.assets";
-		$url = Yii::getPathOfAlias($assetDir)."/css/";
+
+		$cssUrl = Yii::getPathOfAlias($assetDir)."/css/";
 		$cssFile = "gallery.css";
 
+		$scriptUrl = Yii::getPathOfAlias($assetDir)."/jquery/";
+		$keyNavFile = "keyNav.js";
 
 		$cs = Yii::app()->getClientScript();
 		$am = Yii::app()->getAssetManager();
-		$localPath = $am->publish($url. $cssFile);
-		$cs->registerCssFile($localPath);
+		$cssLocalPath = $am->publish($cssUrl. $cssFile);
+		$scriptLocalPath = $am->publish($scriptUrl. $keyNavFile);
+		$cs->registerCssFile($cssLocalPath);
+		$cs->registerScriptFile($scriptLocalPath);
 	}
 }

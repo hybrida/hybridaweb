@@ -5,7 +5,6 @@ $this->beginClip('sidebar');
 $index = array_search($image, $album->images);
 $num = count($album->images);
 ?>
-
 <div class="g-barTitle">Handlinger</div>
 <div class="g-sidebarNav">
 	<ul>
@@ -30,7 +29,7 @@ $num = count($album->images);
 	<div style="width: 100%">
 		<div style="width: 33%; float: left;">
 		<? if ($index > 0): ?>
-			<?= CHtml::link('< forrige', '/gallery/'.$album->id.'/'.$album->images[$index-1]->id) ?>
+			<?= CHtml::link('< forrige', '/gallery/'.$album->id.'/'.$album->images[$index-1]->id, array('id' => 'prev')) ?>
 		<? else: ?>
 			første
 		<? endif; ?>
@@ -40,7 +39,7 @@ $num = count($album->images);
 		</div>
 		<div style="width: 33%; float: left; text-align: right;">
 		<? if ($index < $num - 1): ?>
-			<?= CHtml::link('neste >', '/gallery/'.$album->id.'/'.$album->images[$index+1]->id) ?>
+			<?= CHtml::link('neste >', '/gallery/'.$album->id.'/'.$album->images[$index+1]->id, array('id' => 'next')) ?>
 		<? else: ?>
 			siste
 		<? endif; ?>
