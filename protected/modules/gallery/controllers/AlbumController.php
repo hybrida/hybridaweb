@@ -15,7 +15,7 @@ class AlbumController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('create','update', 'upload','index','view', 'picview'),
+				'actions'=>array('clear', 'create','update', 'upload','index','view', 'picview'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -90,10 +90,18 @@ class AlbumController extends Controller
 				foreach ($imageIDs as $imageID) {
 					$model->addAlbumImageRelation($imageID);
 				}
+				$this->clearUploads();
 				$this->redirect('/gallery/'.$model->id);
 			}
 			else {
-				$error[] = "Albumet må ha tittel";
+				$errors[] = "Albumet må ha tittel";
+				if (count($imageIDs) > 0) {
+					$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger ikke laste opp disse på nytt";
+					$errors[] = "Trykk " . CHtml::link('her', '#', 
+						array(
+							'submit' => array('clear', 'id' => $_POST['new'])))
+					 . " om du ikke vil ha med disse bildene";
+				}
 			}
 		}
 
@@ -102,6 +110,20 @@ class AlbumController extends Controller
 			'errors' => $errors,
 			'new' => isset($_POST['new']) ? $_POST['new'] == 0 : 1,
 		));
+	}
+
+	public function actionClear($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			$this->clearUploads();
+			if ($id > 0)
+				$this->redirect('/gallery/update/'.$id);
+			else
+				$this->redirect('/gallery/create');
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 	}
 
 	public function actionUpdate($id)
@@ -161,12 +183,15 @@ class AlbumController extends Controller
 			$files = Yii::app()->user->getState("uploadedfile");
 		}
 
+		return $files;
+	}
+
+	private function clearUploads()
+	{
 		// Clear files
 		if (Yii::app()->user->hasState("uploadedfile")) {
 			Yii::app()->user->setState('uploadedfile', null);
 		}
-
-		return $files;
 	}
 
 	public function loadModel($id)

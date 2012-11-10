@@ -14,3 +14,7 @@
 .albumPicview img {
 	border: 1px solid black;
 }
+
+.createAlbum .errorText  {
+	color: red;
+}

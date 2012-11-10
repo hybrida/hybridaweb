@@ -52,7 +52,7 @@ $this->beginClip('sidebar');
 
 	<?php $this->endWidget(); ?>
 
-	<p class="error">
+	<p class="errorText">
 	<? foreach($errors as $error): ?>
 			<?= $error ?>
 		<br>
@@ -64,7 +64,6 @@ $this->beginClip('sidebar');
 		<ul>
 			<li> Vent til alle bildene er lastet før du trykker <?= $new ? 'Opprett' : 'Lagre'?> </li>
 			<li> Bare filtypene gif, png og jpg er støttet </li>
-			<li> Om du skulle glemme tittel etter å ha lastet opp bildene, trenger du ikke laste dem opp på nytt. Bare trykk <?= $new ? 'Opprett' : 'Lagre'?></li>
 		</ul>
 	</p>
 
