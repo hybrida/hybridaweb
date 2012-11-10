@@ -15,18 +15,10 @@ class AlbumController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array(),
-				'users'=>array('*'),
-			),
-			array('allow',
 				'actions'=>array('create','update', 'upload','index','view', 'picview'),
 				'users'=>array('@'),
 			),
-			array('allow',
-				'actions'=>array(),
-				'users'=>array('admin'),
-			),
-			array('deny',	// deny all users
+			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
 		);
