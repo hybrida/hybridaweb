@@ -13,11 +13,24 @@ $this->beginClip('sidebar');
 	</ul>
 </div>
 
+<? if (count($albums) > 0): ?>
+	<div class="g-barTitle">Navigasjon</div>
+	<div class="g-sidebarNav">
+		<ul>
+			<? foreach($albums as $album): ?>
+				<li><?= CHtml::link($album->title, "/gallery/" . $album->id) ?></li>
+			<? endforeach; ?>
+		</ul>
+	</div>
+<? endif; ?>
 <? $this->endClip(); ?>
 
 <div class="albumIndex">
 	<h1>Galleri</h1>
 
+	<? if (count($albums) == 0): ?>
+		Tomt, <?= CHtml::link('lag et album', '/gallery/create/') ?> 
+	<? endif; ?>
 	<? foreach($albums as $album): ?>
 			<? $num = count($album->images); ?>
 			<h2>

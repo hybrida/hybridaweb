@@ -9,18 +9,27 @@ $num = count($album->images);
 <div class="g-sidebarNav">
 	<ul>
 		<li>
-			<?= CHtml::link('Galleri', '/gallery/') ?>
-			<?= CHtml::link('Album', '/gallery/'.$album->id) ?>
-		<br>
-		<li>
-			<?= CHtml::link('Slett bilde', '#', 
-				array(
-					'submit'=>array('picdelete','id'=>$album->id, 'pid' => $image->id),
-					'confirm'=>'Er du sikker på at du vil slette dette bildet?'))?>
+			<?= CHtml::link('Full oppløsning', Image::getRelativeFilePath($image->id, "original"), array('target' => '_blank')) ?>
+
+			<? if (Yii::app()->user->id == $image->userId): ?>
+				<?= CHtml::link('Slett bilde', '#', 
+					array(
+						'submit'=>array('picdelete','id'=>$album->id, 'pid' => $image->id),
+						'confirm'=>'Er du sikker på at du vil slette dette bildet?'))?>
+			<? endif; ?>
 		</li>
 	</ul>
 </div>
 
+<div class="g-barTitle">Navigasjon</div>
+<div class="g-sidebarNav">
+	<ul>
+		<li>
+			<?= CHtml::link('Til galleri', '/gallery/') ?>
+			<?= CHtml::link('Til album', '/gallery/'.$album->id) ?>
+		</li>
+	</ul>
+</div>
 <? $this->endClip(); ?>
 
 <div class="albumPicview">

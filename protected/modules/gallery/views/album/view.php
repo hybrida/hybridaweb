@@ -7,19 +7,27 @@ $this->beginClip('sidebar');
 <div class="g-sidebarNav">
 	<ul>
 		<li>
-			<?= CHtml::link('Galleri', '/gallery/') ?>
-		</li>
-		<br>
-		<li>
 			<?= CHtml::link('Legg til bilder', 'update/'.$album->id) ?>
-			<?= CHtml::link('Slett album', '#', 
-				array(
-					'submit'=>array('delete','id'=>$album->id),
-					'confirm'=>'Er du sikker på at du vil slette dette albumet?'))?>
 		</li>
+		<? if (Yii::app()->user->id == $album->user_id): ?>
+			<li>
+				<?= CHtml::link('Slett album', '#', 
+					array(
+						'submit'=>array('delete','id'=>$album->id),
+						'confirm'=>'Er du sikker på at du vil slette dette albumet?'))?>
+			</li>
+		<? endif; ?>
 	</ul>
 </div>
 
+<div class="g-barTitle">Navigasjon</div>
+<div class="g-sidebarNav">
+	<ul>
+		<li>
+			<?= CHtml::link('Til galleri', '/gallery/') ?>
+		</li>
+	</ul>
+</div>
 <? $this->endClip(); ?>
 
 <div class="albumView">

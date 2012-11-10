@@ -3,11 +3,11 @@ $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); 
 ?>
 
-<div class="g-barTitle">Handlinger</div>
+<div class="g-barTitle">Navigasjon</div>
 <div class="g-sidebarNav">
 	<ul>
 		<li>
-			<?= CHtml::link('Galleri', '/gallery/', array('confirm' => 'Dette vil avbryte det du holder på med')) ?>
+			<?= CHtml::link('Galleri', '/gallery/', array('confirm' => 'Pass på, dette vil avbryte det du holder på med')) ?>
 		</li>
 	</ul>
 </div>
@@ -30,7 +30,7 @@ $this->beginClip('sidebar');
 
 		<div class="row">
 			Albumtittel
-			<?php echo $form->textField($model,'title'); ?>
+			<?php echo $form->textField($model,'title', array('size' => 50, 'maxlength' => 50, 'readonly' => !($new || Yii::app()->user->id == $model->user_id))); ?>
 		</div>
 
 		<div class="row">
