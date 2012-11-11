@@ -11,10 +11,14 @@
 	width: 100%;
 }
 
-.albumPicview img {
-	border: 1px solid black;
-}
 
 .createAlbum .errorText  {
 	color: red;
+}
+
+.albumPicview img {
+	border: 1px solid black;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
