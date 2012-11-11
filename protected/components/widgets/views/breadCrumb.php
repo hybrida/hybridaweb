@@ -5,7 +5,7 @@
     foreach($this->links as $val => $url) {
 		echo "<li>";
         if(isset($url)) {
-            echo CHtml::link($val, $url);
+            echo $this->link($val, $url);
         } else {
             echo $val;
         }

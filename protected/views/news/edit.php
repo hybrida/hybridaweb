@@ -1,4 +1,14 @@
-<? $this->pageTitle = "Rediger nyhet" ?>
+<?
+$this->pageTitle = "Rediger nyhet";
+$this->breadcrumbs = array(
+	$model->news['title'] => array(
+		'/news/view',
+		'id' => $model->news['id'],
+		'htmlOptions' => array(
+			'confirm' => 'Er du sikker på at du vil gå tilbake til nyheten?',
+		)));
+
+?>
 
 <script type="text/javascript">
 	$(document).ready(function(){

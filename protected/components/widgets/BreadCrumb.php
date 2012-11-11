@@ -26,5 +26,15 @@ class BreadCrumb extends CWidget {
 		}
 		return false;
 	}
+	
+	public function link($title, $urlWithOptions) {
+		$htmlOptions = array();
+		if (isset($urlWithOptions['htmlOptions'])) {
+			$htmlOptions = $urlWithOptions['htmlOptions'];
+			unset($urlWithOptions['htmlOptions']);
+		}
+		return CHtml::link($title, $urlWithOptions, $htmlOptions);
+		
+	}
 
 }
