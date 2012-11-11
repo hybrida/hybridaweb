@@ -5,6 +5,9 @@ Yii::import('notifications.models.*');
 class DefaultController extends Controller {
 
 	public function actionSubmit() {
+		if (Yii::app()->user->isGuest) {
+			throw new CHttpException(403, "Du har ikke tilgang");
+		}
 		$model = new CommentForm();
 
 		if (isset($_POST['CommentForm'])) {
