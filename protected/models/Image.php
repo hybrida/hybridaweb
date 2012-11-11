@@ -201,7 +201,7 @@ class Image extends CActiveRecord {
 			if ($height && $si->getHeight() > $height) {
 				$si->resizeToHeight($height);
 			} 
-			if ($width && $si->getWidth() > $width) {
+			elseif ($width && $si->getWidth() > $width) {
 				echo Yii::trace("Hello there",'vardump');
 				$si->resizeToWidth($width);
 			}
