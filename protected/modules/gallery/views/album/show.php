@@ -1,3 +1,9 @@
+<?
+$this->breadcrumbs = array(
+	'Galleri' => array('/gallery'),
+);
+?>
+
 <style>
     #galleria{ width: 700px; height: 600px; background: #000 }
 </style>

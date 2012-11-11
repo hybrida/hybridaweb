@@ -32,6 +32,7 @@ $this->beginClip('sidebar');
 
 <div class="albumView">
 	<h1><?= $album->title ?></h1>
+	<h3><?= CHtml::link('Se albumet i et slideshow', array('/gallery/show', 'id' => $album->id)) ?></h3>
 		<div style="width: 100%; height: 229px;">
 			<? $c = 0; ?>
 			<? foreach($album->images as $image): ?>
