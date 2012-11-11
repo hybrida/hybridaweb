@@ -20,7 +20,7 @@ class Image extends CActiveRecord {
 		'frontpage' => array('width' => 600, 'height' => 150),
 		'sidebar' => array('width' => 150),
 		'gallery_thumb' => array('width' => 225, 'height' => 225),
-		'gallery_big' => array('width' => 691),
+		'gallery_big' => array('width' => 691, 'noStretch' => true),
 	);
 
 	/**
@@ -123,9 +123,9 @@ class Image extends CActiveRecord {
 	}
 
 	public static function tag($id, $size, $htmlOptions=array('alt' => '')) {
-		list($width, $height) = self::getSize($size);
-		if ($width) $htmlOptions['width'] = $width;
-		if ($height) $htmlOptions['height'] = $height;
+		list($width, $height, $noStretch) = self::getSize($size);
+		if ($width && !$noStretch) $htmlOptions['width'] = $width;
+		if ($height && !$noStretch) $htmlOptions['height'] = $height;
 		try {
 			$url = self::getViewUrl($id, $size);
 			return CHtml::image($url, "", $htmlOptions);
@@ -172,6 +172,7 @@ class Image extends CActiveRecord {
 		return sha1("hybrida" . $id);
 	}
 
+
 	public function hasSize($size) {
 		$filename = $this->getFilePath($size);
 		return file_exists($filename);
@@ -186,13 +187,24 @@ class Image extends CActiveRecord {
 			return;
 		$this->throwExceptionIfFileDoesNotExist();
 		$si = new SimpleImage($this->getFilePath());
-		list($width, $height) = self::getSize($size);
-		if ($height && $width) {
-			$si->crop($width, $height);
-		} else if ($height) {
-			$si->resizeToHeight($height);
-		} else {
-			$si->resizeToWidth($width);
+		list($width, $height, $noStretch) = self::getSize($size);
+		if (!$noStretch) {
+			if ($height && $width) {
+				$si->crop($width, $height);
+			} else if ($height) {
+				$si->resizeToHeight($height);
+			} else if ($width) {
+				$si->resizeToWidth($width);
+			}
+		}
+		else if($noStretch) {
+			if ($height && $si->getHeight() > $height) {
+				$si->resizeToHeight($height);
+			} 
+			if ($width && $si->getWidth() > $width) {
+				echo Yii::trace("Hello there",'vardump');
+				$si->resizeToWidth($width);
+			}
 		}
 		$si->save($this->getFilePath($size));
 	}
@@ -210,7 +222,8 @@ class Image extends CActiveRecord {
 		$ar = self::$sizes[$size];
 		$width = isset($ar['width']) ? $ar['width'] : null;
 		$height = isset($ar['height']) ? $ar['height'] : null;
-		return array($width, $height);
+		$noStretch = isset($ar['noStretch']) ? $ar['noStretch'] : false;
+		return array($width, $height, $noStretch);
 	}
 	
 	public static function uploadByModel($model, $attribute, $userId) {
