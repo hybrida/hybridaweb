@@ -11,6 +11,7 @@
 		<script type="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/animations.js"></script>
 		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/collapsible_lists.js'></script>
 		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/e.js'></script>
+		<script type ="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/galleria/galleria-1.2.8.min.js"></script>
 		
 
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/fonts/fonts.css" />

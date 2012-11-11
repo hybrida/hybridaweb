@@ -15,7 +15,7 @@ class AlbumController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('clear', 'create','update', 'upload','index','view', 'picview'),
+				'actions'=>array('clear', 'create','update', 'upload','index','view', 'picview', 'show'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -46,6 +46,17 @@ class AlbumController extends Controller
 		$this->pageTitle = ($album->title);
 
 		$this->render('view',array(
+			'album'=> $album,
+		));
+	}
+	
+	public function actionShow($id)
+	{
+		$album = $this->loadModel($id);
+		$album->getImages();
+		$this->pageTitle = ($album->title);
+
+		$this->render('show',array(
 			'album'=> $album,
 		));
 	}
