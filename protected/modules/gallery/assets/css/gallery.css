@@ -1,3 +1,4 @@
+/* Index */
 .albumIndex h2 {
 	text-align: center;
 }
@@ -7,18 +8,71 @@
 	margin-bottom: 30px;
 }
 
+.albumIndex .smallContainer {
+	width: 33%; float: left;
+}
+
+.albumIndex .container {
+	width: 100%
+}
+
+.albumIndex #clearer {
+	clear: both;
+}
+
+/* View */
 .albumView table{
 	width: 100%;
 }
 
+.albumView .smallContainer {
+	width: 33%; float: left;
+}
 
+.albumView .container {
+	width: 100%
+}
+
+
+/* Create */
 .createAlbum .errorText  {
 	color: red;
 }
 
+/* PicView */
 .albumPicview img {
 	border: 1px solid black;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+.albumPicview .container {
+	width: 100%;
+}
+
+.albumPicview .smallContainer {
+	width: 33%; 
+	float: left;
+}
+
+.albumPicview #counter {
+	text-align: center;
+}
+
+.albumPicview #nextDiv {
+	text-align: right;
+}
+
+.albumPicview #userName {
+	float: left;
+}
+
+.albumPicview #timestamp {
+	float: right;
+	text-align: right;
+}
+
+.albumPicview #spacer {
+	padding-bottom: 200px;
 }

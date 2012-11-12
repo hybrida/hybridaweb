@@ -56,7 +56,7 @@ $this->breadcrumbs = array(
 			<li> Vent til alle bildene er lastet før du trykker <?= $new ? 'Opprett' : 'Lagre'?> </li>
 			<li> Bare filtypene gif, png og jpg er støttet </li>
 			<li> Maks filstørrelse er 10 MB </li>
-			<li> Chrome er til tider treg til å laste opp filer, så bruk gjerne en annen browser om du skal laste opp mange bilder </li>
+			<li> Chrome kan være treg til å laste opp filer, så bruk gjerne en annen browser om du skal laste opp mange bilder </li>
 		</ul>
 	</p>
 

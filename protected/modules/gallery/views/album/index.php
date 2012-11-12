@@ -33,14 +33,14 @@ $this->beginClip('sidebar');
 				<?= CHtml::link($album->title, "/gallery/" . $album->id) ?>
 			</h2>
 			<? if(count($album->images) == 0): ?>
-				<div style="width: 100%;">
+				<div class="container">
 					Tomt, <?= CHtml::link('legg til bilder', '/gallery/update/'.$album->id) ?> 
 				</div>
 				<? continue; ?>
 			<? endif; ?>
-			<div style="width: 100%;">
+				<div class="container">
 				<? for ($i = 0; $i < min($num, 3); $i++): ?>
-				<div style="width: 33%; float: left;">
+				<div class="smallContainer">
 					<?= CHtml::link(Image::tag($album->images[$i]->id, "gallery_thumb"), "/gallery/".$album->id . "/" . $album->images[$i]->id); ?>
 					</div>
 				<? endfor; ?>
@@ -48,6 +48,6 @@ $this->beginClip('sidebar');
 
 
 			</div>
-			<br style="clear: both;">
+			<br id="clearer">
 	<? endforeach; ?>
 </div>

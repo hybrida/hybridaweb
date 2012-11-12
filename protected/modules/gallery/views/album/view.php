@@ -30,12 +30,12 @@ $this->beginClip('sidebar');
 
 <div class="albumView">
 	<h1><?= $album->title ?></h1>
-		<div style="width: 100%; height: 229px;">
+		<div class="container">
 			<? $c = 0; ?>
 			<? foreach($album->images as $image): ?>
 				<? if ($c % 3 == 0 && $c > 0): ?>
 				<? endif; ?>
-				<div style="width: 33%; float: left;">
+				<div class="smallContainer">
 					<?= CHtml::link(Image::tag($image->id, "gallery_thumb"), $album->id."/".$image->id) ?>
 				</div>
 				<? $c++; ?>
