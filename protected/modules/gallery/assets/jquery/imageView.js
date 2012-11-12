@@ -9,13 +9,7 @@ $('#delLink').click(function(e){
 		var request =  get_XmlHttp();
 		request.open("POST", url, true);
 		request.send(null);
-
-			request.onreadystatechange = function() {
-				if (request.readyState == 4) {
-					var data = request.responseText;
-					$("#data").text(data);
-				}
-			}
+		window.location.href = "/gallery/" + albumID;
 	}
 });
 $('#image').click(function(e){
