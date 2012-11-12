@@ -15,7 +15,7 @@ class AlbumController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('clear', 'create','update', 'upload','index','view', 'picview', 'show'),
+				'actions'=>array('clear', 'create','update', 'upload','index','view', 'picview', 'show', 'ajax', 'delete', 'picdelete'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
@@ -69,15 +69,71 @@ class AlbumController extends Controller
 
 		$image = Image::model()->findByPk($pid);
 
-		$userId = $image->userId;
+		if ($image && in_array($image, $album->images)) {
+			$userId = $image->userId;
+		} else {
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		}
 		$userModel = User::model()->findByPk($userId);
 		$user = $userModel->getFullName();
+		$index =array_search($image, $album->images);
+		$num =count($album->images);
+		if ($index + 1 < $num)
+			$nextID = $index+1;
+		else
+			$nextID = -1;
+
+		if ($index > 0)
+			$prevID = $index-1;
+		else
+			$prevID = -1;
 
 		$this->render('picview',array(
 			'album'=>$album,
 			'image'=>$image,
 			'user' => $user,
+			'index' => $index,
+			'num' => $num,
+			'nextID' => $nextID,
+			'prevID' => $prevID,
 		));
+	}
+
+	public function actionAjax($id, $pid)
+	{
+		$data = array();
+		$album = $this->loadModel($id);
+		$album->getImages();
+		$image = Image::model()->findByPk($pid);
+		$userId = $image->userId;
+		$userModel = User::model()->findByPk($userId);
+		$userName = $userModel->getFullName();
+		$index =array_search($image, $album->images);
+		$num =count($album->images);
+
+		if (!$image->hasSize("gallery_big"))
+			$image->resize("gallery_big");
+
+		$data['albumID'] = $album->id;
+		$data['imageID'] = $image->id;
+		$data['timestamp'] = $image->timestamp;
+		$data['index'] = $index;
+		$data['num'] = $num; 
+		$data['userName'] = $userName;
+		$data['fullURL'] = Image::getRelativeFilePath($image->id, "original");
+		$data['bigURL'] = Image::getRelativeFilePath($image->id, "gallery_big");
+
+		$data['deleteAble'] = Yii::app()->user->id == $image->userId;
+		if ($index + 1 < $num)
+			$data['nextID'] = $album->images[$index+1]->id;
+		else
+			$data['nextID'] = -1;
+
+		if ($index > 0)
+			$data['prevID'] = $album->images[$index-1]->id;
+		else
+			$data['prevID'] = -1;
+		echo json_encode($data);
 	}
 
 	public function actionCreate()

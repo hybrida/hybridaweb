@@ -29,14 +29,18 @@ class GalleryModule extends CWebModule
 		$cssUrl = Yii::getPathOfAlias($assetDir)."/css/";
 		$cssFile = "gallery.css";
 
-		$scriptUrl = Yii::getPathOfAlias($assetDir)."/jquery/";
-		$keyNavFile = "keyNav.js";
-
 		$cs = Yii::app()->getClientScript();
 		$am = Yii::app()->getAssetManager();
 		$cssLocalPath = $am->publish($cssUrl. $cssFile);
-		$scriptLocalPath = $am->publish($scriptUrl. $keyNavFile);
 		$cs->registerCssFile($cssLocalPath);
-		$cs->registerScriptFile($scriptLocalPath);
+
+		$scriptUrl = Yii::getPathOfAlias("gallery.assets").'/jquery/';
+		$cs = Yii::app()->getClientScript();
+		$am = Yii::app()->getAssetManager();
+
+		foreach(array("keyNav.js", "imageView.js") as $scriptFile) {
+			$scriptLocalPath = $am->publish($scriptUrl. $scriptFile);
+			$cs->registerScriptFile($scriptLocalPath, CClientScript::POS_END);
+		}
 	}
 }
