@@ -1,4 +1,10 @@
 <?
+$this->breadcrumbs = array(
+	'Galleri' => ''
+);
+?>
+
+<?
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); 
 
@@ -13,16 +19,6 @@ $this->beginClip('sidebar');
 	</ul>
 </div>
 
-<? if (count($albums) > 0): ?>
-	<div class="g-barTitle">Navigasjon</div>
-	<div class="g-sidebarNav">
-		<ul>
-			<? foreach($albums as $album): ?>
-				<li><?= CHtml::link($album->title, "/gallery/" . $album->id) ?></li>
-			<? endforeach; ?>
-		</ul>
-	</div>
-<? endif; ?>
 <? $this->endClip(); ?>
 
 <div class="albumIndex">

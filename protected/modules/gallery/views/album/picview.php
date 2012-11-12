@@ -1,8 +1,13 @@
 <?
+$this->breadcrumbs = array(
+	'Galleri' => array('/gallery'),
+	$album->title => array('/gallery/'.$album->id),
+);
+?>
 
+<?
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); 
-
 ?>
 
 <script>
@@ -26,16 +31,6 @@ $(document).ready(function(){
 				<?= CHtml::link('Slett bilde', '#', array( 'id' => 'delLink',
 					'style' => 'display: none;'))?>
 			<? endif; ?>
-		</li>
-	</ul>
-</div>
-
-<div class="g-barTitle">Navigasjon</div>
-<div class="g-sidebarNav">
-	<ul>
-		<li>
-			<?= CHtml::link('Til galleri', '/gallery/') ?>
-			<?= CHtml::link('Til album', '/gallery/'.$album->id) ?>
 		</li>
 	</ul>
 </div>

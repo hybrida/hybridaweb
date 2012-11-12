@@ -1,18 +1,8 @@
 <?
-$this->layout = "//layouts/doubleColumn";
-$this->beginClip('sidebar'); 
+$this->breadcrumbs = array(
+	'Galleri' => array('/gallery'),
+);
 ?>
-
-<div class="g-barTitle">Navigasjon</div>
-<div class="g-sidebarNav">
-	<ul>
-		<li>
-			<?= CHtml::link('Galleri', '/gallery/', array('confirm' => 'Pass på, dette vil avbryte det du holder på med')) ?>
-		</li>
-	</ul>
-</div>
-
-<? $this->endClip(); ?>
 
 <div class="createAlbum">
 	<h1><?= $new ? "Opprett Album" : "Endre Album"?></h1>

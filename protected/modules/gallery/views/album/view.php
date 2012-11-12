@@ -1,4 +1,10 @@
 <?
+$this->breadcrumbs = array(
+	'Galleri' => array('/gallery'),
+);
+?>
+
+<?
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); 
 ?>
@@ -20,19 +26,10 @@ $this->beginClip('sidebar');
 	</ul>
 </div>
 
-<div class="g-barTitle">Navigasjon</div>
-<div class="g-sidebarNav">
-	<ul>
-		<li>
-			<?= CHtml::link('Til galleri', '/gallery/') ?>
-		</li>
-	</ul>
-</div>
 <? $this->endClip(); ?>
 
 <div class="albumView">
 	<h1><?= $album->title ?></h1>
-	<h3><?= CHtml::link('Se albumet i et slideshow', array('/gallery/show', 'id' => $album->id)) ?></h3>
 		<div style="width: 100%; height: 229px;">
 			<? $c = 0; ?>
 			<? foreach($album->images as $image): ?>
