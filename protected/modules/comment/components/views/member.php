@@ -93,7 +93,8 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 		
 		function flashCurrentComment() {
 			var commentName = window.location.hash.substring(1);
-			flashComment(commentName)
+			if (commentName != "")
+				flashComment(commentName)
 		}
 		
 		attachSubmitAction();
