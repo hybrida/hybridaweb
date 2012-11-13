@@ -190,4 +190,10 @@ class UserTest extends CTestCase {
 		$this->assertTrue($user->validate());
 	}
 	
+	public function test_get_studmail() {
+		$user = $this->getUser();
+		$studmail = $user->username . "@stud.ntnu.no";
+		$this->assertEquals($studmail, $user->studmail);
+	}
+	
 }

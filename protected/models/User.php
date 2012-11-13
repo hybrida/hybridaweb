@@ -28,6 +28,9 @@
  * @property Access $access
  */
 class User extends CActiveRecord {
+	
+	const MALE = "male";
+	const FEMALE = "female";
 
 	public $cardNumber;
 	public $imageUpload;
@@ -167,9 +170,9 @@ class User extends CActiveRecord {
 	}
 
 	private function getGenderAccess() {
-		if ($this->gender == "male") {
+		if ($this->gender == User::MALE) {
 			return array(Access::MALE);
-		} elseif ($this->gender == "female") {
+		} elseif ($this->gender == USER::FEMALE) {
 			return array(Access::FEMALE);
 		} else {
 			return array();
@@ -180,9 +183,9 @@ class User extends CActiveRecord {
 		$englishGender = $this->gender;
 		$norwegianGender = null;
 		
-		if ($englishGender == "male") {
+		if ($englishGender == User::MALE) {
 			$norwegianGender = "Mann";
-		} elseif ($englishGender == "female") {
+		} elseif ($englishGender == User::FEMALE) {
 			$norwegianGender = "Kvinne";
 		} else {
 			$norwegianGender = "Ukjent";
@@ -224,9 +227,9 @@ class User extends CActiveRecord {
 	public function getFullName() {
 		return $this->firstName . " " . $this->middleName . " " . $this->lastName;
 	}
-
-	public function getUsername() {
-		return $this->username;
+	
+	public function getStudmail() {
+		return $this->username . "@stud.ntnu.no";
 	}
 
 	public function getViewUrl() {
