@@ -4,6 +4,7 @@ class ArticleController extends Controller {
 
 	public function actionView($id) {
 		$article = $this->getArticleModelAndThrowExceptionIfNullOrNotAccess($id);
+        
 
 		$this->render("view", array(
 			'article' => $article,
@@ -17,8 +18,10 @@ class ArticleController extends Controller {
 		}
 
 		$model = new Article;
+        $articleText = new ArticleText;
+        
 		$model->parentId = $parentId;
-		$this->renderArticleForm($model);
+		$this->renderArticleForm($model, $articleText);
 	}
 
 	public function actionEdit($id) {
@@ -27,7 +30,8 @@ class ArticleController extends Controller {
 		}
 
 		$model = $this->getArticleModel($id);
-		$this->renderArticleForm($model);
+        $articleText = $this->getArticleText($model->articleTextId);
+		$this->renderArticleForm($model, $articleText);
 	}
 
 	private function getArticleModelAndThrowExceptionIfNullOrNotAccess($id) {
@@ -39,11 +43,12 @@ class ArticleController extends Controller {
 		return $article;
 	}
 
-	private function renderArticleForm($model) {
+	private function renderArticleForm($model, $articleText) {
 		$form = new ArticleForm($model);
 		if (isset($_POST['ArticleForm'])) {
-			$form->setAttributes($_POST['ArticleForm']);
+			$form->setAttributes($_POST['ArticleForm'], $_POST['ArticleText'], $articleText);
 			$form->save();
+            $articleText->save();
 
 			$this->redirect($form->getArticleModel()->getViewUrl());
 			return;
@@ -51,6 +56,7 @@ class ArticleController extends Controller {
 
 		$this->render('edit', array(
 			'model' => $form,
+            'articleText' => $articleText,
 		));
 	}
 
@@ -61,5 +67,10 @@ class ArticleController extends Controller {
 		else
 			throw new CHttpException(404,"Artikkelen finnes ikke");
 	}
+    
+    private function getArticleText($id) {
+        $articleText = Article::model()->findByPk($id);
+        return $articleText;
+    }
 
 }

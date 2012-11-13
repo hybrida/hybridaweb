@@ -15,6 +15,7 @@ Yii::import('application.components.widgets.ArticleTree');
  * @property integer $author
  * @property string $timestamp
  * @property array $access
+ * @property integer $articleTextId
  */
 class Article extends CActiveRecord {
 
@@ -44,6 +45,7 @@ class Article extends CActiveRecord {
 	public function relations() {
 		return array(
 			'author' => array(self::BELONGS_TO, 'user', 'author'),
+            'article_text' => array(self::HAS_MANY, 'article_text', 'article_text_id'),
 		);
 	}
 
@@ -103,6 +105,9 @@ class Article extends CActiveRecord {
 		if (empty($this->shorttitle)) {
 			$this->shorttitle = new CDbExpression('NULL'); 
 		}
+        if (empty($this->phpFile)) {
+            $this->phpFile = new CDbExpression('NULL');
+        }
 		return parent::beforeSave();
 	}
 
@@ -126,6 +131,11 @@ class Article extends CActiveRecord {
 				));
 		return $children;
 	}
+    
+    public function getText() {
+        $articleText = ArticleText::model()->findByPk($this->articleTextId);
+        return $articleText->content;
+    }
 	
 	public static function getRootTitle($currentId, $currentParent) {
 		$rootId = $currentId;
