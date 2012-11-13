@@ -49,17 +49,6 @@ class AlbumController extends Controller
 			'album'=> $album,
 		));
 	}
-	
-	public function actionShow($id)
-	{
-		$album = $this->loadModel($id);
-		$album->getImages();
-		$this->pageTitle = ($album->title);
-
-		$this->render('show',array(
-			'album'=> $album,
-		));
-	}
 
 	public function actionPicview($id, $pid)
 	{
