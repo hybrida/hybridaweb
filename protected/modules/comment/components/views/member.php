@@ -34,7 +34,7 @@ $user = User::model()->findByPk(user()->id);
 			<div class="comment-title">
 				<span class="comment-author"><?= $user->fullName ?></span>
 				<span class="comment-date">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<?= Html::dateToString(date('n.m.Y H:i'), 'long') ?></span>
+					<?= Html::dateToString(date('j.m.Y H:i'), 'long') ?></span>
 			</div>
 			<div class="commentContent">
 				<?php
