@@ -12,6 +12,13 @@ $this->beginClip('sidebar');
 			'class' => 'g-button'
 		));
 		?>
+		<? if ($signup): ?>
+		<?= CHtml::link("Hent epostadresser", array(
+			"/news/email",
+			"id" => $news->id), array(
+				'class' => 'g-button',
+			)) ?>
+		<? endif ?>
 	</fieldset>
 <? endif ?>
 

@@ -14,7 +14,7 @@ class NewsController extends Controller {
 				'actions' => array("view", "edit", 'toggleAttending'),
 			),
 			array('allow',
-				'actions' => array("create"),
+				'actions' => array("create", "email"),
 				'roles' => array('createNews'),
 			),
 			array('deny'),
@@ -175,6 +175,19 @@ class NewsController extends Controller {
 		if (!$newsModel->isNewRecord) {
 			$this->redirect($newsModel->viewUrl);
 		}
+	}
+	
+	public function actionEmail($id) {
+		$news = News::model()->with("event", "event.signup")->findByPk($id);
+		$event = $news->event;
+		if (!$event || !$event->signup) {
+			throw new CHttpException(400, "Dette er ikke et arrangement");
+		}
+		$signup = $event->signup;
+		$this->render('email', array(
+			'news' => $news,
+			'attenders' => $signup->attenders,
+		));
 	}
 
 }

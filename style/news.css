@@ -128,4 +128,8 @@
 }
 
 
-
+.newsEmail .emails {
+	border: 1px solid #888;
+	width: 90%;
+	height: 500px;
+}
