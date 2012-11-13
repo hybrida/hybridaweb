@@ -10,15 +10,6 @@ $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); 
 ?>
 
-<script>
-$(document).ready(function(){
-	window.imageID = <?= $image->id ?>;
-	window.albumID = <?= $album->id ?>;
-	window.nextID = <?= $nextID >= 0 ? $album->images[$nextID]->id : "false" ?>;
-	window.prevID = <?= $prevID >= 0 ? $album->images[$prevID]->id : "false" ?>;
-});
-</script>
-
 <div class="g-barTitle">Handlinger</div>
 <div class="g-sidebarNav">
 	<ul>
@@ -101,5 +92,13 @@ $(document).ready(function(){
 	<div  id="timestamp">
 		<?= $image->timestamp ?>
 	</div>
-	<div id="spacer"></div>
+	<div style="width: 100%; clear: both; margin-top: 60px;"></div>
+	<div id="comments">
+		<?
+		$this->widget('comment.components.CommentWidget', array(
+			'id' => $image->id,
+			'type' => 'gallery',
+		));
+		?>
+	</div>
 </div>

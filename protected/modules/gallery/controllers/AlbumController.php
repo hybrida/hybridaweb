@@ -122,6 +122,7 @@ class AlbumController extends Controller
 		$data['userName'] = $userName;
 		$data['fullURL'] = Image::getRelativeFilePath($image->id, "original");
 		$data['bigURL'] = Image::getRelativeFilePath($image->id, "gallery_big");
+		$data['comments'] = $this->widget('comment.components.CommentWidget', array( 'id' => $image->id, 'type' => 'gallery',));
 
 		$data['deleteAble'] = Yii::app()->user->id == $image->userId;
 		if ($index + 1 < $num)
@@ -133,7 +134,7 @@ class AlbumController extends Controller
 			$data['prevID'] = $album->images[$index-1]->id;
 		else
 			$data['prevID'] = -1;
-		echo json_encode($data);
+		echo str_replace('\/','/',json_encode($data));
 	}
 
 	public function actionCreate()

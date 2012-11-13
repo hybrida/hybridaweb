@@ -1,5 +1,10 @@
 $(document).ready(function(){
-	console.log("Hello");
+	var url = location.href;
+	var ids = url.split('/');
+	window.albumID = ids[4];
+	var imageID = ids[5];
+
+	ajaxrequest(imageID);
 });
 $('#delLink').click(function(e){
 	e.preventDefault();
@@ -18,11 +23,13 @@ $('#image').click(function(e){
 });
 $('#next').click(function(e){
 	e.preventDefault();
-	ajaxrequest(window.nextID);
+	if (window.nextID != -1)
+		ajaxrequest(window.nextID);
 });
 $('#prev').click(function(e){
 	e.preventDefault();
-	ajaxrequest(window.prevID);
+	if (window.prevID != -1)
+		ajaxrequest(window.prevID);
 });
 
 function get_XmlHttp() {
@@ -38,14 +45,19 @@ function get_XmlHttp() {
 
 function ajaxrequest(pictureID) {
 	var request =  get_XmlHttp();
-	var  url = '/gallery/ajax/' + albumID + "/" + pictureID;
+	var  url = '/gallery/ajax/' + window.albumID + "/" + pictureID;
 
 	request.open("POST", url, true);
 	request.send(null);
 
 	request.onreadystatechange = function() {
 		if (request.readyState == 4) {
-			var data = JSON.parse(request.responseText);
+			var string  = request.responseText;
+			var skille = string.search("</script>");
+			var json = string.substr(skille+9);
+			var comments = string.substr(0, skille+9);
+			var data = JSON.parse(json);
+			data.comments = comments;
 			changeData(data);
 			history.pushState('data', '','/gallery/' + albumID + "/" + pictureID);
 		}
@@ -53,6 +65,7 @@ function ajaxrequest(pictureID) {
 }
 
 function changeData(data) {
+	albumID = data.albumID;
 	imageID = data.imageID;
 	nextID = data.nextID;
 	prevID = data.prevID;
@@ -61,6 +74,7 @@ function changeData(data) {
 	$("#counter").text("Bilde " + (data.index+1) + " av " + data.num);
 	$("#timestamp").text(data.timestamp);	
 	$("#userName").text(data.userName);	
+	$("#comments").html(data.comments);
 	if (nextID >= 0) {
 		$("#next").attr("href", "/gallery/"+albumID+"/"+nextID);
 		$("#next").attr("style", "");

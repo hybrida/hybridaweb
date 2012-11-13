@@ -37,7 +37,7 @@ class GalleryModule extends CWebModule
 		$scriptUrl = Yii::getPathOfAlias("gallery.assets").'/jquery/';
 		$cs = Yii::app()->getClientScript();
 		$am = Yii::app()->getAssetManager();
-
+		
 		foreach(array("keyNav.js", "imageView.js") as $scriptFile) {
 			$scriptLocalPath = $am->publish($scriptUrl. $scriptFile);
 			$cs->registerScriptFile($scriptLocalPath, CClientScript::POS_END);
