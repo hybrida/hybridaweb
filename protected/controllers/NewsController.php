@@ -97,7 +97,7 @@ class NewsController extends Controller {
 		$this->toggleAttending($signup, $userId);
 		$this->redirectToNewsByEventId($eventId);
 	}
-	
+
 	private function toggleAttending($signup, $userId) {
 		$isAttending = $signup->isAttending($userId);
 		if ($isAttending) {
@@ -145,10 +145,11 @@ class NewsController extends Controller {
 
 	public function getNewsModel($id) {
 		$model = News::model()->findByPk($id);
-		if ($model)
+		if ($model) {
 			return $model;
-		else
-			throw new CHttpException(404,"Nyheten finnes ikke");
+		} else {
+			throw new CHttpException(404, "Nyheten finnes ikke");
+		}
 	}
 
 	private function renderNewsEventForm($inputModel) {
@@ -176,7 +177,7 @@ class NewsController extends Controller {
 			$this->redirect($newsModel->viewUrl);
 		}
 	}
-	
+
 	public function actionEmail($id) {
 		$news = News::model()->with("event", "event.signup")->findByPk($id);
 		$event = $news->event;
