@@ -29,7 +29,8 @@ class BreadCrumb extends CWidget {
 	
 	public function link($title, $urlWithOptions) {
 		$htmlOptions = array();
-		if (is_array($urlWithOptions['htmlOptions'])) {
+		if (isset($urlWithOptions['htmlOptions']) && 
+			is_array($urlWithOptions['htmlOptions'])) {
 			$htmlOptions = $urlWithOptions['htmlOptions'];
 			unset($urlWithOptions['htmlOptions']);
 		}
