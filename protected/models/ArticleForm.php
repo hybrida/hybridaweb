@@ -38,9 +38,7 @@ class ArticleForm extends CFormModel {
 	public function save() {
 		$this->setArticleAttributes();
 		$this->_article->purify();
-		$this->_articleText->purify();
 		$this->_article->save();
-		$this->_articleText->save();
 	}
 
 	private function setArticleAttributes() {

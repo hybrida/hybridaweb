@@ -143,7 +143,8 @@ class ArticleFormTest extends CTestCase {
 		$form->save();
 
 		$art = Article::model()->findByPk($article->id);
-		$this->assertEquals("hei", $art->content);
+		$content = $art->content;
+		$this->assertEquals("hei", $content);
 	}
 
 	public function test_getArticle() {

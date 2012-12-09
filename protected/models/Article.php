@@ -16,11 +16,13 @@ Yii::import('application.components.widgets.ArticleTree');
  * @property string $timestamp
  * @property array $access
  * @property integer $articleTextId
+ * @property ArticleText $articleText
  */
 class Article extends CActiveRecord {
 
 	private $_access;
 	private static $list;
+	private $articleText;
 
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
@@ -38,14 +40,15 @@ class Article extends CActiveRecord {
 			array('phpFile', 'length','max' => 30),
 			array('author', 'numerical', 'integerOnly' => true),
 			array('title, shorttitle, content, timestamp', 'safe'),
-			array('id, parentId, title, shorttitle, content, author, timestamp', 'safe', 'on' => 'search'),
+			array('id, parentId, title, shorttitle, author, timestamp', 'safe', 'on' => 'search'),
 		);
 	}
 
 	public function relations() {
 		return array(
 			'author' => array(self::BELONGS_TO, 'user', 'author'),
-            'article_text' => array(self::HAS_MANY, 'article_text', 'article_text_id'),
+            'contents' => array(self::HAS_MANY, 'ArticleText', 'articleId'),
+			//'currentArticleContent' => array(self::BELONGS_TO, "ArticleText", "articleTextId"),
 		);
 	}
 
@@ -69,7 +72,6 @@ class Article extends CActiveRecord {
 		$criteria->compare('parentId', $this->parentId);
 		$criteria->compare('title', $this->title, true);
 		$criteria->compare('shorttitle', $this->shorttitle, true);
-		$criteria->compare('content', $this->content, true);
 		$criteria->compare('phpFile', $this->phpFile);
 		$criteria->compare('author', $this->author);
 		$criteria->compare('timestamp', $this->timestamp, true);
@@ -78,14 +80,19 @@ class Article extends CActiveRecord {
 					'criteria' => $criteria,
 				));
 	}
+	
+	private function setupAccessRelation() {
+		$this->_access = new AccessRelation($this);
+	}
 
 	public function afterConstruct() {
-		$this->_access = new AccessRelation($this);
+		$this->setupAccessRelation();
+		$this->articleText = new ArticleText;
 		return parent::afterConstruct();
 	}
 
 	public function afterFind() {
-		$this->afterConstruct();
+		$this->setupAccessRelation();
 		return parent::afterFind();
 	}
 
@@ -98,20 +105,26 @@ class Article extends CActiveRecord {
 	}
 
 	public function beforeSave() {
+		$transaction = $this->dbConnection->beginTransaction();
 		if ($this->isNewRecord) {
 			$this->author = Yii::app()->user->id;
 			$this->timestamp = new CDbExpression('NOW()');
 		}
 		if (empty($this->shorttitle)) {
-			$this->shorttitle = new CDbExpression('NULL'); 
+			$this->shorttitle = new CDbExpression('NULL');
 		}
         if (empty($this->phpFile)) {
             $this->phpFile = new CDbExpression('NULL');
         }
+		$this->articleText->save(false);
+		$this->articleTextId = $this->articleText->id;
+		$transaction->commit();
 		return parent::beforeSave();
 	}
 
 	public function afterSave() {
+		$this->articleText->articleId = $this->id;
+		$this->articleText->save();
 		$this->_access->replace();
 		return parent::afterSave();
 	}
@@ -119,7 +132,7 @@ class Article extends CActiveRecord {
 	public function purify() {
 		$purifier = new CHtmlPurifier();
 		$this->parentId = $purifier->purify($this->parentId);
-		$this->content = $purifier->purify($this->content);
+		$this->articleText->purify();
 		$this->title = $purifier->purify($this->title);
 		$this->phpFile = $purifier->purify($this->phpFile);
 		$this->shorttitle = $purifier->purify($this->shorttitle);
@@ -131,21 +144,34 @@ class Article extends CActiveRecord {
 				));
 		return $children;
 	}
-    
+	
     public function getText() {
         $articleText = ArticleText::model()->findByPk($this->articleTextId);
         return $articleText->content;
     }
 	
-	public static function getRootTitle($currentId, $currentParent) {
-		$rootId = $currentId;
-		
-		if ($currentParent)
-			$rootId = Article::traverseToRoot($currentId, $currentParent);
-	
-		return Article::model()->findByPk($rootId)->title;		
+	public function setContent($contentString) {
+		$this->articleText = new ArticleText;
+		$this->articleText->content = $contentString;
 	}
 	
+	public function getContent() {
+		return $this->articleText->content;
+	}
+	
+	public function getArticleText() {
+		return $this->articleText;
+	}
+
+	public static function getRootTitle($currentId, $currentParent) {
+		$rootId = $currentId;
+
+		if ($currentParent)
+			$rootId = Article::traverseToRoot($currentId, $currentParent);
+
+		return Article::model()->findByPk($rootId)->title;
+	}
+
 	private static function traverseToRoot($curId, $parId) {
 		if ($parId == null) {
 			return $curId;
@@ -156,15 +182,15 @@ class Article extends CActiveRecord {
 			return Article::traverseToRoot($curId, $parId);
 		}
 	}
-	
+
 	public function getPhpFilePath() {
         $protectedPath = Yii::getPathOfAlias('application');
         $root = str_replace("protected", "", $protectedPath);
         $modifiedPath = $root."files/article/".$this->phpFile.".php";
-        
+
         return $modifiedPath;
 	}
-    
+
 	public function getViewUrl() {
 		return Yii::app()->createUrl("article/view", array(
 					"id" => $this->id,
@@ -199,10 +225,10 @@ class Article extends CActiveRecord {
 			self::addNodeToList($child, $text);
 		}
 	}
-	
+
 	public function getCrumbsList() {
 		$list = ArticleTree::getArticleTree();
-		
+
 		$que = array();
 		foreach ($list as $node) {
 			$que[] = new Queue(0, $node);
@@ -220,14 +246,14 @@ class Article extends CActiveRecord {
 		}
 		return array();
 	}
-	
+
 	private function updateCrumbList(&$crumbList, $q) {
 		while (count($crumbList) > $q->level && count($crumbList) != 0) {
 			array_pop($crumbList);
 		}
 		array_push($crumbList, $q);
 	}
-	
+
 	private function createCrumbs($crumbList) {
 		$list = array();
 		foreach ($crumbList as $que) {
@@ -245,7 +271,7 @@ class Article extends CActiveRecord {
 class Queue {
 	public $level;
 	public $node;
-	
+
 	public function __construct($level, $node) {
 		$this->level = $level;
 		$this->node = $node;

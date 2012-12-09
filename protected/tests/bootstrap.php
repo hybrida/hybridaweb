@@ -2,7 +2,7 @@
 
 // For at man fortsatt kan drive med innlogging og utlogging
 // (endring av session) etter at testene har begynt å kjøre.
-ob_start();
+//ob_start();
 
 
 // change the following paths if necessary
