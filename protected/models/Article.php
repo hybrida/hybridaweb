@@ -93,6 +93,7 @@ class Article extends CActiveRecord {
 
 	public function afterFind() {
 		$this->setupAccessRelation();
+		$this->articleText = ArticleText::model()->findByPk($this->articleTextId);
 		return parent::afterFind();
 	}
 
@@ -116,17 +117,19 @@ class Article extends CActiveRecord {
         if (empty($this->phpFile)) {
             $this->phpFile = new CDbExpression('NULL');
         }
-		$this->articleText->save(false);
+		$saveOK = $this->articleText->save(false);
 		$this->articleTextId = $this->articleText->id;
+		$this->addErrors($this->articleText->getErrors());
 		$transaction->commit();
-		return parent::beforeSave();
+		return parent::beforeSave() && $saveOK;
 	}
 
 	public function afterSave() {
 		$this->articleText->articleId = $this->id;
-		$this->articleText->save();
+		$saveOK = $this->articleText->save();
+		$this->addErrors($this->articleText->getErrors());
 		$this->_access->replace();
-		return parent::afterSave();
+		return parent::afterSave() && $saveOK;
 	}
 
 	public function purify() {
@@ -153,6 +156,7 @@ class Article extends CActiveRecord {
 	public function setContent($contentString) {
 		$this->articleText = new ArticleText;
 		$this->articleText->content = $contentString;
+		$this->articleText->purify();
 	}
 	
 	public function getContent() {

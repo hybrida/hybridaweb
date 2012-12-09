@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `article` (
   `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `shorttitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci,
-  `articleTextId` int(11) DEFAULT NULL,
   `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `articleTextId` int(11) DEFAULT NULL,
   `author` int(11) NOT NULL,
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
@@ -51,6 +51,7 @@ CREATE TABLE IF NOT EXISTS `article_text` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `articleId` int(11) NOT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;

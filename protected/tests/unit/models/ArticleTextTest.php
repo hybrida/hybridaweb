@@ -67,5 +67,14 @@ SQL;
 		$article->save();
 		$this->assertContentsCount($article, 4);
 	}
+	
+	public function test_find() {
+		$article = $this->getArticle();
+		$article->setContent("Testing testing");
+		$saveOK = $article->save();
+		$this->assertTrue($saveOK);
+		$article2 = Article::model()->findByPk($article->id);
+		$this->assertEquals("Testing testing", $article2->getContent());
+	}
 
 }

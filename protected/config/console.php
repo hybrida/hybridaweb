@@ -1,10 +1,12 @@
 <?php
+include dirname(dirname(dirname(__FILE__))) . "/globals.php";
 
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.
 return array(
 	'import' => array(
 		'application.exceptions.*',
+		'application.models.*',
 	),
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'My Console Application',

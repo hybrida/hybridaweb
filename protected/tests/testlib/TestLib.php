@@ -14,7 +14,7 @@ class TestLib {
 
 	public static function deleteDummyData() {
 		self::deleteDummyDataFromNews();
-		self::deleteDummyDataFromEvent();
+		self::deleteDummyDataFromArticle();
 	}
 
 	public static function deleteDummyDataFromNews() {
@@ -34,21 +34,21 @@ class TestLib {
 		$command->execute();
 	}
 
-	public static function deleteDummyDataFromEvent() {
-		$sql = "delete from event where 
+	public static function deleteDummyDataFromArticle() {
+		$sql = "delete from article where 
 				title is null 
+				or content is null
 				or title = 'title'
 				or title = 'dummy'
 				or title = 'TestCase'
+				or content = 'TestCase'
 				or title = 'NewsEventFormTest'
-				or title = 'SPAM'
-				or title = ''
-				or title = 'jepp'
+				or title Like 'Lipsum%'
 				";
 		$command = Yii::app()->db->createCommand($sql);
 		$command->execute();
 	}
-	
+
 	public static function trace($name, $value) {
 		$len = strlen($name);
 		echo "\n\n$name\n";
