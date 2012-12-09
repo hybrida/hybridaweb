@@ -3,11 +3,11 @@
 class ArticleForm extends CFormModel {
 
 	private $_article;
-    private $_articleText;
+	private $_articleText;
 	public $access = array();
 	public $author;
 	public $content;
-    public $articleTextId;
+	public $articleTextId;
 	public $parentId;
 	public $shorttitle;
 	public $title;
@@ -19,16 +19,16 @@ class ArticleForm extends CFormModel {
 		if ($article == null) {
 			throw new NullPointerException("articleinput was null");
 		}
-        
+
 		$this->_article = $article;
-        $this->_articleText = new ArticleText;
+		$this->_articleText = new ArticleText;
 		$this->initAttributes();
 	}
 
 	private function initAttributes() {
 		$this->title = $this->_article->title;
 		$this->content = $this->_article->content;
-        $this->articleTextId = $this->_articleText->id;
+		$this->articleTextId = $this->_articleText->id;
 		$this->parentId = $this->_article->parentId;
 		$this->shorttitle = $this->_article->shorttitle;
 		$this->access = $this->_article->access;
@@ -38,9 +38,9 @@ class ArticleForm extends CFormModel {
 	public function save() {
 		$this->setArticleAttributes();
 		$this->_article->purify();
-        $this->_articleText->purify();
+		$this->_articleText->purify();
 		$this->_article->save();
-        $this->_articleText->save();
+		$this->_articleText->save();
 	}
 
 	private function setArticleAttributes() {
@@ -50,7 +50,7 @@ class ArticleForm extends CFormModel {
 			'parentId' => $this->parentId,
 			'shorttitle' => $this->shorttitle,
 			'phpFile' => $this->phpFile,
-            'articleTextId' => $this->articleTextId,
+			'articleTextId' => $this->articleTextId,
 		));
 		$this->_article->access = $this->access;
 	}
@@ -59,9 +59,8 @@ class ArticleForm extends CFormModel {
 		return $this->_article;
 	}
 
-	public function setAttributes($values, $articleText, $safeOnly = false) {
+	public function setAttributes($values, $safeOnly = false) {
 		$this->access = array();
-        $this->articleTextId = $articleText->id;
 		parent::setAttributes($values, $safeOnly);
 	}
 

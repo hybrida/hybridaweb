@@ -122,22 +122,25 @@ class Image extends CActiveRecord {
 		return $image;
 	}
 
-	public static function tag($id, $size, $htmlOptions=array('alt' => '')) {
+	public static function tag($id, $size, $htmlOptions = array('alt' => '')) {
 		list($width, $height) = self::getSize($size);
-		if ($width) $htmlOptions['width'] = $width;
-		if ($height) $htmlOptions['height'] = $height;
+		if ($width)
+			$htmlOptions['width'] = $width;
+		if ($height)
+			$htmlOptions['height'] = $height;
 		try {
 			$url = self::getViewUrl($id, $size);
 			return CHtml::image($url, "", $htmlOptions);
 		} catch (FileNotFoundException $e) {
+			
 		}
 	}
-	
+
 	public static function getViewUrl($id, $size) {
 		$image = self::getResized($id, $size);
 		return Yii::app()->baseUrl . self::getRelativeFilePath($id, $size);
 	}
-	
+
 	public static function getRelativeFilePath($id, $size) {
 		$filename = self::getFileName($id);
 		$filePath = "/upc/images/$size/$filename.jpg";
@@ -167,11 +170,10 @@ class Image extends CActiveRecord {
 	public static function getImageDir() {
 		return Yii::getPathOfAlias("webroot.upc.images");
 	}
-	
+
 	public static function getFileName($id) {
 		return sha1("hybrida" . $id);
 	}
-
 
 	public function hasSize($size) {
 		$filename = $this->getFilePath($size);
@@ -203,7 +205,7 @@ class Image extends CActiveRecord {
 		}
 		$si->save($this->getFilePath($size));
 	}
-	
+
 	private function throwExceptionIfFileDoesNotExist() {
 		if (!file_exists($this->getFilePath())) {
 			throw new FileNotFoundException("The image " . $this->id . " Does not exist");
@@ -221,7 +223,7 @@ class Image extends CActiveRecord {
 		$max_height = isset($ar['max_height']) ? $ar['max_height'] : null;
 		return array($width, $height, $max_width, $max_height);
 	}
-	
+
 	public static function uploadByModel($model, $attribute, $userId) {
 		$uploadedFile = CUploadedFile::getInstance($model, $attribute);
 		$image = self::uploadAndSave($uploadedFile, $userId);
@@ -235,16 +237,20 @@ class Image extends CActiveRecord {
 			throw new NoFileIsUploadedException();
 		}
 		$image->save();
-		if (!$useRename)
+		$dirname = dirname($image->getFilePath());
+		SimpleImage::createDirectoryIfNotExists($dirname);
+		if (!$useRename) {
 			$image->oldName->saveAs($image->getFilePath());
-		else
+		} else {
 			$ren = rename($image->oldName->tempName, $image->getFilePath());
+		}
 		$image->title = $image->oldName;
 		$image->timestamp = new CDbExpression("NOW()");
 		$image->userId = $userId;
 		$image->save();
 		return $image;
 	}
+
 }
 
 /*
@@ -288,7 +294,15 @@ class SimpleImage {
 		}
 	}
 
+	public static function createDirectoryIfNotExists($directory) {
+		if (!is_dir($directory)) {
+			mkdir($directory);
+			chmod($directory, 0770);
+		}
+	}
+
 	public function save($filename, $image_type = IMAGETYPE_JPEG, $compression = 75, $permissions = null) {
+		self::createDirectoryIfNotExists(dirname($filename));
 
 		if ($image_type == IMAGETYPE_JPEG) {
 			imagejpeg($this->image, $filename, $compression);
@@ -352,7 +366,7 @@ class SimpleImage {
 		imagecopyresampled($new_image, $this->image, 0, 0, 0, 0, $width, $height, $this->getWidth(), $this->getHeight());
 		$this->image = $new_image;
 	}
-	
+
 	public function crop($crop_width, $crop_height) {
 		$cropped_image_gd = imagecreatetruecolor($crop_width, $crop_height);
 		$original_image_gd = $this->image;
@@ -372,7 +386,7 @@ class SimpleImage {
 			$int_width = $half_width - $w_height;
 
 			imagecopyresampled($cropped_image_gd, $original_image_gd, -$int_width, 0, 0, 0, $adjusted_width, $crop_height, $original_width, $original_height);
-		} else  {
+		} else {
 			$adjusted_height = $original_height / $widthRatio;
 			$half_height = $adjusted_height / 2;
 			$int_height = $half_height - $h_height;

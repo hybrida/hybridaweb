@@ -24,61 +24,6 @@ class ArticleTest extends CTestCase {
 		$article2 = Article::model()->findByPk($article->primaryKey);
 		$this->assertEquals($access, $article2->access);
 	}
-    
-    public function test_printTemplateContent() {
-        $article_without_php_file = $this->getNewArticle();
-        $article_without_php_file->content = "content";
-        $article_without_php_file->phpFile = null;
-        
-        $this->assertEquals("content", self::getTemplateContent($article_without_php_file));
-        
-        
-        $article = $this->getNewArticle();
-        $article->phpFile = "styret_om_oss";
-        try {
-            self::getTemplateContent($article);
-        } catch (Exception $e) {
-            $this->fail('Should have succeded');
-        }
-        
-        
-        $this->assertArticleName("/etc/hosts");
-        $this->assertArticleName(".htaccess");
-        
-        
-        $article_non_existing = $this->getNewArticle();
-        $article_non_existing->phpFile = "doesNotExist";
-        
-        try {
-            self::getTemplateContent($article_non_existing);
-        } catch (CHttpException $e) {
-            return;
-        }
-        
-        $this->fail("Should have been illegal content");
-    }
-    
-    private function assertArticleName($name) {
-        $article = $this->getNewArticle();
-        $article->phpFile = $name;
-        
-        try {
-            self::getTemplateContent($article);
-        } catch (CHttpException $e) {
-            return;
-        }
-        
-        $this->fail("Should have been illegal content");
-    }
-    
-        
-    private static function getTemplateContent($article) {
-        ob_start();
-        $article->printTemplateContent();
-        $contents = ob_get_contents();
-        ob_end_clean();
-        return $contents;
-    }
 
 	public function test_getChildren() {
 		$parent = $this->getNewArticle();
