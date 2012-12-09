@@ -18,6 +18,7 @@ class m121209_184746_move_from_article_content_to_article_text extends CDbMigrat
 			$article->save();
 		}
 		$this->dropColumn("article", "content");
+		$this->dropColumn("article", "phpFile");
 		return true;
 	}
 	

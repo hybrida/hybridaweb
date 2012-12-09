@@ -22,7 +22,6 @@ class Article extends CActiveRecord {
 
 	private $_access;
 	private static $list;
-	private $articleText;
 
 	public static function model($className = __CLASS__) {
 		return parent::model($className);
@@ -47,7 +46,7 @@ class Article extends CActiveRecord {
 	public function relations() {
 		return array(
 			'author' => array(self::BELONGS_TO, 'user', 'author'),
-            'contents' => array(self::HAS_MANY, 'ArticleText', 'articleId'),
+            'articleText' => array(self::HAS_MANY, 'ArticleText', 'articleId'),
 			//'currentArticleContent' => array(self::BELONGS_TO, "ArticleText", "articleTextId"),
 		);
 	}
@@ -153,14 +152,39 @@ class Article extends CActiveRecord {
         return $articleText->content;
     }
 	
-	public function setContent($contentString) {
+	public function setContent($content) {
+		$this->setArticleTextContents($content);
+	}
+	
+	private function setArticleTextContents($content=null, $phpFile=null) {
+		$oldArt = $this->articleText;
+		if ($oldArt === null) {
+			$oldArt = new ArticleText;
+		}
 		$this->articleText = new ArticleText;
-		$this->articleText->content = $contentString;
-		$this->articleText->purify();
+		if ($content ===null) {
+			$this->articleText->content = $oldArt->content;
+		} else {
+			$this->articleText->content = $content;
+		}
+		if ($phpFile === null) {
+			$this->articleText->phpFile = $oldArt->phpFile;
+		} else {
+			$this->articleText->phpFile = $phpFile;
+		}
+		$this->articleText->purify();		
 	}
 	
 	public function getContent() {
 		return $this->articleText->content;
+	}
+	
+	public function setPhpFile($phpFile) {
+		$this->setArticleTextContents(null, $phpFile);
+	}
+	
+	public function getPhpFile() {
+		return $this->articleText->phpFile;
 	}
 	
 	public function getArticleText() {
