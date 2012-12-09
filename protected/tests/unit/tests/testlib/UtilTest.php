@@ -36,6 +36,11 @@ class UtilTest extends PHPUnit_Framework_TestCase {
 	public function testGetNewComment() {
 		$this->assertSave(Util::getNewComment());
 	}
+	
+	public function testGetNewArticleText() {
+		$dummyArticleId = 0;
+		$this->assertSave(Util::getNewArticleText($dummyArticleId));
+	}
 
 
 }

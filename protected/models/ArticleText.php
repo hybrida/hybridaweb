@@ -89,6 +89,11 @@ class ArticleText extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+	
+	public function beforeValidate() {
+		$this->timestamp = new CDbExpression('NOW()');
+		return parent::beforeValidate();
+	}
 
 	public function purify() {
 		$purifier = new CHtmlPurifier();

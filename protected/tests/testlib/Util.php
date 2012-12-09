@@ -115,4 +115,17 @@ class Util {
 		$comment->save();
 		return $comment;
 	}
+	
+	public static function getNewArticleText($articleId) {
+		$articleText = new ArticleText;
+		$articleText->content = "test";
+		$articleText->articleId = $articleId;
+		return $articleText;
+	}
+	
+	public static function getArticleText($articleId) {
+		$articleText = self::getNewArticleText($articleId);
+		$articleText->save();
+		return $articleText;
+	}
 }
