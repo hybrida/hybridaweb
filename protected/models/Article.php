@@ -205,33 +205,33 @@ class Article extends CActiveRecord {
 		
 		$que = array();
 		foreach ($list as $node) {
-			$que[] = new Queue(0, $node);
+			$que[] = new QueueNode(0, $node);
 		}
 		$crumbList = array();
 		while(!empty($que)) {
-			$q = array_pop($que);
-			$this->updateCrumbList($crumbList, $q);
-			if ($q->node->id == $this->id) {
+			$queNode = array_pop($que);
+			$this->updateCrumbList($crumbList, $queNode);
+			if ($queNode->node->id == $this->id) {
 				return $this->createCrumbs($crumbList);
 			}
-			foreach ($q->node->children as $child) {
-				$que[] = new Queue($q->level + 1, $child);
+			foreach ($queNode->node->children as $child) {
+				$que[] = new QueueNode($queNode->level + 1, $child);
 			}
 		}
 		return array();
 	}
 	
-	private function updateCrumbList(&$crumbList, $q) {
-		while (count($crumbList) > $q->level && count($crumbList) != 0) {
+	private function updateCrumbList(&$crumbList, $queNode) {
+		while (count($crumbList) > $queNode->level && count($crumbList) != 0) {
 			array_pop($crumbList);
 		}
-		array_push($crumbList, $q);
+		array_push($crumbList, $queNode);
 	}
 	
 	private function createCrumbs($crumbList) {
 		$list = array();
-		foreach ($crumbList as $que) {
-			$node = $que->node;
+		foreach ($crumbList as $queNode) {
+			$node = $queNode->node;
 			$list[$node->title] = Yii::app()->createUrl("/article/view", array(
 				'title' => $node->title,
 				'id' => $node->id,
@@ -242,7 +242,7 @@ class Article extends CActiveRecord {
 
 }
 
-class Queue {
+class QueueNode {
 	public $level;
 	public $node;
 	
