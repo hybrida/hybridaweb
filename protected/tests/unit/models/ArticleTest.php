@@ -25,27 +25,6 @@ class ArticleTest extends CTestCase {
 		$this->assertEquals($access, $article2->access);
 	}
 
-    private function assertArticleName($name) {
-        $article = $this->getNewArticle();
-        $article->phpFile = $name;
-
-        try {
-            self::getTemplateContent($article);
-        } catch (CHttpException $e) {
-            return;
-        }
-
-        $this->fail("Should have been illegal content");
-    }
-
-    private static function getTemplateContent($article) {
-        ob_start();
-        $article->printTemplateContent();
-        $contents = ob_get_contents();
-        ob_end_clean();
-        return $contents;
-    }
-
 	public function test_getChildren() {
 		$parent = $this->getNewArticle();
 		$parent->save();
