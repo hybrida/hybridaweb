@@ -40,9 +40,9 @@
 	</div>
 
     <div class="row">
-        <?= $form->labelEx($articleText, 'content') ?>
-        <?= $form->richTextArea($articleText, 'content') ?>
-        <?= $form->error($articleText, 'content') ?>
+        <?= $form->labelEx($model, 'content') ?>
+        <?= $form->richTextArea($model, 'content') ?>
+        <?= $form->error($model, 'content') ?>
     </div>
 
 	<div class="row">

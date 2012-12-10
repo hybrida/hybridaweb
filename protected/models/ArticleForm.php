@@ -3,11 +3,9 @@
 class ArticleForm extends CFormModel {
 
 	private $_article;
-	private $_articleText;
 	public $access = array();
 	public $author;
 	public $content;
-	public $articleTextId;
 	public $parentId;
 	public $shorttitle;
 	public $title;
@@ -21,14 +19,12 @@ class ArticleForm extends CFormModel {
 		}
 
 		$this->_article = $article;
-		$this->_articleText = new ArticleText;
 		$this->initAttributes();
 	}
 
 	private function initAttributes() {
 		$this->title = $this->_article->title;
 		$this->content = $this->_article->content;
-		$this->articleTextId = $this->_articleText->id;
 		$this->parentId = $this->_article->parentId;
 		$this->shorttitle = $this->_article->shorttitle;
 		$this->access = $this->_article->access;
@@ -48,7 +44,6 @@ class ArticleForm extends CFormModel {
 			'parentId' => $this->parentId,
 			'shorttitle' => $this->shorttitle,
 			'phpFile' => $this->phpFile,
-			'articleTextId' => $this->articleTextId,
 		));
 		$this->_article->access = $this->access;
 	}

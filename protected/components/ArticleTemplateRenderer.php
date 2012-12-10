@@ -8,7 +8,7 @@ class ArticleTemplateRenderer {
                     "<h1>".$article->title."</h1>".
                 "</div>".
                 "<div id='article-content'>".
-                    $article->text.
+                    $article->content.
                 "</div>";
             return;
         }
