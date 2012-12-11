@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS `article` (
   `parentId` int(11) DEFAULT NULL,
   `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `shorttitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `content` mediumtext COLLATE utf8_unicode_ci,
-  `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `articleTextId` int(11) DEFAULT NULL,
   `author` int(11) NOT NULL,
   `timestamp` date NOT NULL,
@@ -47,15 +45,13 @@ CREATE TABLE IF NOT EXISTS `article` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=81 ;
 
 CREATE TABLE IF NOT EXISTS `article_text` (
-
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `articleId` int(11) NOT NULL,
   `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
   `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
-
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=30 ;
 
 CREATE TABLE IF NOT EXISTS `bk_company` (
   `companyID` int(11) NOT NULL AUTO_INCREMENT,
@@ -164,6 +160,15 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
+CREATE TABLE IF NOT EXISTS `group_membership` (
+  `groupId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `start` date NOT NULL DEFAULT '0000-00-00',
+  `end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`groupId`,`userId`,`end`,`start`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu` int(11) NOT NULL,
@@ -175,15 +180,6 @@ CREATE TABLE IF NOT EXISTS `groups` (
   UNIQUE KEY `url` (`url`),
   KEY `members` (`admin`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
-
-CREATE TABLE IF NOT EXISTS `group_membership` (
-  `groupId` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `start` date NOT NULL DEFAULT '0000-00-00',
-  `end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`groupId`,`userId`,`end`,`start`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `iktringen_membership` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -358,6 +354,12 @@ CREATE TABLE IF NOT EXISTS `specialization` (
   KEY `siteId` (`siteId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
 
+CREATE TABLE IF NOT EXISTS `tbl_migration` (
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `apply_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -403,7 +405,3 @@ ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 SET FOREIGN_KEY_CHECKS=1;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
