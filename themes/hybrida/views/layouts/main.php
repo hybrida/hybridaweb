@@ -8,11 +8,8 @@
 
 		<?= $this->clips['head-facebook'] ?>
 
-		<script type="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/animations.js"></script>
-		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/collapsible_lists.js'></script>
-		<script type = 'text/javascript' src = '<?= Yii::app()->request->baseUrl ?>/scripts/e.js'></script>
-		<script type ="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/galleria/galleria-1.2.8.min.js"></script>
-		
+		<script type="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/collapsible_lists.js"></script>
+	
 
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
 
@@ -28,7 +25,7 @@
 		} elseif (isset($_GET['matrix'])) {
 			$_SESSION['matrix'] = false;
 		} ?>
-			
+
 		<? if (isset($_SESSION['matrix']) && $_SESSION['matrix'] == true): ?>
 			<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/hidden/matrix.css" />
 		<?endif ?>
@@ -76,6 +73,5 @@
 			
 			<div id="layout-marginMaker"></div>
 		</div>
-
 	</body>
 </html>
