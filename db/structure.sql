@@ -346,6 +346,15 @@ CREATE TABLE IF NOT EXISTS `signup_membership` (
   PRIMARY KEY (`eventId`,`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `signup_membership_anonymous` (
+  `eventId` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `signedOff` enum('true','false','','') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
+  PRIMARY KEY (`eventId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `specialization` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `siteId` int(11) DEFAULT NULL,
@@ -405,3 +414,7 @@ ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 SET FOREIGN_KEY_CHECKS=1;
+
+ALTER TABLE `signup_membership_anonymous`
+  ADD CONSTRAINT `signup_membership_anonymous_ibfk_2` FOREIGN KEY (`eventId`) REFERENCES `event` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
