@@ -141,6 +141,14 @@ class Signup extends CActiveRecord {
 		}
 	}
 
+	public function addAnonymousAttender($name, $email) {
+		$sm = new SignupMembershipAnonymous();
+		$sm->name = $name;
+		$sm->email = $email;
+		$sm->eventId = $this->eventId;
+		$sm->save();
+	}
+
 	public function pushToFacebook($eventId) {
 		$fb = new Facebook;
 		$fb->setAttending($eventId);
@@ -180,9 +188,15 @@ class Signup extends CActiveRecord {
 	public function removeAllAttenders() {
 		Yii::app()->db->createCommand()
 			->update('signup_membership', array('signedOff' => 'true'), 'eventId = :eid', array(':eid' => $this->eventId));
+		Yii::app()->db->createCommand()
+			->update('signup_membership_anonymous', array('signedOff' => 'true'), 'eventId = :eid', array(':eid' => $this->eventId));
 	}
 
 	public function getAttendingCount() {
+		return $this->getRegisteredAttendingCount() + $this->getAnonymousAttendingCount();
+	}
+
+	public function getRegisteredAttendingCount() {
 		$sql = "SELECT COUNT(*) as num 
 			FROM signup_membership
 			WHERE eventId = :eventId
@@ -194,6 +208,12 @@ class Signup extends CActiveRecord {
 		));
 		$data = $stmt->fetch(PDO::FETCH_ASSOC);
 		return $data['num'];
+	}
+
+	public function getAnonymousAttendingCount() {
+		return SignupMembershipAnonymous::model()->count("signedOff = 'false' AND eventId = ?", array(
+			$this->eventId,
+		));
 	}
 
 	public function getAttenderIDs() {
@@ -274,29 +294,29 @@ class Signup extends CActiveRecord {
 	}
 
 	private static function userListingComparator($user1, $user2) {
-        if ($user1->firstName == $user2->firstName) {
+		if ($user1->firstName == $user2->firstName) {
 			if ($user1->lastName == $user2->lastName)
 				return 0;
 			else {
-                return ($user1->lastName > $user2->lastName) ? 1 : -1;
-            }
+				return ($user1->lastName > $user2->lastName) ? 1 : -1;
+			}
 		} else {
 			return ($user1->firstName > $user2->firstName) ? 1 : -1;
 		}
 	}
-        
-        public function getAttendingFraction(){
-            return 100*($this->attendingCount / $this->spots);
-        }
-        
-        public function getAttendingColorClass(){
-            if ($this->AttendingFraction == 100) {
-                return "red";
-            }elseif ($this->AttendingFraction > 75) {
-                return "orange";
-            }else {
-                return "green";
-            }
-        }
+		
+		public function getAttendingFraction(){
+			return 100*($this->attendingCount / $this->spots);
+		}
+		
+		public function getAttendingColorClass(){
+			if ($this->AttendingFraction == 100) {
+				return "red";
+			}elseif ($this->AttendingFraction > 75) {
+				return "orange";
+			}else {
+				return "green";
+			}
+		}
 
 }

@@ -1,6 +1,6 @@
 <?php 
 
-class SignupMembershipAnonymTest extends CTestCase {
+class SignupMembershipAnonymousTest extends CTestCase {
 
 	private $sm;
 	

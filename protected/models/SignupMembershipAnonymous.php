@@ -12,7 +12,7 @@
  * The followings are the available model relations:
  * @property Event $event
  */
-class SignupMembershipAnonym extends CActiveRecord
+class SignupMembershipAnonymous extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -28,7 +28,7 @@ class SignupMembershipAnonym extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'signup_membership_anonym';
+		return 'signup_membership_anonymous';
 	}
 
 	/**

@@ -34,17 +34,21 @@ class Util {
 	}
 	
 	
-	public static function getNewSignup() {
+	public static function getNewSignup($eventId=null) {
 		$signup = new Signup;
 		$signup->spots = 1;
 		$signup->close = "2011-10-22 14:30";
 		$signup->open = "2015-10-22 14:30";
-		$signup->eventId = 10000 + Signup::model()->count();
+		if ($eventId === null) {
+			$signup->eventId = 10000 + Signup::model()->count();
+		} else {
+			$signup->eventId = $eventId;
+		}
 		return $signup;
 	}
 	
-	public static function getSignup() {
-		$signup = self::getNewSignup();
+	public static function getSignup($eventId=null) {
+		$signup = self::getNewSignup($eventId);
 		$signup->save();
 		return $signup;
 	}
@@ -129,9 +133,15 @@ class Util {
 		return $articleText;
 	}
 
-	public static function getNewSignupMembershipAnonym($eventId){
-		$signupMembershipAnonym = new SignupMembershipAnonym();
-		$signupMembershipAnonym->eventId = $eventId;
-		return $signupMembershipAnonym;
+	public static function getNewSignupMembershipAnonymous($eventId){
+		$signupMembershipAnonymous = new SignupMembershipAnonym();
+		$signupMembershipAnonymous->eventId = $eventId;
+		return $signupMembershipAnonymous;
+	}
+
+	public static function getSignupMembershipAnonymous($eventId) {
+		$signupMembershipAnonymous = self::getNewSignupMembershipAnonymous($eventId);
+		$signupMembershipAnonymous->save();
+		return $signupMembershipAnonymous;
 	}
 }
