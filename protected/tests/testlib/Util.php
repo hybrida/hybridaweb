@@ -128,4 +128,10 @@ class Util {
 		$articleText->save();
 		return $articleText;
 	}
+
+	public static function getNewSignupMembershipAnonym($eventId){
+		$signupMembershipAnonym = new SignupMembershipAnonym();
+		$signupMembershipAnonym->eventId = $eventId;
+		return $signupMembershipAnonym;
+	}
 }

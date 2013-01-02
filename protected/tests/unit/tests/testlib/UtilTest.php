@@ -42,5 +42,10 @@ class UtilTest extends PHPUnit_Framework_TestCase {
 		$this->assertSave(Util::getNewArticleText($dummyArticleId));
 	}
 
+	public function testGetNewSignupMembershipAnonym() {
+		$event = Util::getEvent();
+		$this->assertSave(Util::getNewSignupMembershipAnonym($event->id));
+	}
+
 
 }
