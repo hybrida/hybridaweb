@@ -56,6 +56,12 @@ class Event extends CActiveRecord {
 		return array(
 			'signup' => array(self::BELONGS_TO, 'Signup', 'id'),
 			'eventCompany' => array(self::BELONGS_TO, 'EventCompany', 'id'),
+			'news' => array(
+				self::HAS_ONE,
+				"News",
+				"parentId",
+				"on" => "news.parentType = 'event'"
+			),
 		);
 	}
 
@@ -185,10 +191,6 @@ class Event extends CActiveRecord {
 			return $this->eventCompany->bpcID != null;
 		}
 		return false;
-	}
-	
-	public function getNews() {
-		return News::model()->find("parentType = 'event' AND parentId = ?", array($this->id));
 	}
 
 }

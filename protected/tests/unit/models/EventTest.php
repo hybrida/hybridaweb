@@ -122,4 +122,23 @@ class EventTest extends CTestCase {
 		$this->assertTrue($event->isBpcEvent());
 	}
 
+	public function test_news_getNewsFromSignupUsingRelations() {
+		$news = Util::getNewNews();
+		$event = Util::getEvent();
+		$news->parentId = $event->id;
+		$news->parentType = "event";
+		$news->save();
+		$newsFromEvent = $event->news;
+		$this->assertEquals($news->id, $newsFromEvent->id);
+
+		// Setter news->parentType til noe annet enn event,
+		// da burde ikke eventen ha noen tilknytning til nyheten lengre
+
+		$news->parentType = "group";
+		$news->save();
+		$event = Event::model()->findByPk($event->id);
+		$newsFromEvent = $event->news;
+		$this->assertNull($newsFromEvent);
+	}
+
 }
