@@ -243,7 +243,7 @@ class Signup extends CActiveRecord {
 	}
 
 	public function getAnonymousAttenders() {
-		return SignupMembershipAnonymous::model()->findAll("eventId = ?", array($this->eventId));
+		return SignupMembershipAnonymous::model()->findAll("signedOff = 'false' AND eventId = ?", array($this->eventId));
 	}
 
 	public function getAttendersFiveYearArrays() {

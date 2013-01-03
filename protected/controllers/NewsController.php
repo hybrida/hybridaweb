@@ -11,7 +11,7 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view", "edit", 'toggleAttending'),
+				'actions' => array("view", "edit", 'toggleAttending', 'deleteManualSignup'),
 			),
 			array('allow',
 				'actions' => array("create", "email", "manualSignup"),
@@ -194,11 +194,27 @@ class NewsController extends Controller {
 	public function actionManualSignup($id) {
 		$eventId = $id; // more verbose
 		$signup = Signup::model()->findByPk($eventId);
+
+		if (Yii::app()->request->isPostRequest) {
+			$model = new SignupMembershipAnonymous();
+			$model->setAttributes($_POST['SignupMembershipAnonymous']);
+			$model->eventId = $id;
+			$model->save();
+		}
+
 		$this->render("manual_signup", array(
 			'signup' => $signup,
 			'attenders' => $signup->getAnonymousAttenders(),
 			'model' => new SignupMembershipAnonymous(),
+			'ajaxFeedUrl' => $this->createUrl("deleteManualSignup", array("id" => "")),
 		));
+	}
+
+	public function actionDeleteManualSignup($id) {
+		$model = SignupMembershipAnonymous::model()->findByPK($id);
+		$model->signedOff = "true";
+		$model->save();
+		echo CJSON::encode($model);
 	}
 
 }

@@ -347,13 +347,14 @@ CREATE TABLE IF NOT EXISTS `signup_membership` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `signup_membership_anonymous` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `eventId` int(11) NOT NULL DEFAULT '0',
   `firstName` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lastName` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `signedOff` enum('true','false','','') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
-  PRIMARY KEY (`eventId`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `specialization` (
