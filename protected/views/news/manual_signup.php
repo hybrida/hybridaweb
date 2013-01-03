@@ -4,6 +4,10 @@
 		function deleteAttender(buttonElement) {
 			var trElement = buttonElement.parentNode.parentNode;
 			var id = trElement.getAttribute("data-id");
+			var name = trElement.getAttribute("data-name");
+			if (!confirm("Er du sikker på at du vil slette " + name)) {
+				return;
+			}
 			var ajaxFeedUrl = "<?= $ajaxFeedUrl ?>" + id;
 			console.log(ajaxFeedUrl);
 			$.ajax({
@@ -61,7 +65,7 @@
 			<th>Slett</th>
 		</tr>
 	<? foreach ($attenders as $attender): ?>
-		<tr data-id="<?= $attender->id ?>">
+		<tr data-id="<?= $attender->id ?>" data-name="<?= $attender->firstName . " " . $attender->lastName ?>">
 			<td><?= $attender->firstName ?></td>
 			<td><?= $attender->lastName ?></td>
 			<td><?= $attender->email ?></td>
