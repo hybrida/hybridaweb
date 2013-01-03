@@ -1,3 +1,9 @@
+<?
+$this->breadcrumbs = array(
+	$signup->event->news->title => $signup->event->news->viewUrl,
+	"Manull Påmelding" => '',
+);
+?>
 <div class="newsManualSignup">
 
 	<script type="text/javascript">

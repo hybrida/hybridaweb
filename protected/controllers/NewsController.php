@@ -193,7 +193,8 @@ class NewsController extends Controller {
 
 	public function actionManualSignup($id) {
 		$eventId = $id; // more verbose
-		$signup = Signup::model()->findByPk($eventId);
+		$signup = Signup::model()->with("event", "event.news")->findByPk($eventId);
+
 
 		if (Yii::app()->request->isPostRequest) {
 			$model = new SignupMembershipAnonymous();
