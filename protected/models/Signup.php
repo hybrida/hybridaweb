@@ -243,7 +243,11 @@ class Signup extends CActiveRecord {
 	}
 
 	public function getAnonymousAttenders() {
-		return SignupMembershipAnonymous::model()->findAll("signedOff = 'false' AND eventId = ?", array($this->eventId));
+		$criteria = new CDbCriteria();
+		$criteria->compare("eventId", $this->eventId );
+		$criteria->compare("signedOff", "false");
+		$criteria->order = "lastName ASC";
+		return SignupMembershipAnonymous::model()->findAll($criteria);
 	}
 
 	public function getAttendersFiveYearArrays() {
