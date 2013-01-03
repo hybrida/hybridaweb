@@ -244,7 +244,7 @@ class SignupTest extends CTestCase {
 	public function test_anonymousAttenders() {
 		$event = Util::getEvent();
 		$signup = Util::getSignup($event->id);
-		$signup->addAnonymousAttender("Sigurd Andreas Holsen", "sighol@gmail.com");
+		$signup->addAnonymousAttender("Sigurd Andreas", "Holsen", "sighol@gmail.com");
 		$this->assertEquals(1, $signup->getAttendingCount());
 
 		$signup->removeAllAttenders();

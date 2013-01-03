@@ -141,9 +141,10 @@ class Signup extends CActiveRecord {
 		}
 	}
 
-	public function addAnonymousAttender($name, $email) {
+	public function addAnonymousAttender($firstName, $lastName,$email) {
 		$sm = new SignupMembershipAnonymous();
-		$sm->name = $name;
+		$sm->firstName = $firstName;
+		$sm->lastName = $lastName;
 		$sm->email = $email;
 		$sm->eventId = $this->eventId;
 		$sm->save();

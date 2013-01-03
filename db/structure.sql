@@ -348,7 +348,8 @@ CREATE TABLE IF NOT EXISTS `signup_membership` (
 
 CREATE TABLE IF NOT EXISTS `signup_membership_anonymous` (
   `eventId` int(11) NOT NULL DEFAULT '0',
-  `name` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `firstName` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lastName` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `signedOff` enum('true','false','','') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',

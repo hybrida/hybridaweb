@@ -41,10 +41,10 @@ class SignupMembershipAnonymous extends CActiveRecord
 		return array(
 			array('timestamp', 'required'),
 			array('eventId', 'numerical', 'integerOnly'=>true),
-			array('name, email', 'length', 'max'=>256),
+			array('firstName, lastName, email', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('eventId, name, email, timestamp', 'safe', 'on'=>'search'),
+			array('eventId, firstName, lastName, email, timestamp', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,8 +67,9 @@ class SignupMembershipAnonymous extends CActiveRecord
 	{
 		return array(
 			'eventId' => 'Event',
-			'name' => 'Name',
-			'email' => 'Email',
+			'firstName' => 'Fornavn',
+			'lastName' => 'Etternavnt',
+			'email' => 'Epost',
 			'timestamp' => 'Timestamp',
 		);
 	}

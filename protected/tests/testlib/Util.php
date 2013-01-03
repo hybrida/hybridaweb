@@ -140,7 +140,8 @@ class Util {
 	}
 
 	public static function getSignupMembershipAnonymous($eventId) {
-		$signupMembershipAnonymous = self::getNewSignupMembershipAnonymous($eventId);
+		$signupMembershipAnonymous = 
+				self::getNewSignupMembershipAnonymous($eventId);
 		$signupMembershipAnonymous->save();
 		return $signupMembershipAnonymous;
 	}
