@@ -137,28 +137,21 @@ $utgaveMapper = getUtgaveFolders($folderPath);
 	}
 </style>
 
-<div id="article-title">
-	<h1><?= $article->title?></h1>
+<div>
+	<?= $article->content ?>
 </div>
 
-<div id="article-content">
+<? foreach ($utgaveMapper as $mappe): ?>
+	<div class="mappe">
+		<h2><?= "Skoleåret " . $mappe->schoolYear ?></h2>
 
-	<div>
-		<?= $article->content ?>
+		<? foreach ($mappe->utgaver as $utgave): ?>
+			<div class="utgave">
+				<a href="<?= $folderUrl ?><?= $mappe->year1 . "-" . $mappe->year2 ?>/<?= $utgave->fileName ?>">
+					<img src="<?= $folderUrl ?><?= $mappe->year1 . "-" . $mappe->year2 ?>/<?= $utgave->pictureFileName ?>" />	
+					<?= $utgave->nummer ?>
+				</a>
+			</div>
+		<? endforeach ?>
 	</div>
-
-	<? foreach ($utgaveMapper as $mappe): ?>
-		<div class="mappe">
-			<h2><?= "Skoleåret " . $mappe->schoolYear ?></h2>
-
-			<? foreach ($mappe->utgaver as $utgave): ?>
-				<div class="utgave">
-					<a href="<?= $folderUrl ?><?= $mappe->year1 . "-" . $mappe->year2 ?>/<?= $utgave->fileName ?>">
-						<img src="<?= $folderUrl ?><?= $mappe->year1 . "-" . $mappe->year2 ?>/<?= $utgave->pictureFileName ?>" />	
-						<?= $utgave->nummer ?>
-					</a>
-				</div>
-			<? endforeach ?>
-		</div>
 	<? endforeach ?>
-</div>
