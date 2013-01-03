@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `signup_membership_anonymous` (
   `lastName` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `email` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `signedOff` enum('true','false','','') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
+  `signedOff` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
