@@ -14,7 +14,7 @@ class NewsController extends Controller {
 				'actions' => array("view", "edit", 'toggleAttending'),
 			),
 			array('allow',
-				'actions' => array("create", "email"),
+				'actions' => array("create", "email", "manualSignup"),
 				'roles' => array('createNews'),
 			),
 			array('deny'),
@@ -188,6 +188,16 @@ class NewsController extends Controller {
 		$this->render('email', array(
 			'news' => $news,
 			'attenders' => $signup->attenders,
+		));
+	}
+
+	public function actionManualSignup($id) {
+		$eventId = $id; // more verbose
+		$signup = Signup::model()->findByPk($eventId);
+		$this->render("manual_signup", array(
+			'signup' => $signup,
+			'attenders' => $signup->getAnonymousAttenders(),
+			'model' => new SignupMembershipAnonymous(),
 		));
 	}
 

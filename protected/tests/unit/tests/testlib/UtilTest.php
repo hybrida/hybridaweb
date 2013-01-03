@@ -44,7 +44,7 @@ class UtilTest extends PHPUnit_Framework_TestCase {
 
 	public function testGetNewSignupMembershipAnonym() {
 		$event = Util::getEvent();
-		$this->assertSave(Util::getNewSignupMembershipAnonym($event->id));
+		$this->assertSave(Util::getNewSignupMembershipAnonymous($event->id));
 	}
 
 

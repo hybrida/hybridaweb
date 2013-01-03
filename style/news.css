@@ -133,3 +133,11 @@
 	width: 90%;
 	height: 500px;
 }
+
+.newsManualSignup table tr {
+	border-bottom: 1px solid #888;
+}
+
+.newsManualSignup table tr:nth-child(even) {
+	background-color: #ccc;
+}

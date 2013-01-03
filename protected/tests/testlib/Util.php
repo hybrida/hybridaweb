@@ -134,7 +134,7 @@ class Util {
 	}
 
 	public static function getNewSignupMembershipAnonymous($eventId){
-		$signupMembershipAnonymous = new SignupMembershipAnonym();
+		$signupMembershipAnonymous = new SignupMembershipAnonymous();
 		$signupMembershipAnonymous->eventId = $eventId;
 		return $signupMembershipAnonymous;
 	}

@@ -18,6 +18,11 @@ $this->beginClip('sidebar');
 			"id" => $news->id), array(
 				'class' => 'g-button',
 			)) ?>
+		<?= CHtml::link("Legg til manuelt", array(
+			'news/manualSignup', 'id' => $signup->eventId,
+		), array(
+			'class' => 'g-button',
+		)) ?>
 		<? endif ?>
 	</fieldset>
 <? endif ?>

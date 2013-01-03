@@ -241,7 +241,7 @@ class SignupTest extends CTestCase {
 		$this->assertEquals($attenders[2][1]->lastName, "Nei");
 	}
 
-	public function test_addAnonymousAttender_numberOfAttendersIncrease() {
+	public function test_anonymousAttenders() {
 		$event = Util::getEvent();
 		$signup = Util::getSignup($event->id);
 		$signup->addAnonymousAttender("Sigurd Andreas Holsen", "sighol@gmail.com");
@@ -249,6 +249,9 @@ class SignupTest extends CTestCase {
 
 		$signup->removeAllAttenders();
 		$this->assertEquals(0, $signup->getAttendingCount());
+
+		$anonymousAttenders = $signup->getAnonymousAttenders();
+		$this->assertEquals(1, count($anonymousAttenders));
 	}
 
 	public function test_addAnonymousAttenderAndDeleteHim_databasRecordIsNotDeleted() {
