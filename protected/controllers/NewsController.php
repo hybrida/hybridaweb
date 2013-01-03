@@ -11,10 +11,10 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view", "edit", 'toggleAttending', 'deleteManualSignup'),
+				'actions' => array("view", "edit", 'toggleAttending'),
 			),
 			array('allow',
-				'actions' => array("create", "email", "manualSignup"),
+				'actions' => array("create", "email", "manualSignup",'deleteManualSignup'),
 				'roles' => array('createNews'),
 			),
 			array('deny'),
