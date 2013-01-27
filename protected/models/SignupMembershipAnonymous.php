@@ -104,4 +104,8 @@ class SignupMembershipAnonymous extends CActiveRecord
 		$this->timestamp = new CDbExpression("NOW()");
 		return parent::afterConstruct();
 	}
+
+	public function getFullName() {
+		return $this->firstName . " " . $this->lastName;
+	}
 }

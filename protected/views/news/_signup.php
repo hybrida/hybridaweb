@@ -14,3 +14,12 @@
 	<h1> Påmeldte: </h1>
 	<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
 <? endif ?>
+
+<h2>Andre påmeldte</h2>
+<div class="manualAttenders">
+	<? foreach ($signup->getAnonymousAttenders() as $attender): ?>
+	<ul class="attender">
+		<li class="name"><?= $attender->fullName ?></li>
+	</ul>
+	<? endforeach ?>
+</div>
