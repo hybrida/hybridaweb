@@ -14,7 +14,7 @@ class NewsController extends Controller {
 				'actions' => array("view", "edit", 'toggleAttending'),
 			),
 			array('allow',
-				'actions' => array("create", "email", "manualSignup",'deleteManualSignup'),
+				'actions' => array("create", "email", "manualSignup",'deleteManualSignup', 'editManualSignup'),
 				'roles' => array('createNews'),
 			),
 			array('deny'),
@@ -209,6 +209,19 @@ class NewsController extends Controller {
 			'model' => new SignupMembershipAnonymous(),
 			'ajaxFeedUrl' => $this->createUrl("deleteManualSignup", array("id" => "")),
 		));
+	}
+
+	public function actionEditManualSignup($id) {
+		$model = SignupMembershipAnonymous::model()->findByPk($id);
+		if (Yii::app()->request->isPostRequest) {
+			$model->setAttributes($_POST['SignupMembershipAnonymous']);
+			$model->save();
+			$this->redirect($this->createUrl("manualSignup", array("id" => $model->eventId)));
+		} else {
+			$this->render("edit_anonymous_membership", array(
+				'model' => $model,
+			));
+		}
 	}
 
 	public function actionDeleteManualSignup($id) {

@@ -68,6 +68,7 @@ $this->breadcrumbs = array(
 			<th>Fornavn</th>
 			<th>Etternavn</th>
 			<th>Epost</th>
+			<th>Rediger</th>
 			<th>Slett</th>
 		</tr>
 	<? foreach ($attenders as $attender): ?>
@@ -75,6 +76,7 @@ $this->breadcrumbs = array(
 			<td><?= $attender->firstName ?></td>
 			<td><?= $attender->lastName ?></td>
 			<td><?= $attender->email ?></td>
+			<td><?= CHtml::link("Rediger", array("editManualSignup", "id" => $attender->id)) ?></td>
 			<td><input type="button" value="X" 
 					class="g-deleteButton" onClick="js:deleteAttender(this)" /></td>
 		</tr>
