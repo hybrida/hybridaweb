@@ -27,15 +27,18 @@ class BpcUpdate {
 		return $response;
 	}
 
-	public function updateAll() {
+	private function getUpdateAllRequest() {
 		$postData = array(
 			'request' => 'get_events',
 		);
 		$response = $this->getBpcResponse($postData);
-		$this->updateAllBedpreses($response);
+		return $response;
 	}
 
-	private function updateAllBedpreses($data) {
+	public function updateAll($data=null) {
+		if ($data === null) {
+			$data = $this->getUpdateAllRequest();
+		}
 		if (!isset($data['event'])) {
 			return;
 		}
@@ -44,7 +47,7 @@ class BpcUpdate {
 		}
 	}
 
-	private function updateBedpres($bedpresData) {
+	public function updateBedpres($bedpresData) {
 		$this->init($bedpresData['id']);
 		$this->saveEvent($bedpresData);
 		$this->saveSignup($bedpresData);

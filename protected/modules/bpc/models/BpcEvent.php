@@ -80,13 +80,31 @@ class BpcEvent extends CModel {
 		if (!$user) {
 			return false;
 		}
+		$hasAccessToSignup = $this->hasAccessToSignup($userId);
 		$classYear = $user->classYear;
 		$signupIsOn = $this->isOpen();
 		$okYear = $classYear >= $this->min_year && $classYear <= $this->max_year;
 		$availableSeats = $this->seats_available > 0;
 		$isWaitingList = (int)$this->waitlist_enabled === 1;
 		$availableSeatsOrWaitingList = $availableSeats || $isWaitingList;
-		return $signupIsOn && $okYear && $availableSeatsOrWaitingList;
+		return $signupIsOn && $okYear && $availableSeatsOrWaitingList && $hasAccessToSignup;
+	}
+
+	private function hasAccessToSignup($userId) {
+		$event = $this->getEvent();
+		if (!$event) {
+			return true;
+		}
+		$signup = $event->signup;
+		return app()->gatekeeper->hasPostAccess('signup', $signup->eventId);
+	}
+
+	private function getEvent() {
+		return Event::model()->
+				with('eventCompany', 'signup')->
+				find(
+					 "eventCompany.bpcID = ?",
+					 array($this->id));
 	}
 
 	public function isOpen() {

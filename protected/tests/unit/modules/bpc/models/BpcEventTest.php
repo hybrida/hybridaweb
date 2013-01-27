@@ -88,9 +88,43 @@ class BpcEventTest extends CTestCase {
 		$this->assertCanAttend(true);
 	}
 
-	public function getEvent() {
+	public function test_canAttend_gatekeeperRestriction_false() {
+		$eventArray = $this->getEventArray();
+
+
+		$eventArray['id'] = Event::model()->count();
+		$eventArray['min_year'] = 1;
+		$eventArray['seats_available'] = 10;
+		$bpcUpdater = new BpcUpdate();
+		$bpcUpdater->updateBedpres($eventArray);
+		$event = Event::model()->
+			with('eventCompany', 'signup')
+			->find(
+				   "eventCompany.bpcID = ?", 
+				   array($eventArray['id']));
+		$event->signup->access = array(Access::SPECIALIZATION_START + 57); // Tror det er webkom, men spiller ingen rolle
+		$event->signup->save();
+
+		$user = Util::getUser();
+		$user->classYear = 3;
+		$user->save();
+
+		$bpcEvent = $this->getEvent($eventArray);
+		$hasAccess = $bpcEvent->canAttend($user->id);
+		$this->assertFalse($hasAccess);
+	}
+
+	public function getEvent($eventArray=null) {
+		if ($eventArray === null) {
+			$eventArray = $this->getEventArray();
+		}
 		$event = new BpcEventMock();
-		$event->setAttributes(array(
+		$event->setAttributes($eventArray, false);
+		return $event;
+	}
+
+	private function getEventArray() {
+		return array(
 			'id' => '381',
 			'title' => 'Capgemini',
 			'description' => 'Capgemini',
@@ -112,8 +146,7 @@ class BpcEventTest extends CTestCase {
 			'web_page' => 'http://www.no.capgemini.com/',
 			'is_advertised' => '1',
 			'logo' => 'http://bpc.timini.no/image/200/22.jpg',
-				), false);
-		return $event;
+		);
 	}
 }
 
