@@ -6,7 +6,7 @@ class BpcUpdate {
 	private $event;
 	private $signup;
 
-	const MAX_INGRESS_LENGTH = 700;
+	const MAX_INGRESS_LENGTH = 600;
 
 	public function update($bpcID) {
 		$postData = array(
