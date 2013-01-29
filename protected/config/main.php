@@ -100,6 +100,7 @@ return array(
                 'admin/articles' => '/admin/articles',
                 'admin/news' => '/admin/news',
 				'artikler/<id:\d+>/<title>' => '/article/view',
+				'alumni/register' => 'alumni/register',
 				'alumni' => '/graduate/index',
 				'alumni/<id:\d+>' => '/graduate/graduationyear',
 				'alumni/<action:\w+>' => '/graduate/<action>',
