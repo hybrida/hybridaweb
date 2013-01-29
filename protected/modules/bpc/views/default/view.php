@@ -38,11 +38,11 @@ $this->beginClip('sidebar'); ?>
 </article>
 
 	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
-	<? if (!$isAttending && $event->canAttend(user()->id)): ?>
+	<? if ($canAttend): ?>
 		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
-    <? elseif (!$isAttending && $event->isNextAttenderSentToWaitlist()): ?>
+    <? elseif ($canAttendWaitlist): ?>
         <a href="<?=$url?>" class='g-button'>Meld meg på venteliste</a>
-	<? elseif ($isAttending && $event->canUnattend()): ?>
+	<? elseif ($canUnAttend): ?>
 		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
 	<? endif ?>
         

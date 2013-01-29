@@ -7,10 +7,17 @@ class DefaultController extends Controller {
 		if (!$event) {
 			throw new CHttpException(404, "Bedriftspresentasjonen finnes ikke");
 		}
+        
+        $canAttend = !$event->isAttending(user()->id) && $event->canAttend(user()->id) && !$event->isNextAttenderSentToWaitlist();
+        $canAttendWaitlist = !$event->isAttending(user()->id) && $event->canAttend(user()->id) && $event->isNextAttenderSentToWaitlist();
+        $canUnAttend = $event->isAttending(user()->id) && $event->canUnattend();
+        
 		$this->render('view', array(
 			'event' => $event,
 			'news' => $this->getNews($id),
-			'isAttending' => $event->isAttending(user()->id),
+            'canAttend' => $canAttend,
+            'canUnAttend' => $canUnAttend,
+            'canAttendWaitlist' => $canAttendWaitlist,
 		));
 	}
 
