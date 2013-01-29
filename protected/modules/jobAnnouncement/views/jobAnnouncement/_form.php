@@ -25,16 +25,11 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'start'); ?>
-		<?php echo $form->dateField($model,'start'); ?>
-		<?php echo $form->error($model,'start'); ?>
+		<?php echo $form->labelEx($model,'deadline'); ?>
+		<?php echo $form->dateField($model,'deadline'); ?>
+		<?php echo $form->error($model,'deadline'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'end'); ?>
-		<?php echo $form->dateField($model,'end'); ?>
-		<?php echo $form->error($model,'end'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>

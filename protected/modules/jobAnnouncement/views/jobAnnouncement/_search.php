@@ -16,13 +16,8 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'start'); ?>
-		<?php echo $form->textField($model,'start'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'end'); ?>
-		<?php echo $form->textField($model,'end'); ?>
+		<?php echo $form->label($model,'deadline'); ?>
+		<?php echo $form->textField($model,'deadline'); ?>
 	</div>
 
 	<div class="row">

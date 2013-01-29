@@ -34,7 +34,7 @@ class JobFeedFinder extends AbstractFeed {
 	protected function getSQL() {
 		return "SELECT id
 			FROM job_announcement 
-			WHERE start > NOW()
+			WHERE deadline > NOW()
 			ORDER BY RAND()";
 	}
 

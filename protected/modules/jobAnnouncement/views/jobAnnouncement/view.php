@@ -10,7 +10,6 @@ $this->renderPartial('_sidebar');
 	<h1><?php echo $model->title; ?></h1>
 
 	<strong>Bedrift:</strong> <?= $model->company->name ?><br/>
-	<strong>Startdato:</strong> <?= Html::dateToString($model->start) ?> <br/>
-	<strong>Sluttdato:</strong> <?= Html::dateToString($model->end) ?> <br/>
+	<strong>Søknadsfrist:</strong> <?= Html::dateToString($model->deadline) ?> <br/>
 	<?= $model->description ?>
 </div>

@@ -18,14 +18,10 @@
 			<?= $data->company->companyName ?>
 		</div>
 
-		<div class="start">
-			<strong>Starttidspunkt:</strong>
-			<?= Html::dateToString($data->start, 'mediumlong') ?>
+		<div class="deadline">
+			<strong>Søknandsfrist:</strong>
+			<?= Html::dateToString($data->deadline, 'mediumlong') ?>
 		</div>
 
-		<div class="end">
-			<strong>Sluttidspunkt:</strong>
-			<?= Html::dateToString($data->end, 'mediumlong') ?>
-		</div>
 	</div>
 </div>
