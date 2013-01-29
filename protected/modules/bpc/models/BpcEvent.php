@@ -171,6 +171,7 @@ class BpcEvent extends CModel {
 			$details = str_replace(PHP_EOL.PHP_EOL, PHP_EOL, $old);
 		} while ($old !== $details);
 		$details = strip_tags($details);
+		$details = $this->shortenDetails($details);
 		$details = trim($details);
 		$details = str_replace(PHP_EOL, "%0A", $details);
 		$details = $this->spaceToUrl($details);
@@ -183,6 +184,13 @@ class BpcEvent extends CModel {
 				"&trp=true" .
 				"&sprop=http%3A%2F%2Fhybrida.no" .
 				"&sprop=name:Hybrida";
+	}
+
+	private function shortenDetails($details) {
+		if (strlen($details) > 700) {
+			return substr($details, 0, 700);
+		}
+		return $details;
 	}
 	
 	private function spaceToUrl($text) {
