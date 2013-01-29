@@ -130,6 +130,10 @@ class BpcEvent extends CModel {
 	public function getWaitingByYear() {
 		return $this->waiters->getActiveRecordsInYearArray();
 	}
+    
+    public function isNextAttenderSentToWaitlist() {
+        return $this->seats_available == 0 && $this->waitlist_enabled === 1;
+    }
 
 	public function addAttending($userId) {
 		BpcCore::addAttending($this->id, $userId);

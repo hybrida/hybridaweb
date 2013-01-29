@@ -40,6 +40,8 @@ $this->beginClip('sidebar'); ?>
 	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
 	<? if (!$isAttending && $event->canAttend(user()->id)): ?>
 		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
+    <? elseif (!$isAttending && $event->isNextAttenderSentToWaitlist()): ?>
+        <a href="<?=$url?>" class='g-button'>Meld meg på venteliste</a>
 	<? elseif ($isAttending && $event->canUnattend()): ?>
 		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
 	<? endif ?>
