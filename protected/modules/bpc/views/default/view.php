@@ -37,6 +37,13 @@ $this->beginClip('sidebar'); ?>
 	<?=$event->description?>
 </article>
 
+	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
+	<? if (!$isAttending && $event->canAttend(user()->id)): ?>
+		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
+	<? elseif ($isAttending && $event->canUnattend()): ?>
+		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
+	<? endif ?>
+        
 <h1> Påmeldte: </h1>
 <? if (!user()->isGuest): ?>
 	<? if (user()->cardHash == ''): ?>
@@ -52,12 +59,6 @@ $this->beginClip('sidebar'); ?>
 <h1>På venteliste:</h1>
 	<?= Html::userListByYear($event->getWaitingByYear()) ?>
 
-	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
-	<? if (!$isAttending && $event->canAttend(user()->id)): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
-	<? elseif ($isAttending && $event->canUnattend()): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
-	<? endif ?>
 <p></p>
 <? else: ?>
 		<p>
