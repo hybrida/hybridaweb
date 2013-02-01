@@ -2,7 +2,7 @@
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'alumni',
-	'action' => '/alumni/register',
+	'action' => '/alumni/form',
 	'enableAjaxValidation'=>false,
 )); ?>
 
@@ -24,5 +24,8 @@
 	</div>
 
 <?php $this->endWidget(); ?>
+<? if(isset($msg)): ?>
+	<?= $msg ?>
+<? endif; ?>
 
 </div><!-- form -->
