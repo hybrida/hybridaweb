@@ -38,6 +38,7 @@ class Alumni extends CActiveRecord
 				array('event_id, navn', 'required'),
 				array('event_id', 'numerical', 'integerOnly'=>true),
 				array('navn', 'length', 'max'=>60),
+				array('navn', 'unique'),
 				// The following rule is used by search().
 				// Please remove those attributes that should not be searched.
 				array('id, event_id, navn', 'safe', 'on'=>'search'),
