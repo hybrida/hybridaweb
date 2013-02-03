@@ -18,6 +18,7 @@ class DefaultController extends Controller {
             'canAttend' => $canAttend,
             'canUnAttend' => $canUnAttend,
             'canAttendWaitlist' => $canAttendWaitlist,
+            'canSupportFieldtrip' => FieldtripSupport::canSupport(user()->id),
 		));
 	}
 
@@ -52,20 +53,26 @@ class DefaultController extends Controller {
 		return $news;
 	}
 
-	public function actionToggleAttending($bpcId) {
+	public function actionToggleAttending($bpcId, $supportFieldtrip) {
 		if (user()->isGuest) {
 			throw new CHttpException(403, "Du er ikke logget inn");
 		}
-		$userId = user()->id;
+		$user = User::model()->findByPk(user()->id);
 		$event = new BpcEvent($bpcId);
-		$isAttending = $event->isAttending($userId);
+		if (FieldtripSupport::canSupport($user->classYear) && $supportFieldtrip) {
+			debug(FieldtripSupport::model()->count(), "CountBEfore");
+			FieldtripSupport::support($user->id, $bpcId);
+			debug(FieldtripSupport::model()->count(), "Count after");
+			die();
+		}
+		$isAttending = $event->isAttending($user->id);
 		if ($isAttending) {
 			if ($event->canUnattend()) {
-				$event->removeAttending($userId);
+				$event->removeAttending($user->id);
 			}
 		} else {
-			if ($event->canAttend($userId)){
-				$event->addAttending($userId);
+			if ($event->canAttend($user->id)){
+				$event->addAttending($user->id);
 			}
 		}
 		$url = $this->createUrl('view', array('id' => $bpcId));

@@ -51,6 +51,10 @@ class YearConverter_PHP_5_3 {
 		return $years;
 	}
 
+	public static function isAutumn() {
+		return self::isAutumn;
+	}
+
 }
 
 YearConverter_PHP_5_3::init();

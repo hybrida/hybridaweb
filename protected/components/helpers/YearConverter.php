@@ -51,6 +51,10 @@ class YearConverter {
 		return $years;
 	}
 
+	public static function isAutumn() {
+		return self::$isAutumn;
+	}
+
 }
 
 YearConverter::init();

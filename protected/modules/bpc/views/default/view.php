@@ -38,13 +38,17 @@ $this->beginClip('sidebar'); ?>
 </article>
 
 	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
-	<? if ($canAttend): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
-    <? elseif ($canAttendWaitlist): ?>
-        <a href="<?=$url?>" class='g-button'>Meld meg på venteliste</a>
-	<? elseif ($canUnAttend): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
-	<? endif ?>
+	<form method="get" action="<?=$url?>" />
+		<input type="hidden" name="supportFieldtrip" value="0" />
+		<input type="checkbox" name="supportFieldtrip" value="1" />
+		<? if ($canAttend): ?>
+			<input type="submit" class='g-button' value="Meld meg på" />
+		<? elseif ($canAttendWaitlist): ?>
+		    <input type="submit" class='g-button' value="Meld meg på venteliste" />
+		<? elseif ($canUnAttend): ?>
+			<input type="submit" class='g-button' value="Meld meg av" />
+		<? endif ?>
+	</form>
         
 <h1> Påmeldte: </h1>
 <? if (!user()->isGuest): ?>
