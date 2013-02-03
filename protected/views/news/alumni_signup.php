@@ -79,12 +79,21 @@ $this->breadcrumbs = array(
 		</div>
 	</article>
 
-	<? $this->renderPartial('edit_anonymous_membership', array(
-		'model' => new SignupMembershipAnonymous
-	)) ?>
+	<? if ($signup->isOpen() && $signup->hasFreeSpots()): ?>
+		<? $this->renderPartial('edit_anonymous_membership', array(
+			'model' => new SignupMembershipAnonymous
+		)) ?>
+	<? else: ?>
+		<? $text = "" ?>
+		<? if (!$signup->isOpen()) $text .= "Påmeldingen er ikke åpen <br/>\n"; ?>
+		<? if (!$signup->hasFreeSpots()) $text .= "Ikke flere plasser igjen\n"; ?>
+		<p class="g-errorText"><?= $text ?></p>
+	<? endif ?>
 
 	<? if ($alumniSignup !== null && $alumniSignup->isNewRecord === false): ?>
-		<p style="color: #000; background-color: #CDEBC7; padding: 1em; border: 2px solid #0c0; border-radius: 2px"><?= $alumniSignup->fullName ?> er nå påmeldte dette arrangementet</p>
+		<p class="g-successText">
+			<?= $alumniSignup->fullName ?> er nå påmeldte dette arrangementet
+		</p>
 	<? endif ?>
 
 	<h2>Påmeldte</h2>
