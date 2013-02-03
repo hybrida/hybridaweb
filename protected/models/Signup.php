@@ -141,13 +141,20 @@ class Signup extends CActiveRecord {
 		}
 	}
 
-	public function addAnonymousAttender($firstName, $lastName,$email) {
-		$sm = new SignupMembershipAnonymous();
+	public function addAnonymousAttender($firstName, $lastName, $email) {
+		$sm = SignupMembershipAnonymous::model()->find("eventId = ? AND email = ?", array(
+			$this->eventId, $email,
+		));
+		if ($sm === null) {
+			$sm = new SignupMembershipAnonymous();
+		}
+
 		$sm->firstName = $firstName;
 		$sm->lastName = $lastName;
 		$sm->email = $email;
 		$sm->eventId = $this->eventId;
 		$sm->save();
+		return $sm;
 	}
 
 	public function pushToFacebook($eventId) {
