@@ -19,6 +19,9 @@ return array(
 			'password' => 'Q8JdU5MY7dDr5XEU',
 			'charset' => 'utf8',
 		),
+		'cliColor' => array(
+			'class' => 'ext.yii-cli-color.components.KCliColor',
+		),
 	),
 	'modules' => array(
 		'dev','bpc',

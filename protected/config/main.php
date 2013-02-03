@@ -173,6 +173,9 @@ return array(
 				'jquery-ui.min.js' => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js",
 			),
 		),
+		'cliColor' => array(
+			'class' => 'ext.yii-cli-color.components.KCliColor',
+		),
 	),
 	'params' => array(
 		'logoutUrl' => array("/site/logout"),

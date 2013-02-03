@@ -108,4 +108,5 @@ class SignupMembershipAnonymous extends CActiveRecord
 	public function getFullName() {
 		return $this->firstName . " " . $this->lastName;
 	}
+
 }

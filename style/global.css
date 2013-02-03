@@ -220,3 +220,21 @@ li.collapsibleListClosed .node {
 	font-size: 0;
 	overflow:hidden;
 }
+
+.g-successText {
+	color: #000;
+	background-color: #CDEBC7;
+	padding: 1em;
+	border: 2px solid #0c0;
+	border-radius: 2px;
+	font-weight: bold;
+}
+
+.g-errorText {
+	color: #000;
+	background-color: #fcf;
+	padding: 1em;
+	border: 2px solid red;
+	border-radius: 2px;
+	font-weight: bold;
+}

@@ -30,9 +30,17 @@
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
+	<? if (isset($emailVerify) && $emailVerify === true): ?>
+		<div class="row">
+			<label>Gjenta epostadresse</label>
+			<?php echo $form->textField($model,'emailVerify'); ?>
+			<?php echo $form->error($model,'emailVerify'); ?>
+		</div>
+	<? endif ?>
+
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Submit'); ?>
+		<?php echo CHtml::submitButton('Submit', array('class' => 'g-button')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
