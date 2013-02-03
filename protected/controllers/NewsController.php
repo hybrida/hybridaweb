@@ -188,6 +188,7 @@ class NewsController extends Controller {
 		$this->render('email', array(
 			'news' => $news,
 			'attenders' => $signup->attenders,
+			'anonymousAttenders' => $signup->getAnonymousAttenders(),
 		));
 	}
 
