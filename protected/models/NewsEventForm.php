@@ -27,7 +27,8 @@ class NewsEventForm extends CFormModel {
 	public function rules() {
 		return array(
 			array('hasSignup, hasEvent', 'boolean'),
-			array('news[title], news[content]', 'required'),
+			array('news[title], news[content]', 'required', 
+				'message'=>'Tittelen kan ikke være tom.'),
 			array(
 				'news[title], news[ingress], news[content], ' .
 				'event[start],event[end], event[location], event[title], event[imageId], event[content], ' .
@@ -36,16 +37,20 @@ class NewsEventForm extends CFormModel {
 				'default'
 			),
 			array('event[start], event[end], signup[open], signup[close]', 'date',),
-			array('event[end]',
+			array(
+				'event[end]',
 				'compare',
 				'compareAttribute'=>'event[start]',
-				'operator'=>'>',
-				'message'=>'Arrangementet må starte før det slutter.'),
-			array('signup[close]',
+				'operator'=>'>=',
+				'message'=>'Arrangementet må starte før det slutter.'
+			),
+			array(
+				'signup[close]',
 				'compare',
 				'compareAttribute'=>'signup[open]',
-				'operator'=>'>',
-				'message'=>'Påmeldingen må starte før det slutter.'),
+				'operator'=>'>=',
+				'message'=>'Påmeldingen må starte før det slutter.'
+			),
 		);
 	}
 
