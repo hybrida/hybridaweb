@@ -126,7 +126,6 @@ $this->breadcrumbs = array(
 		</div>
 			
 		<div class="row">
-			<label>Tilgang til nyhet</label>
 			<div style="width: 85%; maring-left:150px">
 				<?= $form->accessField($model, "news[access]"); ?> 
 			</div>
