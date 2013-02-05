@@ -95,8 +95,8 @@ class Utgave {
 }
 
 
-$folderPath = Yii::getPathOfAlias("webroot") . "/upc/files/updatek/";
 $folderUrl = "/upc/files/updatek/";
+$folderPath = Yii::getPathOfAlias("webroot") . folderUrl;
 
 $utgaveMapper = getUtgaveFolders($folderPath);
 ?>
