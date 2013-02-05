@@ -44,7 +44,7 @@ class News extends CActiveRecord {
 		return array(
 			array('parentId, imageId, authorId, status, weight', 'numerical', 'integerOnly' => true),
 			array('parentType', 'length', 'max' => 7),
-			array('title', 'length', 'max' => 50),
+			array('title', 'length', 'max' => 150),
 			array('title, imageId, ingress, content, timestamp', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
