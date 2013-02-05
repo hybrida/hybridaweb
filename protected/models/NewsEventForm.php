@@ -36,6 +36,16 @@ class NewsEventForm extends CFormModel {
 				'default'
 			),
 			array('event[start], event[end], signup[open], signup[close]', 'date',),
+			array('event[end]',
+				'compare',
+				'compareAttribute'=>'event[start]',
+				'operator'=>'>',
+				'message'=>'Arrangementet må starte før det slutter.'),
+			array('signup[close]',
+				'compare',
+				'compareAttribute'=>'signup[open]',
+				'operator'=>'>',
+				'message'=>'Påmeldingen må starte før det slutter.'),
 		);
 	}
 
