@@ -11,7 +11,7 @@
 
     </div>
     
-    <label>Tilgang til nyhet</label>
+    <label>Tilgang</label>
     <?=
     CHtml::button('Legg til nytt tilgangsfelt', array(
         'class' => "g-button fetchNewAccessBlock{$this->id}",
