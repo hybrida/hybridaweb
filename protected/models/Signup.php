@@ -132,7 +132,11 @@ class Signup extends CActiveRecord {
 			$query->execute($array);
 			$result = $query->fetch(PDO::FETCH_ASSOC);
 			if ($result['postEvents'] == true) {
-				$this->pushToFacebook($news->absoluteUrl);
+				// Facebook-intregrasjon fungerer ikke.
+				// Derfor dropper vi denne for å ikke forsinke
+				// påmeldingen.
+
+				// $this->pushToFacebook($news->absoluteUrl);
 			}
 		}
 
