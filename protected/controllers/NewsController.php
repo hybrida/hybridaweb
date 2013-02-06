@@ -125,9 +125,7 @@ class NewsController extends Controller {
 		$news = News::model()->find("parentId = ? AND parentType = 'event'", array(
 			$eventId,
 				));
-		$url = $this->createUrl('/news/view', array(
-			'id' => $news->id,
-			'title' => $news->title));
+		$url = $news->viewUrl;
 		$this->redirect($url);
 	}
 
