@@ -25,6 +25,10 @@
 	color: black;
 }
 
+.newsfeedIndex .element h1 a:hover {
+    color: #00509e;
+}
+
 .newsfeedIndex .header-title h1 {
 	margin: 0;
 	padding: 0;

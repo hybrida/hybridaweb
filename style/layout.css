@@ -7,6 +7,14 @@ html{
 	height: 100%;
 }
 
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Din";
+}
+
+h1 a:hover, h2:hover, h3:hover, h4:hover, h5:hover, h6:hover {
+    color: #00509e;
+}
+
 body {
 	height: 100%;
 	padding: 0;
