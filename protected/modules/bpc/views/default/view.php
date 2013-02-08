@@ -7,7 +7,7 @@ function stotte() { ?>
 	<input type="checkbox" name="supportFieldtrip" value="1" />
 	<strong>Støtt ekskursjonen</strong> <a href="#" id="supportFieldtripDialog">Hva er dette?</a>
 	<br>
-	<div id="forklaring" style="background-color: white; padding: 20px; border: 1px solid black">
+	<div id="forklaring" style="background-color: white; padding: 20px; border: 1px solid black; border-radius: 2px">
 
 		Annethvert år reiser Hybrida på eksursjon. Hvis det er mindre enn 18
 		mnd til neste eksursjon har du muligheten til å støtte
@@ -17,6 +17,17 @@ function stotte() { ?>
 		ditt oppmøte.
 
 	</div>
+
+	<style>
+	.ui-icon-closethick {
+		background-color: #185c9b;
+		padding: 4px;
+		border: 1px solid #888;
+		border-radius: 2px;
+		color: white;
+		
+	}
+	</style>
 
 	<script>
 		var dialogLink = $("#supportFieldtripDialog");
