@@ -2,6 +2,6 @@
 
 <? foreach ($companies as $company): ?>
 	<div class="g-barText">
-		<?= Html::externalLink(Image::tag($company->imageId, 'sidebar'), $company->homepage) ?>
+		<?= Html::externalLink(Image::tag($company->imageID, 'sidebar'), $company->homepage) ?>
 	</div>
 <? endforeach ?>
