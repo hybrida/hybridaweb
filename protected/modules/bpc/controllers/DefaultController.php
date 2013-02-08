@@ -18,7 +18,7 @@ class DefaultController extends Controller {
             'canAttend' => $canAttend,
             'canUnAttend' => $canUnAttend,
             'canAttendWaitlist' => $canAttendWaitlist,
-            'canSupportFieldtrip' => FieldtripSupport::canSupport(user()->id),
+            'canSupportFieldtrip' => FieldtripSupport::canSupport(User::model()->findByPk(user()->id)),
 		));
 	}
 
@@ -60,7 +60,7 @@ class DefaultController extends Controller {
 		$user = User::model()->findByPk(user()->id);
 		$event = new BpcEvent($bpcId);
 		if (FieldtripSupport::canSupport($user) && $supportFieldtrip) {
-			FieldtripSupport::support($user, $event);
+			FieldtripSupport::support($event, $user);
 		}
 		$isAttending = $event->isAttending($user->id);
 		if ($isAttending) {

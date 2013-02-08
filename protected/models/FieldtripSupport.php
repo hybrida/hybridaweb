@@ -95,8 +95,13 @@ class FieldtripSupport extends CActiveRecord
 	}
 
 	public static function canSupport($user) {
-		if ($user->classYear == 3) {
-			return ! YearConverter::isAutumn() || self::isFieldTripThisYear();
+		if ($user === null) {
+			return false;
+		}
+		if ($user->classYear == 2) {
+			return YearConverter::isSpring() && !self::isFieldtripThisYear();
+		} elseif ($user->classYear == 3) {
+			return YearConverter::isSpring() || self::isFieldTripThisYear();
 		} elseif($user->classYear == 4) {
 			return self::isFieldTripThisYear();
 		}
@@ -110,8 +115,8 @@ class FieldtripSupport extends CActiveRecord
 		return self::isFieldtripOnYear(date('Y'));
 	}
 
-	public static function support($user, $bpc) {
-		if (!$this->canSupport($user)) {
+	public static function support($bpc, $user) {
+		if (!self::canSupport($user)) {
 			return;
 		}
 		$ft = self::findByUserEventId($user->id, $bpc->id);
