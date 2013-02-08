@@ -280,7 +280,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
   `parentType` enum('event','article','group') COLLATE utf8_unicode_ci DEFAULT NULL,
-  `title` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `imageId` int(11) DEFAULT NULL,
   `ingress` text COLLATE utf8_unicode_ci,
   `content` mediumtext COLLATE utf8_unicode_ci,
