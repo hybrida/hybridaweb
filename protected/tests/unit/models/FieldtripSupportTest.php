@@ -2,15 +2,15 @@
 
 class FieldtripSupportTest extends CTestCase {
 
-	private function assertSupport($expected, $userId) {
-		$this->assertEquals($expected, FieldtripSupport::canSupport($userId));
+	private function assertSupport($expected, $user) {
+		$this->assertEquals($expected, FieldtripSupport::canSupport($user));
 	}
 
 	public function test_canSupport_freshman_false() {
 		$user = Util::getUser();
 		$user->classYear = 1;
 		$user->save();
-		$this->assertSupport(false, $user->id);
+		$this->assertSupport(false, $user);
 	}
 
 	public function test_canSupport_thirdYear_true() {

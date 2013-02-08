@@ -59,11 +59,8 @@ class DefaultController extends Controller {
 		}
 		$user = User::model()->findByPk(user()->id);
 		$event = new BpcEvent($bpcId);
-		if (FieldtripSupport::canSupport($user->classYear) && $supportFieldtrip) {
-			debug(FieldtripSupport::model()->count(), "CountBEfore");
-			FieldtripSupport::support($user->id, $bpcId);
-			debug(FieldtripSupport::model()->count(), "Count after");
-			die();
+		if (FieldtripSupport::canSupport($user) && $supportFieldtrip) {
+			FieldtripSupport::support($user, $event);
 		}
 		$isAttending = $event->isAttending($user->id);
 		if ($isAttending) {

@@ -94,10 +94,10 @@ class FieldtripSupport extends CActiveRecord
 		));
 	}
 
-	public static function canSupport($classYear) {
-		if ($classYear == 3) {
+	public static function canSupport($user) {
+		if ($user->classYear == 3) {
 			return ! YearConverter::isAutumn() || self::isFieldTripThisYear();
-		} elseif($classYear == 4) {
+		} elseif($user->classYear == 4) {
 			return self::isFieldTripThisYear();
 		}
 	}
@@ -110,10 +110,22 @@ class FieldtripSupport extends CActiveRecord
 		return self::isFieldtripOnYear(date('Y'));
 	}
 
-	public static function support($userId, $bpcId) {;
-		$ft = new FieldtripSupport();
-		$ft->userId = $userId;
-		$ft->bpcId = $bpcId;
+	public static function support($user, $bpc) {
+		if (!$this->canSupport($user)) {
+			return;
+		}
+		$ft = self::findByUserEventId($user->id, $bpc->id);
+		if ($ft === null) {
+			$ft = new FieldtripSupport();
+		}
+		$ft->userId = $user->id;
+		$ft->bpcId = $bpc->id;
 		$ft->save();
+	}
+
+	public static function findByUserEventId($userId, $eventId) {
+		return FieldtripSupport::model()->find("userId = ? AND bpcId = ?", array(
+			$user->id, $bpcId)
+		);
 	}
 }
