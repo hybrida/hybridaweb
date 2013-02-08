@@ -1,8 +1,13 @@
 <div class="view g-clearfix">
 	<div class="left">
+
 		<a href="<?= $this->createUrl('view', array('id' => $data->id)) ?>">
+			<? if ($data->company->imageID != 0): ?>
+			<?= Image::tag($data->company->imageID, 'small') ?>
+			<? else: ?>
 			<img src="/images/company_logo_default.png"
 				 alt="default company logo" />
+			<? endif ?>
 		</a>
 	</div>
 
