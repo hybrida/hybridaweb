@@ -255,8 +255,4 @@ class NewsController extends Controller {
 		));
 	}
 
-	public function actionGriffgrabber() {
-		$this->render('thehunt');
-	}
-
 }
