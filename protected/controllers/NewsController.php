@@ -11,7 +11,7 @@ class NewsController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("view", "edit", 'toggleAttending', 'alumniSignup'),
+				'actions' => array("view", "edit", 'toggleAttending', 'alumniSignup', 'griffgrabber'),
 			),
 			array('allow',
 				'actions' => array("create", "email", "manualSignup",'deleteManualSignup', 'editManualSignup'),
@@ -253,6 +253,10 @@ class NewsController extends Controller {
 			'signup' => $news->event->signup,
 			'alumniSignup' => $alumniSignup,
 		));
+	}
+
+	public function actionGriffgrabber() {
+		$this->render('thehunt');
 	}
 
 }
