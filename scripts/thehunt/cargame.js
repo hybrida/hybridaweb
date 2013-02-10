@@ -1,4 +1,4 @@
-define(["keylistener", "canvasobject"], function(keylistener, canvasobject){
+define(["keylistener", "canvasobject", "fastmath"], function(keylistener, canvasobject, fastmath){
 
 	var width = 800;
 	var height = 400;
@@ -62,9 +62,11 @@ define(["keylistener", "canvasobject"], function(keylistener, canvasobject){
 			} else if (right) {
 				this.rotation += this.speed * this.rotationSpeed;
 			}
+			if (this.rotation >= 2 * Math.PI) this.rotation -= 2 * Math.PI;
+			if (this.rotation < 0) this.rotation += 2* Math.PI;
 
-			this.x += this.speed * Math.cos(this.rotation);
-			this.y += this.speed * Math.sin(this.rotation);
+			this.x += this.speed * fastmath.cos(this.rotation);
+			this.y += this.speed * fastmath.sin(this.rotation);
 		};
 
 		this.drawNow = function(context) {
@@ -171,8 +173,6 @@ define(["keylistener", "canvasobject"], function(keylistener, canvasobject){
 				self.moveCarInsideCanvas(car);
 				car.draw(self.context);
 				}
-			score1.innerHTML = "PLAYER 1: " + self.carList[0].points;
-			score2.innerHTML = "PLAYER 2: " + self.carList[1].points;
 		};
 
 		this.moveCarInsideCanvas = function(car) {
