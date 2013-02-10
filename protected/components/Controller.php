@@ -25,9 +25,26 @@ class Controller extends CController {
 	public $breadcrumbs = array();
 	public $breadcrumbOptions = array();
 	public $pdo;
+	private $jsFiles = array();
 
 	public function __construct($id, $module=null) {
 		parent::__construct($id, $module);
 		$this->pdo = Yii::app()->db->getPdoInstance();
+	}
+
+	protected function addJavascript($scriptName) {
+		$this->jsFiles[] = $scriptName;
+	}
+
+	protected function printJavascriptFiles() {
+		$output = "";
+		$scriptRoot = "/scripts/";
+		foreach ($this->jsFiles as $scriptName) {
+			$output .= CHtml::tag('script', array(
+				'data-main' => $scriptRoot . $scriptName . ".js",
+				'src' => $scriptRoot . 'require.js',
+			), "", true);
+		}
+		return $output;
 	}
 }

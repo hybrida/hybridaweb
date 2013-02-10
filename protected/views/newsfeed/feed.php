@@ -3,26 +3,26 @@ $this->pageTitle = "Nyhetsstrøm";
 $this->layout = "//layouts/newsfeed";
 
 $this->beginClip('sidebar'); ?>
-    <? if ($hasPublishAccess): ?>
-        <fieldset class="g-adminSet">
-            <legend>Admin</legend>
-            <?=
-            CHtml::link("Publiser", array("news/create"), array(
-                'class' => 'g-button',
-            ))
-            ?>
-            <?=
-            CHtml::link("Nyheter", array("admin/news"), array(
-                'class' => 'g-button',
-            ))
-            ?>
-            <?=
-            CHtml::link("Artikler", array("admin/articles"), array(
-                'class' => 'g-button'
-            ))
-            ?>
-        </fieldset>
-    <? endif ?>
+	<? if ($hasPublishAccess): ?>
+		<fieldset class="g-adminSet">
+			<legend>Admin</legend>
+			<?=
+			CHtml::link("Publiser", array("news/create"), array(
+				'class' => 'g-button',
+			))
+			?>
+			<?=
+			CHtml::link("Nyheter", array("admin/news"), array(
+				'class' => 'g-button',
+			))
+			?>
+			<?=
+			CHtml::link("Artikler", array("admin/articles"), array(
+				'class' => 'g-button'
+			))
+			?>
+		</fieldset>
+	<? endif ?>
 <?
 $this->widget('application.components.widgets.ActivitiesFeed');
 Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
@@ -43,31 +43,21 @@ $this->endClip();
 ))?>
 
 <?php
+
 $ajaxFeedUrl = $this->createUrl("feedAjax", array(
-	'offset' => ''));
+	'offset' => ''
+));
+
+$this->addJavascript('newsfeed');
+
 ?>
 <script language="javascript">
-	var count = <?= $index ?>;
-	$("#fetchNews").click(function fetchNews(){
-		
-		$.ajax({
-			success: function(html){
-				$(".feeds").append(html);
-                
-                if (html.indexOf("Ingen flere nyheter") != -1) {
-                    $("#fetchNews").off('click');
-                    $("#fetchNews").remove();
-                }
-			},
-			type: 'get',
-			url: '<?= $ajaxFeedUrl ?>' + count,
-			data: {
-				index: $(".feeds li").size()
-			},
-			cache: false,
-			dataType: 'html'
-		});
-		count += <?= $limit ?>;
-	});
+	var data = {
+		count: <?= $index ?>,
+		ajaxFeedUrl: '<?= $ajaxFeedUrl ?>',
+		ajaxButtonSelector: '#fetchNews',
+		feedContentSelector: '.feeds',
+		limit: <?= $limit ?>
+	};
 </script>
 </div>
