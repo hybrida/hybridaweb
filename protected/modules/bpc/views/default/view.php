@@ -2,8 +2,8 @@
 <? $this->layout = "//layouts/doubleColumn" ?>
 <?
 
-function stotte() { ?>
-<br>
+function stotte() {	?>
+	<br>
 	<input type="checkbox" name="supportFieldtrip" value="1" />
 	<strong>Støtt ekskursjonen</strong> <a href="#" id="supportFieldtripDialog">Hva er dette?</a>
 	<br>
@@ -83,10 +83,14 @@ $this->beginClip('sidebar'); ?>
 	<form method="get" action="<?=$url?>" />
 		<input type="hidden" name="supportFieldtrip" value="0" />
 		<? if ($canAttend): ?>
-			<? stotte() ?>
+			<? if ($canSupportFieldtrip): ?>
+				<? stotte() ?>
+			<? endif ?>
 			<input type="submit" class='g-button' value="Meld meg på" />
 		<? elseif ($canAttendWaitlist): ?>
-			<? stotte() ?>
+			<? if ($canSupportFieldtrip): ?>
+				<? stotte() ?>
+			<? endif ?>
 		    <input type="submit" class='g-button' value="Meld meg på venteliste" />
 		<? elseif ($canUnAttend): ?>
 			<input type="submit" class='g-button' value="Meld meg av" />
