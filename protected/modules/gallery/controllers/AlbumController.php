@@ -41,7 +41,6 @@ function listFolderFiles($dir){
        }
      }
      reset($objects);
-     rmdir($dir);
    }
  } 
 
