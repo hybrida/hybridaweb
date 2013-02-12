@@ -79,7 +79,6 @@ class AlbumController extends Controller
 
 	public function actionClearImages() {
 		$dir = getcwd()."/upc";
-		$c = chmod($dir . "/images", 0775);
 		rrmdir($dir . "/images/original");
 		rrmdir($dir . "/images/gallery_thumb");
 		rrmdir($dir . "/images/gallery_big");
