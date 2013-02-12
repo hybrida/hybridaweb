@@ -128,9 +128,9 @@ class FieldtripSupport extends CActiveRecord
 		$ft->save();
 	}
 
-	public static function findByUserEventId($userId, $eventId) {
+	public static function findByUserEventId($userId, $bpcId) {
 		return FieldtripSupport::model()->find("userId = ? AND bpcId = ?", array(
-			$user->id, $bpcId)
+			$userId, $bpcId)
 		);
 	}
 }
