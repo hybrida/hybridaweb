@@ -1,3 +1,4 @@
+
 <? 
 function listFolderFiles($dir){
     $ffs = scandir($dir);
@@ -31,8 +32,5 @@ function listFolderFiles($dir){
 
 $dir = getcwd()."/upc/images";
 listFolderFiles($dir, array());
-
-
-
 
 ?>

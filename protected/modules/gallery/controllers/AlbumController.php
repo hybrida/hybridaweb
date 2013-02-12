@@ -24,6 +24,10 @@ class AlbumController extends Controller
 		);
 	}
 
+	public function actionDebug() {
+		$this->render('debug');
+	}
+
 	public function actionIndex()
 	{
 		$this->pageTitle = ("Galleri");
