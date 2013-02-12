@@ -1,5 +1,50 @@
 <?php
 
+function listFolderFiles($dir){
+	$ffs = scandir($dir);
+	$output = '<ul>';
+	foreach($ffs as $ff)
+	{
+		$path = $dir .'/'.$ff;
+		if($ff != '.' && $ff != '..')
+		{
+			if(!is_dir($path))
+			{
+				$output .= '<li><b>'.$ff.'</b>';   
+			}
+			else
+			{
+				$info = stat($path);
+				$permissions = $info['mode'];
+				$output .= '<li>Chmod: '.decoct($permissions) .' - '. $ff;
+			}
+
+
+			if(is_dir($path)) { 
+				$output .= listFolderFiles($path);
+				$output .= '</li>';
+			}
+		}
+	}
+	$output .= '</ul>';
+	return $output;
+} 
+
+
+
+ function rrmdir($dir) {
+   if (is_dir($dir)) {
+     $objects = scandir($dir);
+     foreach ($objects as $object) {
+       if ($object != "." && $object != "..") {
+         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+       }
+     }
+     reset($objects);
+     rmdir($dir);
+   }
+ } 
+
 class AlbumController extends Controller
 {
 	private $imageIDs = array();
@@ -7,25 +52,39 @@ class AlbumController extends Controller
 	public function filters()
 	{
 		return array(
-			'accessControl', // perform access control for CRUD operations
-		);
+				'accessControl', // perform access control for CRUD operations
+				);
 	}
 
 	public function accessRules()
 	{
 		return array(
-			array('allow',
-				'actions'=>array('debug','clear', 'create','update', 'upload','index','view', 'picview', 'show', 'ajax', 'delete', 'picdelete'),
-				'users'=>array('@'),
-			),
-			array('deny',  // deny all users
-				'users'=>array('*'),
-			),
-		);
+				array('allow',
+					'actions'=>array('clearImages', 'debug','clear', 'create','update', 'upload','index','view', 'picview', 'show', 'ajax', 'delete', 'picdelete'),
+					'users'=>array('@'),
+					),
+				array('deny',  // deny all users
+					'users'=>array('*'),
+					),
+				);
 	}
 
+
 	public function actionDebug() {
-		$this->render('debug');
+
+		$dir = getcwd()."/upc";
+		$files = listFolderFiles($dir, array());
+		$this->render('debug', array('files' => $files));
+	}
+
+	public function actionClearImages() {
+		$dir = getcwd()."/upc";
+		$c = chmod($dir . "/images", 0775);
+		rrmdir($dir . "/images/original");
+		rrmdir($dir . "/images/gallery_thumb");
+		rrmdir($dir . "/images/gallery_big");
+		$this->actionDebug();
+
 	}
 
 	public function actionIndex()
@@ -39,8 +98,8 @@ class AlbumController extends Controller
 		foreach($albums as $album)
 			$album->getImages();
 		$this->render('index',array(
-			'albums'=> $albums,
-		));
+					'albums'=> $albums,
+					));
 	}
 
 	public function actionView($id)
@@ -50,8 +109,8 @@ class AlbumController extends Controller
 		$this->pageTitle = ($album->title);
 
 		$this->render('view',array(
-			'album'=> $album,
-		));
+					'album'=> $album,
+					));
 	}
 
 	public function actionPicview($id, $pid)
@@ -82,14 +141,14 @@ class AlbumController extends Controller
 			$prevID = -1;
 
 		$this->render('picview',array(
-			'album'=>$album,
-			'image'=>$image,
-			'user' => $user,
-			'index' => $index,
-			'num' => $num,
-			'nextID' => $nextID,
-			'prevID' => $prevID,
-		));
+					'album'=>$album,
+					'image'=>$image,
+					'user' => $user,
+					'index' => $index,
+					'num' => $num,
+					'nextID' => $nextID,
+					'prevID' => $prevID,
+					));
 	}
 
 	public function actionAjax($id, $pid)
@@ -159,18 +218,18 @@ class AlbumController extends Controller
 				if (count($imageIDs) > 0) {
 					$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger ikke laste opp disse på nytt";
 					$errors[] = "Trykk " . CHtml::link('her', '#', 
-						array(
-							'submit' => array('clear', 'id' => $_POST['new'])))
-					 . " om du ikke vil ha med disse bildene";
+							array(
+								'submit' => array('clear', 'id' => $_POST['new'])))
+						. " om du ikke vil ha med disse bildene";
 				}
 			}
 		}
 
 		$this->render('create',array(
-			'model'=>$model,
-			'errors' => $errors,
-			'new' => isset($_POST['new']) ? $_POST['new'] == 0 : 1,
-		));
+					'model'=>$model,
+					'errors' => $errors,
+					'new' => isset($_POST['new']) ? $_POST['new'] == 0 : 1,
+					));
 	}
 
 	public function actionClear($id)
@@ -195,10 +254,10 @@ class AlbumController extends Controller
 		$errors = array();
 
 		$this->render('create',array(
-			'model'=>$model,
-			'errors' => $errors,
-			'new' => 0,
-		));
+					'model'=>$model,
+					'errors' => $errors,
+					'new' => 0,
+					));
 	}
 
 	public function actionDelete($id)
@@ -266,7 +325,7 @@ class AlbumController extends Controller
 
 	public function actionUpload()
 	{
-	 // HTTP headers for no cache etc
+		// HTTP headers for no cache etc
 		header('Content-type: text/plain; charset=UTF-8');
 		header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
@@ -294,65 +353,65 @@ class AlbumController extends Controller
 
 		// Create target dir
 		if (!file_exists($targetDir))
-				@mkdir($targetDir);
+			@mkdir($targetDir);
 
 		// Remove old temp files
 		if (is_dir($targetDir) && ($dir = opendir($targetDir))) {
-				while (($file = readdir($dir)) !== false) {
-						$filePath = $targetDir . DIRECTORY_SEPARATOR . $file;
+			while (($file = readdir($dir)) !== false) {
+				$filePath = $targetDir . DIRECTORY_SEPARATOR . $file;
 
-						// Remove temp files if they are older than the max age
-						if (preg_match('/\\.tmp$/', $file) && (filemtime($filePath) < time() - $maxFileAge))
-								@unlink($filePath);
-				}
+				// Remove temp files if they are older than the max age
+				if (preg_match('/\\.tmp$/', $file) && (filemtime($filePath) < time() - $maxFileAge))
+					@unlink($filePath);
+			}
 
-				closedir($dir);
+			closedir($dir);
 		} else
-				throw new CHttpException (500, Yii::t('app', "Can't open temporary directory."));
+			throw new CHttpException (500, Yii::t('app', "Can't open temporary directory."));
 
 		// Look for the content type header
 		if (isset($_SERVER["HTTP_CONTENT_TYPE"]))
-				$contentType = $_SERVER["HTTP_CONTENT_TYPE"];
+			$contentType = $_SERVER["HTTP_CONTENT_TYPE"];
 
 		if (isset($_SERVER["CONTENT_TYPE"]))
-				$contentType = $_SERVER["CONTENT_TYPE"];
+			$contentType = $_SERVER["CONTENT_TYPE"];
 
 		if (strpos($contentType, "multipart") !== false) {
-				if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
-						// Open temp file
-						$out = fopen($targetDir . DIRECTORY_SEPARATOR . $fileName, $chunk == 0 ? "wb" : "ab");
-						if ($out) {
-								// Read binary input stream and append it to temp file
-								$in = fopen($_FILES['file']['tmp_name'], "rb");
-
-								if ($in) {
-										while ($buff = fread($in, 4096))
-												fwrite($out, $buff);
-								} else
-										throw new CHttpException (500, Yii::t('app', "Can't open input stream."));
-
-								fclose($out);
-								unlink($_FILES['file']['tmp_name']);
-						} else
-								throw new CHttpException (500, Yii::t('app', "Can't open output stream."));
-				} else
-						throw new CHttpException (500, Yii::t('app', "Can't move uploaded file."));
-		} else {
+			if (isset($_FILES['file']['tmp_name']) && is_uploaded_file($_FILES['file']['tmp_name'])) {
 				// Open temp file
 				$out = fopen($targetDir . DIRECTORY_SEPARATOR . $fileName, $chunk == 0 ? "wb" : "ab");
 				if ($out) {
-						// Read binary input stream and append it to temp file
-						$in = fopen("php://input", "rb");
+					// Read binary input stream and append it to temp file
+					$in = fopen($_FILES['file']['tmp_name'], "rb");
 
-						if ($in) {
-								while ($buff = fread($in, 4096))
-										fwrite($out, $buff);
-						} else
-								throw new CHttpException (500, Yii::t('app', "Can't open input stream."));
+					if ($in) {
+						while ($buff = fread($in, 4096))
+							fwrite($out, $buff);
+					} else
+						throw new CHttpException (500, Yii::t('app', "Can't open input stream."));
 
-						fclose($out);
+					fclose($out);
+					unlink($_FILES['file']['tmp_name']);
 				} else
-						throw new CHttpException (500, Yii::t('app', "Can't open output stream."));
+					throw new CHttpException (500, Yii::t('app', "Can't open output stream."));
+			} else
+				throw new CHttpException (500, Yii::t('app', "Can't move uploaded file."));
+		} else {
+			// Open temp file
+			$out = fopen($targetDir . DIRECTORY_SEPARATOR . $fileName, $chunk == 0 ? "wb" : "ab");
+			if ($out) {
+				// Read binary input stream and append it to temp file
+				$in = fopen("php://input", "rb");
+
+				if ($in) {
+					while ($buff = fread($in, 4096))
+						fwrite($out, $buff);
+				} else
+					throw new CHttpException (500, Yii::t('app', "Can't open input stream."));
+
+				fclose($out);
+			} else
+				throw new CHttpException (500, Yii::t('app', "Can't open output stream."));
 		}
 
 		// After last chunk is received, process the file
