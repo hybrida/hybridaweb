@@ -1,48 +1,5 @@
 <?php
 
-function listFolderFiles($dir){
-	$ffs = scandir($dir);
-	$output = '<ul>';
-	foreach($ffs as $ff)
-	{
-		$path = $dir .'/'.$ff;
-		if($ff != '.' && $ff != '..')
-		{
-			if(!is_dir($path))
-			{
-				$output .= '<li><b>'.$ff.'</b>';   
-			}
-			else
-			{
-				$info = stat($path);
-				$permissions = $info['mode'];
-				$output .= '<li>Chmod: '.decoct($permissions) .' - '. $ff;
-			}
-
-
-			if(is_dir($path)) { 
-				$output .= listFolderFiles($path);
-				$output .= '</li>';
-			}
-		}
-	}
-	$output .= '</ul>';
-	return $output;
-} 
-
-
-
- function rrmdir($dir) {
-   if (is_dir($dir)) {
-     $objects = scandir($dir);
-     foreach ($objects as $object) {
-       if ($object != "." && $object != "..") {
-         if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
-       }
-     }
-     reset($objects);
-   }
- } 
 
 class AlbumController extends Controller
 {
@@ -66,23 +23,6 @@ class AlbumController extends Controller
 					'users'=>array('*'),
 					),
 				);
-	}
-
-
-	public function actionDebug() {
-
-		$dir = getcwd()."/upc";
-		$files = listFolderFiles($dir, array());
-		$this->render('debug', array('files' => $files));
-	}
-
-	public function actionClearImages() {
-		$dir = getcwd()."/upc";
-		rrmdir($dir . "/images/original");
-		rrmdir($dir . "/images/gallery_thumb");
-		rrmdir($dir . "/images/gallery_big");
-		$this->actionDebug();
-
 	}
 
 	public function actionIndex()
