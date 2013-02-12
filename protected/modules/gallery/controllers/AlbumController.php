@@ -15,7 +15,7 @@ class AlbumController extends Controller
 	{
 		return array(
 			array('allow',
-				'actions'=>array('clear', 'create','update', 'upload','index','view', 'picview', 'show', 'ajax', 'delete', 'picdelete'),
+				'actions'=>array('debug','clear', 'create','update', 'upload','index','view', 'picview', 'show', 'ajax', 'delete', 'picdelete'),
 				'users'=>array('@'),
 			),
 			array('deny',  // deny all users
