@@ -35,6 +35,7 @@ class ProfileForm extends CFormModel {
 	}
 
 	public function setAttributes($values, $safeOnly = false) {
+		unset($values['member']);
 		parent::setAttributes($values, $safeOnly);
 	}
 
