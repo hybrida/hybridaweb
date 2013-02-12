@@ -66,4 +66,8 @@ class DefaultController extends Controller {
             $this->renderPartial('html');
         }
 
+	public function actionGallery() {
+		$this->render('gallery');
+	}
+
 }
