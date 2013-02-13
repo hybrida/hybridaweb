@@ -379,7 +379,7 @@ class AlbumController extends Controller
 				if (file_exists($fullName)) {
 					$image = new CUploadedFile( $fileName, $fullName, filetype($fullName), filesize($fullName), 0);
 					$uploadedFile = Image::uploadAndSave($image, $user->id, true);
-					//$uploadedFile->resize("gallery_thumb");
+					$uploadedFile->resize("gallery_thumb");
 
 					if ($user->hasState("uploadedfile"))
 						$files = $user->getState("uploadedfile");
