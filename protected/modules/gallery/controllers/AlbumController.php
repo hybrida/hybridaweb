@@ -223,7 +223,7 @@ class AlbumController extends Controller
 			$model = $this->loadModel($id);
 			$image = Image::model()->findByPk($pid);
 
-			if (Yii::app()->user->id != $image->user_id)
+			if (Yii::app()->user->id != $image->userId)
 				throw new CHttpException(403,'Invalid request. Please do not repeat this request again.');
 
 			$model->delAlbumImageRelation($pid);
