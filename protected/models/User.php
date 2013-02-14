@@ -65,6 +65,7 @@ class User extends CActiveRecord {
 			array('firstName, middleName, lastName', 'length', 'max' => 75),
 			array('graduationYear', 'length', 'max' => 4),
 			array('member', 'length', 'max' => 5),
+			array('member', 'unsafe'),
 			array('gender', 'length', 'max' => 7),
 			array('workPlace, altEmail', 'length', 'max' => 255),
 			array('workDescription, lastLogin, description, birthdate', 'safe'),
