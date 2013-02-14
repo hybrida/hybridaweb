@@ -7,10 +7,10 @@ class DefaultController extends Controller {
 		if (!$event) {
 			throw new CHttpException(404, "Bedriftspresentasjonen finnes ikke");
 		}
-        
-        $canAttend = !$event->isAttending(user()->id) && $event->canAttend(user()->id) && !$event->isNextAttenderSentToWaitlist();
-        $canAttendWaitlist = !$event->isAttending(user()->id) && $event->canAttend(user()->id) && $event->isNextAttenderSentToWaitlist();
-        $canUnAttend = $event->isAttending(user()->id) && $event->canUnattend();
+        $isAttending = $event->isAttending(user()->id);
+        $canAttend = !$isAttending && $event->canAttend(user()->id) && !$event->isNextAttenderSentToWaitlist();
+        $canAttendWaitlist = !$isAttending && $event->canAttend(user()->id) && $event->isNextAttenderSentToWaitlist();
+        $canUnAttend = $isAttending && $event->canUnattend();
         
 		$this->render('view', array(
 			'event' => $event,
@@ -18,6 +18,7 @@ class DefaultController extends Controller {
             'canAttend' => $canAttend,
             'canUnAttend' => $canUnAttend,
             'canAttendWaitlist' => $canAttendWaitlist,
+            'isAttending' => $isAttending,
             'canSupportFieldtrip' => FieldtripSupport::canSupport(User::model()->findByPk(user()->id)),
 		));
 	}

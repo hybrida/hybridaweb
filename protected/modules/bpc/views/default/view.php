@@ -57,6 +57,7 @@ $this->beginClip('sidebar'); ?>
 
 	<? $this->renderPartial("_attenders", array(
 		'event' => $event,
+		'isAttending' => $isAttending,
 	))  ?>
 <? $this->endClip() ?>
 

@@ -7,6 +7,14 @@
 
 	<div class="g-barTitle">Påmelding:</div>
 	<div class="g-barText">
+		<? if (!user()->isGuest): ?>
+			<? if ($isAttending): ?>
+				<span style="color: green;font-weight: bold">Du er påmeldt</span>
+			<? else: ?>
+				<span style="color: red;font-weight: bold">Du er ikke påmeldt</span>
+			<? endif ?>
+			<br/>
+		<? endif ?>
 		<strong>Påmeldte: </strong> <i><?= $event->this_attending ?> av <?= $event->seats ?></i> <br/>
 		<strong>Venteliste: </strong> <i><?= $event->count_waiting ?> av <?= $event->seats ?></i> <br/>
 		<strong>Fra: </strong><i><?= Html::dateToString($event->registration_start, 'long') ?></i> <br>
