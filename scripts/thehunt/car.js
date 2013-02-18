@@ -12,8 +12,8 @@ define(["canvasobject", "keylistener", "fastmath"],
 		this.image = new Image();
 		this.image.src =  "/images/griffgame/car1.png";
 		this.rotationSpeed = 0.015;
-		this.acceleration = 0.5;
-		this.maxSpeed = 10;
+		this.acceleration = 0.1;
+		this.maxSpeed = 6;
 		this.size = 20;
 		this.points = 0;
 		this.keys = {
@@ -42,10 +42,14 @@ define(["canvasobject", "keylistener", "fastmath"],
 			var acc = this.acceleration;
 			var maxSpeed = this.maxSpeed;
 
-			if (!down && this.speed < maxSpeed) {
+			if (up && this.speed < maxSpeed) {
 				this.speed += acc;
 			} else if(down && this.speed > -maxSpeed) {
 				this.speed -= acc;
+			} else if (this.speed >= acc) {
+				this.speed -= (this.speed > 0 ? 1 : -1) * acc;
+			} else {
+				this.speed = 0;
 			}
 
 			if (left) {

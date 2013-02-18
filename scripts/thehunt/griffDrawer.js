@@ -2,6 +2,7 @@ define([],function(){
 
 	var canvas = data.pictureCanvas;
 	var context = canvas.getContext("2d");
+	var drawPart;
 	var coords = [
 		[34, 43],
 		[15, 87],
@@ -33,6 +34,18 @@ define([],function(){
 		[162, 203]
 	];
 
+	var drawBackground = function () {
+		var img = new Image();
+		img.src = "/images/griffgame/griff-faded.png";
+		img.onload = function(){
+			context.save();
+			context.globalAlpha = 0.3;
+			context.drawImage(img,0,0);
+			context.restore();
+		};
+	};
+	drawBackground();
+
 	function randomColor() {
 		var red = Math.floor(Math.random() * 255);
 		var green = Math.floor(Math.random() * 255);
@@ -41,29 +54,19 @@ define([],function(){
 	}
 
 	var trigger = function(i){
+		drawPart(i);
 		// Her skal drawPart være
 	};
 
-	var drawPart = function(i) {
+	drawPart = function(i) {
 		var image = new Image();
 		image.src = "/images/griffgame/griff-" + i + ".png";
 		image.onload = function() {
 			var x = coords[i][0];
 			var y = coords[i][1];
-			console.log("griffDrawer: " + i, x, y);
-			context.beginPath();
-			context.strokeStyle = randomColor();
-			context.rect(x,y,image.width, image.height);
-			context.stroke();
-			context.drawImage(image, x, y);
-			context.strokeText("" + i, x+image.width/2, y+image.height/2);
+			context.drawImage(image, x-image.width/2, y - image.height/2);
 		};
 	};
-
-	for (var i = 1; i <=27; i++) {
-		drawPart(i);
-	}
-
 
 	return trigger;
 });

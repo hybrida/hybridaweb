@@ -42,21 +42,44 @@ define(
 		this.height = canvas.height;
 		this.victim = new Victim();
 		this.carList = [];
+		this.time = 0.0;
+		this.runSpeed = 1000/100;
 
 		this.addCar = function(car) {
 			this.carList.push(car);
 		};
 
+		this.timetick = function() {
+			var ctx = self.context;
+			this.time += 1/(this.runSpeed*10);
+			ctx.save();
+			ctx.globalAlpha = 0.1;
+			ctx.font = "50pt Arial";
+			var timeInSeconds = Math.floor(this.time*10)/10;
+			var txt = "" + timeInSeconds;
+			if (timeInSeconds % 1 === 0) {
+				txt += ".0";
+			}
+
+			ctx.fillText(txt,550,100);
+			ctx.restore();
+		};
+
 		var self = this;
 		this.run = function() {
 			self.context.clearRect(0,0,width,height);
+			self.timetick();
 			self.victim.draw(self.context);
 			for (var i = 0; i < self.carList.length; i++) {
 				var car = self.carList[i];
 				car.move();
 				if (car.distance(self.victim) < 30) {
-					self.victim.move();
-					car.addPoint();
+					try {
+						self.victim.hit();
+						car.addPoint();
+					} catch(e) {
+						self.stop();
+					}
 				}
 				self.moveCarInsideCanvas(car);
 				car.draw(self.context);
@@ -79,10 +102,10 @@ define(
 		};
 
 		this.start = function() {
-			this.timer = setInterval(this.run, 1000/100);
+			this.timer = setInterval(this.run, this.runSpeed);
 		};
 
-		stop = function() {
+		this.stop = function() {
 			// Praktisk global metode for å stoppe timeren
 			clearInterval(self.timer);
 		};
