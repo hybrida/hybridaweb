@@ -55,7 +55,6 @@ define([],function(){
 
 	var trigger = function(i){
 		drawPart(i);
-		// Her skal drawPart være
 	};
 
 	drawPart = function(i) {

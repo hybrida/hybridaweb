@@ -23,7 +23,6 @@ define(
 		};
 
 		this.popRandom = function() {
-			console.log("len: ", this.parts);
 			var i = this.parts.pop();
 			this.found.push(i);
 			if (this.parts.length === 0) {
@@ -42,7 +41,6 @@ define(
 			var i = this.popRandom();
 			this.image.src = "/images/griffgame/griff-" + i + ".png";
 			this.image.oldIntValue = i;
-			console.log(i);
 		};
 
 		this.move();

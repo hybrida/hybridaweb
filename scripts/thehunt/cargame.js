@@ -78,12 +78,30 @@ define(
 						self.victim.hit();
 						car.addPoint();
 					} catch(e) {
-						self.stop();
+						self.gameOver();
 					}
 				}
 				self.moveCarInsideCanvas(car);
 				car.draw(self.context);
 				}
+		};
+
+		this.gameOver = function() {
+			this.stop();
+			$.ajax({
+			success: function(html){
+				var el = document.createElement("div");
+				el.innerHTML = html;
+				document.body.appendChild(el);
+			},
+			type: 'get',
+			url: "/game/score",
+			data: {
+				time: this.time.toFixed(5)
+			},
+			cache: false,
+			dataType: 'html'
+		});
 		};
 
 		this.moveCarInsideCanvas = function(car) {
@@ -106,7 +124,6 @@ define(
 		};
 
 		this.stop = function() {
-			// Praktisk global metode for å stoppe timeren
 			clearInterval(self.timer);
 		};
 	}

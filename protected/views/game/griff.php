@@ -44,6 +44,13 @@ $this->layout = "//layouts/doubleColumn";
 		margin-left: 10px;
 		display: block;
 	}
+
+	.userScore .score {
+		width: 5em;
+		font-weight: bold;
+	}
+
+
 </style>
 
 <script>
@@ -64,5 +71,13 @@ $this->layout = "//layouts/doubleColumn";
 <canvas id="thehunt_picture" width="230" height="216"></canvas>
 
 <div class="g-barTitle">Highscore</div>
+<div class="g-barText">
+<? foreach ($highscorelist as $hs): ?>
+	<div class="userScore">
+		<span class="score"> <?= $hs->score ?></span>
+		<span class="name"><?= $hs->user->fullName ?></span>
+	</div>
+<? endforeach ?>
+</div>
 
 <? $this->endClip() ?>

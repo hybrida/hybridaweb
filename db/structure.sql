@@ -169,6 +169,15 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
+CREATE TABLE IF NOT EXISTS `griffgame_highscore` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `score` double(10,0) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
 CREATE TABLE IF NOT EXISTS `group_membership` (
   `groupId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -414,6 +423,9 @@ CREATE TABLE IF NOT EXISTS `user_password` (
 ALTER TABLE `fieldtrip_support`
   ADD CONSTRAINT `fieldtrip_support_ibfk_1` FOREIGN KEY (`bpcId`) REFERENCES `event_company` (`bpcID`),
   ADD CONSTRAINT `fieldtrip_support_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+
+ALTER TABLE `griffgame_highscore`
+  ADD CONSTRAINT `griffgame_highscore_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
 ALTER TABLE `iktringen_membership`
   ADD CONSTRAINT `fk_iktringen_membership_bk_company1` FOREIGN KEY (`companyId`) REFERENCES `bk_company` (`companyID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
