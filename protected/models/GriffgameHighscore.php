@@ -94,17 +94,6 @@ class GriffgameHighscore extends CActiveRecord
 		));
 	}
 
-	private static function bullshit() {
-		for ($i = 0; $i < 1000; $i++) {
-			$hs = new GriffgameHighscore();
-			$hs->score = rand(20,1000);
-			$hs->userId = rand(300,400);
-			debug([$hs->score, $hs->userId], "adata");
-			$hs->timestamp = new CDbExpression("NOW()");
-			$hs->save();
-		}
-	}
-
 	public static function getTopScores() {
 		$sql =  "SELECT userId, min(score) as score
 			from griffgame_highscore
