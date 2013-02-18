@@ -6,7 +6,7 @@ define(
 	var Victim = function(){
 		this.parts = [];
 		this.found = [];
-		for (var i = 27; i >= 0; i--) {
+		for (var i = 27; i >= 1; i--) {
 			this.parts[i] = i;
 		}
 		this.image = new Image();
@@ -23,11 +23,12 @@ define(
 		};
 
 		this.popRandom = function() {
+			console.log("len: ", this.parts);
+			var i = this.parts.pop();
+			this.found.push(i);
 			if (this.parts.length === 0) {
 				throw 20;
 			}
-			var i = this.parts.pop();
-			this.found.push(i);
 			return i;
 		};
 
@@ -41,6 +42,7 @@ define(
 			var i = this.popRandom();
 			this.image.src = "/images/griffgame/griff-" + i + ".png";
 			this.image.oldIntValue = i;
+			console.log(i);
 		};
 
 		this.move();
