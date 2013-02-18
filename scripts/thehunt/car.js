@@ -9,8 +9,8 @@ define(["canvasobject", "keylistener", "fastmath"],
 	}
 
 	function Car () {
-		this.bodyColor = randomColor();
-		this.wheelColor = randomColor();
+		this.image = new Image();
+		this.image.src =  "/images/griffgame/car1.png";
 		this.rotationSpeed = 0.015;
 		this.acceleration = 0.5;
 		this.maxSpeed = 10;
@@ -59,38 +59,13 @@ define(["canvasobject", "keylistener", "fastmath"],
 			this.x += this.speed * fastmath.cos(this.rotation);
 			this.y += this.speed * fastmath.sin(this.rotation);
 		};
-
+		var self = this;
 		this.drawNow = function(context) {
-			var px = 5;
-
-			context.fillStyle = this.wheelColor;
-
-			// Upper left wheel
-			context.strokeRect(-3*px, -4*px, 3*px, 2*px);
-			context.fillRect(  -3*px, -4*px, 3*px, 2*px);
-
-			// Upper right wheel
-			context.strokeRect(3*px, -4*px, 2*px, 2*px);
-			context.fillRect(  3*px, -4*px, 2*px, 2*px);
-
-			//lower left wheel
-			context.strokeRect(-3*px, 2*px, 3*px, 2*px);
-			context.fillRect(  -3*px, 2*px, 3*px, 2*px);
-
-			//lower right wheel
-			context.strokeRect(3*px, 2*px, 2*px, 2*px);
-			context.fillRect(  3*px, 2*px, 2*px, 2*px);
-
-			// body
-			context.fillStyle = this.bodyColor;
-			context.fillRect(-4*px,-3*px,11*px, 6*px);
-			context.strokeRect(-4*px, -3*px, 11*px, 6*px);
+			context.drawImage(self.image, - self.image.width/2, - self.image.height/2);
 		};
 
 		this.addPoint = function() {
 			this.points++;
-			this.maxSpeed += (Math.random() > 0.5) ? 1 : -1;
-			
 		};
 
 	}

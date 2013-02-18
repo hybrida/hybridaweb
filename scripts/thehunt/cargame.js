@@ -1,6 +1,6 @@
 define(
-		["keylistener", "canvasobject", "fastmath", "car", "victim"],
-		function(keylistener, canvasobject, fastmath, Car, Victim) {
+		["car", "victim"],
+		function(Car, Victim) {
 
 	var width = 800;
 	var height = 400;
@@ -79,7 +79,12 @@ define(
 		};
 
 		this.start = function() {
-			this.timer = setInterval(this.run, 1000/50);
+			this.timer = setInterval(this.run, 1000/100);
+		};
+
+		stop = function() {
+			// Praktisk global metode for å stoppe timeren
+			clearInterval(self.timer);
 		};
 	}
 

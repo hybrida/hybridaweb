@@ -1,4 +1,9 @@
-<? $this->addJavascript("thehunt/run") ?>
+<?php
+
+$this->addJavascript("thehunt/run");
+$this->layout = "//layouts/doubleColumn";
+
+ ?>
 
 <div class="newsThehunt">
 	<h1>The Hunt</h1>
@@ -7,18 +12,28 @@
 </div>
 
 <style>
-	canvas {
-		border: 1px solid white;
+	canvas#thehunt {
+		border: 2px solid #888;
 		margin: auto;
 		width: 700px;
 		height: 400px;
-		background-color: #ccf;
+		background-color: #eee;
 		border-radius: 2px;
 	}
 </style>
 
 <script>
-	var data = {
-		canvas: document.getElementById("thehunt"),
-	};
+	var data;
+	document.ready = function() {
+		data = {
+			canvas: document.getElementById("thehunt"),
+			pictureCanvas: document.getElementById("thehunt_picture")
+		};
+}
 </script>
+
+<canvas id="thehunt_picture" width="530" height="316"></canvas>
+<? $this->beginClip("sidebar") ?>
+
+
+<? $this->endClip() ?>
