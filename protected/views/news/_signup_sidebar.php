@@ -9,7 +9,7 @@
 	<? if ($signup): ?>
 		<div class="g-barTitle">Påmelding:</div>
 		<div class="g-barText">
-			<? if (!user()->isGuest): ?>
+			<? if (!user()->isGuest && isset($isAttending)): ?>
 				<? if ($isAttending): ?>
 					<span style="color: green;font-weight: bold">Du er påmeldt</span>
 				<? else: ?>
