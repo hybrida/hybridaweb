@@ -45,7 +45,7 @@ define(
 		this.victim = new Victim();
 		this.carList = [];
 		this.time = 0.0;
-		this.runSpeed = 1000/100;
+		this.runSpeed = 1000/30;
 
 		this.addCar = function(car) {
 			this.carList.push(car);

@@ -12,7 +12,7 @@ define(["canvasobject", "keylistener", "fastmath"],
 		var self = this;
 		this.image = new Image();
 		this.image.src =  "/images/griffgame/car1.png";
-		this.rotationSpeed = 0.015;
+		this.rotationSpeed = 0.05;
 		this.slideRotation = null;
 		this.slideTurn = null;
 		this.acceleration = 0.1;
@@ -36,7 +36,8 @@ define(["canvasobject", "keylistener", "fastmath"],
 				this.keys[direction]);
 		};
 
-		this.move = function() {
+		this.move = function(timedelta) {
+			this.timeCorrection = timedelta/10;
 			this.setVelocity();
 		};
 
@@ -91,8 +92,8 @@ define(["canvasobject", "keylistener", "fastmath"],
 				this.slideRotation += this.speed * this.rotationSpeed/3;
 			}
 
-			this.x += this.speed * fastmath.cos(this.slideRotation);
-			this.y += this.speed * fastmath.sin(this.slideRotation);
+			this.x += this.speed * fastmath.cos(this.slideRotation)*this.timeCorrection;
+			this.y += this.speed * fastmath.sin(this.slideRotation)*this.timeCorrection;
 		};
 
 		this.setNonslideVelocity = function() {
@@ -115,8 +116,8 @@ define(["canvasobject", "keylistener", "fastmath"],
 			}
 			if (this.rotation >= 2 * Math.PI) this.rotation -= 2 * Math.PI;
 			if (this.rotation < 0) this.rotation += 2* Math.PI;
-			this.x += this.speed * fastmath.cos(this.rotation);
-			this.y += this.speed * fastmath.sin(this.rotation);
+			this.x += this.speed * fastmath.cos(this.rotation)*this.timeCorrection;
+			this.y += this.speed * fastmath.sin(this.rotation)*this.timeCorrection;
 		};
 
 		this.drawNow = function(context) {
