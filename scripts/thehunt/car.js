@@ -9,6 +9,7 @@ define(["canvasobject", "keylistener", "fastmath"],
 	}
 
 	function Car () {
+		var self = this;
 		this.image = new Image();
 		this.image.src =  "/images/griffgame/car1.png";
 		this.rotationSpeed = 0.015;
@@ -40,16 +41,26 @@ define(["canvasobject", "keylistener", "fastmath"],
 		};
 
 		this.setVelocity = function() {
-			var up = this.isDown("up");
-			var down = this.isDown("down");
-			var left = this.isDown("left");
-			var right = this.isDown("right");
-			var slide = this.isDown("slide");
+			this.up = this.isDown("up");
+			this.down = this.isDown("down");
+			this.left = this.isDown("left");
+			this.right = this.isDown("right");
 
 			if (this.isDown("clear")) {
 				this.slidePath = [];
 			}
 
+			this.setSlideStatus();
+
+			if (this.slideRotation !== null) {
+				this.setSlideVelocity();
+			} else {
+				this.setNonslideVelocity();
+			}
+		};
+
+		this.setSlideStatus = function() {
+			var slide = this.isDown("slide");
 			if (slide && this.slideRotation === null) {
 				this.slideRotation = this.rotation;
 				if (left) {
@@ -57,61 +68,57 @@ define(["canvasobject", "keylistener", "fastmath"],
 				} else if (right) {
 					this.slideTurn = "right";
 				}
-				// this.slidePath = [];
 			}
 			if (!slide) {
 				this.slideRotation = null;
 				this.slideTurn = null;
-				// this.slidePath = [];
-			}
-
-			var acc = this.acceleration;
-			var maxSpeed = this.maxSpeed;
-
-
-
-			if (this.slideRotation !== null) {
-				// Bilen sklir
-				this.slidePath.push({x: this.x, y:this.y});
-				if (Math.abs(this.speed) >= acc) {
-					this.speed -= (this.speed > 0 ? 1 : -1) * acc;
-				} else {
-					this.speed = 0;
-				}
-
-				if (this.slideTurn === "left") {
-					this.rotation -= this.speed * this.rotationSpeed/2;
-					this.slideRotation -= this.speed * this.rotationSpeed/3;
-				} else if (this.slideTurn === "right") {
-					this.rotation += this.speed * this.rotationSpeed/2;
-					this.slideRotation += this.speed * this.rotationSpeed/3;
-				}
-
-				this.x += this.speed * fastmath.cos(this.slideRotation);
-				this.y += this.speed * fastmath.sin(this.slideRotation);
-			} else {
-				if (up && this.speed < maxSpeed) {
-					this.speed += acc;
-				} else if(down && this.speed > -maxSpeed) {
-					this.speed -= acc;
-				} else if (Math.abs(this.speed) >= acc) {
-					this.speed -= (this.speed > 0 ? 1 : -1) * acc;
-				} else {
-					this.speed = 0;
-				}
-
-				if (left) {
-					this.rotation -= this.speed * this.rotationSpeed;
-				} else if (right) {
-					this.rotation += this.speed * this.rotationSpeed;
-				}
-				if (this.rotation >= 2 * Math.PI) this.rotation -= 2 * Math.PI;
-				if (this.rotation < 0) this.rotation += 2* Math.PI;
-				this.x += this.speed * fastmath.cos(this.rotation);
-				this.y += this.speed * fastmath.sin(this.rotation);
 			}
 		};
-		var self = this;
+
+		this.setSlideVelocity = function() {
+			this.slidePath.push({x: this.x, y:this.y});
+			if (Math.abs(this.speed) >= acc) {
+				this.speed -= (this.speed > 0 ? 1 : -1) * this.acceleration;
+			} else {
+				this.speed = 0;
+			}
+
+			if (this.slideTurn === "left") {
+				this.rotation -= this.speed * this.rotationSpeed/2;
+				this.slideRotation -= this.speed * this.rotationSpeed/3;
+			} else if (this.slideTurn === "right") {
+				this.rotation += this.speed * this.rotationSpeed/2;
+				this.slideRotation += this.speed * this.rotationSpeed/3;
+			}
+
+			this.x += this.speed * fastmath.cos(this.slideRotation);
+			this.y += this.speed * fastmath.sin(this.slideRotation);
+		};
+
+		this.setNonslideVelocity = function() {
+			var maxSpeed = this.maxSpeed;
+			var acc = this.acceleration;
+			if (this.up && this.speed < maxSpeed) {
+				this.speed += acc;
+			} else if(this.down && this.speed > -maxSpeed) {
+				this.speed -= acc;
+			} else if (Math.abs(this.speed) >= acc) {
+				this.speed -= (this.speed > 0 ? 1 : -1) * acc;
+			} else {
+				this.speed = 0;
+			}
+
+			if (this.left) {
+				this.rotation -= this.speed * this.rotationSpeed;
+			} else if (this.right) {
+				this.rotation += this.speed * this.rotationSpeed;
+			}
+			if (this.rotation >= 2 * Math.PI) this.rotation -= 2 * Math.PI;
+			if (this.rotation < 0) this.rotation += 2* Math.PI;
+			this.x += this.speed * fastmath.cos(this.rotation);
+			this.y += this.speed * fastmath.sin(this.rotation);
+		};
+
 		this.drawNow = function(context) {
 			context.drawImage(self.image, - self.image.width/2, - self.image.height/2);
 		};

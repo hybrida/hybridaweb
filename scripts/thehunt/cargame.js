@@ -30,6 +30,8 @@ define(
 	}
 
 	function CarGame(canvas) {
+		var self = this;
+
 		this.pictures = [];
 		this.found = [];
 		this.timer = null;
@@ -50,8 +52,13 @@ define(
 		};
 
 		this.timetick = function() {
-			var ctx = self.context;
 			this.time += 1/(this.runSpeed*10);
+			this.printTime();
+
+		};
+
+		this.printTime = function() {
+			var ctx = self.context;
 			ctx.save();
 			ctx.globalAlpha = 0.1;
 			ctx.font = "50pt Arial";
@@ -60,30 +67,34 @@ define(
 			if (timeInSeconds % 1 === 0) {
 				txt += ".0";
 			}
-
 			ctx.fillText(txt,550,100);
 			ctx.restore();
 		};
 
-		var self = this;
 		this.run = function() {
+			var timedelta = Date.now() - self.lastFrame;
+			//console.log(timedelta);
 			self.context.clearRect(0,0,width,height);
 			self.timetick();
 			self.victim.draw(self.context);
 			for (var i = 0; i < self.carList.length; i++) {
-				var car = self.carList[i];
-				car.move();
-				if (car.distance(self.victim) < 30) {
-					try {
-						self.victim.hit();
-						car.addPoint();
-					} catch(e) {
-						self.gameOver();
-					}
+				self.runCar(self.carList[i], timedelta);
+			}
+			self.lastFrame = Date.now();
+		};
+
+		this.runCar = function(car, timedelta) {
+			car.move(timedelta);
+			if (car.distance(self.victim) < 30) {
+				try {
+					self.victim.hit();
+					car.addPoint();
+				} catch(e) {
+					self.gameOver();
 				}
-				self.moveCarInsideCanvas(car);
-				car.draw(self.context);
-				}
+			}
+			self.moveCarInsideCanvas(car);
+			car.draw(self.context);
 		};
 
 		this.gameOver = function() {
@@ -118,6 +129,7 @@ define(
 		};
 
 		this.start = function() {
+			this.lastFrame = Date.now();
 			this.timer = setInterval(this.run, this.runSpeed);
 		};
 
