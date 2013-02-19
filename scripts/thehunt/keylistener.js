@@ -11,14 +11,15 @@ define(function(){
 
 	function onKeyDown (key) {
 		down[key.keyCode] = true;
+		if (key.keyCode === 116) {
+			location.reload(true);
+		}
 		key.preventDefault();
 		return false;
 	}
 
 	function onKeyUp (key) {
 		down[key.keyCode] = false;
-		key.preventDefault();
-		return false;
 	}
 
 	window.addEventListener("keydown", onKeyDown, false);
