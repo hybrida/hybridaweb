@@ -46,7 +46,7 @@ define(["canvasobject", "keylistener", "fastmath"],
 				this.speed += acc;
 			} else if(down && this.speed > -maxSpeed) {
 				this.speed -= acc;
-			} else if (this.speed >= acc) {
+			} else if (Math.abs(this.speed) >= acc) {
 				this.speed -= (this.speed > 0 ? 1 : -1) * acc;
 			} else {
 				this.speed = 0;
