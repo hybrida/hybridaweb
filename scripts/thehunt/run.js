@@ -3,6 +3,7 @@ require(['cargame'], function(cargame) {
 	var canvas = data.canvas;
 	var button = data.button;
 	var tutorial = data.tutorial;
+	var highscorelist = data.highscorelist;
 
 
 

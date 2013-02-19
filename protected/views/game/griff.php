@@ -60,7 +60,8 @@ $this->layout = "//layouts/doubleColumn";
 			canvas: document.getElementById("thehunt"),
 			pictureCanvas: document.getElementById("thehunt_picture"),
 			button: document.getElementById("thebutton"),
-			tutorial: document.getElementById("tutorial")
+			tutorial: document.getElementById("tutorial"),
+			highscorelist: document.getElementById("highscorelist")
 		};
 	}
 </script>
@@ -70,14 +71,9 @@ $this->layout = "//layouts/doubleColumn";
 <div class="g-barTitle">Progresjon</div>
 <canvas id="thehunt_picture" width="230" height="216"></canvas>
 
-<div class="g-barTitle">Highscore</div>
-<div class="g-barText">
-<? foreach ($highscorelist as $hs): ?>
-	<div class="userScore">
-		<span class="score"> <?= $hs->score ?></span>
-		<span class="name"><?= $hs->user->fullName ?></span>
-	</div>
-<? endforeach ?>
+<div id="highscorelist">
+	<? $this->renderPartial('_highscore', array(
+		'highscorelist' => $highscorelist,
+	))  ?>
 </div>
-
 <? $this->endClip() ?>

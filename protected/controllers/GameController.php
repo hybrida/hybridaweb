@@ -19,7 +19,9 @@ class GameController extends Controller {
 		$hs->userId = user()->id;
 		$hs->timestamp = new CDbExpression("NOW()");
 		$okSave = $hs->save();
-		echo CJSON::encode(GriffgameHighscore::getTopScores());
+		$this->renderPartial('_highscore', array(
+			'highscorelist' => GriffgameHighscore::getTopScores(),
+		));
 	}
 
 }

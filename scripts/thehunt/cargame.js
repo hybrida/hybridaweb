@@ -90,9 +90,7 @@ define(
 			this.stop();
 			$.ajax({
 			success: function(html){
-				var el = document.createElement("div");
-				el.innerHTML = html;
-				document.body.appendChild(el);
+				data.highscorelist.innerHTML = html;
 			},
 			type: 'get',
 			url: "/game/score",
