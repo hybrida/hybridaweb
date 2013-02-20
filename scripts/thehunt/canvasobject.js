@@ -9,7 +9,6 @@ define(function() {
 
 		this.draw = function(context) {
 			context.save();
-			this.rawDraw(context);
 			context.translate(this.x,this.y);
 			context.rotate(this.rotation);
 			context.scale(this.scale, this.scale);
@@ -20,12 +19,6 @@ define(function() {
 		this.drawNow = function(context) {
 			throw "Not Implemented Yet";
 		};
-
-		this.rawDraw = function(context) {
-
-		};
-
-
 
 		this.distance = function(canvasObject) {
 			var dx = canvasObject.x - this.x;
