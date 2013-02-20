@@ -7,15 +7,20 @@ $this->layout = "//layouts/doubleColumn";
 
 <div class="newsThehunt">
 	<h1>The Hunt</h1>
-	<canvas id="thehunt" style="display:none" width="700" height="400"></canvas>
-</div>
+	<div id="gameWrap" style="display:none">
+		<canvas id="thehunt" width="700" height="400"></canvas>
+		<div class="buttonContainer">
+			<input type="button" id="restartButton" class="g-button" value="Restart" />
+		</div>
+	</div>
 
-<div id="tutorial">
-	<img src="/images/griffgame/start.png" alt="" />
-	<br>
+	<div id="tutorial">
+		<img src="/images/griffgame/start.png" alt="" />
+		<br>
 
-	<div class="buttonContainer">
-	<input id="thebutton" type="button" class="g-button" value="Start spillet nå!" />
+		<div class="buttonContainer">
+			<input id="thebutton" type="button" class="g-button" value="Start spillet nå!" />
+		</div>
 	</div>
 </div>
 
@@ -29,7 +34,7 @@ $this->layout = "//layouts/doubleColumn";
 		border-radius: 2px;
 	}
 
-	#thebutton {
+	.newsThehunt input[type=button] {
 		margin: auto;
 		display: block;
 	}
@@ -59,9 +64,11 @@ $this->layout = "//layouts/doubleColumn";
 		data = {
 			canvas: document.getElementById("thehunt"),
 			pictureCanvas: document.getElementById("thehunt_picture"),
-			button: document.getElementById("thebutton"),
+			startButton: document.getElementById("thebutton"),
 			tutorial: document.getElementById("tutorial"),
-			highscorelist: document.getElementById("highscorelist")
+			highscorelist: document.getElementById("highscorelist"),
+			gameWrap: document.getElementById("gameWrap"),
+			restartButton: document.getElementById("restartButton")
 		};
 	}
 </script>
