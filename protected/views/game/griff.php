@@ -50,7 +50,7 @@ $this->layout = "//layouts/doubleColumn";
 		display: block;
 	}
 
-	.userScore .score {
+	.userScore .score, .userScore .position {
 		width: 5em;
 		font-weight: bold;
 	}

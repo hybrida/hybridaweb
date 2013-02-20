@@ -117,7 +117,7 @@ define(
 			var ctx = this.context;
 			ctx.save();
 			ctx.font = "bold 80px Arial";
-			ctx.fillText("Score: " + this.finalTime, 50,350);
+			ctx.fillText("Score: " + this.finalTime/1000, 50,350);
 			ctx.restore();
 		};
 
