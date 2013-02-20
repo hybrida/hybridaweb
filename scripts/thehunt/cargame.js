@@ -45,7 +45,7 @@ define(
 		this.victim = new Victim();
 		this.carList = [];
 		this.time = 0.0;
-		this.runSpeed = 1000/30;
+		this.fps = 50;
 
 		this.addCar = function(car) {
 			this.carList.push(car);
@@ -75,7 +75,6 @@ define(
 		this.run = function() {
 			var timedelta = Date.now() - self.lastFrame;
 			self.lastFrame = Date.now();
-			//console.log(timedelta);
 			self.context.clearRect(0,0,width,height);
 			self.timetick();
 			self.victim.draw(self.context);
@@ -85,7 +84,7 @@ define(
 		};
 
 		this.runCar = function(car, timedelta) {
-			car.move(timedelta);
+			car.move(timedelta/this.frameSpeed);
 			if (car.distance(self.victim) < 30) {
 				try {
 					self.victim.hit();
@@ -97,6 +96,7 @@ define(
 			self.moveCarInsideCanvas(car);
 			car.draw(self.context);
 			self.context.strokeText("" + timedelta, 50, 400);
+			self.context.strokeText("" + this.frameSpeed, 100,400);
 		};
 
 		this.gameOver = function() {
@@ -131,6 +131,7 @@ define(
 		};
 
 		this.start = function() {
+			this.frameSpeed = 1000/this.fps;
 			this.lastFrame = Date.now();
 			this.timer = setInterval(this.run, this.runSpeed);
 			this.firstFrame = Date.now();
