@@ -133,7 +133,7 @@ define(
 		this.start = function() {
 			this.frameSpeed = 1000/this.fps;
 			this.lastFrame = Date.now();
-			this.timer = setInterval(this.run, this.runSpeed);
+			this.timer = setInterval(this.run, this.frameSpeed);
 			this.firstFrame = Date.now();
 		};
 
