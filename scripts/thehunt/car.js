@@ -26,6 +26,12 @@ define(["canvasobject", "keylistener", "fastmath"],
 		};
 		this.speed = 0;
 
+		this.normalizeToFPS = function(fps) {
+			var factor = 50/fps;
+			this.maxSpeed *= factor;
+			this.acceleration *= factor;
+		};
+
 		this.isDown = function(direction) {
 			return keylistener.isDown(
 				this.keys[direction]);
