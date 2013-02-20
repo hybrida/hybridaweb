@@ -10,12 +10,12 @@
 	<? elseif ($isAttending && $signup->canUnattend()): ?>
 		<a href="<?= $url ?>" class='g-button'>Meld meg av</a>
 	<? endif ?>
-	
-	<h1> Påmeldte: </h1>
+
+	<h1> Påmeldte: (<?= $signup->getRegisteredAttendingCount() ?>)</h1>
 	<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
 <? endif ?>
 
-<h2>Andre påmeldte</h2>
+<h2>Andre påmeldte: (<?= $signup->getAnonymousAttendingCount() ?>)</h2>
 <div class="manualAttenders">
 	<? foreach ($signup->getAnonymousAttenders() as $attender): ?>
 	<ul class="attender">
