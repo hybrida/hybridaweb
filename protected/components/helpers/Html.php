@@ -10,7 +10,7 @@ class Html extends CHtml {
 			'jan.', 'feb.', "mar.", "apr.","mai","jun.","jul.",
 			"aug.","sep.","okt.", "nov.", "des."
 		);
-        
+
         public static function externalLink($text, $url, $htmlOptions=array()){
             $urlStartsWithHttp = preg_match("/^http:\/\//", $url);
             if (!$urlStartsWithHttp) {
@@ -18,7 +18,7 @@ class Html extends CHtml {
             }
             return CHtml::link($text, $url, $htmlOptions);
         }
-	
+
 	public static function dateToString($dateString, $format='medium') {
 		$date = strtotime($dateString);
 		$month = date('n', $date);
@@ -33,19 +33,19 @@ class Html extends CHtml {
 		else
 			return date($format, $date);
 	}
-	
+
 	public static function removeSpecialChars($text) {
 		return preg_replace('/[^a-zæøåA-ZÆØÅ0-9_ -]/s', '', $text);
 	}
-	
+
 	public static function getLongMonthNames() {
 		return self::$longMonthNames;
 	}
 	public static function getShortMonthNames() {
 		return self::$shortMonthNames;
 	}
-        
-        public static 
+
+        public static
                 function timeLeftFromUNIXtimespampToString($eventDate){
             $timeLeft = $eventDate - time();
             if ($timeLeft > 60*60*24*30){
@@ -66,7 +66,7 @@ class Html extends CHtml {
                 echo "Har begynt";
             }
         }
-        
+
         private function printTime($timeLeft,$duration){
             if ($duration=="måned"){
                 Html::printPlural($timeLeft,"måned");
@@ -78,7 +78,7 @@ class Html extends CHtml {
                 Html::printPlural($timeLeft,"minutt");
             }
         }
-        
+
        private static function printPlural($timeLeft,$duration){
             if ($timeLeft == 1){
                 echo "1 {$duration} gjenstår.";
@@ -86,15 +86,15 @@ class Html extends CHtml {
                 echo "{$timeLeft} {$duration}er gjenstår.";
             }
         }
-       
+
         public static function timeLeftFromDateToString($eventDate){ /*
          * Formatet til $eventDate må være på formen
-         * 
+         *
          * YYYYMMDDTTTT
-         * 
+         *
          * der Y er år, M måned, D dag og T 24-tallsklokkeslett
-         */            
-            $year = floor($eventDate/100000000); 
+         */
+            $year = floor($eventDate/100000000);
             $rest = ($eventDate/100000000 - $year);
             $month = floor($rest*100);
             $rest2 = ($rest*100 - $month);
@@ -105,11 +105,11 @@ class Html extends CHtml {
             $minute = floor($rest4);
             return Html::timeLeftFromUNIXtimespampToString(mktime($hour, $minute, 00, $month, $day, $year));
         }
-	
+
 	public static function userListByYear($usersByYear) {
 		$i = 1;
 		$userYear = user()->classYear;
-		foreach($usersByYear as $year): 
+		foreach($usersByYear as $year):
 			if (!empty($year)):
 				?>
 				<ul class="collapsibleList">
@@ -118,10 +118,10 @@ class Html extends CHtml {
 				<? else: ?>
 					<li class="collapsibleListOpen">
 				<? endif ?>
-				<h3> <?= $i ?>. årskurs (<?= count($year) ?>)</h3>
+				<h3> <?= ($i <= 5) ? $i . "årskurs" : "Alumni" ?> (<?= count($year) ?>)</h3>
 				<ul>
 				<?
-				foreach ($year as $user): 
+				foreach ($year as $user):
 					?><li class="node">
 						<?= CHtml::link(Image::profileTag($user->imageId, 'mini'), $user->viewUrl) ?>
 						<?= Html::link($user->fullName, array('/profile/info', 'username' => $user->username)) ?>
@@ -129,7 +129,7 @@ class Html extends CHtml {
 				endforeach;
 				?></ul>
 				</li>
-				</ul><? 
+				</ul><?
 			endif;
 			$i++;
 		endforeach;
@@ -158,7 +158,7 @@ class Html extends CHtml {
 		}
 		return $array;
 	}
-    
+
     public static function truncate($string, $length, $omission) {
         if (strlen($string) > $length) {
             return substr($string, 0, $length).$omission;
