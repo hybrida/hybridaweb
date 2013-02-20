@@ -52,7 +52,7 @@ define(
 		};
 
 		this.timetick = function() {
-			this.time += 1/(this.runSpeed*10);
+			this.time = Date.now() - this.firstFrame;
 			this.printTime();
 
 		};
@@ -62,7 +62,8 @@ define(
 			ctx.save();
 			ctx.globalAlpha = 0.1;
 			ctx.font = "50pt Arial";
-			var timeInSeconds = Math.floor(this.time*10)/10;
+			var timeInSeconds = this.time / 1000;
+			timeInSeconds = Math.round(timeInSeconds * 10) / 10;
 			var txt = "" + timeInSeconds;
 			if (timeInSeconds % 1 === 0) {
 				txt += ".0";
@@ -73,6 +74,7 @@ define(
 
 		this.run = function() {
 			var timedelta = Date.now() - self.lastFrame;
+			self.lastFrame = Date.now();
 			//console.log(timedelta);
 			self.context.clearRect(0,0,width,height);
 			self.timetick();
@@ -80,7 +82,6 @@ define(
 			for (var i = 0; i < self.carList.length; i++) {
 				self.runCar(self.carList[i], timedelta);
 			}
-			self.lastFrame = Date.now();
 		};
 
 		this.runCar = function(car, timedelta) {
@@ -95,6 +96,7 @@ define(
 			}
 			self.moveCarInsideCanvas(car);
 			car.draw(self.context);
+			self.context.strokeText("" + timedelta, 50, 400);
 		};
 
 		this.gameOver = function() {
@@ -131,6 +133,7 @@ define(
 		this.start = function() {
 			this.lastFrame = Date.now();
 			this.timer = setInterval(this.run, this.runSpeed);
+			this.firstFrame = Date.now();
 		};
 
 		this.stop = function() {
