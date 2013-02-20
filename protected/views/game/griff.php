@@ -19,6 +19,9 @@ $this->layout = "//layouts/doubleColumn";
 		<br>
 
 		<div class="buttonContainer">
+			<? if (user()->isGuest): ?>
+				<p style="text-align: center">Husk å logge inn hvis du vil være med på highscoren</p>
+			<? endif ?>
 			<input id="thebutton" type="button" class="g-button" value="Start spillet nå!" />
 		</div>
 	</div>
