@@ -103,7 +103,7 @@ define(
 				success: function(html){
 					data.highscorelist.innerHTML = html;
 				},
-				type: 'get',
+				type: 'post',
 				url: "/game/score",
 				data: {
 					time: this.finalTime.toFixed(5)

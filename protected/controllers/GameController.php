@@ -15,7 +15,7 @@ class GameController extends Controller {
 			return;
 		}
 		$hs = new GriffgameHighscore();
-		$hs->score = (double)$_GET['time'];
+		$hs->score = (double)$_POST['time'];
 		$hs->userId = user()->id;
 		$hs->timestamp = new CDbExpression("NOW()");
 		$okSave = $hs->save();
