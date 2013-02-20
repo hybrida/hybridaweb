@@ -12,9 +12,9 @@ define(["canvasobject", "keylistener", "fastmath"],
 		var self = this;
 		this.image = new Image();
 		this.image.src =  "/images/griffgame/car1.png";
-		this.rotationSpeed = 0.018;
+		this.rotationSpeed = 0.015;
 		this.acceleration = 0.4;
-		this.maxSpeed = 12;
+		this.maxSpeed = 13;
 		this.size = 20;
 		this.points = 0;
 		this.keys = {
@@ -31,8 +31,7 @@ define(["canvasobject", "keylistener", "fastmath"],
 				this.keys[direction]);
 		};
 
-		this.move = function(timeFactor) {
-			this.timeFactor = timeFactor;
+		this.move = function() {
 			this.setVelocity();
 		};
 
@@ -45,8 +44,8 @@ define(["canvasobject", "keylistener", "fastmath"],
 			this.setSpeed();
 			this.setRotation();
 
-			this.x += this.speed * fastmath.cos(this.rotation)*this.timeFactor;
-			this.y += this.speed * fastmath.sin(this.rotation)*this.timeFactor;
+			this.x += this.speed * fastmath.cos(this.rotation);
+			this.y += this.speed * fastmath.sin(this.rotation);
 		};
 
 		this.setSpeed = function() {
