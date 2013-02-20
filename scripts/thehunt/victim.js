@@ -18,8 +18,8 @@ define(
 		};
 
 		this.move = function() {
-			this.x = Math.random() * 400;
-			this.y = Math.random() * 300;
+			this.x = 10 + Math.random() * 680;
+			this.y = 10 + Math.random() * 380;
 		};
 
 		this.popRandom = function() {
