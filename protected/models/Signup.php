@@ -115,9 +115,9 @@ class Signup extends CActiveRecord {
 	}
 
 	public function addAttender($userId, $addBPC = true) {
-		$sql = "INSERT INTO signup_membership 
-			( `eventId`, `userId`, `signedOff` )
-			VALUES ( :eid, :uid, 'false')
+		$sql = "INSERT INTO signup_membership
+			( `eventId`, `userId`, `signedOff`, `timestamp` )
+			VALUES ( :eid, :uid, 'false', NOW())
 			ON DUPLICATE KEY UPDATE `signedOff` = 'false'";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->bindValue(':eid', $this->eventId);
@@ -209,7 +209,7 @@ class Signup extends CActiveRecord {
 	}
 
 	public function getRegisteredAttendingCount() {
-		$sql = "SELECT COUNT(*) as num 
+		$sql = "SELECT COUNT(*) as num
 			FROM signup_membership
 			WHERE eventId = :eventId
 				AND signedOff = 'false'";
@@ -308,7 +308,7 @@ class Signup extends CActiveRecord {
 		app()->gatekeeper->hasPostAccess('event', $this->eventId) &&
 		!user()->isGuest;
 	}
-	
+
 	public function canUnattend() {
 		return $this->signoff === 'true' || $this->signoff === true;
 	}
@@ -324,11 +324,11 @@ class Signup extends CActiveRecord {
 			return ($user1->firstName > $user2->firstName) ? 1 : -1;
 		}
 	}
-		
+
 		public function getAttendingFraction(){
 			return 100*($this->attendingCount / $this->spots);
 		}
-		
+
 		public function getAttendingColorClass(){
 			if ($this->AttendingFraction == 100) {
 				return "red";

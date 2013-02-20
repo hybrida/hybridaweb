@@ -359,6 +359,7 @@ CREATE TABLE IF NOT EXISTS `signup` (
 CREATE TABLE IF NOT EXISTS `signup_membership` (
   `eventId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `signedOff` enum('true','false') COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`eventId`,`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
