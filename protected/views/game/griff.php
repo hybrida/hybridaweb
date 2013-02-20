@@ -55,6 +55,11 @@ $this->layout = "//layouts/doubleColumn";
 		font-weight: bold;
 	}
 
+	.userScore {
+		white-space: nowrap;
+		overflow: hidden;
+	}
+
 
 </style>
 
