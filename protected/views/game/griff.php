@@ -6,7 +6,7 @@ $this->layout = "//layouts/doubleColumn";
  ?>
 
 <div class="newsThehunt">
-	<h1>The Hunt</h1>
+	<h1>Griff Grabber</h1>
 	<div id="gameWrap" style="display:none">
 		<canvas id="thehunt" width="700" height="400"></canvas>
 		<div class="buttonContainer">

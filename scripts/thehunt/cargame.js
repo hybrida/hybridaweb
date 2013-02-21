@@ -45,7 +45,7 @@ define(
 		this.victim = new Victim();
 		this.carList = [];
 		this.time = 0.0;
-		this.fps = 40;
+		this.fps = 60;
 
 		this.addCar = function(car) {
 			car.normalizeToFPS(this.fps);
