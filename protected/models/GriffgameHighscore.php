@@ -99,7 +99,7 @@ class GriffgameHighscore extends CActiveRecord
 			from griffgame_highscore
 			group by userId
 			order by score asc
-			limit 10";
+			limit 50";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->execute();
 		$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
