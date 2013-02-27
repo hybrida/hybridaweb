@@ -1,5 +1,6 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -17,17 +18,40 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
   PRIMARY KEY (`id`,`type`,`access`,`super_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `album` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `title` varchar(60) COLLATE utf8_unicode_ci NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '0',
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `album_image` (
+  `image_id` int(11) NOT NULL,
+  `album_id` int(11) NOT NULL,
+  `status` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
   `title` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `shorttitle` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `content` mediumtext COLLATE utf8_unicode_ci,
-  `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `articleTextId` int(11) DEFAULT NULL,
   `author` int(11) NOT NULL,
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=81 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=84 ;
+
+CREATE TABLE IF NOT EXISTS `article_text` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `articleId` int(11) NOT NULL,
+  `content` mediumtext COLLATE utf8_unicode_ci NOT NULL,
+  `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `timestamp` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=34 ;
 
 CREATE TABLE IF NOT EXISTS `bk_company` (
   `companyID` int(11) NOT NULL AUTO_INCREMENT,
@@ -47,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `bk_company` (
   `status` enum('Aktuell senere','Blir kontaktet','Ikke kontaktet','Uaktuell') COLLATE utf8_unicode_ci DEFAULT 'Ikke kontaktet',
   `phoneNumber` int(11) DEFAULT NULL,
   `subgroupOfID` int(11) DEFAULT NULL,
-  `imageId` int(11) DEFAULT NULL,
+  `imageID` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`companyID`),
   KEY `contactorID` (`contactorID`,`addedByID`,`updatedByID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=219 ;
@@ -102,7 +126,7 @@ CREATE TABLE IF NOT EXISTS `event` (
   `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=109 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=111 ;
 
 CREATE TABLE IF NOT EXISTS `event_company` (
   `eventID` int(11) NOT NULL,
@@ -127,6 +151,15 @@ CREATE TABLE IF NOT EXISTS `fb_user` (
   PRIMARY KEY (`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `fieldtrip_support` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bpcId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `bpcId` (`bpcId`,`userId`),
+  KEY `user` (`userId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
 CREATE TABLE IF NOT EXISTS `gallery` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
@@ -135,6 +168,15 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `timestamp` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
+
+CREATE TABLE IF NOT EXISTS `griffgame_highscore` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userId` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `score` double(10,0) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `userId` (`userId`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `group_membership` (
   `groupId` int(11) NOT NULL,
@@ -177,18 +219,17 @@ CREATE TABLE IF NOT EXISTS `image` (
   PRIMARY KEY (`id`),
   KEY `albumId` (`galleryId`,`userId`),
   KEY `userId` (`userId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=48 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=61 ;
 
 CREATE TABLE IF NOT EXISTS `job_announcement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `companyId` int(11) NOT NULL,
-  `start` date NOT NULL,
-  `end` date NOT NULL,
+  `deadline` date NOT NULL,
   `title` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `companyId` (`companyId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 CREATE TABLE IF NOT EXISTS `kilt_comment` (
   `id` int(11) NOT NULL,
@@ -208,7 +249,7 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   `confirmed` tinyint(1) NOT NULL,
   `status` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=29 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `kilt_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -235,13 +276,13 @@ CREATE TABLE IF NOT EXISTS `kilt_time` (
   `start` date NOT NULL,
   `end` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
   `parentType` enum('event','article','group') COLLATE utf8_unicode_ci DEFAULT NULL,
-  `title` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `title` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `imageId` int(11) DEFAULT NULL,
   `ingress` text COLLATE utf8_unicode_ci,
   `content` mediumtext COLLATE utf8_unicode_ci,
@@ -252,7 +293,7 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=388 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=390 ;
 
 CREATE TABLE IF NOT EXISTS `news_group` (
   `newsId` int(11) NOT NULL,
@@ -318,9 +359,21 @@ CREATE TABLE IF NOT EXISTS `signup` (
 CREATE TABLE IF NOT EXISTS `signup_membership` (
   `eventId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `signedOff` enum('true','false') COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`eventId`,`userId`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `signup_membership_anonymous` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `eventId` int(11) NOT NULL DEFAULT '0',
+  `firstName` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `lastName` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(256) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `signedOff` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `specialization` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -329,6 +382,12 @@ CREATE TABLE IF NOT EXISTS `specialization` (
   PRIMARY KEY (`id`),
   KEY `siteId` (`siteId`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
+
+CREATE TABLE IF NOT EXISTS `tbl_migration` (
+  `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `apply_time` int(11) DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -352,7 +411,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `altEmail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=521 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=528 ;
 
 CREATE TABLE IF NOT EXISTS `user_password` (
   `userId` int(11) NOT NULL,
@@ -361,6 +420,13 @@ CREATE TABLE IF NOT EXISTS `user_password` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+
+ALTER TABLE `fieldtrip_support`
+  ADD CONSTRAINT `fieldtrip_support_ibfk_1` FOREIGN KEY (`bpcId`) REFERENCES `event_company` (`bpcID`),
+  ADD CONSTRAINT `fieldtrip_support_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+
+ALTER TABLE `griffgame_highscore`
+  ADD CONSTRAINT `griffgame_highscore_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
 ALTER TABLE `iktringen_membership`
   ADD CONSTRAINT `fk_iktringen_membership_bk_company1` FOREIGN KEY (`companyId`) REFERENCES `bk_company` (`companyID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
