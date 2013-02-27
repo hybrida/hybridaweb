@@ -1,33 +1,12 @@
 define(
-		["car", "victim"],
-		function(Car, Victim) {
+		["car", "victim", "griffDrawer"],
+		function(Car, Victim, griffDrawer) {
 
 	var width = 800;
 	var height = 400;
 	var fps;
 	var canvas;
 	var game;
-
-	var scores = document.createElement("div");
-	var score1 = document.createElement("span");
-	var score2 = document.createElement("span");
-	scores.appendChild(score1);
-	scores.appendChild(score2);
-	setStyle(score1);
-	setStyle(score2);
-	score2.style.float = "right";
-
-	function setStyle(score){
-		var s = score.style;
-		s.border = "1px solid #000000";
-		s.margin = "2px";
-		s.padding = "0 20px 0 20px";
-		s.display = "block";
-		s.float = "left";
-		s.fontSize = "25px";
-		s.color = "#FFFFFFF";
-		s.borderRadius = "2px";
-	}
 
 	function CarGame(canvas) {
 		var self = this;
@@ -46,6 +25,7 @@ define(
 		this.carList = [];
 		this.time = 0.0;
 		this.fps = 60;
+
 
 		this.addCar = function(car) {
 			car.normalizeToFPS(this.fps);
@@ -140,10 +120,40 @@ define(
 			this.frameSpeed = 1000/this.fps;
 			this.timer = setInterval(this.run, this.frameSpeed);
 			this.firstFrame = Date.now();
+			this.victim = new Victim();
+			griffDrawer.clear();
 		};
+
 
 		this.stop = function() {
 			clearInterval(self.timer);
+			for (var i = 0; i < this.carList.length; i++) {
+				var car = this.carList[i];
+				car.speed = 0;
+			}
+		};
+
+		this.startWithCountDown = function() {
+			this.countDownCount = 3;
+			this.countDownTimer = setInterval(this.countDownTick, 1000);
+			this.countDownTick();
+		};
+
+		this.restart = function() {
+			this.stop();
+			this.startWithCountDown();
+		};
+
+		this.countDownTick = function() {
+			if (self.countDownCount <= 0) {
+				clearInterval(self.countDownTimer);
+				self.start();
+			}
+			self.context.save();
+			self.context.font = "italic 80px Calibri";
+			self.context.fillText("" + self.countDownCount, 300 - self.countDownCount*70, 200);
+			self.context.restore();
+			self.countDownCount -= 1;
 		};
 	}
 

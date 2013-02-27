@@ -1,6 +1,6 @@
 define(
 		["canvasobject", "griffDrawer"],
-		function(canvasobject, trigger) {
+		function(canvasobject, griffDrawer) {
 
 
 	var Victim = function(){
@@ -32,7 +32,7 @@ define(
 		};
 
 		this.hit = function() {
-			trigger(this.image.oldIntValue);
+			griffDrawer.trigger(this.image.oldIntValue);
 			this.changePart();
 			this.move();
 		};

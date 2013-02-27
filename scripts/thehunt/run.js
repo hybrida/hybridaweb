@@ -6,12 +6,13 @@ require(['cargame'], function(cargame) {
 	var highscorelist = data.highscorelist;
 	var gameWrap = data.gameWrap;
 	var restartButton = data.restartButton;
+	var game = new cargame.CarGame(data.canvas);
 
 	var run = function() {
-		var game = new cargame.CarGame(data.canvas);
+		game = new cargame.CarGame(data.canvas);
 		var car = new cargame.Car();
 		game.addCar(car);
-		game.start();
+		game.startWithCountDown();
 	};
 
 	startButton.addEventListener('click', function(){
@@ -21,7 +22,7 @@ require(['cargame'], function(cargame) {
 	});
 
 	restartButton.addEventListener('click', function() {
-		location.reload(true);
+		game.restart();
 	});
 
 
