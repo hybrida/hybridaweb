@@ -263,8 +263,12 @@ class BktoolController extends Controller {
                 
                 $bkTool = new Bktool();
 		$data = array();
+                $data['years'] = $bkTool->getAllGraduationYears();
                 $data['companyEvents'] = $bkTool->getAllCompanyEvents();
-                $data['years'] = $bkTool->getPresentationsSumForAllYears();
+                $data['oldCompanyEvents'] = $bkTool->getAllOldCompanyEvents();
+                $data['oldCompanyEventsSumByYear'] = $bkTool->getSumOfOldCompanyEventsByYear();
+                $data['companyEventsSumByYear'] = $bkTool->getPresentationsSumForAllYears();
+                $data['sumOfPresentationsThisYear'] = 0;
             
 		$this->render('presentations', $data);
 	}
@@ -331,7 +335,9 @@ class BktoolController extends Controller {
                 $data['companyId'] = $id;
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
                 $data['presentationDates'] = $bkTool->getPresentationDatesByCompanyId($id);
+                $data['oldPresentationDates'] = $bkTool->getOldPresentationDatesByCompanyId($id);
                 $data['presentationsCount'] = $bkTool->getPresentationsCountByCompanyId($id);
+                $data['oldPresentationsCount'] = $bkTool->getOldPresentationsCountByCompanyId($id);
                 $data['employedGraduates'] = $bkTool->getEmployedGraduatesByCompanyId($id);
                 $data['employedGraduatesSum'] = $bkTool->getSumOfEmployedGraduatesByCompanyId($id);
                 $data['parentCompanyName'] = $bkTool->getParentCompanyBySubCompanyId($id);
@@ -341,8 +347,10 @@ class BktoolController extends Controller {
                 $data['contactor'] = $bkTool->getContactorByCompanyId($id);
                 $data['updater'] = $bkTool->getPersonWhichUpdatedLastByCompanyId($id);
                 $data['adder'] = $bkTool->getPersonWhichAddedCompanyByCompanyId($id);
+                $data['isMember'] = $bkTool->isCompanyIKTRingenMember($id);
                 $data['commentsSum'] = $bkTool->getSumOfAllCommentsByCompanyId($id);
                 $data['comments'] = $bkTool->getAllCommentsByCompanyId($id);
+                $data['sumOfAllPresentations'] = 0;
                 
                 $this->render('company', $data);
         }
@@ -379,6 +387,7 @@ class BktoolController extends Controller {
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
                 $data['parentCompanyId'] = $bkTool->getParentCompanyBySubCompanyId($id);
+                $data['isMember'] = $bkTool->isCompanyIKTRingenMember($id);
                 $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
                 $data['relevantSpecializations'] = $bkTool->getRelevantSpecializationsByCompanyId($id);
                 $data['status'] = $bkTool->getStatusByCompanyId($id);

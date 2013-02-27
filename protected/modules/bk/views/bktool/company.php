@@ -162,10 +162,16 @@
     </td>
     <td id="BK-company-column">
             <div id="BK-company-presentationscontainer">
-            <? foreach($presentationsCount as $count) : ?>
-                <h3>Registrerte bedriftspresentasjoner (<?= $count['sum'] ?>)</h3>
-            <? endforeach ?>
+            <? foreach($presentationsCount as $count) : 
+                $sumOfAllPresentations += $count['sum'];
+            endforeach ?>
+                
+            <? foreach($oldPresentationsCount as $count) : 
+                $sumOfAllPresentations += $count['sum'];
+            endforeach ?>
             
+                <h3>Registrerte bedriftspresentasjoner (<?= $sumOfAllPresentations ?>)</h3>
+                
                 <table id="BK-company-presentationtable">
                     <tr>
                         <th>Dato</th>
@@ -179,13 +185,81 @@
                             <? } ?>
                         </td></tr>
                     <? endforeach ?>
+                        
+                    <? foreach($oldPresentationDates as $date) : ?>
+                        <tr><td><?= $date['date'] ?></td></tr>
+                    <? endforeach ?>
                 </table>
             </div>
         </td>
     </tr>
 </table>
 
-<br/>
+<table id="BK-company-uppertable">
+   <tr>
+        <td id="BK-company-column">
+            <h3>I&IKT-ringen</h3>
+            <p>
+                <table id="BK-company-informationtable">
+                  <tr>
+                    <th>Medlemskap i I&IKT-ringen</th>
+                    <td>
+                        <? if($isMember){ ?>
+                            Medlem
+                        <? } else { ?>
+                            Ikke medlem
+                        <? } ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Relevans for I&IKT-ringen</th>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sist kontaktet angående I&IKT-ringen</th>
+                    <td>
+
+                    </td>
+                </tr>
+                </table>
+            </p>
+            
+            <? if($isMember){ ?>
+            <p>
+            <table id="BK-company-informationtable">
+                  <tr>
+                    <th>Kontaktperson for faktura</th>
+                    <td>
+                    
+                    </td>
+                </tr>
+                <tr>
+                    <th>Organisasjonsnummer</th>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Fakturaadresse</th>
+                    <td>
+
+                    </td>
+                </tr>
+                    <tr>
+                    <th>Medlemskapsavgift</th>
+                    <td>
+
+                    </td>
+                </tr>
+            </table>
+            </p>
+            <? } ?>
+        </td>
+   </tr>
+</table>
+
 <table id="BK-company-centertable">
     <tr id="BK-company-editinglinks">
         <td id="BK-company-column">
@@ -197,7 +271,6 @@
     </tr>
 </table>
 
-<br/>
 <table id="BK-company-commenttable">
     <tr>
         <td id="BK-company-column">
@@ -232,7 +305,6 @@
     </tr>
 </table>
 
-<br/>
 <table id="BK-company-graduatetable">
     <tr>
     <td id="BK-company-column">

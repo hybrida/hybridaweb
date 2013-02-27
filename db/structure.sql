@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `bk_company` (
   `status` enum('Aktuell senere','Blir kontaktet','Ikke kontaktet','Uaktuell') COLLATE utf8_unicode_ci DEFAULT 'Ikke kontaktet',
   `phoneNumber` int(11) DEFAULT NULL,
   `subgroupOfID` int(11) DEFAULT NULL,
+  `imageId` int(11) DEFAULT NULL,
   PRIMARY KEY (`companyID`),
   KEY `contactorID` (`contactorID`,`addedByID`,`updatedByID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=219 ;

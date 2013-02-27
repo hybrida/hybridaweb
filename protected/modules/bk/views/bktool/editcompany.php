@@ -130,6 +130,64 @@
     <div id="BK-add-container">
         <table id="BK-add-table">
             <tr>
+                <th>Medlem av I&IKT-ringen</th>
+                <th>
+                    <input type="checkbox" name="isMember" value="<?= $isMember ?>"
+                        <?= ($isMember ? "checked" : ""); ?>              
+                    />
+                </th>
+            </tr>
+            <tr>
+                <th>Relevans for I&IKT-ringen</th>
+                <th>
+
+                </th>
+            </tr>
+            <tr>
+                <th>Sist kontaktet angående I&IKT-ringen</th>
+               <th>
+
+                </th>
+            </tr>
+        </table>
+    </div>
+    
+    <? if($isMember){ ?>
+        <br/>
+        <div id="BK-add-container">
+            <table id="BK-add-table">
+                <tr>
+                    <th>Kontaktperson for faktura</th>
+                    <th>
+
+                    </th>
+                    </tr>
+                <tr>
+                   <th>Organisasjonsnummer</th>
+                   <th>
+
+                    </th>
+                </tr>
+                <tr>
+                    <th>Fakturaadresse</th>
+                    <th>
+
+                    </th>
+                </tr>
+                <tr>
+                    <th>Medlemskapsavgift</th>
+                    <th>
+
+                    </th>
+                </tr>
+            </table>
+        </div>
+    <? } ?>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
+            <tr>
 		<th>Relevant for studieretning</th>
 		<th>
                     <? foreach($specializationNames as $name) : ?>
