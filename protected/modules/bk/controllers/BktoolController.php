@@ -6,6 +6,8 @@ class BktoolController extends Controller {
         protected $lineOfStudy = 'Ingeniørvitenskap og IKT';
         protected $organisationName = 'Hybrida';
         protected $bkGroupId = 57;
+        protected $industryAssociation = 'I&IKT-ringen';
+        protected $foundingYear = 2003;
         
         public function getNumberOfRelevantUpdatesAsString(){
             $bkTool = new Bktool();
@@ -22,6 +24,17 @@ class BktoolController extends Controller {
             else{
                 return '('.$sum.')';
             }
+        }
+        
+        public function getAllYearsSinceFounding(){
+            $year = date('Y');
+            $years = array();
+            
+            while($year >= $this->foundingYear){
+                array_push($years, $year);
+                $year--;
+            }
+            return $years;
         }
 
 	public function actionIndex() {
@@ -263,7 +276,7 @@ class BktoolController extends Controller {
                 
                 $bkTool = new Bktool();
 		$data = array();
-                $data['years'] = $bkTool->getAllGraduationYears();
+                $data['years'] = $this->getAllYearsSinceFounding();
                 $data['companyEvents'] = $bkTool->getAllCompanyEvents();
                 $data['oldCompanyEvents'] = $bkTool->getAllOldCompanyEvents();
                 $data['oldCompanyEventsSumByYear'] = $bkTool->getSumOfOldCompanyEventsByYear();

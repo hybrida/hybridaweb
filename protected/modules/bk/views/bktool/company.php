@@ -198,11 +198,11 @@
 <table id="BK-company-uppertable">
    <tr>
         <td id="BK-company-column">
-            <h3>I&IKT-ringen</h3>
+            <h3><?= $this->industryAssociation ?></h3>
             <p>
                 <table id="BK-company-informationtable">
                   <tr>
-                    <th>Medlemskap i I&IKT-ringen</th>
+                    <th>Medlemskap i <?= $this->industryAssociation ?></th>
                     <td>
                         <? if($isMember){ ?>
                             Medlem
@@ -212,13 +212,13 @@
                     </td>
                 </tr>
                 <tr>
-                    <th>Relevans for I&IKT-ringen</th>
+                    <th>Relevans for <?= $this->industryAssociation ?></th>
                     <td>
 
                     </td>
                 </tr>
                 <tr>
-                    <th>Sist kontaktet angående I&IKT-ringen</th>
+                    <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
                     <td>
 
                     </td>

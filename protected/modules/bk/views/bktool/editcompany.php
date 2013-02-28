@@ -130,7 +130,7 @@
     <div id="BK-add-container">
         <table id="BK-add-table">
             <tr>
-                <th>Medlem av I&IKT-ringen</th>
+                <th>Medlem av <?= $this->industryAssociation ?></th>
                 <th>
                     <input type="checkbox" name="isMember" value="<?= $isMember ?>"
                         <?= ($isMember ? "checked" : ""); ?>              
@@ -138,13 +138,13 @@
                 </th>
             </tr>
             <tr>
-                <th>Relevans for I&IKT-ringen</th>
+                <th>Relevans for <?= $this->industryAssociation ?></th>
                 <th>
 
                 </th>
             </tr>
             <tr>
-                <th>Sist kontaktet angående I&IKT-ringen</th>
+                <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
                <th>
 
                 </th>

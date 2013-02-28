@@ -15,24 +15,24 @@
         <? $sumOfPresentationsThisYear = 0 ?>
     
         <? foreach($oldCompanyEventsSumByYear as $event) : ?>
-            <? if($event['year'] == $year['graduationYear']){ ?>
+            <? if($event['year'] == $year){ ?>
                 <? $sumOfPresentationsThisYear += $event['sum'] ?>
             <? } ?>
         <? endforeach; ?>
     
         <? foreach($companyEventsSumByYear as $event) : ?>
-            <? if($event['year'] == $year['graduationYear']){ ?>
+            <? if($event['year'] == $year){ ?>
                 <? $sumOfPresentationsThisYear += $event['sum'] ?>
             <? } ?>
         <? endforeach; ?>
     
         <? if($sumOfPresentationsThisYear > 0 ){ ?>
-            <h3><?= $year['graduationYear'] ?> (<?= $sumOfPresentationsThisYear ?>):</h3>
+            <h3><?= $year ?> (<?= $sumOfPresentationsThisYear ?>):</h3>
 
             <table id="BK-presentationstable">
                 <tr><th>Arrangementstittel</th><th>Tidspunkt</th><th>Tilknyttet bedrift</th></tr>
                 <? foreach($companyEvents as $event) : ?>
-                    <? if($event['year'] == $year['graduationYear']){ ?>
+                    <? if($event['year'] == $year){ ?>
                         <tr>
                             <td>
                                 <? if($event['bpcID'] > 0){ ?>
@@ -48,7 +48,7 @@
                 <? endforeach; ?>
 
                 <? foreach($oldCompanyEvents as $event) : ?>
-                    <? if($event['year'] == $year['graduationYear']){ ?>
+                    <? if($event['year'] == $year){ ?>
                         <tr>
                             <td>Bedpres: <?= $event['companyName'] ?></td>
                             <td><?= $event['date'] ?></td>

@@ -553,7 +553,8 @@ class BkTool {
     
         $data = array();
         $sql = "SELECT DISTINCT graduationYear FROM user
-                WHERE graduationYear IS NOT NULL AND graduationYear > 2006 ORDER BY graduationYear DESC";
+                WHERE graduationYear IS NOT NULL AND graduationYear > 2006
+                ORDER BY graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -767,7 +768,7 @@ class BkTool {
         $sql = "SELECT n.title, c.companyName, e.start, YEAR(e.start) AS year, c.companyID, ec.bpcID
                 FROM news AS n, event AS e, event_company AS ec 
                 LEFT JOIN bk_company AS c ON ec.companyID = c.companyID 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND e.status = 0
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND e.status = ".Status::PUBLISHED."
                 ORDER BY e.start DESC";
 
         $query = $this->pdo->prepare($sql);
@@ -819,7 +820,7 @@ class BkTool {
         $sql = "SELECT COUNT(n.title) AS sum, YEAR(e.start) AS year
                 FROM news AS n, event AS e, event_company AS ec 
                 LEFT JOIN bk_company AS c ON ec.companyID = c.companyID 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND e.status = 0
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND e.status = ".Status::PUBLISHED."
                 GROUP BY year
                 ORDER BY e.start DESC";
 
@@ -839,7 +840,7 @@ class BkTool {
         );
         $sql = "SELECT n.title, e.start, ec.bpcID
                 FROM news AS n, event AS e, event_company AS ec 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId AND e.status = 0
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId AND e.status = ".Status::PUBLISHED."
                 ORDER BY e.start DESC";
 
         $query = $this->pdo->prepare($sql);
@@ -878,7 +879,7 @@ class BkTool {
         );
         $sql = "SELECT COUNT(n.title) AS sum
                 FROM news AS n, event AS e, event_company AS ec 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId AND e.status = 0";
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId AND e.status = ".Status::PUBLISHED;
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
