@@ -94,6 +94,13 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14610 ;
 
+CREATE TABLE IF NOT EXISTS `bk_iktringen_information` (
+  `companyID` int(11) NOT NULL,
+  `relevance` enum('Høy','Middels','Lav') COLLATE utf8_unicode_ci DEFAULT 'Middels',
+  `dateContacted` datetime DEFAULT NULL,
+  PRIMARY KEY (`companyID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 CREATE TABLE IF NOT EXISTS `book_sales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -204,7 +211,12 @@ CREATE TABLE IF NOT EXISTS `iktringen_membership` (
   `companyId` int(11) DEFAULT NULL,
   `start` date DEFAULT NULL,
   `end` date DEFAULT NULL,
+  `invoiceContact` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `organizationNumber` char(9) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `invoiceAddress` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `membershipFee` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `organizationNumber` (`organizationNumber`),
   KEY `company` (`companyId`,`start`,`end`),
   KEY `fk_iktringen_membership_bk_company1_idx` (`companyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
