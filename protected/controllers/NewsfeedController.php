@@ -1,34 +1,22 @@
 <?php
 
 class NewsfeedController extends Controller {
-	private $feedLimit = 10;
-	private $offset = 0;
-	
 	public function actionIndex() {
-		$feedElements = $this->getFeedElements();
-		$this->render("feed", array(
-			'models' => $feedElements,
-			'index' => $this->offset,
-			'limit' => $this->feedLimit,
-			'hasPublishAccess' => user()->checkAccess('createNews'),
-		));
-	}
+        $criteria = new CDbCriteria;
+        $criteria->addCondition("`status` = " . Status::PUBLISHED);
+        $criteria->order = "`weight` DESC, `timestamp` DESC";
+        $total = News::model()->count('`status`= ' . Status::PUBLISHED);
 
-	public function actionFeedAjax($offset = 0) {
-		$feedElements = $this->getFeedElements($offset);
-		$this->renderPartial('_feed', array(
-			'models' => $feedElements,
-			'index' => $this->offset,
-			'limit' => $this->feedLimit,
-		));
-	}
+        $pages = new CPagination($total);
+        $pages->pageSize = 10;
+        $pages->applyLimit($criteria);
 
-	private function getFeedElements($offset = 0) {
-		$feed = new NewsFeed($this->feedLimit, $offset);
-		$elements = $feed->getElements();
-		$this->offset = $feed->getOffset();
-
-		return $elements;
+        $news = News::model()->findAll($criteria);
+        
+        $this->render('feed', array(
+            'news' => $news,
+            'pages' => $pages,
+            'hasPublishAccess' => user()->checkAccess('createNews'),
+        ));
 	}
-	
 }

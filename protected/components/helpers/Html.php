@@ -33,7 +33,9 @@ class Html extends CHtml {
 	}
 
 	public static function removeSpecialChars($text) {
-		return preg_replace('/[^a-zæøåA-ZÆØÅ0-9_ -]/s', '', $text);
+		$fixedUnderscores = preg_replace('/ /', '-', $text);	// Replace ' ' with '-'
+		$lowerCased = mb_strtolower($fixedUnderscores, "UTF-8");
+		return preg_replace('/[^a-zæøåA-ZÆØÅ0-9_ -]/s', '', $lowerCased);		// Keep only chosen chars
 	}
 
 	public static function getLongMonthNames() {
