@@ -15,7 +15,7 @@ $this->beginClip('sidebar');
 		<li>
 			<?= CHtml::link('Legg til bilder', 'update/'.$album->id) ?>
 		</li>
-		<? if (Yii::app()->user->id == $album->user_id): ?>
+		<? if ($canDelete): ?>
 			<li>
 				<?= CHtml::link('Slett album', '#', 
 					array(

@@ -10,14 +10,16 @@ $this->beginClip('sidebar');
 
 ?>
 
-<div class="g-barTitle">Handlinger</div>
-<div class="g-sidebarNav">
-	<ul>
-		<li>
-			<?= CHtml::link('Opprett album', '/gallery/create') ?>
-		</li>
-	</ul>
-</div>
+<? if ($isLoggedIn): ?>
+	<div class="g-barTitle">Handlinger</div>
+	<div class="g-sidebarNav">
+		<ul>
+			<li>
+				<?= CHtml::link('Opprett album', '/gallery/create') ?>
+			</li>
+		</ul>
+	</div>
+<? endif; ?>
 
 <? $this->endClip(); ?>
 

@@ -35,7 +35,7 @@ class AccessRelation {
 		}
 		if (!$this->getTypeFromModel($model)) {
 			throw new InvalidArgumentException(
-					"Model must be an instance of Event, News or Article or Signup");
+					"Model must be an instance of Event, News or Article or Signup or Album");
 		}
 	}
 
@@ -60,6 +60,8 @@ class AccessRelation {
 			return "article";
 		} else if ($model instanceof Signup) {
 			return "signup";
+		} else if ($model instanceof Album) {
+			return "album";
 		}
 	}
 

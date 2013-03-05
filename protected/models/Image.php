@@ -103,6 +103,18 @@ class Image extends CActiveRecord {
 				));
 	}
 
+	public function hasDeleteAccess()
+	{
+		if (!isset(Yii::app()->user))
+			return false;
+
+		if	(Yii::app()->user->id == $this->userId)
+			return true;
+
+		if (Yii::app()->gatekeeper->hasGroupAccess(55))
+			return false;
+	}
+
 	public function getFilePath($size = "original") {
 		if ($this->isNewRecord) {
 			throw new CException("Filen er ikke lagret i databasen, og har derfor ingen plassering");

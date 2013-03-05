@@ -24,7 +24,7 @@ $this->beginClip('sidebar');
 		</li>
 		<li>
 
-			<? if (Yii::app()->user->id == $image->userId): ?>
+			<? if ($canDelete): ?>
 				<?= CHtml::link('Slett bilde', '#', array( 'id' => 'delLink'))?>
 			<? else: ?>
 				<?= CHtml::link('Slett bilde', '#', array( 'id' => 'delLink',

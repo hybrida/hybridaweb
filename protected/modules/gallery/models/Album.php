@@ -12,9 +12,42 @@
  */
 class Album extends CActiveRecord
 {
+	public $images;
 	private $statusDisabled = Status::DELETED;
 	private $statusPublished = Status::PUBLISHED;
-	public $images;
+	private $_access;
+
+	public function afterConstruct() {
+		$this->_access = new AccessRelation($this);
+		return parent::afterConstruct();
+	}
+
+	public function afterFind() {
+		$this->afterConstruct();
+		return parent::afterFind();
+	}
+
+	public function setAccess($array) {
+		$this->_access->set($array);
+	}
+
+	public function getAccess() {
+		return $this->_access->get();
+	}
+
+	public function afterSave() {
+		$this->_access->replace();
+		return parent::afterSave();
+	}
+	public function setAttributes($atts)
+	{
+		if (array_key_exists('access', $atts))
+		{
+			$this->setAccess($atts['access']);
+			unset($atts['access']);
+		}
+		return parent::setAttributes($atts);
+	}
 
 	public function getImages()
 	{
@@ -31,6 +64,22 @@ class Album extends CActiveRecord
 		$data = $command->queryColumn();
 		foreach ($data as $imageID)
 			$this->images[] = Image::model()->findByPk($imageID);
+	}
+
+	public function hasViewAccess()
+	{
+		return Yii::app()->gatekeeper->hasPostAccess('album', $this->id);
+	}
+	public function hasDeleteAccess()
+	{
+		if (!isset(Yii::app()->user))
+			return false;
+
+		if	(Yii::app()->user->id == $this->user_id)
+			return true;
+
+		if (Yii::app()->gatekeeper->hasGroupAccess(55))
+			return false;
 	}
 
 	 public function addAlbumImageRelation($pid)
