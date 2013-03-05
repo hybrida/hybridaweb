@@ -79,7 +79,9 @@ class Album extends CActiveRecord
 			return true;
 
 		if (Yii::app()->gatekeeper->hasGroupAccess(55))
-			return false;
+			return true;
+
+		return false;
 	}
 
 	 public function addAlbumImageRelation($pid)

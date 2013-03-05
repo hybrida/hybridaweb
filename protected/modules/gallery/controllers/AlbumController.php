@@ -153,10 +153,59 @@ class AlbumController extends Controller
 
 		if(isset($_POST['Album']))
 		{
-			if ($_POST['new'] > 0)
-				$model = Album::model()->findByPk($_POST['new']);
+
+			$model->attributes = $_POST['Album'];
+			$model->user_id = Yii::app()->user->id;
+			$imageIDs = $this->getUploads();
+
+			if($model->save())
+			{
+				foreach ($imageIDs as $imageID) {
+					$model->addAlbumImageRelation($imageID);
+				}
+				$this->clearUploads();
+				$this->redirect('/gallery/'.$model->id);
+			}
+			else {
+				$errors[] = "Albumet må ha tittel";
+				if (count($imageIDs) > 0) {
+					$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger ikke laste opp disse på nytt";
+					$errors[] = "Trykk " . CHtml::link('her', '#', 
+							array(
+								'submit' => array('clear', 'id' => $_POST['new'])))
+						. " om du ikke vil ha med disse bildene";
+				}
+			}
+		}
+
+		$this->render('create',array(
+					'model'=>$model,
+					'errors' => $errors,
+					));
+	}
+
+	public function actionClear($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			$this->clearUploads();
+			if ($id > 0)
+				$this->redirect('/gallery/update/'.$id);
 			else
-				$model->user_id = Yii::app()->user->id;
+				$this->redirect('/gallery/create');
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+
+	public function actionUpdate($id)
+	{
+		$this->pageTitle = "Last opp";
+		$model=$this->loadModel($id);
+		$model->getImages();
+		$errors = array();
+		if(isset($_POST['Album']))
+		{
 
 			$model->attributes = $_POST['Album'];
 			$imageIDs = $this->getUploads();
@@ -184,35 +233,7 @@ class AlbumController extends Controller
 		$this->render('create',array(
 					'model'=>$model,
 					'errors' => $errors,
-					'new' => isset($_POST['new']) ? $_POST['new'] == 0 : 1,
-					));
-	}
-
-	public function actionClear($id)
-	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			$this->clearUploads();
-			if ($id > 0)
-				$this->redirect('/gallery/update/'.$id);
-			else
-				$this->redirect('/gallery/create');
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
-	}
-
-	public function actionUpdate($id)
-	{
-		$this->pageTitle = "Last opp";
-		$model=$this->loadModel($id);
-		$model->getImages();
-		$errors = array();
-
-		$this->render('create',array(
-					'model'=>$model,
-					'errors' => $errors,
-					'new' => 0,
+					'canDelete' => $model->hasDeleteAccess(),
 					));
 	}
 
@@ -222,7 +243,7 @@ class AlbumController extends Controller
 		{
 			$model = $this->loadModel($id);
 
-			if ($model->hasDeleteAccess())
+			if (!$model->hasDeleteAccess())
 				throw new CHttpException(403,'Invalid request. Please do not repeat this request again.');
 
 			$model->delAlbumRelations();
@@ -241,7 +262,7 @@ class AlbumController extends Controller
 			$model = $this->loadModel($id);
 			$image = Image::model()->findByPk($pid);
 
-			if ($image->hasDeleteAccess())
+			if (!$image->hasDeleteAccess())
 				throw new CHttpException(403,'Invalid request. Please do not repeat this request again.');
 
 			$model->delAlbumImageRelation($pid);
