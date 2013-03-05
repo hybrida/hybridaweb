@@ -2,7 +2,7 @@ $(document).ready(function(){
 	var url = location.href;
 	var ids = url.split('/');
 	window.albumID = ids[4];
-	var imageID = ids[5];
+	window.imageID = ids[5];
 
 	ajaxrequest(imageID);
 });
@@ -23,7 +23,6 @@ $('#delLink').click(function(e){
 });
 $('#image').click(function(e){
 	e.preventDefault();
-	console.log("I clicked image");
 });
 $('#next').click(function(e){
 	e.preventDefault();
@@ -57,9 +56,9 @@ function ajaxrequest(pictureID) {
 	request.onreadystatechange = function() {
 		if (request.readyState == 4) {
 			var string  = request.responseText;
-			var skille = string.search("</script>");
-			var json = string.substr(skille+9);
-			var comments = string.substr(0, skille+9);
+			var skille = string.search("{\"albumID\"");
+			var json = string.substr(skille);
+			var comments = string.substr(0, skille);
 			var data = JSON.parse(json);
 			data.comments = comments;
 			changeData(data);
