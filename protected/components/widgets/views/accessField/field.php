@@ -17,6 +17,8 @@
         'class' => "g-button fetchNewAccessBlock{$this->id}",
     ))
     ?>
+    
+    <a class="g-button" style="font-weight: bold" href="/artikler/96/Guide+til+tilgangsrettigheter">?</a>
 
     <script type="text/javascript">
         var sub = <?=$this->sub?>;
