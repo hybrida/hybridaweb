@@ -9,7 +9,7 @@ $this->breadcrumbs = array(
 
 	<div class="form">
 
-	<?php $form=$this->beginWidget('CActiveForm', array(
+	<?php $form=$this->beginWidget('ActiveForm', array(
 		'id'=>'album-form',
 		'action'=>Yii::app()->createUrl('/gallery/create'),
 		'enableAjaxValidation'=>false,
@@ -36,7 +36,11 @@ $this->breadcrumbs = array(
 			   'id' => 'uploader'
 			)); ?>
 		</div>
-
+		<br>
+		<div class="row">
+			<?= $form->accessField($model, 'access'); ?>
+		</div>
+		<br>
 		<div class="row buttons">
 			<?php echo CHtml::submitButton($new ? 'Opprett' : 'Lagre'); ?>
 		</div>
