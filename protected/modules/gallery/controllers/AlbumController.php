@@ -16,9 +16,14 @@ class AlbumController extends Controller
 	{
 		return array(
 				array('allow',
-					'actions'=>array('clear', 'create','update', 'upload','index','view', 'picview', 'show', 'ajax', 'delete', 'picdelete'),
+					'actions'=>array('clear', 'create','update', 'upload', 'delete', 'picdelete'),
 					'users'=>array('@'),
 					),
+				array('allow', 
+					'actions' => array('index','view', 'picview', 'ajax' ),
+					'users'=>array('*'),
+					),
+
 				array('deny',  // deny all users
 					'users'=>array('*'),
 					),
@@ -32,17 +37,24 @@ class AlbumController extends Controller
 		$criteria->condition='status=:status';
 		$criteria->params=array(':status'=>Status::PUBLISHED);
 		$criteria->order = 'id DESC';
-		$albums = Album::model()->findAll($criteria);
+		$allAlbums = Album::model()->findAll($criteria);
+		$albums = array();
+		foreach($allAlbums as $album)
+			if ($album->hasViewAccess())
+				$albums[] = $album;
 		foreach($albums as $album)
 			$album->getImages();
 		$this->render('index',array(
 					'albums'=> $albums,
+					'isLoggedIn' => isset(Yii::app()->user),
 					));
 	}
 
 	public function actionView($id)
 	{
 		$album = $this->loadModel($id);
+		if(!$album->hasViewAccess())
+			throw new CHttpException(403,'Invalid request. Please do not repeat this request again.');
 		$album->getImages();
 		$canDelete = $album->hasDeleteAccess();
 		$this->pageTitle = ($album->title);
@@ -56,6 +68,8 @@ class AlbumController extends Controller
 	public function actionPicview($id, $pid)
 	{
 		$album = $this->loadModel($id);
+		if(!$album->hasViewAccess())
+			throw new CHttpException(403,'Invalid request. Please do not repeat this request again.');
 		$album->getImages();
 		$this->pageTitle = ($album->title);
 
@@ -144,7 +158,7 @@ class AlbumController extends Controller
 			else
 				$model->user_id = Yii::app()->user->id;
 
-			$model->attributes=$_POST['Album'];
+			$model->attributes = $_POST['Album'];
 			$imageIDs = $this->getUploads();
 
 			if($model->save())
@@ -208,7 +222,7 @@ class AlbumController extends Controller
 		{
 			$model = $this->loadModel($id);
 
-			if (Yii::app()->user->id != $model->user_id)
+			if ($model->hasDeleteAccess())
 				throw new CHttpException(403,'Invalid request. Please do not repeat this request again.');
 
 			$model->delAlbumRelations();
@@ -227,7 +241,7 @@ class AlbumController extends Controller
 			$model = $this->loadModel($id);
 			$image = Image::model()->findByPk($pid);
 
-			if (Yii::app()->user->id != $image->userId)
+			if ($image->hasDeleteAccess())
 				throw new CHttpException(403,'Invalid request. Please do not repeat this request again.');
 
 			$model->delAlbumImageRelation($pid);
