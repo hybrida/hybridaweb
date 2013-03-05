@@ -104,8 +104,14 @@ class Image extends CActiveRecord {
 
 	public function hasDeleteAccess()
 	{
-		return	Yii::app()->user->id == $this->userId || 
-				Yii::app()->gatekeeper->hasGroupAccess(55);
+		if (!isset(Yii::app()->user))
+			return false;
+
+		if	(Yii::app()->user->id == $this->userId)
+			return true;
+
+		if (Yii::app()->gatekeeper->hasGroupAccess(55))
+			return false;
 	}
 
 	public function getFilePath($size = "original") {
