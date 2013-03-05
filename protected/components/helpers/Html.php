@@ -22,8 +22,6 @@ class Html extends CHtml {
 	public static function dateToString($dateString, $format='medium') {
 		$date = strtotime($dateString);
 		$month = date('n', $date);
-		if ($format == 'short')
-			return date('n.m.Y', $date);
 		if ($format == 'medium')
 			return date('j. ', $date) . self::$shortMonthNames[$month - 1] . date(' Y', $date);
 		if ($format == 'mediumlong')

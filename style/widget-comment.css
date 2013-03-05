@@ -11,8 +11,8 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 }
 
 .widget-comment .comment .profile-image {
-    width: 75px;
-    height: 75px;
+    width: 55px;
+    height: 55px;
     margin: auto;
     clear: both;
 }
@@ -40,6 +40,10 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 }
 
 .widget-comment .comment-left, .comment-right {
-    margin-bottom: 25px;
-    margin-top: 25px;
+    margin-bottom: 10px;
+    margin-top:10px;
+}
+
+.widget-comment .comment-title .deleteButton {
+    float: right;
 }

@@ -16,6 +16,7 @@ class Image extends CActiveRecord {
 	public static $sizes = array(
 		'profile' => array('width' => 249),
 		'small' => array('width' => 75, 'height' => 75),
+		'xsmall' => array('width' => 55, 'height' => 55),
 		'mini' => array('width' => 40, 'height' => 40),
 		'frontpage' => array('width' => 600, 'height' => 150),
 		'sidebar' => array('width' => 150),
