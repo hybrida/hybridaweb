@@ -1,13 +1,15 @@
 .accessField {
-	font-family: "Gill Sans", DIN;
 	font-weight: lighter;
 	width: 602px;
 	margin: 0;
 	padding: 1px;
 }
 
+.accessField .accessSub {
+    
+}
+
 .accessField h1, .accessField h2, .accessField h3 {
-	font-family: DIN;
 	font-variant: small-caps;
 }
 
@@ -59,9 +61,13 @@
 }
 
 .accessField div#Grupper div.accessName {
-	width: 5em;
+	width: 4em;
 }
 
 .accessField div#Spesialisering div.accessName {
-	width: 11em;
+	width: 10em;
+}
+
+.accessField div#Utgangsår div.accessName {
+	width: 3em;
 }

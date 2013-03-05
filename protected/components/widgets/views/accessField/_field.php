@@ -4,7 +4,6 @@
 		'onclick' => "js:$(this).closest('div').remove()",
 	)) ?>
 	<? if ($sub != 0): ?>
-	<h2>Eller</h2>
 	<? endif ?>
 
 	<? foreach ($this->getAccessGroups() as $groupName => $group): ?>
@@ -18,5 +17,5 @@
 			<? endforeach ?>
 		</div>
 	<? endforeach ?>
+    <br clear="all">
 </div>
-<br clear="all">
