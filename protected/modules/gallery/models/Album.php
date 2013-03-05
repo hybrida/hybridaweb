@@ -33,6 +33,12 @@ class Album extends CActiveRecord
 			$this->images[] = Image::model()->findByPk($imageID);
 	}
 
+	public function hasDeleteAccess()
+	{
+		return	Yii::app()->user->id == $this->user_id || 
+				Yii::app()->gatekeeper->hasGroupAccess(55);
+	}
+
 	 public function addAlbumImageRelation($pid)
 	 {
 		$id = $this->id;

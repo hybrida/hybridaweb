@@ -44,10 +44,12 @@ class AlbumController extends Controller
 	{
 		$album = $this->loadModel($id);
 		$album->getImages();
+		$canDelete = $album->hasDeleteAccess();
 		$this->pageTitle = ($album->title);
 
 		$this->render('view',array(
 					'album'=> $album,
+					'canDelete' => $canDelete,
 					));
 	}
 
@@ -64,6 +66,7 @@ class AlbumController extends Controller
 		} else {
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
 		}
+		$canDelete = $image->hasDeleteAccess();
 		$userModel = User::model()->findByPk($userId);
 		$user = $userModel->getFullName();
 		$index =array_search($image, $album->images);
@@ -86,6 +89,7 @@ class AlbumController extends Controller
 					'num' => $num,
 					'nextID' => $nextID,
 					'prevID' => $prevID,
+					'canDelete' => $canDelete,
 					));
 	}
 
@@ -114,7 +118,7 @@ class AlbumController extends Controller
 		$data['bigURL'] = Image::getRelativeFilePath($image->id, "gallery_big");
 		$data['comments'] = $this->widget('comment.components.CommentWidget', array( 'id' => $image->id, 'type' => 'gallery',));
 
-		$data['deleteAble'] = Yii::app()->user->id == $image->userId;
+		$data['deleteAble'] = $image->hasDeleteAccess();
 		if ($index + 1 < $num)
 			$data['nextID'] = $album->images[$index+1]->id;
 		else
