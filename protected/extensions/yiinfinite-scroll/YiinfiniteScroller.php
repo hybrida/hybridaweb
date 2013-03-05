@@ -39,7 +39,7 @@ class YiinfiniteScroller extends CBasePager {
         $this->createInfiniteScrollScript();
         $this->renderNavigation();
 
-        if($this->getPages()->getPageCount() > 0 && $this->theresNoMorePages()) {
+        if($this->getPages()->getPageCount() > 0 && $this->isThereMorePages()) {
             throw new CHttpException(404);
         }
     }
@@ -80,14 +80,28 @@ class YiinfiniteScroller extends CBasePager {
     }
 
     private function renderNavigation() {
-        $next_link = CHtml::link('next',$this->createPageUrl($this->getCurrentPage(false)+1));
+        if ($this->isThereANextPage()) {
+            return;
+        }
+        $next_link = CHtml::link('Neste side >',$this->createPageUrl($this->getCurrentPage(false)+1));
         echo '<div class="infinite_navigation">'.$next_link.'</div>';
     }
 
-    private function theresNoMorePages() {
-        return $this->getPages()->getCurrentPage() >= $this->getPages()->getPageCount();
+    private function isThereMorePages() {
+        return $this->currentPage() >= $this->pageCount();
     }
-
+    
+    private function isThereANextPage() {
+        return ($this->currentPage() + 1) >= $this->pageCount();
+    }
+    
+    private function currentPage() {
+        return $this->getPages()->getCurrentPage();
+    }
+    
+    private function pageCount() {
+        return $this->getPages()->getPageCount();
+    }
 }
 
 ?>

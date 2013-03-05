@@ -49,7 +49,7 @@
 <?php $this->widget('ext.yiinfinite-scroll.YiinfiniteScroller', array(
     'contentSelector' => '#news',
     'itemSelector' => 'div.element',
-    'loadingText' => 'Finner flere nyheter for deg...',
-    'donetext' => 'Ingen flere nyheter.',
+    'loadingText' => 'Sigbjørn jobber med å skrive flere nyheter...',
+    'donetext' => 'Sigurd kunne ikke finne flere nyheter...',
     'pages' => $pages,
 )); ?>
