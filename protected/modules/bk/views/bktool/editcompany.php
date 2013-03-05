@@ -11,7 +11,7 @@
 </p>
 
 <p>
-<form name="editcompanyform" method="post" enctype="multipart/form-data"
+<form name="editcompanyform" method="post"
     <? foreach($companyContactInfo as $info) : ?>
         action="editcompanyform?id=<?= $info['companyID'] ?>"
     <? endforeach ?>
@@ -103,22 +103,6 @@
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">
-			<tr>
-				<th>
-					Logo
-				</th>
-				<th>
-					<?= Image::tag($logo, "sidebar") ?>
-					<br/>
-					<?= CHtml::fileField('logo', 'logo', array('id'=>'logo')); ?>
-				</th>
-			</tr>
-        </table>
-    </div>
-
-    <br/>
-    <div id="BK-add-container">
-        <table id="BK-add-table">
             <tr>
                 <th>Undergruppe av</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
                 <th>
@@ -141,6 +125,64 @@
             </tr>
         </table>
     </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
+            <tr>
+                <th>Medlem av <?= $this->industryAssociation ?></th>
+                <th>
+                    <input type="checkbox" name="isMember" value="<?= $isMember ?>"
+                        <?= ($isMember ? "checked" : ""); ?>              
+                    />
+                </th>
+            </tr>
+            <tr>
+                <th>Relevans for <?= $this->industryAssociation ?></th>
+                <th>
+
+                </th>
+            </tr>
+            <tr>
+                <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
+               <th>
+
+                </th>
+            </tr>
+        </table>
+    </div>
+    
+    <? if($isMember){ ?>
+        <br/>
+        <div id="BK-add-container">
+            <table id="BK-add-table">
+                <tr>
+                    <th>Kontaktperson for faktura</th>
+                    <th>
+
+                    </th>
+                    </tr>
+                <tr>
+                   <th>Organisasjonsnummer</th>
+                   <th>
+
+                    </th>
+                </tr>
+                <tr>
+                    <th>Fakturaadresse</th>
+                    <th>
+
+                    </th>
+                </tr>
+                <tr>
+                    <th>Medlemskapsavgift</th>
+                    <th>
+
+                    </th>
+                </tr>
+            </table>
+        </div>
+    <? } ?>
     
     <br/>
     <div id="BK-add-container">

@@ -71,11 +71,7 @@ class CalendarWidget extends CWidget {
 		$news = $this->calendar->event()
 				->condition('timestamp', $timestamp)
 				->title($news->title)
-				->output($this->createUrl(
-						'/news/view', array(
-					'title' => $news->title,
-					'id' => $news->id,
-				)));
+				->output($news->viewUrl);
 		$this->calendar->attach($news);
 	}
 

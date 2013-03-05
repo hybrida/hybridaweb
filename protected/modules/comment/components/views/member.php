@@ -2,6 +2,7 @@
 $user = User::model()->findByPk(user()->id);
 ?>
 
+<div class="widget-comment">
 <h1>Kommentarer</h1>
 
 <div class="comment-view-all">
@@ -110,3 +111,4 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 		}
 	}
 </script>
+</div>

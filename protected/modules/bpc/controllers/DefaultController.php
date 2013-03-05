@@ -7,10 +7,10 @@ class DefaultController extends Controller {
 		if (!$event) {
 			throw new CHttpException(404, "Bedriftspresentasjonen finnes ikke");
 		}
-        
-        $canAttend = !$event->isAttending(user()->id) && $event->canAttend(user()->id) && !$event->isNextAttenderSentToWaitlist();
-        $canAttendWaitlist = !$event->isAttending(user()->id) && $event->canAttend(user()->id) && $event->isNextAttenderSentToWaitlist();
-        $canUnAttend = $event->isAttending(user()->id) && $event->canUnattend();
+        $isAttending = $event->isAttending(user()->id);
+        $canAttend = !$isAttending && $event->canAttend(user()->id) && !$event->isNextAttenderSentToWaitlist();
+        $canAttendWaitlist = !$isAttending && $event->canAttend(user()->id) && $event->isNextAttenderSentToWaitlist();
+        $canUnAttend = $isAttending && $event->canUnattend();
         
 		$this->render('view', array(
 			'event' => $event,
@@ -18,6 +18,8 @@ class DefaultController extends Controller {
             'canAttend' => $canAttend,
             'canUnAttend' => $canUnAttend,
             'canAttendWaitlist' => $canAttendWaitlist,
+            'isAttending' => $isAttending,
+            'canSupportFieldtrip' => FieldtripSupport::canSupport(User::model()->findByPk(user()->id)),
 		));
 	}
 
@@ -52,20 +54,23 @@ class DefaultController extends Controller {
 		return $news;
 	}
 
-	public function actionToggleAttending($bpcId) {
+	public function actionToggleAttending($bpcId, $supportFieldtrip) {
 		if (user()->isGuest) {
 			throw new CHttpException(403, "Du er ikke logget inn");
 		}
-		$userId = user()->id;
+		$user = User::model()->findByPk(user()->id);
 		$event = new BpcEvent($bpcId);
-		$isAttending = $event->isAttending($userId);
+		if (FieldtripSupport::canSupport($user) && $supportFieldtrip) {
+			FieldtripSupport::support($event, $user);
+		}
+		$isAttending = $event->isAttending($user->id);
 		if ($isAttending) {
 			if ($event->canUnattend()) {
-				$event->removeAttending($userId);
+				$event->removeAttending($user->id);
 			}
 		} else {
-			if ($event->canAttend($userId)){
-				$event->addAttending($userId);
+			if ($event->canAttend($user->id)){
+				$event->addAttending($user->id);
 			}
 		}
 		$url = $this->createUrl('view', array('id' => $bpcId));

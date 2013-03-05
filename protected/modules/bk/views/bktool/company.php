@@ -1,21 +1,12 @@
 <?php $this->renderPartial("_menu", array()); ?>
 
-<? if ($logo != false): ?>
-<div style="float: right;">
-	<br>
-	<?= Image::tag($logo, "sidebar"); ?>
-</div>
-<? endif; ?>
+<h1>
+    <?= $this->title ?>
+</h1>
 
-<div style="float: left;">
-	<h1>
-		<?= $this->title ?>
-	</h1>
-
-	<? foreach($companyContactInfo as $info) : ?>
-		<h2><?= $info['companyName'] ?></h2>
-	<? endforeach ?>
-</div>
+<? foreach($companyContactInfo as $info) : ?>
+    <h2><?= $info['companyName'] ?></h2>
+<? endforeach ?>
 
 <p>
 <table id="BK-company-uppertable">
@@ -171,10 +162,16 @@
     </td>
     <td id="BK-company-column">
             <div id="BK-company-presentationscontainer">
-            <? foreach($presentationsCount as $count) : ?>
-                <h3>Registrerte bedriftspresentasjoner (<?= $count['sum'] ?>)</h3>
-            <? endforeach ?>
+            <? foreach($presentationsCount as $count) : 
+                $sumOfAllPresentations += $count['sum'];
+            endforeach ?>
+                
+            <? foreach($oldPresentationsCount as $count) : 
+                $sumOfAllPresentations += $count['sum'];
+            endforeach ?>
             
+                <h3>Registrerte bedriftspresentasjoner (<?= $sumOfAllPresentations ?>)</h3>
+                
                 <table id="BK-company-presentationtable">
                     <tr>
                         <th>Dato</th>
@@ -188,13 +185,81 @@
                             <? } ?>
                         </td></tr>
                     <? endforeach ?>
+                        
+                    <? foreach($oldPresentationDates as $date) : ?>
+                        <tr><td><?= $date['date'] ?></td></tr>
+                    <? endforeach ?>
                 </table>
             </div>
         </td>
     </tr>
 </table>
 
-<br/>
+<table id="BK-company-uppertable">
+   <tr>
+        <td id="BK-company-column">
+            <h3><?= $this->industryAssociation ?></h3>
+            <p>
+                <table id="BK-company-informationtable">
+                  <tr>
+                    <th>Medlemskap i <?= $this->industryAssociation ?></th>
+                    <td>
+                        <? if($isMember){ ?>
+                            Medlem
+                        <? } else { ?>
+                            Ikke medlem
+                        <? } ?>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Relevans for <?= $this->industryAssociation ?></th>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
+                    <td>
+
+                    </td>
+                </tr>
+                </table>
+            </p>
+            
+            <? if($isMember){ ?>
+            <p>
+            <table id="BK-company-informationtable">
+                  <tr>
+                    <th>Kontaktperson for faktura</th>
+                    <td>
+                    
+                    </td>
+                </tr>
+                <tr>
+                    <th>Organisasjonsnummer</th>
+                    <td>
+
+                    </td>
+                </tr>
+                <tr>
+                    <th>Fakturaadresse</th>
+                    <td>
+
+                    </td>
+                </tr>
+                    <tr>
+                    <th>Medlemskapsavgift</th>
+                    <td>
+
+                    </td>
+                </tr>
+            </table>
+            </p>
+            <? } ?>
+        </td>
+   </tr>
+</table>
+
 <table id="BK-company-centertable">
     <tr id="BK-company-editinglinks">
         <td id="BK-company-column">
@@ -206,7 +271,6 @@
     </tr>
 </table>
 
-<br/>
 <table id="BK-company-commenttable">
     <tr>
         <td id="BK-company-column">
@@ -241,7 +305,6 @@
     </tr>
 </table>
 
-<br/>
 <table id="BK-company-graduatetable">
     <tr>
     <td id="BK-company-column">

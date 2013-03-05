@@ -311,14 +311,6 @@ class BkTool {
         return $data;     
     }
     
-    public function getLogoById($id){
-        $connection = Yii::app()->db;
-        $sql = "SELECT imageID FROM bk_company WHERE companyID = " . $id;
-		$command = $connection->createCommand($sql);
-        $data = $command->queryScalar();
-        
-        return $data;     
-    }
     public function getLatestUpdateTimeStampRelevantForCurrentUser(){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
@@ -561,7 +553,8 @@ class BkTool {
     
         $data = array();
         $sql = "SELECT DISTINCT graduationYear FROM user
-                WHERE graduationYear IS NOT NULL AND graduationYear > 2006 ORDER BY graduationYear DESC";
+                WHERE graduationYear IS NOT NULL AND graduationYear > 2006
+                ORDER BY graduationYear DESC";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -775,7 +768,7 @@ class BkTool {
         $sql = "SELECT n.title, c.companyName, e.start, YEAR(e.start) AS year, c.companyID, ec.bpcID
                 FROM news AS n, event AS e, event_company AS ec 
                 LEFT JOIN bk_company AS c ON ec.companyID = c.companyID 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND e.status = ".Status::PUBLISHED."
                 ORDER BY e.start DESC";
 
         $query = $this->pdo->prepare($sql);
@@ -786,6 +779,40 @@ class BkTool {
         return $data; 
     }
     
+    public function getAllOldCompanyEvents(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT bc.companyName, eco.date, YEAR(eco.date) AS year, bc.companyID
+                FROM bk_company AS bc, event_company_old AS eco
+                WHERE eco.companyId = bc.companyID
+                ORDER BY eco.date DESC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getSumOfOldCompanyEventsByYear(){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array();
+        $sql = "SELECT COUNT(eco.companyId) AS sum, YEAR(eco.date) AS year
+                FROM event_company_old AS eco 
+                GROUP BY year
+                ORDER BY eco.date DESC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data;
+    }
+    
     public function getPresentationsSumForAllYears(){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
@@ -793,7 +820,7 @@ class BkTool {
         $sql = "SELECT COUNT(n.title) AS sum, YEAR(e.start) AS year
                 FROM news AS n, event AS e, event_company AS ec 
                 LEFT JOIN bk_company AS c ON ec.companyID = c.companyID 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND e.status = ".Status::PUBLISHED."
                 GROUP BY year
                 ORDER BY e.start DESC";
 
@@ -813,7 +840,7 @@ class BkTool {
         );
         $sql = "SELECT n.title, e.start, ec.bpcID
                 FROM news AS n, event AS e, event_company AS ec 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId AND e.status = ".Status::PUBLISHED."
                 ORDER BY e.start DESC";
 
         $query = $this->pdo->prepare($sql);
@@ -824,6 +851,26 @@ class BkTool {
         return $data; 
     }
     
+    public function getOldPresentationDatesByCompanyId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT eco.date
+                FROM event_company_old AS eco 
+                WHERE eco.companyID = :companyId
+                ORDER BY eco.date DESC";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    
     public function getPresentationsCountByCompanyId($id){
         $this->pdo = Yii::app()->db->getPdoInstance();
     
@@ -832,7 +879,7 @@ class BkTool {
         );
         $sql = "SELECT COUNT(n.title) AS sum
                 FROM news AS n, event AS e, event_company AS ec 
-                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId";
+                WHERE n.parentType = 'event' AND n.parentId = e.id AND e.id = ec.eventID AND ec.companyID = :companyId AND e.status = ".Status::PUBLISHED;
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -840,5 +887,48 @@ class BkTool {
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         
         return $data; 
+    }
+    
+    public function getOldPresentationsCountByCompanyId($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT COUNT(eco.companyID) AS sum
+                FROM event_company_old AS eco
+                WHERE eco.companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function isCompanyIKTRingenMember($id) {
+         $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT companyName
+                FROM bk_company AS bc, iktringen_membership AS im
+                WHERE bc.companyID = im.companyId AND bc.companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        if (empty($data))
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 }

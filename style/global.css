@@ -238,3 +238,22 @@ li.collapsibleListClosed .node {
 	border-radius: 2px;
 	font-weight: bold;
 }
+
+.g-imageFloatRight {
+	float: right;
+	margin: 1em;
+	width: 300px;
+	background-color: #eee;
+	border: 1px solid #ddd;
+	clear: right;
+}
+
+.g-imageFloatRight img {
+	width: 300px;
+	display: block;
+}
+
+.g-imageFloatRight .caption {
+	text-align: left;
+	padding: 0.4em;
+}

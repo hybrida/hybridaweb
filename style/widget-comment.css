@@ -1,37 +1,37 @@
-.comment {
+.widget-comment .comment {
     width: 700px;
 }
 
 /* Forcing comment to contain its children despite the floats inside
 http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
-.comment {
+.widget-comment .comment {
     overflow: hidden;
     display: inline-block;
     display: block;
 }
 
-.comment .profile-image {
+.widget-comment .comment .profile-image {
     width: 75px;
     height: 75px;
     margin: auto;
     clear: both;
 }
 
-.comment-title {
+.widget-comment .comment-title {
     margin-bottom: 0.35em;
 }
 
-.comment-date :before {
+.widget-comment .comment-date :before {
     content: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 }
 
-.comment-left {
+.widget-comment .comment-left {
     width: 150px;
     float: left;
     border-right: 1px solid #abadb3;
 }
 
-.comment-right {
+.widget-comment .comment-right {
     float: left;
     width: 515px;
     border-left: 1px solid #abadb3;
@@ -39,7 +39,7 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
     margin-left: -1px;
 }
 
-.comment-left, .comment-right {
+.widget-comment .comment-left, .comment-right {
     margin-bottom: 25px;
     margin-top: 25px;
 }

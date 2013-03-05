@@ -28,7 +28,7 @@
  * @property Access $access
  */
 class User extends CActiveRecord {
-	
+
 	const MALE = "male";
 	const FEMALE = "female";
 
@@ -65,6 +65,7 @@ class User extends CActiveRecord {
 			array('firstName, middleName, lastName', 'length', 'max' => 75),
 			array('graduationYear', 'length', 'max' => 4),
 			array('member', 'length', 'max' => 5),
+			array('member', 'unsafe'),
 			array('gender', 'length', 'max' => 7),
 			array('workPlace, altEmail', 'length', 'max' => 255),
 			array('workDescription, lastLogin, description, birthdate', 'safe'),
@@ -178,11 +179,11 @@ class User extends CActiveRecord {
 			return array();
 		}
 	}
-	
+
 	public function getGenderInNorwegian() {
 		$englishGender = $this->gender;
 		$norwegianGender = null;
-		
+
 		if ($englishGender == User::MALE) {
 			$norwegianGender = "Mann";
 		} elseif ($englishGender == User::FEMALE) {
@@ -190,7 +191,7 @@ class User extends CActiveRecord {
 		} else {
 			$norwegianGender = "Ukjent";
 		}
-		
+
 		return $norwegianGender;
 	}
 
@@ -227,7 +228,7 @@ class User extends CActiveRecord {
 	public function getFullName() {
 		return $this->firstName . " " . $this->middleName . " " . $this->lastName;
 	}
-	
+
 	public function getStudmail() {
 		return $this->username . "@stud.ntnu.no";
 	}
@@ -244,6 +245,10 @@ class User extends CActiveRecord {
 
 	public function setClassYear($classYear) {
 		$this->graduationYear = YearConverter::classYearToGraduationYear($classYear);
+	}
+
+	public function getIsAlumni() {
+		return $this->classYear > 5;
 	}
 
 	protected function beforeSave() {

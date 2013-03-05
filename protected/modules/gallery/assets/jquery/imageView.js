@@ -14,7 +14,11 @@ $('#delLink').click(function(e){
 		var request =  get_XmlHttp();
 		request.open("POST", url, true);
 		request.send(null);
-		window.location.href = "/gallery/" + albumID;
+		request.onreadystatechange = function() {
+			if (request.readyState == 4) {
+				window.location.href = "/gallery/" + albumID;
+			}
+		}
 	}
 });
 $('#image').click(function(e){

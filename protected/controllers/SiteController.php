@@ -39,7 +39,6 @@ class SiteController extends Controller {
 	public function actionLogin($page) {
 		$redirect = $this->getLoginRedirect($page);
 		$this->redirect($redirect);
-		return;
 	}
 	
 	public function getLoginRedirect($page) {

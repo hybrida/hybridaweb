@@ -1,6 +1,48 @@
 <? $this->pageTitle = "Bedpres: ".$event->title ?>
 <? $this->layout = "//layouts/doubleColumn" ?>
-<? 
+<?
+
+function stotte() {	?>
+	<br>
+	<input type="checkbox" name="supportFieldtrip" value="1" />
+	<strong>Støtt ekskursjonen</strong> <a href="#" id="supportFieldtripDialog">Hva er dette?</a>
+	<br>
+	<div id="forklaring" style="background-color: white; padding: 20px; border: 1px solid black; border-radius: 2px">
+
+		Annethvert år reiser Hybrida på eksursjon. Hvis det er mindre enn 18
+		mnd til neste eksursjon har du muligheten til å støtte
+		eksursjonskassa. Dette gjør du ved å trykke på <strong>Støtt
+		eksursjonen</strong>-knappen over påmeldingsknappen. Du vil da støtte
+		hybrida med halvparten av inntektene Hybrida Bedriftskomité får for
+		ditt oppmøte.
+
+	</div>
+
+	<style>
+	.ui-icon-closethick {
+		background-color: #185c9b;
+		padding: 4px;
+		border: 1px solid #888;
+		border-radius: 2px;
+		color: white;
+		
+	}
+	</style>
+
+	<script>
+		var dialogLink = $("#supportFieldtripDialog");
+		dialogLink.click(function(e){
+			e.preventDefault();
+			toggle();
+		});
+		var forklaring = $("#forklaring");
+		forklaring.hide();
+		function toggle() {
+			forklaring.dialog();
+		}
+	</script>
+
+<? }
 $this->beginClip('sidebar'); ?>
 
 <? if (user()->checkAccess('updateBedpres')): ?>
@@ -15,6 +57,7 @@ $this->beginClip('sidebar'); ?>
 
 	<? $this->renderPartial("_attenders", array(
 		'event' => $event,
+		'isAttending' => $isAttending,
 	))  ?>
 <? $this->endClip() ?>
 
@@ -38,13 +81,22 @@ $this->beginClip('sidebar'); ?>
 </article>
 
 	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
-	<? if ($canAttend): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg på</a>
-    <? elseif ($canAttendWaitlist): ?>
-        <a href="<?=$url?>" class='g-button'>Meld meg på venteliste</a>
-	<? elseif ($canUnAttend): ?>
-		<a href="<?=$url?>" class='g-button'>Meld meg av</a>
-	<? endif ?>
+	<form method="get" action="<?=$url?>" />
+		<input type="hidden" name="supportFieldtrip" value="0" />
+		<? if ($canAttend): ?>
+			<? if ($canSupportFieldtrip): ?>
+				<? stotte() ?>
+			<? endif ?>
+			<input type="submit" class='g-button' value="Meld meg på" />
+		<? elseif ($canAttendWaitlist): ?>
+			<? if ($canSupportFieldtrip): ?>
+				<? stotte() ?>
+			<? endif ?>
+		    <input type="submit" class='g-button' value="Meld meg på venteliste" />
+		<? elseif ($canUnAttend): ?>
+			<input type="submit" class='g-button' value="Meld meg av" />
+		<? endif ?>
+	</form>
         
 <h1> Påmeldte: </h1>
 <? if (!user()->isGuest): ?>

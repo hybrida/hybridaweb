@@ -3,6 +3,7 @@
 #BK-presentationstable{
     border-collapse: collapse;
     text-align: left;
+    width: 100%;
 }
 
 #BK-presentationstable *{

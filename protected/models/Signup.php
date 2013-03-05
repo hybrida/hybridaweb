@@ -115,9 +115,9 @@ class Signup extends CActiveRecord {
 	}
 
 	public function addAttender($userId, $addBPC = true) {
-		$sql = "INSERT INTO signup_membership 
-			( `eventId`, `userId`, `signedOff` )
-			VALUES ( :eid, :uid, 'false')
+		$sql = "INSERT INTO signup_membership
+			( `eventId`, `userId`, `signedOff`, `timestamp` )
+			VALUES ( :eid, :uid, 'false', NOW())
 			ON DUPLICATE KEY UPDATE `signedOff` = 'false'";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->bindValue(':eid', $this->eventId);
@@ -132,7 +132,11 @@ class Signup extends CActiveRecord {
 			$query->execute($array);
 			$result = $query->fetch(PDO::FETCH_ASSOC);
 			if ($result['postEvents'] == true) {
-				$this->pushToFacebook($news->absoluteUrl);
+				// Facebook-intregrasjon fungerer ikke.
+				// Derfor dropper vi denne for å ikke forsinke
+				// påmeldingen.
+
+				// $this->pushToFacebook($news->absoluteUrl);
 			}
 		}
 
@@ -205,7 +209,7 @@ class Signup extends CActiveRecord {
 	}
 
 	public function getRegisteredAttendingCount() {
-		$sql = "SELECT COUNT(*) as num 
+		$sql = "SELECT COUNT(*) as num
 			FROM signup_membership
 			WHERE eventId = :eventId
 				AND signedOff = 'false'";
@@ -260,10 +264,12 @@ class Signup extends CActiveRecord {
 	public function getAttendersFiveYearArrays() {
 		$attenders = $this->getAttenders();
 		$attendersArrays = array();
-		for ($i = 1; $i <= 5; $i++) {
+		foreach (array(1,2,3,4,5,'alumni') as $i) {
 			$year = array();
 			foreach ($attenders as $attender) {
 				if ($attender->classYear == $i) {
+					array_push($year, $attender);
+				} else if ($attender->isAlumni && $i == 'alumni') {
 					array_push($year, $attender);
 				}
 			}
@@ -271,6 +277,18 @@ class Signup extends CActiveRecord {
 			array_push($attendersArrays, $year);
 		}
 		return $attendersArrays;
+	}
+
+	private static function userListingComparator($user1, $user2) {
+		if ($user1->firstName == $user2->firstName) {
+			if ($user1->lastName == $user2->lastName)
+				return 0;
+			else {
+				return ($user1->lastName > $user2->lastName) ? 1 : -1;
+			}
+		} else {
+			return ($user1->firstName > $user2->firstName) ? 1 : -1;
+		}
 	}
 
 	public function isAttending($userId) {
@@ -304,35 +322,23 @@ class Signup extends CActiveRecord {
 		app()->gatekeeper->hasPostAccess('event', $this->eventId) &&
 		!user()->isGuest;
 	}
-	
+
 	public function canUnattend() {
 		return $this->signoff === 'true' || $this->signoff === true;
 	}
 
-	private static function userListingComparator($user1, $user2) {
-		if ($user1->firstName == $user2->firstName) {
-			if ($user1->lastName == $user2->lastName)
-				return 0;
-			else {
-				return ($user1->lastName > $user2->lastName) ? 1 : -1;
-			}
-		} else {
-			return ($user1->firstName > $user2->firstName) ? 1 : -1;
+	public function getAttendingFraction(){
+		return 100*($this->attendingCount / $this->spots);
+	}
+
+	public function getAttendingColorClass(){
+		if ($this->AttendingFraction == 100) {
+			return "red";
+		}elseif ($this->AttendingFraction > 75) {
+			return "orange";
+		}else {
+			return "green";
 		}
 	}
-		
-		public function getAttendingFraction(){
-			return 100*($this->attendingCount / $this->spots);
-		}
-		
-		public function getAttendingColorClass(){
-			if ($this->AttendingFraction == 100) {
-				return "red";
-			}elseif ($this->AttendingFraction > 75) {
-				return "orange";
-			}else {
-				return "green";
-			}
-		}
 
 }

@@ -114,13 +114,6 @@ class NewsTest extends CTestCase {
 		$this->assertEquals("event", $news2->getParentTYpe());
 	}
 
-	public function test_rules_tooLongTitle_invalid() {
-		$this->login();
-		$news = $this->getNewNews();
-		$news->title = '_123456789_0123456789_123456789_123456789_123456789_123456789';
-		$this->assertFalse($news->save());
-	}
-
 	public function test_rules_longestParentType_valid() {
 		$this->login();
 		$news = $this->getNewNews();

@@ -7,11 +7,11 @@ class SignupTest extends CTestCase {
 	}
 
 	private function getSignupWithAttenders($usernames) {
-		$signup = Util::getNewSignup();
-		
+		$signup = Util::getSignup();
+
 		foreach ($usernames as $name => $class) {
 			$user = $this->getUser();
-			
+
 			if (!(preg_match('/\s/',$name))) {
 				$user->firstName = $name;
 			} else {
@@ -19,12 +19,12 @@ class SignupTest extends CTestCase {
 				$user->firstName = $names[0];
 				$user->lastName = $names[1];
 			}
-			
+
 			$user->classYear = $class;
 			$user->save();
 			$signup->addAttender($user->id ,false);
 		}
-		
+
 		return $signup;
 	}
 
@@ -213,7 +213,7 @@ class SignupTest extends CTestCase {
 		$this->assertTrue($signup->canUnattend());
 	}
 
-	public function test_get_attenders_five_year_arrays() {
+	public function test_getAttendersFiveYearArrays() {
 		$usernames = array(
 			"Albert" => 1,
 			"Christian" => 1,
@@ -225,7 +225,7 @@ class SignupTest extends CTestCase {
 			"Anne Hei" => 3,
 			"Anne Nei" => 3,
 			);
-		
+
 		$signup = $this->getSignupWithAttenders($usernames);
 		$attenders = $signup->attendersFiveYearArrays;
 
@@ -236,9 +236,24 @@ class SignupTest extends CTestCase {
 		$this->assertEquals($attenders[1][1]->firstName, "Anita");
 		$this->assertEquals($attenders[1][2]->firstName, "Anne");
 		$this->assertEquals($attenders[1][3]->firstName, "Arne");
-		
+
 		$this->assertEquals($attenders[2][0]->lastName, "Hei");
 		$this->assertEquals($attenders[2][1]->lastName, "Nei");
+	}
+
+	public function test_getAttendersFiveYearArrays_alumnisExist() {
+		$usernames = array(
+			"Albert" => 1,
+			"Christian" => 1,
+			'Henrik'=> 8,
+			);
+
+		$signup = $this->getSignupWithAttenders($usernames);
+		$attenders = $signup->attendersFiveYearArrays;
+
+		$this->assertEquals($attenders[0][0]->firstName, "Albert");
+		$this->assertEquals($attenders[0][1]->firstName, "Christian");
+		$this->assertEquals($attenders[5][0]->firstName, "Henrik");
 	}
 
 	public function test_anonymousAttenders() {
@@ -255,7 +270,7 @@ class SignupTest extends CTestCase {
 		$this->assertEquals(0, $signup->getAttendingCount());
 
 		$anonymousAttenders = $signup->getAnonymousAttenders();
-		$this->assertEquals(0, count($anonymousAttenders));		
+		$this->assertEquals(0, count($anonymousAttenders));
 	}
 
 	public function test_anonymousAttenders_addTwoPeopleWithSameEmail_onlyOneIsRegistered() {

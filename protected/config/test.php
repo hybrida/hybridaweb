@@ -6,7 +6,8 @@ return CMap::mergeArray(
 				'application.models.*',
 				'application.components.*',
 				'application.exceptions.*',
-				'application.tests.testlib.*'
+				'application.tests.testlib.*',
+				'application.tests.mocks.*',
 			),
 			'components' => array(
 				'fixture' => array(
