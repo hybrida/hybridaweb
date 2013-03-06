@@ -112,7 +112,7 @@ class Image extends CActiveRecord {
 			return true;
 
 		if (Yii::app()->gatekeeper->hasGroupAccess(55))
-			return false;
+			return true;
 	}
 
 	public function getFilePath($size = "original") {

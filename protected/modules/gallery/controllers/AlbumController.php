@@ -151,6 +151,7 @@ class AlbumController extends Controller
 		$errors = array();
 		$this->pageTitle = ("Nytt album");
 
+		$imageIDs = $this->getUploads();
 		if(isset($_POST['Album']))
 		{
 
@@ -168,15 +169,15 @@ class AlbumController extends Controller
 			}
 			else {
 				$errors[] = "Albumet må ha tittel";
-				if (count($imageIDs) > 0) {
-					$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger ikke laste opp disse på nytt";
-					$errors[] = "Trykk " . CHtml::link('her', '#', 
-							array(
-								'submit' => array('clear', 'id' => $_POST['new'])))
-						. " om du ikke vil ha med disse bildene";
-				}
 			}
 		}
+		if (count($imageIDs) > 0) {
+			$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger 
+												ikke laste opp disse på nytt";
+			$errors[] = "Trykk " . CHtml::link('her', '#', 
+					array( 'submit' => array('clear', 'id' => $model->id)))
+					. " om du ikke vil ha med disse bildene";
+			}
 
 		$this->render('create',array(
 					'model'=>$model,
@@ -204,11 +205,11 @@ class AlbumController extends Controller
 		$model=$this->loadModel($id);
 		$model->getImages();
 		$errors = array();
+		$imageIDs = $this->getUploads();
 		if(isset($_POST['Album']))
 		{
 
 			$model->attributes = $_POST['Album'];
-			$imageIDs = $this->getUploads();
 
 			if($model->save())
 			{
@@ -220,17 +221,17 @@ class AlbumController extends Controller
 			}
 			else {
 				$errors[] = "Albumet må ha tittel";
-				if (count($imageIDs) > 0) {
-					$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger ikke laste opp disse på nytt";
-					$errors[] = "Trykk " . CHtml::link('her', '#', 
-							array(
-								'submit' => array('clear', 'id' => $_POST['new'])))
-						. " om du ikke vil ha med disse bildene";
-				}
 			}
 		}
+		if (count($imageIDs) > 0) {
+			$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger 
+												ikke laste opp disse på nytt";
+			$errors[] = "Trykk " . CHtml::link('her', '#', 
+					array( 'submit' => array('clear', 'id' => $model->id)))
+					. " om du ikke vil ha med disse bildene";
+			}
 
-		$this->render('create',array(
+		$this->render('update',array(
 					'model'=>$model,
 					'errors' => $errors,
 					'canDelete' => $model->hasDeleteAccess(),
