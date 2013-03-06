@@ -36,6 +36,50 @@ class BktoolController extends Controller {
             }
             return $years;
         }
+        
+        public function isDateValid($dateString)
+        {
+            $error = false;
+            
+            if(strlen($dateString) != 10){
+                return $error;
+            }
+            if($dateString[5] != '-' && $dateString[8] != '-'){
+                return $error;
+            }
+            
+            (int) $year = intval(substr($dateString, 0, 4));
+            (int) $month = intval(substr($dateString, 6, 2));
+            (int) $date = intval(substr($dateString, 9, 2));
+            
+            $monthsWithAtLeast31Days = array(1, 3, 5, 7, 8, 10, 12);
+            $monthsWithAtLeast30Days = array(1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+            $monthsWithAtLeast29Days = array(1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
+
+            if((int) $year <= (int) 0 || (int) $month <= (int) 0 || (int) $date <= (int) 0){
+                return $error;
+            }
+            if((int) $year < (int) 1000){
+                return $error;
+            }
+            if((int) $month > (int) 12){
+                return $error;
+            }
+            if((int) $date > (int) 31){
+                return $error;
+            }
+            if((int) $date == (int) 31 && !in_array((int) $month, $monthsWithAtLeast31Days)){
+                return $error;
+            }
+            if((int) $date == (int) 30 && !in_array((int) $month, $monthsWithAtLeast30Days)){
+                return $error;
+            }
+            if((int) $date == (int) 29 && !in_array((int) $month, $monthsWithAtLeast29Days)){
+                return $error;
+            } 
+            
+            return !$error;
+        }
 
 	public function actionIndex() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
@@ -563,9 +607,11 @@ class BktoolController extends Controller {
                 $errordata['phonenumbererror'] = '';
                 $errordata['postnumbererror'] = '';
                 $errordata['parentcompanyerror'] = '';
+                $errordata['datecontactederror'] = '';
                 $phonenumber;
                 $postnumber;
                 $parentCompanyId = 0;
+                $datecontacted;
                 $companyId;
                 
                 if($bkForms->isInputFieldEmpty($_POST['addedcompany'])){
@@ -595,6 +641,13 @@ class BktoolController extends Controller {
                     }
                 }
                 
+                if(!$bkForms->isInputFieldEmpty($_POST['datecontacted'])){
+                    if(!$this->isDateValid($_POST['datecontacted'])){
+                        $errordata['error'] = true;
+                        $errordata['datecontactederror'] = 'Ugyldig dato';
+                    }
+                }
+                
                 if($bkForms->isCompanySet($_POST['parentcompanyid'])){
                     $parentCompanyId = $_POST['parentcompanyid'];
                 }
@@ -616,6 +669,21 @@ class BktoolController extends Controller {
                     if(isset($_POST['contactor'])){
                         $bkForms->updateCompanyContactor($companyId, $_POST['contactor']);
                     }
+                    
+                    if(isset($_POST['membership'])){
+                        if(in_array("isMember", $_POST['membership'])){
+                            $bkForms->insertCompanyIKTRingenMembership($companyId);
+                        }
+                    }
+                    
+                    if($bkForms->isInputFieldEmpty($_POST['datecontacted'])){
+                        $datecontacted = '0000-00-00 00:00:00';
+                    }
+                    else {
+                        $datecontacted = $_POST['datecontacted'] + ' 00:00:00';
+                    }
+                    
+                    $bkForms->insertCompanyIKTRingenInformation($companyId, $_POST['relevance'], $datecontacted);
                     
                     if(isset($_POST['specializations'])){
                         foreach ($_POST['specializations'] as $specializationId) :
@@ -651,6 +719,12 @@ class BktoolController extends Controller {
                         }
                         if($bkForms->isCompanySet($_POST['parentcompanyid'])){
                             $bkForms->addCompanyParentCompanyUpdate($member['id'], $companyId);
+                        }
+                        if(isset($_POST['membership'])){
+                            $bkForms->addCompanyMembershipUpdate($member['id'], $companyId);
+                        }
+                        if(!$bkForms->isInputFieldEmpty($_POST['datecontacted'])){
+                            $bkForms->addCompanyDateContactedUpdate($member['id'], $companyId);
                         }
                         if(isset($_POST['contactor'])){
                             $bkForms->addCompanyContactorUpdate($member['id'], $companyId);

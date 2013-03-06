@@ -150,7 +150,7 @@
             <tr>
                 <th>Medlem av <?= $this->industryAssociation ?></th>
                 <th>
-                    <input type="checkbox" name="isMember" value="<?= $isMember ?>"
+                    <input type="checkbox" name="membership[]" value="isMember"
                         <?= ($isMember ? "checked" : ""); ?>              
                     />
                 </th>
@@ -187,7 +187,7 @@
                     <? foreach($iktRingenInfo as $info) : ?>
                          value='<?= $info['dateContacted'] ?>' 
                     <? endforeach ?>
-                    maxlength="11" /> (YYYY-MM-DD)
+                    maxlength="10" /> (YYYY-MM-DD)
                 </th>
             </tr>
         </table>

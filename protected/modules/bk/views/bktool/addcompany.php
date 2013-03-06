@@ -97,7 +97,7 @@
             <tr>
                 <th>Medlem av <?= $this->industryAssociation ?></th>
                 <th>
-                    <input type="checkbox" name="isMember" />
+                    <input type="checkbox" name="membership[]" value="isMember"/>
                 </th>
             </tr>
             <tr>
@@ -119,7 +119,8 @@
             <tr>
                 <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
                <th>
-                   <input name="datecontacted" type="text" class="textfield" maxlength="11" /> (YYYY-MM-DD)
+                   <input name="datecontacted" type="text" class="textfield" maxlength="10" /> (YYYY-MM-DD)
+                   <div id="BK-add-errormessage"><i><u><?= $errordata['datecontactederror'] ?></u></i></div>
                 </th>
             </tr>
         </table>
