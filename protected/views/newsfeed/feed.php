@@ -30,10 +30,34 @@ $this->widget('JobAnnouncementFeed');
 $this->endClip();
 ?>				
 <div class="newsfeedIndex">
-    <div class="feeds">
-        <?	$this->renderPartial("_feed", array(
-            'news' => $news,
-            'pages' => $pages,
-        ));	?>
-    </div>
+<div class="feeds">
+	<?	$this->renderPartial("_feed", array(
+		'models' => $models,
+	));	?>
+
+</div>
+<?=CHtml::button('Vis flere', array(
+	'class' => 'g-button',
+	'style' => 'display: block; width: 100%;',
+	'id' => 'fetchNews',
+))?>
+
+<?php
+
+$ajaxFeedUrl = $this->createUrl("feedAjax", array(
+	'offset' => ''
+));
+
+$this->addJavascript('newsfeed');
+
+?>
+<script language="javascript">
+	var data = {
+		count: <?= $index ?>,
+		ajaxFeedUrl: '<?= $ajaxFeedUrl ?>',
+		ajaxButtonSelector: '#fetchNews',
+		feedContentSelector: '.feeds',
+		limit: <?= $limit ?>
+	};
+</script>
 </div>
