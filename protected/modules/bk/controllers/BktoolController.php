@@ -361,6 +361,8 @@ class BktoolController extends Controller {
                 $data['updater'] = $bkTool->getPersonWhichUpdatedLastByCompanyId($id);
                 $data['adder'] = $bkTool->getPersonWhichAddedCompanyByCompanyId($id);
                 $data['isMember'] = $bkTool->isCompanyIKTRingenMember($id);
+                $data['iktRingenInfo'] = $bkTool->getIKTRingenInformationById($id);
+                $data['iktRingenMembershipInfo'] = $bkTool->getIKTRingenMembershipInformationById($id);
                 $data['commentsSum'] = $bkTool->getSumOfAllCommentsByCompanyId($id);
                 $data['comments'] = $bkTool->getAllCommentsByCompanyId($id);
                 $data['sumOfAllPresentations'] = 0;
@@ -401,6 +403,8 @@ class BktoolController extends Controller {
                 $data['companyContactInfo'] = $bkTool->getCompanyContactInfoById($id);
                 $data['parentCompanyId'] = $bkTool->getParentCompanyBySubCompanyId($id);
                 $data['isMember'] = $bkTool->isCompanyIKTRingenMember($id);
+                $data['iktRingenInfo'] = $bkTool->getIKTRingenInformationById($id);
+                $data['iktRingenMembershipInfo'] = $bkTool->getIKTRingenMembershipInformationById($id);
                 $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
                 $data['relevantSpecializations'] = $bkTool->getRelevantSpecializationsByCompanyId($id);
                 $data['status'] = $bkTool->getStatusByCompanyId($id);

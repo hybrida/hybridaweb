@@ -140,13 +140,36 @@
             <tr>
                 <th>Relevans for <?= $this->industryAssociation ?></th>
                 <th>
-
-                </th>
+                    <select name="relevance" size="3">	
+                        <option value="Høy" style="color:#00688B;"
+                            <? foreach($iktRingenInfo as $info) : ?>
+                                <?= ("Høy" == $info['relevance'] ? "selected" : ""); ?>
+                            <? endforeach ?>
+                            >Høy
+			</option>
+			<option value="Middels" style="color:#50A6C2;"
+                            <? foreach($iktRingenInfo as $info) : ?>
+                                <?= ("Middels" == $info['relevance'] ? "selected" : ""); ?>
+                            <? endforeach ?>
+                            >Middels
+			</option>				
+			<option value="Lav" style="color:#B2DFEE;"
+                            <? foreach($iktRingenInfo as $info) : ?>
+                                <?= ("Lav" == $info['relevance'] ? "selected" : ""); ?>
+                            <? endforeach ?>
+                            >Lav
+			</option>					
+                    </select>
+		</th>
             </tr>
             <tr>
                 <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
                <th>
-
+                   <input name="datecontacted" type="text" class="textfield"
+                    <? foreach($iktRingenInfo as $info) : ?>
+                         value='<?= $info['dateContacted'] ?>' 
+                    <? endforeach ?>
+                    maxlength="11" /> (YYYY-MM-DD)
                 </th>
             </tr>
         </table>
@@ -159,25 +182,52 @@
                 <tr>
                     <th>Kontaktperson for faktura</th>
                     <th>
-
+                        <input name="invoicecontact" type="text" class="textfield"
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                             value='<?= $info['invoiceContact'] ?>' 
+                        <? endforeach ?>
+                        maxlength="255" /> Characters (255)
                     </th>
                     </tr>
                 <tr>
                    <th>Organisasjonsnummer</th>
                    <th>
-
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                        <input name='organizationnumber' type="text"
+                               
+                            <? if($info['organizationNumber'] != 0){ ?>
+                                value='<?= $info['organizationNumber'] ?>'
+                            <? } ?>
+                                
+                        maxlength="9" class="textfield"/> Integer > 0 (9)<br/>
+                        <div id="BK-add-errormessage"><i><u><?= $errordata['organizationnumbererror'] ?></u></i></div>
+                         <? endforeach ?>
                     </th>
                 </tr>
                 <tr>
                     <th>Fakturaadresse</th>
                     <th>
-
+                        <input name="invoiceaddress" type="text" class="textfield"
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                             value='<?= $info['invoiceAddress'] ?>' 
+                        <? endforeach ?>
+                        maxlength="255" /> Characters (255)
                     </th>
                 </tr>
                 <tr>
                     <th>Medlemskapsavgift</th>
                     <th>
-
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                        <input name='membershipfee' type="text"
+                               
+                            <? if($info['membershipFee'] != 0){ ?>
+                                value='<?= $info['membershipFee'] ?>'
+                            <? } ?>
+                                
+                        maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
+                        <div id="BK-add-errormessage"><i><u><?= $errordata['membershipfeeerror'] ?></u></i></div>
+                         <? endforeach ?>
+                    </th>
                     </th>
                 </tr>
             </table>

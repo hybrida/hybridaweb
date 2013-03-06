@@ -266,7 +266,8 @@ class BkTool {
             'companyId' => $id
         );
         $sql = "SELECT companyID, companyName, address, phoneNumber, homepage, mail, postbox, postnumber, postplace
-                FROM bk_company WHERE companyID = :companyId";
+                FROM bk_company 
+                WHERE companyID = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
@@ -274,6 +275,24 @@ class BkTool {
         $data = $query->fetchAll(PDO::FETCH_ASSOC);
         
         return $data;     
+    }
+    
+    public function getIKTRingenInformationById($id){
+                $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT relevance, dateContacted
+                FROM bk_iktringen_information  
+                WHERE companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
     }
     
     public function getEmployedGraduatesByCompanyId($id){
@@ -898,6 +917,24 @@ class BkTool {
         $sql = "SELECT COUNT(eco.companyID) AS sum
                 FROM event_company_old AS eco
                 WHERE eco.companyID = :companyId";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+
+        $data = $query->fetchAll(PDO::FETCH_ASSOC);
+        
+        return $data; 
+    }
+    
+    public function getIKTRingenMembershipInformationById($id){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+    
+        $data = array(
+            'companyId' => $id
+        );
+        $sql = "SELECT start, invoiceContact, organizationNumber, invoiceAddress, membershipFee
+                FROM iktringen_membership
+                WHERE companyId = :companyId";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);

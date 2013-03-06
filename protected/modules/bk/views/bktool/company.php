@@ -65,7 +65,6 @@
                 <td>
                     <? foreach($companyContactInfo as $info) : ?>
                         <?= Html::externalLink($info['homepage'], $info['homepage'], null)?>
-                        
                     <? endforeach ?>
                 </td>
             </tr>
@@ -214,13 +213,32 @@
                 <tr>
                     <th>Relevans for <?= $this->industryAssociation ?></th>
                     <td>
-
+                        <? foreach($iktRingenInfo as $info) : ?>
+                            
+                            <? switch ($info['relevance']){
+                                case "Høy": ?>
+                                    <td id ="BK-company-high-relevance">
+                            <?      break;
+                                case "Middels": ?>
+                                    <td id="BK-company-medium-relevance">
+                            <?      break;
+                                case "Lav": ?>
+                                    <td id="BK-company-low-relevance">
+                            <?      break;
+                                default: ?>
+                                    <td>
+                            <? } ?>
+                        
+                            <?= $info['relevance'] ?>
+                        <? endforeach ?>
                     </td>
                 </tr>
                 <tr>
                     <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
                     <td>
-
+                        <? foreach($iktRingenInfo as $info) : ?>
+                            <?= $info['dateContacted'] ?>
+                        <? endforeach ?>
                     </td>
                 </tr>
                 </table>
@@ -229,28 +247,44 @@
             <? if($isMember){ ?>
             <p>
             <table id="BK-company-informationtable">
-                  <tr>
+                 <tr>
+                    <th>Medlemskap startet</th>
+                    <td>
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                            <?= $info['start'] ?>
+                        <? endforeach ?>
+                    </td>
+                </tr>
+                <tr>
                     <th>Kontaktperson for faktura</th>
                     <td>
-                    
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                            <?= $info['invoiceContact'] ?>
+                        <? endforeach ?>
                     </td>
                 </tr>
                 <tr>
                     <th>Organisasjonsnummer</th>
                     <td>
-
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                            <?= $info['organizationNumber'] ?>
+                        <? endforeach ?>
                     </td>
                 </tr>
                 <tr>
                     <th>Fakturaadresse</th>
                     <td>
-
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                            <?= $info['invoiceAddress'] ?>
+                        <? endforeach ?>
                     </td>
                 </tr>
                     <tr>
                     <th>Medlemskapsavgift</th>
                     <td>
-
+                        <? foreach($iktRingenMembershipInfo as $info) : ?>
+                            <?= $info['membershipFee'] ?>
+                        <? endforeach ?>
                     </td>
                 </tr>
             </table>

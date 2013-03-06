@@ -72,6 +72,7 @@
 			</tr>
         </table>
     </div>
+    
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">
@@ -85,6 +86,40 @@
                              <? endforeach ?>
                     </select>
                     <br/><div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
+                </th>
+            </tr>
+        </table>
+    </div>
+    
+    <br/>
+    <div id="BK-add-container">
+        <table id="BK-add-table">
+            <tr>
+                <th>Medlem av <?= $this->industryAssociation ?></th>
+                <th>
+                    <input type="checkbox" name="isMember" />
+                </th>
+            </tr>
+            <tr>
+                <th>Relevans for <?= $this->industryAssociation ?></th>
+                <th>
+                    <select name="relevance" size="3">	
+                        <option value="Høy" style="color:#00688B;">
+                            Høy
+                        </option>
+			<option value="Middels" style="color:#50A6C2;" selected>
+                            Middels
+			</option>				
+			<option value="Lav" style="color:#B2DFEE;">
+                            Lav
+			</option>					
+                    </select>
+		</th>
+            </tr>
+            <tr>
+                <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
+               <th>
+                   <input name="datecontacted" type="text" class="textfield" maxlength="11" /> (YYYY-MM-DD)
                 </th>
             </tr>
         </table>

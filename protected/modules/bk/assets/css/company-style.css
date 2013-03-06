@@ -70,6 +70,24 @@
     text-align: left;
 }
 
+#BK-company-high-relevance{
+    color: #00688B;
+    font-weight: bold;
+    text-align: left;
+}
+
+#BK-company-medium-relevance{
+    color: #50A6C2;
+    font-weight: bold;
+    text-align: left;
+}
+
+#BK-company-low-relevance{
+    color: #B2DFEE;
+    font-weight: bold;
+    text-align: left;
+}
+
 /* tabellen som inneholder bedriftspresentasjoner*/
 
 #BK-company-presentationtable{
