@@ -4,6 +4,7 @@ $this->breadcrumbs = array(
 );
 ?>
 
+<? if ($isLoggedIn): ?>
 <?
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); 
@@ -27,6 +28,7 @@ $this->beginClip('sidebar');
 </div>
 
 <? $this->endClip(); ?>
+<? endif; ?>
 
 <div class="albumView">
 	<h1><?= $album->title ?></h1>

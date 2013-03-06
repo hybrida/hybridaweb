@@ -4,13 +4,13 @@ $this->breadcrumbs = array(
 );
 ?>
 
+<? if ($isLoggedIn): ?>
 <?
 $this->layout = "//layouts/doubleColumn";
 $this->beginClip('sidebar'); 
 
 ?>
 
-<? if ($isLoggedIn): ?>
 	<div class="g-barTitle">Handlinger</div>
 	<div class="g-sidebarNav">
 		<ul>
@@ -19,9 +19,9 @@ $this->beginClip('sidebar');
 			</li>
 		</ul>
 	</div>
-<? endif; ?>
 
 <? $this->endClip(); ?>
+<? endif; ?>
 
 <div class="albumIndex">
 	<h1>Galleri</h1>

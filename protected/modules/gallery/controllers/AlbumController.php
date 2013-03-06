@@ -46,7 +46,7 @@ class AlbumController extends Controller
 			$album->getImages();
 		$this->render('index',array(
 					'albums'=> $albums,
-					'isLoggedIn' => isset(Yii::app()->user),
+					'isLoggedIn' => isset(Yii::app()->user->id),
 					));
 	}
 
@@ -62,6 +62,7 @@ class AlbumController extends Controller
 		$this->render('view',array(
 					'album'=> $album,
 					'canDelete' => $canDelete,
+					'isLoggedIn' => isset(Yii::app()->user->id),
 					));
 	}
 
