@@ -13,7 +13,7 @@ USE `hybrida_dev`;
 CREATE TABLE IF NOT EXISTS `access_relations` (
   `id` int(11) NOT NULL,
   `access` int(11) NOT NULL,
-  `type` enum('article','event','image','news','signup') COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('article','event','image','news','signup', 'album') COLLATE utf8_unicode_ci NOT NULL,
   `super_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`type`,`access`,`super_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
