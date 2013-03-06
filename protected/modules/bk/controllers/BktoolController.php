@@ -365,6 +365,7 @@ class BktoolController extends Controller {
                 $data['iktRingenMembershipInfo'] = $bkTool->getIKTRingenMembershipInformationById($id);
                 $data['commentsSum'] = $bkTool->getSumOfAllCommentsByCompanyId($id);
                 $data['comments'] = $bkTool->getAllCommentsByCompanyId($id);
+                $data['logo'] = $bkTool->getLogoById($id);
                 $data['sumOfAllPresentations'] = 0;
                 
                 $this->render('company', $data);
@@ -411,6 +412,7 @@ class BktoolController extends Controller {
                 $data['contactor'] = $bkTool->getContactorByCompanyId($id);
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 $data['errordata'] = $errordata;
+                $data['logo'] = $bkTool->getLogoById($id);
                 
                 $this->render('editcompany', $data);
         }
@@ -429,6 +431,12 @@ class BktoolController extends Controller {
                 $companyName;
                 
                 $data['thiscompany'] = $bkTool->getCompanyNameByCompanyId($id);
+                
+                $logo = CUploadedFile::getInstanceByName('logo');
+                if ($logo !== null) {
+                        $image = Image::uploadAndSave($logo, Yii::app()->user->id);
+                        $bkForms->setLogoById($id, $image->id);
+                }
                     
                 foreach ($data['thiscompany'] as $company) :
                     $companyName = $company['companyName'];
