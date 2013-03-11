@@ -255,6 +255,34 @@ class Bkforms {
         $query->execute($data);
     }
     
+    public function insertCompanyIKTRingenInformation($companyId, $relevance, $dateContacted){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+        
+        $data = array(
+            'companyId' => $companyId,
+            'relevance' => $relevance,
+            'dateContacted' => $dateContacted
+        );
+        $sql = "INSERT INTO bk_iktringen_information (companyId, relevance, dateContacted) 
+		VALUES (:companyId, :relevance, :dateContacted)";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
+    public function insertCompanyIKTRingenMembership($companyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+        
+        $data = array(
+            'companyId' => $companyId
+        );
+        $sql = "INSERT INTO iktringen_membership (companyId, start) 
+		VALUES (:companyId, now())";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
     public function insertCompanySpecialization($companyId, $specializationId){
                 $this->pdo = Yii::app()->db->getPdoInstance();
 
@@ -403,6 +431,36 @@ class Bkforms {
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
     }
+    
+    public function addCompanyRelevanceUpdate($relevantUserId, $companyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId,
+            'currentUserId' => Yii::app()->user->id,
+            'relevantUserId' => $relevantUserId
+        );
+        $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
+		VALUES (:relevantUserId, :companyId, 'Bedriftens relevans har blitt oppdatert', :currentUserId, now())";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
+    public function addCompanyDateContactedUpdate($relevantUserId, $companyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId,
+            'currentUserId' => Yii::app()->user->id,
+            'relevantUserId' => $relevantUserId
+        );
+        $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
+		VALUES (:relevantUserId, :companyId, 'Bedriftens dato for kontakt har blitt oppdatert', :currentUserId, now())";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
 
     public function addCompanyParentCompanyUpdate($relevantUserId, $companyId){
         $this->pdo = Yii::app()->db->getPdoInstance();
@@ -444,6 +502,21 @@ class Bkforms {
         );
         $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
 		VALUES (:relevantUserId, :companyId, 'En spesialisering har blitt knyttet til bedriften', :currentUserId, now())";
+
+        $query = $this->pdo->prepare($sql);
+        $query->execute($data);
+    }
+    
+    public function addCompanyMembershipUpdate($relevantUserId, $companyId){
+        $this->pdo = Yii::app()->db->getPdoInstance();
+
+        $data = array(
+            'companyId' => $companyId,
+            'currentUserId' => Yii::app()->user->id,
+            'relevantUserId' => $relevantUserId
+        );
+        $sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
+		VALUES (:relevantUserId, :companyId, 'Bedriften er nå en medlemsbedrift', :currentUserId, now())";
 
         $query = $this->pdo->prepare($sql);
         $query->execute($data);
