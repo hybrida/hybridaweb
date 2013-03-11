@@ -1,15 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 	<head <?= $this->clips['head-tag'] ?> >
-
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-
-		<? if ($this->getPageTitle() !== null): ?>
-			<title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
-		<? else: ?>
-			<title><?= CHtml::encode(Yii::app()->name) ?></title>
-		<? endif ?>
-
+		<title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
 		<meta name="description" content="Hybrida er linjeforeningen for 
 			  studieprogrammet Ingeniørvitenskap og IKT ved NTNU i Trondheim." />
 

@@ -1,5 +1,5 @@
 <?php
-$this->pageTitle = null;
+$this->pageTitle = "Nyhetsstrøm";
 $this->layout = "//layouts/newsfeed";
 
 $this->beginClip('sidebar'); ?>
