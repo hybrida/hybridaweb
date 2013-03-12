@@ -158,7 +158,7 @@ class GetController extends Controller {
 
 	public function actionUserSearch($usernameStartsWith) {
 		$username = $usernameStartsWith;
-		$username = preg_replace("/[^a-zA-Z]*/", "", $username);
+		$username = preg_replace("/[^a-zæøåA-ZÆØÅ ]*/", "", $username);
 		$term = "'" . $username . "%'";
 		$sql = sprintf(
 				'username LIKE %s OR firstName LIKE %s OR lastName LIKE %s',

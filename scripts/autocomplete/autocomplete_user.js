@@ -8,7 +8,7 @@ require(['autocomplete'],function(autocomplete){
 				usernameStartsWith: request.term
 			},
 			success: function( data ) {
-				console.log(data);
+				//console.log(data);
 				response( $.map( data, function( item ) {
 					var fullName = item.firstName + " " + item.middleName + " " + item.lastName;
 					var label = item.username + ": " + fullName;
