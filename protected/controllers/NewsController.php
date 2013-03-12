@@ -230,31 +230,6 @@ class NewsController extends Controller {
 		echo CJSON::encode($model);
 	}
 
-	public function actionAlumniSignup($id) {
-		$news = News::model()->with('event', 'event.signup')->findByPk($id);
-		if ($news->event === null || $news->event->signup === null) {
-			throw new CHttpException(400, "Dette er ikke et arrangement");
-		}
-		$alumniSignup = null;
-
-		if (Yii::app()->request->isPostRequest) {
-			$anon = $_POST['SignupMembershipAnonymous'];
-			$alumniSignup = $news->
-							event->signup->
-							addAnonymousAttender(
-												 $anon['firstName'],
-												 $anon['lastName'],
-												 $anon['email']);
-		}
-
-		$this->render('alumni_signup', array(
-			'event' => $news->event,
-			'news' => $news,
-			'signup' => $news->event->signup,
-			'alumniSignup' => $alumniSignup,
-		));
-	}
-
 	public function actionEditSignup($id) {
 		$news = News::model()
 				->with('event', 'event.signup')
