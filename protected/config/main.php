@@ -97,8 +97,8 @@ return array(
 			'urlFormat' => 'path',
 			'showScriptName' => false,
 			'rules' => array(
-                'admin/articles' => '/admin/articles',
-                'admin/news' => '/admin/news',
+				'admin/articles' => '/admin/articles',
+				'admin/news' => '/admin/news',
 				'artikler/<id:\d+>/<title>' => '/article/view',
 				'alumni/form' => 'alumni/form',
 				'alumni' => '/graduate/index',
@@ -130,8 +130,8 @@ return array(
 				'profil/<username:\w+>' => '/profile/info/',
 				'profil/<username:\w+>/<action:\w+>' => 'profile/<action>/',
 				'kalender' => '/calendar/default/index',
-                            'test' => 'dev/default/test',
-                            'html' => 'dev/default/html',
+				'test' => 'dev/default/test',
+				'html' => 'dev/default/html',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
@@ -158,11 +158,11 @@ return array(
 					'levels' => 'error, warning',
 				),
 				/*
-			    array(
-				    'class'=>'CWebLogRoute',
+				array(
+					'class'=>'CWebLogRoute',
 					'levels' => 'trace',
 					'categories'=>'vardump',
-			    ),
+				),
 				*/
 			),
 		),
