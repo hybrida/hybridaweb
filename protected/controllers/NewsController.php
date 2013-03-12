@@ -14,7 +14,7 @@ class NewsController extends Controller {
 				'actions' => array("view", "edit", 'toggleAttending', 'alumniSignup', 'griffgrabber'),
 			),
 			array('allow',
-				'actions' => array("create", "email", "manualSignup",'deleteManualSignup', 'editManualSignup'),
+				'actions' => array("create", "email", "manualSignup",'deleteManualSignup', 'editManualSignup', 'editSignup'),
 				'roles' => array('createNews'),
 			),
 			array('deny'),
@@ -242,8 +242,8 @@ class NewsController extends Controller {
 			$alumniSignup = $news->
 							event->signup->
 							addAnonymousAttender(
-												 $anon['firstName'], 
-												 $anon['lastName'], 
+												 $anon['firstName'],
+												 $anon['lastName'],
 												 $anon['email']);
 		}
 
@@ -253,6 +253,31 @@ class NewsController extends Controller {
 			'signup' => $news->event->signup,
 			'alumniSignup' => $alumniSignup,
 		));
+	}
+
+	public function actionEditSignup($id) {
+		$news = News::model()
+				->with('event', 'event.signup')
+				->findByPk($id);
+
+		if ($news == null || $news->event == null || $news->event->signup == null) {
+			throw new CHttpException(404, "Nyheten, hendelsen elle påmeldingen finnes ikke");
+		}
+
+		if (isset($_POST['SignupMembershipManualForm'])) {
+			$form = new SignupMembershipManualForm($news->event->signup);
+			$form->setAttributes($_POST['SignupMembershipManualForm'], false);
+			$form->save();
+		}
+
+		$this->render('editSignup', array(
+			'event' => $news->event,
+			'news' => $news,
+			'signup' => $news->event->signup,
+			'attenders'=> $news->event->signup->attenders,
+			'formModel' => new SignupMembershipManualForm($news->event->signup),
+		));
+
 	}
 
 }

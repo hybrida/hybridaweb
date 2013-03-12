@@ -31,7 +31,7 @@
 .g-form .radio-item {
     margin-left: 100px;
 }
-.progressbar { 
+.progressbar {
 	height: 20px;  /* Can be anything */
         width: 150px;
 	position: relative;
@@ -88,10 +88,10 @@
 	  rgb(43,194,83) 37%,
 	  rgb(84,240,84) 69%
 	 );
-	-webkit-box-shadow: 
+	-webkit-box-shadow:
 	  inset 0 2px 9px  rgba(255,255,255,0.3),
 	  inset 0 -2px 6px rgba(0,0,0,0.4);
-	-moz-box-shadow: 
+	-moz-box-shadow:
 	  inset 0 2px 9px  rgba(255,255,255,0.3),
 	  inset 0 -2px 6px rgba(0,0,0,0.4);
 */
@@ -102,7 +102,7 @@
 .progressbar span.orange {
 	background-color: #f1a165;
 	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #f1a165),color-stop(1, #f36d0a));
-	background-image: -webkit-linear-gradient(top, #f1a165, #f36d0a); 
+	background-image: -webkit-linear-gradient(top, #f1a165, #f36d0a);
         background-image: -moz-linear-gradient(top, #f1a165, #f36d0a);
         background-image: -ms-linear-gradient(top, #f1a165, #f36d0a);
         background-image: -o-linear-gradient(top, #f1a165, #f36d0a);
@@ -123,8 +123,8 @@
 	background-image: -webkit-linear-gradient(center bottom,rgb(43,194,83) 37%,rgb(84,240,84) 69%);
 	background-image: -moz-linear-gradient(center bottom,rgb(43,194,83) 37%,rgb(84,240,84) 69%);
 	background-image: -ms-linear-gradient(center bottom,rgb(43,194,83) 37%,rgb(84,240,84) 69%);
-	background-image: -o-linear-gradient(center bottom,rgb(43,194,83) 37%,rgb(84,240,84) 69%);       
-       
+	background-image: -o-linear-gradient(center bottom,rgb(43,194,83) 37%,rgb(84,240,84) 69%);
+
 }
 
 
@@ -140,4 +140,10 @@
 
 .newsManualSignup table tr:nth-child(even) {
 	background-color: #ccc;
+}
+
+
+.newsEditSignup table.attenders td {
+	border: 1px solid #888;
+	padding: 0.2em;
 }

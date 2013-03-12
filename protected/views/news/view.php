@@ -23,6 +23,11 @@ $this->beginClip('sidebar');
 		), array(
 			'class' => 'g-button',
 		)) ?>
+		<?= CHtml::link("Endre registrerte påmeldinger", array(
+			'news/editSignup', 'id' => $news->id,
+		), array(
+			'class' => 'g-button',
+		)) ?>
 		<? endif ?>
 	</fieldset>
 <? endif ?>
