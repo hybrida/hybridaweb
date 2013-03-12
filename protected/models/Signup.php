@@ -114,7 +114,7 @@ class Signup extends CActiveRecord {
 		$this->_access->replace();
 	}
 
-	public function addAttender($userId, $addBPC = true) {
+	public function addAttender($userId) {
 		$sql = "INSERT INTO signup_membership
 			( `eventId`, `userId`, `signedOff`, `timestamp` )
 			VALUES ( :eid, :uid, 'false', NOW())
@@ -138,10 +138,6 @@ class Signup extends CActiveRecord {
 
 				// $this->pushToFacebook($news->absoluteUrl);
 			}
-		}
-
-		if ($addBPC) {
-			$this->addBpcAttender($userId);
 		}
 	}
 
@@ -170,12 +166,6 @@ class Signup extends CActiveRecord {
 		return News::model()->find("parentId = ? AND parentType = 'event'", array(
 			$this->eventId,
 		));
-	}
-
-	private function addBpcAttender($userID) {
-		if ($this->isBpcEvent()) {
-			BpcCore::addAttending($this->event->eventCompany->bpcID, $userID);
-		}
 	}
 
 	public function removeAttender($userId) {

@@ -22,7 +22,7 @@ class SignupTest extends CTestCase {
 
 			$user->classYear = $class;
 			$user->save();
-			$signup->addAttender($user->id ,false);
+			$signup->addAttender($user->id);
 		}
 
 		return $signup;
@@ -88,8 +88,7 @@ class SignupTest extends CTestCase {
 	public function test_addAttending_attendingCount_oneAttending() {
 		$signup = $this->getSignup();
 		$user = $this->getUser();
-		$signup->addAttender(
-				$user->id);
+		$signup->addAttender($user->id);
 		$this->assertEquals(1, $signup->attendingCount);
 	}
 

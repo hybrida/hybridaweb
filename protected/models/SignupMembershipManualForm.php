@@ -21,7 +21,7 @@ class SignupMembershipManualForm extends CFormModel {
 		));
 		if (!$user) return false;
 
-		$this->signup->addAttender($user->id, false);
+		$this->signup->addAttender($user->id);
 	}
 
 	public function deleteAttenders() {
