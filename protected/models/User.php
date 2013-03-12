@@ -258,4 +258,10 @@ class User extends CActiveRecord {
 		return parent::beforeSave();
 	}
 
+	public static function getByUsername($username) {
+		return User::model()->find('username = :username',array(
+			'username' => $username,
+		));
+	}
+
 }

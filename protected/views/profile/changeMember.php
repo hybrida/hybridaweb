@@ -51,11 +51,24 @@
 		</form>
 	<? endif ?>
 
+	<? $this->addJavascript('/autocomplete/autocomplete_user') ?>
+
+	<script>
+		data = {
+			selector: ".profileChangeMember input.username"
+		}
+	</script>
+
 	<h1>Søk</h1>
-	<form method="get" name="search">
-		<input type="text" placeholder="Fornavn" name="firstName"/>
-		<input type="text" placeholder="Etternavn" name="lastName" />
-		<input type="submit"/>
+
+
+
+	<form method="get" class="g-form" name="search">
+		<div class="row">
+			<label>Brukernavn</label>
+			<input class="username" autofocus type="text" placeholder="Brukernavn" name="username"/>
+			<input type="submit" class="g-button"/>
+		</div>
 	</form>
 
 	<script type="text/javascript" language="JavaScript">

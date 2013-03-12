@@ -96,12 +96,10 @@ class ProfileController extends Controller {
 				));
 		$this->redirect($url);
 	}
-	
-	public function actionChangeMember($firstName="", $lastName="") {
+
+	public function actionChangeMember($username="") {
 		$msg = '';
-		$user = User::model()->find('firstName =? AND lastName = ?',array(
-			$firstName, $lastName
-		));
+		$user = User::getByUsername($username);
 		if (Yii::app()->request->isPostRequest && $user != null) {
 			$isMember = isset($_POST['isMember']);
 			$isNotMember = isset($_POST['isNotMember']);
@@ -113,7 +111,7 @@ class ProfileController extends Controller {
 				"<span class='notmember'>ikke medlem</span>";
 			if ($isMember) {
 				$user->member = 'true';
-				
+
 			} else {
 				$user->member = 'false';
 			}
@@ -127,7 +125,7 @@ class ProfileController extends Controller {
 			'user' => $user,
 			'message' => $msg,
 		));
-		
+
 	}
 
 	public function old() {
@@ -141,7 +139,7 @@ class ProfileController extends Controller {
 					$user->imageId = $image->id;
 					$user->save();
 				} catch (NoFileIsUploadedException $ex) {
-					
+
 				}
 				$this->redirect(array('/profile/info', 'username' => $username));
 			} else {
