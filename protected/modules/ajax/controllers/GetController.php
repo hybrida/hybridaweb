@@ -157,6 +157,10 @@ class GetController extends Controller {
 	}
 
 	public function actionUserSearch($usernameStartsWith) {
+		if (user()->isGuest) {
+			echo "[]";
+			return;
+		}
 		$username = $usernameStartsWith;
 		$username = preg_replace("/[^a-zæøåA-ZÆØÅ ]*/", "", $username);
 		$term = "'" . $username . "%'";
