@@ -32,7 +32,7 @@ class GetController extends Controller {
 		}
 
 		//Søke på brukere
-		$sql = "SELECT DISTINCT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName 
+		$sql = "SELECT DISTINCT ui.id AS userId, ui.firstName, ui.middleName, ui.lastName
             FROM user AS ui WHERE " . $searchString;
 
 		$query = $this->pdo->prepare($sql);
@@ -49,7 +49,7 @@ class GetController extends Controller {
 			'search' => $search
 		);
 
-		$sql = "SELECT id, parentId, parentType, title, timestamp 
+		$sql = "SELECT id, parentId, parentType, title, timestamp
             FROM news n WHERE n.title REGEXP :search
             ORDER BY timestamp DESC";
 
@@ -99,9 +99,9 @@ class GetController extends Controller {
 
 
 			case "pastEvent":
-				$query = "SELECT e.id, e.start, e.title 
-			FROM event AS e 
-			RIGHT JOIN  " . accessId('event', $selfId) . " = e.id 
+				$query = "SELECT e.id, e.start, e.title
+			FROM event AS e
+			RIGHT JOIN  " . accessId('event', $selfId) . " = e.id
 			WHERE start < NOW()
 			ORDER BY start $limit";
 				$result = mysql_query($query) or die(mysql_error());
@@ -120,7 +120,7 @@ class GetController extends Controller {
 			case "poll":
 				echo ("<table>");
 				$query = "SELECT title FROM poll
-			RIGHT JOIN  " . accessId('poll', $selfId) . " = poll.id 
+			RIGHT JOIN  " . accessId('poll', $selfId) . " = poll.id
 			WHERE poll.id=$id";
 				$result = mysql_query($query);
 				$row = mysql_fetch_array($result);
@@ -154,6 +154,17 @@ class GetController extends Controller {
 				echo ("</table>");
 				break;
 		}
+	}
+
+	public function actionUserSearch($usernameStartsWith) {
+		$username = $usernameStartsWith;
+		$username = preg_replace("/[^a-zA-Z]*/", "", $username);
+		$term = "'" . $username . "%'";
+		$sql = sprintf(
+				'username LIKE %s OR firstName LIKE %s OR lastName LIKE %s',
+				$term, $term, $term);
+		$users = User::model()->findAll($sql);
+		echo CJSON::encode($users);
 	}
 
 }

@@ -32,6 +32,13 @@ $form = $this->beginWidget('CActiveForm', array(
 
 </table>
 
+	<? $this->addJavascript('/autocomplete/autocomplete_user') ?>
+
+	<script>
+		data = {
+			selector: ".newsEditSignup .row input"
+		}
+	</script>
 
 	<h2>Legg til ny bruker</h2>
 	<div class="row">
@@ -40,8 +47,9 @@ $form = $this->beginWidget('CActiveForm', array(
 	</div>
 
 	<div class="row">
-		<input type="submit" value="Lagre">
+		<input type="submit" class="g-button" value="Lagre">
 	</div>
 
 	<? $this->endWidget() ?>
 </div>
+

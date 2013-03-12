@@ -3,15 +3,17 @@
 	<head <?= $this->clips['head-tag'] ?> >
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
-		<meta name="description" content="Hybrida er linjeforeningen for 
+		<meta name="description" content="Hybrida er linjeforeningen for
 			  studieprogrammet Ingeniørvitenskap og IKT ved NTNU i Trondheim." />
 
 		<?= $this->clips['head-facebook'] ?>
 
 		<script type="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/collapsible_lists.js"></script>
-	
+
 
 		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css" />
+
 
 		<? if (YII_DEBUG): ?>
 			<? CssIncluder::registerDirectory("style") ?>
@@ -19,7 +21,7 @@
 		<? else: ?>
 			<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/style/min.css" />
 		<? endif ?>
-			
+
 		<? if (isset($_GET['matrix']) && $_GET['matrix'] == "true") {
 			$_SESSION['matrix'] = true;
 		} elseif (isset($_GET['matrix'])) {
@@ -51,8 +53,8 @@
 			<div class="layout-head">
 				<div class="layout-banner">
 					<a href="<?= Yii::app()->request->baseUrl ?>/">
-						<img 
-							class="layout-headerBanner" 
+						<img
+							class="layout-headerBanner"
 							src="<?= Yii::app()->request->baseUrl ?>/images/logo_head.png"
 							alt="" />
 					</a>
@@ -71,7 +73,7 @@
 			<div class="layout-mainWrap g-clearfix">
 				<?= $content ?>
 			</div>
-			
+
 			<div id="layout-marginMaker"></div>
 		</div>
 	</body>
