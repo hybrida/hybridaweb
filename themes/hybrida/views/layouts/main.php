@@ -60,7 +60,9 @@
 					</a>
  				</div>
  				<div class="layout-search">
-					<? $this->widget('SearchField') ?>
+					<div class="layout-search">
+						<input type="text" id="searchField" placeholder="Søk"/>
+					</div>
  				</div>
 				<br clear="all" />
 				<div class="layout-headBottom">
