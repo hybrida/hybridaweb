@@ -1,11 +1,11 @@
 define([], function() {
 
-	var autocomplete = function (selector, source, select) {
-		$(selector).autocomplete({
-			source: source,
+	var autocomplete = function (options) {
+		$(options.selector).autocomplete({
+			source: options.source,
 			minLength: 2,
-			select: select,
-			open: function() {
+			select: options.select,
+			open: function(event, ui) {
 				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
 			},
 			close: function() {

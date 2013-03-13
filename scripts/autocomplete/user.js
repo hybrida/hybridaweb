@@ -22,5 +22,9 @@ require(['autocomplete/core'],function(autocomplete){
 	};
 
 	var selector = data.selector;
-	autocomplete(selector, source);
+
+	autocomplete({
+		selector: selector,
+		source: source
+	});
 });

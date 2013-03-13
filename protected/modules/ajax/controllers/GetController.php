@@ -171,4 +171,29 @@ class GetController extends Controller {
 		echo CJSON::encode($users);
 	}
 
+	public function actionNewsSearch($titleLike) {
+		if (user()->isGuest) {
+			echo "['ops']";
+			return;
+		}
+		$title = $titleLike;
+		$title = preg_replace("/[^a-zæøåA-ZÆØÅ0-9 ]*/", "", $title);
+		$term = "'%" . $title . "%'";
+		$securitySql = sprintf("status = %d ", Status::PUBLISHED);
+		$sql = sprintf("title LIKE %s AND (%s)", $term, $securitySql);
+		$models = News::model()->findAll($sql);
+		echo $this->getJsonFromModels($models);
+	}
+
+	private function getJsonFromModels($models) {
+		$modelsArray = array();
+		foreach ($models as $model) {
+			$modelsArray[] = array(
+				'viewUrl' => $model->viewUrl,
+				'title' => $model->title,
+			);
+		}
+		return CJSON::encode($modelsArray);
+	}
+
 }

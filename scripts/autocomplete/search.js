@@ -1,21 +1,24 @@
 require(['autocomplete/core'],function(autocomplete){
 
-	//alert("autocomplete_search");
+	var foundViewUrl = null;
 
 	var source = function( request, response ) {
+		console.log(request);
 		$.ajax({
-			url: "/get/userSearch",
+			url: "/get/newsSearch",
 			dataType: "json",
 			data: {
-				usernameStartsWith: request.term
+				titleLike: request.term
 			},
 			success: function( data ) {
-				response( $.map( data, function( user ) {
-					var fullName = user.firstName + " " + user.middleName + " " + user.lastName;
-					var label = user.username + ": " + fullName;
+				console.log(data);
+				response( $.map( data, function( news ) {
+					var label = news.title;
+					foundViewUrl = news.id;
 					return {
 						label: label,
-						value: user.username
+						value: label,
+						foundViewUrl: news.viewUrl
 					}
 				}));
 			}
@@ -24,9 +27,13 @@ require(['autocomplete/core'],function(autocomplete){
 
 	var onSelect = function( event, ui ) {
 		if (ui.item) {
-			window.location.href = "/profil/" + ui.item.value;
+			window.location.href = ui.item.foundViewUrl;
 		}
 	}
 
-	autocomplete("input#searchField", source, onSelect);
+	autocomplete({
+		selector: "input#searchField",
+		source: source,
+		select: onSelect
+	});
 });
