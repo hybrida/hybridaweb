@@ -99,7 +99,7 @@ class ProfileController extends Controller {
 
 	public function actionChangeMember($username="") {
 		$msg = '';
-		$user = User::getByUsername($username);
+		$user = User::findByUsername($username);
 		if (Yii::app()->request->isPostRequest && $user != null) {
 			$isMember = isset($_POST['isMember']);
 			$isNotMember = isset($_POST['isNotMember']);
