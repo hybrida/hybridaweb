@@ -180,23 +180,32 @@ class GetController extends Controller {
 		$title = preg_replace("/[^a-zæøåA-ZÆØÅ0-9 ]*/", "", $title);
 		$term = "'%" . $title . "%'";
 		$securitySql = sprintf("status = %d ", Status::PUBLISHED);
-		$sql = sprintf("title LIKE %s AND (%s)", $term, $securitySql);
-		$models = News::model()->findAll($sql);
+		$newsSql = sprintf("title LIKE %s AND (%s)", $term, $securitySql);
+		$models = News::model()->findAll($newsSql);
+		$articleSql = sprintf("title LIKE %s", $term);
+		$models += Article::model()->findAll($articleSql);
 		echo $this->getJsonFromModels($models);
 	}
 
 	private function getJsonFromModels($models) {
 		$modelsArray = array();
-		foreach ($models as $news) {
-			if (!app()->gatekeeper->hasPostAccess('news', $news->id)) {
+		foreach ($models as $model) {
+			if ($model instanceof News &&
+					!app()->gatekeeper->hasPostAccess('news', $model->id)) {
 				continue;
 			}
-
+			if ($model instanceof Article &&
+					!app()->gatekeeper->hasPostAccess('article', $model->id)) {
+				continue;
+			}
 			$modelsArray[] = array(
-				'viewUrl' => $news->viewUrl,
-				'title' => $news->title,
+				'viewUrl' => $model->viewUrl,
+				'title' => $model->title,
 			);
 		}
+		usort($modelsArray, function($a, $b){
+			return strcmp($a['title'], $b['title']);
+		});
 		return CJSON::encode($modelsArray);
 	}
 
