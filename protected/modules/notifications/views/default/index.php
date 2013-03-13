@@ -2,19 +2,19 @@
 $deleteUrl = $this->createUrl('delete', array('id' => ''));
 ?>
 <script language="javascript">
-	
-	function del (id, element, callback){
+
+	function del (id, element){
 		var url = '<?= $deleteUrl ?>/' + id;
 		var row = element.parentNode.parentNode;
 		row.parentNode.removeChild(row);
-		
+
 		$.ajax({
 			'url' : url
 		}).done(function(data) {
-			callback();
+
 		});
 	}
-	
+
 	function go (id, element, url) {
 		del(id, element, function() {
 			window.location = url;
@@ -24,13 +24,13 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 
 <div class="notificationIndex">
 	<h1>Ulest</h1>
-	
+
 	<? foreach ($unread as $notification): ?>
 		<div class="row">
 			<div class="date">
 				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
-			</div>			
-			<div class="changedByAuthor">				
+			</div>
+			<div class="changedByAuthor">
 				<?=
 				Html::link($notification->changedByUser->fullName, array(
 					$notification->changedByUser->viewUrl
@@ -46,7 +46,7 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 				</a>
 			</div>
 			<div class="delete">
-				<a href="#" class="g-deleteButton" onclick="js:del(<?= $notification->id ?>, this, function(){})">
+				<a href="#" class="g-deleteButton" onclick="js:del(<?= $notification->id ?>, this)">
 					X
 				</a>
 			</div>
