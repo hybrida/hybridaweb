@@ -161,14 +161,18 @@ class GetController extends Controller {
 			echo "[]";
 			return;
 		}
+		$users = $this->getUserFromSearchCriteria($usernameStartsWith);
+		echo CJSON::encode($users);
+	}
+
+	private function getUserFromSearchCriteria($usernameStartsWith) {
 		$username = $usernameStartsWith;
 		$username = preg_replace("/[^a-zæøåA-ZÆØÅ ]*/", "", $username);
 		$term = "'" . $username . "%'";
 		$sql = sprintf(
 				'username LIKE %s OR firstName LIKE %s OR lastName LIKE %s',
 				$term, $term, $term);
-		$users = User::model()->findAll($sql);
-		echo CJSON::encode($users);
+		return User::model()->findAll($sql);
 	}
 
 	public function actionNewsSearch($titleLike) {
@@ -184,6 +188,7 @@ class GetController extends Controller {
 		$models = News::model()->findAll($newsSql);
 		$articleSql = sprintf("title LIKE %s", $term);
 		$models += Article::model()->findAll($articleSql);
+		$models += $this->getUserFromSearchCriteria($titleLike);
 		echo $this->getJsonFromModels($models);
 	}
 
@@ -198,6 +203,14 @@ class GetController extends Controller {
 					!app()->gatekeeper->hasPostAccess('article', $model->id)) {
 				continue;
 			}
+			if ($model instanceof User) {
+				$modelsArray[] = array(
+					'viewUrl' => $model->viewUrl,
+					'title' => $model->fullName,
+				);
+				continue;
+			}
+
 			$modelsArray[] = array(
 				'viewUrl' => $model->viewUrl,
 				'title' => $model->title,
