@@ -112,7 +112,7 @@ class Groups extends CActiveRecord {
 
 	private function removeMembershipAndAddNewOne($userId, $comission) {
 		$this->removeMember($userId);
-		$sql = "INSERT INTO group_membership 
+		$sql = "INSERT INTO group_membership
 			(userId, groupId, comission, start, end)
 			VALUES (:userId, :groupId, :comission, NOW(), :end)";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
@@ -133,7 +133,7 @@ class Groups extends CActiveRecord {
 		$ms->comission = $comission;
 		$ms->save();
 	}
-	
+
 	private function getCurrentDaysTimestamp() {
 		$date = date('Y-m-d');
 		return $date;
@@ -158,7 +158,7 @@ class Groups extends CActiveRecord {
 		}
 		return $membersInActiveRecord;
 	}
-	
+
 	public function getActiveMemberships() {
 		$criteria = new CDbCriteria();
 		$criteria->condition = "groupId = :groupId AND end = :stillActive";
@@ -182,5 +182,9 @@ class Groups extends CActiveRecord {
 			$ms->save();
 		}
 	}
-	
+
+	public function getViewUrl() {
+		return Yii::app()->createUrl('/group/view', array('url' => $this->url));
+	}
+
 }
