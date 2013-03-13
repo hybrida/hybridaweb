@@ -214,13 +214,12 @@ class GetController extends Controller {
 	}
 
 	public function actionNewsSearch($titleLike) {
-		if (user()->isGuest) {
-			echo "[]";
-			return;
-		}
-		$users = $this->getUsersFromSearch($titleLike);
 		$news = $this->getNewsFromSearch($titleLike);
 		$articles = $this->getArticlesFromSearch($titleLike);
+		$users = array();
+		if (!user()->isGuest) {
+			$users = $this->getUsersFromSearch($titleLike);
+		}
 		$models = array_merge($news, $articles, $users);
 		echo $this->getJsonFromModels($models);
 	}
