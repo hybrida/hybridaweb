@@ -169,7 +169,7 @@ class GetController extends Controller {
 		$username = $this->removeEvilCharacters($usernameStartsWith);
 		$term = "'" . $username . "%'";
 		$sql = sprintf(
-				'username LIKE %s COLLATE utf8_bin OR firstName LIKE %s COLLATE utf8_bin OR lastName LIKE %s COLLATE utf8_bin',
+				'username LIKE %s OR firstName LIKE %s OR lastName LIKE %s',
 				$term, $term, $term);
 		$criteria = new CDbCriteria();
 		$criteria->condition = $sql;
@@ -181,7 +181,7 @@ class GetController extends Controller {
 		$title = $this->removeEvilCharacters($titleLike);
 		$term = "'%" . $title . "%'";
 		$securitySql = sprintf("status = %d ", Status::PUBLISHED);
-		$newsSql = sprintf("title LIKE %s COLLATE utf8_bin AND (%s)", $term, $securitySql);
+		$newsSql = sprintf("title LIKE %s AND (%s)", $term, $securitySql);
 		$criteria = new CDbCriteria();
 		$criteria->condition = $newsSql;
 		$criteria->order = "title asc";
@@ -192,7 +192,7 @@ class GetController extends Controller {
 	private function getArticlesFromSearch($titleLike) {
 		$title = $this->removeEvilCharacters($titleLike);
 		$term = "'%" . $title . "%'";
-		$articleSql = sprintf("title LIKE %s COLLATE utf8_bin", $term);
+		$articleSql = sprintf("title LIKE %s", $term);
 		$criteria = new CDbCriteria();
 		$criteria->condition = $articleSql;
 		$criteria->order = "title asc";
