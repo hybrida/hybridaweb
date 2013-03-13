@@ -32,7 +32,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 </table>
 
-	<? $this->addJavascript('/autocomplete/autocomplete_user') ?>
+	<? $this->addJavascript('autocomplete/user') ?>
 
 	<script>
 		data = {

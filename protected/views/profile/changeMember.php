@@ -51,7 +51,7 @@
 		</form>
 	<? endif ?>
 
-	<? $this->addJavascript('/autocomplete/autocomplete_user') ?>
+	<? $this->addJavascript('/autocomplete/user') ?>
 
 	<script>
 		data = {
@@ -70,10 +70,6 @@
 			<input type="submit" class="g-button"/>
 		</div>
 	</form>
-
-	<script type="text/javascript" language="JavaScript">
-		document.forms['search'].elements['firstName'].focus();
-	</script>
 	<br/>
 	<br/>
 	<br/>

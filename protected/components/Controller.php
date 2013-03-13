@@ -39,12 +39,11 @@ class Controller extends CController {
 	protected function printJavascriptFiles() {
 		$output = "";
 		$scriptRoot = "/scripts/";
-		foreach ($this->jsFiles as $scriptName) {
-			$output .= CHtml::tag('script', array(
-				'data-main' => $scriptRoot . $scriptName . ".js",
-				'src' => $scriptRoot . 'require.js',
-			), "", true);
-		}
-		return $output;
+		$scriptTag = CHtml::tag('script', array(
+			'data-main' => $scriptRoot . "main.js",
+			'src' => $scriptRoot . 'require.js',
+		), "", true);
+		$scriptContent = "<script>\nrequire(['". implode("', '", $this->jsFiles) . "']);\n</script>";
+		return $scriptTag . PHP_EOL .  $scriptContent;
 	}
 }

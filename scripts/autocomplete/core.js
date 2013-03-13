@@ -1,9 +1,10 @@
 define([], function() {
 
-	var autocomplete = function (selector, source) {
+	var autocomplete = function (selector, source, select) {
 		$(selector).autocomplete({
 			source: source,
 			minLength: 2,
+			select: select,
 			open: function() {
 				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
 			},

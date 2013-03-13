@@ -59,6 +59,9 @@
 							alt="" />
 					</a>
  				</div>
+ 				<div class="layout-search">
+					<? $this->widget('SearchField') ?>
+ 				</div>
 				<br clear="all" />
 				<div class="layout-headBottom">
 					<div class="layout-menu">
