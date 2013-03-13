@@ -161,18 +161,56 @@ class GetController extends Controller {
 			echo "[]";
 			return;
 		}
-		$users = $this->getUserFromSearchCriteria($usernameStartsWith);
+		$users = $this->getUsersFromSearch($usernameStartsWith);
 		echo CJSON::encode($users);
 	}
 
-	private function getUserFromSearchCriteria($usernameStartsWith) {
-		$username = $usernameStartsWith;
-		$username = preg_replace("/[^a-zæøåA-ZÆØÅ ]*/", "", $username);
+	private function getUsersFromSearch($usernameStartsWith) {
+		$username = $this->removeEvilCharacters($usernameStartsWith);
 		$term = "'" . $username . "%'";
 		$sql = sprintf(
 				'username LIKE %s OR firstName LIKE %s OR lastName LIKE %s',
 				$term, $term, $term);
-		return User::model()->findAll($sql);
+		$criteria = new CDbCriteria();
+		$criteria->condition = $sql;
+		$criteria->order = "username asc";
+		return User::model()->findAll($criteria);
+	}
+
+	private function getNewsFromSearch($titleLike) {
+		$title = $this->removeEvilCharacters($titleLike);
+		$term = "'%" . $title . "%'";
+		$securitySql = sprintf("status = %d ", Status::PUBLISHED);
+		$newsSql = sprintf("title LIKE %s AND (%s)", $term, $securitySql);
+		$criteria = new CDbCriteria();
+		$criteria->condition = $newsSql;
+		$criteria->order = "title asc";
+		$news = News::model()->findAll($criteria);
+		return $this->filterOutNonAccess($news, "news");
+	}
+
+	private function getArticlesFromSearch($titleLike) {
+		$title = $this->removeEvilCharacters($titleLike);
+		$term = "'%" . $title . "%'";
+		$articleSql = sprintf("title LIKE %s", $term);
+		$criteria = new CDbCriteria();
+		$criteria->condition = $articleSql;
+		$criteria->order = "title asc";
+		$articles =  Article::model()->findAll($criteria);
+		return $this->filterOutNonAccess($articles, "article");
+	}
+
+	private function filterOutNonAccess($models, $type) {
+		return array_filter($models, function($model) use ($type) {
+			if (!app()->gatekeeper->hasPostAccess($type, $model->primaryKey)) {
+				return false;
+			}
+			return true;
+		});
+	}
+
+	private function removeEvilCharacters($input) {
+		return preg_replace("/[^a-zæøåA-ZÆØÅ ]*/", "", $input);
 	}
 
 	public function actionNewsSearch($titleLike) {
@@ -180,29 +218,16 @@ class GetController extends Controller {
 			echo "[]";
 			return;
 		}
-		$title = $titleLike;
-		$title = preg_replace("/[^a-zæøåA-ZÆØÅ0-9 ]*/", "", $title);
-		$term = "'%" . $title . "%'";
-		$securitySql = sprintf("status = %d ", Status::PUBLISHED);
-		$newsSql = sprintf("title LIKE %s AND (%s)", $term, $securitySql);
-		$models = News::model()->findAll($newsSql);
-		$articleSql = sprintf("title LIKE %s", $term);
-		$models += Article::model()->findAll($articleSql);
-		$models += $this->getUserFromSearchCriteria($titleLike);
+		$users = $this->getUsersFromSearch($titleLike);
+		$news = $this->getNewsFromSearch($titleLike);
+		$articles = $this->getArticlesFromSearch($titleLike);
+		$models = array_merge($news, $articles, $users);
 		echo $this->getJsonFromModels($models);
 	}
 
 	private function getJsonFromModels($models) {
 		$modelsArray = array();
 		foreach ($models as $model) {
-			if ($model instanceof News &&
-					!app()->gatekeeper->hasPostAccess('news', $model->id)) {
-				continue;
-			}
-			if ($model instanceof Article &&
-					!app()->gatekeeper->hasPostAccess('article', $model->id)) {
-				continue;
-			}
 			if ($model instanceof User) {
 				$modelsArray[] = array(
 					'viewUrl' => $model->viewUrl,
@@ -216,9 +241,7 @@ class GetController extends Controller {
 				'title' => $model->title,
 			);
 		}
-		usort($modelsArray, function($a, $b){
-			return strcmp($a['title'], $b['title']);
-		});
+
 		return CJSON::encode($modelsArray);
 	}
 

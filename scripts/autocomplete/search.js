@@ -14,11 +14,13 @@ require(['autocomplete/core', "shortcut"],function(autocomplete, shortcut){
 				console.log(data);
 				response( $.map( data, function( news ) {
 					var label = news.title;
+					var isSelector = news.title == "---";
 					foundViewUrl = news.id;
 					return {
 						label: label,
 						value: label,
-						foundViewUrl: news.viewUrl
+						foundViewUrl: news.viewUrl,
+						isSelector: isSelector
 					}
 				}));
 			}
@@ -26,7 +28,7 @@ require(['autocomplete/core', "shortcut"],function(autocomplete, shortcut){
 	};
 
 	var onSelect = function( event, ui ) {
-		if (ui.item) {
+		if (ui.item && ! ui.item.isSelector) {
 			window.location.href = ui.item.foundViewUrl;
 		}
 	}
