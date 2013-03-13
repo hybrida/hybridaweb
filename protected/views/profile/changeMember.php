@@ -51,7 +51,7 @@
 		</form>
 	<? endif ?>
 
-	<? $this->addJavascript('/autocomplete/user') ?>
+	<? $this->addJavascript('autocomplete/user') ?>
 
 	<script>
 		data = {
