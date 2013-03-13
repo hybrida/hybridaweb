@@ -37,12 +37,8 @@ class GetControllerTest extends CTestCase {
 	}
 
 	public function test_actionUserSearch_loggedOut_empty () {
+		$this->session->logout();
 		$this->con->actionUserSearch('sig');
-		$this->assertEquals("[]", $this->getOutput());
-	}
-
-	public function test_actionNewsSearch_loggedOut_empty() {
-		$this->con->actionNewsSearch('den');
 		$this->assertEquals("[]", $this->getOutput());
 	}
 

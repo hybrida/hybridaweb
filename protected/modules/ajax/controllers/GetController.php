@@ -173,7 +173,7 @@ class GetController extends Controller {
 				$term, $term, $term);
 		$criteria = new CDbCriteria();
 		$criteria->condition = $sql;
-		$criteria->order = "username asc";
+		$criteria->order = "firstname asc, lastname asc";
 		return User::model()->findAll($criteria);
 	}
 
