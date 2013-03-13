@@ -173,7 +173,7 @@ class GetController extends Controller {
 
 	public function actionNewsSearch($titleLike) {
 		if (user()->isGuest) {
-			echo "['ops']";
+			echo "[]";
 			return;
 		}
 		$title = $titleLike;

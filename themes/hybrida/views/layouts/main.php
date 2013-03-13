@@ -60,9 +60,11 @@
 					</a>
  				</div>
  				<div class="layout-search">
-					<div class="layout-search">
-						<input type="text" id="searchField" placeholder="Søk"/>
-					</div>
+ 					<? if (!user()->isGuest): ?>
+						<div class="layout-search">
+							<input type="text" id="searchField" placeholder="Søk"/>
+						</div>
+					<? endif ?>
  				</div>
 				<br clear="all" />
 				<div class="layout-headBottom">
