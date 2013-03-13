@@ -36,7 +36,7 @@ require(['autocomplete/core', "shortcut"],function(autocomplete, shortcut){
 	var selector = "input#searchField";
 	var searchField = $(selector);
 
-	shortcut.add("Ctrl+S", function(e){
+	shortcut.add("Ctrl+i", function(e){
 		searchField.focus();
 	});
 
