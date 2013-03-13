@@ -1,6 +1,6 @@
 <?php
 
-$this->addJavascript("thehunt/run");
+$this->addJavascript("griffgrabber/run");
 $this->layout = "//layouts/doubleColumn";
 
  ?>

@@ -1,4 +1,4 @@
-define(["canvasobject", "keylistener", "fastmath"],
+define(["griffgrabber/canvasobject", "griffgrabber/keylistener", "griffgrabber/fastmath"],
 		function(canvasobject, keylistener, fastmath){
 
 	function randomColor() {

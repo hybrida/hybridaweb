@@ -1,4 +1,4 @@
-require(['cargame'], function(cargame) {
+require(['griffgrabber/cargame'], function(cargame) {
 
 	var canvas = data.canvas;
 	var startButton = data.startButton;

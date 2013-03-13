@@ -1,5 +1,5 @@
 define(
-		["canvasobject", "griffDrawer"],
+		["griffgrabber/canvasobject", "griffgrabber/griffDrawer"],
 		function(canvasobject, griffDrawer) {
 
 

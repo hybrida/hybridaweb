@@ -1,5 +1,5 @@
 define(
-		["car", "victim", "griffDrawer"],
+		["griffgrabber/car", "griffgrabber/victim", "griffgrabber/griffDrawer"],
 		function(Car, Victim, griffDrawer) {
 
 	var width = 800;
