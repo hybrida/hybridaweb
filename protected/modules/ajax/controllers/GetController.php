@@ -187,10 +187,14 @@ class GetController extends Controller {
 
 	private function getJsonFromModels($models) {
 		$modelsArray = array();
-		foreach ($models as $model) {
+		foreach ($models as $news) {
+			if (!app()->gatekeeper->hasPostAccess('news', $news->id)) {
+				continue;
+			}
+
 			$modelsArray[] = array(
-				'viewUrl' => $model->viewUrl,
-				'title' => $model->title,
+				'viewUrl' => $news->viewUrl,
+				'title' => $news->title,
 			);
 		}
 		return CJSON::encode($modelsArray);
