@@ -1,3 +1,5 @@
+<div class="groupEditMembers">
+
 <h1>Medlemsredigering for <?= $group->title ?></h1>
 
 <? $this->renderPartial("_menu", array(
@@ -38,6 +40,14 @@
 <? endforeach; ?>
 </table>
 
+<? $this->addJavascript('autocomplete/user') ?>
+
+<script>
+	data = {
+		selector: ".groupEditMembers input.username"
+	}
+</script>
+
 <h1>Legg til nye medlemmer</h1>
 
 <table>
@@ -47,14 +57,15 @@
 	</tr>
 <? for ($i = 1; $i <= 4; $i++): ?>
 	<tr>
-		<td><?= $form->textField($groupForm, "add[$i][username]") ?></td>
+		<td><?= $form->textField($groupForm, "add[$i][username]", array('class' => 'username')) ?></td>
 		<td><?= $form->textField($groupForm, "add[$i][comission]") ?></td>
 	</tr>
-	
+
 <? endfor; ?>
-	
+
 </table>
 
 <br />
 <?= CHtml::submitButton("Send inn") ?>
 <?	$this->endWidget() ?>
+</div>
