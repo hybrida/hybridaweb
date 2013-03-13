@@ -2,6 +2,8 @@
 
 class GetController extends Controller {
 
+	const AJAX_LIMIT = 10;
+
 	public function actionGetAccessBlock($sub, $name, $id) {
 		$this->widget('application.components.widgets.AccessField', array(
 			'name' => $name,
@@ -22,13 +24,15 @@ class GetController extends Controller {
 
 	private function getUsersFromSearch($usernameStartsWith) {
 		$username = $this->removeEvilCharacters($usernameStartsWith);
-		$term = "'" . $username . "%'";
+		$term = "'%" . $username . "%'";
+		$concat = "CONCAT(firstName, ' ' , middleName, ' ', lastName)";
+		$concat2 = "CONCAT(firstName, ' ', lastName)";
 		$sql = sprintf(
-				'username LIKE %s OR firstName LIKE %s OR lastName LIKE %s',
-				$term, $term, $term);
+				'username LIKE %s OR %s LIKE %s OR %s LIKE %s',
+				$term, $concat, $term, $concat2, $term);
 		$criteria = new CDbCriteria();
 		$criteria->condition = $sql;
-		$criteria->limit = 7;
+		$criteria->limit = self::AJAX_LIMIT;
 		$criteria->order = "firstname asc, lastname asc";
 		return User::model()->findAll($criteria);
 	}
@@ -41,7 +45,7 @@ class GetController extends Controller {
 		$criteria = new CDbCriteria();
 		$criteria->condition = $newsSql;
 		$criteria->order = "title asc";
-		$criteria->limit = 7;
+		$criteria->limit = self::AJAX_LIMIT;
 		$news = News::model()->findAll($criteria);
 		return $this->filterOutNonAccess($news, "news");
 	}
@@ -53,7 +57,7 @@ class GetController extends Controller {
 		$criteria = new CDbCriteria();
 		$criteria->condition = $articleSql;
 		$criteria->order = "title asc";
-		$criteria->limit = 7;
+		$criteria->limit = self::AJAX_LIMIT;
 		$articles =  Article::model()->findAll($criteria);
 		return $this->filterOutNonAccess($articles, "article");
 	}
