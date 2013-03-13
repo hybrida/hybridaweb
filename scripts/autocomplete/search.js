@@ -1,4 +1,4 @@
-require(['autocomplete/core'],function(autocomplete){
+require(['autocomplete/core', "shortcut"],function(autocomplete, shortcut){
 
 	var foundViewUrl = null;
 
@@ -31,8 +31,15 @@ require(['autocomplete/core'],function(autocomplete){
 		}
 	}
 
+	var selector = "input#searchField";
+	var searchField = $(selector);
+
+	shortcut.add("Ctrl+S", function(e){
+		searchField.focus();
+	});
+
 	autocomplete({
-		selector: "input#searchField",
+		selector: selector,
 		source: source,
 		select: onSelect
 	});
