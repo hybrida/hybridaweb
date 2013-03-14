@@ -12,6 +12,7 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
     padding-left: 10px;
     margin-left: 20px;
     margin-right: 20px;
+    width: 650px;
 }
 
 .widget-comment .c-comment:nth-child(even) {
@@ -26,7 +27,7 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 }
 
 .widget-comment .c-date {
-    color: #333;
+    color: #666;
     float: right;
 }
 
