@@ -1,49 +1,83 @@
-.widget-comment .comment {
-    width: 700px;
-}
-
 /* Forcing comment to contain its children despite the floats inside
 http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
-.widget-comment .comment {
+.widget-comment .c-comment
+, .widget-comment .c-header
+ {
     overflow: hidden;
     display: inline-block;
     display: block;
 }
 
-.widget-comment .comment .profile-image {
+.widget-comment .c-comment {
+    padding-left: 10px;
+}
+
+.widget-comment .c-comment:nth-child(even) {
+    background-color: #eee;
+}
+
+.widget-comment .c-comment .c-profile-image {
     width: 55px;
     height: 55px;
-    margin: auto;
+    margin-top: 0;
     clear: both;
 }
 
-.widget-comment .comment-title {
-    margin-bottom: 0.35em;
+.widget-comment .c-date {
+    color: #333;
+    float: right;
 }
 
-.widget-comment .comment-date :before {
-    content: "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+.widget-comment .c-date-without-delete {
+    margin-right: 34px;
 }
 
-.widget-comment .comment-left {
-    width: 150px;
+.widget-comment .c-author {
     float: left;
-    border-right: 1px solid #abadb3;
 }
 
-.widget-comment .comment-right {
+.widget-comment .c-header {
+    margin-bottom: 0em;
+}
+
+.widget-comment .c-profileImage {
+    width: 50px;
     float: left;
-    width: 515px;
-    border-left: 1px solid #abadb3;
-    padding-left: 34px;
-    margin-left: -1px;
 }
 
-.widget-comment .comment-left, .comment-right {
+.widget-comment .c-right {
+    float: left;
+    width: 580px;
+    padding-left: 20px;
+    margin-left: 10px;
+}
+
+.widget-comment .c-right , .widget-comment .c-profileImage {
     margin-bottom: 10px;
     margin-top:10px;
 }
 
-.widget-comment .comment-title .deleteButton {
+.widget-comment .c-header .c-deleteButton {
     float: right;
+}
+
+.widget-comment .c-deleteButton {
+    border-radius: 2px;
+    border: 0;
+    font-weight: bold;
+    padding: 0.07em 0.38em 0.2em 0.4em;
+    background-color: inherit;
+    color: #666;
+    margin-left: 1em;
+    position: relative;
+    top: -3px;
+}
+
+.widget-comment .c-deleteButton:hover {
+    cursor: pointer;
+    color: black;
+}
+
+.widget-comment .c-comment textarea {
+    border: 1px solid #888;
 }

@@ -23,30 +23,29 @@ $user = User::model()->findByPk(user()->id);
 	?>
 	<?= $form->hiddenField($formModel, 'type') ?>
 	<?= $form->hiddenField($formModel, 'id') ?>
-	
-	<div class="comment">
-		<div class="comment-left">
-			<div class="profile-image">
-				<?= Image::profileTag($user->imageId, 'small') ?>
-			</div>
+
+	<div class="c-comment">
+		<div class="c-profileImage">
+			<?= Image::profileTag($user->imageId, 'xsmall') ?>
 		</div>
 
-		<div class="comment-right">
-			<div class="comment-title">
-				<span class="comment-author"><?= $user->fullName ?></span>
-				<span class="comment-date">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-					<?= Html::dateToString(date('j.m.Y H:i'), 'long') ?></span>
+		<div class="c-right">
+			<div class="c-header">
+				<span class="c-author"><?= $user->fullName ?></span>
+				<span class="c-date c-date-without-delete">
+					<?= Html::dateToString(date('j.m.Y H:i'), 'mediumlong') ?>
+				</span>
 			</div>
-			<div class="commentContent">
+			<div class="c-content">
 				<?php
 				echo $form->textArea($formModel, 'content', array(
-					'cols' => 60,
-					'rows' => 10,
+					'cols' => 50,
+					'rows' => 3,
 				));
 				?>
-				<?= $form->error($formModel, 'content'); ?>
-				<br />
+				<br>
 				<input type="submit" id="comment-submit" value="Send" class="g-button" />
+				<?= $form->error($formModel, 'content'); ?>
 			</div>
 		</div>
 	</div>
@@ -65,7 +64,7 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 ?>
 <script lang="javascript">
 	$(document).ready(function() {
-		
+
 		function attachSubmitAction() {
 			jQuery('body')
 			.undelegate('#comment-submit','click')
@@ -83,7 +82,7 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 				return false;
 			});
 		}
-		
+
 		function flashComment(commentName) {
 			var comment = $('.' + commentName);
 			comment.css('background-color', '#ffa');
@@ -91,17 +90,17 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 				backgroundColor: '#fff'
 			}, 3000, 'easeInOutSine');
 		}
-		
+
 		function flashCurrentComment() {
 			var commentName = window.location.hash.substring(1);
 			if (commentName != "")
 				flashComment(commentName)
 		}
-		
+
 		attachSubmitAction();
 		flashCurrentComment();
 	});
-	
+
 	function deleteComment(id) {
 		var commentViewAll = $(".comment-view-all");
 		var url = "<?= $deleteUrl ?>/" + id;

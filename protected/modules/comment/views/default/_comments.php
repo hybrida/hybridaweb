@@ -1,25 +1,33 @@
+<?/*
+
+ * Her er alle css-tags prefixet med en c-. Dette er for å unngå
+ * navnkonflikter fra views lenger oppe.
+
+ */ ?>
+
 <? foreach ($models as $model): ?>
-	<div class="comment comment-<?= $model->id ?>">
+	<div class="c-comment comment-<?= $model->id ?>">
 		<a name="comment-<?= $model->id ?>"></a>
-		<div class="comment-left">
-			<div class="profile-image">
-				<?= Image::profileTag($model->author->imageId, 'xsmall') ?>
-			</div>
+		<div class="c-profileImage">
+			<?= Image::profileTag($model->author->imageId, 'xsmall') ?>
 		</div>
 
-		<div class="comment-right">
-			<div class="comment-title">
+		<div class="c-right">
+			<div class="c-header">
+				<div class="c-author"><?= Html::link($model->author->fullName, $model->author->viewUrl) ?></div>
 				<? if ($model->hasDeleteAccess()): ?>
-					<button class="g-deleteButton deleteButton" style="" onclick="deleteComment(<?= $model->id ?>)">X</button>
-                    <span class="comment-date" style="float: right; margin-top: 5px;">
+					<button
+						class="c-deleteButton"
+						onclick="deleteComment(<?= $model->id ?>)"
+							>x</button>
+                    <div class="c-date">
 				<? else: ?>
-                    <span class="comment-date comment-date-without-delete" style="float: right; margin-top: 5px; margin-right: 32px;">
+                    <div class="c-date c-date-without-delete">
                 <? endif; ?>
-                 <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
-					<?= Html::dateToString($model->timestamp, 'mediumlong') ?></span>
-				<span class="comment-author"><?= Html::link($model->author->fullName, $model->author->viewUrl) ?></span>
+						<?= Html::dateToString($model->timestamp, 'mediumlong') ?>
+					</div>
 			</div>
-			<div class="commentContent">
+			<div class="c-content">
 				<?= $model->content ?>
 			</div>
 		</div>
