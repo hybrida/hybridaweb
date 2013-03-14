@@ -226,7 +226,11 @@ class User extends CActiveRecord {
 	}
 
 	public function getFullName() {
-		return $this->firstName . " " . $this->middleName . " " . $this->lastName;
+		$middle = " " . $this->middleName;
+		if ($this->middleName == "") {
+			$middle = "";
+		}
+		return $this->firstName . $middle . " " . $this->lastName;
 	}
 
 	public function getStudmail() {

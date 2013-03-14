@@ -208,4 +208,20 @@ class UserTest extends CTestCase {
 		$this->assertTrue($user2->isAlumni);
 	}
 
+	public function test_fullName_noMiddleName() {
+		$user = $this->getUser();
+		$user->firstName = "Tore";
+		$user->middleName = "";
+		$user->lastName = "Hansen";
+		$this->assertEquals("Tore Hansen", $user->fullName);
+	}
+
+	public function test_fullName_withMidleName() {
+		$user = $this->getUser();
+		$user->firstName = "Tore";
+		$user->middleName = "Fredrik";
+		$user->lastName = "Hansen";
+		$this->assertEquals("Tore Fredrik Hansen", $user->fullName);
+	}
+
 }
