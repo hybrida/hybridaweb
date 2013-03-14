@@ -10,6 +10,8 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 
 .widget-comment .c-comment {
     padding-left: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .widget-comment .c-comment:nth-child(even) {
@@ -47,7 +49,7 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 
 .widget-comment .c-right {
     float: left;
-    width: 580px;
+    width: 560px;
     padding-left: 20px;
     margin-left: 10px;
 }
@@ -80,4 +82,8 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 
 .widget-comment .c-comment textarea {
     border: 1px solid #888;
+}
+
+.widget-comment .c-content {
+    margin-right: 34px;
 }
