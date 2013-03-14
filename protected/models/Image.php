@@ -145,7 +145,7 @@ class Image extends CActiveRecord {
 			$url = self::getViewUrl($id, $size);
 			return CHtml::image($url, "", $htmlOptions);
 		} catch (FileNotFoundException $e) {
-			
+
 		}
 	}
 
@@ -166,6 +166,9 @@ class Image extends CActiveRecord {
 		}
 		$url = "";
 		switch ($size) {
+			case "xsmall":
+				$url = "unknown_profile_xsmall";
+				break;
 			case "small":
 				$url = "unknown_profile_small";
 				break;
