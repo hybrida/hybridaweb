@@ -23,27 +23,30 @@ class GetController extends Controller {
 	}
 
 	private function getUsersFromSearch($usernameStartsWith) {
-		$username = $this->removeEvilCharacters($usernameStartsWith);
-		$term = "'%" . $username . "%'";
+		$term = $this->createSearchTerm($usernameStartsWith);
 		$concat = "CONCAT(firstName, ' ' , middleName, ' ', lastName)";
 		$concat2 = "CONCAT(firstName, ' ', lastName)";
 		$sql = sprintf(
-				'username LIKE %s OR %s LIKE %s OR %s LIKE %s',
-				$term, $concat, $term, $concat2, $term);
+				'username LIKE :term OR %s LIKE :term OR %s LIKE :term',
+				$concat, $concat2);
 		$criteria = new CDbCriteria();
 		$criteria->condition = $sql;
+		$criteria->params = array(
+			'term' => $term,
+		);
 		$criteria->limit = self::AJAX_LIMIT;
 		$criteria->order = "firstname asc, lastname asc";
 		return User::model()->findAll($criteria);
 	}
 
 	private function getNewsFromSearch($titleLike) {
-		$title = $this->removeEvilCharacters($titleLike);
-		$term = "'%" . $title . "%'";
-		$securitySql = sprintf("status = %d ", Status::PUBLISHED);
-		$newsSql = sprintf("title LIKE %s AND (%s)", $term, $securitySql);
+		$term = $this->createSearchTerm($titleLike);
 		$criteria = new CDbCriteria();
-		$criteria->condition = $newsSql;
+		$criteria->condition = "title LIKE :title AND status = :status";
+		$criteria->params = array(
+			'title' => $term,
+			'status' => Status::PUBLISHED,
+		);
 		$criteria->order = "title asc";
 		$criteria->limit = self::AJAX_LIMIT;
 		$news = News::model()->findAll($criteria);
@@ -51,13 +54,15 @@ class GetController extends Controller {
 	}
 
 	private function getArticlesFromSearch($titleLike) {
-		$title = $this->removeEvilCharacters($titleLike);
-		$term = "'%" . $title . "%'";
-		$articleSql = sprintf("title LIKE %s", $term);
+		$term = $this->createSearchTerm($titleLike);
 		$criteria = new CDbCriteria();
-		$criteria->condition = $articleSql;
+		$criteria->condition = "title LIKE :title";
+		$criteria->params = array(
+			':title' => $term,
+		);
 		$criteria->order = "title asc";
 		$criteria->limit = self::AJAX_LIMIT;
+		//debug($criteria->toArray());
 		$articles =  Article::model()->findAll($criteria);
 		return $this->filterOutNonAccess($articles, "article");
 	}
@@ -71,8 +76,8 @@ class GetController extends Controller {
 		});
 	}
 
-	private function removeEvilCharacters($input) {
-		return preg_replace("/[^a-zæøåA-ZÆØÅ ]*/", "", $input);
+	private function createSearchTerm($input) {
+		return '%' . str_replace(' ', '% %', $input) . '%';
 	}
 
 	public function actionNewsSearch($titleLike) {
