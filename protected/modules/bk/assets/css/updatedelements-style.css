@@ -38,34 +38,34 @@
 #BK-updatedelements-maintable tr:first-child {
     background-color: transparent;
 }
-	
+
 #BK-updatedelements-maintable td input[type=checkbox] { 
 	display: block;
 	position: center; 
 	margin-left:auto; 
 	margin-right:auto;
-	}
-	
+}
+
 /*stil for tabellen med valgmuligheter*/
 
 #BK-updatedelements-selectiontable{
 	text-align: left;
 	width: 50%;
-	}
-	
+}
+
 #BK-updatedelements-selectiontable td{
 	vertical-align: text-top;
-	}
-	
+}
+
 #BK-updatedelements-selectiontable input[type=submit] { 
 	font-weight: bolder;
-        width: 200px;
-        height: 40px;
-	}
-        
+	width: 200px;
+	height: 40px;
+}
+
 /* stil for tabellen med tidspunkter */
 
 #BK-updatedelements-timetable{
 	width: 50%;
-        padding: 10px;
-	}
+	padding: 10px;
+}

@@ -1,7 +1,7 @@
 
-	
+
 /*F�lgende gjelder kun for hovedtabellen*/
-	
+
 #BK-companyoverview-maintable{
     border-collapse: collapse;
     text-align: left;
@@ -37,13 +37,13 @@
 #BK-companyoverview-maintable tr:first-child {
     background-color: transparent;
 }
-        
+
 #BK-companyoverview-aktuell-senere{
     color: #FF9900;
     font-weight: bold;
     text-align: left;
 }
-        
+
 #BK-companyoverview-blir-kontaktet{
     color: #009900;
     font-weight: bold;
@@ -54,7 +54,7 @@
     font-weight: bold;
     text-align: left;
 }
-        
+
 #BK-companyoverview-uaktuell{
     color: #CC0000;
     font-weight: bold;
@@ -62,27 +62,27 @@
 }
 
 /*F�lgende gjelder kun for støttetabellen*/
-	
+
 #BK-companyoverview-supporttable{
-        vertical-align: top;
+	vertical-align: top;
 	width: 100%;
 }
 
 #BK-companyoverview-supporttable-header{
-        text-align: left;
-        padding: 0% 10%;
+	text-align: left;
+	padding: 0% 10%;
 }
-        
+
 #BK-companyoverview-supporttable-element{
-        vertical-align: top;
-        padding: 0% 10%;
+	vertical-align: top;
+	padding: 0% 10%;
 }
 
 /*F�lgende gjelder kun for statistikktabellen*/
-	
+
 #BK-companyoverview-statisticstable{
-        border: none;
-        border-collapse: collapse;
+	border: none;
+	border-collapse: collapse;
 }
 
 #BK-companyoverview-statisticstable td {
@@ -107,6 +107,6 @@
 /*F�lgende gjelder kun for valgtabellen*/
 
 #BK-companyoverview-selectiontable{
-        vertical-align: top;
-        text-align: left;
+	vertical-align: top;
+	text-align: left;
 }

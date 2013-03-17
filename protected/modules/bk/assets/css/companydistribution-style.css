@@ -1,5 +1,5 @@
 /* stil for siden med fordeling av bedrifter */
-        
+
 #BK-companydistribution-maintable{
     border-collapse: collapse;
     text-align: left;
@@ -27,13 +27,13 @@
 #BK-companydistribution-maintable tr:first-child {
     background-color: transparent;
 }
-        
+
 #BK-companydistribution-aktuell-senere{
     color: #FF9900;
     font-weight: bold;
     text-align: left;
 }
-        
+
 #BK-companydistribution-blir-kontaktet{
     color: #009900;
     font-weight: bold;
@@ -44,7 +44,7 @@
     font-weight: bold;
     text-align: left;
 }
-        
+
 #BK-companydistribution-uaktuell{
     color: #CC0000;
     font-weight: bold;

@@ -1,16 +1,16 @@
 /*stil for alle filer som har grensesnitt for � legge til elementer*/
 
 #BK-add-container{
-        border: 2px solid #ccc;
-        border-style: outset;
+	border: 2px solid #ccc;
+	border-style: outset;
 	width: 100%;
-	}
+}
 
 #BK-add-button input[type=submit] { 
 	height: 100px;
 	width: 162px;
 	font-weight: bolder;
-	}
+}
 
 #BK-add-table{
     padding: 10px 15px;
@@ -22,34 +22,34 @@
     padding: 3px 0px;
     width: 50%;
 }
-        
+
 #BK-add-table td{
-        padding: 3px 0px;
+	padding: 3px 0px;
 	width: 50%;
-	}	
+}	
 #BK-add-table select {
 	width: 100%;
-	}
-	
+}
+
 #BK-add-table option[selected] { 
 	background: white; 
-	}
-	
+}
+
 #BK-add-table input[type=text] { 
 	width: 50%; 
-	}
-        
+}
+
 #BK-add-table input[type=textarea] { 
 	width: 100%; 
-        height: 150px;
-	}
-	
+	height: 150px;
+}
+
 #BK-add-table input[type=checkbox] { 
 	margin: 5px;
-	}
-	
+}
+
 #BK-add-table textarea{
 	height: 150px;
 	width: 100%;
 	max-width: 100%;
-	}
+}

@@ -1,17 +1,17 @@
 /*tabellen som holder de øverste kolonnene på plass */
 
 #BK-company-uppertable{
-        padding: 0px 8px;
+	padding: 0px 8px;
 	width: 100%;
-        text-align: justify;
-	}
-        
+	text-align: justify;
+}
+
 #BK-company-uppertable td{
-        height: 100%;
-        padding: 0px 3px;
-        width: 50%; 
-	}
-        
+	height: 100%;
+	padding: 0px 3px;
+	width: 50%; 
+}
+
 #BK-company-column{
     vertical-align: text-top;
     border-width: 2px;
@@ -24,15 +24,15 @@
 /* tabellen som holder all informasjon*/
 
 #BK-company-informationtable{
-        padding: 0px 10px;
-        border-collapse: collapse;
+	padding: 0px 10px;
+	border-collapse: collapse;
 	width: 95%;
-	}
-        
+}
+
 #BK-company-informationtable *{
     border: none;
 }
-	
+
 #BK-company-informationtable td{
     text-align: left;
     width: 50%;
@@ -46,13 +46,13 @@
     padding: 5px;
     border-bottom: 1px solid #ccc;
 }
-        
+
 #BK-company-aktuell-senere{
     color: #FF9900;
     font-weight: bold;
     text-align: left;
 }
-        
+
 #BK-company-blir-kontaktet{
     color: #009900;
     font-weight: bold;
@@ -63,7 +63,7 @@
     font-weight: bold;
     text-align: left;
 }
-        
+
 #BK-company-uaktuell{
     color: #CC0000;
     font-weight: bold;
@@ -92,13 +92,13 @@
 
 #BK-company-presentationtable{
 	width: 100%;
-        text-align: center;
+	text-align: center;
 }
-        
+
 #BK-company-presentationtable *{
     border: none;
 }
-	
+
 #BK-company-presentationtable td {
     border-bottom: 1px solid #ccc;
     padding: 6px 8px;
@@ -120,54 +120,54 @@
 
 
 #BK-company-presentationscontainer{
-        height: 100%;
+	height: 100%;
 	overflow-y: scroll;
-	}
+}
 
 /* kolonnene med redigeringslinker*/
 
 #BK-company-centertable{
-        padding: 0px 8px;
+	padding: 0px 8px;
 	width: 100%;
-        text-align: justify;
-	}
-        
+	text-align: justify;
+}
+
 #BK-company-centertable td{
-        height: 100%;
-        padding: 0px 3px;
-        width: 50%; 
-	}
-	
+	height: 100%;
+	padding: 0px 3px;
+	width: 50%; 
+}
+
 #BK-company-editinglinks{
-        text-align: center;
-	}
-        
+	text-align: center;
+}
+
 /* tabellen som inneholder rammen rundt kommentarområdet */
 
 #BK-company-commenttable{
-        padding: 0px 8px;
+	padding: 0px 8px;
 	width: 100%;
-        text-align: justify;
-	}
-        
+	text-align: justify;
+}
+
 #BK-company-commenttable td{
-        height: 100%;
-        padding: 0px 3px;
-        width: 100%; 
-	}
-        
+	height: 100%;
+	padding: 0px 3px;
+	width: 100%; 
+}
+
 #BK-company-commenttable textarea{
-        height: 150px;
+	height: 150px;
 	width: 99%;
 	max-width: 99%;
-	}
-        
+}
+
 #BK-company-commenttable input[type=submit] {
-    	height: 50px;
+	height: 50px;
 	width: 150px;
 	font-weight: bolder;
-	}
-	
+}
+
 /* tabellen som inneholder alle kommentarene*/
 
 #BK-company-commentstable{
@@ -178,7 +178,7 @@
 
 #BK-company-commentstable td{
 	padding: 8px;
-        border-bottom: 1px solid #fff;
+	border-bottom: 1px solid #fff;
 	border-top: 1px solid #fff;
 	background: #e8edff url('/images/bk/gradback.png') repeat-x;
 }
@@ -186,24 +186,24 @@
 #BK-company-commentstable i{
 	font-size: 16px;
 }
-        
+
 #BK-company-commentscontainer{
-        height: 500px;
+	height: 500px;
 	overflow-y: scroll;
-	}
+}
 
 /* tabellen som inneholder rammen rundt alumniområdet */
 
 #BK-company-graduatetable{
-        padding: 0px 8px;
+	padding: 0px 8px;
 	width: 100%;
-	}
-        
+}
+
 #BK-company-graduatetable td{
-        padding: 0px 3px;
-	}
+	padding: 0px 3px;
+}
 /* tabellen som inneholder alle alumnistudentene*/
-        
+
 #BK-company-graduatestable {
     border-collapse: collapse;
     text-align: left;
@@ -234,6 +234,6 @@
 }
 
 #BK-company-alumnicontainer{
-        height: 400px;
+	height: 400px;
 	overflow-y: scroll;
-	}
+}
