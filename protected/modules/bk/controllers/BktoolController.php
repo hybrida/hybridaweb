@@ -648,7 +648,9 @@ class BktoolController extends Controller {
                         $datecontacted = $_POST['datecontacted'].' 00:00:00';
                     }
 
-                    $bkForms->updateCompanyIKTRingenInformation($id, $_POST['relevance'], $datecontacted);
+                    if (isset($_POST['relevance'])) {
+                        $bkForms->updateCompanyIKTRingenInformation($id, $_POST['relevance'], $datecontacted);
+                    }
 
                     if($bkTool->isCompanyInMembershipDatabase($id) &&
                         isset($_POST['invoicecontact']) &&
