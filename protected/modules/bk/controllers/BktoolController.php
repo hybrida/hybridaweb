@@ -8,13 +8,13 @@ class BktoolController extends Controller {
         protected $bkGroupId = 57;
         protected $industryAssociation = 'I&IKT-ringen';
         protected $foundingYear = 2003;
-        
+
         public function getNumberOfRelevantUpdatesAsString(){
             $bkTool = new Bktool();
             $data['relevantUpdatesInfo'] = $bkTool->getSumOfUpdatesRelevantForCurrentUser();
-            
+
             $sum = 0;
-            
+
             foreach ($data['relevantUpdatesInfo'] as $info) {
                 $sum = $info['sum'];
             }
@@ -25,33 +25,33 @@ class BktoolController extends Controller {
                 return '('.$sum.')';
             }
         }
-        
+
         public function getAllYearsSinceFounding(){
             $year = date('Y');
             $years = array();
-            
+
             while($year >= $this->foundingYear){
                 array_push($years, $year);
                 $year--;
             }
             return $years;
         }
-        
+
         public function isDateValid($dateString)
         {
             $error = false;
-            
+
             if(strlen($dateString) != 10){
                 return $error;
             }
             if($dateString[4] != '-' && $dateString[7] != '-'){
                 return $error;
             }
-            
+
             (int) $year = intval(substr($dateString, 0, 4));
             (int) $month = intval(substr($dateString, 6, 2));
             (int) $date = intval(substr($dateString, 9, 2));
-            
+
             $monthsWithAtLeast31Days = array(1, 3, 5, 7, 8, 10, 12);
             $monthsWithAtLeast30Days = array(1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
             $monthsWithAtLeast29Days = array(1, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12);
@@ -77,20 +77,20 @@ class BktoolController extends Controller {
             if((int) $date == (int) 29 && !in_array((int) $month, $monthsWithAtLeast29Days)){
                 return $error;
             }
-            
+
             return !$error;
         }
 
 	public function actionIndex() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-                
+
                 if(!isset($_GET['orderby'])){
                     $_GET['orderby'] = 'firstName';
                 }
                 if(!isset($_GET['order'])){
                     $_GET['order'] = 'DESC';
-                } 
-                
+                }
+
                 switch($_GET['orderby']){
                     case 'comission':
                         $_SESSION['orderby'] = 'comission';
@@ -122,35 +122,35 @@ class BktoolController extends Controller {
                         $_SESSION['order'] = 'DESC';
                         break;
                 }
-                
+
                 $bkTool = new Bktool();
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, $_SESSION['orderby'], $_SESSION['order']);
                 $data['membersSum'] = $bkTool->getSumOfAllActiveMembersByGroupId($this->bkGroupId);
                 $data['formerMembers'] = $bkTool->getAllFormerMembersByGroupId($this->bkGroupId);
-                
+
 		$this->render('index', $data);
 	}
 
 	public function actionCalendar() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
 		$this->render('calendar');
 	}
 
 	public function actionUpdates() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
                 $bkTool = new Bktool();
 		$data = array();
-                
+
                 if(!isset($_GET['orderby'])){
                     $_GET['orderby'] = 'dateAdded';
                 }
                 if(!isset($_GET['order'])){
                     $_GET['order'] = 'ASC';
-                } 
-                
+                }
+
                 switch($_GET['orderby']){
                     case 'dateAdded':
                         $_SESSION['orderby'] = 'dateAdded';
@@ -179,18 +179,18 @@ class BktoolController extends Controller {
                         $_SESSION['order'] = 'ASC';
                         break;
                 }
-                
+
                 $data['loginInfo'] = $bkTool->getLastLoginCurrentUser();
                 $data['lastUpdateInfo'] = $bkTool->getLatestUpdateTimeStampRelevantForCurrentUser();
                 $data['relevantUpdatesInfo'] = $bkTool->getSumOfUpdatesRelevantForCurrentUser();
                 $data['relevantUpdates'] = $bkTool->getAllUpdatesRelevantForCurrentUser($_SESSION['orderby'], $_SESSION['order']);
-                
+
 		$this->render('updates', $data);
 	}
-        
+
         public function actionDeleteupdateform(){
                $bkForms = new Bkforms();
-               
+
                if(isset($_POST['selectedupdates'])){
                    if(in_array('deleteall', $_POST['selectedupdates'])){
                         $bkForms->deleteAllUpdatesRelevantToCurrentUser();
@@ -201,7 +201,7 @@ class BktoolController extends Controller {
                             $bkForms->deleteUpdateByUpdateId($updateId);
                         endforeach;
                         $this->actionUpdates();
-                   } 
+                   }
                }
                else{
                    $this->actionUpdates();
@@ -210,17 +210,17 @@ class BktoolController extends Controller {
 
 	public function actionCompanyOverview() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
 		$bkTool = new Bktool();
 		$data = array();
-                
+
                 if(!isset($_GET['orderby'])){
                     $_GET['orderby'] = 'companyName';
                 }
                 if(!isset($_GET['order'])){
                     $_GET['order'] = 'DESC';
-                } 
-                
+                }
+
                 switch($_GET['orderby']){
                     case 'status':
                         $_SESSION['orderby'] = 'status';
@@ -255,17 +255,17 @@ class BktoolController extends Controller {
 
 	public function actionGraduates() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
 		$bkTool = new Bktool();
 		$data = array();
-                
+
                 if(!isset($_GET['orderby'])){
                     $_GET['orderby'] = 'firstName';
                 }
                 if(!isset($_GET['order'])){
                     $_GET['order'] = 'DESC';
-                } 
-                
+                }
+
                 switch($_GET['orderby']){
                     case 'graduationYear':
                         $_SESSION['orderby'] = 'graduationYear';
@@ -291,8 +291,8 @@ class BktoolController extends Controller {
                         $_SESSION['order'] = 'DESC';
                         break;
                 }
-                
-                
+
+
 		$data['graduationYears'] = $bkTool->getAllGraduationYears();
                 $data['graduatesByYear'] = $bkTool->getNumberOfGraduatesGroupedByYear();
                 $data['employeesByYear'] = $bkTool->getNumberOfEmployedGraduatesGroupedByYear();
@@ -306,18 +306,18 @@ class BktoolController extends Controller {
 
 	public function actionCompanyDistribution() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
                 $bkTool = new Bktool();
 		$data = array();
                 $data['contactingMembers'] = $bkTool->getMembersByContactingStatus('Blir kontaktet');
                 $data['contactedCompanies'] = $bkTool->getCompaniesByContactingStatus('Blir kontaktet');
-               
+
 		$this->render('companydistribution', $data);
 	}
 
 	public function actionPresentations() {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-                
+
                 $bkTool = new Bktool();
 		$data = array();
                 $data['years'] = $this->getAllYearsSinceFounding();
@@ -326,23 +326,23 @@ class BktoolController extends Controller {
                 $data['oldCompanyEventsSumByYear'] = $bkTool->getSumOfOldCompanyEventsByYear();
                 $data['companyEventsSumByYear'] = $bkTool->getPresentationsSumForAllYears();
                 $data['sumOfPresentationsThisYear'] = 0;
-            
+
 		$this->render('presentations', $data);
 	}
 
         public function actionGraduationyear($id) {
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
                 $bkTool = new Bktool();
 		$data = array();
-                
+
                 if(!isset($_GET['orderby'])){
                     $_GET['orderby'] = 'firstName';
                 }
                 if(!isset($_GET['order'])){
                     $_GET['order'] = 'DESC';
-                } 
-                
+                }
+
                 switch($_GET['orderby']){
                     case 'specialization':
                         $_SESSION['orderby'] = 's.name';
@@ -368,7 +368,7 @@ class BktoolController extends Controller {
                         $_SESSION['order'] = 'DESC';
                         break;
                 }
-                
+
 		$data['graduationYears'] = $bkTool->getAllGraduationYears();
                 $data['graduatesByYear'] = $bkTool->getNumberOfGraduatesGroupedByYear();
                 $data['employeesByYear'] = $bkTool->getNumberOfEmployedGraduatesGroupedByYear();
@@ -380,13 +380,13 @@ class BktoolController extends Controller {
                 $data['graduatelistByYear'] = $bkTool->getGraduatesByYear($id, $_SESSION['orderby'], $_SESSION['order']);
                 $data['graduatesSumByYear'] = $bkTool->getSumOfGraduatesByYear($id);
                 $data['graduationyear'] = $id;
-                
+
 		$this->render('graduationyear', $data);
 	}
-        
+
         public function actionCompany($id){
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
                 $bkTool = new Bktool();
 		$data = array();
                 $data['companyId'] = $id;
@@ -410,29 +410,30 @@ class BktoolController extends Controller {
                 $data['commentsSum'] = $bkTool->getSumOfAllCommentsByCompanyId($id);
                 $data['comments'] = $bkTool->getAllCommentsByCompanyId($id);
                 $data['logo'] = $bkTool->getLogoById($id);
+                $data['priority'] = $bkTool->getPriorityOfCompanyById($id);
                 $data['sumOfAllPresentations'] = 0;
-                
+
                 $this->render('company', $data);
         }
-        
+
         public function actionAddcommentform($id){
                 $bkForms = new Bkforms();
 		$data = array();
-                
+
                 if($bkForms->isInputFieldEmpty($_POST['comment'])){
                     $this->actionCompany($id);
                 }
                 else{
                     $bkForms->addCompanyComment($_POST['comment'], $id);
-                    
+
                     $bkTool = new Bktool();
                     $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                     foreach ($data['members'] as $member) :
                         $bkForms->addCompanyCommentUpdate($id, $member['id']);
                     endforeach;
-                    
+
                     $bkForms->setCompanyAsUpdated($id);
-                    
+
                     $this->actionCompany($id);
                 }
         }
@@ -440,7 +441,7 @@ class BktoolController extends Controller {
 
         public function actionEditcompany($id, $errordata=null){
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
                 $bkTool = new Bktool();
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
@@ -457,10 +458,11 @@ class BktoolController extends Controller {
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 $data['errordata'] = $errordata;
                 $data['logo'] = $bkTool->getLogoById($id);
-                
+                $data['priority'] = $bkTool->getPriorityOfCompanyById($id);
+
                 $this->render('editcompany', $data);
         }
-        
+
         public function actionEditcompanyform($id){
                 $bkForms = new Bkforms();
                 $bkTool = new Bktool();
@@ -479,19 +481,19 @@ class BktoolController extends Controller {
                 $organizationnumber;
                 $membershipfee;
                 $companyName;
-                
+
                 $data['thiscompany'] = $bkTool->getCompanyNameByCompanyId($id);
-                
+
                 $logo = CUploadedFile::getInstanceByName('logo');
                 if ($logo !== null) {
                         $image = Image::uploadAndSave($logo, Yii::app()->user->id);
                         $bkForms->setLogoById($id, $image->id);
                 }
-                    
+
                 foreach ($data['thiscompany'] as $company) :
                     $companyName = $company['companyName'];
                 endforeach;
-                
+
                 if($bkForms->isInputFieldEmpty($_POST['editedcompany'])){
                     $errordata['error'] = true;
                     $errordata['editedcompanyerror'] = 'Bedriftsnavnet mangler';
@@ -502,7 +504,7 @@ class BktoolController extends Controller {
                         $errordata['editedcompanyerror'] = 'Bedriften finnes allerede i databasen';
                     }
                 }
-                
+
                 if(!$bkForms->isInputFieldEmpty($_POST['phonenumber'])){
                     (int) $phonenumber = intval($_POST['phonenumber']);
                     if((int) $phonenumber <= (int) 0){
@@ -510,7 +512,7 @@ class BktoolController extends Controller {
                         $errordata['phonenumbererror'] = 'Ugyldig telefonnummer';
                     }
                 }
-                
+
                 if(!$bkForms->isInputFieldEmpty($_POST['postnumber'])){
                     (int) $postnumber = intval($_POST['postnumber']);
                     if((int) $postnumber <= (int) 0){
@@ -518,18 +520,18 @@ class BktoolController extends Controller {
                         $errordata['postnumbererror'] = 'Ugyldig postnummer';
                     }
                 }
-                
+
                 if($bkForms->isCompanySet($_POST['parentcompanyid'])){
                     $parentCompanyId = $_POST['parentcompanyid'];
                 }
-                
+
                 if(!$bkForms->isInputFieldEmpty($_POST['datecontacted'])){
                     if(!$this->isDateValid($_POST['datecontacted'])){
                         $errordata['error'] = true;
                         $errordata['datecontactederror'] = 'Ugyldig dato';
                     }
                 }
-                
+
                 if(isset($_POST['organizationnumber']) && !$bkForms->isInputFieldEmpty($_POST['organizationnumber'])){
                     (int) $organizationnumber = intval($_POST['organizationnumber']);
                     if((int) $organizationnumber <= (int) 0|| strlen($_POST['organizationnumber']) != 9){
@@ -537,7 +539,7 @@ class BktoolController extends Controller {
                         $errordata['organizationnumbererror'] = 'Ugyldig organisasjonsnummer';
                     }
                 }
-                
+
                 if(isset($_POST['membershipfee']) && !$bkForms->isInputFieldEmpty($_POST['membershipfee'])){
                     (int) $membershipfee = intval($_POST['membershipfee']);
                     if((int) $membershipfee <= (int) 0){
@@ -545,7 +547,7 @@ class BktoolController extends Controller {
                         $errordata['membershipfeeerror'] = 'Ugyldig verdi for medlemskapsavgift';
                     }
                 }
-                
+
                 if(isset($errordata['error'])){
                     $this->actionEditcompany($id, $errordata);
                 }
@@ -586,13 +588,17 @@ class BktoolController extends Controller {
                             }
                         }
                         if(isset($_POST['contactor']) && $bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
-                            $bkForms->addCompanyContactorUpdate($member['id'], $id);         
+                            $bkForms->addCompanyContactorUpdate($member['id'], $id);
                         }
                         if(isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
                             $bkForms->addCompanySpecializationUpdate($member['id'], $id);
                         }
+                        if (isset($_POST['priority']) && $bkForms->hasCompanyPriorityChanged($id, $_POST['priority'])) {
+                            $bkForms->addCompanyPriorityUpdate($member['id'], $id);
+                        }
                     endforeach;
-                    
+
+
                     if(isset($_POST['membership'])){
                         if(in_array("isMember", $_POST['membership'])){
                             if($bkTool->isCompanyInMembershipDatabase($id))
@@ -601,29 +607,29 @@ class BktoolController extends Controller {
                                 {
                                     $bkForms->updateMembershipStartDate($id);
                                 }
-                                
+
                                 $bkForms->nullifyMembershipEndDate($id);
-                            }  
+                            }
                             else
                             {
                                 $bkForms->insertCompanyIKTRingenMembership($id);
                             }
                         }
-                    }                       
+                    }
                     else
                     {
                         if($bkTool->isCompanyInMembershipDatabase($id))
                         {
                             $bkForms->setMembershipEndDate($id);
-                        }                             
+                        }
                     }
-                    
+
                     if(isset($_POST['contactor']) && $bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
                         $bkForms->updateCompanyContactor($id, $_POST['contactor']);
                     }
                     if(isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
                         $bkForms->nullifyAllCompanySpecializationsByCompanyId($id);
-                        
+
                         foreach ($_POST['specializations'] as $specializationId) :
                             $bkForms->insertCompanySpecialization($id, $specializationId);
                         endforeach;
@@ -631,19 +637,19 @@ class BktoolController extends Controller {
                     if(!isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, array())){
                         $bkForms->nullifyAllCompanySpecializationsByCompanyId($id);
                     }
-                    
-                    $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'], 
-                                $_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status']);
-                    
+
+                    $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'],
+                                $_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status'], $_POST['priority']);
+
                     if($bkForms->isInputFieldEmpty($_POST['datecontacted'])){
                         $datecontacted = '0000-00-00 00:00:00';
                     }
                     else {
                         $datecontacted = $_POST['datecontacted'].' 00:00:00';
                     }
-                    
+
                     $bkForms->updateCompanyIKTRingenInformation($id, $_POST['relevance'], $datecontacted);
-                    
+
                     if($bkTool->isCompanyInMembershipDatabase($id) &&
                         isset($_POST['invoicecontact']) &&
                         isset($_POST['organizationnumber']) &&
@@ -652,14 +658,14 @@ class BktoolController extends Controller {
                     {
                         $bkForms->updateInvoiceInformation($id, $_POST['invoicecontact'], $_POST['organizationnumber'], $_POST['invoiceaddress'], $_POST['membershipfee']);
                     }
-                    
+
                     $this->actionCompany($id);
                 }
         }
-        
+
         public function actionAddcompany($errordata=null){
                 $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
                 $bkTool = new Bktool();
 		$data = array();
                 $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstName', 'ASC');
@@ -667,10 +673,10 @@ class BktoolController extends Controller {
                 $data['specializationNames'] = $bkTool->getAllSpecializationNames();
                 $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
                 $data['errordata'] = $errordata;
-                
-                $this->render('addcompany', $data); 
+
+                $this->render('addcompany', $data);
         }
-        
+
         public function actionAddcompanyform(){
                 $bkForms = new Bkforms();
                 $bkTool = new Bktool();
@@ -685,7 +691,7 @@ class BktoolController extends Controller {
                 $parentCompanyId = 0;
                 $datecontacted;
                 $companyId;
-                
+
                 if($bkForms->isInputFieldEmpty($_POST['addedcompany'])){
                     $errordata['error'] = true;
                     $errordata['addedcompanyerror'] = 'Bedriftsnavnet mangler';
@@ -696,7 +702,7 @@ class BktoolController extends Controller {
                         $errordata['addedcompanyerror'] = 'Bedriften finnes allerede i databasen';
                     }
                 }
-                
+
                 if(!$bkForms->isInputFieldEmpty($_POST['phonenumber'])){
                     (int) $phonenumber = intval($_POST['phonenumber']);
                     if((int) $phonenumber <= (int) 0){
@@ -704,7 +710,7 @@ class BktoolController extends Controller {
                         $errordata['phonenumbererror'] = 'Ugyldig telefonnummer';
                     }
                 }
-                
+
                 if(!$bkForms->isInputFieldEmpty($_POST['postnumber'])){
                     (int) $postnumber = intval($_POST['postnumber']);
                     if((int) $postnumber <= (int) 0){
@@ -712,62 +718,62 @@ class BktoolController extends Controller {
                         $errordata['postnumbererror'] = 'Ugyldig postnummer';
                     }
                 }
-                
+
                 if(!$bkForms->isInputFieldEmpty($_POST['datecontacted'])){
                     if(!$this->isDateValid($_POST['datecontacted'])){
                         $errordata['error'] = true;
                         $errordata['datecontactederror'] = 'Ugyldig dato';
                     }
                 }
-                
+
                 if($bkForms->isCompanySet($_POST['parentcompanyid'])){
                     $parentCompanyId = $_POST['parentcompanyid'];
                 }
-                
+
                 if(isset($errordata['error'])){
                     $this->actionAddcompany($errordata);
                 }
                 else {
-                    $bkForms->insertCompanyInformation($_POST['addedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'], 
+                    $bkForms->insertCompanyInformation($_POST['addedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'],
                                 $_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status']);
-                    
-                    
+
+
                     $data['thiscompany'] = $bkTool->getCompanyIdByCompanyName($_POST['addedcompany']);
-                    
+
                     foreach ($data['thiscompany'] as $company) :
                         $companyId = $company['companyID'];
                     endforeach;
-                    
+
                     if(isset($_POST['contactor'])){
                         $bkForms->updateCompanyContactor($companyId, $_POST['contactor']);
                     }
-                    
+
                     if(isset($_POST['membership'])){
                         if(in_array("isMember", $_POST['membership'])){
                             $bkForms->insertCompanyIKTRingenMembership($companyId);
                         }
                     }
-                    
+
                     if($bkForms->isInputFieldEmpty($_POST['datecontacted'])){
                         $datecontacted = '0000-00-00 00:00:00';
                     }
                     else {
                         $datecontacted = $_POST['datecontacted'].' 00:00:00';
                     }
-                    
+
                     $bkForms->insertCompanyIKTRingenInformation($companyId, $_POST['relevance'], $datecontacted);
-                    
+
                     if(isset($_POST['specializations'])){
                         foreach ($_POST['specializations'] as $specializationId) :
                             $bkForms->insertCompanySpecialization($companyId, $specializationId);
                         endforeach;
                     }
-                    
+
                     $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
                     foreach ($data['members'] as $member) :
                         $bkForms->addCompanyInsertionUpdate($member['id'], $companyId);
                         $bkForms->addCompanyStatusUpdate($member['id'], $companyId);
-                        
+
                         if(!$bkForms->isInputFieldEmpty($_POST['mail'])){
                             $bkForms->addCompanyMailUpdate($member['id'], $companyId);
                         }
@@ -805,7 +811,7 @@ class BktoolController extends Controller {
                             $bkForms->addCompanySpecializationUpdate($member['id'], $companyId);
                         }
                     endforeach;
-                    
+
                     $this->actionCompanyOverview();
                 }
         }
@@ -821,17 +827,17 @@ class BktoolController extends Controller {
                 $data['graduateInfo'] = $bkTool->getGraduateInfoByUserId($id);
                 $data['companiesList'] = $bkTool->getCompaniesDropDownArray();
                 $data['errordata'] = $errordata;
-                
-                $this->render('editgraduate', $data); 
+
+                $this->render('editgraduate', $data);
         }
-        
+
         public function actionEditgraduateform($id){
                 $bkForms = new Bkforms();
                 $bkTool = new Bktool();
 		$data = array();
 		$errordata = array();
-                
-                if(isset($errordata['error'])){ 
+
+                if(isset($errordata['error'])){
                     $this->actionEditgraduate($id, $errordata);
                 }
                 else{
@@ -840,9 +846,9 @@ class BktoolController extends Controller {
                     $bkForms->updateGraduateWorkDescription($id, $_POST['workdescription']);
                     $bkForms->updateGraduateWorkPlace($id, $_POST['workplace']);
                     $bkForms->updateGraduateGraduationYear($id, $_POST['graduationyear']);
-                    
+
                     if($bkForms->hasGraduateWorkCompanyChanged($id, $_POST['workcompanyid'])){
-                            
+
                         $bkForms->updateGraduateWorkCompany($id, $_POST['workcompanyid']);
 
                         if($bkForms->isCompanySet($_POST['workcompanyid'])){
@@ -852,20 +858,20 @@ class BktoolController extends Controller {
                                 endforeach;
                         }
                 }
-                    
+
                 $this->actionGraduates();
             }
         }
-        
+
         public function actionEditmembers($errordata=null) {
             $this->setPageTitle($this->getNumberOfRelevantUpdatesAsString().' '.$this->organisationName.'-BK');
-            
+
             if(!isset($_GET['orderby'])){
                 $_GET['orderby'] = 'firstName';
             }
             if(!isset($_GET['order'])){
                 $_GET['order'] = 'DESC';
-            } 
+            }
 
             switch($_GET['orderby']){
                 case 'comission':
@@ -907,14 +913,14 @@ class BktoolController extends Controller {
 
             $this->render('editmembers', $data);
         }
-        
+
         public function actionEditmembersform() {
             $bkTool = new Bktool();
             $bkForms = new Bkforms();
             $data = array();
             $errordata = array();
             $i = 0;
-            
+
             if(isset($_POST['selectedmembers'])){
                 foreach ($_POST['selectedmembers'] as $memberId) :
                     $bkForms->deleteMemberById($memberId, $this->bkGroupId);
@@ -922,7 +928,7 @@ class BktoolController extends Controller {
                     $bkForms->deleteAllUpdatesRelevantToUser($memberId);
                 endforeach;
             }
-            
+
             foreach ($_POST['addedmembers'] as $memberId) :
                 if($memberId != 0){
                     if(!$bkForms->isAlreadyGroupMember($memberId, $this->bkGroupId)){
@@ -937,7 +943,7 @@ class BktoolController extends Controller {
                 }
             $i += 1;
             endforeach;
-            
+
             $this->actionEditmembers($errordata);
         }
 
@@ -951,11 +957,11 @@ class BktoolController extends Controller {
 
             $this->render('editmember', $data);
         }
-        
+
         public function actionEditmemberform($id) {
             $bkForms = new Bkforms();
             $errordata = array();
-            
+
             if($_POST['start'] != ''){
                 if(!strtotime($_POST['start'])){
                     $errordata['error'] = true;
@@ -966,12 +972,12 @@ class BktoolController extends Controller {
                 $errordata['error'] = true;
                 $errordata['starttimeerror'] = 'Medlemskapet må starte fra en dato.';
             }
-            
+
             if($_POST['end'] != ''){
                 if(strtotime($_POST['end'])){
                     if(date("Y-m-d", strtotime($_POST['end'])) < date("Y-m-d", strtotime($_POST['start']))){
                         $errordata['error'] = true;
-                        $errordata['endtimeerror'] = 'Ugyldig sluttdato, sluttdato må være etter startdato.'; 
+                        $errordata['endtimeerror'] = 'Ugyldig sluttdato, sluttdato må være etter startdato.';
                     }
                 }
                 else{
@@ -979,7 +985,7 @@ class BktoolController extends Controller {
                     $errordata['endtimeerror'] = 'Ugyldig sluttdato, bruk formatet YYYY-MM-DD.';
                 }
             }
-            
+
             if(isset($errordata['error'])){
                 $this->actionEditmember($id, $errordata);
             }

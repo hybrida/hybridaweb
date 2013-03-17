@@ -40,15 +40,15 @@
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
                         <input name='phonenumber' type="text"
-                               
+
                             <? if($info['phoneNumber'] != 0){ ?>
                                 value='<?= $info['phoneNumber'] ?>'
                             <? } ?>
-                                
+
                         maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['phonenumbererror'] ?></u></i></div>
                     <? endforeach ?>
-		</th>                
+		</th>
             </tr>
             <tr>
 		<th>Adresse</th>
@@ -70,12 +70,12 @@
 		<th>Postnummer</th>
 		<th>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <input name='postnumber' type="text" 
-                               
+                        <input name='postnumber' type="text"
+
                             <? if($info['postnumber'] != 0){ ?>
-                                value='<?= $info['postnumber'] ?>' 
+                                value='<?= $info['postnumber'] ?>'
                             <? } ?>
-                               
+
                         maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['postnumbererror'] ?></u></i></div>
                     <? endforeach ?>
@@ -96,10 +96,17 @@
                         <input name="homepage" type="text" class="textfield" value='<?= $info['homepage'] ?>' maxlength="255" /> Characters (255)
                     <? endforeach ?>
 		</th>
+            <tr>
+                <th>Prioritet</th>
+                <td>
+                    <input id="priority" name="priority" type="range" value="<?=$priority ?>" min="0" max="10">
+                    <strong><span id="priorityValue"></span></strong>
+                </td>
+            </tr>
             </tr>
         </table>
     </div>
-    
+
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">
@@ -143,7 +150,7 @@
             </tr>
         </table>
     </div>
-    
+
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">
@@ -151,14 +158,14 @@
                 <th>Medlem av <?= $this->industryAssociation ?></th>
                 <th>
                     <input type="checkbox" name="membership[]" value="isMember"
-                        <?= ($isMember ? "checked" : ""); ?>              
+                        <?= ($isMember ? "checked" : ""); ?>
                     />
                 </th>
             </tr>
             <tr>
                 <th>Relevans for <?= $this->industryAssociation ?></th>
                 <th>
-                    <select name="relevance" size="3">	
+                    <select name="relevance" size="3">
                         <option value="Høy" style="color:#00688B;"
                             <? foreach($iktRingenInfo as $info) : ?>
                                 <?= ("Høy" == $info['relevance'] ? "selected" : ""); ?>
@@ -170,13 +177,13 @@
                                 <?= ("Middels" == $info['relevance'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Middels
-			</option>				
+			</option>
 			<option value="Lav" style="color:#B2DFEE;"
                             <? foreach($iktRingenInfo as $info) : ?>
                                 <?= ("Lav" == $info['relevance'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Lav
-			</option>					
+			</option>
                     </select>
 		</th>
             </tr>
@@ -185,7 +192,7 @@
                <th>
                    <input name="datecontacted" type="text" class="textfield"
                     <? foreach($iktRingenInfo as $info) : ?>
-                         value='<?= substr($info['dateContacted'], 0, 10) ?>' 
+                         value='<?= substr($info['dateContacted'], 0, 10) ?>'
                     <? endforeach ?>
                     maxlength="10" /> (YYYY-MM-DD)
                    <div id="BK-add-errormessage"><i><u><?= $errordata['datecontactederror'] ?></u></i></div>
@@ -193,7 +200,7 @@
             </tr>
         </table>
     </div>
-    
+
     <? if($isMember){ ?>
         <br/>
         <div id="BK-add-container">
@@ -203,7 +210,7 @@
                     <th>
                         <input name="invoicecontact" type="text" class="textfield"
                         <? foreach($iktRingenMembershipInfo as $info) : ?>
-                             value='<?= $info['invoiceContact'] ?>' 
+                             value='<?= $info['invoiceContact'] ?>'
                         <? endforeach ?>
                         maxlength="255" /> Characters (255)
                     </th>
@@ -213,11 +220,11 @@
                    <th>
                         <? foreach($iktRingenMembershipInfo as $info) : ?>
                         <input name='organizationnumber' type="text"
-                               
+
                             <? if($info['organizationNumber'] != 0){ ?>
                                 value='<?= $info['organizationNumber'] ?>'
                             <? } ?>
-                                
+
                         maxlength="9" class="textfield"/> Integer > 0 (9)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['organizationnumbererror'] ?></u></i></div>
                          <? endforeach ?>
@@ -228,7 +235,7 @@
                     <th>
                         <input name="invoiceaddress" type="text" class="textfield"
                         <? foreach($iktRingenMembershipInfo as $info) : ?>
-                             value='<?= $info['invoiceAddress'] ?>' 
+                             value='<?= $info['invoiceAddress'] ?>'
                         <? endforeach ?>
                         maxlength="255" /> Characters (255)
                     </th>
@@ -238,11 +245,11 @@
                     <th>
                         <? foreach($iktRingenMembershipInfo as $info) : ?>
                         <input name='membershipfee' type="text"
-                               
+
                             <? if($info['membershipFee'] != 0){ ?>
                                 value='<?= $info['membershipFee'] ?>'
                             <? } ?>
-                                
+
                         maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
                         <div id="BK-add-errormessage"><i><u><?= $errordata['membershipfeeerror'] ?></u></i></div>
                          <? endforeach ?>
@@ -252,7 +259,7 @@
             </table>
         </div>
     <? } ?>
-    
+
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">
@@ -261,18 +268,18 @@
 		<th>
                     <? foreach($specializationNames as $name) : ?>
                         <input type="checkbox" name="specializations[]" value="<?= $name['id'] ?>"
-                                        
+
                             <? foreach($relevantSpecializations as $specialization) : ?>
                                 <?= ($name['id'] == $specialization['specializationId'] ? "checked" : ""); ?>
                             <? endforeach ?>
-                                        
+
                         /><?= $name['name'] ?><br/>
-                    <? endforeach ?> 
+                    <? endforeach ?>
 		</th>
             </tr>
         </table>
     </div>
-    
+
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">
@@ -281,31 +288,31 @@
 		<th>
                     <? foreach($membersSum as $info) : ?>
                         <select name="contactor" size="<?= $info['sum'] ?>">
-                            
+
                             <? foreach($members as $member) : ?>
                                 <option value="<?= $member['id'] ?>"
-                                        
+
                                     <? foreach($contactor as $info) : ?>
                                         <?= ($member['id'] == $info['id'] ? "selected" : ""); ?>
                                     <? endforeach ?>
-                                        
+
                                 ><?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?></option>
-                            <? endforeach ?> 
-                                
+                            <? endforeach ?>
+
                     <? endforeach ?>
                         </select>
                 </th>
             </tr>
         </table>
     </div>
-    
+
     <br/>
     <div id="BK-add-container">
         <table id="BK-add-table">
             <tr>
                 <th>Status</br>("Ikke kontaktet" er standardvalg i databasen)</th>
                 <th>
-                    <select name="status" size="4">	
+                    <select name="status" size="4">
                         <option value="Aktuell senere" style="color:#FF9900;"
                             <? foreach($status as $info) : ?>
                                 <?= ("Aktuell senere" == $info['status'] ? "selected" : ""); ?>
@@ -317,28 +324,42 @@
                                 <?= ("Blir kontaktet" == $info['status'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Blir kontaktet
-			</option>				
+			</option>
 			<option value="Ikke kontaktet"
                             <? foreach($status as $info) : ?>
                                 <?= ("Ikke kontaktet" == $info['status'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Ikke kontaktet
-			</option>	
+			</option>
 			<option value="Uaktuell" style="color:#CC0000;"
                             <? foreach($status as $info) : ?>
                                 <?= ("Uaktuell" == $info['status'] ? "selected" : ""); ?>
                             <? endforeach ?>
                             >Uaktuell
-			</option>					
+			</option>
                     </select>
 		</th>
             </tr>
         </table>
     </div>
-    
+
     <br/>
     <p id="BK-add-button" align="center" >
         <input type="submit" name="Submit" value="Utfør endringer" />
     </p>
 </form>
 </p>
+
+<script>
+    var priorityRange = document.getElementById('priority');
+    var priorityValue = document.getElementById('priorityValue');
+
+    priorityValue.innerHTML = priorityRange.value;
+
+    var onChange = function(e){
+        var value = e.srcElement.value;
+        priorityValue.innerHTML = value;
+    };
+
+    priorityRange.addEventListener("change", onChange, false);
+</script>

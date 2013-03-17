@@ -6,7 +6,7 @@
 	<?= Image::tag($logo, "sidebar"); ?>
 </div>
 <? endif; ?>
- 
+
 <div style="float: left;">
 	<h1>
             <?= $this->title ?>
@@ -28,7 +28,7 @@
                 <th>Mailadresse</th>
                 <td>
                     <? foreach($companyContactInfo as $info) : ?>
-                        <a href="mailto:<?= $info['mail'] ?>"><?= $info['mail'] ?></a> 
+                        <a href="mailto:<?= $info['mail'] ?>"><?= $info['mail'] ?></a>
                     <? endforeach ?>
                 </td>
             </tr>
@@ -165,21 +165,25 @@
                     <? endforeach ?>
                 </td>
             </tr>
+            <tr>
+                <th>Prioritet</th>
+                <td><?= $priority ?></td>
+            </tr>
         </table>
         </p>
     </td>
     <td id="BK-company-column">
             <div id="BK-company-presentationscontainer">
-            <? foreach($presentationsCount as $count) : 
+            <? foreach($presentationsCount as $count) :
                 $sumOfAllPresentations += $count['sum'];
             endforeach ?>
-                
-            <? foreach($oldPresentationsCount as $count) : 
+
+            <? foreach($oldPresentationsCount as $count) :
                 $sumOfAllPresentations += $count['sum'];
             endforeach ?>
-            
+
                 <h3>Registrerte bedriftspresentasjoner (<?= $sumOfAllPresentations ?>)</h3>
-                
+
                 <table id="BK-company-presentationtable">
                     <tr>
                         <th>Dato</th>
@@ -193,7 +197,7 @@
                             <? } ?>
                         </td></tr>
                     <? endforeach ?>
-                        
+
                     <? foreach($oldPresentationDates as $date) : ?>
                         <tr><td><?= $date['date'] ?></td></tr>
                     <? endforeach ?>
@@ -222,7 +226,7 @@
                 <tr>
                     <th>Relevans for <?= $this->industryAssociation ?></th>
                         <? foreach($iktRingenInfo as $info) : ?>
-                            
+
                             <? switch ($info['relevance']){
                                 case "Høy": ?>
                                     <td id ="BK-company-high-relevance">
@@ -236,7 +240,7 @@
                                 default: ?>
                                     <td>
                             <? } ?>
-                        
+
                             <?= $info['relevance'] ?>
                         <? endforeach ?>
                     </td>
@@ -251,7 +255,7 @@
                 </tr>
                 </table>
             </p>
-            
+
             <? if($isMember){ ?>
             <p>
             <table id="BK-company-informationtable">
@@ -361,7 +365,7 @@
 
                 <? foreach($employedGraduates as $graduate) : ?>
 
-                    <tr> 
+                    <tr>
                         <td><?= Image::profileTag($graduate['imageId'], 'mini') ?></td>
                         <td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
                         <td><?=CHtml::link($graduate['graduationYear'], array('graduationyear?id='.$graduate['graduationYear']))?></td>
