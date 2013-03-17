@@ -97,14 +97,6 @@
                     <? endforeach ?>
 		</th>
             </tr>
-
-            <tr>
-                <th>Prioritet</th>
-                <td>
-                    <input id="priority" name="priority" type="range" value="<?=$priority ?>" min="0" max="10">
-                    <strong><span id="priorityValue"></span></strong>
-                </td>
-            </tr>
         </table>
     </div>
     
@@ -193,9 +185,10 @@
                <th>
                    <input name="datecontacted" type="text" class="textfield"
                     <? foreach($iktRingenInfo as $info) : ?>
-                         value='<?= $info['dateContacted'] ?>' 
+                         value='<?= substr($info['dateContacted'], 0, 10) ?>' 
                     <? endforeach ?>
                     maxlength="10" /> (YYYY-MM-DD)
+                   <div id="BK-add-errormessage"><i><u><?= $errordata['datecontactederror'] ?></u></i></div>
                 </th>
             </tr>
         </table>
@@ -349,17 +342,3 @@
     </p>
 </form>
 </p>
-
-<script>
-    var priorityRange = document.getElementById('priority');
-    var priorityValue = document.getElementById('priorityValue');
-    
-    priorityValue.innerHTML = priorityRange.value;
-
-    var onChange = function(e){
-        var value = e.srcElement.value;
-        priorityValue.innerHTML = value;
-    };
-
-    priorityRange.addEventListener("change", onChange, false);
-</script>

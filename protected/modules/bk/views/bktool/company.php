@@ -165,11 +165,6 @@
                     <? endforeach ?>
                 </td>
             </tr>
-
-            <tr>
-                <th>Prioritet</th>
-                <td><?= $priority ?></td>
-            </tr>
         </table>
         </p>
     </td>
@@ -226,7 +221,6 @@
                 </tr>
                 <tr>
                     <th>Relevans for <?= $this->industryAssociation ?></th>
-                    <td>
                         <? foreach($iktRingenInfo as $info) : ?>
                             
                             <? switch ($info['relevance']){
@@ -251,7 +245,7 @@
                     <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
                     <td>
                         <? foreach($iktRingenInfo as $info) : ?>
-                            <?= $info['dateContacted'] ?>
+                            <?= substr($info['dateContacted'], 0, 10) ?>
                         <? endforeach ?>
                     </td>
                 </tr>
