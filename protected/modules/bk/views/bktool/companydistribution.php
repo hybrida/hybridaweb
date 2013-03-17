@@ -19,7 +19,7 @@
         <p>
         <table id="BK-companydistribution-maintable">
             <tr>
-                <th>Nr.</th><th>Bedriftsnavn</th><th>Status</th><th>Sist tildelt</th><th>Sist oppdatert</th>
+                <th>Nr.</th><th>Prioritet</th><th>Bedriftsnavn</th><th>Status</th><th>Sist tildelt</th><th>Sist oppdatert</th>
             </tr>
             
             <? $counter = 1; ?>
@@ -28,6 +28,7 @@
                 <? if($company['id'] == $member['id']){ ?>
                     <tr>
                         <td><?= $counter ?></td>
+                        <td><?= $company['priority'] ?></td>
                         <td><?=CHtml::link($company['companyName'], array('company?id='.$company['companyID']))?></td>
                         <? switch ($company['status']){
                                 case "Aktuell senere": ?>

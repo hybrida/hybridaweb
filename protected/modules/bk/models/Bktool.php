@@ -257,8 +257,8 @@ class BkTool {
 		$data = array(
 			'status' => $status
 		);
-		$sql = "SELECT id, companyID, companyName, status, dateAssigned, dateUpdated FROM user LEFT JOIN bk_company 
-				ON id = contactorID WHERE status = :status ORDER BY firstName ASC, companyName ASC";
+		$sql = "SELECT id, companyID, companyName, status, dateAssigned, dateUpdated, priority FROM user LEFT JOIN bk_company 
+				ON id = contactorID WHERE status = :status ORDER BY priority DESC, companyName ASC";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
