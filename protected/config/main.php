@@ -132,6 +132,8 @@ return array(
 				'kalender' => '/calendar/default/index',
 				'test' => 'dev/default/test',
 				'html' => 'dev/default/html',
+
+				'dev/login/<id:\w+>' => 'dev/default/login',
 				'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
 				'<module:(dev|ajax)>/<action:\w+>' => '<module>/default/<action>',
 				'<controller:\w+>/<id:\d+>' => '<controller>/view',
