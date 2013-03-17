@@ -64,7 +64,7 @@
 						<input type="text" id="searchField" placeholder="Søk"/>
 					</div>
  				</div>
-				<br clear="all" />
+				<div style="clear: both"></div>
 				<div class="layout-headBottom">
 					<div class="layout-menu">
 						<nav>

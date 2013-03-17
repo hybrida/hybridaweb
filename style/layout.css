@@ -22,9 +22,6 @@ a {
 	margin:0 auto;
 }
 
-.layout-head .layout-banner {
-}
-
 .layout-head img {
 	float: left;
 	border: 0;
@@ -57,7 +54,7 @@ a {
 }
 
 .layout-rightBar  {
-	width: 249px;
+	width: 247px;
 	border-left: 1px solid #ddd;
 	float:left;
 	margin-left: -1px;
@@ -70,7 +67,6 @@ a {
 .layout-search {
 	float: right;
 	padding-top: 3em;
-	padding-right: 0em;
 }
 
 .layout-search input[type="text"] {
