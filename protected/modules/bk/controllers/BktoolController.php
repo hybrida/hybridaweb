@@ -410,6 +410,7 @@ class BktoolController extends Controller {
 		$data['commentsSum'] = $bkTool->getSumOfAllCommentsByCompanyId($id);
 		$data['comments'] = $bkTool->getAllCommentsByCompanyId($id);
 		$data['logo'] = $bkTool->getLogoById($id);
+		$data['priority'] = $bkTool->getPriorityOfCompanyById($id);
 		$data['sumOfAllPresentations'] = 0;
 		
 		$this->render('company', $data);
@@ -457,6 +458,7 @@ class BktoolController extends Controller {
 		$data['specializationNames'] = $bkTool->getAllSpecializationNames();
 		$data['errordata'] = $errordata;
 		$data['logo'] = $bkTool->getLogoById($id);
+		$data['priority'] = $bkTool->getPriorityOfCompanyById($id);
 		
 		$this->render('editcompany', $data);
 	}
@@ -522,7 +524,7 @@ class BktoolController extends Controller {
 		}
 		else{
 		    $data['members'] = $bkTool->getAllActiveMembersByGroupId($this->bkGroupId, 'firstname', 'ASC');
-		    foreach ($data['members'] as $member) :
+		    foreach ($data['members'] as $member) {
 
 			if($bkForms->hasCompanyNameChanged($id, $_POST['editedcompany'])){
 			    $bkForms->addCompanyNameUpdate($member['id'], $id);
@@ -562,7 +564,11 @@ class BktoolController extends Controller {
 			if(isset($_POST['specializations']) && $bkForms->hasCompanySpecializationsChanged($id, $_POST['specializations'])){
 			    $bkForms->addCompanySpecializationUpdate($member['id'], $id);
 			}
-		    endforeach;
+			
+			if (isset($_POST['priority']) && $bkForms->hasCompanyPriorityChanged($id, $_POST['priority'])) {
+				$bkForms->addCompanyPriorityUpdate($member['id'], $id);
+			}
+		    }
 		    
 		    if(isset($_POST['contactor']) && $bkForms->hasCompanyContactorChanged($id, $_POST['contactor'])){
 			$bkForms->updateCompanyContactor($id, $_POST['contactor']);
@@ -579,7 +585,9 @@ class BktoolController extends Controller {
 		    }
 		    
 		    $bkForms->updateCompanyInformation($id, $_POST['editedcompany'], $_POST['mail'], $_POST['phonenumber'], $_POST['address'], 
-				$_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status']);
+				$_POST['postbox'], $_POST['postnumber'], $_POST['postplace'], $_POST['homepage'], $parentCompanyId, $_POST['status'],
+				$_POST['priority']
+				);
 		    
 		    $this->actionCompany($id);
 		}

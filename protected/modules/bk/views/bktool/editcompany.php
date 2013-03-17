@@ -97,6 +97,14 @@
                     <? endforeach ?>
 		</th>
             </tr>
+
+            <tr>
+                <th>Prioritet</th>
+                <td>
+                    <input id="priority" name="priority" type="range" value="<?=$priority ?>" min="0" max="10">
+                    <strong><span id="priorityValue"></span></strong>
+                </td>
+            </tr>
         </table>
     </div>
     
@@ -341,3 +349,17 @@
     </p>
 </form>
 </p>
+
+<script>
+    var priorityRange = document.getElementById('priority');
+    var priorityValue = document.getElementById('priorityValue');
+    
+    priorityValue.innerHTML = priorityRange.value;
+
+    var onChange = function(e){
+        var value = e.srcElement.value;
+        priorityValue.innerHTML = value;
+    };
+
+    priorityRange.addEventListener("change", onChange, false);
+</script>

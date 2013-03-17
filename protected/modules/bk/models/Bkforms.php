@@ -521,6 +521,21 @@ class Bkforms {
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
 	}
+
+	public function addCompanyPriorityUpdate($relevantUserId, $companyId) {
+		$this->pdo = Yii::app()->db->getPdoInstance();
+
+		$data = array(
+			'companyId' => $companyId,
+			'currentUserId' => Yii::app()->user->id,
+			'relevantUserId' => $relevantUserId
+		);
+		$sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded) 
+		VALUES (:relevantUserId, :companyId, 'Bedriften har endret prioritet', :currentUserId, now())";
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);	
+	}
 	
 	public function setCompanyAsUpdated($companyId){
 		$this->pdo = Yii::app()->db->getPdoInstance();
@@ -534,7 +549,7 @@ class Bkforms {
 		$query->execute($data);
 	}
 	
-	public function updateCompanyInformation($companyId, $companyName, $mail, $phonenumber, $address, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status){
+	public function updateCompanyInformation($companyId, $companyName, $mail, $phonenumber, $address, $postbox, $postnumber, $postplace, $homepage, $parentCompanyId, $status, $priority){
 				$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array(
@@ -549,10 +564,12 @@ class Bkforms {
 			'homepage' => $homepage,
 			'parentCompanyId' => $parentCompanyId,
 			'status' => $status,
+			'priority' => $priority,
 			'updatedById' => Yii::app()->user->id
 		);
 		$sql = "UPDATE bk_company SET companyName = :companyName, mail = :mail, phoneNumber = :phonenumber, address = :address, postbox = :postbox,
 				postnumber = :postnumber, postplace = :postplace, homepage = :homepage, subgroupOfID = :parentCompanyId, status = :status,
+				priority = :priority,
 				updatedByID = :updatedById, dateUpdated = now() WHERE companyID = :companyId";
 
 		$query = $this->pdo->prepare($sql);
@@ -804,6 +821,26 @@ class Bkforms {
 		
 		foreach ($data as $company) :
 			if($company['status'] != $status){
+				return true;
+			}
+		endforeach;
+	}
+
+	public function hasCompanyPriorityChanged($companyId, $priority) {
+		$this->pdo = Yii::app()->db->getPdoInstance();
+
+		$data = array(
+			'companyId' => $companyId
+		);
+		$sql = "SELECT priority FROM bk_company WHERE companyID = :companyId";
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
+
+		$data = $query->fetchAll(PDO::FETCH_ASSOC);
+		
+		foreach ($data as $company) :
+			if($company['priority'] != $priority){
 				return true;
 			}
 		endforeach;

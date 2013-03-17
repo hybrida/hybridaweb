@@ -165,6 +165,11 @@
                     <? endforeach ?>
                 </td>
             </tr>
+
+            <tr>
+                <th>Prioritet</th>
+                <td><?= $priority ?></td>
+            </tr>
         </table>
         </p>
     </td>

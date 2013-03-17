@@ -977,4 +977,19 @@ class BkTool {
 			return true;
 		}
 	}
+
+	public function getPriorityOfCompanyById($id) {
+		$this->pdo = Yii::app()->db->getPdoInstance();
+		$data = array(
+			'companyId'=> $id,
+		);
+
+		$sql = "SELECT priority
+				FROM bk_company WHERE companyId = :companyId";
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
+
+		$data = $query->fetch(PDO::FETCH_ASSOC);
+		return $data['priority'];
+	}
 }

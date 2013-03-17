@@ -72,6 +72,7 @@ CREATE TABLE IF NOT EXISTS `bk_company` (
   `phoneNumber` int(11) DEFAULT NULL,
   `subgroupOfID` int(11) DEFAULT NULL,
   `imageID` int(11) NULL DEFAULT NULL,
+  `priority` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`companyID`),
   KEY `contactorID` (`contactorID`,`addedByID`,`updatedByID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=219 ;
