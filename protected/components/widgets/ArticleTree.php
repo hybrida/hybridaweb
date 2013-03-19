@@ -47,6 +47,7 @@ class ArticleTree extends CWidget {
                                     $article->parentId,
                                     $article->title,
                                     $article->shorttitle,
+									$article->weight,
                                     self::treeBuilder($articles, $article->id)
                     );
                 }
@@ -129,13 +130,15 @@ class Node {
 	public $title;
 	public $shorttitle;
 	public $children = array();
+	public $weight;
 
-	public function __construct($id, $parentId, $title, $shorttitle, $children) {
+	public function __construct($id, $parentId, $title, $shorttitle, $weight, $children) {
 		$this->id = $id;
 		$this->parentId = $parentId;
 		$this->title = $title;
 		$this->shorttitle = $shorttitle;
 		$this->setChildren($children);
+		$this->weight = $weight;
 	}
 	
 	public static function sortNodes(&$nodes) {
@@ -148,6 +151,8 @@ class Node {
 	}
 
 	private static  function compare($a, $b) {
-		return strcmp($a->title, $b->title);
+		if ($a->weight == $b->weight)
+			return strcmp($a->title, $b->title);
+		return $b->weight - $a->weight;
 	}
 }
