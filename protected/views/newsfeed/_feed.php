@@ -13,13 +13,6 @@
 			</div>
 			<div class="header-date">
 
-				<? if ($model->parentType == ''): ?>
-					<span style="color: red">Nyhet</span>
-				<? elseif($model->parentType == 'event' && $model->event->eventCompany): ?>
-					<span style="color: blue">Bedpress</span>
-				<? elseif($model->parentType == 'event'): ?>
-					<span style="color: green">Event</span>
-				<? endif ?>
 			</div>
 		</div>
 		<div class="text-content">
@@ -28,30 +21,7 @@
 					<?= Image::tag($model->imageId, 'frontpage') ?>
 				</a>
 			<? endif ?>
-			<div class="ingressWrapper">
-				<? if ($model->parentType == ''): ?>
-					<div class="ingress">
-						<?= $model->ingress ?>
-					</div>
-				<? elseif($model->parentType == 'event' && $model->event->eventCompany): ?>
-					<div class="ingress-left">
-						<?= $model->ingress ?>
-					</div>
-					<div class="info">
-						Her er det informasjon
-						Bedrift: <?= $model->event->eventCompany->bpcID ?>
-					</div>
-				<? elseif($model->parentType == 'event'): ?>
-					<div class="ingress-left">
-						<?= $model->ingress ?>
-					</div>
-					<div class="info">
-						Her er det informasjon
-						start: <?= $model->event->start ?>
-					</div>
-				<? endif ?>
-			</div>
-
+			<?= $model->ingress ?>
 			<? if ($model->author): ?>
 				<div class="author">
 					<?= CHtml::link($model->author->fullName, $model->author->viewUrl) ?>
