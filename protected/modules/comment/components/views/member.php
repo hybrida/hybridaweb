@@ -3,7 +3,7 @@ $user = User::model()->findByPk(user()->id);
 ?>
 
 <div class="widget-comment">
-<h1>Kommentarer</h1>
+<h2 style="text-align: right">Cumentarer</h2>
 
 <div class="comment-view-all">
 	<?php
