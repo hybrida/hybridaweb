@@ -1,0 +1,10 @@
+#slider {
+	width: 200px;
+	float: left;
+}
+#sliderValue {
+	width: 200px;
+	float: left;
+	text-align: center;
+}
+

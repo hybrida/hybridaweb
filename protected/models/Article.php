@@ -40,6 +40,7 @@ class Article extends CActiveRecord {
 			array('author', 'numerical', 'integerOnly' => true),
 			array('title, shorttitle, content, timestamp', 'safe'),
 			array('id, parentId, title, shorttitle, author, timestamp', 'safe', 'on' => 'search'),
+			array('weight', 'safe'),
 		);
 	}
 
