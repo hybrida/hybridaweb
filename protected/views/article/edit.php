@@ -51,6 +51,11 @@
 		<?php echo $form->error($model, 'access'); ?>				
 	</div>
 
+	<div class="row">
+		<?php echo $form->labelEx($model, 'Vekt'); ?>
+		<?php echo $form->rangePicker($model, 'weight'); ?>
+	</div>
+
 	<?php echo CHtml::submitButton('Lagre', array(
 		'class'=> 'g-button'
 	)); ?>
