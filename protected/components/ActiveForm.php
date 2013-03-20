@@ -49,11 +49,12 @@ class ActiveForm extends CActiveForm {
 		));
 	}
 
-	public function rangePicker($model, $attribute)
+	public function rangePicker($model, $attribute, $options = array())
 	{
 		$this->widget('application.components.widgets.RangePicker', array(
 			'model' => $model,
 			'attribute' => $attribute,
+			'options' => $options,
 		));
 	}
 }

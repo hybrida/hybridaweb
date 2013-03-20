@@ -4,8 +4,9 @@ Yii::app()->clientScript->registerCssFile($assetUrl.'/rangePicker.css');
 ?>
 
 <div id="sliderContainer">
+	<?= CHtml::activeHiddenField($this->model, $this->attribute, array('id' => 'fieldValue')) ?>
 	<div id="sliderValue">
-		0
+		<?= $value ?>
 	</div>
 	<br>
 	<div id="slider">
@@ -20,11 +21,12 @@ Yii::app()->clientScript->registerCssFile($assetUrl.'/rangePicker.css');
 	$(function() {
 		$( "#slider" ).slider
 			({
-				value: 0,
-				min: 0,
-				max: 10,
+				value: <?= $value ?>,
+				min: <?= $min ?>,
+				max: <?= $max ?>,
 				slide: function( event, ui ) {
 					$( "#sliderValue" ).text( ui.value );
+					$( "#fieldValue").val( ui.value );
 				}
 			}) ;
 	});
