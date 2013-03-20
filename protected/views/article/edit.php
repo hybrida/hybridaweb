@@ -53,7 +53,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model, 'Vekt'); ?>
-		<?php echo $form->rangePicker($model, 'weight'); ?>
+		<?php echo $form->rangePicker($model, 'weight', array('value' => 5)); ?>
 	</div>
 
 	<?php echo CHtml::submitButton('Lagre', array(
