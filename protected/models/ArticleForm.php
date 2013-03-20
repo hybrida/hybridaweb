@@ -10,6 +10,7 @@ class ArticleForm extends CFormModel {
 	public $shorttitle;
 	public $title;
 	public $phpFile;
+	public $weight;
 
 	public function __construct(Article $article, $scenario = '') {
 		parent::__construct($scenario);
@@ -29,6 +30,7 @@ class ArticleForm extends CFormModel {
 		$this->shorttitle = $this->_article->shorttitle;
 		$this->access = $this->_article->access;
 		$this->phpFile = $this->_article->phpFile;
+		$this->weight = $this->_article->weight;
 	}
 
 	public function save() {
@@ -44,6 +46,7 @@ class ArticleForm extends CFormModel {
 			'parentId' => $this->parentId,
 			'shorttitle' => $this->shorttitle,
 			'phpFile' => $this->phpFile,
+			'weight' => $this->weight,
 		));
 		$this->_article->access = $this->access;
 	}
