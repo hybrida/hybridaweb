@@ -1,8 +1,3 @@
-<?
-$assetUrl = Yii::app()->getAssetManager()->publish(Yii::getPathOfAlias('application.components.widgets.assets'));
-Yii::app()->clientScript->registerCssFile($assetUrl.'/rangePicker.css'); 
-?>
-
 <div id="sliderContainer">
 	<?= CHtml::activeHiddenField($this->model, $this->attribute, array('id' => 'fieldValue')) ?>
 	<div id="sliderValue">
@@ -13,9 +8,6 @@ Yii::app()->clientScript->registerCssFile($assetUrl.'/rangePicker.css');
 	</div>
 </div>
 <br>
-
-<script language="text/css">
-</script>
 
 <script>
 	$(function() {

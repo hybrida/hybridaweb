@@ -12,6 +12,7 @@ class RangePicker extends CWidget {
 		$this->fixRange();
 		$this->readModelValue();
 		$this->clampValue();
+		$this->registerCss();
 	}
 
 	public function setDefaultValues()
@@ -53,6 +54,15 @@ class RangePicker extends CWidget {
 			$this->options['value'] = $this->options['min'];
 		if ($this->options['value'] > $this->options['max'])
 			$this->options['value'] = $this->options['max'];
+	}
+
+	public function registerCss()
+	{
+		$cssFile = '/rangePicker.css';
+		$assetPathAlias = 'application.components.widgets.assets';
+		$assetManager = Yii::app()->getAssetManager();
+		$assetUrl = $assetManager->publish(Yii::getPathOfAlias($assetPathAlias));
+		Yii::app()->clientScript->registerCssFile($assetUrl.$cssFile); 
 	}
 
     public function run() {
