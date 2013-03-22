@@ -125,37 +125,6 @@ class ProfileController extends Controller {
 			'user' => $user,
 			'message' => $msg,
 		));
-
 	}
-
-	public function old() {
-		if (isset($_POST['User'])) {
-			$user->attributes = $_POST['User'];
-			if ($user->validate()) {
-				$user->purify();
-				$user->save();
-				try {
-					$image = Image::uploadByModel($user, 'imageUpload', $user->id);
-					$user->imageId = $image->id;
-					$user->save();
-				} catch (NoFileIsUploadedException $ex) {
-
-				}
-				$this->redirect(array('/profile/info', 'username' => $username));
-			} else {
-				print_r($user->errors);
-				return;
-			}
-		}
-
-		$fb = new Facebook();
-		$this->render('edit', array(
-			'fb' => $fb->authLink(),
-			'model' => $user,
-			'specializations' => Html::getSpecializationsDropDownArray(),
-			'companies' => Html::getCompaniesDropDownArray(),
-		));
-	}
-
 
 }
