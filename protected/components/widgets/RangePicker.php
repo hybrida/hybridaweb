@@ -23,7 +23,9 @@ class RangePicker extends CWidget {
 		if (!isset($this->options['max'])) {
 			$this->options['max'] = 10;
 		}
-		if (!isset($this->options['defaultValue'])) {
+		if (isset($this->options['defaultValue'])) {
+			$this->options['value'] = $this->options['defaultValue'];
+		} else {
 			$this->options['value'] = 0;
 		}
 	}
