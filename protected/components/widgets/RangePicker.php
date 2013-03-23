@@ -42,13 +42,8 @@ class RangePicker extends CWidget {
 		$attr = $this->model->getAttributes();
 		if (isset($attr[$this->attribute])) {
 			$this->options['value'] = $attr[$this->attribute];
-		} else if ($this->model instanceof ArticleForm) {
-			$parentArticle = $this->model->getArticleModel();
-			$articleAttr = $parentArticle->getAttributes();
-			$this->options['value'] = $articleAttr[$this->attribute];
 		}
 	}
-
 	public function clampValue()
 	{
 		if ($this->options['value'] < $this->options['min']) {
