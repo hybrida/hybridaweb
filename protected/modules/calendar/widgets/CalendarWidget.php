@@ -51,11 +51,33 @@ class CalendarWidget extends CWidget {
 	}
 
 	private function getEvents() {
-		$from = $this->year . "-" . $this->month . "-01";
-		$to = $this->getNextMonthsYear() . "-" . $this->getNextMonth() . "-01";
+		$from = $this->getStartOfWeek($this->year, $this->month, 1);
+		$to = $this->getEndOfWeek($this->getNextMonthsYear(), $this->getNextMonth(), 1);
 		$newsList = News::getNewsBetween($from, $to);
 		$this->putNewsList($newsList);
 	}
+
+	private function getStartOfWeek($year, $month, $day) {
+		$dayOfWeek = $this->getDayOfWeek($year, $month, $day);
+		return $this->addDaysAndConvertToString($year, $month, $day,  -$dayOfWeek);
+	}
+
+	private function getEndOfWeek($year, $month, $day) {
+		$dayOfWeek = $this->getDayOfWeek($year, $month, $day);
+		return $this->addDaysAndConvertToString($year, $month, $day, 7 - $dayOfWeek);
+	}
+
+	private function getDayOfWeek($year, $month, $day) {
+		$fromTime = mktime(0, 0, 0, $month, $day, $year);
+		$dayOfWeek = date('w', $fromTime)-1;
+		return ($dayOfWeek == 0) ? 7 : $dayOfWeek;
+	}
+
+	private function addDaysAndConvertToString($year, $month, $day, $days) {
+		$newTime = mktime(0, 0, 0, $month, $day + $days, $year); 
+		return date('Y-m-d', $newTime);
+	}
+
 
 	private function putNewsList($newsList) {
 		foreach ($newsList as $news) {
