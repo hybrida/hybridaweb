@@ -454,3 +454,36 @@ ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 SET FOREIGN_KEY_CHECKS=1;
+
+CREATE TABLE IF NOT EXISTS `quiz_event` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `responsibleQuizTeamId` int(11) NOT NULL,
+  `eventSummary` varchar(300) COLLATE utf8_unicode_ci NOT NULL,
+  `eventDate` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `responsibleQuizTeamId` (`responsibleQuizTeamId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `quiz_team` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
+  `foundedDate` date NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `foundedDate` (`foundedDate`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `quiz_team_member` (
+  `userId` int(11) NOT NULL,
+  `quizTeamId` int(11) NOT NULL,
+  PRIMARY KEY (`userId`),
+  KEY `quizTeamId` (`quizTeamId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `quiz_team_score` (
+  `quizEventId` int(11) NOT NULL,
+  `quizTeamId` int(11) NOT NULL,
+  `score` decimal(10,0) NOT NULL,
+  KEY `quizEventId` (`quizEventId`,`quizTeamId`),
+  KEY `score` (`score`),
+  KEY `quizTeamId` (`quizTeamId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
