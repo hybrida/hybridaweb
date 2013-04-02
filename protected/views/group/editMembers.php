@@ -40,12 +40,10 @@
 <? endforeach; ?>
 </table>
 
-<? $this->addJavascript('autocomplete/user') ?>
-
 <script>
-	data = {
-		selector: ".groupEditMembers input.username"
-	}
+	require(['autocomplete/user'], function(au){
+		au.addUserAutocomplete(".groupEditMembers input.username");
+	});
 </script>
 
 <h1>Legg til nye medlemmer</h1>

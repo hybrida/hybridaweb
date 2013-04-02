@@ -45,7 +45,8 @@
 				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 			})();
 		</script>
-		<?= $this->printJavascriptFiles() ?>
+		<script data-main="/scripts/main.js" src="/scripts/require.js"></script>
+
 	</head>
 
 	<body>

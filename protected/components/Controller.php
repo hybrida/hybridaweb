@@ -27,18 +27,4 @@ class Controller extends CController {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 	}
 
-	protected function addJavascript($scriptName) {
-		$this->jsFiles[] = $scriptName;
-	}
-
-	protected function printJavascriptFiles() {
-		$output = "";
-		$scriptRoot = "/scripts/";
-		$scriptTag = CHtml::tag('script', array(
-			'data-main' => $scriptRoot . "main.js",
-			'src' => $scriptRoot . 'require.js',
-		), "", true);
-		$scriptContent = "<script>\nrequire(['". implode("', '", $this->jsFiles) . "']);\n</script>";
-		return $scriptTag . PHP_EOL .  $scriptContent;
-	}
 }
