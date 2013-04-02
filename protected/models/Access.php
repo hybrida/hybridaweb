@@ -2,10 +2,7 @@
 
 class Access {
 
-	private static $pdo;
-
 	const REGISTERED = 2;
-
 	const MEMBER = 3;
 	const MALE = 1001;
 	const FEMALE = 1002;
