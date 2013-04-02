@@ -9,10 +9,7 @@
 
 		<?= $this->clips['head-facebook'] ?>
 
-		<script type="text/javascript" src="<?= Yii::app()->request->baseUrl ?>/scripts/collapsible_lists.js"></script>
 		<script data-main="/scripts/main.js" src="/scripts/require.js"></script>
-
-		<link rel="stylesheet" type="text/css" href="<?= Yii::app()->request->baseUrl ?>/fonts/fonts.css" />
 
 		<? $this->renderPartial('//layouts/_css') ?>
 		<? $this->renderPartial('//layouts/_matrix') ?>
