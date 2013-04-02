@@ -487,3 +487,14 @@ CREATE TABLE IF NOT EXISTS `quiz_team_score` (
   KEY `score` (`score`),
   KEY `quizTeamId` (`quizTeamId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `quiz_event`
+  ADD CONSTRAINT `quiz_event_ibfk_1` FOREIGN KEY (`responsibleQuizTeamId`) REFERENCES `quiz_team` (`id`);
+
+ALTER TABLE `quiz_team_member`
+  ADD CONSTRAINT `quiz_team_member_ibfk_2` FOREIGN KEY (`quizTeamId`) REFERENCES `quiz_team` (`id`),
+  ADD CONSTRAINT `quiz_team_member_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+
+ALTER TABLE `quiz_team_score`
+  ADD CONSTRAINT `quiz_team_score_ibfk_2` FOREIGN KEY (`quizTeamId`) REFERENCES `quiz_team` (`id`),
+  ADD CONSTRAINT `quiz_team_score_ibfk_1` FOREIGN KEY (`quizEventId`) REFERENCES `quiz_event` (`id`);
