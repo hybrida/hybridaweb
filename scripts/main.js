@@ -2,4 +2,4 @@ require.config({
 
 });
 
-require(['autocomplete/search']);
+require(['autocomplete/search', 'collapsible_lists']);

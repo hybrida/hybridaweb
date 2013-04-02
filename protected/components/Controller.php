@@ -7,21 +7,16 @@
 class Controller extends CController {
 
 	/**
-	 * @var string the default layout for the controller view. Defaults to '//layouts/column1',
-	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
+	 * @var string the default layout for the controller view
 	 */
 	public $layout = '//layouts/singleColumn';
 
 	/**
 	 * @var array context menu items. This property will be assigned to {@link CMenu::items}.
+	 * Does only work if the layout is set to //layouts/crud.
 	 */
 	public $menu = array();
 
-	/**
-	 * @var array the breadcrumbs of the current page. The value of this property will
-	 * be assigned to {@link CBreadcrumbs::links}. Please refer to {@link CBreadcrumbs::links}
-	 * for more details on how to specify this property.
-	 */
 	public $breadcrumbs = array();
 	public $breadcrumbOptions = array();
 	public $pdo;
@@ -32,18 +27,4 @@ class Controller extends CController {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 	}
 
-	protected function addJavascript($scriptName) {
-		$this->jsFiles[] = $scriptName;
-	}
-
-	protected function printJavascriptFiles() {
-		$output = "";
-		$scriptRoot = "/scripts/";
-		$scriptTag = CHtml::tag('script', array(
-			'data-main' => $scriptRoot . "main.js",
-			'src' => $scriptRoot . 'require.js',
-		), "", true);
-		$scriptContent = "<script>\nrequire(['". implode("', '", $this->jsFiles) . "']);\n</script>";
-		return $scriptTag . PHP_EOL .  $scriptContent;
-	}
 }

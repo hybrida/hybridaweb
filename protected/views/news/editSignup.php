@@ -32,12 +32,10 @@ $form = $this->beginWidget('CActiveForm', array(
 
 </table>
 
-	<? $this->addJavascript('autocomplete/user') ?>
-
 	<script>
-		data = {
-			selector: ".newsEditSignup .row input"
-		}
+		require(['autocomplete/user'], function(au){
+			au.addUserAutocomplete(".newsEditSignup .row input");
+		});
 	</script>
 
 	<h2>Legg til ny bruker</h2>

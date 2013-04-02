@@ -1,6 +1,5 @@
 <?php
 
-$this->addJavascript("griffgrabber/run");
 $this->layout = "//layouts/doubleColumn";
 
  ?>
@@ -79,6 +78,7 @@ $this->layout = "//layouts/doubleColumn";
 			restartButton: document.getElementById("restartButton")
 		};
 	}
+	require(['griffgrabber/run']);
 </script>
 
 <? $this->beginClip("sidebar") ?>

@@ -1,4 +1,4 @@
-require(['autocomplete/core'],function(autocomplete){
+define(['autocomplete/core'],function(autocomplete){
 
 	var source = function( request, response ) {
 		$.ajax({
@@ -21,10 +21,15 @@ require(['autocomplete/core'],function(autocomplete){
 		});
 	};
 
-	var selector = data.selector;
+	var addUserAutocomplete = function(selector) {
+		autocomplete({
+			selector: selector,
+			source: source
+		});
+	};
 
-	autocomplete({
-		selector: selector,
-		source: source
-	});
+	return {
+		addUserAutocomplete: addUserAutocomplete
+	};
+
 });

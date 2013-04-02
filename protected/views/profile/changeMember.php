@@ -51,12 +51,11 @@
 		</form>
 	<? endif ?>
 
-	<? $this->addJavascript('autocomplete/user') ?>
-
 	<script>
-		data = {
-			selector: ".profileChangeMember input.username"
-		}
+		require(['autocomplete/user'], function(autocompleteUser){
+			var addAutoComplete = autocompleteUser.addUserAutocomplete
+			addAutoComplete(".profileChangeMember input.username");
+		});
 	</script>
 
 	<h1>Søk</h1>
