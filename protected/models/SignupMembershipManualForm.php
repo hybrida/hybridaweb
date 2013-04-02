@@ -32,6 +32,4 @@ class SignupMembershipManualForm extends CFormModel {
 		}
 	}
 
-
-
 }
