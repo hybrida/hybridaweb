@@ -5,7 +5,7 @@
 		<title><?= $this->getPageTitle() ?> - <?= CHtml::encode(Yii::app()->name) ?></title>
 
 		<meta name="description" content="Hybrida er linjeforeningen for
-			  studieprogrammet Ingeniørvitenskap og IKT ved NTNU i Trondheim." />
+			studieprogrammet Ingeniørvitenskap og IKT ved NTNU i Trondheim." />
 
 		<?= $this->clips['head-facebook'] ?>
 
@@ -27,12 +27,12 @@
 							src="<?= Yii::app()->request->baseUrl ?>/images/logo_head.png"
 							alt="" />
 					</a>
- 				</div>
- 				<div class="layout-search">
+				</div>
+				<div class="layout-search">
 					<div class="layout-search">
 						<input type="text" id="searchField" placeholder="Søk"/>
 					</div>
- 				</div>
+				</div>
 				<div style="clear: both"></div>
 				<div class="layout-headBottom">
 					<div class="layout-menu">
