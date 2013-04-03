@@ -3,7 +3,9 @@
 class QuizController extends Controller {
 	
 	public function actionIndex() {
-		$this->render("status");
+		$teams = QuizTeam::getQuizTeams();
+		$this->render("status", array(
+			'quizTeams' => $teams,
+		));
 	}
-	
 }
