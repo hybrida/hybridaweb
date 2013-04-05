@@ -28,7 +28,7 @@ $this->widget('application.components.widgets.ActivitiesFeed');
 Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 $this->widget('JobAnnouncementFeed');
 $this->endClip();
-?>				
+?>
 <div class="newsfeedIndex">
 <div class="feeds">
 	<?	$this->renderPartial("_feed", array(
@@ -48,10 +48,9 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 	'offset' => ''
 ));
 
-$this->addJavascript('newsfeed');
-
 ?>
 <script language="javascript">
+	require(['newsfeed']);
 	var data = {
 		count: <?= $index ?>,
 		ajaxFeedUrl: '<?= $ajaxFeedUrl ?>',

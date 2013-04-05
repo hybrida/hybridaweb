@@ -16,7 +16,7 @@ class AdminController extends Controller {
 			array('deny'),
 		);
 	}
-    
+
     public function actionNews() {
         $news = News::model()->findAll(
                 array(
@@ -27,16 +27,14 @@ class AdminController extends Controller {
                     )
                 );
         $data['news'] = $news;
-        
+
         $this->render('news', $data);
     }
-    
+
     public function actionArticles() {
         $articles = Article::model()->findAll(array('order'=>'parentId, id'));
         $data['articles'] = $articles;
-        
+
         $this->render('articles', $data);
     }
 }
-
-?>
