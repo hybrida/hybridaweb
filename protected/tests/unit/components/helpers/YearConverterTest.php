@@ -54,7 +54,7 @@ class YearConverterTest extends CTestCase {
 		DateMock::$isAutumn = false;
 		$this->assertEquals(2004, DateMock::getFreshmanGraduationYear());
 	}
-	
+
 	public function test_() {
 		DateMock::$year = 2012;
 		DateMock::$isAutumn = false;
@@ -63,13 +63,13 @@ class YearConverterTest extends CTestCase {
 
 }
 
-class DateMock extends YearConverter_PHP_5_3 {
+class DateMock extends YearConverter {
 
 	public static $year;
 	public static $isAutumn;
 
 	public static function init() {
-		
+
 	}
 
 }
