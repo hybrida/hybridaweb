@@ -110,7 +110,7 @@ $utgaveMapper = getUtgaveFolders($folderPath);
 		width: 200px;
 		float: left;
 		padding: 0.5em;
-		margin: 0.5em;
+		margin: 0.3em;
 		background-color: #eee;
 		overflow: auto;
 		border-radius: 2px;
