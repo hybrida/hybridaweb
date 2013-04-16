@@ -27,7 +27,8 @@ $this->layout = "//layouts/doubleColumn"; ?>
 $this->endClip()
  
 ?>
-<div class="articleView">
-	<h1><?= $article->title ?></h1>
-	<? ArticleTemplateRenderer::render($article) ?>
+<div class="articleIndex">
+	<div id="article">
+		<? ArticleTemplateRenderer::render($article) ?>
+	</div>
 </div>
