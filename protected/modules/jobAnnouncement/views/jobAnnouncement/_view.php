@@ -17,7 +17,7 @@
 			<strong>Tittel:</strong>
 			<?= CHtml::link($data->title, array('view', 'id' => $data->id)) ?>
 		</div>
-
+        
 		<div class="company">
 			<strong>Bedrift:</strong>
 			<?= $data->company->companyName ?>
