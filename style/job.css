@@ -8,8 +8,8 @@ Det vil si alt som kommer fra modulen jobAnnouncement
 }
 
 .jobAnnouncementIndex .view {
-	background-color: #ddd;
-	padding: 0.3em;
+	background-color: #ECECEC;
+	padding: 1em;
 	margin-top: 0.6em;
 	border-radius: 2px;
 }
@@ -29,5 +29,6 @@ Det vil si alt som kommer fra modulen jobAnnouncement
 
 .jobAnnouncementView {
 	margin: auto 1em;
+    color: black; 
 }
 
