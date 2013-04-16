@@ -108,17 +108,16 @@ class Html extends CHtml {
 
 	public static function userListByYear($usersByYear) {
 		$i = 1;
-		$userYear = user()->classYear;
-		foreach($usersByYear as $year):
-			if (!empty($year)):
-				?>
-				<ul class="collapsibleList">
+		$userYear = user()->classYear; ?>
+		<ul class="collapsibleList">
+		<? foreach($usersByYear as $year):
+			if (!empty($year)): ?>
 				<? if ($i == $userYear): ?>
-					<li class="collapsibleListClosed">
-				<? else: ?>
 					<li class="collapsibleListOpen">
+				<? else: ?>
+					<li class="collapsibleListClosed">
 				<? endif ?>
-				<h3> <?= ($i <= 5) ? $i . "årskurs" : "Alumni" ?> (<?= count($year) ?>)</h3>
+				<h3 class="collapsibleListHeader"> <?= ($i <= 5) ? $i . "årskurs" : "Alumni" ?> (<?= count($year) ?>)</h3>
 				<ul>
 				<?
 				foreach ($year as $user):
@@ -129,11 +128,11 @@ class Html extends CHtml {
 				endforeach;
 				?></ul>
 				</li>
-				</ul><?
-			endif;
+			<? endif;
 			$i++;
-		endforeach;
-	}
+		endforeach; ?>
+		</ul>
+	<?}
 
 	public static function getCompaniesDropDownArray() {
 		$companies = app()->db->createCommand()
