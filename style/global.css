@@ -172,7 +172,7 @@ table.g-membertable *{
 }
 
 li.collapsibleListOpen{
-	list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+	list-style-image:url('http://cdn1.iconfinder.com/data/icons/miniicons2/minus.gif');
 	cursor:pointer;
 }
 
@@ -181,7 +181,7 @@ li.collapsibleListOpen .node {
 }
 
 li.collapsibleListClosed{
-	list-style-image:url('http://coolalpha.com/images/structure/icons/plus_icon_trans.gif');
+	list-style-image:url('http://cdn1.iconfinder.com/data/icons/miniicons2/plus.gif');
 	cursor:pointer;
 }
 
