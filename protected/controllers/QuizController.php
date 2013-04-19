@@ -4,26 +4,21 @@ class QuizController extends Controller {
 	
 	// Oversikt over alle lag med poengsum
 	public function actionIndex() {
-		$teams = QuizTeam::model()->findAll();
+		$teams = QuizTeam::model()->with('quizTeamScores')->findAll();
+		$teamScoreValues = array();
 		
 		foreach ($teams as $team) {
-			debug($team);
-			echo '<br>';
-			
-			
 			$totalScore = 0;
 			$teamScores = $team->quizTeamScores;
-			debug($teamScores);
 			foreach ($teamScores as $scoreObject) {
-				die();
 				$totalScore += $scoreObject->score;
 			}
-			echo $totalScore;
+			$teamScoreValues[$team->id] = $totalScore;
 		}
 		
-		return;
 		$this->render("status", array(
 			'quizTeams' => $teams,
+			'totalScore' => $teamScoreValues,
 		));
 	}
 	

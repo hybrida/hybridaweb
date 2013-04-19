@@ -1,8 +1,8 @@
-<h1>Status for Quiz</h1>
+<h1>Quiz: Lagoversikt</h1>
 
 <ul>
 <? foreach ($quizTeams as $team): ?>
-	<li><?=$team->name?>: <?=$team->foundedDate?></li>
+	<li><?=$team->name?>: founded <?=$team->foundedDate?>, total score: <?=$totalScore[$team->id]?></li>
 	
 	<ul>
 		<? /* foreach ($team->quizTeamScores as $score):?>
@@ -11,11 +11,3 @@
 	</ul>
 <? endforeach; ?>
 </ul>
-
-<p>
-	<? $utr = QuizTeam::model()->findByPk('1'); ?>
-	Laget <?=$utr->name?> ble starta <?=$utr->foundedDate?>.
-	<? foreach($utr->quizTeamMembers as $member): ?>
-	<p><? print_r($member) ?></p>
-	<? endforeach; ?>
-</p>
