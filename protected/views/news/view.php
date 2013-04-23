@@ -107,11 +107,12 @@ $this->breadcrumbs = array(
 		</div>
 	</article>
 
-	<? if ($signup && $hasAccessToSignup): ?>
+	<? if ($signup): ?>
 		<?
 		$this->renderPartial('_signup', array(
 			'signup' => $signup,
 			'isAttending' => $isAttending,
+			'hasAccessToSignup' => $hasAccessToSignup,
 		))
 		?>
 	<? endif ?>

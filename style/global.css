@@ -118,6 +118,24 @@ table.g-membertable *{
 
 }
 
+.g-button[disabled=disabled]{
+	color: white;
+	text-decoration: none;
+	font-weight: 550;
+	padding: 5px 15px;
+	border: 0;
+	border-radius: 2px;
+	margin-right: 5px;
+	background: #bfbfbf;
+	background: -moz-linear-gradient(top, #bfbfbf 0%, #cecece 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#bfbfbf), color-stop(100%,#cecece));
+	background: -webkit-linear-gradient(top, #bfbfbf 0%,#cecece 100%);
+	background: -o-linear-gradient(top, #bfbfbf 0%,#cecece 100%);
+	background: -ms-linear-gradient(top, #bfbfbf 0%,#cecece 100%);
+	background: linear-gradient(to bottom, #bfbfbf 0%,#cecece 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfbfbf', endColorstr='#cecece',GradientType=0 );
+}
+
 .layout-content > #g-groupNavigation {
 	margin: 0;
 }
