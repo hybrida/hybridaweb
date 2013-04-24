@@ -42,7 +42,7 @@ $this->renderPartial('_signup_sidebar', array(
 $this->widget('application.components.widgets.ActivitiesFeed');
 $this->endClip();
 
-if ($event): ?>
+if ($event && $hasAccessToEvent): ?>
 	<? $this->beginClip('head-tag') ?>
 	prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# lfhybrida: http://ogp.me/ns/fb/lfhybrida#"
 	<? $this->endClip() ?>
@@ -107,7 +107,7 @@ $this->breadcrumbs = array(
 		</div>
 	</article>
 
-	<? if ($signup): ?>
+	<? if ($signup && $hasAccessToSignup): ?>
 		<?
 		$this->renderPartial('_signup', array(
 			'signup' => $signup,
