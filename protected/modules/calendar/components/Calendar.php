@@ -58,6 +58,29 @@ class Calendar extends Event_Subject {
 			return $this->$key;
 		}
 	}
+    
+    /**
+     * Returner link til forrige eller neste måned for dager som ikke er i denne
+     *  måneden. Returnerer bare dagen tilbake om den er i den nåværende måneden
+     * @param type $current Boolean om en er i denne måneden eller ikke
+     * @param type $number Dagen i måneden.
+     * @return type
+     */
+    public function getOutputFor($current, $number) {
+        if($current) {
+            return $number;
+        }
+        elseif(!$current && $number < 10) {
+            return CHtml::link("{$number} >", "#", array(
+                'class' => 'calendar-next-month-button'
+                ));
+        }
+        elseif(!$current && $number > 20) {
+            return CHtml::link("< {$number}", "#", array(
+                'class' => 'calendar-previous-month-button'
+                ));
+        }
+    }
 
 	/**
 	 * Returns an array of the names of the days, using the current locale.

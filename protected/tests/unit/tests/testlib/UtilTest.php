@@ -28,15 +28,15 @@ class UtilTest extends PHPUnit_Framework_TestCase {
 	public function testGetNewArticle() {
 		$this->assertSave(Util::getNewArticle());
 	}
-	
+
 	public function testGetNewFacebookUser() {
 		$this->assertSave(Util::getNewFacebookUser(Util::getUser()->id));
 	}
-	
+
 	public function testGetNewComment() {
 		$this->assertSave(Util::getNewComment());
 	}
-	
+
 	public function testGetNewArticleText() {
 		$dummyArticleId = 0;
 		$this->assertSave(Util::getNewArticleText($dummyArticleId));
@@ -47,5 +47,22 @@ class UtilTest extends PHPUnit_Framework_TestCase {
 		$this->assertSave(Util::getNewSignupMembershipAnonymous($event->id));
 	}
 
+	public function testGetNewQuizTeam() {
+		$team = Util::getNewQuizTeam();
+		$this->assertSave($team);
+	}
+
+	public function testGetNewQuizEvent() {
+		$team = Util::getQuizTeam();
+		$this->assertSave(Util::getNewQuizEvent($team->id));
+	}
+
+	public function testGetNewQuizTeamScore() {
+		$team = Util::getQuizTeam();
+		$event = Util::getQuizEvent($team->id);
+		$score = Util::getNewQuizTeamScore($event->id, $team->id);
+
+		$this->assertSave($score);
+	}
 
 }
