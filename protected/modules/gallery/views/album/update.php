@@ -30,7 +30,7 @@ $this->breadcrumbs = array(
 					'autostart' => true,
 					'jquery_ui' => false,
 					'filters' => array( array('title' => 'Bildefiler', 'extensions' =>'jpg,jpeg,gif,png'),   ),
-					'max_file_size' => '10mb'
+					'max_file_size' => '15mb'
 			   ),
 			   'id' => 'uploader'
 			)); ?>
