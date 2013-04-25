@@ -4,7 +4,6 @@ require([],function(){
 	var CollapsibleLists = new function() {
 		this.apply = function() {
 			var uls = document.getElementsByClassName('collapsibleList');
-			console.log(Object.prototype.toString.call( uls ));
 			for (var index = 0; index < uls.length; index++) {
 				this.applyTo(uls[index]);
 			}
