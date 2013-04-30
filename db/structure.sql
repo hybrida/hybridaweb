@@ -449,6 +449,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `gender` enum('unknown','male','female') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
   `imageId` int(11) DEFAULT NULL,
   `phoneNumber` int(11) DEFAULT NULL,
+  `linkedin` varchar(75) DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   `cardHash` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
