@@ -15,6 +15,7 @@
  * @property string $gender
  * @property integer $imageId
  * @property integer $phoneNumber
+ * @property string $linkedin
  * @property string $lastLogin
  * @property string $cardHash
  * @property string $cardNumber
@@ -63,6 +64,7 @@ class User extends CActiveRecord {
 			array('cardNumber', 'length', 'max' => 8),
 			array('cardNumber', 'length', 'min' => 5),
 			array('firstName, middleName, lastName', 'length', 'max' => 75),
+            array('linkedin', 'length', 'max' => 75),
 			array('graduationYear', 'length', 'max' => 4),
 			array('member', 'length', 'max' => 5),
 			array('member', 'unsafe'),

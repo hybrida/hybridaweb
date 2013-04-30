@@ -58,5 +58,10 @@ $this->renderPartial('_header', array(
 		<td>Beskrivelse:        </td>
 		<td> <?= $user->description ?></td>
 	</tr>
-
 </table>
+
+<? if($user->linkedin): ?>
+    <h2>LinkedIn:</h2>
+    <script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
+    <script type="IN/MemberProfile" data-id="http://www.linkedin.com/<?= $user->linkedin ?>" data-format="inline"></script>
+<? endif ?>
