@@ -108,7 +108,11 @@ class Html extends CHtml {
 
 	public static function userListByYear($usersByYear) {
 		$i = 1;
-		$userYear = user()->classYear; ?>
+		$userYear = 0;
+		if (!user()->isGuest) {
+			$userYear = user()->classYear;
+ 		}
+		 ?>
 		<ul class="collapsibleList">
 		<? foreach($usersByYear as $year):
 			if (!empty($year)): ?>
