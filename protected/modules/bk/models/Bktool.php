@@ -15,8 +15,10 @@ class BkTool {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array();
-		$sql = "SELECT companyID, id, username, companyName, status, firstName, middleName, lastName, dateUpdated FROM bk_company
-        LEFT JOIN user ON contactorID = id ORDER BY " . $orderBy . " " . $order . "";
+		$sql = "SELECT bc.companyID, u.id, u.username, bc.companyName, bc.status, u.firstName, u.middleName, u.lastName, bc.dateUpdated 
+				FROM bk_company AS bc
+				LEFT JOIN user AS u ON contactorID = id 
+				ORDER BY " . $orderBy . " " . $order . "";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -30,7 +32,43 @@ class BkTool {
 		$this->pdo = Yii::app()->db->getPdoInstance();
 
 		$data = array();
-		$sql = "SELECT status, COUNT(DISTINCT companyName) AS sum FROM bk_company GROUP BY status";
+		$sql = "SELECT status, COUNT(DISTINCT companyName) AS sum 
+				FROM bk_company 
+				GROUP BY status";
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
+
+		$data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+		return $data;
+	}
+	
+	public function getIndustryAssociationOverview($orderBy, $order) {
+		$this->pdo = Yii::app()->db->getPdoInstance();
+
+		$data = array();
+		$sql = "SELECT bc.companyID, u.id, u.username, bc.companyName, bc.status, u.firstName, u.middleName, u.lastName, bii.relevance 
+				FROM bk_company AS bc
+				LEFT JOIN user AS u ON contactorID = id
+				LEFT JOIN bk_iktringen_information AS bii ON bii.companyID = bc.companyID
+				ORDER BY " . $orderBy . " " . $order . "";
+
+		$query = $this->pdo->prepare($sql);
+		$query->execute($data);
+
+		$data = $query->fetchAll(PDO::FETCH_ASSOC);
+
+		return $data;
+	}
+	
+	public function getIndustryAssociationStatistics() {
+		$this->pdo = Yii::app()->db->getPdoInstance();
+
+		$data = array();
+		$sql = "SELECT relevance, COUNT(DISTINCT companyID) AS sum 
+				FROM bk_iktringen_information 
+				GROUP BY relevance";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);

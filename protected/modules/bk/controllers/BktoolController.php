@@ -251,6 +251,51 @@ class BktoolController extends Controller {
 
 		$this->render('companyoverview', $data);
 	}
+	
+	public function actionIndustryAssociation(){
+		$this->setPageTitle($this->getNumberOfRelevantUpdatesAsString() . ' ' . $this->organisationName . '-BK');
+
+		$bkTool = new Bktool();
+		$data = array();
+		
+		if (!isset($_GET['orderby'])) {
+			$_GET['orderby'] = 'companyName';
+		}
+		if (!isset($_GET['order'])) {
+			$_GET['order'] = 'DESC';
+		}
+
+		switch ($_GET['orderby']) {
+			case 'status':
+				$_SESSION['orderby'] = 'status';
+				break;
+			case 'firstName':
+				$_SESSION['orderby'] = 'firstName';
+				break;
+			case 'relevance':
+				$_SESSION['orderby'] = 'relevance';
+				break;
+			default:
+				$_SESSION['orderby'] = 'companyName';
+				break;
+		}
+		switch ($_GET['order']) {
+			case 'ASC':
+				$_SESSION['order'] = 'DESC';
+				break;
+			case 'DESC':
+				$_SESSION['order'] = 'ASC';
+				break;
+			default:
+				$_SESSION['order'] = 'DESC';
+				break;
+		}
+		
+		$data['companies'] = $bkTool->getIndustryAssociationOverview($_SESSION['orderby'], $_SESSION['order']);
+		$data['statistics'] = $bkTool->getIndustryAssociationStatistics();
+		
+		$this->render('industryassociation', $data);
+	}
 
 	public function actionGraduates() {
 		$this->setPageTitle($this->getNumberOfRelevantUpdatesAsString() . ' ' . $this->organisationName . '-BK');
