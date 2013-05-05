@@ -76,7 +76,7 @@
 		<tr> 
 			<td><?= CHtml::link($company['companyName'], array('company?id=' . $company['companyID'])) ?></td>
 			<?
-			switch ($stat['relevance']) {
+			switch ($company['relevance']) {
 				case "Høy":
 					?>
 					<td id ="BK-company-high-relevance">
