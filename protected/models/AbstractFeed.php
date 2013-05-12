@@ -50,6 +50,8 @@ abstract class AbstractFeed {
 			}
 			if ($this->gatekeeper->hasPostAccess($this->getType(), $id)) {
 				$good[] = $id;
+			} else {
+				$this->offset++;
 			}
 		}
 		return $good;
