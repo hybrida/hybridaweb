@@ -10,7 +10,7 @@ class AdminController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("news", "articles"),
+				'actions' => array("news", "articles", "stats",),
 				'roles' => array('editor'),
 			),
 			array('deny'),
@@ -36,5 +36,19 @@ class AdminController extends Controller {
         $data['articles'] = $articles;
 
         $this->render('articles', $data);
+    }
+    
+    public function actionStats() {
+        $stats = array(
+            'news' => array(
+                'count' => StatisticsQuery::newsCount(),
+                'lastMonth' => StatisticsQuery::newsCountOneMonthBack(),
+            ),
+            'users' => array(
+                'count' => StatisticsQuery::usersCount(),
+            )
+        );
+        $data['stats'] = $stats;
+        $this->render('stats', $data);
     }
 }

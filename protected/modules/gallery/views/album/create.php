@@ -29,7 +29,7 @@ $this->breadcrumbs = array(
 					'autostart' => true,
 					'jquery_ui' => false,
 					'filters' => array( array('title' => 'Bildefiler', 'extensions' =>'jpg,jpeg,gif,png'),   ),
-					'max_file_size' => '10mb'
+					'max_file_size' => '15mb'
 			   ),
 			   'id' => 'uploader'
 			)); ?>
@@ -57,7 +57,7 @@ $this->breadcrumbs = array(
 		<ul>
 			<li> Vent til alle bildene er lastet før du trykker opprett </li>
 			<li> Bare filtypene gif, png og jpg er støttet </li>
-			<li> Maks filstørrelse er 10 MB </li>
+			<li> Maks filstørrelse er 15 MB </li>
 			<li> Chrome kan være treg til å laste opp filer, så bruk gjerne en annen browser om du skal laste opp mange bilder </li>
 		</ul>
 	</p>

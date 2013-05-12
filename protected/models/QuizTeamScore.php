@@ -4,13 +4,14 @@
  * This is the model class for table "quiz_team_score".
  *
  * The followings are the available columns in table 'quiz_team_score':
+ * @property integer $id
  * @property integer $quizEventId
  * @property integer $quizTeamId
  * @property string $score
  *
  * The followings are the available model relations:
- * @property QuizTeam $quizTeam
  * @property QuizEvent $quizEvent
+ * @property QuizTeam $quizTeam
  */
 class QuizTeamScore extends CActiveRecord
 {
@@ -45,7 +46,7 @@ class QuizTeamScore extends CActiveRecord
 			array('score', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('quizEventId, quizTeamId, score', 'safe', 'on'=>'search'),
+			array('id, quizEventId, quizTeamId, score', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,8 +58,8 @@ class QuizTeamScore extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'quizTeam' => array(self::BELONGS_TO, 'QuizTeam', 'quizTeamId'),
 			'quizEvent' => array(self::BELONGS_TO, 'QuizEvent', 'quizEventId'),
+			'quizTeam' => array(self::BELONGS_TO, 'QuizTeam', 'quizTeamId'),
 		);
 	}
 
@@ -68,6 +69,7 @@ class QuizTeamScore extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'id' => 'ID',
 			'quizEventId' => 'Quiz Event',
 			'quizTeamId' => 'Quiz Team',
 			'score' => 'Score',
@@ -85,6 +87,7 @@ class QuizTeamScore extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('id',$this->id);
 		$criteria->compare('quizEventId',$this->quizEventId);
 		$criteria->compare('quizTeamId',$this->quizTeamId);
 		$criteria->compare('score',$this->score,true);

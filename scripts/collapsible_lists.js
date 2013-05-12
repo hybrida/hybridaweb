@@ -3,34 +3,28 @@ require([],function(){
 	// http://code.stephenmorley.org/javascript/collapsible-lists/
 	var CollapsibleLists = new function() {
 		this.apply = function() {
-			var uls = document.getElementsByTagName('ul');
+			var uls = document.getElementsByClassName('collapsibleList');
 			for (var index = 0; index < uls.length; index++) {
-				if (uls[index].className.match(/(^| )collapsibleList( |$)/)) {
-					this.applyTo(uls[index]);
-				}
+				this.applyTo(uls[index]);
 			}
 		}
 
 		this.applyTo = function(node) {
-			var lis = node.getElementsByTagName('li');
+			var lis = node.getElementsByClassName('collapsibleListHeader');
 			for (var index = 0; index < lis.length; index++) {
-				if (node == lis[index].parentNode) {
-					$(lis[index]).mousedown(function (event) {
-						event.preventDefault();
-					})
+				$(lis[index]).mousedown(function (event) {
+					event.preventDefault();
+				})
 
-					$(lis[index]).click(function (event) {
-						if (!event) event = window.event;
+				$(lis[index]).click(function (event) {
+					if (!event) event = window.event;
 
-						$(this).toggleClass('collapsibleListClosed collapsibleListOpen');
-					})
+					$(this.parentNode).toggleClass('collapsibleListClosed collapsibleListOpen');
 
-					$(lis[index]).toggleClass('collapsibleListClosed collapsibleListOpen');
-				}
+				})
 			}
 		}
-	}();
+	} ();
 
 	CollapsibleLists.apply();
-
 });

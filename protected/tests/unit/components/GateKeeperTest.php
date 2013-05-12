@@ -6,6 +6,7 @@ class GateKeeperTest extends CTestCase {
 
 	private $session;
 	private $gatekeeper;
+	const LOGGED_OUT = array();
 
 	public function __construct() {
 		$this->session = new Session();
@@ -32,7 +33,7 @@ class GateKeeperTest extends CTestCase {
 		$this->assertTrue($user->save(), "User should have been saved");
 		return $user;
 	}
-	
+
 	private function assertHasAccess($expected, $userAccess, $accessID) {
 		$this->gatekeeper->setAccess($userAccess);
 		$actual = $this->gatekeeper->hasAccess($accessID);
@@ -113,13 +114,13 @@ class GateKeeperTest extends CTestCase {
 	}
 
 	public function test_hasPostAccess_LoggedOut_empty_true() {
-		$userAccess = array();
+		$userAccess = self::LOGGED_OUT;
 		$postAccess = array();
 		$this->assertHasPostAccess(true, $userAccess, $postAccess);
 	}
 
 	public function test_hasPostAccess_LoggedOut_someOut_false() {
-		$userAccess = array();
+		$userAccess = self::LOGGED_OUT;
 		$postAccess = array(1);
 		$this->assertHasPostAccess(false, $userAccess, $postAccess);
 	}
@@ -234,7 +235,7 @@ class GateKeeperTest extends CTestCase {
 	private function getGroup() {
 		$group = new Groups;
 		$group->url = $group->title = "s" . Groups::model()->count();
-		
+
 		$group->save();
 		return $group;
 	}
@@ -244,12 +245,12 @@ class GateKeeperTest extends CTestCase {
 		$user = $this->getUser();
 		$this->assertHasNotAccessToGroup($user, $group);
 	}
-	
+
 	public function test_hasAccessID_registered_true() {
 		$user = $this->getUser();
 		$this->assertHasAccess(true, $user->access, Access::REGISTERED);
 	}
-	
+
 	public function test_hasAccessID_gender_false() {
 		$user = $this->getUser();
 		$user->gender = "female";

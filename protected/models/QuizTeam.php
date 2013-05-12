@@ -94,5 +94,5 @@ class QuizTeam extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 }

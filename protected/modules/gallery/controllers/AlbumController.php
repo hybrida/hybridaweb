@@ -319,7 +319,7 @@ class AlbumController extends Controller
 
 
 		// 5 minutes execution time
-		@set_time_limit(5 * 60);
+		@set_time_limit(60 * 60);
 		// usleep(5000);
 
 		// Get parameters

@@ -1,14 +1,13 @@
-<h1>Status for Quiz</h1>
+<h1>Quiz: Lagoversikt</h1>
 
 <ul>
 <? foreach ($quizTeams as $team): ?>
-	<li><?=$team->name?>: <?=$team->foundedDate?></li>
+	<li><?=$team->name?>: founded <?=$team->foundedDate?>, total score: <?=$totalScore[$team->id]?></li>
 	
 	<ul>
-		<? foreach ($team->quizTeamScores as $score):?>
-		<li><? debug($team->quizTeamScores) ?></li>
-		<? endforeach; ?>
+		<? /* foreach ($team->quizTeamScores as $score):?>
+		<li><? debug($team->quizTeamScores) ?></li>~
+		<? endforeach; */ ?>
 	</ul>
-	
 <? endforeach; ?>
 </ul>

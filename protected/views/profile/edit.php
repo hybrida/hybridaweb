@@ -150,6 +150,27 @@
 
 <div class="formSection">
     <div class="inputGroup">
+        <div class="fieldDefinition">
+			LinkedIn
+        </div>
+        <div class="fieldInput">
+            <?= $form->textField($model, 'user[linkedin]') ?>
+            <?= $form->error($model, 'user[linkedid]') ?>
+        </div>
+    </div>
+    
+    <div class="fieldExplanation">
+        Se på linkedin-profilen din, der er det en link til profilen din.
+        Den har en av disse formene:
+        <strong>no.linkedin.com/pub/fornanvn-etternavn/65/26/31</strong>
+        <br><strong>no.linkedin.com/in/brukernavn.</strong>
+        <br>Kopier enten: <strong>pub/fornanvn-etternavn/65/26/31</strong
+        <br>eller: <strong>in/brukernavn</strong> inn her.
+    </div>
+</div>
+
+<div class="formSection">
+    <div class="inputGroup">
         <div class="fieldDefinition">Kortnummer:</div>
         <div class="fieldInput">
 <?= $form->textField($model, 'user[cardNumber]') ?>

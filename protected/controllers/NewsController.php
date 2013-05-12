@@ -14,7 +14,7 @@ class NewsController extends Controller {
 				'actions' => array("view", "edit", 'toggleAttending', 'alumniSignup', 'griffgrabber'),
 			),
 			array('allow',
-				'actions' => array("create", "email", "manualSignup",'deleteManualSignup', 'editManualSignup', 'editSignup'),
+				'actions' => array("create", "email", "manualSignup", 'deleteManualSignup', 'editManualSignup', 'editSignup'),
 				'roles' => array('createNews'),
 			),
 			array('deny'),
@@ -24,7 +24,10 @@ class NewsController extends Controller {
 	public function actionView($id) {
 		$news = $this->getNewsModelAndThrowExceptionIfNullOrNotAccess($id);
 		$event = $this->getEventByNews($news);
+		$eventAccess = false;
+		$signupAccess = false;
 		if ($event) {
+			$eventAccess = app()->gatekeeper->hasPostAccess('event', $event->id);
 			$bedpress = $event->getBedpress();
 			if ($bedpress) {
 				$this->redirectToBpc($bedpress->bpcID, $news->title);
@@ -34,31 +37,19 @@ class NewsController extends Controller {
 		$signup = $this->getSignupByEvent($event);
 		$isAttending = false;
 		if ($signup) {
+			$signupAccess = app()->gatekeeper->hasPostAccess('signup', $signup->eventId);
 			$isAttending = $signup->isAttending(user()->id);
 		}
 
 		$this->render('view', array(
 			'news' => $news,
 			'event' => $event,
+			'hasAccessToEvent' => $eventAccess,
 			'signup' => $signup,
+			'hasAccessToSignup' => $signupAccess,
 			'isAttending' => $isAttending,
 			'hasEditAccess' => user()->checkAccess('updateNews', array('id' => $id)),
 		));
-	}
-
-	private function getSignupByEvent($event) {
-		if (!$event) {
-			return null;
-		}
-		return $this->getPublishedAccessibleSignup($event->id);
-	}
-
-	private function redirectToBpc($id, $title) {
-		$url = $this->createUrl('/bpc/default/view', array(
-			'id' => $id,
-			'title' => Html::removeSpecialChars($title),
-				));
-		$this->redirect($url);
 	}
 
 	private function getNewsModelAndThrowExceptionIfNullOrNotAccess($id) {
@@ -78,9 +69,32 @@ class NewsController extends Controller {
 		$event = $news->event;
 
 		if ($event &&
-				$event->status == Status::PUBLISHED &&
-				app()->gatekeeper->hasPostAccess('event', $event->id)) {
+				$event->status == Status::PUBLISHED) {
 			return $event;
+		}
+		return null;
+	}
+
+	private function redirectToBpc($id, $title) {
+		$url = $this->createUrl('/bpc/default/view', array(
+			'id' => $id,
+			'title' => Html::removeSpecialChars($title),
+				));
+		$this->redirect($url);
+	}
+
+	private function getSignupByEvent($event) {
+		if (!$event) {
+			return null;
+		}
+		return $this->getPublishedSignup($event->id);
+	}
+
+	private function getPublishedSignup($eventId) {
+		$signup = Signup::model()->findByPk($eventId);
+		if ($signup &&
+				$signup->status == Status::PUBLISHED) {
+			return $signup;
 		}
 		return null;
 	}
@@ -90,7 +104,7 @@ class NewsController extends Controller {
 			return;
 		}
 		$userId = user()->id;
-		$signup = $this->getPublishedAccessibleSignup($eventId);
+		$signup = $this->getPublishedSignup($eventId);
 		if (!$signup) {
 			return;
 		}
@@ -109,16 +123,6 @@ class NewsController extends Controller {
 				$signup->addAttender($userId);
 			}
 		}
-	}
-
-	private function getPublishedAccessibleSignup($eventId) {
-		$signup = Signup::model()->findByPk($eventId);
-		if ($signup &&
-				$signup->status == Status::PUBLISHED &&
-				app()->gatekeeper->hasPostAccess('signup', $signup->eventId)) {
-			return $signup;
-		}
-		return null;
 	}
 
 	private function redirectToNewsByEventId($eventId) {
@@ -249,10 +253,9 @@ class NewsController extends Controller {
 			'event' => $news->event,
 			'news' => $news,
 			'signup' => $news->event->signup,
-			'attenders'=> $news->event->signup->attenders,
+			'attenders' => $news->event->signup->attenders,
 			'formModel' => new SignupMembershipManualForm($news->event->signup),
 		));
-
 	}
 
 }

@@ -32,8 +32,8 @@ class Util {
 		$event->save();
 		return $event;
 	}
-	
-	
+
+
 	public static function getNewSignup($eventId=null) {
 		$signup = new Signup;
 		$signup->spots = 1;
@@ -46,14 +46,14 @@ class Util {
 		}
 		return $signup;
 	}
-	
+
 	public static function getSignup($eventId=null) {
 		$signup = self::getNewSignup($eventId);
 		$signup->save();
 		return $signup;
 	}
-	
-	
+
+
 	public static function getNewUser() {
 		$user = new User;
 		$user->username = 'test' . User::model()->count();
@@ -61,13 +61,13 @@ class Util {
 		$user->member = "false";
 		return $user;
 	}
-	
+
 	public static function getUser() {
 		$user = self::getNewUser();
 		$user->save();
 		return $user;
 	}
-	
+
 	public static function getNewFacebookUser($userId) {
 		$fbUser = new FacebookUser;
 		$fbUser->fb_token = sha1($userId);
@@ -75,58 +75,58 @@ class Util {
 		$fbUser->postEvents = 'false';
 		return $fbUser;
 	}
-	
+
 	public static function getFacebookUser($userId) {
 		$fbUser = self::getNewFacebookUser($userId);
 		$fbUser->save();
 		return $fbUser;
 	}
-	
+
 	public static function getNewGroup() {
 		$group = new Groups;
 		$group->url = $group->title = "test" . Groups::model()->count();
 		$group->menu = 123;
 		return $group;
 	}
-	
+
 	public static function getGroup() {
 		$group = self::getNewGroup();
 		$group->save();
 		return $group;
 	}
-	
+
 	public static function getNewArticle() {
 		$article = new Article;
 		$article->title = "test";
 		return $article;
 	}
-	
+
 	public static function getArticle() {
 		$article = self::getNewArticle();
 		$article->save();
 		return $article;
 	}
-	
+
 	public static function getNewComment() {
 		$comment = new Comment;
 		$comment->content = "test";
 		$comment->parentId = 1;
 		return $comment;
 	}
-	
+
 	public static function getComment() {
 		$comment = self::getNewComment();
 		$comment->save();
 		return $comment;
 	}
-	
+
 	public static function getNewArticleText($articleId) {
 		$articleText = new ArticleText;
 		$articleText->content = "test";
 		$articleText->articleId = $articleId;
 		return $articleText;
 	}
-	
+
 	public static function getArticleText($articleId) {
 		$articleText = self::getNewArticleText($articleId);
 		$articleText->save();
@@ -140,9 +140,61 @@ class Util {
 	}
 
 	public static function getSignupMembershipAnonymous($eventId) {
-		$signupMembershipAnonymous = 
+		$signupMembershipAnonymous =
 				self::getNewSignupMembershipAnonymous($eventId);
 		$signupMembershipAnonymous->save();
 		return $signupMembershipAnonymous;
 	}
+
+	public static function getNewQuizTeam() {
+		$team = new QuizTeam();
+		$team->name = "test";
+		$team->foundedDate = new CDbExpression("NOW()");
+		return $team;
+	}
+
+	public static function getQuizTeam() {
+		$team = self::getNewQuizTeam();
+		$team->save();
+		return $team;
+	}
+
+	public static function getNewQuizEvent($teamId) {
+		$event = new QuizEvent();
+		$event->responsibleQuizTeamId = $teamId;
+		$event->eventSummary = "test";
+		$event->eventDate = new CDbExpression("NOW()");
+		return $event;
+	}
+
+	public static function getQuizEvent($teamId=null) {
+		$team = null;
+		if ($teamId == null) {
+			$team = self::getNewQuizEvent();
+		} else {
+			$team = self::getNewQuizEvent($teamId);
+		}
+		$team->save();
+		return $team;
+	}
+
+	public static function getNewQuizTeamScore($quizEventId, $quizTeamId) {
+		$score = new QuizTeamScore();
+		$score->quizEventId = $quizEventId;
+		$score->quizTeamId = $quizTeamId;
+		$score->score = 0;
+		return $score;
+	}
+
+	public static function getQuizTeamScore($quizEventId=null, $quizTeamId=null) {
+		$score = null;
+		if ($quizEventId == null || $quizTeamId == null) {
+			$score = self::getNewQuizTeamScore();
+		} else {
+			$score = self::getNewQuizTeamScore($quizEventId, $quizTeamId);
+		}
+		$score->save();
+		return $score;
+	}
+
 }

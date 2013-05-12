@@ -7,4 +7,5 @@ upc/
 .project
 .buildpath
 .DS_Store
+.git
 
