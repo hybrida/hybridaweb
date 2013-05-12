@@ -13,8 +13,28 @@ class Access {
 	const SPECIALIZATION_START = 3000;
 
 
+	public static function toText($accessArray) {
+		$textArray = Access::toTextArray($accessArray);
+		if (count($textArray) == 0) {
+			return "";
+		}
+		if (count($textArray) == 1) {
+			return $textArray[0];
+		}
+		$lastElement = array_pop($textArray);
+		$returnString = implode(',<br>', $textArray);
+		$returnString = $returnString . ", eller<br>" . $lastElement;
+		return $returnString;
+	}
+
 	public static function toTextArray($accessArray) {
 		$outerOrGroup = array();
+		if (count($accessArray) == 0) {
+			return $outerOrGroup;
+		}
+		if (!is_array($accessArray[0])) {
+			$accessArray = array($accessArray);
+		}
 		foreach ($accessArray as $access) {
 			$grouped = Access::groupByType($access);
 			$andGroup = array();

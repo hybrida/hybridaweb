@@ -37,8 +37,20 @@ $this->renderPartial('_signup_sidebar', array(
 	'signup' => $signup,
 	'event' => $event,
 	'isAttending' => $isAttending,
-));
+));?>
 
+<div class="g-barTitle">Tilgang</div>
+<div class="g-barText">
+	<? $tilgang = Access::toText($signup->access); ?>
+	<? if($tilgang == ""): ?>
+		Alle har tilgang
+	<? else: ?>
+		Disse kan melde seg på:<br>
+		<?= $tilgang ?>
+	<? endif ?>
+</div>
+
+<?
 $this->widget('application.components.widgets.ActivitiesFeed');
 $this->endClip();
 
