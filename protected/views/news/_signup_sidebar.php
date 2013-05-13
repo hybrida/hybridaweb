@@ -7,6 +7,17 @@
 	</div>
 
 	<? if ($signup): ?>
+		<div class="g-barTitle">Tilgang</div>
+		<div class="g-barText">
+			<? $tilgang = Access::toText($signup->access); ?>
+			<? if($tilgang == ""): ?>
+				Alle har tilgang
+			<? else: ?>
+				Disse kan melde seg på:<br>
+				<?= $tilgang ?>
+			<? endif ?>
+		</div>
+
 		<div class="g-barTitle">Påmelding:</div>
 		<div class="g-barText">
 			<? if (!user()->isGuest && isset($isAttending)): ?>
