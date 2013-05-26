@@ -372,7 +372,6 @@ class AlbumController extends Controller
 					fclose($out);
 					@unlink($_FILES['file']['tmp_name']);
 				} else {
-					Yii::log("Cant open output stream", 'info');
 					throw new CHttpException (500, Yii::t('app', "Can't open output stream."));
 			} else
 				throw new CHttpException (500, Yii::t('app', "Can't move uploaded file."));
