@@ -2,12 +2,15 @@
 	<ul>
 		<li><?= $this->firstCrumb ?></li>
     <?php
-    foreach($this->links as $val => $url) {
+    foreach($this->links as $key => $value) {
 		echo "<li>";
-        if(isset($url)) {
-            echo $this->link($val, $url);
+        if(!is_numeric($key)) {
+            $title = $key;
+            $url = $value;
+            echo $this->link($title, $url);
         } else {
-            echo $val;
+            $title = $value;
+            echo $title;
         }
 		echo "</li>\n";
     }
