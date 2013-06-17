@@ -1,0 +1,34 @@
+/**
+ * Default look uses Yii's default gridview look, and mimics that look for
+ * the listview
+ */
+
+.list-view {}
+
+.list-view div.preheader {
+    color:white;
+    background: url("bg.gif") repeat-x scroll left top #80CFFF;
+    border:1px solid white;
+    text-align: center;
+}
+.list-view div.preheaderinner {padding:0.3em;}
+
+.list-view div.post {
+    margin-bottom:10px;
+}
+
+.list-view div.post div {
+    padding:5px;
+    border:1px solid white;
+}
+.list-view div.post div.header {
+    background: url("bg.gif") repeat-x scroll left top #80CFFF;
+}
+
+.list-view div.post div.content {
+    background: #F8F8F8;
+    padding:10px !important;
+}
+.list-view div.footer {
+    text-align:right;
+}

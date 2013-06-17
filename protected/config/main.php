@@ -33,6 +33,9 @@ return array(
 		'bk',
 		'kilt',
 		'gallery',
+		'forum'=>array(
+			'class'=>'application.modules.yii-forum.YiiForumModule',
+		),
 		'bpc',
 		'calendar',
 		'comment',
@@ -99,7 +102,7 @@ return array(
 			'rules' => array(
 				'admin/articles' => '/admin/articles',
 				'admin/news' => '/admin/news',
-                'admin/stats' => '/admin/stats',
+				'admin/stats' => '/admin/stats',
 				'artikler/<id:\d+>/<title>' => '/article/view',
 				'alumni/form' => 'alumni/form',
 				'alumni' => '/graduate/index',

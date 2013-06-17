@@ -1,0 +1,76 @@
+/**
+ * Mimic the view of MyBB 1.6
+ */
+
+.MyBB-tb {
+    padding: 10px;
+}
+
+.MyBB-tb div.newthread {
+    text-align:right;
+}
+.MyBB-tb table.items {
+    border-spacing: 1px;
+    background: none repeat scroll 0% 0% rgb(129, 162, 196);
+    width: 100%;
+    margin: auto;
+    border: 1px solid rgb(15, 92, 142);
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-family: Verdana,Arial,Sans-Serif;
+}
+
+.MyBB-tb table.items th.preheader {
+    background: url("/forum/assets/6178624f/images/thead_bg.gif") repeat-x scroll left top rgb(2, 108, 177);
+    color:white;
+}
+.MyBB-tb table.items a {
+    text-decoration:none;
+}
+.MyBB-tb table.items a:hover {
+    text-decoration: underline;
+}
+
+.MyBB-tb table.items th,
+.MyBB-tb table.items td
+{
+    padding:.3em;
+}
+
+.MyBB-tb table.items th {
+    background-color:rgb(173, 203, 231);
+}
+.MyBB-tb table.items td {
+    vertical-align: top;
+}
+
+.MyBB-tb table.items td.extrarow {
+    background-color:rgb(229, 229, 229);
+    font-weight: bold;
+}
+
+.MyBB-tb table.items tr.odd {
+    background: none repeat scroll 0% 0% rgb(245, 245, 245);
+}
+
+.MyBB-tb table.items tr.even {
+    background: none repeat scroll 0% 0% rgb(239, 239, 239);
+}
+
+.MyBB-tb table.items th.preheader {
+    background:rgb(2, 108, 177);
+    color:white;
+}
+.MyBB-tb table.items th.preheader a {
+    color:white;
+}
+.MyBB-tb table.items div.name {
+    margin:2px 0;
+    font-weight:bold;
+}
+.MyBB-tb table.items div.level2 {
+}
+.MyBB-tb table.items div.level3 {
+    margin-top:3px;
+    font-size:11px;
+}

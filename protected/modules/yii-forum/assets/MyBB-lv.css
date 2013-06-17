@@ -1,0 +1,42 @@
+/**
+ * Mimic the view of MyBB 1.6
+ */
+
+.MyBB-lv {
+    margin:10px;
+}
+.MyBB-lv div.pager {
+    margin:5px 0;
+}
+.MyBB-lv div.preheader {
+    background: url("thead_bg.gif") repeat-x scroll left top rgb(2, 108, 177);
+    border:1px solid rgb(15, 92, 142);
+}
+.MyBB-lv div.preheaderinner {
+    border:1px solid rgb(129, 162, 196);
+    border-bottom:none;
+    color: rgb(255, 255, 255);
+    padding:5px;
+    font-weight:bold;
+}
+.MyBB-lv div.post {
+    border:1px solid rgb(129, 162, 196);
+    margin-bottom:5px;
+}
+
+.MyBB-lv .post div {
+    padding:5px;
+    border:1px solid rgb(129, 162, 196);
+}
+.MyBB-lv .post .header {
+    background: rgb(173, 203, 231);
+    font-size:12px;
+}
+
+.MyBB-lv .post .content {
+    background: rgb(245, 245, 245);
+    padding:10px !important;
+}
+.MyBB-lv div.footer {
+    text-align:right;
+}

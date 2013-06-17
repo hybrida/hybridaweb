@@ -1,0 +1,12 @@
+.MyBB-dt {
+    width:90%;
+    margin:10px auto;
+}
+
+.MyBB-dt tr.odd {
+    background: none repeat scroll 0% 0% rgb(245, 245, 245);
+}
+
+.MyBB-dt tr.even {
+    background: none repeat scroll 0% 0% rgb(239, 239, 239);
+}

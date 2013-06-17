@@ -1,0 +1,149 @@
+/**
+ * The stuff that is commented out gives the grid a similar look to MyBB 1.6
+ */
+
+/*
+.grid-view {
+    padding: 10px;
+}
+
+.grid-view table.items {
+    border-spacing: 1px;
+    background: none repeat scroll 0% 0% rgb(129, 162, 196);
+    width: 100%;
+    margin: auto;
+    border: 1px solid rgb(15, 92, 142);
+    color: rgb(0, 0, 0);
+    font-size: 12px;
+    font-family: Verdana,Arial,Sans-Serif;
+}
+
+.grid-view th.preheader {
+    background: url("/forum/assets/6178624f/images/thead_bg.gif") repeat-x scroll left top rgb(2, 108, 177);
+    color:white;
+}
+.grid-view a {
+    text-decoration:none;
+}
+.grid-view a:hover {
+    text-decoration: underline;
+}
+
+.grid-view table.items th,
+.grid-view table.items td
+{
+    padding:.3em;
+}
+
+.grid-view th {
+    background-color:rgb(173, 203, 231);
+}
+.grid-view td {
+    vertical-align: top;
+}
+
+.grid-view td.extrarow {
+    background-color:rgb(229, 229, 229);
+    font-weight: bold;
+}
+
+.grid-view tr.odd {
+    background: none repeat scroll 0% 0% rgb(245, 245, 245);
+}
+
+.grid-view tr.even {
+    background: none repeat scroll 0% 0% rgb(239, 239, 239);
+}
+
+.grid-view th.preheader {
+    background:rgb(2, 108, 177);
+    color:white;
+}
+.grid-view th.preheader a {
+    color:white;
+}
+.grid-view div.name {
+    margin:2px 0;
+    font-weight:bold;
+}
+.grid-view div.level2 {
+}
+.grid-view div.level3 {
+    margin-top:3px;
+    font-size:11px;
+}
+
+.list-view {
+    margin:10px;
+}
+.list-view div.preheader {
+    background: url("/forum/assets/6178624f/images/thead_bg.gif") repeat-x scroll left top rgb(2, 108, 177);
+    border:1px solid rgb(15, 92, 142);
+}
+.list-view div.preheaderinner {
+    border:1px solid rgb(129, 162, 196);
+    border-bottom:none;
+    color: rgb(255, 255, 255);
+    padding:5px;
+    font-weight:bold;
+}
+.list-view div.post {
+    border:1px solid rgb(129, 162, 196);
+    margin-bottom:5px;
+}
+
+.thread-view .post div {
+    padding:5px;
+    border:1px solid rgb(129, 162, 196);
+}
+.thread-view .post .header {
+    background: rgb(173, 203, 231);
+    font-size:12px;
+}
+
+.thread-view .post .content {
+    background: rgb(245, 245, 245);
+    padding:10px !important;
+}
+.thread-view div.footer {
+    text-align:right;
+}
+
+*/
+
+
+/****/
+
+/**
+ * These settings are copied from matching entries in zii.widgets.assets.gridview
+ * to make this thing kind of look like a table, while it isn't
+ */
+.list-view {}
+
+.list-view div.preheader {
+    color:white;
+    background: url("bg.gif") repeat-x scroll left top #80CFFF;
+    border:1px solid white;
+    text-align: center;
+}
+.list-view div.preheaderinner {padding:0.3em;}
+
+.list-view div.post {
+    margin-bottom:10px;
+}
+
+.list-view div.post div {
+    padding:5px;
+    border:1px solid white;
+}
+.list-view div.post div.header {
+    background: url("bg.gif") repeat-x scroll left top #80CFFF;
+}
+
+.list-view div.post div.content {
+    background: #F8F8F8;
+    padding:10px !important;
+}
+.list-view div.footer {
+    text-align:right;
+}
