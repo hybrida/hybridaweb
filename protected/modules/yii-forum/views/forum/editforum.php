@@ -1,12 +1,10 @@
 <?php
-$this->widget('zii.widgets.CBreadcrumbs', array(
-    'links'=>array_merge(
+$this->breadcrumbs = array_merge(
         $model->getBreadcrumbs(!$model->isNewRecord),
         array($model->isNewRecord?'New forum':'Edit')
-    )
-));
+    );
 ?>
-<div class="form" style="margin:20px;">
+<div class="g-form" style="margin:20px;">
 <?php $form=$this->beginWidget('CActiveForm'); ?>
 
     <p class="note">Fields with <span class="required">*</span> are required.</p>

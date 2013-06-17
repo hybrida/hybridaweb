@@ -28,7 +28,7 @@ class Forumuser extends CActiveRecord
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'forumuser';
+        return 'forum_user';
     }
 
     /**

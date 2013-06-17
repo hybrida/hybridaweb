@@ -51,9 +51,10 @@ class ForumController extends ForumBaseController
     {
         // Dataproviders for forums in each category will be created on the fly
         // This may be a good candidate for eager loading...
-        $this->render('index',array(
-            'categories'=>Forum::model()->categories()->findAll(),
-        ));
+        // $this->render('index',array(
+        //     'categories'=>Forum::model()->categories()->findAll(),
+        // ));
+        $this->actionView(1);
     }
 
     /**

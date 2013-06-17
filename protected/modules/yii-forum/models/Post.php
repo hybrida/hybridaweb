@@ -32,7 +32,7 @@ class Post extends CActiveRecord
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'post';
+        return 'forum_post';
     }
 
     /**

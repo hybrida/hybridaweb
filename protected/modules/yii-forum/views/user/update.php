@@ -6,7 +6,7 @@ $this->widget('zii.widgets.CBreadcrumbs', array('links'=>array(
 )));
 ?>
 
-<div class="form" style="margin:20px;">
+<div class="g-form" style="margin:20px;">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'forumuser-form',
         'enableClientValidation'=>true,

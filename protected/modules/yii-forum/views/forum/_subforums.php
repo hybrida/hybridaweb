@@ -74,20 +74,21 @@ if($isAdmin)
         'htmlOptions' => array('style' => 'width:40px;'),
     );
 }
-
-$this->widget('forum.extensions.groupgridview.GroupGridView', array(
-    'enableSorting' => false,
-    'summaryText' => '',
-    'selectableRows' => 0,
-    'emptyText' => 'No forums found',
-    'showTableOnEmpty'=>$isAdmin,
-    'preHeader'=>$preheader,
-    'preHeaderHtmlOptions' => array(
-        'class' => 'preheader',
-    ),
-    'dataProvider'=>$subforums,
-    'columns' => $gridColumns,
-    'htmlOptions'=>array(
-        'class'=>Yii::app()->controller->module->forumTableClass,
-    )
-));
+if ($isAdmin || $subforums->itemCount > 0) {
+    $this->widget('forum.extensions.groupgridview.GroupGridView', array(
+        'enableSorting' => false,
+        'summaryText' => '',
+        'selectableRows' => 0,
+        'emptyText' => 'No forums found',
+        'showTableOnEmpty'=>$isAdmin,
+        'preHeader'=>$preheader,
+        'preHeaderHtmlOptions' => array(
+            'class' => 'preheader',
+        ),
+        'dataProvider'=>$subforums,
+        'columns' => $gridColumns,
+        'htmlOptions'=>array(
+            'class'=>Yii::app()->controller->module->forumTableClass,
+        )
+    ));
+}

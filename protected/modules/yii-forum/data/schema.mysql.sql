@@ -1,4 +1,4 @@
-CREATE TABLE `forumuser` (
+CREATE TABLE `forum_user` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`siteid` VARCHAR(200) NOT NULL,
 	`name` VARCHAR(200) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE `forum` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
-CREATE TABLE `thread` (
+CREATE TABLE `forum_thread` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`forum_id` INT(10) UNSIGNED NOT NULL,
 	`subject` VARCHAR(120) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE `thread` (
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
-CREATE TABLE `post` (
+CREATE TABLE `forum_post` (
 	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 	`author_id` INT(10) UNSIGNED NOT NULL,
 	`thread_id` INT(10) UNSIGNED NOT NULL,
@@ -49,9 +49,9 @@ CREATE TABLE `post` (
 	INDEX `FK_post_author` (`author_id`),
 	INDEX `FK_post_editor` (`editor_id`),
 	INDEX `FK_post_thread` (`thread_id`),
-	CONSTRAINT `FK_post_author` FOREIGN KEY (`author_id`) REFERENCES `forumuser` (`id`) ON DELETE CASCADE,
-	CONSTRAINT `FK_post_editor` FOREIGN KEY (`editor_id`) REFERENCES `forumuser` (`id`) ON DELETE CASCADE,
-	CONSTRAINT `FK_post_thread` FOREIGN KEY (`thread_id`) REFERENCES `thread` (`id`) ON DELETE CASCADE
+	CONSTRAINT `FK_post_author` FOREIGN KEY (`author_id`) REFERENCES `forum_user` (`id`) ON DELETE CASCADE,
+	CONSTRAINT `FK_post_editor` FOREIGN KEY (`editor_id`) REFERENCES `forum_user` (`id`) ON DELETE CASCADE,
+	CONSTRAINT `FK_post_thread` FOREIGN KEY (`thread_id`) REFERENCES `forum_thread` (`id`) ON DELETE CASCADE
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB;

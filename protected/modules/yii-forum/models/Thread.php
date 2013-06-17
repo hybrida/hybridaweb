@@ -32,7 +32,7 @@ class Thread extends CActiveRecord
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'thread';
+        return 'forum_thread';
     }
 
     /**
@@ -144,11 +144,16 @@ class Thread extends CActiveRecord
      */
     public function getBreadcrumbs($currentlink=false)
     {
+        $self = array(CHtml::encode($this->subject));
+        if ($currentlink) {
+            $self = array(
+                CHtml::encode($this->subject)=>array(
+                    '/forum/thread/view', 'id'=>$this->id
+                )
+            );
+        }
         return array_merge(
-            $this->forum->getBreadcrumbs(true),
-            ($currentlink?array(CHtml::encode($this->subject)=>array('/forum/thread/view', 'id'=>$this->id)):array(CHtml::encode($this->subject)))
-            // array(isset($this->subject)?$this->subject:'New thread')
-        );
+            $this->forum->getBreadcrumbs(true), $self);
     }
 
     /**

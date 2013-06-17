@@ -1,5 +1,7 @@
 SET FOREIGN_KEY_CHECKS=0;
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -7,6 +9,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida_dev`;
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
@@ -17,32 +20,32 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (85, 4055, 'signup', 0);
 
 INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `articleTextId`, `author`, `timestamp`, `weight`) VALUES
-(56, 1, 'Lenker', NULL, 1, 381, '2012-03-07', 0),
+(1, NULL, 'Hybrida', NULL, 8, 0, '0000-00-00', 0),
+(2, NULL, 'Bedrift', NULL, 7, 331, '2011-11-01', 0),
 (53, 1, 'Updateᵏ', NULL, 2, 381, '2012-03-07', 0),
-(75, NULL, '2012', NULL, 3, 381, '2012-05-12', 0),
 (54, NULL, '2007', NULL, 4, 381, '2012-03-07', 0),
 (55, 1, 'Kontaktinfo', NULL, 5, 381, '2012-03-07', 0),
+(56, 1, 'Lenker', NULL, 1, 381, '2012-03-07', 0),
 (57, 1, 'Sanger', NULL, 6, 381, '2012-03-07', 0),
-(2, NULL, 'Bedrift', NULL, 7, 331, '2011-11-01', 0),
-(1, NULL, 'Hybrida', NULL, 8, 0, '0000-00-00', 0),
 (58, 1, 'Statutter', NULL, 9, 381, '2012-03-07', 0),
 (59, 1, 'Styre og stell', 'Styret', 10, 381, '2012-03-07', 0),
+(60, 59, 'Referater', NULL, 15, 381, '2012-03-07', 0),
+(61, 55, 'Kontoret', NULL, 14, 381, '2012-03-07', 0),
+(62, NULL, 'I&amp;IKT-ringen', NULL, 16, 381, '2012-05-05', 0),
+(63, 62, 'Styret', 'Styret', 17, 381, '2012-05-05', 0),
 (64, 62, 'Visjon', NULL, 11, 293, '2012-05-05', 0),
 (65, 62, 'Medlemmer', NULL, 12, 293, '2012-05-05', 0),
 (66, 62, 'Årsmeldinger', 'Årsmeldinger', 13, 293, '2012-05-05', 0),
-(61, 55, 'Kontoret', NULL, 14, 381, '2012-03-07', 0),
-(60, 59, 'Referater', NULL, 15, 381, '2012-03-07', 0),
-(62, NULL, 'I&amp;IKT-ringen', NULL, 16, 381, '2012-05-05', 0),
-(63, 62, 'Styret', 'Styret', 17, 381, '2012-05-05', 0),
 (67, 62, 'Kontaktinformasjon', NULL, 18, 293, '2012-05-05', 0),
 (68, 62, 'Om', 'Om', 19, 293, '2012-05-05', 0),
 (69, 62, 'Bedriftens bidrag', NULL, 20, 293, '2012-05-05', 0),
-(73, 2, 'Kontakt', NULL, 21, 293, '2012-05-08', 0),
-(76, 1, 'Tillitsvalgte', 'Tillitsvalgte', 22, 317, '2012-09-04', 0),
 (70, 62, 'Promotering', NULL, 23, 293, '2012-05-08', 0),
 (71, 70, 'Presentasjoner', NULL, 24, 293, '2012-05-08', 0),
 (72, 70, 'Update^k', NULL, 25, 293, '2012-05-08', 0),
+(73, 2, 'Kontakt', NULL, 21, 293, '2012-05-08', 0),
 (74, 2, 'Medlemmer', NULL, 26, 293, '2012-05-08', 0),
+(75, NULL, '2012', NULL, 3, 381, '2012-05-12', 0),
+(76, 1, 'Tillitsvalgte', 'Tillitsvalgte', 22, 317, '2012-09-04', 0),
 (77, 76, 'SPR', 'SPR', 27, 317, '2012-09-04', 2),
 (78, 76, 'KTR', 'KTR', 28, 317, '2012-09-04', 0),
 (80, 1, 'Lesesalen', NULL, 29, 381, '2012-09-06', 0),
@@ -118,7 +121,6 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (83, '2012-12-01 00:00:00', '2013-04-06 00:00:00', 'Kontoret', 0),
 (85, '2012-02-25 20:00:54', '2012-02-26 02:00:00', 'Lyche', 0),
 (89, '2012-03-21 14:00:00', '2012-03-21 19:00:00', '', 0),
-(100, '2012-10-02 18:15:00', '2012-10-02 18:15:00', 'S4', 0),
 (91, '2012-04-19 18:15:00', '2012-04-19 18:15:00', '', 0),
 (92, '2012-04-17 00:00:00', '2012-04-18 00:00:00', 'Kontoret', 0),
 (93, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'NTNU', 0),
@@ -126,9 +128,10 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (95, '2012-04-24 06:35:00', '2012-04-01 19:30:00', 'Her!', 0),
 (97, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'arst', 0),
 (99, '2013-09-01 00:00:00', '2015-09-01 00:00:00', 'Lesesalen', 0),
-(103, '2012-10-04 17:15:00', '2012-10-04 17:15:00', 'R2', 0),
+(100, '2012-10-02 18:15:00', '2012-10-02 18:15:00', 'S4', 0),
 (101, '2012-10-15 18:15:00', '2012-10-15 18:15:00', 'R2', 0),
 (102, '2012-10-23 18:15:00', '2012-10-23 18:15:00', 'R2', 0),
+(103, '2012-10-04 17:15:00', '2012-10-04 17:15:00', 'R2', 0),
 (108, '2012-10-24 00:00:00', '2012-10-27 00:00:00', 'R61', 0),
 (109, '2021-06-05 17:00:00', '2021-06-05 17:00:00', 'R7', 0),
 (110, '2015-02-03 17:00:00', '2015-02-03 17:00:00', 'R7', 0);
@@ -146,19 +149,22 @@ INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
 INSERT INTO `fieldtrip_support` (`id`, `bpcId`, `userId`) VALUES
 (1, 98, 381);
 
+INSERT INTO `forum` (`id`, `parent_id`, `title`, `description`, `listorder`, `is_locked`) VALUES
+(1, NULL, 'Hybrida', '', 1, 0);
+
 INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
-(22, 1, 'HELLO', NULL, '2011-04-03 23:24:42'),
-(21, 1, 'hello', NULL, '2011-04-03 23:23:11'),
-(20, 1, 'n', NULL, '2011-04-03 22:12:46'),
-(19, 1, 'lol', NULL, '2011-04-03 21:37:07'),
 (18, 1, 'lol', NULL, '2011-04-03 20:56:39'),
+(19, 1, 'lol', NULL, '2011-04-03 21:37:07'),
+(20, 1, 'n', NULL, '2011-04-03 22:12:46'),
+(21, 1, 'hello', NULL, '2011-04-03 23:23:11'),
+(22, 1, 'HELLO', NULL, '2011-04-03 23:24:42'),
 (23, 1, 'bears', NULL, '2011-04-03 23:39:46');
 
 INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
-(58, 0, 'UpdateK', 381, 'false', 'updatek'),
 (55, 0, 'Webkom', 381, 'true', 'webkom'),
 (56, 0, 'Styret', 363, 'false', 'styret'),
-(57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bk');
+(57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bk'),
+(58, 0, 'UpdateK', 381, 'false', 'updatek');
 
 INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (1, 'Kilt', 'Gutt', 'K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
@@ -220,8 +226,6 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, 0, '2011-07-17 22:34:51', 0),
 (41, 73, 'event', 'Generalforsamling', NULL, 'Generalforsamling i Hybrida', '', 326, 0, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, 0, '2011-11-26 20:02:14', 0),
-(379, 101, 'event', 'Bedpres: Jotne EPM Technology', NULL, 'Bedriftspresentasjon med Jotne EPM Technology', '<p>Bedriftspresentasjon med Jotne EPM Technology</p>\n', NULL, 0, '2012-09-25 20:25:01', 0),
-(380, 102, 'event', 'Bedpres: IPRES', NULL, 'Bedriftspresentasjon med IPRES', '<p>Bedriftspresentasjon med IPRES</p>\n', NULL, 0, '2012-09-25 20:25:01', 0),
 (364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>\n	Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>\n	Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p>\n	<strong>Lycheburger </strong>Lyches ubestridte klassiker. Med aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter. kr 109.</p>\n<p>\n	<strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli, pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.  kr 99</p>\n<p>\n	<strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår. Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte mandelpoteter. kr 129</p>\n<p>\n	<strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr 129</p>\n<p>\n	<strong><em>Dessertvalg:</em></strong></p>\n<p>\n	<strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr 45</p>\n<p>\n	<strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p>\n	 </p>\n<p>\n	Betaling skjer på Hybridas konto: 0539.26.44913 Prisen avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn + halvingfest</p>\n<p>\n	 </p>\n', 367, 0, '2012-02-17 19:09:39', 0),
 (366, 89, 'event', 'Komitefest!', NULL, 'Det arrangeres komitefest for hybrida kommitémedlemmer 15. mars på kjellerne.', '', 381, 0, '2012-02-28 13:23:04', 0),
 (368, NULL, NULL, 'Den gamle siden', NULL, 'Den gamle siden vil ikke lenger bli vedlikeholdt, men finnes på <a href="http://www.hybrida.ntnu.no">http://www.hybrida.ntnu.no</a>', '<p>\n	 .</p>\n', 353, 0, '2012-04-25 23:17:43', 0),
@@ -230,7 +234,6 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (371, 91, 'event', '17. mai-tog', NULL, '17. mai-toget begynner klokken 13.00 utenfor Nidarosdomen. Oppmøte: 12.45.\n\nVi går uansett vær!', '<p>\n	Møt opp og bli med i 17. mai-tog!</p>\n', 370, 0, '2012-05-17 00:39:04', 0),
 (373, NULL, NULL, 'Dette er bare en beta', NULL, 'Denne siden er bare en beta, gå til <a href="http://hybrida.no">hybrida.no</a> for å komme til hovedsiden', '', 381, 2147483647, '2025-07-05 07:18:12', 0),
 (375, 97, 'event', 'Testevent', NULL, 'oaietno', '<p>\n	awtaw</p>\n', 381, 0, '2012-08-24 08:55:52', 0),
-(378, 100, 'event', 'Bedpres: EDR Medeso', NULL, '<p>EDR&Medeso er en ledende leverandør av programvareløsninger og konsulenttjenester innen BIM, strukturanalyser og dynamikk. Vi har over 25 års erfaring med 3D programvare og forhandler blant annet Tekla og SAP2000, som er markedsledende innen struktur-BIM og jordskjelvsberegninger.</p>\r\n\r\n<p>Vårt hovedkontor for BIM er i Oslo, her jobber i dag 11 ingeniører innenfor bygg, offshore, konstruksjonsteknikk og BIM. Som ansatt hos oss blir du del av et internasjonalt, faglig sterkt og ungt miljø. Du vil jobbe på spennende prosjekter innenfor samferdsel, bygg eller offshore for kunder som Aas Jakobsen, Multiconsult, Norconsult, Reinertsen, Skanska, Rambøll og Spenncon.</p>\r\n\r\n<p>Vår BIM-...', '<p>EDR&Medeso er en ledende leverandør av programvareløsninger og konsulenttjenester innen BIM, strukturanalyser og dynamikk. Vi har over 25 års erfaring med 3D programvare og forhandler blant annet Tekla og SAP2000, som er markedsledende innen struktur-BIM og jordskjelvsberegninger.</p>\n\n<p>Vårt hovedkontor for BIM er i Oslo, her jobber i dag 11 ingeniører innenfor bygg, offshore, konstruksjonsteknikk og BIM. Som ansatt hos oss blir du del av et internasjonalt, faglig sterkt og ungt miljø. Du vil jobbe på spennende prosjekter innenfor samferdsel, bygg eller offshore for kunder som Aas Jakobsen, Multiconsult, Norconsult, Reinertsen, Skanska, Rambøll og Spenncon.</p>\n\n<p>Vår BIM-avdeling er i kraftig vekst og vi er interessert i deg som går på konstruksjonsteknikk med fordypning innen stål eller betong. Eller du som fordyper deg innen programmering men har grunnleggende kunnskaper i bygg og anleggsteknikk</p>\n\n<hr>\n\n<p>Bedriftspresentasjonen er åpen for 4. - 5. klasse I & IKT og 4. - 5. klasse Bygg med spesialisering innen konstruksjonsteknikk og bør helst ha full fordypning innen betong eller stål.</p>\n\n<p>\nDet blir servering av pizza og vinlotteri på kjelhuset i etterkant av presentasjonen.\n</p>\n', NULL, 0, '2012-09-25 20:25:01', 0),
 (377, 99, 'event', 'Evig event', NULL, 'Event som kun brukes til testing', '<p>\n	Denne hendelsen med påmelding er åpen frem til 2015. Veldig nyttig til testing</p>\n', 381, 0, '2012-09-11 13:39:55', 0),
 (382, NULL, NULL, 'Trenger ikke nytt passord likevel', NULL, '<p>\nNTNU har nettopp gått tilbake på deres beslutning om å stenge ned den gamle innloggingstjenesten, så det er ikke lenger noe akutt behov for å legge inn nytt passord.\n\nDe har gitt beskjed om at de kommer til å  videreføre den nåværende tjenesten intil videre, så da kommer vi til å benytte den.\n</p>\n\n<p>\nBeklager alt maset.\n</p>', '<p>\n	Hvis det skulle være at NTNU etter en tid velger å avslutte innloggingstjenesten, som opprinnelig var planen, kan det hende vi kommer til å gå over til å bruke eget hybrida-passord, slik som er praksis hos en del andre linjeforeninger, men det er altså ikke vits i å styre med dette lenger nå.</p>\n<p>\n	Vi kommer ikke til å slette de nye passordene på grunn av dette.</p>\n<p>\n	Om NTNU gjør en ny beslutning vil vi gi beskjed om dette i god tid.</p>\n', 381, 0, '2012-09-28 00:30:22', 0),
 (386, NULL, NULL, 'Lipsum', NULL, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin pretium fermentum augue, eget fermentum neque venenatis et. Donec mollis tristique sagittis. Fusce quis sapien non felis aliquet suscipit. In id odio nisi, non sodales ipsum. Duis at est nunc, ut tincidunt nunc. Duis quis orci lectus. Fusce lobortis, diam dapibus condimentum lobortis, leo orci blandit dolor, quis suscipit massa mi nec ligula. Nunc ligula tellus, ultrices a vehicula sed, pretium quis velit. Pellentesque tellus odio, consectetur dapibus sodales ac, luctus nec enim.', '<p>\n	Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pulvinar ipsum in odio accumsan sit amet tincidunt mauris posuere. Aliquam mollis luctus risus eget posuere. Donec eleifend purus id arcu consectetur eget tempor felis euismod. Nam tempus gravida justo, sit amet imperdiet libero tristique nec. Donec varius eleifend fermentum. Aenean sit amet sapien diam. Sed dolor orci, pharetra vel volutpat non, ornare nec orci.</p>\n<p>\n	Duis eget arcu sed quam cursus placerat a non leo. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla facilisi. Mauris eget orci vitae ante imperdiet rhoncus. Integer id nisi magna. Donec sagittis ornare dolor. Morbi id purus non felis adipiscing molestie.</p>\n<p>\n	Phasellus nec leo elit. Praesent lectus metus, rhoncus euismod gravida eu, venenatis a sapien. Praesent at lectus ipsum. Curabitur tempor odio sit amet dui fringilla imperdiet. Vestibulum vehicula eleifend elit eget consequat. Phasellus hendrerit velit eget dolor convallis eu tincidunt lorem tristique. Etiam odio dui, rutrum id molestie ut, egestas vitae velit.</p>\n<p>\n	Proin nisl dolor, imperdiet non eleifend eget, euismod vel sem. Nulla at nibh eget quam gravida convallis in nec dolor. Nullam odio magna, ullamcorper ac tempor sed, dignissim at mi. In bibendum mauris vitae massa tempus ac auctor neque varius. Aenean tincidunt dolor euismod nisi molestie quis placerat mi placerat. Mauris libero dolor, mollis in consectetur nec, fringilla et arcu. Sed scelerisque sodales augue et placerat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Ut lobortis laoreet tortor nec venenatis. Fusce lobortis pharetra libero, ut accumsan urna venenatis eu. Mauris non nisi magna. Vivamus condimentum feugiat congue. Suspendisse bibendum molestie augue non molestie.</p>\n', 381, 0, '2012-09-27 17:05:35', 0),
@@ -271,33 +274,33 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('writer', 2, 'Kan publisere', '', 's:0:"";');
 
 INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
-('webkom', 'admin'),
+('admin', 'deleteComment'),
+('admin', 'editor'),
+('admin', 'updateBedpres'),
+('admin', 'updateGroup'),
+('admin', 'updateProfile'),
+('admin', 'writer'),
 ('all', 'bk'),
+('all', 'deleteOwnComment'),
+('all', 'styret'),
+('all', 'updateOwnProfile'),
+('all', 'webkom'),
+('bk', 'updateBedpres'),
+('bk', 'updateNews'),
+('deleteOwnComment', 'deleteComment'),
+('editor', 'updateArticle'),
+('editor', 'updateNews'),
+('styret', 'editor'),
+('styret', 'writer'),
+('updateOwnArticle', 'updateArticle'),
+('updateOwnNews', 'updateNews'),
+('updateOwnProfile', 'updateProfile'),
+('webkom', 'admin'),
+('webkom', 'writer'),
 ('writer', 'createArticle'),
 ('writer', 'createNews'),
-('admin', 'deleteComment'),
-('deleteOwnComment', 'deleteComment'),
-('all', 'deleteOwnComment'),
-('admin', 'editor'),
-('styret', 'editor'),
-('all', 'styret'),
-('editor', 'updateArticle'),
-('updateOwnArticle', 'updateArticle'),
-('admin', 'updateBedpres'),
-('bk', 'updateBedpres'),
-('admin', 'updateGroup'),
-('bk', 'updateNews'),
-('editor', 'updateNews'),
-('updateOwnNews', 'updateNews'),
 ('writer', 'updateOwnArticle'),
-('writer', 'updateOwnNews'),
-('all', 'updateOwnProfile'),
-('admin', 'updateProfile'),
-('updateOwnProfile', 'updateProfile'),
-('all', 'webkom'),
-('admin', 'writer'),
-('styret', 'writer'),
-('webkom', 'writer');
+('writer', 'updateOwnNews');
 
 INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
 (71, 47, '2011-12-07 22:25:40', '2012-01-01 22:35:00', 'false', 0),
@@ -314,17 +317,17 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (92, 20, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'true', 0),
 (93, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'true', 0),
 (94, 100, '2012-04-01 00:00:00', '2012-04-30 00:00:00', 'false', 0),
-(98, 1, '2012-08-27 11:00:00', '2012-09-17 11:00:00', 'false', 2),
 (97, 1, '2012-08-01 00:00:00', '2012-08-31 00:00:00', 'false', 0),
+(98, 1, '2012-08-27 11:00:00', '2012-09-17 11:00:00', 'false', 2),
 (99, 10000, '2012-09-01 00:00:00', '2015-09-01 00:00:00', 'true', 0),
+(100, 30, '2012-09-24 11:00:00', '2012-10-01 11:00:00', 'false', 2),
+(101, 1, '2012-08-31 11:00:00', '2012-10-15 11:00:00', 'false', 2),
 (102, 1, '2012-08-31 11:00:00', '2012-10-23 11:00:00', 'false', 2),
 (103, 50, '2012-09-27 15:00:00', '2012-10-04 11:00:00', 'false', 2),
-(101, 1, '2012-08-31 11:00:00', '2012-10-15 11:00:00', 'false', 2),
-(100, 30, '2012-09-24 11:00:00', '2012-10-01 11:00:00', 'false', 2),
 (107, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 2),
 (108, 500, '2012-10-15 00:00:00', '2012-10-31 00:00:00', 'true', 0),
-(110, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 2),
-(109, 110, '2012-02-01 15:00:00', '2016-11-04 17:00:00', 'false', 2);
+(109, 110, '2012-02-01 15:00:00', '2016-11-04 17:00:00', 'false', 2),
+(110, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 2);
 
 INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (1, 10, 'Geomatikk'),
@@ -348,3 +351,4 @@ INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `sp
 INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
 (293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
 SET FOREIGN_KEY_CHECKS=1;
+COMMIT;

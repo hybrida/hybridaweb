@@ -7,7 +7,7 @@
     ));
 ?>
 
-<div class="form" style="margin:20px;">
+<div class="g-form" style="margin:20px;">
     <?php $form=$this->beginWidget('CActiveForm', array(
         'id'=>'thread-form',
         'enableClientValidation'=>true,

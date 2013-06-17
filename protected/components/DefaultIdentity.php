@@ -16,7 +16,7 @@ class DefaultIdentity extends InnsidaIdentity {
 		} else {
 			$user = User::findByUsername($id);
 		}
-		
+
 		$ssoClient = new SSOMock("username,{$user->username}");
 		parent::__construct($ssoClient);
 	}

@@ -5,7 +5,7 @@
  * set the user state "forumuser_id" to a correct value.
  * All controllers in the foum module must extend from this base class.
  */
-class ForumBaseController extends CController
+class ForumBaseController extends Controller
 {
 	public function beforeAction($action)
 	{

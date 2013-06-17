@@ -1,7 +1,7 @@
 <?php
-$this->widget('zii.widgets.CBreadcrumbs', array(
-    'links'=>$forum->getBreadcrumbs(),
-));
+
+$this->breadcrumbs = $forum->getBreadcrumbs();
+
 
 $this->renderPartial('_subforums', array(
     'inforum'=>true,

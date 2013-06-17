@@ -1,4 +1,7 @@
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -6,7 +9,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-CREATE DATABASE `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida_dev`;
 
 CREATE TABLE IF NOT EXISTS `access_relations` (
@@ -167,6 +170,54 @@ CREATE TABLE IF NOT EXISTS `fieldtrip_support` (
   UNIQUE KEY `bpcId` (`bpcId`,`userId`),
   KEY `user` (`userId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+CREATE TABLE IF NOT EXISTS `forum` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `parent_id` int(10) unsigned DEFAULT NULL,
+  `title` varchar(120) NOT NULL,
+  `description` text NOT NULL,
+  `listorder` smallint(5) unsigned NOT NULL,
+  `is_locked` tinyint(1) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_forum_forum` (`parent_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `forum_post` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `author_id` int(10) unsigned NOT NULL,
+  `thread_id` int(10) unsigned NOT NULL,
+  `editor_id` int(10) unsigned DEFAULT NULL,
+  `content` text NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  `updated` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_post_author` (`author_id`),
+  KEY `FK_post_editor` (`editor_id`),
+  KEY `FK_post_thread` (`thread_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `forum_thread` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `forum_id` int(10) unsigned NOT NULL,
+  `subject` varchar(120) NOT NULL,
+  `is_sticky` tinyint(1) unsigned NOT NULL,
+  `is_locked` tinyint(1) unsigned NOT NULL,
+  `view_count` bigint(20) unsigned NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_thread_forum` (`forum_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE IF NOT EXISTS `forum_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `siteid` varchar(200) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `signature` text,
+  `firstseen` int(10) unsigned NOT NULL,
+  `lastseen` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `siteid` (`siteid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `gallery` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -449,7 +500,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `gender` enum('unknown','male','female') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'unknown',
   `imageId` int(11) DEFAULT NULL,
   `phoneNumber` int(11) DEFAULT NULL,
-  `linkedin` varchar(75) DEFAULT NULL,
+  `linkedin` varchar(75) COLLATE utf8_unicode_ci DEFAULT NULL,
   `lastLogin` datetime DEFAULT NULL,
   `cardHash` varchar(70) COLLATE utf8_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8_unicode_ci,
@@ -473,6 +524,17 @@ CREATE TABLE IF NOT EXISTS `user_password` (
 ALTER TABLE `fieldtrip_support`
   ADD CONSTRAINT `fieldtrip_support_ibfk_1` FOREIGN KEY (`bpcId`) REFERENCES `event_company` (`bpcID`),
   ADD CONSTRAINT `fieldtrip_support_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
+
+ALTER TABLE `forum`
+  ADD CONSTRAINT `FK_forum_forum` FOREIGN KEY (`parent_id`) REFERENCES `forum` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `forum_post`
+  ADD CONSTRAINT `FK_post_author` FOREIGN KEY (`author_id`) REFERENCES `forum_user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_post_editor` FOREIGN KEY (`editor_id`) REFERENCES `forum_user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_post_thread` FOREIGN KEY (`thread_id`) REFERENCES `forum_thread` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `forum_thread`
+  ADD CONSTRAINT `FK_thread_forum` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`) ON DELETE CASCADE;
 
 ALTER TABLE `griffgame_highscore`
   ADD CONSTRAINT `griffgame_highscore_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
@@ -500,3 +562,5 @@ ALTER TABLE `rbac_assignment`
 ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
