@@ -41,6 +41,21 @@ class YiiForumModule extends CWebModule
             'forum.components.*',
             'forum.models.*',
         ));
+
+        $this->setAdminAccess();
+    }
+
+    private function setAdminAccess() {
+        //FIXME denne funksjonen må fjernes så snart siden går til produksjon!
+        // Det må løses på en bedre måte.
+        if (user()->isGuest) {
+            return;
+        }
+        if (user()->checkAccess('webkom')) {
+            user()->setState('isAdmin', true);
+        } else {
+            user()->setState('isAdmin', false);
+        }
     }
 
     /**
