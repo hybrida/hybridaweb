@@ -1,27 +1,35 @@
-<div class="navItems">
-		<?= CHtml::link("Hjem", array("/newsfeed/index"), array('class' => 'firstNavigationLink')); ?> 
-		<?= CHtml::link("Kalender", array("/calendar/default/index")); ?> 
+<div class="layout-menu">
+	<ul>
+		<li><?= CHtml::link("Hjem", array("/newsfeed/index"), array('class' => 'firstNavigationLink')); ?></li>
+		<li><?= CHtml::link("Kalender", array("/calendar/default/index")); ?></li>
 
 		<? if (app()->gatekeeper->hasGroupAccess(57)): ?>
-			<?= CHtml::link("BK", array('/bk/bktool/index')) ?> 
+			<li><?= CHtml::link("BK", array('/bk/bktool/index')) ?></li>
 		<? endif ?>
 
 		<? if (!user()->isGuest): ?>
-			<?= CHtml::link("Profil", array("/profile/")); ?> 
-			<?= CHtml::link("Medlemmer", array("/students/")); ?> 
 		<? endif ?>
 
-		<?= CHtml::link("Bedrift", array("/article/view", 'id' => 2, 'title' => 'Bedrift')); ?> 
-		<?= CHtml::link("I&IKT-ringen", array("/article/view", 'id' => 62, 'title' => 'IKT-ringen')); ?> 
-		<?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 1, 'title' => 'Om Hybrida')); ?> 
-		<? Yii::import('notifications.models.*') ?>
+		<li><?= CHtml::link("Bedrift", array("/article/view", 'id' => 2, 'title' => 'Bedrift')); ?></li>
+		<li><?= CHtml::link("I&IKT-ringen", array("/article/view", 'id' => 62, 'title' => 'IKT-ringen')); ?></li>
+		<li><?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 1, 'title' => 'Om Hybrida')); ?></li>
 
-	<div class="userOptions">
 		<? if (user()->isGuest): ?>
-			<?= CHtml::link("Logg inn", user()->loginUrl) ?>
+			<li class="userOptions"><?= CHtml::link("Logg inn", user()->loginUrl) ?></li>
 		<? else: ?>
-			<?= CHtml::link("Logg ut", param('logoutUrl')); ?>
+			<li class="userOptions"><?= CHtml::link("Logg ut", param('logoutUrl')); ?></li>
+			<li class="userOptions">
+				<a href="#">
+					Mer
+				</a>
+				<ul>
+					<li><?= user()->fullName ?></li>
+					<li><?= CHtml::link("Varslinger", array("/notifications/")); ?></li>
+					<li><?= CHtml::link("Profil", array("/profile/")); ?></li>
+					<li><?= CHtml::link("Medlemmer", array("/students/")); ?></li>
+				</ul>
+			</li>
 		<? endif ?>
-	</div>
-
+	</ul>
 </div>
+<br/>

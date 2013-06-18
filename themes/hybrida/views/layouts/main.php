@@ -35,12 +35,7 @@
 				</div>
 				<div style="clear: both"></div>
 				<div class="layout-headBottom">
-					<div class="layout-menu">
-						<nav>
-							<? $this->widget("application.components.widgets.TabNavigation"); ?>
-						</nav>
-						<br/>
-					</div>
+					<? $this->widget("application.components.widgets.TabNavigation"); ?>
 				</div>
 			</div>
 

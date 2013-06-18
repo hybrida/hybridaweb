@@ -1,8 +1,75 @@
-.layout-menu nav {
+.layout-menu ul{
 	box-shadow: 0 0 5px black;
+	list-style: none;
+	padding: 7px 0;
+	margin: 0;
+	border-radius: 2px;
 }
 
-.layout-menu nav {
+
+.layout-menu li{
+	display: inline;
+	position: relative;
+}
+
+.layout-menu a{
+	color: white;
+	text-decoration: none;
+	font-weight: 550;
+	padding: 7px 20px;
+	margin-right: -4px;
+	margin-left: -2px;
+	border-right: 2px solid rgba(0,0,0,0.3);
+}
+
+.layout-menu a:first-child {
+	margin-left: 0;
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+}
+
+.layout-menu a:last-child {
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 2px;
+}
+
+.layout-menu .userOptions {
+	float: right;
+}
+
+.layout-menu .userOptions a {
+	border-right: none;
+	border-left: 2px solid rgba(0,0,0,0.3);
+	margin-right: 0;
+	margin-left: 0;
+}
+
+.layout-menu ul ul {
+	display: none;
+	position: absolute;
+	top: 100%;
+	left: 0;
+	padding: 1em;
+}
+
+.layout-menu ul ul li {
+	margin-top: 0.5em;
+	display: block;
+}
+
+.layout-menu ul ul li:first-child {
+	margin-top:0;
+}
+
+.layout-menu ul ul li a, .layout-menu ul .userOptions ul li a{
+	border: none;
+}
+
+.layout-menu ul li:hover > ul {
+	display: block;
+}
+
+.layout-menu ul {
 	background: #185c9b;
 	background: -moz-linear-gradient(top,  #185c9b 0%, #003b8e 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#003b8e), color-stop(100%,#185c9b));
@@ -11,49 +78,9 @@
 	background: -ms-linear-gradient(top,  #185c9b 0%,#003b8e 100%);
 	background: linear-gradient(to bottom,  #185c9b 0%,#003b8e 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#185c9b', endColorstr='#003b8e',GradientType=0 );
-	padding: 7px 0px;
-	border-radius: 2px;
 }
 
-.layout-menu nav .navItems a{
-	display: inline;
-}
-
-.layout-menu nav .navItems a{
-	color: white;
-	text-decoration: none;
-	font-weight: 550;
-	padding: 7px 20px;
-	margin-right: -3px;
-	margin-left: -1px;
-	/*margin-right: 5px;*/
-	border-right: 2px solid rgba(0,0,0,0.3);
-}
-
-.layout-menu nav .navItems a:first-child {
-	margin-left: 0;
-	border-top-left-radius: 2px;
-	border-bottom-left-radius: 2px;
-}
-
-.layout-menu nav .navItems a:last-child {
-	border-top-right-radius: 2px;
-	border-bottom-right-radius: 2px;
-}
- 
-.layout-menu nav .navItems .userOptions a {
-	border-right: none;
-	border-left: 2px solid rgba(0,0,0,0.3);
-	margin-right: 0;
-	margin-left: 0;
-}
-
- .layout-menu nav .navItems div.userOptions {
-	 display: inline;
-	 float: right;
- }
-
-.layout-menu nav .navItems a:hover {
+.layout-menu a:hover {
 	background: #154e87;
 	background: -moz-linear-gradient(top,  #154e87 0%, #003a75 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#154e87), color-stop(100%,#003a75));
@@ -65,7 +92,7 @@
 
 }
 
-.layout-menu nav .navItems a:active {
+.layout-menu a:active {
 	background: #14427f;
 	background: -moz-linear-gradient(top,  #14427f 0%, #004063 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#14427f), color-stop(100%,#004063));
