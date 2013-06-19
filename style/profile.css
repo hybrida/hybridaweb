@@ -54,3 +54,13 @@
     height: 30px;
     margin-top: -6px;
 }
+
+.profileInfo .infoTable th {
+    text-align: right;
+    width: 150px;
+    padding-right: 0.5em;
+}
+
+.profileInfo .userDescription {
+    text-align: justify;
+}
