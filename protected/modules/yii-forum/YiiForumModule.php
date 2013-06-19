@@ -48,10 +48,11 @@ class YiiForumModule extends CWebModule
     private function setAdminAccess() {
         //FIXME denne funksjonen må fjernes så snart siden går til produksjon!
         // Det må løses på en bedre måte.
-        if (user()->isGuest) {
+        if (user()->isGuest || user()->getState('isAdmin') !== null) {
             return;
         }
-        if (user()->checkAccess('webkom')) {
+
+        if (user()->checkAccess('admin')) {
             user()->setState('isAdmin', true);
         } else {
             user()->setState('isAdmin', false);
