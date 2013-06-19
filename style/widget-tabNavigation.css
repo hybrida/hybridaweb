@@ -6,7 +6,6 @@
 	border-radius: 2px;
 }
 
-
 .layout-menu li{
 	display: inline;
 	position: relative;
@@ -44,17 +43,29 @@
 	margin-left: 0;
 }
 
+/*------------------ submenyer ---------------------*/
+
 .layout-menu ul ul {
 	display: none;
 	position: absolute;
 	top: 100%;
 	left: 0;
 	padding: 1em;
+	background-color: #185c9b;
+}
+
+.layout-menu ul li:hover > ul {
+	display: block;
 }
 
 .layout-menu ul ul li {
 	margin-top: 0.5em;
 	display: block;
+	color: gray;
+}
+
+.layout-menu ul ul a {
+	width: 150px;
 }
 
 .layout-menu ul ul li:first-child {
@@ -65,11 +76,26 @@
 	border: none;
 }
 
-.layout-menu ul li:hover > ul {
+.layout-menu ul ul a:hover {
+	background-color: #337abc;
+}
+
+/*------- submeny: Navnefelt ----------*/
+
+.layout-menu li.name a{
+	background-color: #296dac;
+	color: white;
+	padding: 0.4em;
+	border-radius: 2px;
+	margin: 0;
+	border: 0;
 	display: block;
 }
 
-.layout-menu ul {
+
+/*-------------- Gradienter --------------------*/
+
+.layout-menu > ul {
 	background: #185c9b;
 	background: -moz-linear-gradient(top,  #185c9b 0%, #003b8e 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#003b8e), color-stop(100%,#185c9b));
@@ -80,7 +106,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#185c9b', endColorstr='#003b8e',GradientType=0 );
 }
 
-.layout-menu a:hover {
+.layout-menu > ul >li >a:hover {
 	background: #154e87;
 	background: -moz-linear-gradient(top,  #154e87 0%, #003a75 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#154e87), color-stop(100%,#003a75));
@@ -92,7 +118,7 @@
 
 }
 
-.layout-menu a:active {
+.layout-menu> ul> li> a:active {
 	background: #14427f;
 	background: -moz-linear-gradient(top,  #14427f 0%, #004063 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#14427f), color-stop(100%,#004063));

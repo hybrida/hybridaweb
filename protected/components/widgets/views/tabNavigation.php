@@ -20,13 +20,14 @@
 			<li class="userOptions"><?= CHtml::link("Logg ut", param('logoutUrl')); ?></li>
 			<li class="userOptions">
 				<a href="#">
-					Mer
+					<?= user()->firstName ?>
 				</a>
 				<ul>
-					<li><?= user()->fullName ?></li>
+					<li class="name"><?= CHtml::link(user()->fullName, array("/profile/")); ?></li>
+					<!-- <li class="name"><?= user()->fullName ?></li> -->
 					<li><?= CHtml::link("Varslinger", array("/notifications/")); ?></li>
-					<li><?= CHtml::link("Profil", array("/profile/")); ?></li>
 					<li><?= CHtml::link("Medlemmer", array("/students/")); ?></li>
+					<li><?= CHtml::link("Kiltbestilling", array("/kilt/")); ?></li>
 				</ul>
 			</li>
 		<? endif ?>
