@@ -27,6 +27,7 @@
 					<!-- <li class="name"><?= user()->fullName ?></li> -->
 					<li><?= CHtml::link("Varslinger", array("/notifications/")); ?></li>
 					<li><?= CHtml::link("Medlemmer", array("/students/")); ?></li>
+					<li><?= CHtml::link("Forum", array("/forum")) ?></li>
 					<li><?= CHtml::link("Kiltbestilling", array("/kilt/")); ?></li>
 				</ul>
 			</li>
