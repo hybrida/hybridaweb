@@ -21,7 +21,7 @@ class UserController extends ForumBaseController
             // ALL users
             array('allow',
                 'actions' => array('view'),
-                'users' => array('*'),
+                'users' => array('@'),
             ),
             // authenticated users
             array('allow',
