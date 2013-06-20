@@ -6,7 +6,7 @@ class GateKeeperTest extends CTestCase {
 
 	private $session;
 	private $gatekeeper;
-	const LOGGED_OUT = array();
+	public static $LOGGED_OUT = array();
 
 	public function __construct() {
 		$this->session = new Session();
@@ -114,13 +114,13 @@ class GateKeeperTest extends CTestCase {
 	}
 
 	public function test_hasPostAccess_LoggedOut_empty_true() {
-		$userAccess = self::LOGGED_OUT;
+		$userAccess = self::$LOGGED_OUT;
 		$postAccess = array();
 		$this->assertHasPostAccess(true, $userAccess, $postAccess);
 	}
 
 	public function test_hasPostAccess_LoggedOut_someOut_false() {
-		$userAccess = self::LOGGED_OUT;
+		$userAccess = self::$LOGGED_OUT;
 		$postAccess = array(1);
 		$this->assertHasPostAccess(false, $userAccess, $postAccess);
 	}
