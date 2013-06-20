@@ -13,6 +13,7 @@
 		</div>
 
 		<div class="c-right">
+			<div class="c-flashBorder"></div>
 			<div class="c-header">
 				<div class="c-author"><?= Html::link($model->author->fullName, $model->author->viewUrl) ?></div>
 				<? if ($model->hasDeleteAccess()): ?>

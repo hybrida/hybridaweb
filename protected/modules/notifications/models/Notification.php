@@ -15,11 +15,11 @@
  */
 class Notification extends CActiveRecord
 {
-	
+
 	private $_model = false;
-	
+
 	private static $MODEL_IS_NOT_SET = false;
-	
+
 	const STATUS_CHANGED = 0;
 	const STATUS_NEW_COMMENT = 1;
 	/**
@@ -65,6 +65,7 @@ class Notification extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'changedByUser' => array(self::BELONGS_TO, 'User', 'changedByUserID'),
+			'user' => array(self::BELONGS_TO, 'User', 'userID'),
 		);
 	}
 
@@ -108,7 +109,7 @@ class Notification extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	private function initModel() {
 		$model = null;
 		switch ($this->parentType) {
@@ -121,7 +122,7 @@ class Notification extends CActiveRecord
 		}
 		$this->_model = $model;
 	}
-	
+
 	public function getViewUrl() {
 		$url = "";
 		if ($this->_model) {
@@ -136,18 +137,18 @@ class Notification extends CActiveRecord
 		} else {
 			$url = '#';
 		}
-		
+
 		if ($this->commentID !== null) {
 			$url .= "#comment-" . $this->commentID;
 		}
 		return $url;
 	}
-	
+
 	public function getMessage() {
-		
+
 		return Notifications::getMessage($this->statusCode);
 	}
-	
+
 	public function getTitle() {
 		if ($this->_model) {
 			switch ($this->parentType) {
@@ -156,14 +157,14 @@ class Notification extends CActiveRecord
 					break;
 				case 'profile':
 					if ($this->parentID === user()->id) {
-						return 'Veggen din';
+						return 'veggen din';
 					}
-					return 'profilen til ' . $this->_model->fullname;
+					return 'veggen til ' . $this->_model->fullname;
 			}
 		} else if ($this->_model === self::$MODEL_IS_NOT_SET) {
 			$this->initModel();
 			return $this->getTitle();
 		}
 	}
-	
+
 }

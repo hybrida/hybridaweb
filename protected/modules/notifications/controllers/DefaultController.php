@@ -20,19 +20,27 @@ class DefaultController extends Controller {
 
 	public function actionIndex() {
 		$unread = Notifications::getUnread(user()->id);
-		$read = Notifications::getRead(user()->id, 10);
+		$unreadViewer = new NotificationViewer($unread);
+
+		$read = Notifications::getRead(user()->id, 40);
+		$readViewer = new NotificationViewer($read);
+
 		$this->render('index', array(
-			'unread' => $unread,
-			'read' => $read,
+			'unread' => $unreadViewer->getGroups(),
+			'read' => $readViewer->getGroups(),
 		));
 	}
 
-	public function actionDelete($id) {
-		$notification = Notification::model()->findByPk($id);
-		if ($notification->userID !== user()->id)
-			Yii::app()->end();
-		$notification->isRead = true;
-		$notification->save();
+	public function actionDelete($ids) {
+		$idArray = explode(',', $ids);
+		foreach($idArray as $id) {
+			$notification = Notification::model()->findByPk($id);
+			if ($notification->userID !== user()->id) {
+				Yii::app()->end();
+			}
+			$notification->isRead = true;
+			$notification->save();
+		}
 	}
 
 }

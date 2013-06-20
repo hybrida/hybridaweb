@@ -85,16 +85,19 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 
 		function flashComment(commentName) {
 			var comment = $('.' + commentName);
-			comment.css('background-color', '#ffa');
-			comment.animate({
-				backgroundColor: '#fff'
-			}, 3000, 'easeInOutSine');
+			comment.addClass("c-flashed");
 		}
 
 		function flashCurrentComment() {
-			var commentName = window.location.hash.substring(1);
-			if (commentName != "")
-				flashComment(commentName)
+			var commentNameAndIDs = window.location.hash.substring(1);
+			if (commentNameAndIDs != "") {
+				var idsString = commentNameAndIDs.replace("comment-", "");
+				var ids = idsString.split(",");
+				for(var i = 0; i < ids.length; i++) {
+					var commentName = "comment-" + ids[i];
+					flashComment(commentName);
+				}
+			}
 		}
 
 		attachSubmitAction();

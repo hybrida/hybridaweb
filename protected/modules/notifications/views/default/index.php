@@ -1,22 +1,25 @@
 <?php
-$deleteUrl = $this->createUrl('delete', array('id' => ''));
+$deleteUrl = $this->createUrl('delete', array('ids' => ''));
 ?>
 <script language="javascript">
 
-	function del (id, element){
-		var url = '<?= $deleteUrl ?>/' + id;
+	function del (ids, element, fun){
+		if (fun === undefined) {
+			fun = function(){};
+		}
+		var url = '<?= $deleteUrl ?>/' + ids;
 		var row = element.parentNode.parentNode;
 		row.parentNode.removeChild(row);
 
 		$.ajax({
 			'url' : url
 		}).done(function(data) {
-
+			fun();
 		});
 	}
 
-	function go (id, element, url) {
-		del(id, element, function() {
+	function go (ids, element, url) {
+		del(ids, element, function() {
 			window.location = url;
 		});
 	}
@@ -31,22 +34,18 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
 			</div>
 			<div class="changedByAuthor">
-				<?=
-				Html::link($notification->changedByUser->fullName, array(
-					$notification->changedByUser->viewUrl
-				))
-				?>
+				<?= $notification->changedByUserHtml ?>
 			</div>
 			<div class="statusMessage">
 				<?= $notification->message ?>
 			</div>
 			<div class="link">
-				<a href="#"onclick="js:go(<?= $notification->id ?>, this, '<?= $notification->viewUrl ?>')">
+				<a href="#" onclick="js:go('<?= $notification->ids ?>', this, '<?= $notification->viewUrl ?>')">
 					<?= $notification->title ?>
 				</a>
 			</div>
 			<div class="delete">
-				<a href="#" class="g-deleteButton" onclick="js:del(<?= $notification->id ?>, this)">
+				<a href="#" class="g-deleteButton" onclick="js:del('<?= $notification->ids ?>', this)">
 					X
 				</a>
 			</div>
@@ -65,11 +64,7 @@ $deleteUrl = $this->createUrl('delete', array('id' => ''));
 				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
 			</div>
 			<div class="changedByAuthor">
-				<?=
-				Html::link($notification->changedByUser->fullName, array(
-					$notification->changedByUser->viewUrl
-				))
-				?>
+				<?= $notification->changedByUserHtml ?>
 			</div>
 			<div class="statusMessage">kommenterte på</div>
 			<div class="link">

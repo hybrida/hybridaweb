@@ -88,3 +88,7 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 .widget-comment .c-content {
     margin-right: 34px;
 }
+
+.widget-comment .c-flashed  {
+    border-left: 3px #185c9b solid;
+}
