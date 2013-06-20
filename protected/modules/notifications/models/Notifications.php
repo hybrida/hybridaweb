@@ -78,7 +78,7 @@ class Notifications {
 		$criteria->compare('userID', $userID);
 		$criteria->compare('isRead', 0); // burde stått false istendefor 0, men det funket ikke
 		$criteria->order = 'timestamp DESC';
-		return Notification::model()->findAll($criteria);
+		return Notification::model()->with('changedByUser')->findAll($criteria);
 	}
 
 	public static function getRead($userID, $limit) {
@@ -87,7 +87,7 @@ class Notifications {
 		$criteria->compare('userID', $userID);
 		$criteria->compare('isRead', true);
 		$criteria->order = 'timestamp DESC';
-		return Notification::model()->findAll($criteria);
+		return Notification::model()->with('changedByUser')->findAll($criteria);
 	}
 
 	public static function getMessage($statusCode) {
