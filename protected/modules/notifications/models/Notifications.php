@@ -109,7 +109,8 @@ class Notifications {
 		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
 		$stmt->bindValue(':userId', $userId);
 		$stmt->execute();
-		return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+		$fetch = $stmt->fetch(PDO::FETCH_ASSOC);
+		return $fetch['count'];
 	}
 
 }
