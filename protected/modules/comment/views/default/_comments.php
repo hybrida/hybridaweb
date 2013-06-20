@@ -18,7 +18,7 @@
 				<div class="c-author"><?= Html::link($model->author->fullName, $model->author->viewUrl) ?></div>
 				<? if ($model->hasDeleteAccess()): ?>
 					<button
-						class="c-deleteButton"
+						class="g-deleteButton"
 						onclick="deleteComment(<?= $model->id ?>)"
 							>x</button>
                     <div class="c-date">

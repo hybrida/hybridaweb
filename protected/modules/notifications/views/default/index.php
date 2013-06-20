@@ -30,23 +30,22 @@ $deleteUrl = $this->createUrl('delete', array('ids' => ''));
 
 	<? foreach ($unread as $notification): ?>
 		<div class="row">
-			<div class="date">
-				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
+			<div class="top">
+				<div class="date">
+					<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
+				</div>
+				<div class="delete">
+					<a href="#" class="g-deleteButton" onclick="js:del('<?= $notification->ids ?>', this)">
+						x
+					</a>
+				</div>
 			</div>
-			<div class="changedByAuthor">
+
+			<div class="content">
 				<?= $notification->changedByUserHtml ?>
-			</div>
-			<div class="statusMessage">
 				<?= $notification->message ?>
-			</div>
-			<div class="link">
 				<a href="#" onclick="js:go('<?= $notification->ids ?>', this, '<?= $notification->viewUrl ?>')">
 					<?= $notification->title ?>
-				</a>
-			</div>
-			<div class="delete">
-				<a href="#" class="g-deleteButton" onclick="js:del('<?= $notification->ids ?>', this)">
-					X
 				</a>
 			</div>
 		</div>

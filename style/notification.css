@@ -8,31 +8,27 @@
 }
 
 .notificationIndex .row {
-	height: 1.5em;
 	margin: 0.2em 0;
 	padding-left: 1em;
+	padding: 10px;
+}
+
+.notificationIndex .row:nth-child(odd) {
+	background: #eee;
+}
+
+.notificationIndex .top:before,
+.notificationIndex .top:after {
+    content:"";
+    display:table;
+}
+
+.notificationIndex .top:after {
+    clear:both;
 }
 
 .notificationIndex .date {
 	color: #999;
-	width: 8em;
-	display: block;
-	float: left;
-}
-
-.notificationIndex .changedByAuthor {
-	display: block;
-	float: left;
-}
-
-.notificationIndex .statusMessage {
-	display: block;
-	float: left;
-	margin: 0 0.5em;
-
-}
-
-.notificationIndex .link {
 	display: block;
 	float: left;
 }
@@ -41,4 +37,8 @@
 	display: block;
 	float:right;
 	margin: 0 1em;
+}
+
+.notificationIndex .content {
+	text-align: left;
 }
