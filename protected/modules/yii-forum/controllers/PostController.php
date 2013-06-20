@@ -57,7 +57,13 @@ class PostController extends ForumBaseController
         if(null == $post)
             throw new CHttpException(404, 'The requested page does not exist.');
 
+        $thread = $post->thread;
         $post->delete();
+
+        if ($thread->postCount == 0) {
+            $forum = $thread->forum;
+            $thread->delete();
+        }
     }
 
     /**

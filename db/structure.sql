@@ -15,7 +15,7 @@ USE `hybrida_dev`;
 CREATE TABLE IF NOT EXISTS `access_relations` (
   `id` int(11) NOT NULL,
   `access` int(11) NOT NULL,
-  `type` enum('article','event','image','news','signup','album') COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('article','event','image','news','signup','album', 'forumthread') COLLATE utf8_unicode_ci NOT NULL,
   `super_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`type`,`access`,`super_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -190,6 +190,7 @@ CREATE TABLE IF NOT EXISTS `forum_post` (
   `content` text NOT NULL,
   `created` int(10) unsigned NOT NULL,
   `updated` int(10) unsigned NOT NULL,
+  `isDeleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `FK_post_author` (`author_id`),
   KEY `FK_post_editor` (`editor_id`),
@@ -204,6 +205,7 @@ CREATE TABLE IF NOT EXISTS `forum_thread` (
   `is_locked` tinyint(1) unsigned NOT NULL,
   `view_count` bigint(20) unsigned NOT NULL,
   `created` int(10) unsigned NOT NULL,
+  `isDeleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   KEY `FK_thread_forum` (`forum_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;

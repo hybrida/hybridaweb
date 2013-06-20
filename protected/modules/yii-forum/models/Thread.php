@@ -71,6 +71,7 @@ class Thread extends CActiveRecord
     {
         return array(
             'order'=>'is_sticky DESC, created DESC, subject',
+            'condition' => 'isDeleted = 0',
         );
     }
 
@@ -203,6 +204,19 @@ class Thread extends CActiveRecord
 
         return '<div class="level2">'. Yii::app()->controller->module->format_date($lastpost->created) .'</div>'.
                 '<div class="level3">by '. $authorlink .'</div>';
+    }
+
+    public function getPostCount() {
+        return Yii::app()->db->createCommand()
+                ->select('count(*) AS num')
+                ->from($this->tableName)
+                ->where('isDeleted = 0')
+                ->queryScalar();
+    }
+
+    public function delete() {
+        $this->isDeleted = 1;
+        $this->save();
     }
 
 }

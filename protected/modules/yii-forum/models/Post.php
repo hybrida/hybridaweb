@@ -66,6 +66,12 @@ class Post extends CActiveRecord
         );
     }
 
+    public function defaultScope() {
+        return array(
+            'condition' => "isDeleted = 0",
+        );
+    }
+
     /**
      * @return array customized attribute labels (name=>label)
      */
@@ -108,6 +114,11 @@ class Post extends CActiveRecord
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
         ));
+    }
+
+    public function delete() {
+        $this->isDeleted = 1;
+        $this->save();
     }
 
 }

@@ -12,7 +12,7 @@ $isAdmin = !Yii::app()->user->isGuest && Yii::app()->user->isAdmin;
                 $deleteConfirm = "Are you sure? This post will be permanently deleted!";
                 echo '<div class="admin" style="float:right; border:none;">'.
                         CHtml::ajaxLink('Delete post',
-                            array('/forum/admin/deletepost', 'id'=>$data->id),
+                            array('/forum/post/delete', 'id'=>$data->id),
                             array('type'=>'POST', 'success'=>'function(){document.location.reload(true);}'),
                             array('confirm'=>$deleteConfirm, 'id'=>'post'.$data->id)
                         ).
