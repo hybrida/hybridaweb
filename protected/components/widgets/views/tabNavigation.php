@@ -17,14 +17,19 @@
 		<? if (user()->isGuest): ?>
 			<li class="userOptions"><?= CHtml::link("Logg inn", user()->loginUrl) ?></li>
 		<? else: ?>
+			<? Yii::import('notifications.models.*')  ?>
+			<? $notificationsCount = Notifications::getCount(user()->id);  ?>
 			<li class="userOptions"><?= CHtml::link("Logg ut", param('logoutUrl')); ?></li>
 			<li class="userOptions">
 				<a href="#">
 					<?= user()->firstName ?>
+					<? if ($notificationsCount > 0):  ?>
+						[<?= $notificationsCount ?>]
+					<? endif  ?>
 				</a>
 				<ul>
 					<li class="name"><?= CHtml::link(user()->fullName, array("/profile/")); ?></li>
-					<li><?= CHtml::link("Varslinger", array("/notifications/")); ?></li>
+					<li><?= CHtml::link("Varslinger [" . $notificationsCount . "]", array("/notifications/")); ?></li>
 					<li><?= CHtml::link("Medlemmer", array("/students/")); ?></li>
 					<li><?= CHtml::link("Forum", array("/forum")) ?></li>
 					<li><?= CHtml::link("Kiltbestilling", array("/kilt/")); ?></li>

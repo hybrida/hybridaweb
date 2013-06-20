@@ -101,4 +101,15 @@ class Notifications {
 		}
 	}
 
+	public static function getCount($userId) {
+		$sql = "SELECT count(DISTINCT parentId, parentType) AS count
+					FROM notification
+					WHERE userId  = :userId AND
+					isRead = 0";
+		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
+		$stmt->bindValue(':userId', $userId);
+		$stmt->execute();
+		return $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+	}
+
 }
