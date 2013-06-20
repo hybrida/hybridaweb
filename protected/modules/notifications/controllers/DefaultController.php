@@ -11,7 +11,7 @@ class DefaultController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array("index", "delete"),
+				'actions' => array("index", "delete", "follow"),
 				'users' => array('@'),
 			),
 			array('deny'),
@@ -40,6 +40,16 @@ class DefaultController extends Controller {
 			}
 			$notification->isRead = true;
 			$notification->save();
+		}
+	}
+
+	public function actionFollow($type, $id, $toggle) {
+		if ($toggle == "unfollow") {
+			Notifications::removeListener($type, $id, user()->id);
+			echo "Følg";
+		} else {
+			Notifications::addListener($type, $id, user()->id);
+			echo "Ikke følg";
 		}
 	}
 

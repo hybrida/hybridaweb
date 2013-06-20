@@ -35,7 +35,9 @@ class YiiForumModule extends CWebModule
 
     public function init()
     {
-        $this->registerAssets();
+        if (!defined('TEST_RUNNING')) {
+            $this->registerAssets();
+        }
 
         $this->setImport(array(
             'forum.components.*',
@@ -46,8 +48,6 @@ class YiiForumModule extends CWebModule
     }
 
     private function setAdminAccess() {
-        //FIXME denne funksjonen må fjernes så snart siden går til produksjon!
-        // Det må løses på en bedre måte.
         if (user()->isGuest || user()->getState('isAdmin') !== null) {
             return;
         }

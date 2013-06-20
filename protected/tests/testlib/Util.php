@@ -6,6 +6,10 @@ Yii::import("comment.components.*");
 
 class Util {
 
+	public static function getUnique() {
+		return rand(3000, 90000);
+	}
+
 	public static function getNewNews() {
 		$news = new News;
 		$news->title = "test";
@@ -56,7 +60,7 @@ class Util {
 
 	public static function getNewUser() {
 		$user = new User;
-		$user->username = 'test' . User::model()->count();
+		$user->username = 'test' . (User::model()->count()*2);
 		$user->firstName = $user->lastName = "test";
 		$user->member = "false";
 		return $user;

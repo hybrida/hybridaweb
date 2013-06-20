@@ -384,6 +384,7 @@ CREATE TABLE IF NOT EXISTS `notification_listener` (
   `userID` int(11) NOT NULL,
   `parentType` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `parentID` int(11) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE KEY `parentID` (`parentID`,`userID`,`parentType`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=43 ;

@@ -2,17 +2,30 @@
 
 class Notifications {
 
-	public static function addListener($type, $id, $userID) {
-		if (self::isUserAlreadyListening($type, $id, $userID)) {
+	public static function addListener($type, $id, $userId) {
+		if (self::isUserAlreadyListening($type, $id, $userId)) {
 			return;
 		}
-		self::addNewListener($type, $id, $userID);
+		self::addNewListener($type, $id, $userId);
+	}
+
+	public static function removeListener($type, $id, $userId) {
+		Yii::app()->db->createCommand()->update(
+			'notification_listener',
+			array('isDeleted' => 1),
+			'parentType = :type AND parentId = :id AND userId = :userId',
+			array(
+				'type' => $type,
+				'id' => $id,
+				'userId' => $userId,
+			));
 	}
 
 	private static function addNewListener($type, $id, $userID) {
 		$sql = "INSERT INTO notification_listener
 				(parentType, parentID, userID) VALUES
-				(:type, :id, :userID)";
+				(:type, :id, :userID)
+				ON DUPLICATE KEY UPDATE isDeleted = 0";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->bindValue("type", $type);
 		$stmt->bindValue("id", $id);
@@ -21,7 +34,7 @@ class Notifications {
 	}
 
 	private static function isUserAlreadyListening($type, $id, $userID) {
-		$where = "parentType = :type AND parentID = :id AND userID = :userID";
+		$where = "parentType = :type AND parentID = :id AND userID = :userID AND isDeleted = 0";
 		$listenerCount = NotificationListener::model()->count($where, array(
 			'type' => $type,
 			'id' => $id,
@@ -29,10 +42,14 @@ class Notifications {
 		return $listenerCount == 1;
 	}
 
+	public function isListening($type, $id, $userId) {
+		return self::isUserAlreadyListening($type, $id, $userId);
+	}
+
 	public static function getListeners($type, $id) {
 		$sql = "SELECT userID
 				FROM notification_listener
-				WHERE parentType = :type AND parentID = :id";
+				WHERE parentType = :type AND parentID = :id AND isDeleted = 0";
 		$stmt = Yii::app()->db->getPdoInstance()->prepare($sql);
 		$stmt->execute(array(
 			'type' => $type,

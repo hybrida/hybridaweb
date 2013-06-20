@@ -5,6 +5,12 @@ $user = User::model()->findByPk(user()->id);
 <div class="widget-comment">
 <h1>Kommentarer</h1>
 
+
+	<? $this->widget('notifications.widgets.FollowButton', array(
+		'id' => $this->id,
+		'type' => $this->type,
+	)); ?>
+
 <div class="comment-view-all">
 	<?php
 	$this->render("comment.views.default._comments", array(

@@ -18,10 +18,30 @@ class NotificationsTest extends CTestCase {
 
 	public function test_addListener_addNewUser() {
 		$user = Util::getUser();
-		$uniqueID = $user->id;
+		$uniqueID = Util::getUnique();
 		Notifications::addListener('news', $uniqueID, $user->id);
 
 		$this->assertEquals(array($user->id), Notifications::getListeners('news', $uniqueID));
+	}
+
+	public function test_removeListener_oneListenerExists() {
+		$user = Util::getUser();
+		$uniqueID = Util::getUnique();
+		Notifications::addListener('news', $uniqueID, $user->id);
+
+		$this->assertEquals(1, count(Notifications::getListeners('news', $uniqueID)));
+
+		Notifications::removeListener('news', $uniqueID, $user->id);
+
+		$this->assertEquals(0, count(Notifications::getListeners('news', $uniqueID)));
+
+		$listening = Notifications::isListening('news', $uniqueID, $user->id);
+
+		$this->assertFalse($listening);
+
+		Notifications::addListener('news', $uniqueID, $user->id);
+
+		$this->assertEquals(1, count(Notifications::getListeners('news', $uniqueID)));
 	}
 
 	public function test_notify_allListenersAreNotified() {

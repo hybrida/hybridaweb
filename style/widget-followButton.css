@@ -1,0 +1,14 @@
+.widget-followButton .widget-followButton-button {
+	background-color: #eee;
+	padding: 0.1em 0.5em;
+	border-radius: 2px;
+	border: 1px solid #888;
+}
+
+.widget-followButton  img {
+	width: 16px;
+}
+
+.widget-followButton {
+	text-align: right;
+}
