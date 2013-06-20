@@ -22,7 +22,7 @@ class DefaultController extends Controller {
 		$unread = Notifications::getUnread(user()->id);
 		$unreadViewer = new NotificationViewer($unread);
 
-		$read = Notifications::getRead(user()->id, 40);
+		$read = Notifications::getRead(user()->id, 100);
 		$readViewer = new NotificationViewer($read);
 
 		$this->render('index', array(
