@@ -1,16 +1,13 @@
 <?php
-    if(isset($forum)) $this->widget('zii.widgets.CBreadcrumbs', array(
-        'links'=>array_merge(
+    if(isset($forum))
+        $this->breadcrumbs = array_merge(
             $forum->getBreadcrumbs(true),
             array('New thread')
-        ),
-    ));
-    else $this->widget('zii.widgets.CBreadcrumbs', array(
-        'links'=>array_merge(
+        );
+    else $this->breadcrumbs = array_merge(
             $thread->getBreadcrumbs(true),
             array('New reply')
-        ),
-    ));
+        );
 ?>
 
 <div class="g-form" style="margin:20px;">

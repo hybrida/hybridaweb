@@ -1,10 +1,8 @@
 <?php
-    $this->widget('zii.widgets.CBreadcrumbs', array(
-        'links'=>array_merge(
+    $this->breadcrumbs = array_merge(
             $model->thread->getBreadcrumbs(true),
             array('Edit post')
-        ),
-    ));
+        );
 ?>
 
 <div class="g-form" style="margin:20px;">
