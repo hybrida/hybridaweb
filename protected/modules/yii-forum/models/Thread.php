@@ -140,6 +140,10 @@ class Thread extends CActiveRecord
         return Yii::app()->createUrl('/forum/thread/view', array('id'=>$this->id));
     }
 
+    public function getViewUrl() {
+        return $this->getUrl();
+    }
+
     /**
      * Returns breadcrumbs array to this forum
      */

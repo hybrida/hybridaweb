@@ -98,6 +98,9 @@ class Notifications {
 			case Notification::STATUS_NEW_COMMENT:
 				return 'kommenterte på';
 				break;
+			case Notification::STATUS_FORUM_NEW_REPLY:
+				return 'svarte på';
+				break;
 		}
 	}
 

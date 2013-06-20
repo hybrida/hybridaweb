@@ -13,6 +13,8 @@
  * @property integer $changedByUserID
  * @property integer $statusCode
  */
+Yii::import('forum.models.*');
+
 class Notification extends CActiveRecord
 {
 
@@ -22,6 +24,8 @@ class Notification extends CActiveRecord
 
 	const STATUS_CHANGED = 0;
 	const STATUS_NEW_COMMENT = 1;
+	const STATUS_FORUM_NEW_REPLY = 10;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return Notification the static model class
@@ -119,6 +123,8 @@ class Notification extends CActiveRecord
 			case 'news':
 				$model = News::model()->findByPk($this->parentID);
 				break;
+			case Type::FORUM_THREAD:
+				$model = Thread::model()->findByPk($this->parentID);
 		}
 		$this->_model = $model;
 	}
@@ -160,6 +166,8 @@ class Notification extends CActiveRecord
 						return 'veggen din';
 					}
 					return 'veggen til ' . $this->_model->fullname;
+				case Type::FORUM_THREAD:
+					return $this->_model->subject;
 			}
 		} else if ($this->_model === self::$MODEL_IS_NOT_SET) {
 			$this->initModel();

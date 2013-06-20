@@ -1,5 +1,7 @@
 <?php
 
+Yii::import('notifications.models.*');
+
 class ThreadController extends ForumBaseController
 {
     /**
@@ -92,6 +94,8 @@ class ThreadController extends ForumBaseController
                 $post->content = $model->content;
                 $post->save(false);
 
+                Notifications::addListener(Type::FORUM_THREAD, $thread->id, user()->id);
+
                 $this->redirect($thread->url);
             }
         }
@@ -143,6 +147,12 @@ class ThreadController extends ForumBaseController
                 $post->thread_id = $thread->id;
                 $post->content = $model->content;
                 $post->save(false);
+
+                Notifications::notifyAndAddListener(
+                        Type::FORUM_THREAD,
+                        $thread->id,
+                        Notification::STATUS_FORUM_NEW_REPLY,
+                        user()->id);
 
                 if(Yii::app()->user->isAdmin && $thread->is_locked != $model->lockthread)
                 {
