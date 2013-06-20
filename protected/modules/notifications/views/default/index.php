@@ -59,14 +59,14 @@ $deleteUrl = $this->createUrl('delete', array('ids' => ''));
 
 	<? foreach ($read as $notification): ?>
 		<div class="row">
-			<div class="date">
-				<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
+			<div class="top">
+				<div class="date">
+					<?= Html::dateToString($notification->timestamp, 'd. F H:i') ?>
+				</div>
 			</div>
-			<div class="changedByAuthor">
+			<div class="content">
 				<?= $notification->changedByUserHtml ?>
-			</div>
-			<div class="statusMessage">kommenterte på</div>
-			<div class="link">
+				<?= $notification->message ?>
 				<a href="<?= $notification->viewUrl ?>">
 					<?= $notification->title ?>
 				</a>
