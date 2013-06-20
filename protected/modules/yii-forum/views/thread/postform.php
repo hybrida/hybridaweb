@@ -1,13 +1,17 @@
 <?php
-    if(isset($forum))
+    if(isset($forum)) {
         $this->breadcrumbs = array_merge(
             $forum->getBreadcrumbs(true),
             array('New thread')
         );
-    else $this->breadcrumbs = array_merge(
+        $this->pageTitle = "Ny forumtråd";
+    } else {
+        $this->breadcrumbs = array_merge(
             $thread->getBreadcrumbs(true),
             array('New reply')
         );
+        $this->pageTitle = "Nytt svar";
+    }
 ?>
 
 <div class="g-form" style="margin:20px;">

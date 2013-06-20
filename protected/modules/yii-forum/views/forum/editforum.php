@@ -1,4 +1,7 @@
 <?php
+
+$this->pageTitle = ($model->isNewRecord ? "Nytt forum" : "Endre forum " . $forum->title);
+
 $this->breadcrumbs = array_merge(
         $model->getBreadcrumbs(!$model->isNewRecord),
         array($model->isNewRecord?'New forum':'Edit')

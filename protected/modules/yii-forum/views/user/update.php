@@ -4,6 +4,9 @@ $this->widget('zii.widgets.CBreadcrumbs', array('links'=>array(
     $model->name=>array('/forum/user/view', 'id'=>$model->id),
     'Update',
 )));
+
+$this->pageTitle = "Endre bruker - Forum";
+
 ?>
 
 <div class="g-form" style="margin:20px;">

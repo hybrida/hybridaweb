@@ -3,7 +3,9 @@
             $model->thread->getBreadcrumbs(true),
             array('Edit post')
         );
+$this->pageTitle = "Endre forumpost";
 ?>
+
 
 <div class="g-form" style="margin:20px;">
     <?php $form=$this->beginWidget('CActiveForm', array(

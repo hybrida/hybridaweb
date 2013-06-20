@@ -2,6 +2,7 @@
 
 $this->breadcrumbs = $forum->getBreadcrumbs();
 
+$this->pageTitle = "Forum";
 
 $this->renderPartial('_subforums', array(
     'inforum'=>true,

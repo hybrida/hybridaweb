@@ -3,6 +3,7 @@
             $model->getBreadcrumbs(true),
             array('Edit')
         );
+$this->pageTitle = "Endre forumtråd";
 ?>
 
 <div class="g-form" style="margin:20px;">

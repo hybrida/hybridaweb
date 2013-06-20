@@ -4,6 +4,8 @@ $this->breadcrumbs = array(
     $user->name,
 );
 
+$this->pageTitle = ucfirst($user->name) . " - Forum";
+
 $siglink = (!Yii::app()->user->isGuest && (Yii::app()->user->isAdmin || Yii::app()->user->forumuser_id == $user->id))?' ['. CHtml::link('Edit', array('user/update', 'id'=>$user->id)) .']':'';
 
 $this->widget('zii.widgets.CDetailView', array(

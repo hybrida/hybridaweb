@@ -3,6 +3,8 @@ $this->breadcrumbs = array(
     'Forum',
 );
 
+$this->pageTitle = "Forum";
+
 if(!Yii::app()->user->isGuest && Yii::app()->user->isAdmin)
 {
     echo 'Admin: '. CHtml::link('New forum', array('/forum/forum/create')) .'<br />';

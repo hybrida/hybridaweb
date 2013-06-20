@@ -2,6 +2,8 @@
 
 $this->breadcrumbs = $thread->getBreadcrumbs();
 
+$this->pageTitle = $thread->subject . " - Forum";
+
 $header = '<div class="preheader"><div class="preheaderinner">'. CHtml::encode($thread->subject) .'</div></div>';
 $footer = $thread->is_locked?'':'<div class="footer">'. CHtml::link(CHtml::image(Yii::app()->controller->module->registerImage("newreply.gif")), array('/forum/thread/newreply', 'id'=>$thread->id)) .'</div>';
 ?>
