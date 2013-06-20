@@ -4,7 +4,20 @@
 		<li><?= CHtml::link("Kalender", array("/calendar/default/index")); ?></li>
 
 		<? if (app()->gatekeeper->hasGroupAccess(57)): ?>
-			<li><?= CHtml::link("BK", array('/bk/bktool/index')) ?></li>
+			<li>
+                            <?= CHtml::link("BK", array('/bk/bktool/index')) ?>
+                            <ul>
+                                <li><?= CHtml::link('Alumniliste', array('/bk/bktool/graduates')) ?></li>
+                                <li><?= CHtml::link('Bedriftsoversikt', array('/bk/bktool/companyoverview')) ?></li>
+                                <li><?= CHtml::link('Bedriftsfordeling', array('/bk/bktool/companydistribution')) ?></li>
+                                <li><?= CHtml::link('I&IKT-ringen', array('/bk/bktool/industryassociation')) ?></li>
+                                <li><?= CHtml::link('Kalender', array('/bk/bktool/calendar')) ?></li>
+                                <li><?= CHtml::link('Om', array('/bk/bktool/index')) ?></li>
+                                <li><?= CHtml::link('Oppdateringer', array('/bk/bktool/updates')) ?></li>
+                                <li><?= CHtml::link('Presentasjoner', array('/bk/bktool/presentations')) ?></li>
+                            </ul>
+			</li>
+                        
 		<? endif ?>
 
 		<? if (!user()->isGuest): ?>
