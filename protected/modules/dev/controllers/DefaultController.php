@@ -71,14 +71,10 @@ class DefaultController extends Controller {
 		Yii::import('comment.models.*');
 		Yii::import('notifications.models.*');
 
-		$sigurd = User::model()->findByPk(381);
-		$magnus = User::model()->findByPk(392);
-		$elin = User::model()->findByPk(393);
-		$users = array($sigurd, $magnus, $elin);
+		$criteria = new CDbCriteria;
+		$criteria->limit = 30;
+		$users = User::model()->findAll($criteria);
 
-		$betaNews = News::model()->findByPk(373);
-		$gryphusNews = News::model()->findByPk(632);
-		$evigEventNews = News::model()->findByPk(377);
 		$newsList = News::model()->findAll();
 
 		$lipsum = new LoremIpsumGenerator();
