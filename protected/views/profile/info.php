@@ -1,4 +1,4 @@
-<? $this->pageTitle = "info" ?>
+<? $this->pageTitle = $user->fullName ?>
 
 
 <?
@@ -52,6 +52,11 @@ $this->renderPartial('_header', array(
 	    <tr>
 			<th>Medlemskap: </th>
 			<td> <?= ($user->member == "true" ? "Medlem" : "Ikke Medlem") ?></td>
+		</tr>
+
+		<tr>
+			<th>Internnummer</th>
+			<td><?= $user->id ?></td>
 		</tr>
 
 	</table>
