@@ -8,8 +8,12 @@ $deleteUrl = $this->createUrl('delete', array('ids' => ''));
 			fun = function(){};
 		}
 		var url = '<?= $deleteUrl ?>/' + ids;
-		var row = element.parentNode.parentNode;
-		row.parentNode.parentNode.removeChild(row.parentNode);
+
+		var row = element;
+		while (row.className != "row") {
+			row = row.parentNode;
+		}
+		row.parentNode.removeChild(row);
 
 		$.ajax({
 			'url' : url
