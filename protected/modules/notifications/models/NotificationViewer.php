@@ -105,10 +105,14 @@ class NotificationGroup extends CComponent {
 
 	public function getViewUrl() {
 		$url = $this->list[0]->viewUrl;
-		foreach ($this->list as $notification) {
+
+		// Nettleserere takler ikke urler med over 2000 characters. Derfor
+		// kutter vi ned litt. Tror ikke dette egentlig er noe reelt problem.
+
+		$listOfFewerNotifications = array_slice($this->list, 1, 300);
+		foreach ($listOfFewerNotifications as $notification) {
 			if ($notification->commentID !== null) {
 				$url .= "," . $notification->commentID;
-
 			}
 		}
 		return $url;
