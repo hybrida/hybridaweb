@@ -53,17 +53,58 @@ class DefaultController extends Controller {
 			$this->redirect(user()->returnUrl);
 		}
 	}
-	
+
 	public function actionTest() {
 		$this->render('test');
 	}
-	
+
 	public function actionAccess() {
 		$this->render('testAccess');
 	}
-        
-        public function actionHtml() {
-            $this->renderPartial('html');
-        }
+
+	public function actionHtml() {
+		$this->renderPartial('html');
+	}
+
+	public function actionAddnotifications() {
+
+		Yii::import('comment.models.*');
+		Yii::import('notifications.models.*');
+
+		$sigurd = User::model()->findByPk(381);
+		$magnus = User::model()->findByPk(392);
+		$elin = User::model()->findByPk(393);
+		$users = array($sigurd, $magnus, $elin);
+
+		$betaNews = News::model()->findByPk(373);
+		$gryphusNews = News::model()->findByPk(632);
+		$evigEventNews = News::model()->findByPk(377);
+		$newsList = News::model()->findAll();
+
+		$lipsum = new LoremIpsumGenerator();
+
+		for ($i = 0; $i < 100; $i++) {
+			$user = $users[array_rand($users)];
+			$news = $newsList[array_rand($newsList)];
+
+			$comment = new Comment;
+			$comment->authorId = $user->id;
+			$comment->parentType = Type::NEWS;
+			$comment->parentId = $news->id;
+			$comment->content = "Kommentar nr: " . $i . "<br/>" . $lipsum->getContent(10);
+			$comment->save();
+			$comment->authorId = $user->id;
+			$comment->save();
+
+			Notifications::notifyAndAddListener(
+				Type::NEWS,
+				$news->id,
+				Notification::STATUS_NEW_COMMENT,
+				$user->id,
+				$comment->id);
+
+		}
+
+	}
 
 }
