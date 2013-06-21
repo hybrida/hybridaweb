@@ -6,7 +6,6 @@ class FollowButton extends CWidget {
 
 	public $id;
 	public $type;
-	public $isAjaxRequest = false;
 	public $isFollowing = false;
 
 	public function init() {
@@ -23,7 +22,7 @@ class FollowButton extends CWidget {
 		if (user()->isGuest) {
 			return;
 		}
-		$this->render('index');
+		$this->render('followButton');
 	}
 
 }

@@ -6,25 +6,11 @@ $url= Yii::app()->createUrl('notifications/default/follow', array(
 	'toggle' => '',
 ));
 
-$linkImage = CHtml::image("/favicon.ico", "Griff", array(
-	'width' => 16,
-));
-
-$linkText = ($this->isFollowing ? "Slutt å følge" : "Følg");
-
-$linkContent = $linkImage . $linkText;
-
-$ajaxLink = CHtml::link($linkContent, $url);
-
-
-if ($this->isAjaxRequest):
-	echo $ajaxLink;
-else:
 ?>
 
 <div class="widget-followButton">
-	<a href="#" class="widget-followButton-button" onclick="js:actionFollow()">
-		<img src="/favicon.ico" alt="griff">
+	<a href="#" class="widget-followButton-button g-button" onclick="js:actionFollow()">
+		<img src="/images/logo_mini_stroke.png" alt="griff">
 		<span>
 			<? if ($this->isFollowing): ?>
 				Ikke følg
@@ -63,5 +49,3 @@ function actionFollow() {
 }
 
 </script>
-
-<? endif ?>
