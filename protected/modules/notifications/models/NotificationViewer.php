@@ -71,7 +71,7 @@ class NotificationGroup extends CComponent {
 	public function getChangedByUserHtml(){
 		$profileLinks = array();
 
-		if (count($this->users) <= 2) {
+		if (count($this->users) <= 3) {
 			return $this->getChangedByUserHtmlFewUsers();
 		} else {
 			return $this->getChangedByUserHtmlManyUsers();
@@ -79,8 +79,13 @@ class NotificationGroup extends CComponent {
 	}
 
 	private function getChangedByUserHtmlFewUsers() {
+		$userIds = array();
 		foreach ($this->users as $user) {
+			if (in_array($user->id, $userIds)) {
+				continue;
+			}
 			$profileLinks[] = CHtml::link($user->fullName, $user->viewUrl);
+			$userIds[] = $user->id;
 		}
 		return implode(" og ", $profileLinks);
 	}
@@ -116,6 +121,12 @@ class NotificationGroup extends CComponent {
 			}
 		}
 		return $url;
+	}
+
+	public function getViewUrlNoFlash() {
+		$url = $this->list[0]->viewUrl;
+		$split = explode('#', $url);
+		return $split[0];
 	}
 
 	public function getTitle() {

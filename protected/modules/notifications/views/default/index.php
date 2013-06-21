@@ -67,7 +67,7 @@ $deleteUrl = $this->createUrl('delete', array('ids' => ''));
 			<div class="content">
 				<?= $notification->changedByUserHtml ?>
 				<?= $notification->message ?>
-				<a href="<?= $notification->viewUrl ?>">
+				<a href="<?= $notification->getViewUrlNoFlash() ?>">
 					<?= $notification->title ?>
 				</a>
 			</div>
