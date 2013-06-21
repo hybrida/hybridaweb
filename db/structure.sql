@@ -245,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `group_membership` (
   `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `start` date NOT NULL DEFAULT '0000-00-00',
   `end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`groupId`,`userId`,`end`,`start`)
+  PRIMARY KEY (`userId`,`groupId`,`end`,`start`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `groups` (
