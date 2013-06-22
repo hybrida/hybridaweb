@@ -103,4 +103,16 @@ class DefaultController extends Controller {
 
 	}
 
+	public function actionRbacTree($parent="all") {
+		$rbac = new RbacTree;
+		$tree = $rbac->getTree($parent);
+
+		$this->render('rbactree', array(
+			'tree' => $tree,
+			'parent' => $parent,
+			'all' => $rbac->getAll(),
+		));
+
+	}
+
 }
