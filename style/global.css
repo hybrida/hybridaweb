@@ -24,6 +24,8 @@ table.g-membertable *{
     background-color: transparent;
 }
 
+/*---------- De blå knappene ---------------*/
+
 .g-button{
 	color: white;
 	text-decoration: none;
@@ -107,6 +109,15 @@ table.g-membertable *{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfbfbf', endColorstr='#cecece',GradientType=0 );
 }
 
+/*---------- Horisontal Navigasjons ---------------*/
+
+/*
+
+Dette er den (pr. revison ca 2000 i hg ) horisontale navigasjonslinja som blant
+annet finnes på profilsider og på bk-siden.
+
+*/
+
 .layout-content > #g-groupNavigation {
 	margin: 0;
 }
@@ -130,6 +141,8 @@ table.g-membertable *{
     background-color: black;
 }
 
+/* ------------------ sidebarmeny --------------*/
+/*Som f.eks brukes i artikkeltreet*/
 
 .g-sidebarNav ul {
 	padding-left: 1em;
@@ -155,6 +168,8 @@ table.g-membertable *{
 	background-color: #e5e5e5;
 }
 
+/*---------- påmeldingsliste over brukere ------------------*/
+
 .collapsibleList li{
 	list-style: none;
 	cursor:auto;
@@ -178,6 +193,8 @@ li.collapsibleListClosed .node {
 	display:none;
 }
 
+/*------------ Tittel-linje i høyremeny ----------------*/
+
 .g-barTitle{
 	color: #000000;
 	border-bottom: 1px solid #ccc;
@@ -194,6 +211,8 @@ li.collapsibleListClosed .node {
 	margin-top: 0.5em;
 }
 
+/*--- En floatcontanier som settes på blokker som inneholder floats ---*/
+
 .g-clearfix:after{
 	/* Settes på container som inneholder flytende elementer:
 	 * <div id="container" class="g-clearfix">
@@ -209,6 +228,8 @@ li.collapsibleListClosed .node {
 	font-size: 0;
 	overflow:hidden;
 }
+
+/*---------- Generelle bokser -----------------*/
 
 .g-successText {
 	color: #000;
@@ -228,6 +249,8 @@ li.collapsibleListClosed .node {
 	font-weight: bold;
 }
 
+/*----------- Inline bilder blant annet nyhetsartikler ------------*/
+
 .g-imageFloatRight {
 	float: right;
 	margin: 1em;
@@ -245,4 +268,33 @@ li.collapsibleListClosed .node {
 .g-imageFloatRight .caption {
 	text-align: left;
 	padding: 0.4em;
+}
+
+
+/*-------- Informasjonsbokser -------------*/
+.g-infoBox {
+	position: relative;
+	font-weight: bold;
+	padding: 0.3em;
+	border-radius: 2px;
+	display: inline;
+	cursor: pointer;
+}
+
+.g-infoBox .g-infoBoxContent {
+	display: none;
+	position: absolute;
+	width: 400px;
+	padding: 0.5em;
+	border-radius: 2px;
+	background-color: white;
+	border: 2px solid black;
+	cursor: auto;
+	z-index: 10;
+}
+
+.g-infoBox:hover > .g-infoBoxContent {
+	display: block;
+	font-size: 18px;
+	font-weight: normal;
 }
