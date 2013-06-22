@@ -94,15 +94,25 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 			comment.addClass("c-flashed");
 		}
 
+		function scrollToComment(id) {
+			var idName = "comment-" + id;
+			document.getElementsByClassName(idName)[0].scrollIntoView();
+		}
+
 		function flashCurrentComment() {
 			var commentNameAndIDs = window.location.hash.substring(1);
 			if (commentNameAndIDs != "") {
 				var idsString = commentNameAndIDs.replace("comment-", "");
 				var ids = idsString.split(",");
+				var firstId = ids[0];
 				for(var i = 0; i < ids.length; i++) {
+					if (ids[i] < firstId)  {
+						firstId = ids[i];
+					}
 					var commentName = "comment-" + ids[i];
 					flashComment(commentName);
 				}
+				scrollToComment(firstId);
 			}
 		}
 
