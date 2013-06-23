@@ -7,10 +7,9 @@ class CommentWidget extends CWidget {
 
 	public $id = "";
 	public $type = "";
+	public $isAjaxRequest = false;
 	private $formModel;
-	
 	private $comments;
-	
 	private $griffCount;
 	private $griffed;
 
@@ -43,7 +42,7 @@ class CommentWidget extends CWidget {
 					comment.parentType = :type AND
 					griff.isDeleted = 0
 				GROUP BY comment.id";
-		
+
 		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
 		$stmt->bindValue("id", $this->id);
 		$stmt->bindValue("type", $this->type);
@@ -53,7 +52,7 @@ class CommentWidget extends CWidget {
 			$this->griffCount[$d['id']] = $d['count'];
 		}
 	}
-	
+
 	public function initGriffed() {
 		$this->griffed = array();
 		$sql = "SELECT comment.id, griff.userId
@@ -62,7 +61,7 @@ class CommentWidget extends CWidget {
 				where comment.parentType = :type AND
 					comment.parentId = :id AND
 					griff.isDeleted = 0";
-		
+
 		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
 		$stmt->bindValue("id", $this->id);
 		$stmt->bindValue("type", $this->type);
@@ -73,24 +72,30 @@ class CommentWidget extends CWidget {
 			if (isset($this->griffed[$d['id']])) {
 				$ids = $this->griffed[$d['id']];
 			}
-			$ids[] = (int)$d['userId'];
+			$ids[] = (int) $d['userId'];
 			$this->griffed[$d['id']] = $ids;
 		}
 	}
 
 	public function run() {
 		if (!user()->isGuest) {
-			$this->render("member", array(
-				'formModel' => $this->formModel,
-				'comments' => $this->comments,
-			));
+			if (!$this->isAjaxRequest) {
+				$this->render("member", array(
+					'formModel' => $this->formModel,
+					'comments' => $this->comments,
+				));
+			} else {
+				$this->render("comment.views.default._comments", array(
+					'models' => $this->comments,
+				));
+			}
 		} else {
 			$this->render('guest');
 		}
 	}
 
 	public function userHasGriffed($comment) {
-		if( isset($this->griffed[$comment->id])) {
+		if (isset($this->griffed[$comment->id])) {
 			$ids = $this->griffed[$comment->id];
 			return (in_array(user()->id, $ids));
 		}

@@ -33,9 +33,14 @@ class DefaultController extends Controller {
 	}
 
 	public function actionView($type, $id) {
-		$this->renderPartial("_comments", array(
-			'models' => Comment::getAll($type, $id),
+		$this->widget('CommentWidget', array(
+			'type' => $type,
+			'id' => $id,
+			'isAjaxRequest' => true,
 		));
+//		$this->renderPartial("_comments", array(
+//			'models' => Comment::getAll($type, $id),
+//		));
 	}
 	
 	public function actionGriffOn($id) {
