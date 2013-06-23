@@ -17,7 +17,7 @@
                                 <li><?= CHtml::link('Presentasjoner', array('/bk/bktool/presentations')) ?></li>
                             </ul>
 			</li>
-                        
+
 		<? endif ?>
 
 		<? if (!user()->isGuest): ?>
@@ -30,8 +30,7 @@
 		<? if (user()->isGuest): ?>
 			<li class="userOptions"><?= CHtml::link("Logg inn", user()->loginUrl) ?></li>
 		<? else: ?>
-			<? Yii::import('notifications.models.*')  ?>
-			<? $notificationsCount = Notifications::getCount(user()->id);  ?>
+			<? $notificationsCount = Yii::app()->notification->count; ?>
 			<li class="userOptions"><?= CHtml::link("Logg ut", param('logoutUrl')); ?></li>
 			<li class="userOptions">
 				<a href="#">

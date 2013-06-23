@@ -69,7 +69,6 @@ class DefaultController extends Controller {
 	public function actionAddnotifications() {
 
 		Yii::import('comment.models.*');
-		Yii::import('notifications.models.*');
 
 		$criteria = new CDbCriteria;
 		$criteria->limit = 30;
@@ -92,7 +91,7 @@ class DefaultController extends Controller {
 			$comment->authorId = $user->id;
 			$comment->save();
 
-			Notifications::notifyAndAddListener(
+			Yii::app()->notification->notifyAndAddListener(
 				Type::NEWS,
 				$news->id,
 				Notification::STATUS_NEW_COMMENT,

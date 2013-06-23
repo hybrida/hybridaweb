@@ -2,6 +2,7 @@
 
 Yii::import('notifications.models.Notifications');
 Yii::import('notifications.models.NotificationListener');
+Yii::import('notifications.models.Notification');
 
 class NotificationComponent extends CComponent {
 
@@ -15,6 +16,15 @@ class NotificationComponent extends CComponent {
 
 	public function removeListener($type, $id, $userId) {
 		Notifications::removeListener($type, $id, $userId);
+	}
+
+	public function notifyAndAddListener($type, $id, $userId, $statusCode=null, $commentId=null) {
+		Notifications::notifyAndAddListener(
+			$type, $id, $userId, $statusCode, $commentId);
+	}
+
+	public function getCount() {
+		return Notifications::getCount(user()->id);
 	}
 
 }

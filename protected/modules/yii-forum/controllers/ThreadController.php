@@ -1,7 +1,5 @@
 <?php
 
-Yii::import('notifications.models.*');
-
 class ThreadController extends ForumBaseController
 {
     /**
@@ -94,7 +92,8 @@ class ThreadController extends ForumBaseController
                 $post->content = $model->content;
                 $post->save(false);
 
-                Notifications::addListener(Type::FORUM_THREAD, $thread->id, user()->id);
+                Yii::app()->notification->addListener(
+                        Type::FORUM_THREAD, $thread->id, user()->id);
 
                 $this->redirect($thread->url);
             }
@@ -148,7 +147,7 @@ class ThreadController extends ForumBaseController
                 $post->content = $model->content;
                 $post->save(false);
 
-                Notifications::notifyAndAddListener(
+                Yii::app()->notification->notifyAndAddListener(
                         Type::FORUM_THREAD,
                         $thread->id,
                         Notification::STATUS_FORUM_NEW_REPLY,
