@@ -113,4 +113,5 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 
 .widget-comment .c-additions .c-userHasGriffed {
     background-color: green;
+    text-decoration: underline;
 }

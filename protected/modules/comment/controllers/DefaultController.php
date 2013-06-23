@@ -37,5 +37,16 @@ class DefaultController extends Controller {
 			'models' => Comment::getAll($type, $id),
 		));
 	}
+	
+	public function actionGriffOn($id) {
+		Griff::add($id, user()->id);
+		echo "It's on!!";
+	}
+	
+	public function actionGriffOff($id) {
+		Griff::remove($id, user()->id);
+		echo "It's off!!";
+	}
+	
 
 }

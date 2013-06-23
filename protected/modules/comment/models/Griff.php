@@ -71,9 +71,13 @@ class Griff extends CActiveRecord {
 	}
 
 	public static function add($commentId, $userId) {
-		$g = new Griff;
+		$g = self::get($commentId, $userId);
+		if ($g == null) {
+			$g = new Griff;
+		}
 		$g->commentId = $commentId;
 		$g->userId = $userId;
+		$g->isDeleted = 0;
 		$g->save();
 	}
 

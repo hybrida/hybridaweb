@@ -56,35 +56,4 @@ class GriffTest extends CTestCase {
 		}
 	}
 
-	public function test_getCount() {
-		$users = array();
-		for ($i = 0; $i < 5; $i++) {
-			$users[] = Util::getUser();
-		}
-
-		$news = Util::getNews();
-
-		$comment = Util::getNewComment();
-		$comment->parentId = $news->id;
-		$comment->parentType = Type::NEWS;
-		$comment->save();
-		
-		Griff::add($comment->id, $user[0]);
-		Griff::add($comment->id, $user[1]);
-		Griff::add($comment->id, $user[2]);
-		Griff::add($comment->id, $user[3]);
-
-		$comment2 = Util::getNewComment();
-		$comment2->parentId = $news->id;
-		$comment2->parentType = Type::NEWS;
-		$comment2->save();
-				
-		Griff::add($comment2->id, $user[0]);
-		Griff::add($comment2->id, $user[3]);
-		
-		$griffs = Griff::getFromTypeId(Type::NEWS, $news->id);
-		$this->assertEquals(3, $griffs)
-
-	}
-
 }

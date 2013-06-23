@@ -33,14 +33,11 @@
 			</div>
 			<div class="c-additions">
 				<ul>
-					<li><a class="c-griffButton g-button" onclick="griff(<?= $model->id ?>)">
+					<li><a class="c-griffButton g-button" onclick="griff(<?= $model->id ?>, this)">
 						<img src="/images/logo_mini_stroke.png" alt="griff">
 						griff
-						<span class="count">
-							<span class="<?= $this->userHasGriffedClass($model) ?>">
-								<?= $this->getGriffCount($model) ?>
-							</span>
-						</span>
+							<span class="<?= $this->userHasGriffedClass($model) ?> count"
+								  ><?= $this->getGriffCount($model) ?></span>
 					</a></li>
 					<li><a href="" class="g-button">
 						reply

@@ -67,8 +67,16 @@ $user = User::model()->findByPk(user()->id);
 <?php
 $deleteUrl = Yii::app()->createUrl("/comment/default/delete", array('id' => ''));
 $submitUrl = Yii::app()->createUrl("/comment/default/submit");
+
+$griffOnUrl  = Yii::app()->createUrl("/comment/default/griffOn",  array('id' => '')) . "/";
+$griffOffUrl = Yii::app()->createUrl("/comment/default/griffOff", array('id' => '')) . "/";
+
 ?>
 <script lang="javascript">
+	
+var urlOn = '<?= $griffOnUrl ?>';
+var urlOff = '<?= $griffOffUrl ?>';
+
 	$(document).ready(function() {
 
 		function attachSubmitAction() {
@@ -129,8 +137,41 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 		}
 	}
 
-	function griff(id) {
-		console.log("griff", id);
+	function griff(id, element) {
+		var userHasGriffedClassName = "c-userHasGriffed count";
+		var userHasNotGriffedClassName = "count";
+		
+		var span = element.getElementsByClassName("count")[0];
+		var griffCount = parseInt(span.innerHTML);
+		var userHasGriffed = span.className.length > "count ".length;
+		var url = "";
+		if (userHasGriffed) {
+			url = urlOff + id;
+			runAjax(url, function(html) {
+				span.innerHTML = griffCount - 1;
+				span.className = userHasNotGriffedClassName;
+				console.log("It's off");
+			});
+		} else {
+			url = urlOn + id;
+			runAjax(url, function(html) {
+				span.innerHTML = griffCount + 1;
+				span.className = userHasGriffedClassName;
+				console.log("It's on");
+			});
+		}
 	}
+	
+	function runAjax(url, callback) {
+		$.ajax({
+			'url': url,
+			'success': function (html) {
+				callback(html);
+			},
+			'error': function(a, b) {
+			}
+		});
+	}
+	
 </script>
 </div>

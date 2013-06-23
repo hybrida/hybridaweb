@@ -39,7 +39,9 @@ class CommentWidget extends CWidget {
 		$sql = "SELECT comment.id, COUNT(griff.id) as count
 				FROM comment
 				JOIN griff on griff.commentId = comment.id
-				WHERE comment.parentId = :id AND comment.parentType = :type
+				WHERE comment.parentId = :id AND
+					comment.parentType = :type AND
+					griff.isDeleted = 0
 				GROUP BY comment.id";
 		
 		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
@@ -57,9 +59,10 @@ class CommentWidget extends CWidget {
 		$sql = "SELECT comment.id, griff.userId
 				FROM comment
 				join griff on griff.commentId = comment.id
-				where
-				comment.parentType = :type AND
-				comment.parentId = :id";
+				where comment.parentType = :type AND
+					comment.parentId = :id AND
+					griff.isDeleted = 0";
+		
 		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
 		$stmt->bindValue("id", $this->id);
 		$stmt->bindValue("type", $this->type);
@@ -101,7 +104,10 @@ class CommentWidget extends CWidget {
 	}
 
 	public function getGriffCount($comment) {
-		return $this->griffCount[$comment->id];
+		if (isset($this->griffCount[$comment->id])) {
+			return $this->griffCount[$comment->id];
+		}
+		return 0;
 	}
 
 }
