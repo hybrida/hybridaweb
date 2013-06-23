@@ -14,7 +14,7 @@ $user = User::model()->findByPk(user()->id);
 <div class="comment-view-all">
 	<?php
 	$this->render("comment.views.default._comments", array(
-		'models' => Comment::getAll($formModel->type, $formModel->id),
+		'models' => $comments,
 	));
 	?>
 </div>
@@ -127,6 +127,10 @@ $submitUrl = Yii::app()->createUrl("/comment/default/submit");
 		if (shouldDelete) {
 			commentViewAll.load(url);
 		}
+	}
+
+	function griff(id) {
+		console.log("griff", id);
 	}
 </script>
 </div>

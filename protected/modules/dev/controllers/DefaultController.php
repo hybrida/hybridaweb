@@ -86,8 +86,8 @@ class DefaultController extends Controller {
 			$comment->authorId = $user->id;
 			$comment->parentType = Type::NEWS;
 			$comment->parentId = $news->id;
-			$comment->content = "Kommentar nr: " . $i . "<br/>" . $lipsum->getContent(10);
 			$comment->save();
+			$comment->content = "Kommentar nr: " . $comment->id . "<br/>" . $lipsum->getContent(50);
 			$comment->authorId = $user->id;
 			$comment->save();
 

@@ -31,6 +31,22 @@
 			<div class="c-content">
 				<?= $model->content ?>
 			</div>
+			<div class="c-additions">
+				<ul>
+					<li><a class="c-griffButton g-button" onclick="griff(<?= $model->id ?>)">
+						<img src="/images/logo_mini_stroke.png" alt="griff">
+						griff
+						<span class="count">
+							<span class="<?= $this->userHasGriffedClass($model) ?>">
+								<?= $this->getGriffCount($model) ?>
+							</span>
+						</span>
+					</a></li>
+					<li><a href="" class="g-button">
+						reply
+					</a></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 <? endforeach; ?>

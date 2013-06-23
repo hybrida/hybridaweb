@@ -75,3 +75,42 @@ http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
 .widget-comment .c-flashed  {
     border-left: 3px #185c9b solid;
 }
+
+.widget-comment .c-additions {
+
+}
+
+.widget-comment .c-additions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: right;
+}
+
+.widget-comment .c-additions li {
+    display: inline;
+}
+
+.widget-comment .c-additions li a {
+    padding: 0.3em;
+    border-radius: 2px;
+}
+
+.widget-comment .c-additions img {
+    width: 16px;
+    position: relative;
+    top: 2px;
+}
+
+.widget-comment .c-additions li .count {
+    background-color: white;
+    color: black;
+    font-weight: bold;
+    border-radius: 2px;
+    margin-left: 5px;
+    padding: 0 0.1em;
+}
+
+.widget-comment .c-additions .c-userHasGriffed {
+    background-color: green;
+}

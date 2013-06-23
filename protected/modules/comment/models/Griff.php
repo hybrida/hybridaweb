@@ -62,21 +62,21 @@ class Griff extends CActiveRecord {
 			'criteria' => $criteria,
 		));
 	}
-	
+
 	public static function get($commentId, $userId) {
 		return Griff::model()->find('commentId = :commentId AND userId = :userId', array(
-			'commentId' => $commentId, 
-			'userId' => $userId,
+					'commentId' => $commentId,
+					'userId' => $userId,
 		));
 	}
-	
+
 	public static function add($commentId, $userId) {
 		$g = new Griff;
 		$g->commentId = $commentId;
 		$g->userId = $userId;
 		$g->save();
 	}
-	
+
 	public static function remove($commentId, $userId) {
 		$g = self::get($commentId, $userId);
 		$g->isDeleted = 1;
