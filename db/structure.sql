@@ -230,6 +230,15 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
 
+CREATE TABLE IF NOT EXISTS `griff` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `commentId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `isDeleted` tinyint(1) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `commentId` (`commentId`,`userId`,`isDeleted`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=87 ;
+
 CREATE TABLE IF NOT EXISTS `griffgame_highscore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
