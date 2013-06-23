@@ -108,17 +108,22 @@ class NewsController extends Controller {
 		if (!$signup) {
 			return;
 		}
-		$this->toggleAttending($signup, $userId);
-		$this->redirectToNewsByEventId($eventId);
+		$news = News::getByEventId($eventId);
+		$this->toggleAttending($news, $signup, $userId);
+		if ($news == null) {
+			throw new CHttpException(403, "Nyheten finnes ikke");
+		}
+		$this->redirect($news->viewUrl);
 	}
 
-	private function toggleAttending($signup, $userId) {
+	private function toggleAttending($news, $signup, $userId) {
 		$isAttending = $signup->isAttending($userId);
 		if ($isAttending) {
 			if ($signup->canUnattend()) {
 				$signup->removeAttender($userId);
 			}
 		} else {
+			Yii::app()->notification->addListener('news', $news->id, $userId);
 			if ($signup->canAttend($userId)) {
 				$signup->addAttender($userId);
 			}
@@ -126,9 +131,7 @@ class NewsController extends Controller {
 	}
 
 	private function redirectToNewsByEventId($eventId) {
-		$news = News::model()->find("parentId = ? AND parentType = 'event'", array(
-			$eventId,
-				));
+		$news = News::getByEventId($eventId);
 		$url = $news->viewUrl;
 		$this->redirect($url);
 	}

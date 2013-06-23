@@ -153,7 +153,7 @@ class News extends CActiveRecord {
 	public function getParentId() {
 		return $this->parentId;
 	}
-    
+
     public function getStatusName() {
         switch ($this->status) {
             case Status::PUBLISHED:
@@ -185,7 +185,7 @@ class News extends CActiveRecord {
 					'title' => $this->getTitleWithoutSpecialChars(),
 				));
 	}
-	
+
 	public function getAbsoluteUrl() {
 		return Yii::app()->createAbsoluteUrl("news/view", array(
 					"id" => $this->id,
@@ -213,6 +213,12 @@ class News extends CActiveRecord {
 			$newsList[] = News::model()->with('event')->findByPk($id);
 		}
 		return $newsList;
+	}
+
+	public static function getByEventId($eventId) {
+		return News::model()->find("parentId = ? AND parentType = 'event'", array(
+			$eventId,
+		));
 	}
 
 }
