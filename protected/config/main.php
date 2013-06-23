@@ -91,6 +91,9 @@ return array(
 		'gatekeeper' => array(
 			'class' => 'GatekeeperComponent',
 		),
+		'notification' => array(
+			'class' => 'notifications.components.NotificationComponent',
+		),
 		'user' => array(
 			// enable cookie-based authentication
 			'allowAutoLogin' => true,
