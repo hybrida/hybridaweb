@@ -70,15 +70,33 @@ class Notifications {
 		foreach ($listenerIDs as $listenerID) {
 			if ($listenerID == $changedByUserID)
 				continue;
-			$notification = new Notification;
-			$notification->parentID = $id;
-			$notification->parentType = $type;
-			$notification->userID = $listenerID;
-			$notification->statusCode = $statusCode;
-			$notification->changedByUserID = $changedByUserID;
-			$notification->commentID = $commentID;
-			$notification->save();
+			self::insertNotifications(array(
+				'parentId' => $id,
+				'parentType' => $type,
+				'userID' => $listenerID,
+				'statusCode' => $statusCode,
+				'changedByUserID' => $changedByUserID,
+				'commentID' => $commentID,
+			));
+//			$notification = new Notification;
+//			$notification->parentID = $id;
+//			$notification->parentType = $type;
+//			$notification->userID = $listenerID;
+//			$notification->statusCode = $statusCode;
+//			$notification->changedByUserID = $changedByUserID;
+//			$notification->commentID = $commentID;
+//			$notification->save();
 		}
+	}
+	
+	private static function insertNotifications($params) {
+		$sql = "INSERT IGNORE INTO `hybrida_dev`.`notification`
+				(`parentType`, `parentID`, `userID`,
+					`changedByUserID`, `commentID`, `statusCode`)
+				VALUES (:parentType, :parentId, :userID,
+					:changedByUserID, :commentID, :statusCode);";
+		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
+		$stmt->execute($params);
 	}
 
 	public static function notifyAndAddListener($type, $id, $statusCode, $changedByUserID = null, $commentID = null) {
@@ -111,18 +129,17 @@ class Notifications {
 		switch ($statusCode) {
 			case Notification::STATUS_CHANGED:
 				return 'gjorde en endring på';
-				break;
 			case Notification::STATUS_NEW_COMMENT:
 				return 'kommenterte på';
-				break;
 			case Notification::STATUS_FORUM_NEW_REPLY:
 				return 'svarte på';
-				break;
+			case Notification::STATUS_GRIFF_COMMENT:
+				return "liker kommentaren din på";
 		}
 	}
 
 	public static function getCount($userId) {
-		$sql = "SELECT count(DISTINCT parentId, parentType) AS count
+		$sql = "SELECT count(DISTINCT parentId, parentType, statusCode) AS count
 					FROM notification
 					WHERE userId  = :userId AND
 					isRead = 0";

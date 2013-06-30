@@ -18,9 +18,9 @@ class NotificationComponent extends CComponent {
 		Notifications::removeListener($type, $id, $userId);
 	}
 
-	public function notifyAndAddListener($type, $id, $userId, $statusCode=null, $commentId=null) {
+	public function notifyAndAddListener($type, $id, $statusCode, $userId=null, $commentId=null) {
 		Notifications::notifyAndAddListener(
-			$type, $id, $userId, $statusCode, $commentId);
+			$type, $id, $statusCode, $userId, $commentId);
 	}
 
 	public function getCount() {

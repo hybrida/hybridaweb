@@ -39,9 +39,6 @@
 							<span class="<?= $this->userHasGriffedClass($model) ?> count"
 								  ><?= $this->getGriffCount($model) ?></span>
 					</a></li>
-					<li><a href="" class="g-button">
-						reply
-					</a></li>
 				</ul>
 			</div>
 		</div>

@@ -44,13 +44,18 @@ class DefaultController extends Controller {
 	}
 	
 	public function actionGriffOn($id) {
+		$comment = Comment::model()->findByPk($id);
 		Griff::add($id, user()->id);
-		echo "It's on!!";
+		Yii::app()->notification->notifyAndAddListener(
+				$comment->parentType,
+				$comment->parentId,
+				Notification::STATUS_GRIFF_COMMENT,
+				user()->id,
+				$comment->id);
 	}
 	
 	public function actionGriffOff($id) {
 		Griff::remove($id, user()->id);
-		echo "It's off!!";
 	}
 	
 

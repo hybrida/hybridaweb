@@ -24,6 +24,7 @@ class Notification extends CActiveRecord
 
 	const STATUS_CHANGED = 0;
 	const STATUS_NEW_COMMENT = 1;
+	const STATUS_GRIFF_COMMENT = 2;
 	const STATUS_FORUM_NEW_REPLY = 10;
 
 	/**
