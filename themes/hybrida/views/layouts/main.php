@@ -9,12 +9,12 @@
 
 		<?= $this->clips['head-facebook'] ?>
 
-		<script data-main="/scripts/main.js" src="/scripts/require.js"></script>
 
 		<? $this->renderPartial('//layouts/_css') ?>
 		<? $this->renderPartial('//layouts/_matrix') ?>
 		<? $this->renderPartial('//layouts/_google_analytics') ?>
 
+		<script data-main="/scripts/main.js" src="/scripts/require.js"></script>
 	</head>
 
 	<body>
