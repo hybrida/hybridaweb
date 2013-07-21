@@ -25,7 +25,7 @@ class CssIncluder {
 			if ($file == "." || $file == ".." || is_dir($fullPathName)) {
 				continue;
 			}
-			self::$cssFiles[] = $dir . "/" . $file;
+			self::$cssFiles[] = Yii::app()->request->baseUrl . "/" . $dir . "/" . $file;
 		}
 	}
 
