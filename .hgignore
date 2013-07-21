@@ -1,5 +1,7 @@
+syntax: glob
+
 nbproject
-^assets/
+assets/*
 runtime
 .swp
 upc/
@@ -9,3 +11,4 @@ upc/
 .DS_Store
 .git
 style/css/min.css
+style/less/*.css
