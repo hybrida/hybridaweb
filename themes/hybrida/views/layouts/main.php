@@ -15,6 +15,8 @@
 		<? $this->renderPartial('//layouts/_matrix') ?>
 		<? $this->renderPartial('//layouts/_google_analytics') ?>
 
+		<script src="/scripts/less.min.js"></script>
+
 	</head>
 
 	<body>
