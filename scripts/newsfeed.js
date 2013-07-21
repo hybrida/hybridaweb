@@ -1,33 +1,45 @@
-require([], function () {
+define([], function () {
 
-	var ajaxButton = $(data.ajaxButtonSelector);
-	var feeds = $(data.feedContentSelector);
-	var count = data.count;
-	var limit = data.limit;
-	var feedContentSelector = data.feedContentSelector;
-	var ajaxFeedUrl = data.ajaxFeedUrl;
+	var ajaxButton;
+	var feeds;
+	var count;
+	var limit;
+	var feedContentSelector;
+	var ajaxFeedUrl;
 
+	function init(data) {
+		ajaxButton = $(data.ajaxButtonSelector);
+		feeds = $(data.feedContentSelector);
+		count = data.count;
+		limit = data.limit;
+		feedContentSelector = data.feedContentSelector;
+		ajaxFeedUrl = data.ajaxFeedUrl;
 
-	ajaxButton.click(function (){
-		$.ajax({
-			success: function(html){
-				feeds.append(html);
+		addClickEventToAjaxButton();
+	}
 
-				if (html.indexOf("Ingen flere nyheter") != -1) {
-					ajaxButton.off('click');
-					ajaxButton.remove();
-				}
-			},
-			type: 'get',
-			url: ajaxFeedUrl + count,
-			data: {
-				index: $(feedContentSelector + " li").size()
-			},
-			cache: false,
-			dataType: 'html'
+	function addClickEventToAjaxButton() {
+		ajaxButton.click(function (){
+			$.ajax({
+				success: function(html){
+					feeds.append(html);
+
+					if (html.indexOf("Ingen flere nyheter") != -1) {
+						ajaxButton.off('click');
+						ajaxButton.remove();
+					}
+				},
+				type: 'get',
+				url: ajaxFeedUrl + count,
+				data: {
+					index: $(feedContentSelector + " li").size()
+				},
+				cache: false,
+				dataType: 'html'
+			});
+			count += limit;
 		});
-		count += limit;
-	});
+	}
 
 
 	/**
@@ -79,5 +91,9 @@ require([], function () {
 	}
 
 	scrollChecker();
+
+	return {
+		init: init
+	};
 
 });

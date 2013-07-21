@@ -55,13 +55,15 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 
 ?>
 <script language="javascript">
-	require(['newsfeed']);
-	var data = {
-		count: <?= $index ?>,
-		ajaxFeedUrl: '<?= $ajaxFeedUrl ?>',
-		ajaxButtonSelector: '#fetchNews',
-		feedContentSelector: '.feeds',
-		limit: <?= $limit ?>
-	};
+	require(['newsfeed'], function(newsfeed) {
+		var data = {
+			count: <?= $index ?>,
+			ajaxFeedUrl: '<?= $ajaxFeedUrl ?>',
+			ajaxButtonSelector: '#fetchNews',
+			feedContentSelector: '.feeds',
+			limit: <?= $limit ?>
+		};
+		newsfeed.init(data);
+	});
 </script>
 </div>
