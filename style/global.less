@@ -1,3 +1,5 @@
+@import url('mixins.less');
+
 table.g-membertable {
     margin: 2em auto;
     border-collapse: collapse;
@@ -34,37 +36,16 @@ table.g-membertable *{
 	border: 0;
 	border-radius: 2px;
 	margin-right: 5px;
-	background: #185c9b;
-	background: -moz-linear-gradient(top,  #185c9b 0%, #003b8e 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#185c9b), color-stop(100%,#003b8e));
-	background: -webkit-linear-gradient(top,  #185c9b 0%,#003b8e 100%);
-	background: -o-linear-gradient(top,  #185c9b 0%,#003b8e 100%);
-	background: -ms-linear-gradient(top,  #185c9b 0%,#003b8e 100%);
-	background: linear-gradient(to bottom,  #185c9b 0%,#003b8e 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#185c9b', endColorstr='#003b8e',GradientType=0 );
+	.gradient(top; #185c9b; #003b8e);
 }
 
 .g-button:hover {
+	.gradient(top; #154e87; #003a75);
 	cursor: pointer;
-	background: #154e87;
-	background: -moz-linear-gradient(top,  #154e87 0%, #003a75 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#154e87), color-stop(100%,#003a75));
-	background: -webkit-linear-gradient(top,  #154e87 0%,#003a75 100%);
-	background: -o-linear-gradient(top,  #154e87 0%,#003a75 100%);
-	background: -ms-linear-gradient(top,  #154e87 0%,#003a75 100%);
-	background: linear-gradient(to bottom,  #154e87 0%,#003a75 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#154e87', endColorstr='#003a75',GradientType=0 );
 }
 
 .g-button:active {
-	background: #14427f;
-	background: -moz-linear-gradient(top,  #14427f 0%, #004063 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#14427f), color-stop(100%,#004063));
-	background: -webkit-linear-gradient(top,  #14427f 0%,#004063 100%);
-	background: -o-linear-gradient(top,  #14427f 0%,#004063 100%);
-	background: -ms-linear-gradient(top,  #14427f 0%,#004063 100%);
-	background: linear-gradient(to bottom,  #14427f 0%,#004063 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#14427f', endColorstr='#004063',GradientType=0 );
+	.gradient(top; #14427f; #004063);
 }
 
 .g-buttonRightSide {
