@@ -7,6 +7,15 @@ define(
 	var fps;
 	var canvas;
 	var game;
+	var highscorelist;
+
+	var init = function(data) {
+		var pictureCanvas = data.pictureCanvas;
+		highscorelist = data.highscorelist;
+		griffDrawer.init({
+			pictureCanvas: pictureCanvas
+		});
+	};
 
 	function CarGame(canvas) {
 		var self = this;
@@ -81,7 +90,7 @@ define(
 			this.drawFinalTime();
 			$.ajax({
 				success: function(html){
-					data.highscorelist.innerHTML = html;
+					highscorelist.innerHTML = html;
 				},
 				type: 'post',
 				url: "/game/score",
@@ -158,6 +167,7 @@ define(
 	}
 
 	return {
+		init: init,
 		Car: Car,
 		CarGame: CarGame
 	};

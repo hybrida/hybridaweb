@@ -1,8 +1,7 @@
 define([],function(){
 
-	var canvas = data.pictureCanvas;
-	var context = canvas.getContext("2d");
-	var drawPart;
+	var canvas;
+	var context;
 	var coords = [
 		[34, 43],
 		[15, 87],
@@ -34,6 +33,12 @@ define([],function(){
 		[162, 203]
 	];
 
+	var init = function(data) {
+		canvas = data.pictureCanvas;
+		context = canvas.getContext("2d");
+		drawBackground();
+	};
+
 	var drawBackground = function () {
 		var img = new Image();
 		img.src = "/images/griffgame/griff-faded.png";
@@ -44,7 +49,6 @@ define([],function(){
 			context.restore();
 		};
 	};
-	drawBackground();
 
 	function randomColor() {
 		var red = Math.floor(Math.random() * 255);
@@ -57,7 +61,7 @@ define([],function(){
 		drawPart(i);
 	};
 
-	drawPart = function(i) {
+	var drawPart = function(i) {
 		var image = new Image();
 		image.src = "/images/griffgame/griff-" + i + ".png";
 		image.onload = function() {
@@ -73,6 +77,7 @@ define([],function(){
 	};
 
 	return {
+		init: init,
 		trigger: trigger,
 		clear: clear
 	};

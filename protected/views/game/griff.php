@@ -66,9 +66,8 @@ $this->layout = "//layouts/doubleColumn";
 </style>
 
 <script>
-	var data;
-	document.ready = function() {
-		data = {
+	require(['griffgrabber/run'], function(runner){
+		var data = {
 			canvas: document.getElementById("thehunt"),
 			pictureCanvas: document.getElementById("thehunt_picture"),
 			startButton: document.getElementById("thebutton"),
@@ -77,8 +76,8 @@ $this->layout = "//layouts/doubleColumn";
 			gameWrap: document.getElementById("gameWrap"),
 			restartButton: document.getElementById("restartButton")
 		};
-	}
-	require(['griffgrabber/run']);
+		runner.init(data);
+	});
 </script>
 
 <? $this->beginClip("sidebar") ?>
