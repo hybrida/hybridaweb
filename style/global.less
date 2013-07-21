@@ -36,16 +36,20 @@ table.g-membertable *{
 	border: 0;
 	border-radius: 2px;
 	margin-right: 5px;
+	.g-button-gradient();
+}
+
+.g-button-gradient() {
 	.gradient(top; #185c9b; #003b8e);
-}
 
-.g-button:hover {
-	.gradient(top; #154e87; #003a75);
-	cursor: pointer;
-}
+	&:hover {
+		.gradient(top; #154e87; #003a75);
+		cursor: pointer;
+	}
 
-.g-button:active {
-	.gradient(top; #14427f; #004063);
+	&:active {
+		.gradient(top; #14427f; #004063);
+	}
 }
 
 .g-buttonRightSide {
