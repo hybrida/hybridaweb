@@ -22,49 +22,12 @@ $url= Yii::app()->createUrl('notifications/default/follow', array(
 </div>
 
 <script>
+	require(['comments/follow'], function(follow) {
+		follow.init({
+			baseUrl: '<?= $url ?>/',
+			isFollowing: eval("<?= $this->isFollowing ? 'true' : 'false' ?>")
+		});
 
-var isFollowing = eval('<?= $this->isFollowing ? 'true' : 'false' ?>');
-
-function getToggle() {
-	if (isFollowing) {
-		return "unfollow";
-	} else {
-		return "follow";
-	}
-}
-
-var button = $(".widget-followButton-button");
-var buttonText = $(".widget-followButton-button span");
-var toggleClassName = "c-toggled";
-
-button.click(function(e){
-	e.preventDefault();
-	actionFollow();
-});
-
-function actionFollow() {
-	var baseUrl = '<?= $url ?>/';
-	var toggle = getToggle();
-	var url = baseUrl + toggle;
-	console.log(url);
-	$.ajax({
-		'url': url,
-		'success': function(html) {
-			buttonText.text(html);
-			isFollowing = !isFollowing;
-			setFollowButtonClassName();
-		}
+		follow.run();
 	});
-}
-
-function setFollowButtonClassName() {
-	if (isFollowing) {
-		button.addClass(toggleClassName);
-	} else {
-		button.removeClass(toggleClassName);
-	}
-}
-
-setFollowButtonClassName();
-
 </script>
