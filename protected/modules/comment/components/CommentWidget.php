@@ -80,17 +80,17 @@ class CommentWidget extends CWidget {
 	public function run() {
 		if (!user()->isGuest) {
 			if (!$this->isAjaxRequest) {
-				$this->render("member", array(
+				$this->render("comment.views.member", array(
 					'formModel' => $this->formModel,
 					'comments' => $this->comments,
 				));
 			} else {
-				$this->render("comment.views.default._comments", array(
+				$this->render("comment.views._comments", array(
 					'models' => $this->comments,
 				));
 			}
 		} else {
-			$this->render('guest');
+			$this->render('comment.views.guest');
 		}
 	}
 
