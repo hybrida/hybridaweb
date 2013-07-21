@@ -1,25 +1,82 @@
-/* Calendar Styles */
-
 .calendarData {
-	padding: 0.5em;
+	padding:.5em;
 }
-.big-calendar {width:98%; border-collapse:collapse;}
-.big-calendar tr.navigation th {padding-bottom:20px;}
-.big-calendar th.prev-month {text-align:left;}
-.big-calendar th.current-month {text-align:center; font-size:1.5em;}
-.big-calendar th.next-month {text-align:right;}
-.big-calendar tr.weekdays th {text-align:left;}
-.big-calendar td {width:13%; height:100px; vertical-align:top; border:1px solid #CCC;}
-.big-calendar th.week-number {width: 5%; font-size: 20px}
-.big-calendar td.today {background:#FFD;}
-.big-calendar td.prev-next {background:#EEE;}
-.big-calendar td.prev-next span.date {color:#9C9C9C;}
-.big-calendar td.holiday {background:#DDFFDE;}
-.big-calendar span.date {display:block; padding:4px; line-height:12px; background:#EEE;}
-.big-calendar div.day-content {}
-.big-calendar ul.output {margin:0; padding:0 4px; list-style:none;}
-.big-calendar ul.output li {margin:0; padding:5px 0; line-height:1em; border-bottom:1px solid #CCC;}
-.big-calendar ul.output li:last-child {border:0;}
-.big-calendar .notThisMonth {
-	color: grey;
+
+.big-calendar {
+
+	width:98%;
+	border-collapse:collapse;
+
+	tr.navigation th {
+		padding-bottom:20px;
+	}
+
+	th.current-month {
+		text-align:center;
+		font-size:1.5em;
+	}
+
+	th.next-month {
+		text-align:right;
+	}
+
+	td {
+		width:13%;
+		height:100px;
+		vertical-align:top;
+		border:1px solid #CCC;
+	}
+
+	th.week-number {
+		width:5%;
+		font-size:20px;
+	}
+
+	td.today {
+		background:#FFD;
+	}
+
+	td.prev-next {
+		background:#EEE;
+	}
+
+	td.prev-next span.date {
+		color:#9C9C9C;
+	}
+
+	td.holiday {
+		background:#DDFFDE;
+	}
+
+	span.date {
+		display:block;
+		line-height:12px;
+		background:#EEE;
+		padding:4px;
+	}
+
+	ul.output {
+		list-style:none;
+		margin:0;
+		padding:0 4px;
+	}
+
+	ul.output li {
+		line-height:1em;
+		border-bottom:1px solid #CCC;
+		margin:0;
+		padding:5px 0;
+	}
+
+	ul.output li:last-child {
+		border:0;
+	}
+
+	.notThisMonth {
+		color:grey;
+	}
+
+	th.prev-month, tr.weekdays th {
+		text-align:left;
+	}
 }

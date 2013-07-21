@@ -1,44 +1,45 @@
 .notificationIndex {
 	margin: 1em;
-}
 
-.notificationIndex h1 {
-	border-bottom: 2px solid #0066CC;
-	padding-left: 0.5em;
-}
 
-.notificationIndex .row {
-	margin: 0.2em 0;
-	padding-left: 1em;
-	padding: 10px;
-}
+	h1 {
+		border-bottom: 2px solid #0066CC;
+		padding-left: 0.5em;
+	}
 
-.notificationIndex .row:nth-child(odd) {
-	background: #eee;
-}
+	.row {
+		margin: 0.2em 0;
+		padding-left: 1em;
+		padding: 10px;
+	}
 
-.notificationIndex .top:before,
-.notificationIndex .top:after {
-    content:"";
-    display:table;
-}
+	.row:nth-child(odd) {
+		background: #eee;
+	}
 
-.notificationIndex .top:after {
-    clear:both;
-}
+	.top:before, .top:after {
+	    content:"";
+	    display:table;
+	}
 
-.notificationIndex .date {
-	color: #999;
-	display: block;
-	float: left;
-}
+	.top:after {
+	    clear:both;
+	}
 
-.notificationIndex .delete {
-	display: block;
-	float:right;
-	margin: 0 1em;
-}
+	.date {
+		color: #999;
+		display: block;
+		float: left;
+	}
 
-.notificationIndex .content {
-	text-align: left;
+	.delete {
+		display: block;
+		float:right;
+		margin: 0 1em;
+	}
+
+	.content {
+		text-align: left;
+	}
+
 }
