@@ -9,7 +9,7 @@ $url= Yii::app()->createUrl('notifications/default/follow', array(
 ?>
 
 <div class="widget-followButton">
-	<a href="#" class="widget-followButton-button g-button" onclick="js:actionFollow()">
+	<a href="#" class="widget-followButton-button">
 		<img src="/images/logo_mini_stroke.png" alt="griff">
 		<span>
 			<? if ($this->isFollowing): ?>
@@ -33,19 +33,38 @@ function getToggle() {
 	}
 }
 
+var button = $(".widget-followButton-button");
+var buttonText = $(".widget-followButton-button span");
+var toggleClassName = "c-toggled";
+
+button.click(function(e){
+	e.preventDefault();
+	actionFollow();
+});
+
 function actionFollow() {
 	var baseUrl = '<?= $url ?>/';
 	var toggle = getToggle();
 	var url = baseUrl + toggle;
 	console.log(url);
-	var buttonText = $(".widget-followButton-button span");
 	$.ajax({
 		'url': url,
 		'success': function(html) {
 			buttonText.text(html);
 			isFollowing = !isFollowing;
+			setFollowButtonClassName();
 		}
 	});
 }
+
+function setFollowButtonClassName() {
+	if (isFollowing) {
+		button.addClass(toggleClassName);
+	} else {
+		button.removeClass(toggleClassName);
+	}
+}
+
+setFollowButtonClassName();
 
 </script>

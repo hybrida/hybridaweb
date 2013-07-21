@@ -81,6 +81,8 @@
 
 	.c-additions {
 
+		.c-additions-mixin();
+
 		ul {
 			list-style: none;
 			padding: 0;
@@ -92,35 +94,46 @@
 			display: inline;
 		}
 
-		li a {
-			padding: 0.3em;
-			border-radius: 2px;
 
-			&:hover {
-				cursor: pointer;
-			}
+	}
+}
+
+
+.widget-followButton {
+
+	text-align: right;
+	.c-additions-mixin();
+}
+
+.c-additions-mixin() {
+
+	a {
+		padding: 0.3em;
+		border-radius: 2px;
+
+		&:hover {
+			cursor: pointer;
 		}
 
-		img {
-			width: 24px;
-			position: relative;
-			top: 6px;
-		}
-
-		li .count {
+		span {
 			color: black;
 			font-weight: bold;
 			border-radius: 2px;
 		}
-
-		.c-userHasGriffed {
-			background-color: @hybrida-blue-main;
-
-			.count {
-				color: white;
-
-			}
-		}
 	}
 
+	img {
+		width: 24px;
+		position: relative;
+		top: 6px;
+	}
+
+	.c-toggled {
+		background-color: @hybrida-blue-main;
+
+		span {
+			color: white;
+
+		}
+	}
 }

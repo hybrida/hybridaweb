@@ -3,7 +3,7 @@ define([], function(){
 	var urlOn = '<?= $griffOnUrl ?>';
 	var urlOff = '<?= $griffOffUrl ?>';
 
-	var hasGriffedClassName = "c-userHasGriffed";
+	var hasGriffedClassName = "c-toggled";
 	var hasGriffedAttribute = "data-isgriffed";
 
 	function setData(data) {
@@ -53,7 +53,7 @@ define([], function(){
 		comments.each(function(i, item){
 			item = $(item);
 			if (item.attr('data-isgriffed') == "true") {
-				item.addClass("c-userHasGriffed");
+				item.addClass(hasGriffedClassName);
 			}
 		});
 	}
