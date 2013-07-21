@@ -198,20 +198,24 @@ li.collapsibleListClosed .node {
 
 /*--- En floatcontanier som settes på blokker som inneholder floats ---*/
 
-.g-clearfix:after{
+.g-clearfix {
+	&:after{
 	/* Settes på container som inneholder flytende elementer:
 	 * <div id="container" class="g-clearfix">
 	 *   <div id="rail" style="float: left;"></div>
 	 *   <div id="content" style="float: left;"></div>
 	 * </div>
+	 *
+	 * Denne kan også puttes inn i css-klasser som inneholder floats
 	 */
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-	font-size: 0;
-	overflow:hidden;
+		clear: both;
+		content: ".";
+		display: block;
+		height: 0;
+		visibility: hidden;
+		font-size: 0;
+		overflow:hidden;
+	}
 }
 
 /*---------- Generelle bokser -----------------*/
