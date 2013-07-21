@@ -95,7 +95,6 @@
 		li a {
 			padding: 0.3em;
 			border-radius: 2px;
-			background-color: #eee;
 
 			&:hover {
 				cursor: pointer;
@@ -103,9 +102,9 @@
 		}
 
 		img {
-			width: 16px;
+			width: 24px;
 			position: relative;
-			top: 2px;
+			top: 6px;
 		}
 
 		li .count {
@@ -115,8 +114,12 @@
 		}
 
 		.c-userHasGriffed {
-			background-color: green;
-			text-decoration: underline;
+			background-color: @hybrida-blue-main;
+
+			.count {
+				color: white;
+
+			}
 		}
 	}
 
