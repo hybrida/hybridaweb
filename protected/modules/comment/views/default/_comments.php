@@ -32,12 +32,16 @@
 				<?= $model->content ?>
 			</div>
 			<div class="c-additions">
+				<?php
+					$userHasGriffed = $this->userHasGriffed($model);
+					$griffBoolString =  $userHasGriffed ? "true" : "false";
+					$griffCount = $this->getGriffCount($model);
+				 ?>
 				<ul>
-					<li><a class="c-griffButton g-button" onclick="griff(<?= $model->id ?>, this)">
+					<li><a  data-isgriffed="<?= $griffBoolString ?>" class="c-griffButton" onclick="griff(<?= $model->id ?>, this)">
 						<img src="/images/logo_mini_stroke.png" alt="griff">
-						griff
-							<span class="<?= $this->userHasGriffedClass($model) ?> count"
-								  ><?= $this->getGriffCount($model) ?></span>
+
+							<span class="count"><?= $griffCount ?></span>
 					</a></li>
 				</ul>
 			</div>

@@ -73,9 +73,11 @@ $griffOffUrl = Yii::app()->createUrl("/comment/default/griffOff", array('id' => 
 
 ?>
 <script lang="javascript">
-	
+
 var urlOn = '<?= $griffOnUrl ?>';
 var urlOff = '<?= $griffOffUrl ?>';
+var hasGriffedClassName = "c-userHasGriffed";
+var hasGriffedAttribute = "data-isgriffed";
 
 	$(document).ready(function() {
 
@@ -138,30 +140,32 @@ var urlOff = '<?= $griffOffUrl ?>';
 	}
 
 	function griff(id, element) {
-		var userHasGriffedClassName = "c-userHasGriffed count";
-		var userHasNotGriffedClassName = "count";
-		
-		var span = element.getElementsByClassName("count")[0];
-		var griffCount = parseInt(span.innerHTML);
-		var userHasGriffed = span.className.length > "count ".length;
+
+		var griffButton = $(element);
+		var count = griffButton.find(".count");
+		var griffCount = parseInt(count.html());
+		var userHasGriffed = griffButton.attr(hasGriffedAttribute) == "true";
+
 		var url = "";
 		if (userHasGriffed) {
 			url = urlOff + id;
 			runAjax(url, function(html) {
-				span.innerHTML = griffCount - 1;
-				span.className = userHasNotGriffedClassName;
+				count.html(griffCount - 1);
+				griffButton.removeClass(hasGriffedClassName);
+				griffButton.attr(hasGriffedAttribute, "false");
 				console.log("It's off");
 			});
 		} else {
 			url = urlOn + id;
 			runAjax(url, function(html) {
-				span.innerHTML = griffCount + 1;
-				span.className = userHasGriffedClassName;
+				count.html(griffCount + 1);
+				griffButton.addClass(hasGriffedClassName);
+				griffButton.attr(hasGriffedAttribute, "true");
 				console.log("It's on");
 			});
 		}
 	}
-	
+
 	function runAjax(url, callback) {
 		$.ajax({
 			'url': url,
@@ -172,6 +176,19 @@ var urlOff = '<?= $griffOffUrl ?>';
 			}
 		});
 	}
-	
+
+	function setGriffButtonColors() {
+		var comments = $(".c-griffButton");
+		comments.each(function(i, item){
+			item = $(item);
+			if (item.attr('data-isgriffed') == "true") {
+				item.addClass("c-userHasGriffed");
+			}
+		});
+	}
+
+	setGriffButtonColors();
+
+
 </script>
 </div>

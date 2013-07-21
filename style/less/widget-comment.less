@@ -1,117 +1,123 @@
-/* Forcing comment to contain its children despite the floats inside
-http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
-.widget-comment .c-comment
-, .widget-comment .c-header
- {
-    overflow: hidden;
-    display: inline-block;
-    display: block;
-}
+@import url('mixins.less');
+@import url('global.less');
 
-.widget-comment .c-comment {
-    padding-left: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-    width: 650px;
-}
+.widget-comment {
 
-.widget-comment .c-comment:nth-child(even) {
-    background-color: #eee;
-}
+	.c-comment, .c-header {
+		/* Forcing comment to contain its children despite the floats inside
+		http://stackoverflow.com/questions/211383/which-method-of-clearfix-is-best */
+		overflow: hidden;
+		display: inline-block;
+		display: block;
+	}
 
-.widget-comment .c-comment .c-profile-image {
-    width: 55px;
-    height: 55px;
-    margin-top: 0;
-    clear: both;
-}
+	.c-comment {
+		padding-left: 10px;
+		margin-left: 20px;
+		margin-right: 20px;
+		width: 650px;
+	}
 
-.widget-comment .c-date {
-    color: #666;
-    float: right;
-}
+	.c-comment:nth-child(even) {
+		background-color: #eee;
+	}
 
-.widget-comment .c-date-without-delete {
-    margin-right: 34px;
-}
+	.c-comment .c-profile-image {
+		width: 55px;
+		height: 55px;
+		margin-top: 0;
+		clear: both;
+	}
 
-.widget-comment .c-author {
-    float: left;
-}
+	.c-date {
+		color: #666;
+		float: right;
+	}
 
-.widget-comment .c-header {
-    margin-bottom: 0em;
-}
+	.c-date-without-delete {
+		margin-right: 34px;
+	}
 
-.widget-comment .c-profileImage {
-    width: 50px;
-    float: left;
-}
+	.c-author {
+		float: left;
+	}
 
-.widget-comment .c-right {
-    float: left;
-    width: 560px;
-    padding-left: 20px;
-    margin-left: 10px;
-}
+	.c-header {
+		margin-bottom: 0em;
+	}
 
-.widget-comment .c-right , .widget-comment .c-profileImage {
-    margin-bottom: 10px;
-    margin-top:10px;
-}
+	.c-profileImage {
+		width: 50px;
+		float: left;
+	}
 
-.widget-comment .c-header .g-deleteButton {
-    float: right;
-}
+	.c-right {
+		float: left;
+		width: 560px;
+		padding-left: 20px;
+		margin-left: 10px;
+	}
 
-.widget-comment .c-comment textarea {
-    border: 1px solid #888;
-}
+	.c-right , .c-profileImage {
+		margin-bottom: 10px;
+		margin-top:10px;
+	}
 
-.widget-comment .c-content {
-    margin-right: 34px;
-}
+	.c-header .g-deleteButton {
+		float: right;
+	}
 
-.widget-comment .c-flashed  {
-    border-left: 3px #185c9b solid;
-}
+	.c-comment textarea {
+		border: 1px solid #888;
+	}
 
-.widget-comment .c-additions {
+	.c-content {
+		margin-right: 34px;
+	}
 
-}
+	.c-flashed  {
+		border-left: 3px #185c9b solid;
+	}
 
-.widget-comment .c-additions ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    text-align: right;
-}
+	.c-additions {
 
-.widget-comment .c-additions li {
-    display: inline;
-}
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			text-align: right;
+		}
 
-.widget-comment .c-additions li a {
-    padding: 0.3em;
-    border-radius: 2px;
-}
+		li {
+			display: inline;
+		}
 
-.widget-comment .c-additions img {
-    width: 16px;
-    position: relative;
-    top: 2px;
-}
+		li a {
+			padding: 0.3em;
+			border-radius: 2px;
+			background-color: #eee;
 
-.widget-comment .c-additions li .count {
-    background-color: white;
-    color: black;
-    font-weight: bold;
-    border-radius: 2px;
-    margin-left: 5px;
-    padding: 0 0.1em;
-}
+			&:hover {
+				cursor: pointer;
+			}
+		}
 
-.widget-comment .c-additions .c-userHasGriffed {
-    background-color: green;
-    text-decoration: underline;
+		img {
+			width: 16px;
+			position: relative;
+			top: 2px;
+		}
+
+		li .count {
+			color: black;
+			font-weight: bold;
+			border-radius: 2px;
+		}
+
+		.c-userHasGriffed {
+			background-color: green;
+			text-decoration: underline;
+		}
+	}
+
 }
