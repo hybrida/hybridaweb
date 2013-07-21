@@ -8,4 +8,4 @@ upc/
 .buildpath
 .DS_Store
 .git
-
+style/css/min.css
