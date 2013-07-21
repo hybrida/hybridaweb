@@ -13,7 +13,7 @@
 ?>
 <div class="memberlists">
 
-	<table class="g-"membertable">
+	<table class="g-membertable">
 		<tr>
 			<th></th>
 			<th>Navn</th>
@@ -21,7 +21,7 @@
 			<th>Stilling</th>
 		</tr>
 		<? $odd = false ?>
-		<? foreach ($members as $membership) : 
+		<? foreach ($members as $membership) :
 			$user = $membership->user?>
 			<? $odd = !$odd ?>
 			<div class="<?= $odd ? "odd" : "like" ?>" >
