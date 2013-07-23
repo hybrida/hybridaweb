@@ -6,26 +6,23 @@ $this->beginClip('sidebar'); ?>
 	<? if ($hasPublishAccess): ?>
 		<fieldset class="g-adminSet">
 			<legend>Admin</legend>
-			<?=
-			CHtml::link("Publiser", array("news/create"), array(
+
+			<?= CHtml::link("Publiser", array("news/create"), array(
 				'class' => 'g-button',
-			))
-			?>
-			<?=
-			CHtml::link("Nyheter", array("admin/news"), array(
+			)) ?>
+
+			<?= CHtml::link("Nyheter", array("admin/news"), array(
 				'class' => 'g-button',
-			))
-			?>
-			<?=
-			CHtml::link("Artikler", array("admin/articles"), array(
+			)) ?>
+
+			<?= CHtml::link("Artikler", array("admin/articles"), array(
 				'class' => 'g-button'
-			))
-			?>
-            <?=
-            CHtml::link("Statistikk", array("admin/stats"), array(
+			)) ?>
+
+            <?= CHtml::link("Statistikk", array("admin/stats"), array(
                 'class' => 'g-button'
-            ))
-            ?>
+            )) ?>
+
 		</fieldset>
 	<? endif ?>
 <?
