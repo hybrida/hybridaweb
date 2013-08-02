@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 <? if ($isLoggedIn): ?>
 <?
 $this->layout = "//layouts/doubleColumn";
-$this->beginClip('sidebar'); 
+$this->beginClip('sidebar');
 
 ?>
 
@@ -27,7 +27,7 @@ $this->beginClip('sidebar');
 	<h1>Galleri</h1>
 
 	<? if (count($albums) == 0): ?>
-		Tomt, <?= CHtml::link('lag et album', '/gallery/create/') ?> 
+		Tomt, <?= CHtml::link('lag et album', '/gallery/create/') ?>
 	<? endif; ?>
 	<? foreach($albums as $album): ?>
 			<? $num = count($album->images); ?>
@@ -36,7 +36,7 @@ $this->beginClip('sidebar');
 			</h2>
 			<? if(count($album->images) == 0): ?>
 				<div class="container">
-					Tomt, <?= CHtml::link('legg til bilder', '/gallery/update/'.$album->id) ?> 
+					Tomt, <?= CHtml::link('legg til bilder', '/gallery/update/'.$album->id) ?>
 				</div>
 				<? continue; ?>
 			<? endif; ?>

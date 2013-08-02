@@ -44,7 +44,7 @@ class BookSale extends CActiveRecord
 			array('title, content, price, author', 'required'),
 			array('price, author, imageID', 'numerical', 'integerOnly'=>true),
 			array('title', 'length', 'max'=>30),
-                        array('price', 'numerical', 'min'=>1, 'max'=>999999),
+						array('price', 'numerical', 'min'=>1, 'max'=>999999),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('id, title, status, content, price, author, imageID, timestamp', 'safe', 'on'=>'search'),
@@ -57,7 +57,7 @@ class BookSale extends CActiveRecord
 	 */
 	public function relations()
 	{
-            	return array(
+				return array(
 			'author' => array(self::BELONGS_TO, 'user', 'author'),
 		);
 	}

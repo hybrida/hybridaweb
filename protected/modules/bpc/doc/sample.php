@@ -41,7 +41,7 @@
 						$data['error'][$errorcode] = $errormsg;
 						if (!in_array($errorcode, $ignerror) && bpcConfig::$debug)
 							echo "Errorcode: $errorcode.<br />
-					      Error message: $errormsg.<br />";
+						  Error message: $errormsg.<br />";
 					}
 				}
 			}
@@ -182,7 +182,7 @@
 						// We are dealing with a list of events, make a simple table linking to each individual event
 
 						echo "<table border='1'>
-				      <tr><th>Event</th><th>Date</th><th>Seats available/seats total</th><th>Registration starts</th></tr>\n";
+					  <tr><th>Event</th><th>Date</th><th>Seats available/seats total</th><th>Registration starts</th></tr>\n";
 						foreach ($data['event'] as $event) {
 							echo "
 						<tr>
@@ -250,7 +250,7 @@
 				echo "<br />var_dump of returned data:<br /><pre>";
 				var_dump($indata);
 				echo "</pre>
-		      <br /><br />This is a very simple example client for the BPC remote interface, utilizing cURL for https-communication with the BPC-server.<br />";
+			  <br /><br />This is a very simple example client for the BPC remote interface, utilizing cURL for https-communication with the BPC-server.<br />";
 				break;
 		}
 		?>

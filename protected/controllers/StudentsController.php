@@ -1,7 +1,7 @@
 <?php
 
 class StudentsController extends Controller {
-	
+
 	public function filters() {
 		return array(
 			'accessControl',
@@ -16,7 +16,7 @@ class StudentsController extends Controller {
 			array('deny'),
 		);
 	}
-	
+
 	public function actionIndex() {
 		$this->actionView(YearConverter::getFreshmanGraduationYear());
 	}

@@ -26,7 +26,7 @@ class BreadCrumb extends CWidget {
 		}
 		return false;
 	}
-	
+
 	public function link($title, $urlWithOptions) {
 		$htmlOptions = array();
 		if (is_array($urlWithOptions) && isset($urlWithOptions['htmlOptions'])) {
@@ -34,7 +34,7 @@ class BreadCrumb extends CWidget {
 			unset($urlWithOptions['htmlOptions']);
 		}
 		return CHtml::link($title, $urlWithOptions, $htmlOptions);
-		
+
 	}
 
 }

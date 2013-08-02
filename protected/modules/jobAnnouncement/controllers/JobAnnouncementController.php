@@ -68,13 +68,13 @@ class JobAnnouncementController extends Controller
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->id));
 			}
-			
+
 		$this->render('create',array(
 			'model'=>$model,
 			'companies' => $this->getCompaniesList(),
 		));
 	}
-	
+
 	public function getCompaniesList() {
 		$criteria = new CDbCriteria();
 		$criteria->order = 'companyName asc';

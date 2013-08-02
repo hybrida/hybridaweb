@@ -20,11 +20,11 @@ class Session {
 			$this->throwLoginError();
 		}
 	}
-	
+
 	private function throwLoginError() {
 		throw new Exception("Could Not Log in");
 	}
-	
+
 	private function getNumberOfUsers() {
 		return User::model()->count();
 	}

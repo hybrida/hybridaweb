@@ -58,5 +58,5 @@ class FieldtripSupportTest extends CTestCase {
 		FieldtripSupport::support($event, $user);
 		$this->assertEquals($modelCount, $this->modelCount());
 	}
-	
+
 }

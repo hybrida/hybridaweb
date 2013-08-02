@@ -133,19 +133,19 @@ class Company extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public function getId() {
 		return $this->companyID;
 	}
-	
+
 	public function setId($id) {
 		$this->companyID = $id;
 	}
-	
+
 	public function getName() {
 		return $this->companyName;
 	}
-	
+
 	public function setName($name) {
 		$this->companyName = $name;
 	}

@@ -1,7 +1,7 @@
 <?php $this->renderPartial("menu", $menu); ?>
 
 <h1>
-    <?= $title ?>
+	<?= $title ?>
 </h1>
 
 <p><?= $content['content'] ?></p>

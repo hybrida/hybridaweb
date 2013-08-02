@@ -7,8 +7,8 @@
 <h2>Fordeling av bedrifter</h2>
 
 <p>
-    Fordelingen av bedrifter er oversikten over hvilke bedrifter hvert medlem har ansvaret for å kontakte.
-    Kun bedrifter med status "Blir kontaktet" vises på denne oversikten, da det er disse som er aktuelle for kontakt.
+	Fordelingen av bedrifter er oversikten over hvilke bedrifter hvert medlem har ansvaret for å kontakte.
+	Kun bedrifter med status "Blir kontaktet" vises på denne oversikten, da det er disse som er aktuelle for kontakt.
 </p>
 
 <p>

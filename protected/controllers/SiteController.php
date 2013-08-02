@@ -23,7 +23,7 @@ class SiteController extends Controller {
 
 	public function actionInnsidaLogin($data, $sign, $target, $returnUrl) {
 		ob_clean();
-		
+
 		$SSOclient = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR'], $target);
 		$identity = new InnsidaIdentity($SSOclient);
 
@@ -40,12 +40,12 @@ class SiteController extends Controller {
 		$redirect = $this->getLoginRedirect($page);
 		$this->redirect($redirect);
 	}
-	
+
 	public function getLoginRedirect($page) {
 		$innsidaLoginActionUrl = $this->createAbsoluteUrl("/site/innsidalogin");
 		$innsidaLoginActionUrl = str_replace("http://", "", $innsidaLoginActionUrl);
 		$returnUrl = $innsidaLoginActionUrl ."," .$page;
-		
+
 		$redirectUrl = self::$innsidaLink . $returnUrl;
 
 		return $redirectUrl;

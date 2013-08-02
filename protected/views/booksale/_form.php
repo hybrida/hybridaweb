@@ -17,7 +17,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'beskrivelse'); ?>
-                <br/>
+				<br/>
 		<?php echo $form->textArea($model,'content',array('rows'=>6, 'cols'=>50,'class' => 'input_text')); ?>
 		<?php echo $form->error($model,'content'); ?>
 	</div>
@@ -27,14 +27,14 @@
 		<?php echo $form->textField($model,'price',array('size'=>6,'class' => 'input_text')); ?>Kroner
 		<?php echo $form->error($model,'price'); ?>
 	</div>
-        
-        <div class="row">
-                <?= $form->labelEx($model,'status') ?>
-                <?= $form->dropDownList($model, 'status', array(
+
+		<div class="row">
+				<?= $form->labelEx($model,'status') ?>
+				<?= $form->dropDownList($model, 'status', array(
 					BookSale::SOLD => "Solgt",
 					BookSale::FOR_SALE => "Til salgs")) ?>
-                <?= $form->error($model, 'status') ?>
-        </div>
+				<?= $form->error($model, 'status') ?>
+		</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'imageID'); ?>

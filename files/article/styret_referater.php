@@ -159,7 +159,7 @@ $referatMapper = getReferatFolders($folderPath);
 			<? foreach ($mappe->referater as $referat): ?>
 				<div class="referat">
 					<a href="<?= $folderUrl ?><?= $mappe->yearSeason ?>/<?= $referat->fileName ?>">
-						<img src="/images/pdf-icon.png" />	
+						<img src="/images/pdf-icon.png" />
 						<?= $referat->date ?>
 						<div class="extra">
 							<?= $referat->extra ?>

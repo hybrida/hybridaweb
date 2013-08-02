@@ -36,10 +36,10 @@
 				<?	$id = $o['product_id']; ?>
 				<?= $products[$id]['type'] . ": " . $products[$id]['model'];?>
 			</td>
-			<td class="orderContent"> 
+			<td class="orderContent">
 				<?= $sizes[$o['product_size']]; ?>
 			</td>
-			<td class="orderContent"> 
+			<td class="orderContent">
 				<?= $o['product_quantity']; ?>
 			</td>
 			<td class="orderContent">
@@ -72,10 +72,10 @@
 			<? endif; ?>
 			</td>
 		</tr>
-	</table> 
+	</table>
 <? endforeach;?>
 <? echo CHtml::endForm(); ?>
-<? if ($curr): ?> 
+<? if ($curr): ?>
 	<p class="orderText">
 		<?= "Du kan endre din bestilling frem til " .  $time['end']; ?>
 	</p>

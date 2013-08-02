@@ -2,9 +2,9 @@
 /**
  * Calendar event observer class.
  *
- * @author     Kohana Team, Corey Worrell
+ * @author	 Kohana Team, Corey Worrell
  * @copyright  (c) 2007-2008 Kohana Team
- * @version    1.0
+ * @version	1.0
  */
 class Calendar_Event extends Event_Observer {
 
@@ -24,7 +24,7 @@ class Calendar_Event extends Event_Observer {
 
 	// Cell classes
 	protected $classes = array();
-	
+
 	// Cell title
 	protected $title = '';
 
@@ -34,20 +34,20 @@ class Calendar_Event extends Event_Observer {
 	/**
 	 * Adds a condition to the event. The condition can be one of the following:
 	 *
-	 * timestamp       - UNIX timestamp
-	 * day             - day number (1-31)
-	 * week            - week number (1-5)
-	 * month           - month number (1-12)
-	 * year            - year number (4 digits)
-	 * day_of_week     - day of week (1-7)
-	 * current         - active month (boolean) (only show data for the month being rendered)
-	 * weekend         - weekend day (boolean)
-	 * first_day       - first day of month (boolean)
-	 * last_day        - last day of month (boolean)
-	 * occurrence      - occurrence of the week day (1-5) (use with "day_of_week")
+	 * timestamp	   - UNIX timestamp
+	 * day			 - day number (1-31)
+	 * week			- week number (1-5)
+	 * month		   - month number (1-12)
+	 * year			- year number (4 digits)
+	 * day_of_week	 - day of week (1-7)
+	 * current		 - active month (boolean) (only show data for the month being rendered)
+	 * weekend		 - weekend day (boolean)
+	 * first_day	   - first day of month (boolean)
+	 * last_day		- last day of month (boolean)
+	 * occurrence	  - occurrence of the week day (1-5) (use with "day_of_week")
 	 * last_occurrence - last occurrence of week day (boolean) (use with "day_of_week")
-	 * easter          - Easter day (boolean)
-	 * callback        - callback test (boolean)
+	 * easter		  - Easter day (boolean)
+	 * callback		- callback test (boolean)
 	 *
 	 * To unset a condition, call condition with a value of NULL.
 	 *
@@ -112,7 +112,7 @@ class Calendar_Event extends Event_Observer {
 
 		return $this;
 	}
-	
+
 	/**
 	 * Add a title for this event.
 	 *
@@ -123,7 +123,7 @@ class Calendar_Event extends Event_Observer {
 	public function title($str)
 	{
 		$this->title = $str;
-		
+
 		return $this;
 	}
 
@@ -160,12 +160,12 @@ class Calendar_Event extends Event_Observer {
 		$condition = array
 		(
 			'timestamp'   => (int) $timestamp,
-			'day'         => (int) date('j', $timestamp),
-			'week'        => (int) $week,
-			'month'       => (int) date('n', $timestamp),
-			'year'        => (int) date('Y', $timestamp),
+			'day'		 => (int) date('j', $timestamp),
+			'week'		=> (int) $week,
+			'month'	   => (int) date('n', $timestamp),
+			'year'		=> (int) date('Y', $timestamp),
 			'day_of_week' => (int) date('w', $timestamp),
-			'current'     => (bool) $current,
+			'current'	 => (bool) $current,
 		);
 
 		// Tested conditions
@@ -179,7 +179,7 @@ class Calendar_Event extends Event_Observer {
 				// This adds 23 hours, 59 minutes and 59 seconds to today's timestamp, as 24 hours
 				// is classed as a new day
 				$next_day = $timestamp + 86399;
-				
+
 				if($this->conditions['timestamp'] < $timestamp OR $this->conditions['timestamp'] > $next_day)
 					return FALSE;
 			}

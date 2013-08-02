@@ -7,7 +7,7 @@ class CommentForm extends CFormModel {
 	public $content = "";
 	public $author = "";
 	public $timestamp = "";
-	
+
 	private $commentID = null;
 
 	public function rules() {
@@ -31,7 +31,7 @@ class CommentForm extends CFormModel {
 		$comment->save();
 		$this->commentID = $comment->id;
 	}
-	
+
 	public function getCommentID() {
 		return $this->commentID;
 	}

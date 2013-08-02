@@ -2,9 +2,9 @@
 <? $this->beginClip('sidebar'); ?>
 	<?= Image::profileTag($user->imageId, 'profile') ?>
 <?$this->endClip()?>
-	
+
 <? if (user()->checkAccess('updateProfile', array('username' => $user->username))): ?>
-	
+
 	<?= CHtml::link('Rediger', array('edit', 'username' => $user->username), array(
 		'class' => 'g-button g-buttonRightSide',
 	));?>

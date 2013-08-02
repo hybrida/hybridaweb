@@ -19,9 +19,9 @@ $this->beginClip('sidebar'); ?>
 				'class' => 'g-button'
 			)) ?>
 
-            <?= CHtml::link("Statistikk", array("admin/stats"), array(
-                'class' => 'g-button'
-            )) ?>
+			<?= CHtml::link("Statistikk", array("admin/stats"), array(
+				'class' => 'g-button'
+			)) ?>
 
 		</fieldset>
 	<? endif ?>

@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 class SignupMembershipAnonymousTest extends CTestCase {
 
 	private $sm;
-	
+
 	function setup() {
 		$this->sm = new SignupMembershipAnonymous();
 	}

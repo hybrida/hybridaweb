@@ -8,12 +8,12 @@
 				background-color: rgb(0, 98, 196);
 				color: white;
 			}
-			
+
 			a:hover {
 				background-color: black;
 				color: white;
 			}
-			
+
 			a.riktiglink {
 				visibility: hidden;
 			}
@@ -28,7 +28,7 @@
 			Vi skal nå sjekke grunnleggende kunnskap om Internett. Oppgaven er enkel: kom til neste side.
 		</p>
 		<p><a class="feillink" href="http://www.youtube.com/watch?v=dQw4w9WgXcQ">Link</a></p>
-		
+
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tempus, mi eu egestas scelerisque, nunc arcu condimentum ante, in tristique justo eros eget diam. Maecenas id nisl et dui ultrices semper eget sed magna. Nunc non mi leo, ut convallis augue. Mauris accumsan, odio in posuere interdum, nulla tellus convallis nisl, nec dictum nulla enim suscipit tellus. Ut pretium tincidunt arcu, sodales sagittis diam suscipit quis. Fusce non risus dolor. Quisque rutrum iaculis tristique. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
 
 		<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum laoreet ultricies sagittis. Proin nec leo lacus. Nunc ultricies, massa et ultrices bibendum, libero diam interdum sapien, ut tempus neque nisl a dolor. Duis quis libero libero. Vestibulum convallis justo et metus dapibus malesuada. In laoreet pulvinar congue. Sed vel ullamcorper tortor. Vivamus orci mi, facilisis non sagittis ut, consequat et velit.</p>
@@ -36,7 +36,7 @@
 		<p>Curabitur lectus ipsum, sagittis at fermentum in, luctus at magna. Donec aliquet risus id mauris dapibus eu posuere lacus elementum. Phasellus convallis mi ac diam adipiscing sed dignissim massa congue. Suspendisse vitae leo non elit consequat lobortis vitae ac nibh. Vestibulum a libero quam, a sagittis mauris. Aliquam erat volutpat. Aliquam egestas malesuada nisi. Phasellus enim nunc, consequat vel fringilla non, luctus sit amet lorem. Aliquam erat volutpat. In tempor felis quis erat ullamcorper molestie. Etiam porttitor luctus odio, rhoncus pulvinar est sollicitudin dignissim. Vestibulum tempus posuere odio, a pulvinar nunc rutrum vitae.</p>
 
 		<p>Curabitur eu risus ut sapien sagittis dapibus id sed sem. Ut sem magna, mattis eu scelerisque pharetra, adipiscing vel purus. Nulla mollis, justo eu placerat vulputate, magna purus mattis sem, ut imperdiet quam massa id felis. Curabitur ligula dui, pulvinar id porta eu, posuere id turpis. Aliquam elementum ultricies aliquet. Nunc sit amet turpis ac lorem iaculis dapibus vitae ut eros. Suspendisse ut odio metus, non ultrices dui. Sed quam quam, euismod a tincidunt a, volutpat in mauris. Vestibulum suscipit pharetra mi ac suscipit. In hac habitasse platea dictumst.</p>
-		
+
 		<a class="riktiglink" href="<?= $this->createUrl('task2_super_top_secret_underground_abcdefghijklmnopqrsteuvwxyz_boom_qwfpgj') ?>">Men er nok her dere egentlig skal</a>
 
 		<p>Morbi vel nisl rutrum arcu faucibus adipiscing. Integer tempus leo sed justo feugiat in posuere velit hendrerit. Maecenas at volutpat odio. Nunc ut imperdiet enim. Morbi sagittis consequat lacus sit amet lobortis. Praesent congue, diam id dignissim pretium, enim metus elementum ipsum, at ultrices arcu tellus tincidunt mi. Praesent mollis facilisis molestie. Integer facilisis, dui vitae mollis mollis, justo nisl egestas nibh, sed congue lectus nulla quis nunc. Quisque et ante risus, ac convallis metus. Nullam pharetra accumsan nibh non semper. Nam ultrices sem lacus, at suscipit lectus. Integer elit metus, luctus et lobortis et, tristique sit amet mi. Nulla mollis vestibulum ante at commodo. Integer eget risus velit.</p>

@@ -6,7 +6,7 @@ class ProfileForm extends CFormModel {
 	public $user;
 	public $facebookUser;
 	private $_facebookUser;
-	
+
 	public $imageUpload;
 
 	public function __construct($user) {
@@ -53,7 +53,7 @@ class ProfileForm extends CFormModel {
 			$user->imageId = $image->id;
 			$user->save();
 		} catch (NoFileIsUploadedException $ex) {
-			
+
 		}
 	}
 

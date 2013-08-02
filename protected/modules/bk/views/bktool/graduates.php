@@ -7,8 +7,8 @@
 <h2>Alumniliste</h2>
 
 <p>
-    Alumnilisten er listen over alle studenter som er uteksaminert fra <?= $this->lineOfStudy ?>, og hvor de har blitt ansatt rett etter studiet. 
-    Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
+	Alumnilisten er listen over alle studenter som er uteksaminert fra <?= $this->lineOfStudy ?>, og hvor de har blitt ansatt rett etter studiet.
+	Statistikken under er ikke nødvendigvis korrekt, da oversikten gitt her kan være mangelfull.
 </p>
 
 <h2>Statistikk:</h2>
@@ -17,16 +17,16 @@
 
 <p>
 <table id="BK-alumnilist-supporttable">
-    <tr>
+	<tr>
 		<td>
-            <div id="BK-alumnilist-yearbox">  
-                <table id="BK-alumnilist-yeartable">
-                    <tr>
-                        <th>Årstall</th><th>Antall alumnistudenter</th><th>Antall registrert ansatte alumnistudenter</th>
-                    </tr>
+			<div id="BK-alumnilist-yearbox">
+				<table id="BK-alumnilist-yeartable">
+					<tr>
+						<th>Årstall</th><th>Antall alumnistudenter</th><th>Antall registrert ansatte alumnistudenter</th>
+					</tr>
 					<? foreach ($graduationYears as $year) : ?>
 
-						<tr> 
+						<tr>
 							<td><?= CHtml::link($year['graduationYear'], array('graduationyear?id=' . $year['graduationYear'])) ?></td>
 							<td>
 								<? foreach ($graduatesByYear as $graduate) : ?>
@@ -44,18 +44,18 @@
 							</td>
 						</tr>
 					<? endforeach ?>
-                </table>
-            </div>
-        </td>
-    </tr>
+				</table>
+			</div>
+		</td>
+	</tr>
 
-    <tr>
-        <th id="BK-alumnilist-cumulationrow">
+	<tr>
+		<th id="BK-alumnilist-cumulationrow">
 			<? foreach ($graduatesSum as $graduateSum) : ?>
 				Sum alumnistudenter: <?= $graduateSum['sum'] ?>
 			<? endforeach ?>
-        </th>
-    </tr>
+		</th>
+	</tr>
 </table>
 </p>
 
@@ -64,13 +64,13 @@
 
 <p>
 <table id="BK-alumnilist-supporttable">
-    <tr>
+	<tr>
 		<td>
-            <div id="BK-alumnilist-companybox">
-                <table id="BK-alumnilist-companytable">
-                    <tr>
-                        <th>Nr.</th><th>Bedrift</th><th>Antall registrert ansatte alumnistudenter</th>
-                    </tr>
+			<div id="BK-alumnilist-companybox">
+				<table id="BK-alumnilist-companytable">
+					<tr>
+						<th>Nr.</th><th>Bedrift</th><th>Antall registrert ansatte alumnistudenter</th>
+					</tr>
 
 					<? $counter = 1; ?>
 
@@ -85,17 +85,17 @@
 
 					<? endforeach ?>
 
-                </table>
-            </div>
+				</table>
+			</div>
 		</td>
-    </tr>
-    <tr>
+	</tr>
+	<tr>
 		<th id="BK-alumnilist-cumulationrow">
 			<? foreach ($employeesSum as $employeeSum) : ?>
 				Sum registrert ansatte alumnistudenter: <?= $employeeSum['sum'] ?>
 			<? endforeach ?>
-        </th>
-    </tr>
+		</th>
+	</tr>
 </table>
 </p>
 
@@ -104,17 +104,17 @@
 
 <p>
 <table id="BK-alumnilist-maintable">
-    <tr>
-        <th><?= CHtml::link('Navn', array('graduates?orderby=firstName&order=' . $_SESSION['order'])) ?></th>
-        <th><?= CHtml::link('Avgangsår', array('graduates?orderby=graduationYear&order=' . $_SESSION['order'])) ?></th>
-        <th><?= CHtml::link('Bedrift', array('graduates?orderby=companyName&order=' . $_SESSION['order'])) ?></th>
-        <th>Stillingsbeskrivelse</th>
-        <th><?= CHtml::link('Arbeidssted', array('graduates?orderby=workPlace&order=' . $_SESSION['order'])) ?></th>
-        <th>Rediger</th>
-    </tr>
+	<tr>
+		<th><?= CHtml::link('Navn', array('graduates?orderby=firstName&order=' . $_SESSION['order'])) ?></th>
+		<th><?= CHtml::link('Avgangsår', array('graduates?orderby=graduationYear&order=' . $_SESSION['order'])) ?></th>
+		<th><?= CHtml::link('Bedrift', array('graduates?orderby=companyName&order=' . $_SESSION['order'])) ?></th>
+		<th>Stillingsbeskrivelse</th>
+		<th><?= CHtml::link('Arbeidssted', array('graduates?orderby=workPlace&order=' . $_SESSION['order'])) ?></th>
+		<th>Rediger</th>
+	</tr>
 
 	<? foreach ($graduates as $graduate) : ?>
-		<tr>                   
+		<tr>
 			<td><a href='/profil/<?= $graduate['username'] ?>'> <?= $graduate['firstName'] ?> <?= $graduate['middleName'] ?> <?= $graduate['lastName'] ?></a></td>
 			<td><?= CHtml::link($graduate['graduationYear'], array('graduationyear?id=' . $graduate['graduationYear'])) ?></td>
 			<td><?= CHtml::link($graduate['companyName'], array('company?id=' . $graduate['companyID'])) ?></td>

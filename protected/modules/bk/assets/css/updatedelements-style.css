@@ -3,32 +3,32 @@
 /*stil for hovedtabellen*/
 
 #BK-updatedelements-maintable {
-    border-collapse: collapse;
-    width: 100%;
-    text-align: left;
+	border-collapse: collapse;
+	width: 100%;
+	text-align: left;
 }
 
 #BK-updatedelements-maintable *{
-    border: none;
+	border: none;
 }
 
 #BK-updatedelements-maintable td {
-    border-bottom: 1px solid #ccc;
-    padding: 6px 8px;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 8px;
 }
 
 #BK-updatedelements-maintable th {
-    color: #009;
-    padding: 10px 8px;
-    border-bottom: 2px solid #6678b1;
+	color: #009;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
 }
 
 #BK-updatedelements-maintable th a:link{ 
-    text-decoration: none 
+	text-decoration: none 
 }
 
 #BK-updatedelements-maintable th a:visited{ 
-    color: #009;
+	color: #009;
 }
 
 #BK-updatedelements-maintable tr:hover{
@@ -36,7 +36,7 @@
 }
 
 #BK-updatedelements-maintable tr:first-child {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 #BK-updatedelements-maintable td input[type=checkbox] { 

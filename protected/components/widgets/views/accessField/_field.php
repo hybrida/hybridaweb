@@ -17,5 +17,5 @@
 			<? endforeach ?>
 		</div>
 	<? endforeach ?>
-    <br clear="all">
+	<br clear="all">
 </div>

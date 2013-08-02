@@ -1,7 +1,7 @@
 <?php
 
 class m121209_184746_move_from_article_content_to_article_text extends CDbMigration {
-	
+
 	/** @property PDO $pdo */
 	private $pdo;
 
@@ -21,11 +21,11 @@ class m121209_184746_move_from_article_content_to_article_text extends CDbMigrat
 		$this->dropColumn("article", "phpFile");
 		return true;
 	}
-	
+
 	private function prepare($sql) {
 		return $this->pdo->prepare($sql);
 	}
-	
+
 	private function getOldArticleContent($id) {
 		$sql = "SELECT content FROM article WHERE id = ?";
 		$stmt = $this->prepare($sql);
@@ -34,7 +34,7 @@ class m121209_184746_move_from_article_content_to_article_text extends CDbMigrat
 		$content = $tmp[0];
 		return $content;
 	}
-	
+
 		private function getOldArticlePhpFile($id) {
 		$sql = "SELECT phpFile FROM article WHERE id = ?";
 		$stmt = $this->prepare($sql);

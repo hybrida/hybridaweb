@@ -19,7 +19,7 @@
 
 <p></p>
 <table id="BK-company-uppertable">
-    <tr>
+	<tr>
 		<td id="BK-company-column">
 			<h3>Informasjon</h3>
 			<p>
@@ -183,7 +183,7 @@
 			</p>
 		</td>
 		<td id="BK-company-column">
-            <div id="BK-company-presentationscontainer">
+			<div id="BK-company-presentationscontainer">
 				<?
 				foreach ($presentationsCount as $count) {
 					$sumOfAllPresentations += $count['sum'];
@@ -196,12 +196,12 @@
 				}
 				?>
 
-                <h3>Registrerte bedriftspresentasjoner (<?= $sumOfAllPresentations ?>)</h3>
+				<h3>Registrerte bedriftspresentasjoner (<?= $sumOfAllPresentations ?>)</h3>
 
-                <table id="BK-company-presentationtable">
-                    <tr>
-                        <th>Dato</th>
-                    </tr>
+				<table id="BK-company-presentationtable">
+					<tr>
+						<th>Dato</th>
+					</tr>
 					<? foreach ($presentationDates as $date) : ?>
 						<tr><td>
 								<? if ($date['bpcID'] > 0) { ?>
@@ -215,30 +215,30 @@
 					<? foreach ($oldPresentationDates as $date) : ?>
 						<tr><td><?= $date['date'] ?></td></tr>
 					<? endforeach ?>
-                </table>
-            </div>
-        </td>
-    </tr>
+				</table>
+			</div>
+		</td>
+	</tr>
 </table>
 
 <table id="BK-company-uppertable">
 	<tr>
-        <td id="BK-company-column">
+		<td id="BK-company-column">
 			<h3><?= $this->industryAssociation ?></h3>
-            <p>
+			<p>
 			<table id="BK-company-informationtable">
 				<tr>
-                    <th>Medlemskap i <?= $this->industryAssociation ?></th>
-                    <td>
+					<th>Medlemskap i <?= $this->industryAssociation ?></th>
+					<td>
 						<? if ($isMember) { ?>
 							Medlem
 						<? } else { ?>
 							Ikke medlem
 						<? } ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Relevans for <?= $this->industryAssociation ?></th>
+					</td>
+				</tr>
+				<tr>
+					<th>Relevans for <?= $this->industryAssociation ?></th>
 					<? foreach ($iktRingenInfo as $info) : ?>
 
 						<?
@@ -265,18 +265,18 @@
 
 							<?= $info['relevance'] ?>
 						<? endforeach ?>
-                    </td>
-                </tr>
-                <tr>
-                    <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
-                    <td>
+					</td>
+				</tr>
+				<tr>
+					<th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
+					<td>
 						<? foreach ($iktRingenInfo as $info) : ?>
 							<?= substr($info['dateContacted'], 0, 10) ?>
 						<? endforeach ?>
-                    </td>
-                </tr>
+					</td>
+				</tr>
 			</table>
-            </p>
+			</p>
 
 			<? if ($isMember) { ?>
 				<p>
@@ -324,26 +324,26 @@
 				</table>
 				</p>
 			<? } ?>
-        </td>
+		</td>
 	</tr>
 </table>
 
 <table id="BK-company-centertable">
-    <tr id="BK-company-editinglinks">
-        <td id="BK-company-column">
+	<tr id="BK-company-editinglinks">
+		<td id="BK-company-column">
 			<h4><?= CHtml::link('Rediger bedrift', array('editcompany?id=' . $companyId)) ?></h4>
-            </div>
-        </td>
-        <td id="BK-company-column">
+			</div>
+		</td>
+		<td id="BK-company-column">
 			<h4>Fjern bedrift</h4>
-        </td>
-    </tr>
+		</td>
+	</tr>
 </table>
 
 
 <table id="BK-company-commenttable">
-    <tr>
-        <td id="BK-company-column">
+	<tr>
+		<td id="BK-company-column">
 			<? foreach ($commentsSum as $info) : ?>
 				<h3>Kommentarer (<?= $info['sum'] ?>)</h3>
 			<? endforeach ?>
@@ -371,17 +371,17 @@
 					<? endforeach ?>
 				</table>
 			</div>
-        </td>
-    </tr>
+		</td>
+	</tr>
 </table>
 
 <table id="BK-company-graduatetable">
-    <tr>
+	<tr>
 		<td id="BK-company-column">
 			<? foreach ($employedGraduatesSum as $info) : ?>
 				<h3>Registrerte alumnistudenter (<?= $info['sum'] ?>)</h3>
 			<? endforeach ?>
-            <div id="BK-company-alumnicontainer">
+			<div id="BK-company-alumnicontainer">
 				<table id="BK-company-graduatestable">
 					<tr>
 						<th></th>
@@ -406,7 +406,7 @@
 						<? $counter++; ?>
 					<? endforeach ?>
 				</table>
-            </div>
+			</div>
 		</td>
-    </tr>
+	</tr>
 </table>

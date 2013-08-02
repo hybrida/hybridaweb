@@ -62,81 +62,81 @@ $this->breadcrumbs = array(
 	<!--<p class="note">Fields with <span class="required">*</span> are required.</p>-->
 
 	<?= $form->errorSummary($model); ?>
-	<?= $form->hiddenField($model, 'news[id]') ?> 
-	<?= $form->hiddenField($model, 'event[id]') ?> 
-	<?= $form->hiddenField($model, 'signup[id]') ?> 
+	<?= $form->hiddenField($model, 'news[id]') ?>
+	<?= $form->hiddenField($model, 'event[id]') ?>
+	<?= $form->hiddenField($model, 'signup[id]') ?>
 
 		<div class="formHeader">
 			<h1 class="formHeader">Nyhet</h1>
 		</div>
-		
-		<div class="row">
-			<?= $form->labelEx($model, 'news[title]'); ?> 
-			<?= $form->textField($model, 'news[title]', array('class' => 'input_text')); ?> 
-			<?= $form->error($model, 'news[title]'); ?> 
-		</div>
-		
 
 		<div class="row">
-			<?= $form->labelEx($model, 'news[ingress]'); ?> 
+			<?= $form->labelEx($model, 'news[title]'); ?>
+			<?= $form->textField($model, 'news[title]', array('class' => 'input_text')); ?>
+			<?= $form->error($model, 'news[title]'); ?>
+		</div>
+
+
+		<div class="row">
+			<?= $form->labelEx($model, 'news[ingress]'); ?>
 			<?= $form->textArea($model, "news[ingress]",array(
 				'cols' => '50',
 				'rows' => '6',
 				'class'=> 'message',
-			)); ?> 
-			<?= $form->error($model, 'news[ingress]'); ?> 
+			)); ?>
+			<?= $form->error($model, 'news[ingress]'); ?>
 		</div>
-    
-        <div class="row">
-            <?= $form->labelEx($model, 'news[weight]'); ?>
-            <?= $form->textField($model, 'news[weight]', array('class' => 'input_text')) ?>
-            <?= $form->error($model, 'news[weight]'); ?>
-        </div>
-    
-        <div class="row radio-status">
-            <?= $form->labelEx($model, 'news[status]'); ?>
-            <br/>
-            <p class="radio-item">
-            <?= $form->radioButtonList($model, 'news[status]', array(
-                Status::DELETED => 'Deleted',
-                Status::DRAFT => 'Draft',
-                Status::PUBLISHED => 'Published',
-            ), array(
-                'separator'=>'</p><p class="radio-item">'
-            )); ?>
-            </p>
-            <?= $form->error($model, 'news[status]'); ?>
-        </div>
 
-				
 		<div class="row">
-			<?= $form->labelEx($model, 'news[content]'); ?> 
+			<?= $form->labelEx($model, 'news[weight]'); ?>
+			<?= $form->textField($model, 'news[weight]', array('class' => 'input_text')) ?>
+			<?= $form->error($model, 'news[weight]'); ?>
+		</div>
+
+		<div class="row radio-status">
+			<?= $form->labelEx($model, 'news[status]'); ?>
+			<br/>
+			<p class="radio-item">
+			<?= $form->radioButtonList($model, 'news[status]', array(
+				Status::DELETED => 'Deleted',
+				Status::DRAFT => 'Draft',
+				Status::PUBLISHED => 'Published',
+			), array(
+				'separator'=>'</p><p class="radio-item">'
+			)); ?>
+			</p>
+			<?= $form->error($model, 'news[status]'); ?>
+		</div>
+
+
+		<div class="row">
+			<?= $form->labelEx($model, 'news[content]'); ?>
 			<?= $form->richTextArea($model, "news[content]",array('class'=>'message')); ?>
 			<? /*
 			 * Her er det ingen validering (ingen $form>error)
 			 * Dette er fordi validering ikke går hånd i hånd med
-			 * CKEditor. 
-			 */?> 
+			 * CKEditor.
+			 */?>
 		</div>
-	
+
 		<div class="row">
 			<label>Last opp bilde</label>
 			<?= $form->fileField($model, 'imageUpload') ?>
 			<?= $form->error($model, 'imageUpload') ?>
 		</div>
-			
+
 		<div class="row">
 			<div style="width: 85%; maring-left:150px">
-				<?= $form->accessField($model, "news[access]"); ?> 
+				<?= $form->accessField($model, "news[access]"); ?>
 			</div>
-			<?= $form->error($model, 'news[acces]'); ?>	
+			<?= $form->error($model, 'news[acces]'); ?>
 		</div>
 
-			
+
 <br clear="all" />
 		<div class="formHeader">
 			<h1>
-				<?= $form->checkBox($model, 'hasEvent'); ?> 
+				<?= $form->checkBox($model, 'hasEvent'); ?>
 				Hendelse
 			</h1>
 		</div>
@@ -144,20 +144,20 @@ $this->breadcrumbs = array(
 
 		<div class="row">
 			<?= $form->labelEx($model, 'event[start]'); ?>
-			<?= $form->dateField($model, 'event[start]', array('class' => 'input_text')); ?> 
-			<?= $form->error($model, 'event[start]'); ?> 
+			<?= $form->dateField($model, 'event[start]', array('class' => 'input_text')); ?>
+			<?= $form->error($model, 'event[start]'); ?>
 		</div>
-		
+
 		<div class="row">
 			<?= $form->labelEx($model, 'event[end]'); ?>
 			<?= $form->dateField($model, 'event[end]', array('class' => 'input_text')); ?>
-			<?= $form->error($model, 'event[end]'); ?>				
-		</div>			
+			<?= $form->error($model, 'event[end]'); ?>
+		</div>
 
 		<div class="row">
 			<label>Sted</label>
 			<?= $form->textField($model, 'event[location]', array('class' => 'input_text')); ?>
-			<?= $form->error($model, 'event[location]'); ?>				
+			<?= $form->error($model, 'event[location]'); ?>
 		</div>
 
 		<div class="formHeader">
@@ -171,28 +171,28 @@ $this->breadcrumbs = array(
 		<div class="row">
 			<?= $form->labelEx($model, 'signup[spots]'); ?>
 			<?= $form->textField($model, 'signup[spots]', array('class' => 'input_text')); ?>
-			<?= $form->error($model, 'signup[spots]'); ?>				
+			<?= $form->error($model, 'signup[spots]'); ?>
 		</div>
-		
+
 		<div class="row">
 			<?= $form->labelEx($model, 'signup[open]'); ?>
 			<?= $form->dateField($model, 'signup[open]', array('class' => 'input_text')); ?>
-			<?= $form->error($model, 'signup[open]'); ?>				
+			<?= $form->error($model, 'signup[open]'); ?>
 		</div>
-		
+
 		<div class="row">
 			<?= $form->labelEx($model, 'signup[close]'); ?>
 			<?= $form->dateField($model, 'signup[close]', array('class' => 'input_text')); ?>
-			<?= $form->error($model, 'signup[close]'); ?>				
+			<?= $form->error($model, 'signup[close]'); ?>
 		</div>
-		
+
 		<div class="row">
 			<label>Tillat avmelding</label>
 			<?= $form->checkBox($model, 'signup[signoff]',array(
 				'value'=> 'true',
 				'uncheckValue' => 'false',
 			)); ?>
-			<?= $form->error($model, 'signup[signoff]'); ?>				
+			<?= $form->error($model, 'signup[signoff]'); ?>
 		</div>
 		<br>
 		<div class="row">

@@ -3,13 +3,13 @@
 Yii::import('jobAnnouncement.models.JobAnnouncement');
 
 class JobAnnouncementFeed extends CWidget {
-	
+
 	public $limit = 5;
 
 	public function run() {
 			$this->runFeed();
 	}
-	
+
 	public function runFeed() {
 		$feed = new JobFeedFinder($this->limit);
 		$elements = $feed->getElements();
@@ -28,12 +28,12 @@ class JobFeedFinder extends AbstractFeed {
 
 	protected function getMaxElementCount() {
 		return JobAnnouncement::model()->count();
-		
+
 	}
 
 	protected function getSQL() {
 		return "SELECT id
-			FROM job_announcement 
+			FROM job_announcement
 			WHERE deadline > NOW()
 			ORDER BY RAND()";
 	}

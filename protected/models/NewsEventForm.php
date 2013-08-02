@@ -17,17 +17,17 @@ class NewsEventForm extends CFormModel {
 	public $news = array();
 	public $event = array();
 	public $signup = array();
-	
+
 	public $imageUpload;
 	private $newsModel;
 	private $eventModel;
 	private $signupModel;
-	
+
 
 	public function rules() {
 		return array(
 			array('hasSignup, hasEvent', 'boolean'),
-			array('news[title], news[content]', 'required', 
+			array('news[title], news[content]', 'required',
 				'message'=>'Tittelen kan ikke være tom.'),
 			array(
 				'news[title], news[ingress], news[content], ' .
@@ -58,8 +58,8 @@ class NewsEventForm extends CFormModel {
 		return array(
 			'news[title]' => 'Tittel',
 			'news[ingress]' => 'Ingress',
-            'news[weight]' => 'Vekting',
-            'news[status]' => 'Status',
+			'news[weight]' => 'Vekting',
+			'news[status]' => 'Status',
 			'news[content]' => 'Innhold',
 			'event[start]' => 'Start',
 			'event[end]' => 'Slutt',

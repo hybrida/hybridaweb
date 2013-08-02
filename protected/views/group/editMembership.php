@@ -1,4 +1,4 @@
-<div class="g-form">	
+<div class="g-form">
 		<div class="formHeader">
 			<h1 class="formHeader"><?=$group->title ?> - <?=$user->fullName ?></h1>
 		</div>

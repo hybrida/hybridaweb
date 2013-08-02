@@ -100,7 +100,7 @@ class BpcEventTest extends CTestCase {
 		$event = Event::model()->
 			with('eventCompany', 'signup')
 			->find(
-				   "eventCompany.bpcID = ?", 
+				   "eventCompany.bpcID = ?",
 				   array($eventArray['id']));
 		$event->signup->access = array(Access::SPECIALIZATION_START + 57); // Tror det er webkom, men spiller ingen rolle
 		$event->signup->save();

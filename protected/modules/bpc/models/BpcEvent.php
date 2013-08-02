@@ -36,7 +36,7 @@ class BpcEvent extends CModel {
 	}
 
 	public static function getByRequest($request) {
-		
+
 	}
 
 	public function __construct($id) {
@@ -130,10 +130,10 @@ class BpcEvent extends CModel {
 	public function getWaitingByYear() {
 		return $this->waiters->getActiveRecordsInYearArray();
 	}
-    
-    public function isNextAttenderSentToWaitlist() {
-        return $this->seats_available == 0 && $this->waitlist_enabled === 1;
-    }
+
+	public function isNextAttenderSentToWaitlist() {
+		return $this->seats_available == 0 && $this->waitlist_enabled === 1;
+	}
 
 	public function addAttending($userId) {
 		BpcCore::addAttending($this->id, $userId);
@@ -192,11 +192,11 @@ class BpcEvent extends CModel {
 		}
 		return $details;
 	}
-	
+
 	private function spaceToUrl($text) {
 		return str_replace(" ", "%20", $text);
 	}
-	
+
 	private function getUTC($time) {
 		return gmdate("Ymd\THis\Z",$time);
 	}

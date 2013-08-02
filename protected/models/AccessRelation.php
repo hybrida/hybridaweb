@@ -121,7 +121,7 @@ class AccessRelation {
 	}
 
 	private function getInsertPdoStatement() {
-		$sql = "INSERT INTO access_relations (id, access, type, super_id) 
+		$sql = "INSERT INTO access_relations (id, access, type, super_id)
 				VALUES	( :id, :access, :type, :super_id)";
 		$stmt = $this->pdo->prepare($sql);
 		$stmt->bindValue(":id", $this->id);

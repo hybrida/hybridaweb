@@ -17,7 +17,7 @@ class BpcAttending extends CComponent {
 		$request = BpcCore::doRequest($postdata);
 		$this->addUsernames($request);
 	}
-	
+
 	protected function getRequest() {
 		return 'get_attending';
 	}
@@ -34,7 +34,7 @@ class BpcAttending extends CComponent {
 	public function getUsernames() {
 		return $this->usernames;
 	}
-	
+
 	public function getActiveRecordsInYearArray() {
 		$years = array(
 			1 => array(), 2 => array(), 3 => array(),
@@ -44,14 +44,14 @@ class BpcAttending extends CComponent {
 		}
 		return $years;
 	}
-	
+
 	public function getActiveRecords() {
 		if ($this->activeRecordUsers == null) {
 			$this->addActiveRecordUsers();
 		}
 		return $this->activeRecordUsers;
 	}
-	
+
 
 	private function addActiveRecordUsers() {
 		$this->activeRecordUsers = array();
@@ -62,8 +62,8 @@ class BpcAttending extends CComponent {
 			}
 		}
 	}
-	
-	
+
+
 	public function contains($username) {
 		return in_array($username, $this->usernames);
 	}

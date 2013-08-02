@@ -20,7 +20,7 @@ Yii::import('comment.models.*');
 					'timestamp' => new CDbExpression('NOW()'),
  */
 class CommentFormTest extends CTestCase {
-	
+
 	public function test_commentIdGetsSaved() {
 		$commentForm = new CommentForm;
 		$commentForm->setAttributes(array(
@@ -32,9 +32,9 @@ class CommentFormTest extends CTestCase {
 		$commentForm->save();
 		$numberOfCommentsAfterSave = Comment::model()->count();
 		$this->assertEquals($numberOfCommentsBeforeSave + 1, $numberOfCommentsAfterSave);
-		
+
 		$this->assertNotNull($commentForm->commentID);
-		
+
 	}
-	
+
 }

@@ -19,7 +19,7 @@ class AlbumController extends Controller
 					'actions'=>array('clear', 'create','update', 'upload', 'delete', 'picdelete'),
 					'users'=>array('@'),
 					),
-				array('allow', 
+				array('allow',
 					'actions' => array('index','view', 'picview', 'ajax' ),
 					'users'=>array('*'),
 					),
@@ -127,7 +127,7 @@ class AlbumController extends Controller
 		$data['imageID'] = $image->id;
 		$data['timestamp'] = $image->timestamp;
 		$data['index'] = $index;
-		$data['num'] = $num; 
+		$data['num'] = $num;
 		$data['userName'] = $userName;
 		$data['fullURL'] = Image::getRelativeFilePath($image->id, "original");
 		$data['bigURL'] = Image::getRelativeFilePath($image->id, "gallery_big");
@@ -173,9 +173,9 @@ class AlbumController extends Controller
 			}
 		}
 		if (count($imageIDs) > 0) {
-			$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger 
+			$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger
 												ikke laste opp disse på nytt";
-			$errors[] = "Trykk " . CHtml::link('her', '#', 
+			$errors[] = "Trykk " . CHtml::link('her', '#',
 					array( 'submit' => array('clear', 'id' => $model->id)))
 					. " om du ikke vil ha med disse bildene";
 			}
@@ -225,9 +225,9 @@ class AlbumController extends Controller
 			}
 		}
 		if (count($imageIDs) > 0) {
-			$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger 
+			$errors[] = count($imageIDs) . " bilder er allerede lastet opp. Du trenger
 												ikke laste opp disse på nytt";
-			$errors[] = "Trykk " . CHtml::link('her', '#', 
+			$errors[] = "Trykk " . CHtml::link('her', '#',
 					array( 'submit' => array('clear', 'id' => $model->id)))
 					. " om du ikke vil ha med disse bildene";
 			}
@@ -438,6 +438,6 @@ class AlbumController extends Controller
 		//die(json_encode($ret));
 
 		echo CJavaScript::jsonEncode($ret);
-		Yii::app()->end(); 
+		Yii::app()->end();
 	}
 }

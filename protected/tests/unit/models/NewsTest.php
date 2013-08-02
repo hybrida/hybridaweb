@@ -11,19 +11,19 @@ class NewsTest extends CTestCase {
 	public function login() {
 		$this->session->loginNewUser();
 	}
-	
+
 	private function getNewNews() {
 		return Util::getNewNews();
 	}
-	
+
 	private function getNews() {
 		return Util::getNews();
 	}
-	
+
 	private function getNewEvent() {
 		return Util::getNewEvent();
 	}
-	
+
 	private function getEvent() {
 		return Util::getEvent();
 	}
@@ -146,7 +146,7 @@ class NewsTest extends CTestCase {
 		$news = $this->getNews();
 		$this->assertNotNull($news->timestamp);
 	}
-	
+
 	public function test_purifier_content() {
 		$this->login();
 		$news = $this->getNewNews();
@@ -154,7 +154,7 @@ class NewsTest extends CTestCase {
 		$news->title = "test<script></script>";
 		$news->purify();
 		$news->save();
-		
+
 		$news2 = News::model()->findByPk($news->id);
 		$this->assertEquals("tomrom",$news2->content);
 		$this->assertEquals("test", $news2->title);

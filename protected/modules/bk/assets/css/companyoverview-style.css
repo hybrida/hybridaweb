@@ -3,31 +3,31 @@
 /*F�lgende gjelder kun for hovedtabellen*/
 
 #BK-companyoverview-maintable{
-    border-collapse: collapse;
-    text-align: left;
+	border-collapse: collapse;
+	text-align: left;
 }
 
 #BK-companyoverview-maintable *{
-    border: none;
+	border: none;
 }
 
 #BK-companyoverview-maintable td {
-    border-bottom: 1px solid #ccc;
-    padding: 6px 8px;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 8px;
 }
 
 #BK-companyoverview-maintable th {
-    color: #009;
-    padding: 10px 8px;
-    border-bottom: 2px solid #6678b1;
+	color: #009;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
 }
 
 #BK-companyoverview-maintable th a:link{ 
-    text-decoration: none 
+	text-decoration: none 
 }
 
 #BK-companyoverview-maintable th a:visited{ 
-    color: #009;
+	color: #009;
 }
 
 #BK-companyoverview-maintable tr:hover{
@@ -35,30 +35,30 @@
 }
 
 #BK-companyoverview-maintable tr:first-child {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 #BK-companyoverview-aktuell-senere{
-    color: #FF9900;
-    font-weight: bold;
-    text-align: left;
+	color: #FF9900;
+	font-weight: bold;
+	text-align: left;
 }
 
 #BK-companyoverview-blir-kontaktet{
-    color: #009900;
-    font-weight: bold;
-    text-align: left;
+	color: #009900;
+	font-weight: bold;
+	text-align: left;
 }
 
 #BK-companyoverview-ikke-kontaktet{
-    font-weight: bold;
-    text-align: left;
+	font-weight: bold;
+	text-align: left;
 }
 
 #BK-companyoverview-uaktuell{
-    color: #CC0000;
-    font-weight: bold;
-    text-align: left;
+	color: #CC0000;
+	font-weight: bold;
+	text-align: left;
 }
 
 /*F�lgende gjelder kun for støttetabellen*/
@@ -86,14 +86,14 @@
 }
 
 #BK-companyoverview-statisticstable td {
-    border-bottom: 1px solid #ccc;
-    padding: 3px 6px;
+	border-bottom: 1px solid #ccc;
+	padding: 3px 6px;
 }
 
 #BK-companyoverview-statisticstable th {
-    border-top: 2px solid #6678b1;
-    border-bottom: 2px solid #6678b1;
-    padding: 3px 6px;
+	border-top: 2px solid #6678b1;
+	border-bottom: 2px solid #6678b1;
+	padding: 3px 6px;
 }
 
 #BK-companyoverview-totaltext{

@@ -46,7 +46,7 @@ class Article extends CActiveRecord {
 	public function relations() {
 		return array(
 			'author' => array(self::BELONGS_TO, 'user', 'author'),
-            'articleText' => array(self::HAS_MANY, 'ArticleText', 'articleId'),
+			'articleText' => array(self::HAS_MANY, 'ArticleText', 'articleId'),
 			//'currentArticleContent' => array(self::BELONGS_TO, "ArticleText", "articleTextId"),
 		);
 	}
@@ -79,7 +79,7 @@ class Article extends CActiveRecord {
 					'criteria' => $criteria,
 				));
 	}
-	
+
 	private function setupAccessRelation() {
 		$this->_access = new AccessRelation($this);
 	}
@@ -113,9 +113,9 @@ class Article extends CActiveRecord {
 		if (empty($this->shorttitle)) {
 			$this->shorttitle = new CDbExpression('NULL');
 		}
-        if (empty($this->phpFile)) {
-            $this->phpFile = new CDbExpression('NULL');
-        }
+		if (empty($this->phpFile)) {
+			$this->phpFile = new CDbExpression('NULL');
+		}
 		$saveOK = $this->articleText->save(false);
 		$this->articleTextId = $this->articleText->id;
 		$this->addErrors($this->articleText->getErrors());
@@ -146,16 +146,16 @@ class Article extends CActiveRecord {
 				));
 		return $children;
 	}
-	
-    public function getText() {
-        $articleText = ArticleText::model()->findByPk($this->articleTextId);
-        return $articleText->content;
-    }
-	
+
+	public function getText() {
+		$articleText = ArticleText::model()->findByPk($this->articleTextId);
+		return $articleText->content;
+	}
+
 	public function setContent($content) {
 		$this->setArticleTextContents($content);
 	}
-	
+
 	private function setArticleTextContents($content=null, $phpFile=null) {
 		$oldArt = $this->articleText;
 		if ($oldArt === null) {
@@ -172,21 +172,21 @@ class Article extends CActiveRecord {
 		} else {
 			$this->articleText->phpFile = $phpFile;
 		}
-		$this->articleText->purify();		
+		$this->articleText->purify();
 	}
-	
+
 	public function getContent() {
 		return $this->articleText->content;
 	}
-	
+
 	public function setPhpFile($phpFile) {
 		$this->setArticleTextContents(null, $phpFile);
 	}
-	
+
 	public function getPhpFile() {
 		return $this->articleText->phpFile;
 	}
-	
+
 	public function getArticleText() {
 		return $this->articleText;
 	}
@@ -212,11 +212,11 @@ class Article extends CActiveRecord {
 	}
 
 	public function getPhpFilePath() {
-        $protectedPath = Yii::getPathOfAlias('application');
-        $root = str_replace("protected", "", $protectedPath);
-        $modifiedPath = $root."files/article/".$this->phpFile.".php";
+		$protectedPath = Yii::getPathOfAlias('application');
+		$root = str_replace("protected", "", $protectedPath);
+		$modifiedPath = $root."files/article/".$this->phpFile.".php";
 
-        return $modifiedPath;
+		return $modifiedPath;
 	}
 
 	public function getViewUrl() {

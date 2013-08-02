@@ -96,7 +96,7 @@ class JobAnnouncement extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-	
+
 	public function getViewUrl() {
 		return Yii::app()->createUrl("jobAnnouncement/jobAnnouncement/view", array(
 					"id" => $this->id,

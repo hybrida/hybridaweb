@@ -251,13 +251,13 @@ class BktoolController extends Controller {
 
 		$this->render('companyoverview', $data);
 	}
-	
+
 	public function actionIndustryAssociation(){
 		$this->setPageTitle($this->getNumberOfRelevantUpdatesAsString() . ' ' . $this->organisationName . '-BK');
 
 		$bkTool = new Bktool();
 		$data = array();
-		
+
 		if (!isset($_GET['orderby'])) {
 			$_GET['orderby'] = 'companyName';
 		}
@@ -290,10 +290,10 @@ class BktoolController extends Controller {
 				$_SESSION['order'] = 'DESC';
 				break;
 		}
-		
+
 		$data['companies'] = $bkTool->getIndustryAssociationOverview($_SESSION['orderby'], $_SESSION['order']);
 		$data['statistics'] = $bkTool->getIndustryAssociationStatistics();
-		
+
 		$this->render('industryassociation', $data);
 	}
 

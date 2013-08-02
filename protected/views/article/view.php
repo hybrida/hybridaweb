@@ -25,7 +25,7 @@ $this->layout = "//layouts/doubleColumn"; ?>
 		'article' => $article,
 	));
 $this->endClip()
- 
+
 ?>
 <div class="articleIndex">
 	<div id="article">

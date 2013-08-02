@@ -1,7 +1,7 @@
 <?php
 
 class EventTest extends CTestCase {
-	
+
 	public function getNewEvent() {
 		return Util::getNewEvent();
 	}
@@ -54,67 +54,67 @@ class EventTest extends CTestCase {
 		$event = $this->getNewEvent();
 		$this->assertEquals(null, $event->id);
 	}
-	
+
 	public function test_saveBedpres_numberOfEventCompanyRowsIncreasesByOne() {
 		$count = EventCompany::model()->count();
 		$event = Util::getEvent();
 		$event->saveBedpres(rand(0,10000000));
 		$newCount = EventCompany::model()->count();
-		
+
 		$this->assertEquals($newCount, $count + 1, "The bedpress didn't get saved");
 	}
-	
-	
+
+
 	public function test_saveBedpres() {
 		$randomNumber = rand(0,10000);
 		$secondRandomNumber = rand(0,100);
 		$event = $this->getNewEvent();
 		$event->save();
 		$event->saveBedpres($randomNumber, $secondRandomNumber);
-		
+
 		$event2 = Event::model()->findByPk($event->id);
 		$bedpress = $event2->getBedpress();
 		$this->assertEquals($randomNumber, $bedpress->bpcID);
 	}
-	
+
 	public function test_saveBedpres_companyID_dont_change_when_saved_if_record_exists_and_companyID_isnt_specified() {
 		$randomNumber = rand(0,10000);
 		$randomNumber2 = rand(0,10000);
 		$event = $this->getNewEvent();
 		$event->save();
 		$event->saveBedpres($randomNumber, $randomNumber2);
-		
+
 		$event2 = Event::model()->findByPk($event->id);
 		$event2->saveBedpres($randomNumber);
-		
+
 		$event3 = Event::model()->findByPk($event->id);
 		$bedpress = $event3->getBedpress();
-		
+
 		$this->assertEquals($randomNumber2, $bedpress->companyID);
 	}
-	
+
 	public function test_saveBedpres_changeCompanyIDToNull() {
 		$randomNumber = rand(0,10000);
 		$randomNumber2 = rand(0,10000);
 		$event = $this->getNewEvent();
 		$event->save();
 		$event->saveBedpres($randomNumber, $randomNumber2);
-		
+
 		$event2 = Event::model()->findByPk($event->id);
 		$event2->saveBedpres($randomNumber, null);
-		
+
 		$event3 = Event::model()->findByPk($event->id);
 		$bedpress = $event3->getBedpress();
-		
+
 		$this->assertEquals(null, $bedpress->companyID);
 	}
-	
+
 	public function test_isBpcEvent_noBpcEvent_false() {
 		$event = $this->getNewEvent();
 		$event->save();
 		$this->assertFalse($event->isBpcEvent());
 	}
-	
+
 	public function test_isBpcEvent_bedpressExists_true() {
 		$event = $this->getNewEvent();
 		$event->save();

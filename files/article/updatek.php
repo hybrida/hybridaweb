@@ -14,15 +14,15 @@ function getDirContents($folderPath) {
 }
 
 function getPdfFilesInDirectory($folderPath) {
-    $files = getDirContents($folderPath);
-    $pdfs = array();
-    foreach ($files as $file) {
-        $explode = explode(".", $file);
-        if ($explode[1] == "pdf") {
-            $pdfs[] = $file;
-        }
-    }
-    return $pdfs;
+	$files = getDirContents($folderPath);
+	$pdfs = array();
+	foreach ($files as $file) {
+		$explode = explode(".", $file);
+		if ($explode[1] == "pdf") {
+			$pdfs[] = $file;
+		}
+	}
+	return $pdfs;
 }
 
 function getUtgaveFolders($folderPath) {
@@ -45,53 +45,53 @@ function utgaveComparator($ref1, $ref2) {
 }
 
 class UtgaveFolder {
-    
-    public $utgaver;
-    public $year;
-    public $schoolYear;
-    public $path;
-    
-    public function __construct($path) {
-        $this->path = $path;
-        $this->setSchoolYear($path);
-        $this->setUtgaver($path);
-        $this->sortUtgaver();
-    }
-    
-    private function setSchoolYear($path) {
-        $date = explode("/", $path);
-        $this->year1 = substr($date[count($date) - 1], 0, 4);
-        $this->year2 = substr($date[count($date) - 1], 5, 4);
-        $this->schoolYear = $this->year1 . "/" . $this->year2;
-    }
-    
-    private function setUtgaver($path) {
-        $utgaver = getPdfFilesInDirectory($path);
+
+	public $utgaver;
+	public $year;
+	public $schoolYear;
+	public $path;
+
+	public function __construct($path) {
+		$this->path = $path;
+		$this->setSchoolYear($path);
+		$this->setUtgaver($path);
+		$this->sortUtgaver();
+	}
+
+	private function setSchoolYear($path) {
+		$date = explode("/", $path);
+		$this->year1 = substr($date[count($date) - 1], 0, 4);
+		$this->year2 = substr($date[count($date) - 1], 5, 4);
+		$this->schoolYear = $this->year1 . "/" . $this->year2;
+	}
+
+	private function setUtgaver($path) {
+		$utgaver = getPdfFilesInDirectory($path);
 		foreach ($utgaver as $utg) {
 			$this->utgaver[] = new Utgave($utg);
 		}
-    }
-    
-    private function sortUtgaver() {
-        usort($this->utgaver, "utgaveComparator");
-    }
+	}
+
+	private function sortUtgaver() {
+		usort($this->utgaver, "utgaveComparator");
+	}
 }
 
 class Utgave {
-    
-    public $fileName;
-    public $pictureFileName;
-    public $nummer;
-    public $sommer;
-    
-    public function __construct($fileName) {
-        $this->fileName = $fileName;
-        $explode = explode(".", $fileName);
-        $this->pictureFileName = $explode[0] . ".png";
-        $explode2 = explode("-", $explode[0]);
-        $this->nummer = $explode2[1] == "00" ? $this->nummer = "Sommer" : $this->nummer = $explode2[1];
-        
-    }  
+
+	public $fileName;
+	public $pictureFileName;
+	public $nummer;
+	public $sommer;
+
+	public function __construct($fileName) {
+		$this->fileName = $fileName;
+		$explode = explode(".", $fileName);
+		$this->pictureFileName = $explode[0] . ".png";
+		$explode2 = explode("-", $explode[0]);
+		$this->nummer = $explode2[1] == "00" ? $this->nummer = "Sommer" : $this->nummer = $explode2[1];
+
+	}
 }
 
 
@@ -127,8 +127,8 @@ $utgaveMapper = getUtgaveFolders($folderPath);
 	.utgave a {
 		color: #000;
 		font-size: 18px;
-        font-weight: bold;
-        text-align: center;
+		font-weight: bold;
+		text-align: center;
 		text-decoration: none;
 	}
 
@@ -154,7 +154,7 @@ $utgaveMapper = getUtgaveFolders($folderPath);
 			<? foreach ($mappe->utgaver as $utgave): ?>
 				<div class="utgave">
 					<a href="<?= $folderUrl ?><?= $mappe->year1 . "-" . $mappe->year2 ?>/<?= $utgave->fileName ?>">
-						<img src="<?= $folderUrl ?><?= $mappe->year1 . "-" . $mappe->year2 ?>/<?= $utgave->pictureFileName ?>" />	
+						<img src="<?= $folderUrl ?><?= $mappe->year1 . "-" . $mappe->year2 ?>/<?= $utgave->pictureFileName ?>" />
 						<?= $utgave->nummer ?>
 					</a>
 				</div>

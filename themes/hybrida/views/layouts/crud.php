@@ -1,16 +1,16 @@
 <?php $this->beginContent('//layouts/main'); ?>
-            <div class="layout-content">	
-                <?php if (isset($this->breadcrumbs)): ?>
-                    <?php
-                    $this->widget('zii.widgets.CBreadcrumbs', array(
-                        'links' => $this->breadcrumbs,
-                    ));
-                    ?><!-- breadcrumbs -->
-                <?php endif ?>
-                <?= $content ?>
-            </div>
+			<div class="layout-content">
+				<?php if (isset($this->breadcrumbs)): ?>
+					<?php
+					$this->widget('zii.widgets.CBreadcrumbs', array(
+						'links' => $this->breadcrumbs,
+					));
+					?><!-- breadcrumbs -->
+				<?php endif ?>
+				<?= $content ?>
+			</div>
 
-            <div class="layout-rightBar">
+			<div class="layout-rightBar">
 		<div id="sidebar">
 		<?php
 			$this->beginWidget('zii.widgets.CPortlet', array(
@@ -22,5 +22,5 @@
 			));
 			$this->endWidget();
 		?>
-		</div><!-- sidebar -->            </div>
+		</div><!-- sidebar -->			</div>
 <?php $this->endContent(); ?>

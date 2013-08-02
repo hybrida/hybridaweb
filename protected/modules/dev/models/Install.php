@@ -41,7 +41,7 @@ class Install {
 			echo PHP_EOL;
 		}
 	}
-	
+
 	private function color($text, $color=null, $bgColor=null) {
 		return Yii::app()->cliColor->getColoredString($text . PHP_EOL, $color, $bgColor);
 	}

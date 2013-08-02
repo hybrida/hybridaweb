@@ -1,42 +1,42 @@
 /*stil for siden med alumnilisten*/
 
 #BK-alumnilist-selectionlist ul{
-    list-style-type: none;
-    padding: 6px 2px;
+	list-style-type: none;
+	padding: 6px 2px;
 }
 #BK-alumnilist-selectionlist ul li ul{
-    list-style-type: none;
-    padding: 3px 20px;
+	list-style-type: none;
+	padding: 3px 20px;
 }
 
 /*stil for hovedtabellen*/
 
 #BK-alumnilist-maintable {
-    border-collapse: collapse;
-    text-align: left;
+	border-collapse: collapse;
+	text-align: left;
 }
 
 #BK-alumnilist-maintable *{
-    border: none;
+	border: none;
 }
 
 #BK-alumnilist-maintable td {
-    border-bottom: 1px solid #ccc;
-    padding: 6px 4px;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 4px;
 }
 
 #BK-alumnilist-maintable th {
-    color: #009;
-    padding: 10px 4px;
-    border-bottom: 2px solid #6678b1;
+	color: #009;
+	padding: 10px 4px;
+	border-bottom: 2px solid #6678b1;
 }
 
 #BK-alumnilist-maintable th a:link{ 
-    text-decoration: none 
+	text-decoration: none 
 }
 
 #BK-alumnilist-maintable th a:visited{ 
-    color: #009;
+	color: #009;
 }
 
 #BK-alumnilist-maintable tr:hover{
@@ -44,7 +44,7 @@
 }
 
 #BK-alumnilist-maintable tr:first-child {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 /*stil for st�ttetabellen og kolonnene som holder statistikken p� plass*/
@@ -73,32 +73,32 @@
 }
 
 #BK-alumnilist-yeartable {
-    border-collapse: collapse;
+	border-collapse: collapse;
 
 }
 
 #BK-alumnilist-yeartable *{
-    border: none;
+	border: none;
 }
 
 #BK-alumnilist-yeartable td {
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-    padding: 6px 8px;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 8px;
 }
 
 #BK-alumnilist-yeartable th {
-    color: #009;
-    padding: 10px 8px;
-    border-bottom: 2px solid #6678b1;
+	color: #009;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
 }
 
 #BK-alumnilist-yeartable tr:hover{
-    background-color: #e1e3e5;
+	background-color: #e1e3e5;
 }
 
 #BK-alumnilist-yeartable tr:first-child {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 /*stil for boksen som inneholder statistikk for bedriftene*/
@@ -109,30 +109,30 @@
 }
 
 #BK-alumnilist-companytable {
-    border-collapse: collapse;
+	border-collapse: collapse;
 
 }
 
 #BK-alumnilist-companytable *{
-    border: none;
+	border: none;
 }
 
 #BK-alumnilist-companytable td {
-    text-align: center;
-    border-bottom: 1px solid #ccc;
-    padding: 6px 8px;
+	text-align: center;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 8px;
 }
 
 #BK-alumnilist-companytable th {
-    color: #009;
-    padding: 10px 8px;
-    border-bottom: 2px solid #6678b1;
+	color: #009;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
 }
 
 #BK-alumnilist-companytable tr:hover{
-    background-color: #e1e3e5;
+	background-color: #e1e3e5;
 }
 
 #BK-alumnilist-companytable tr:first-child {
-    background-color: transparent;
+	background-color: transparent;
 }

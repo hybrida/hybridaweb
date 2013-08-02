@@ -27,9 +27,9 @@ $this->endClip();
 
 
 <table class="g-membertable">
-    <tr>
-        <th></th><th>Navn</th><th>Medlemskap</th><th>Spesialisering</th>
-    </tr>
+	<tr>
+		<th></th><th>Navn</th><th>Medlemskap</th><th>Spesialisering</th>
+	</tr>
 	<? $odd = false ?>
 	<? foreach ($users as $user) : ?>
 		<? $odd = !$odd ?>

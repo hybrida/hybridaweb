@@ -1,23 +1,23 @@
 /* stil for siden med fordeling av bedrifter */
 
 #BK-companydistribution-maintable{
-    border-collapse: collapse;
-    text-align: left;
+	border-collapse: collapse;
+	text-align: left;
 }
 
 #BK-companydistribution-maintable *{
-    border: none;
+	border: none;
 }
 
 #BK-companydistribution-maintable td {
-    border-bottom: 1px solid #ccc;
-    padding: 6px 8px;
+	border-bottom: 1px solid #ccc;
+	padding: 6px 8px;
 }
 
 #BK-companydistribution-maintable th {
-    color: #009;
-    padding: 10px 8px;
-    border-bottom: 2px solid #6678b1;
+	color: #009;
+	padding: 10px 8px;
+	border-bottom: 2px solid #6678b1;
 }
 
 #BK-companydistribution-maintable tr:hover{
@@ -25,28 +25,28 @@
 }
 
 #BK-companydistribution-maintable tr:first-child {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 #BK-companydistribution-aktuell-senere{
-    color: #FF9900;
-    font-weight: bold;
-    text-align: left;
+	color: #FF9900;
+	font-weight: bold;
+	text-align: left;
 }
 
 #BK-companydistribution-blir-kontaktet{
-    color: #009900;
-    font-weight: bold;
-    text-align: left;
+	color: #009900;
+	font-weight: bold;
+	text-align: left;
 }
 
 #BK-companydistribution-ikke-kontaktet{
-    font-weight: bold;
-    text-align: left;
+	font-weight: bold;
+	text-align: left;
 }
 
 #BK-companydistribution-uaktuell{
-    color: #CC0000;
-    font-weight: bold;
-    text-align: left;
+	color: #CC0000;
+	font-weight: bold;
+	text-align: left;
 }

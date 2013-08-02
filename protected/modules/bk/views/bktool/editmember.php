@@ -57,7 +57,7 @@
 
 	<? endforeach ?>
 
-    <p id="BK-index-editmember-button" align="center">
-        <input type="submit" name="Submit" value="Legg til endringer" />
-    </p>
+	<p id="BK-index-editmember-button" align="center">
+		<input type="submit" name="Submit" value="Legg til endringer" />
+	</p>
 </form>

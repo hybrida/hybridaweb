@@ -28,7 +28,7 @@
 				<? endif ?>
 				<br/>
 			<? endif ?>
-			<strong>Påmeldte: </strong> <?= $signup->attendingCount ?> / <?= $signup->spots ?> <br/>             
+			<strong>Påmeldte: </strong> <?= $signup->attendingCount ?> / <?= $signup->spots ?> <br/>
 			<div class="progressbar" style="text-align: center">
 				<span class="<?= $signup->AttendingColorClass ?>" style="width: <?= $signup->AttendingFraction?>%"></span>
 			</div>

@@ -1,13 +1,13 @@
 <?php
 
 class ActivitiesFeed extends CWidget {
-	
+
 	public $limit = 5;
 
 	public function run() {
 			$this->runFeed();
 	}
-	
+
 	public function runFeed() {
 		$feed = new SignupFeed($this->limit);
 		$elements = $feed->getElements();
@@ -26,7 +26,7 @@ class SignupFeed extends AbstractFeed {
 
 	protected function getMaxElementCount() {
 		return Signup::model()->count();
-		
+
 	}
 
 	protected function getSQL() {

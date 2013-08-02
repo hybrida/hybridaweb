@@ -7,5 +7,5 @@
  * @author sighol
  */
 class NoFileIsUploadedException extends RuntimeException {
-	
+
 }

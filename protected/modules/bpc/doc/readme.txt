@@ -42,7 +42,7 @@ get_events - henter alle eller et enkelt arrangement
 		fromdate - Hent kun hendelser etter dette tidspunktet. Format: YYYY-MM-DD HH:MM:SS. Hvis dette ikke er angitt hentes alle arrangementer i framtiden, evt alle før todate
 		todate - Hent kun hendelser før dette tidspunktet. Format: YYYY-MM-DD HH:MM:SS. Hvis dette ikke er angitt hentes alle arrangementer i framtiden, evt alle etter fromdate
 		event_type – Kan være enten 'advertised', 'not_advertised' eller 'all'. 'advertised' gir kun hendelser hvor linjeforeningen har inngått avtale om blæstedeal. Dette er standard, og er slikt ting fungerte før versjon 1.1. 'not_advertised' gir da hendelser uten blæstedeal, og 'all' gir begge deler.
-	
+
 	Returnert data:
 		$data['event'][int], int itererer over alle arrangementer
 		id - Arrangementets id (det du vil bruke i som event-parameter)
@@ -85,7 +85,7 @@ rem_attending - Melder en person av et arrangement
 		username - NTNU-brukernavn
 	Returnert data:
 		$data['rem_attending'][0] = 1 hvis det gikk bra, hvis ikke kommer en feilmelding i $data['error']
-		
+
 get_attending - Returnerer alle deltagere fra din linjeforening til et arrangement
 	Påkrevd argument:
 		event - arrangement-id (i BPC, som gitt av get_events)

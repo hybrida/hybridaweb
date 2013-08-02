@@ -10,7 +10,7 @@ $this->renderPartial("_menu");
 		Nå har du endelig mulighet til å skaffe deg Hybrida-kilten.
 	</p>
 	<p>
-		Kiltene vil bli bestilt fra 
+		Kiltene vil bli bestilt fra
 		<a href="http://www.sportkilt.com">sportkilt.com</a>,
 		 vi har valgt å gå for Irisher fargene og kilten finnes
 		 også i damefasong for jentene, eller minikilt.
@@ -45,7 +45,7 @@ $this->renderPartial("_menu");
 	</p>
 
 	<h2> Størrelser</h2>
-	
+
 	<h3>Guttemodeller</h3>
 	<table border="1" width="400">
 		<tbody>
@@ -93,7 +93,7 @@ $this->renderPartial("_menu");
 			</tr>
 		</tbody>
 	</table>
-	Det anbefales å kjøpe Medium Long dersom du er høyere enn 175cm	
+	Det anbefales å kjøpe Medium Long dersom du er høyere enn 175cm
 
 	<h3>Jentemodeller</h3>
 	<table border="1" width="400">

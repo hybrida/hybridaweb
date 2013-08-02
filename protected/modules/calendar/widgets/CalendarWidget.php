@@ -74,7 +74,7 @@ class CalendarWidget extends CWidget {
 	}
 
 	private function addDaysAndConvertToString($year, $month, $day, $days) {
-		$newTime = mktime(0, 0, 0, $month, $day + $days, $year); 
+		$newTime = mktime(0, 0, 0, $month, $day + $days, $year);
 		return date('Y-m-d', $newTime);
 	}
 

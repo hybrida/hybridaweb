@@ -14,7 +14,7 @@ class BpcUpdateTest extends CTestCase {
 		$this->bedpress = bedpress();
 		$this->bpcID = $this->bedpress['id'];
 	}
-	
+
 	private function update() {
 		$update = new BpcUpdateMock;
 		$update->setBpcRequestResponse($this->bedpress);
@@ -58,13 +58,13 @@ class BpcUpdateTest extends CTestCase {
 		$this->assertEquals($this->bedpress['registration_start'], $signup->open);
 		$this->assertEquals(Status::DELETED, $signup->status);
 	}
-	
+
 	public function test_updateAll_newsTitleIsTooLong_titleIsShortened() {
 		$this->bedpress['title'] = "123456789012345678901234567890123456789012345678901234567890"; // 60 chars
 		$this->update();
 		$news = $this->eventCompany->event->news;
 		$this->assertNotNull($news);
-		
+
 		$this->assertEquals(50, strlen($news->title));
 	}
 

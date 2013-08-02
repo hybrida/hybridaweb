@@ -8,5 +8,5 @@ class ArticleTreeTest extends CTestCase {
 		$articleTree = $widget->articleTree;
 		//print_r($articleTree);
 	}
-	
+
 }

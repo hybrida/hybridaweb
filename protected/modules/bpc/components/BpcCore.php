@@ -5,10 +5,10 @@
 // Check for curl availability
 if (!function_exists("curl_init") || !function_exists("curl_setopt") || !function_exists("curl_exec") || !function_exists("curl_close"))
 	die('You do not have cURL-support installed with php, please contact your system administrator.<br />
-	     On debian-based systems, this is simply done by "aptitude install php5-curl"');
+		 On debian-based systems, this is simply done by "aptitude install php5-curl"');
 
 class BpcCore {
-	
+
 	public static function doRequest($postdata) {
 		$request = new BpcRequest($postdata);
 		$request->send();
@@ -20,11 +20,11 @@ class BpcCore {
 		if (!$user) {
 			return;
 		}
-		
+
 		if ($user->cardHash == "" || $user->cardHash == null) {
 			throw new CHttpException("403", "Du har ikke lagt inn noe kortnummer. Dette gjøres på profilredigeringssiden");
 		}
-		
+
 		$inData = array(
 			'request' => 'add_attending',
 			'fullname' => $user->fullName,
@@ -48,12 +48,12 @@ class BpcCore {
 		);
 		BpcCore::doRequest($inData);
 	}
-	
+
 	public static function update($bpcID) {
 		$b = new BpcUpdate();
 		$b->update($bpcID);
 	}
-	
+
 	public static function updateAll() {
 		$b = new BpcUpdate();
 		$b->updateAll();

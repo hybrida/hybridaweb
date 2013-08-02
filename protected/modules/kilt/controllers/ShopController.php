@@ -26,10 +26,10 @@ class ShopController extends Controller
 		if (isset($_POST['submit']))
 		{
 			$qnty = array();
-			$size    = $_POST['size'];
+			$size	= $_POST['size'];
 			$newComment = $_POST['comment'];
 			if (isset($_POST['qnty']))
-				$qnty    = $_POST['qnty'];
+				$qnty	= $_POST['qnty'];
 
 			foreach ($qnty as $id => $q)
 			{
@@ -92,9 +92,9 @@ class ShopController extends Controller
 						'sizes'		 => $shopHelper->getSizes(),
 						'isShopOpen' => $timeHelper->isShopOpen(),
 						'timeID'	 => $curTimeID,
-						'comment'    => $comment,
-						'errors'     => $errors,
-						'size'       => $size,
+						'comment'	=> $comment,
+						'errors'	 => $errors,
+						'size'	   => $size,
 						'qnty'		 => $qnty,
 						));
 		}
@@ -115,10 +115,10 @@ class ShopController extends Controller
 					$commentHelper->deleteComment($key);
 
 		$products = $shopHelper->getProducts();
-		$sizes    = $shopHelper->getSizes();
+		$sizes	= $shopHelper->getSizes();
 
 		$isShopOpen = $timeHelper->isShopOpen();
-		$time       = $timeHelper->getCurrentTime();
+		$time	   = $timeHelper->getCurrentTime();
 		$times		= $timeHelper->getTimes();
 
 		$timeComments = $commentHelper->getUserCommentsIndexedByTime();
@@ -128,10 +128,10 @@ class ShopController extends Controller
 				array(
 					'timeOrders' => $timeOrders,
 					'products'   => $products,
-					'sizes'	     => $sizes,
+					'sizes'		 => $sizes,
 					'isShopOpen' => $isShopOpen,
-					'time'       => $time,
-					'times'      => $times,
+					'time'	   => $time,
+					'times'	  => $times,
 					'timeComments'   => $timeComments,
 					));
 	}
@@ -148,7 +148,7 @@ class ShopController extends Controller
 		$shopHelper = new ShopHelper();
 		$orderHelper = new OrderHelper();
 		$timeHelper = new TimeHelper();
-	    $commentHelper = new CommentHelper();
+		$commentHelper = new CommentHelper();
 
 		$showTimeID = -1;
 		$showUserID = -1;
@@ -165,16 +165,16 @@ class ShopController extends Controller
 			foreach($_POST['recv'] as $id => $value)
 				$orderHelper->setOrderRecv($id, $value);
 		}
-		elseif (isset($_POST['createTime']) && 
-				isset($_POST['start']) && 
+		elseif (isset($_POST['createTime']) &&
+				isset($_POST['start']) &&
 				isset($_POST['end']))
 		{
 			$dateRegex = "#^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$#";
 			$start = $_POST['start'];
 			$end = $_POST['end'];
 
-			if (preg_match($dateRegex, $start) && 
-				preg_match($dateRegex, $end) && 
+			if (preg_match($dateRegex, $start) &&
+				preg_match($dateRegex, $end) &&
 				$start < $end)
 				$timeHelper->addTime($start, $end);
 			else
@@ -183,18 +183,18 @@ class ShopController extends Controller
 				$showTimeID = $_POST['timeid'];
 			}
 		}
-			
+
 		else
 			foreach($_POST as $key => $value)
 			{
 				if ($value == "Vis bestillinger")
 				{
-					$showTimeID = $key;	
+					$showTimeID = $key;
 				}
 			}
 
-		$currentTimeID    = $timeHelper->getCurrentTimeID();
-		$times      = $timeHelper->getTimes();
+		$currentTimeID	= $timeHelper->getCurrentTimeID();
+		$times	  = $timeHelper->getTimes();
 		$isShopOpen = $timeHelper->isShopOpen();
 
 		$sizes = $shopHelper->getSizes();
@@ -203,7 +203,7 @@ class ShopController extends Controller
 			$showTimeID = $timeHelper->getLastTimeID();
 		elseif ($showTimeID == -1)
 			$showTimeID = $currentTimeID;
-		
+
 		$products = $shopHelper->getProducts();
 		$orders = $orderHelper->getOrders();
 
@@ -257,9 +257,9 @@ class ShopController extends Controller
 			ksort($timeOrders);
 		}
 
-		foreach($userOrders as &$userTimeOrders) 
+		foreach($userOrders as &$userTimeOrders)
 		{
-			foreach($userTimeOrders as &$userTimeProductOrders) 
+			foreach($userTimeOrders as &$userTimeProductOrders)
 			{
 				if (!is_array($userTimeProductOrders))
 					continue;
@@ -273,7 +273,7 @@ class ShopController extends Controller
 			$showUserID = -1;
 
 
-		$this->render('admin', 
+		$this->render('admin',
 				array(
 					'post' => $_POST,
 					'userOrders' => $userOrders,
@@ -284,6 +284,6 @@ class ShopController extends Controller
 					'times' => $times,
 					'showTimeID' => $showTimeID,
 					'showUserID' => $showUserID,
-					));	
+					));
 	}
 }

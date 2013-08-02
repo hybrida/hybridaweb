@@ -80,7 +80,7 @@ class InnsidaIdentityTest extends CTestCase {
 
 	public function test_lastLoginIsUpdated() {
 		$user = $this->getNewUser();
-		
+
 		$data = "username,{$user->username}";
 		$mock = new SSOMock($data);
 
@@ -91,7 +91,7 @@ class InnsidaIdentityTest extends CTestCase {
 
 		$identity = new InnsidaIdentity($mock);
 		$this->assertTrue($identity->authenticate());
-		
+
 		$new = User::model()->findByPk($user->id)->lastLogin;
 		$this->assertNotEquals($old, $new);
 	}

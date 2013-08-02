@@ -18,21 +18,21 @@ class GroupsTest extends CTestCase {
 		$group = $this->getGroup();
 		$this->assertTrue($group->save());
 		$this->assertNotNull($group->id, "Id kan ikke være null.");
-		
+
 		$group2 = Groups::model()->findByPk($group->id);
 		$this->assertNotNull($group2);
 	}
-	
+
 	public function test_addMember() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
 		$group->addMember($user->id);
 		$ms = $this->getMemberships($group->id, $user->id);
-		
+
 		$this->assertEquals(1, count($ms));
 		$this->assertEquals(Groups::STILL_ACTIVE, $ms[0]->end);
 	}
-	
+
 	private function addMembership($groupId, $userId, $start, $end) {
 		$ms = new GroupMembership();
 		$ms->start = $start;
@@ -41,13 +41,13 @@ class GroupsTest extends CTestCase {
 		$ms->userId = $userId;
 		$ms->save();
 	}
-	
+
 	private function getMemberships($groupId, $userId) {
 		return GroupMembership::model()->findAll('groupId = ? AND userId = ?', array(
 			$groupId, $userId,
 		));
 	}
-	
+
 	public function test_removeMember() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
@@ -59,13 +59,13 @@ class GroupsTest extends CTestCase {
 			':groupId' => $group->id,
 			':userId' => $user->id,
 				));
-		
+
 		$this->assertNotNull($ms);
 		$this->assertNotNull($ms->start);
 		$this->assertNotNull($ms->end);
 	}
-	
-	
+
+
 	public function test_addMember_twoTimesInARow_twoMemberships() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
@@ -76,7 +76,7 @@ class GroupsTest extends CTestCase {
 
 		$this->assertEquals(2, $numberOfMemberships);
 	}
-	
+
 	public function test_addMember_twoTimesInARow_correctStartEndNullProperties() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
@@ -86,13 +86,13 @@ class GroupsTest extends CTestCase {
 		$memberships = $this->getMemberships($group->id, $user->id);
 		$ms1 = $memberships[1];
 		$ms0 = $memberships[0];
-		
+
 		$this->assertEquals($earlyDummyStartDate, $ms1->start);
 		$this->assertNotEquals(Groups::STILL_ACTIVE, $ms1->end);
 		$this->assertEquals(Groups::STILL_ACTIVE, $ms0->end);
-		
+
 	}
-	
+
 	public function test_getMembers() {
 		$group = $this->getGroup();
 		$u1 = $this->getUser();
@@ -104,7 +104,7 @@ class GroupsTest extends CTestCase {
 		$this->assertContains($u2->id, $members);
 		$this->assertContains($u1->id, $members);
 	}
-	
+
 	public function test_addRemoveMultipleTimesOnSameDay_only_oneRecordIsSaved() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
@@ -113,7 +113,7 @@ class GroupsTest extends CTestCase {
 		$group->addMember($user->id);
 		$group->removeMember($user->id);
 	}
-	
+
 	public function test_hasEarlierMembershipSameDay() {
 		$group = $this->getGroup();
 		$user = $this->getUser();
@@ -123,7 +123,7 @@ class GroupsTest extends CTestCase {
 		$actual = $group->hasEarlierMembershipSameDay($user->id);
 		$this->assertTrue($actual);
 	}
-	
+
 	public function test_getActiveMemberships_correctNumberOfMemberships() {
 		$group = $this->getGroup();
 		$user = $this->getUser();

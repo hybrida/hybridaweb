@@ -177,7 +177,7 @@ class Bkforms {
 			'graduateId' => $id
 		);
 		$sql = "SELECT companyId FROM bk_company
-                RIGHT JOIN user ON workCompanyID = companyID WHERE id = :graduateId";
+				RIGHT JOIN user ON workCompanyID = companyID WHERE id = :graduateId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -290,8 +290,8 @@ class Bkforms {
 			'companyId' => $companyId
 		);
 		$sql = "UPDATE iktringen_membership
-                 SET end = '0000-00-00'
-                 WHERE companyId = :companyId";
+				 SET end = '0000-00-00'
+				 WHERE companyId = :companyId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -304,8 +304,8 @@ class Bkforms {
 			'companyId' => $companyId
 		);
 		$sql = "UPDATE iktringen_membership
-                 SET end = now()
-                 WHERE companyId = :companyId";
+				 SET end = now()
+				 WHERE companyId = :companyId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -318,8 +318,8 @@ class Bkforms {
 			'companyId' => $companyId
 		);
 		$sql = "UPDATE iktringen_membership
-                 SET start = now()
-                 WHERE companyId = :companyId";
+				 SET start = now()
+				 WHERE companyId = :companyId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -334,9 +334,9 @@ class Bkforms {
 			'dateContacted' => $dateContacted
 		);
 		$sql = "UPDATE bk_iktringen_information
-                SET relevance = :relevance,
-                   dateContacted = :dateContacted
-                WHERE companyId = :companyId";
+				SET relevance = :relevance,
+				   dateContacted = :dateContacted
+				WHERE companyId = :companyId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -530,7 +530,7 @@ class Bkforms {
 			'relevantUserId' => $relevantUserId
 		);
 		$sql = "INSERT INTO bk_company_update (relevantForUserId, companyId, description, addedById, dateAdded)
-            VALUES (:relevantUserId, :companyId, 'Bedriften har endret prioritet', :currentUserId, now())";
+			VALUES (:relevantUserId, :companyId, 'Bedriften har endret prioritet', :currentUserId, now())";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -627,9 +627,9 @@ class Bkforms {
 			'updatedById' => Yii::app()->user->id
 		);
 		$sql = "UPDATE bk_company SET companyName = :companyName, mail = :mail, phoneNumber = :phonenumber, address = :address, postbox = :postbox,
-                postnumber = :postnumber, postplace = :postplace, homepage = :homepage, subgroupOfID = :parentCompanyId, status = :status,
-                priority = :priority,
-                updatedByID = :updatedById, dateUpdated = now() WHERE companyID = :companyId";
+				postnumber = :postnumber, postplace = :postplace, homepage = :homepage, subgroupOfID = :parentCompanyId, status = :status,
+				priority = :priority,
+				updatedByID = :updatedById, dateUpdated = now() WHERE companyID = :companyId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -646,11 +646,11 @@ class Bkforms {
 			'membershipfee' => $membershipfee
 		);
 		$sql = "UPDATE iktringen_membership
-                SET invoiceContact = :invoicecontact,
-                    organizationNumber = :organizationnumber,
-                    invoiceAddress = :invoiceaddress,
-                    membershipFee = :membershipfee
-                WHERE companyID = :companyId";
+				SET invoiceContact = :invoicecontact,
+					organizationNumber = :organizationnumber,
+					invoiceAddress = :invoiceaddress,
+					membershipFee = :membershipfee
+				WHERE companyID = :companyId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -683,7 +683,7 @@ class Bkforms {
 			'companyId' => $companyId
 		);
 		$sql = "SELECT specializationId FROM bk_company_specialization, specialization
-                WHERE id = specializationId AND companyId = :companyId ORDER BY name ASC";
+				WHERE id = specializationId AND companyId = :companyId ORDER BY name ASC";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -948,8 +948,8 @@ class Bkforms {
 			'companyId' => $companyId,
 		);
 		$sql = "UPDATE bk_company_specialization
-                SET companyId = 0, specializationId = 0
-                WHERE companyID = :companyId";
+				SET companyId = 0, specializationId = 0
+				WHERE companyID = :companyId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -963,8 +963,8 @@ class Bkforms {
 			'groupId' => $groupId
 		);
 		$sql = "UPDATE group_membership
-                SET end = now()
-                WHERE userId = :memberId AND groupId = :groupId";
+				SET end = now()
+				WHERE userId = :memberId AND groupId = :groupId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -977,8 +977,8 @@ class Bkforms {
 			'memberId' => $memberId
 		);
 		$sql = "UPDATE bk_company
-                SET status = 'Aktuell senere'
-                WHERE contactorID = :memberId AND status = 'Blir kontaktet'";
+				SET status = 'Aktuell senere'
+				WHERE contactorID = :memberId AND status = 'Blir kontaktet'";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -991,9 +991,9 @@ class Bkforms {
 			'groupId' => $groupId
 		);
 		$sql = "SELECT id
-                FROM user, group_membership
-                WHERE groupId = :groupId AND userId = id
-                ORDER BY id ASC";
+				FROM user, group_membership
+				WHERE groupId = :groupId AND userId = id
+				ORDER BY id ASC";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);
@@ -1033,8 +1033,8 @@ class Bkforms {
 			'comission' => $comission
 		);
 		$sql = "UPDATE group_membership
-                SET start = :start, end = :end, comission = :comission
-                WHERE userId = :memberId AND groupId = :groupId";
+				SET start = :start, end = :end, comission = :comission
+				WHERE userId = :memberId AND groupId = :groupId";
 
 		$query = $this->pdo->prepare($sql);
 		$query->execute($data);

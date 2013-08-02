@@ -16,7 +16,7 @@ get_events:
 		+registration_start	- Påmelding starter, i formatet YYYY-MM-DD HH:MM:SS
 		+registration_started	- Hvorvidt påmeldingen har begynt, 1 eller 0 (true/false)
 		+is_advertised		- 1 hvis dere har blæstedeal, 0 ellers. Trenger bare ta hensyn til denne når event_type='all'
-		
+
 +get_user_stats:
 	Se readme for detaljer.
 
@@ -51,7 +51,7 @@ get_attending:
 		+sort - hvordan deltagerne skal sorteres. Alternativer: 'lname' (etternavn, standard), 'fname' (fornavn), 'username', 'registered' (når påmeldingen skjedde)
 	Returnert data:
 		+year - hvilken årstrinn i studiet personen er på
-	
+
 +get_waiting:
 	Samme paramtere som get_attending, men gir personer på venteliste. Sortert etter påmeldingstidspunkt som standard, kan overstyres med 'sort'.
 

@@ -84,7 +84,7 @@
 	</tr>
 
 	<? foreach ($companies as $company) : ?>
-		<tr> 
+		<tr>
 			<td><?= CHtml::link($company['companyName'], array('company?id=' . $company['companyID'])) ?></td>
 			<?
 			switch ($company['status']) {
@@ -113,7 +113,7 @@
 					<td>
 				<? } ?>
 				<?= $company['status'] ?>
-			</td> 
+			</td>
 			<td><a href='/profil/<?= $company['username'] ?>'><?= $company['firstName'] ?> <?= $company['middleName'] ?> <?= $company['lastName'] ?></a></td>
 			<td><?= $company['dateUpdated'] ?></td>
 		</tr>

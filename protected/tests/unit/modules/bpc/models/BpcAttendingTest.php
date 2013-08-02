@@ -4,11 +4,11 @@ Yii::import('bpc.components.*');
 Yii::import('bpc.models.*');
 
 class BpcAttendingTest extends PHPUnit_Framework_TestCase {
-	
+
 	private function getUser() {
 		return Util::getUser();
 	}
-	
+
 	public function testGetActiveRecordsInYears() {
 		$u1 = $this->getUser();
 		$u1->setClassYear(1);
@@ -16,7 +16,7 @@ class BpcAttendingTest extends PHPUnit_Framework_TestCase {
 		$u2->setClassYear(1);
 		$u3 = $this->getUser();
 		$u3->setClassYear(2);
-		
+
 		$mock = new BpcAttendingMock();
 		$mock->list = array($u1, $u2, $u3);
 		$userInYearArray = $mock->getActiveRecordsInYearArray();
@@ -28,7 +28,7 @@ class BpcAttendingTest extends PHPUnit_Framework_TestCase {
 		$this->assertEmpty($userInYearArray[4]);
 		$this->assertEmpty($userInYearArray[5]);
 	}
-	
+
 
 }
 
@@ -38,6 +38,6 @@ class BpcAttendingMock extends BpcAttending {
 		return $this->list;
 	}
 	public function __construct() {
-		
+
 	}
 }

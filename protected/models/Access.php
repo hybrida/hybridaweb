@@ -45,7 +45,7 @@ class Access {
 				}
 				$andGroup[] = implode('/', $innerOrGroup);
 			}
-			$outerOrGroup[] = implode(' og ', $andGroup);			
+			$outerOrGroup[] = implode(' og ', $andGroup);
 		}
 		return $outerOrGroup;
 	}
@@ -74,7 +74,7 @@ class Access {
 				$spec = Specialization::model()->findByPk($value);
 				return $spec->name;
 			case 4:
-				$group = Groups::model()->findByPk($value);	
+				$group = Groups::model()->findByPk($value);
 				return $group->title;
 		}
 	}

@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 <? if ($isLoggedIn): ?>
 <?
 $this->layout = "//layouts/doubleColumn";
-$this->beginClip('sidebar'); 
+$this->beginClip('sidebar');
 ?>
 
 <div class="g-barTitle">Handlinger</div>
@@ -18,7 +18,7 @@ $this->beginClip('sidebar');
 		</li>
 		<? if ($canDelete): ?>
 			<li>
-				<?= CHtml::link('Slett album', '#', 
+				<?= CHtml::link('Slett album', '#',
 					array(
 						'submit'=>array('delete','id'=>$album->id),
 						'confirm'=>'Er du sikker på at du vil slette dette albumet?'))?>

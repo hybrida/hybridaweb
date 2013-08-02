@@ -12,7 +12,7 @@
  * @property string $content
  */
 class Event extends CActiveRecord {
-	
+
 	private $_access;
 
 	/**
@@ -138,7 +138,7 @@ class Event extends CActiveRecord {
 	private function setSignup() {
 		$this->signupModel = Signup::model()->findByPk($this->id);
 	}
-	
+
 	public function getGoogleCalendarButton() {
 		$news = News::model()->find('parentType = "event" AND parentId = ?',array(
 			$this->id,
@@ -158,15 +158,15 @@ class Event extends CActiveRecord {
 			"&sprop=http%3A%2F%2Fhybrida.no".
 			"&sprop=name:Hybrida\" target=\"_blank\">Legg til i kalender</a>";
 	}
-	
+
 	private function spaceToUrl($text) {
 		return str_replace(" ", "%20", $text);
 	}
-	
+
 	private function getUTC($timeString) {
 		return gmdate("Ymd\THis\Z",strtotime($timeString));
 	}
-	
+
 	public function saveBedpres($bpcID, $companyID='NULL') {
 		$eventCompany = EventCompany::model()->find("bpcID = ?", array(
 			$bpcID,
@@ -181,11 +181,11 @@ class Event extends CActiveRecord {
 		$eventCompany->eventID = $this->id;
 		$eventCompany->save();
 	}
-	
+
 	public function getBedpress() {
 		return EventCompany::model()->findByPk($this->id);
 	}
-	
+
 	public function isBpcEvent() {
 		if ($this->eventCompany) {
 			return $this->eventCompany->bpcID != null;

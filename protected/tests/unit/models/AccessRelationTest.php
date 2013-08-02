@@ -147,7 +147,7 @@ class AccessRelationTest extends CTestCase {
 		$news->save();
 		$access->replace();
 
-		// Hvis testen har kommet så langt 
+		// Hvis testen har kommet så langt
 		// betyr det at den ikke har kastet none exception
 		$this->assertTrue(true);
 	}

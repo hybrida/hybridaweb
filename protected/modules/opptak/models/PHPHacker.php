@@ -23,7 +23,7 @@ class PHPHacker extends CFormModel {
 	public $output = "";
 
 	function __construct() {
-		
+
 	}
 
 	public function runCode() {

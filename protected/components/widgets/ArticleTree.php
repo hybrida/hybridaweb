@@ -40,17 +40,17 @@ class ArticleTree extends CWidget {
 
 				$key = array_search($article, $articles);
 				unset($articles[$key]);
-                
-                if (app()->gatekeeper->hasPostAccess('article', $article->id)) {
-                    $branchOfArticleTree[] = new Node(
-                                    $article->id,
-                                    $article->parentId,
-                                    $article->title,
-                                    $article->shorttitle,
+
+				if (app()->gatekeeper->hasPostAccess('article', $article->id)) {
+					$branchOfArticleTree[] = new Node(
+									$article->id,
+									$article->parentId,
+									$article->title,
+									$article->shorttitle,
 									$article->weight,
-                                    self::treeBuilder($articles, $article->id)
-                    );
-                }
+									self::treeBuilder($articles, $article->id)
+					);
+				}
 			}
 		}
 		return $branchOfArticleTree;
@@ -78,14 +78,14 @@ class ArticleTree extends CWidget {
 	private function printArticleTree($relevantArticles) {
 		if (empty($relevantArticles))
 			return;
-		
+
 		echo "\n<div class='g-sidebarNav'><ul class=\"widget-articletree g-sidebarNav\">\n";
 		foreach ($relevantArticles[0] as $node) {
-                        if (!empty($node->children))
-                            echo "<li class = \"hasChildren\">";
-                        else
-                            echo "<li class = \"childless\">";
-                        
+						if (!empty($node->children))
+							echo "<li class = \"hasChildren\">";
+						else
+							echo "<li class = \"childless\">";
+
 			$this->printNode($node);
 			if ($this->containsChild($node, $relevantArticles[1])) {
 				foreach ($relevantArticles[1] as $children) {
@@ -103,7 +103,7 @@ class ArticleTree extends CWidget {
 			$title = $node->shorttitle;
 
 		if ($this->currentId != $node->id) {
-                    echo CHtml::link($title, array(
+					echo CHtml::link($title, array(
 				'/article/view',
 				'id' => $node->id,
 				'title' => $node->title,
@@ -112,7 +112,7 @@ class ArticleTree extends CWidget {
 			echo "<span class=\"current\">$title</span>";
 		}
 	}
-	
+
 	private function containsChild($parent, $possibleChildren) {
 		if (isset($possibleChildren[1]) && isset($possibleChildren[1][0])) {
 			foreach ($possibleChildren[1][0] as $child) {
@@ -140,7 +140,7 @@ class Node {
 		$this->setChildren($children);
 		$this->weight = $weight;
 	}
-	
+
 	public static function sortNodes(&$nodes) {
 		usort($nodes, array(__CLASS__, "compare"));
 	}

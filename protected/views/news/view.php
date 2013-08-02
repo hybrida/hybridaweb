@@ -49,11 +49,11 @@ if ($event && $hasAccessToEvent): ?>
 	<? $this->endClip() ?>
 
 	<? $this->beginClip('head-facebook') ?>
-	<meta property="fb:app_id"      content="202808609747231" />
-	<meta property="og:type"        content="lfhybrida:event" />
-	<meta property="og:url"         content="<?= Yii::app()->createAbsoluteUrl("/") . $news->viewUrl ?>" />
-	<meta property="og:title"       content="<?= $news->title ?>" />
-	<meta property="og:image"       content="<?= Yii::app()->createAbsoluteUrl("/") ?>/images/mastHeadLogo.png" />
+	<meta property="fb:app_id"	  content="202808609747231" />
+	<meta property="og:type"		content="lfhybrida:event" />
+	<meta property="og:url"		 content="<?= Yii::app()->createAbsoluteUrl("/") . $news->viewUrl ?>" />
+	<meta property="og:title"	   content="<?= $news->title ?>" />
+	<meta property="og:image"	   content="<?= Yii::app()->createAbsoluteUrl("/") ?>/images/mastHeadLogo.png" />
 	<? $this->endClip() ?>
 <? endif; ?>
 
@@ -66,11 +66,11 @@ $this->breadcrumbs = array(
 
 <div class="newsView">
 
-    <? if ($news->status == Status::DRAFT): ?>
-        <h1><?= $news->title ?> <span style="color:red">[UTKAST!]</span> </h1>
-    <? else: ?>
-        <h1><?= $news->title ?></h1>
-    <? endif ?>
+	<? if ($news->status == Status::DRAFT): ?>
+		<h1><?= $news->title ?> <span style="color:red">[UTKAST!]</span> </h1>
+	<? else: ?>
+		<h1><?= $news->title ?></h1>
+	<? endif ?>
 
 	<? if ($news->imageId): ?>
 		<div class="headerImage">

@@ -7,18 +7,18 @@
 	list-style: none;
 	background-color: #0062C4;
 }
-#nav li 
+#nav li
 {
-	float: left; 
+	float: left;
 }
-#nav li a 
+#nav li a
 {
 	display: block;
 	padding: 3px 70px;
 	text-decoration: none;
 	color: white;
 }
-#nav li a:hover 
+#nav li a:hover
 {
 	text-decoration: underline;
 }

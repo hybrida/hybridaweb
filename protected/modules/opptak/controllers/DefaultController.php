@@ -6,11 +6,11 @@ class DefaultController extends Controller
 	{
 		$this->renderPartial('index');
 	}
-	
+
 	public function actionTask2_super_top_secret_underground_abcdefghijklmnopqrsteuvwxyz_boom_qwfpgj() {
 		$hacker = new PHPHacker;
 		$answer = null;
-		
+
 		if (Yii::app()->request->isPostRequest) {
 			$hacker->php = $_POST['PHPHacker']['php'];
 			$answer = $hacker->runCode();
@@ -25,9 +25,9 @@ class DefaultController extends Controller
 			'output' => $hacker->output,
 			'hacks' => Inject::model()->findAll($condition),
 		));
-		
+
 	}
-	
+
 	public function actionTask3_super_secret() {
 		$inject = new Inject;
 		if (Yii::app()->request->isPostRequest) {
@@ -38,6 +38,6 @@ class DefaultController extends Controller
 		$this->render('task3', array(
 			'inject' => new Inject,
 		));
-		
+
 	}
 }

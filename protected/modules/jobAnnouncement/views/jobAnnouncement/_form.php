@@ -20,7 +20,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'companyId'); ?>
-            <?= $form->dropDownList($model, 'companyId', $companies) ?>
+			<?= $form->dropDownList($model, 'companyId', $companies) ?>
 		<?php echo $form->error($model,'companyId'); ?>
 	</div>
 

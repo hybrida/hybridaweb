@@ -103,7 +103,7 @@ SQL;
 		$this->assertEquals($content, $article2->getContent());
 		$this->assertEquals($phpFile, $article2->getPhpFile());
 	}
-	
+
 	public function test_setPhpFile_newArticleText() {
 		$article = $this->getArticle();
 		$article->setPhpFile("test");

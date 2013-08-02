@@ -5,7 +5,7 @@
 </h1>
 
 <h2>
-    Oppdaterte elementer 
+	Oppdaterte elementer
 	<? foreach ($relevantUpdatesInfo as $info) : ?>
 		(<?= $info['sum'] ?>)
 	<? endforeach ?>
@@ -25,7 +25,7 @@
 	</tr>
 	<tr>
 		<td>
-			Sist oppdatert: 
+			Sist oppdatert:
 		</td>
 		<td>
 			<? foreach ($lastUpdateInfo as $info) : ?>
@@ -37,28 +37,28 @@
 </p>
 
 <form name='deleteupdateform' method='post' action='deleteupdateform'>
-	<p> 
-    <table id='BK-updatedelements-selectiontable'>
-        <tr>
-            <td><input type='submit' name='emptylog' value='Fjern valgte elementer' /></td>
-            <td><h4><input type='checkbox' name='selectedupdates[]' value='deleteall' /> Velg alle</h4></td>
-        </tr>
-    </table>
+	<p>
+	<table id='BK-updatedelements-selectiontable'>
+		<tr>
+			<td><input type='submit' name='emptylog' value='Fjern valgte elementer' /></td>
+			<td><h4><input type='checkbox' name='selectedupdates[]' value='deleteall' /> Velg alle</h4></td>
+		</tr>
+	</table>
 </p>
 
 <p>
-    Fjerning av elementer sletter kun egne oppdateringer og ikke andre medlemmers.
+	Fjerning av elementer sletter kun egne oppdateringer og ikke andre medlemmers.
 </p>
 
 <p>
 <table id="BK-updatedelements-maintable">
-    <tr>
-        <th>Merk</th>
-        <th><?= CHtml::link('Tidspunkt', array('updates?orderby=dateAdded&order=' . $_SESSION['order'])) ?></th>
-        <th><?= CHtml::link('Beskrivelse', array('updates?orderby=description&order=' . $_SESSION['order'])) ?></th>
-        <th><?= CHtml::link('Oppdatert bedrift', array('updates?orderby=companyName&order=' . $_SESSION['order'])) ?></th>
-        <th><?= CHtml::link('Oppdatert av', array('updates?orderby=firstName&order=' . $_SESSION['order'])) ?></th>
-    </tr>
+	<tr>
+		<th>Merk</th>
+		<th><?= CHtml::link('Tidspunkt', array('updates?orderby=dateAdded&order=' . $_SESSION['order'])) ?></th>
+		<th><?= CHtml::link('Beskrivelse', array('updates?orderby=description&order=' . $_SESSION['order'])) ?></th>
+		<th><?= CHtml::link('Oppdatert bedrift', array('updates?orderby=companyName&order=' . $_SESSION['order'])) ?></th>
+		<th><?= CHtml::link('Oppdatert av', array('updates?orderby=firstName&order=' . $_SESSION['order'])) ?></th>
+	</tr>
 
 	<? foreach ($relevantUpdates as $update) : ?>
 		<tr>

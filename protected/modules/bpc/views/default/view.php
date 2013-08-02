@@ -25,7 +25,7 @@ function stotte() {	?>
 		border: 1px solid #888;
 		border-radius: 2px;
 		color: white;
-		
+
 	}
 	</style>
 
@@ -50,7 +50,7 @@ $this->beginClip('sidebar'); ?>
 		<legend>Admin</legend>
 		<?= CHtml::link("Rediger",array("/news/edit",'id' => $news->id), array(
 			'class' => 'g-button')); ?>
-        <?= CHtml::link("Koble til bedrift",array("edit",'id' => $event->id), array(
+		<?= CHtml::link("Koble til bedrift",array("edit",'id' => $event->id), array(
 			'class' => 'g-button')); ?>
 	</fieldset>
 <? endif; ?>
@@ -92,12 +92,12 @@ $this->beginClip('sidebar'); ?>
 			<? if ($canSupportFieldtrip): ?>
 				<? stotte() ?>
 			<? endif ?>
-		    <input type="submit" class='g-button' value="Meld meg på venteliste" />
+			<input type="submit" class='g-button' value="Meld meg på venteliste" />
 		<? elseif ($canUnAttend): ?>
 			<input type="submit" class='g-button' value="Meld meg av" />
 		<? endif ?>
 	</form>
-        
+
 <h1> Påmeldte: </h1>
 <? if (!user()->isGuest): ?>
 	<? if (user()->cardHash == ''): ?>
@@ -119,8 +119,8 @@ $this->beginClip('sidebar'); ?>
 			Du må logge inn for å se listen over påmeldte
 		</p>
 <? endif ?>
-		
-		
+
+
 	<? $this->widget('comment.components.CommentWidget', array(
 		'type' => 'bedpres',
 		'id'=> $event->id,

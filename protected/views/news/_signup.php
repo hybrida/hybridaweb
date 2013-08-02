@@ -12,10 +12,10 @@
 	<? elseif (!$isAttending && !$hasAccessToSignup): ?>
 		<input type ="button" class='g-button' disabled="disabled" value ="Meld meg på"</input>
 		<p>Du har ikke tilgang til denne hendelsen</p>
-		
+
 	<? endif ?>
 <? endif ?>
-		
+
 <? if ($hasAccessToSignup): ?>
 		<h1> Påmeldte: (<?= $signup->getRegisteredAttendingCount() ?>)</h1>
 		<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>

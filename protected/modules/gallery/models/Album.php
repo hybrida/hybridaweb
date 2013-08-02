@@ -53,7 +53,7 @@ class Album extends CActiveRecord
 	{
 		$id = $this->id;
 		$this->images = array();
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$sql = "SELECT image_id
 				FROM album_image
 				WHERE album_id = :album_id
@@ -87,47 +87,47 @@ class Album extends CActiveRecord
 	 public function addAlbumImageRelation($pid)
 	 {
 		$id = $this->id;
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$sql = "INSERT INTO album_image (album_id,  image_id) VALUES (:album_id, :image_id)";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":album_id", $this->getAttribute("id"));
 		$command = $command->bindParam(":image_id", $pid);
-		$command->execute(); 
+		$command->execute();
 	 }
 
 	 public function delAlbumRelations()
 	 {
 		$id = $this->id;
-        $connection = Yii::app()->db;
-		$sql = "UPDATE album_image SET status = :disabled 
+		$connection = Yii::app()->db;
+		$sql = "UPDATE album_image SET status = :disabled
 				WHERE album_id = :album_id";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":album_id", $id);
 		$command = $command->bindParam(":disabled", $this->statusDisabled);
-		$command->execute(); 
+		$command->execute();
 	 }
 	 public function delAlbum()
 	 {
 		$id = $this->id;
-        $connection = Yii::app()->db;
-		$sql = "UPDATE album SET status = :disabled 
+		$connection = Yii::app()->db;
+		$sql = "UPDATE album SET status = :disabled
 				WHERE id = :album_id";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":album_id", $id);
 		$command = $command->bindParam(":disabled", $this->statusDisabled);
-		$command->execute(); 
+		$command->execute();
 	 }
 	 public function delAlbumImageRelation($pid)
 	 {
 		$id = $this->id;
-        $connection = Yii::app()->db;
-		$sql = "UPDATE album_image SET status = :disabled 
+		$connection = Yii::app()->db;
+		$sql = "UPDATE album_image SET status = :disabled
 				WHERE album_id = :album_id AND image_id = :image_id";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":album_id", $id);
 		$command = $command->bindParam(":image_id", $pid);
 		$command = $command->bindParam(":disabled", $this->statusDisabled);
-		$command->execute(); 
+		$command->execute();
 	 }
 	public static function model($className=__CLASS__)
 	{

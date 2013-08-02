@@ -6,27 +6,27 @@ class OrderHelper
 	private $statusDeleted = Status::DELETED;
 
 	public function getUserNameByID($id) {
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$sql = "SELECT firstName, lastName FROM user WHERE id = :id";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":id", $id);
 		$data = $command->queryRow(); 
-        return $data;
+		return $data;
 	}
 
 	public function getOrders()
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$sql = "SELECT * FROM kilt_order WHERE status = :enabled";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":enabled", $this->statusPublished);
 		$data = $command->queryAll(); 
-        return $data;
+		return $data;
 	}
 
 	public function deleteOrder($id)
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$sql = "UPDATE kilt_order
 				SET status = :deleted
 				WHERE id = :id";
@@ -38,16 +38,16 @@ class OrderHelper
 
 	public function updateOrder($id, $qnty)
 	{
-        $connection = Yii::app()->db;
-        $data = array(
-            ':id' => $id,
-            ':product_quantity' => $qnty,
-        );
-        $sql = "UPDATE kilt_order
+		$connection = Yii::app()->db;
+		$data = array(
+			':id' => $id,
+			':product_quantity' => $qnty,
+		);
+		$sql = "UPDATE kilt_order
 				SET product_quantity = :product_quantity
 		  		WHERE id = :id";
 		$command = $connection->createCommand($sql);
-        $command->execute($data);
+		$command->execute($data);
 	}
 
 	public function addOrder($pid, $tid, $qnty, $size)
@@ -66,20 +66,20 @@ class OrderHelper
 			}
 		}
 
-        $connection = Yii::app()->db;
-        $data = array(
-            ':product_id' => $pid,
-            ':product_size' => $size,
-            ':product_quantity' => $qnty,
+		$connection = Yii::app()->db;
+		$data = array(
+			':product_id' => $pid,
+			':product_size' => $size,
+			':product_quantity' => $qnty,
 			':user_id' => Yii::app()->user->id,
 			':time_id' => $tid,
 			':enabled' => $this->statusPublished,
-        );
-        $sql = "INSERT INTO kilt_order
+		);
+		$sql = "INSERT INTO kilt_order
 			 ( user_id,  product_id,  product_quantity,  product_size,  time_id,  status) 
 	  VALUES (:user_id, :product_id, :product_quantity, :product_size, :time_id, :enabled)";
 		$command = $connection->createCommand($sql);
-        $command->execute($data);
+		$command->execute($data);
 	}
 
 	public function cmpOrder($a, $b)
@@ -92,7 +92,7 @@ class OrderHelper
 
 	public function getUserOrders()
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$userId = Yii::app()->user->id;
 		$sql = "SELECT * FROM kilt_order WHERE user_id = :user_id AND status = :enabled";
 		$command = $connection->createCommand($sql);
@@ -112,21 +112,21 @@ class OrderHelper
 		foreach($timeOrders as &$to) {
 			usort($to, array("OrderHelper", "cmpOrder"));
 		}
-        return $timeOrders;
+		return $timeOrders;
 	}
 
 	public function setOrderRecv($id, $value)
 	{
-        $connection = Yii::app()->db;
-        $data = array(
-            ':id' => $id,
-            ':confirmed' => $value,
-        );
-        $sql = "UPDATE kilt_order
-			    SET confirmed = :confirmed
+		$connection = Yii::app()->db;
+		$data = array(
+			':id' => $id,
+			':confirmed' => $value,
+		);
+		$sql = "UPDATE kilt_order
+				SET confirmed = :confirmed
 		  		WHERE id = :id";
 		$command = $connection->createCommand($sql);
-        $command->execute($data);
+		$command->execute($data);
 	}
 }
 

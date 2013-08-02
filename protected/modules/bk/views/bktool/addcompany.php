@@ -7,61 +7,61 @@
 <h2>Legg til bedrift</h2>
 
 <p>
-    Fyll inn informasjon knyttet til bedriften. Felter merket med (*) er obligatoriske.
+	Fyll inn informasjon knyttet til bedriften. Felter merket med (*) er obligatoriske.
 </p>
 
 <p>
 
 <form name="addcompanyform" method="post" action="addcompanyform" enctype="multipart/form-data">
-    <div id="BK-add-container">
+	<div id="BK-add-container">
 		<table id="BK-add-table">
-            <tr>
+			<tr>
 				<th>Bedriftsnavn*</th>
 				<th>
-                    <input type='text' name='addedcompany' maxlength="255" /> Characters (255)<br/>
+					<input type='text' name='addedcompany' maxlength="255" /> Characters (255)<br/>
 			<div id="BK-add-errormessage"><i><u><?= $errordata['addedcompanyerror'] ?></u></i></div>
 			</th>
-            </tr>
-            <tr>
+			</tr>
+			<tr>
 				<th>Mailadresse</th>
 				<th><input name="mail" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
-            </tr>
-            <tr>
+			</tr>
+			<tr>
 				<th>Telefonnummer</th>
 				<th>
-                    <input name='phonenumber' type="text" maxlength="11" class="textfield" /> Integer > 0 (11)<br/>
+					<input name='phonenumber' type="text" maxlength="11" class="textfield" /> Integer > 0 (11)<br/>
 			<div id="BK-add-errormessage"><i><u><?= $errordata['phonenumbererror'] ?></u></i></div>
-			</th>                
-            </tr>
-            <tr>
+			</th>
+			</tr>
+			<tr>
 				<th>Adresse</th>
 				<th><input name="address" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
-            </tr>
-            <tr>
-                <th>Postboks</th>
+			</tr>
+			<tr>
+				<th>Postboks</th>
 				<th><input name="postbox" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
-            </tr>
-            <tr>
+			</tr>
+			<tr>
 				<th>Postnummer</th>
 				<th>
-                    <input name='postnumber' type="text" maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
+					<input name='postnumber' type="text" maxlength="11" class="textfield"/> Integer > 0 (11)<br/>
 			<div id="BK-add-errormessage"><i><u><?= $errordata['postnumbererror'] ?></u></i></div>
 			</th>
-            </tr>
-            <tr>
+			</tr>
+			<tr>
 				<th>Poststed</th>
 				<th><input name="postplace" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
-            </tr>
-            <tr>
-                <th>Hjemmeside</th>
-                <th><input name="homepage" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
-            </tr>
-        </table>
-    </div>
+			</tr>
+			<tr>
+				<th>Hjemmeside</th>
+				<th><input name="homepage" type="text" class="textfield" maxlength="255" /> Characters (255)</th>
+			</tr>
+		</table>
+	</div>
 
-    <br/>
-    <div id="BK-add-container">
-        <table id="BK-add-table">
+	<br/>
+	<div id="BK-add-container">
+		<table id="BK-add-table">
 			<tr>
 				<th>
 					Logo
@@ -70,81 +70,81 @@
 					<?= CHtml::fileField('logo', 'logo', array('id' => 'logo')); ?>
 				</th>
 			</tr>
-        </table>
-    </div>
+		</table>
+	</div>
 
-    <br/>
-    <div id="BK-add-container">
-        <table id="BK-add-table">
-            <tr>
-                <th>Undergruppe av</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
-                <th>
-                    <select name="parentcompanyid">
+	<br/>
+	<div id="BK-add-container">
+		<table id="BK-add-table">
+			<tr>
+				<th>Undergruppe av</br>(Man kan kun velge bedrifter<br/>som allerede finnes i databasen)</th>
+				<th>
+					<select name="parentcompanyid">
 						<option value="0">Ingen valgt</option>
 						<? foreach ($companiesList as $company) : ?>
 							<option value="<?= $company['companyID'] ?>"><?= $company['companyName'] ?></option>
 						<? endforeach ?>
-                    </select>
+					</select>
 			<br/><div id="BK-add-errormessage"><i><u><?= $errordata['parentcompanyerror'] ?></u></i></div>
 			</th>
-            </tr>
-        </table>
-    </div>
+			</tr>
+		</table>
+	</div>
 
-    <br/>
-    <div id="BK-add-container">
-        <table id="BK-add-table">
-            <tr>
-                <th>Medlem av <?= $this->industryAssociation ?></th>
-                <th>
-                    <input type="checkbox" name="membership[]" value="isMember"/>
-                </th>
-            </tr>
-            <tr>
-                <th>Relevans for <?= $this->industryAssociation ?></th>
-                <th>
-                    <select name="relevance" size="3">	
-                        <option value="Høy" style="color:#00688B;">
-                            Høy
-                        </option>
-						<option value="Middels" style="color:#50A6C2;" selected>
-                            Middels
-						</option>				
-						<option value="Lav" style="color:#B2DFEE;">
-                            Lav
-						</option>					
-                    </select>
+	<br/>
+	<div id="BK-add-container">
+		<table id="BK-add-table">
+			<tr>
+				<th>Medlem av <?= $this->industryAssociation ?></th>
+				<th>
+					<input type="checkbox" name="membership[]" value="isMember"/>
 				</th>
-            </tr>
-            <tr>
-                <th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
+			</tr>
+			<tr>
+				<th>Relevans for <?= $this->industryAssociation ?></th>
+				<th>
+					<select name="relevance" size="3">
+						<option value="Høy" style="color:#00688B;">
+							Høy
+						</option>
+						<option value="Middels" style="color:#50A6C2;" selected>
+							Middels
+						</option>
+						<option value="Lav" style="color:#B2DFEE;">
+							Lav
+						</option>
+					</select>
+				</th>
+			</tr>
+			<tr>
+				<th>Sist kontaktet angående <?= $this->industryAssociation ?></th>
 				<th>
 					<input name="datecontacted" type="text" class="textfield" maxlength="10" /> (YYYY-MM-DD)
 			<div id="BK-add-errormessage"><i><u><?= $errordata['datecontactederror'] ?></u></i></div>
 			</th>
-            </tr>
-        </table>
-    </div>
+			</tr>
+		</table>
+	</div>
 
-    <br/>
-    <div id="BK-add-container">
-        <table id="BK-add-table">
-            <tr>
+	<br/>
+	<div id="BK-add-container">
+		<table id="BK-add-table">
+			<tr>
 				<th>Relevant for studieretning</th>
 				<th>
 					<? foreach ($specializationNames as $name) : ?>
 						<input type="checkbox" name="specializations[]" value="<?= $name['id'] ?>"/><?= $name['name'] ?><br/>
-					<? endforeach ?> 
+					<? endforeach ?>
 				</th>
-            </tr>
-        </table>
-    </div>
+			</tr>
+		</table>
+	</div>
 
-    <br/>
-    <div id="BK-add-container">
-        <table id="BK-add-table">
-            <tr>
-                <th>Kontaktet av</br>(Man kan kun velge personer som er aktive medlemmer av gruppen til <?= $this->title ?>)</th>
+	<br/>
+	<div id="BK-add-container">
+		<table id="BK-add-table">
+			<tr>
+				<th>Kontaktet av</br>(Man kan kun velge personer som er aktive medlemmer av gruppen til <?= $this->title ?>)</th>
 				<th>
 					<? foreach ($membersSum as $info) : ?>
 						<select name="contactor" size="<?= $info['sum'] ?>">
@@ -153,36 +153,36 @@
 								<option value="<?= $member['id'] ?>">
 									<?= $member['firstName'] ?> <?= $member['middleName'] ?> <?= $member['lastName'] ?>
 								</option>
-							<? endforeach ?> 
+							<? endforeach ?>
 
 						<? endforeach ?>
 					</select>
-                </th>
-            </tr>
-        </table>
-    </div>
-
-    <br/>
-    <div id="BK-add-container">
-        <table id="BK-add-table">
-            <tr>
-                <th>Status</br>("Ikke kontaktet" er standardvalg i databasen)</th>
-                <th>
-                    <select name="status" size="4">	
-                        <option value="Aktuell senere" style="color:#FF9900;">Aktuell senere</option>
-						<option value="Blir kontaktet" style="color:#009900;">Blir kontaktet</option>				
-						<option value="Ikke kontaktet" selected>Ikke kontaktet</option>	
-						<option value="Uaktuell" style="color:#CC0000;">Uaktuell</option>					
-                    </select>
 				</th>
-            </tr>
-        </table>
-        </table>
-    </div>
+			</tr>
+		</table>
+	</div>
 
-    <br/>
-    <p id="BK-add-button" align="center" >
-        <input type="submit" name="Submit" value="Legg til bedrift" />
-    </p>
+	<br/>
+	<div id="BK-add-container">
+		<table id="BK-add-table">
+			<tr>
+				<th>Status</br>("Ikke kontaktet" er standardvalg i databasen)</th>
+				<th>
+					<select name="status" size="4">
+						<option value="Aktuell senere" style="color:#FF9900;">Aktuell senere</option>
+						<option value="Blir kontaktet" style="color:#009900;">Blir kontaktet</option>
+						<option value="Ikke kontaktet" selected>Ikke kontaktet</option>
+						<option value="Uaktuell" style="color:#CC0000;">Uaktuell</option>
+					</select>
+				</th>
+			</tr>
+		</table>
+		</table>
+	</div>
+
+	<br/>
+	<p id="BK-add-button" align="center" >
+		<input type="submit" name="Submit" value="Legg til bedrift" />
+	</p>
 </form>
 </p>

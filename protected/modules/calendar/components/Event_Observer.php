@@ -2,9 +2,9 @@
 /**
  * Kohana event observer. Uses the SPL observer pattern.
  *
- * @author     Kohana Team, Corey Worrell
+ * @author	 Kohana Team, Corey Worrell
  * @copyright  (c) 2007-2008 Kohana Team
- * @version    1.0
+ * @version	1.0
  */
 abstract class Event_Observer {
 

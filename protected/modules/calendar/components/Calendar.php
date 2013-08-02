@@ -3,9 +3,9 @@
 /**
  * Calendar creation class.
  *
- * @author     Kohana Team, Corey Worrell
+ * @author	 Kohana Team, Corey Worrell
  * @copyright  (c) 2007-2008 Kohana Team
- * @version    1.0
+ * @version	1.0
  */
 class Calendar extends Event_Subject {
 
@@ -58,29 +58,29 @@ class Calendar extends Event_Subject {
 			return $this->$key;
 		}
 	}
-    
-    /**
-     * Returner link til forrige eller neste måned for dager som ikke er i denne
-     *  måneden. Returnerer bare dagen tilbake om den er i den nåværende måneden
-     * @param type $current Boolean om en er i denne måneden eller ikke
-     * @param type $number Dagen i måneden.
-     * @return type
-     */
-    public function getOutputFor($current, $number) {
-        if($current) {
-            return $number;
-        }
-        elseif(!$current && $number < 10) {
-            return CHtml::link("{$number} >", "#", array(
-                'class' => 'calendar-next-month-button'
-                ));
-        }
-        elseif(!$current && $number > 20) {
-            return CHtml::link("< {$number}", "#", array(
-                'class' => 'calendar-previous-month-button'
-                ));
-        }
-    }
+
+	/**
+	 * Returner link til forrige eller neste måned for dager som ikke er i denne
+	 *  måneden. Returnerer bare dagen tilbake om den er i den nåværende måneden
+	 * @param type $current Boolean om en er i denne måneden eller ikke
+	 * @param type $number Dagen i måneden.
+	 * @return type
+	 */
+	public function getOutputFor($current, $number) {
+		if($current) {
+			return $number;
+		}
+		elseif(!$current && $number < 10) {
+			return CHtml::link("{$number} >", "#", array(
+				'class' => 'calendar-next-month-button'
+				));
+		}
+		elseif(!$current && $number > 20) {
+			return CHtml::link("< {$number}", "#", array(
+				'class' => 'calendar-previous-month-button'
+				));
+		}
+	}
 
 	/**
 	 * Returns an array of the names of the days, using the current locale.
@@ -210,7 +210,7 @@ class Calendar extends Event_Subject {
 
 		return $month;
 	}
-	
+
 	public function getWeekNumber($weekNumberInMonth) {
 		$firstDayOfMonth = mktime(0,0,0,$this->month,1,$this->year);
 		$weekInSeconds = 60*60*24*7;
@@ -308,8 +308,8 @@ class Calendar extends Event_Subject {
 	 * Get the previous month name
 	 *
 	 * @param   int/bool   Length of month name. Or 'TRUE' for full name, '0' or 'FALSE' for just '$before'
-	 * @param   string     String to show before the month name
-	 * @return  string     Month name
+	 * @param   string	 String to show before the month name
+	 * @return  string	 Month name
 	 */
 	public function prev_month($length = TRUE, $before = '&lsaquo;&nbsp;') {
 		$months = Html::getLongMonthNames();
@@ -325,7 +325,7 @@ class Calendar extends Event_Subject {
 	 * Get the current month name.
 	 *
 	 * @param   int/bool   Length of month name. Or 'TRUE' for full name.
-	 * @return  string     Current month name
+	 * @return  string	 Current month name
 	 */
 	public function month($length = TRUE) {
 		$months = Html::getLongMonthNames();
@@ -342,7 +342,7 @@ class Calendar extends Event_Subject {
 
 		return $month;
 	}
-	
+
 	public function year() {
 		return $this->year;
 	}
@@ -352,8 +352,8 @@ class Calendar extends Event_Subject {
 	 * Get the next month name
 	 *
 	 * @param   int/bool   Length of month name. Or 'TRUE' for full name, '0' or 'FALSE' for just '$after'
-	 * @param   string     String to show after the month name
-	 * @return  string     Month name
+	 * @param   string	 String to show after the month name
+	 * @return  string	 Month name
 	 */
 	public function next_month($length = TRUE, $after = '&nbsp;&rsaquo;') {
 		$months = Html::getLongMonthNames();
@@ -423,15 +423,15 @@ class Calendar extends Event_Subject {
 	 * Merges the current GET parameters with an array of new or overloaded
 	 * parameters and returns the resulting query string.
 	 *
-	 *     // Returns "?sort=title&limit=10" combined with any existing GET values
-	 *     $query = URL::query(array('sort' => 'title', 'limit' => 10));
+	 *	 // Returns "?sort=title&limit=10" combined with any existing GET values
+	 *	 $query = URL::query(array('sort' => 'title', 'limit' => 10));
 	 *
 	 * Typically you would use this when you are sorting query results,
 	 * or something similar.
 	 *
 	 * [!!] Parameters with a NULL value are left out.
 	 *
-	 * @param   array    array of GET parameters
+	 * @param   array	array of GET parameters
 	 * @param   boolean  include current request GET parameters
 	 * @return  string
 	 */

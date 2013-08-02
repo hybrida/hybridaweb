@@ -1,15 +1,15 @@
 <?php $this->renderPartial("menu", $menu); ?>
 
 <?
-    /**
-     * Side for google calendar
-     *
-     * @author frans
-     */
+	/**
+	 * Side for google calendar
+	 *
+	 * @author frans
+	 */
 ?>
 
 <h1>
-    <?= $title ?>
+	<?= $title ?>
 </h1>
 
 <h2>Google Calendar</h2>

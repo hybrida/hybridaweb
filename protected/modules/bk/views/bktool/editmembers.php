@@ -5,24 +5,24 @@
 
 <h2>Administrer medlemmer</h2>
 <p>
-    Sletting av et medlem flytter medlemmet til listen over tidligere medlemmer og setter status til alle bedrifter som medlemmet kontakter til 'Aktuell senere'.
-    Alle oppdateringer knyttet til medlemmet blir slettet. Tidligere medlemmer har også tilgang til BK-modulen.
+	Sletting av et medlem flytter medlemmet til listen over tidligere medlemmer og setter status til alle bedrifter som medlemmet kontakter til 'Aktuell senere'.
+	Alle oppdateringer knyttet til medlemmet blir slettet. Tidligere medlemmer har også tilgang til BK-modulen.
 </p>
 
 <form name='editmembersform' method='post' action='editmembersform'>
-    <br/>
-    <h3>Legg til nye medlemmer</h3>
-    <table id="BK-index-member-supporttable">
-        <tr>
-            <td>
-                <table id="BK-index-addmember-table">
-                    <tr>
-                        <th>Bruker</th>
-                        <th>Stilling</th>
-                    </tr>
+	<br/>
+	<h3>Legg til nye medlemmer</h3>
+	<table id="BK-index-member-supporttable">
+		<tr>
+			<td>
+				<table id="BK-index-addmember-table">
+					<tr>
+						<th>Bruker</th>
+						<th>Stilling</th>
+					</tr>
 					<? for ($i = 0; $i < 4; $i += 1) { ?>
 						<tr>
-							<td>                        
+							<td>
 								<select name="addedmembers[]">
 									<option value="0">Ingen valgt</option>
 									<? foreach ($userList as $user) : ?>
@@ -32,14 +32,14 @@
 							</td>
 							<td><input name="addedcomissions[]" type="text" class="textfield" maxlength="50" /></td>
 						</tr>
-					<? } ?>  
-                </table>
-            </td>
-            <td id="BK-index-buttoncell">
-                <input type="submit" name="Submit" value="Legg til alle endringer" />
-            </td>
-        </tr>
-    </table>
+					<? } ?>
+				</table>
+			</td>
+			<td id="BK-index-buttoncell">
+				<input type="submit" name="Submit" value="Legg til alle endringer" />
+			</td>
+		</tr>
+	</table>
 
 	<? if (isset($errordata)) { ?>
 		<? foreach ($errordata as $error) : ?>
@@ -47,11 +47,11 @@
 		<? endforeach ?>
 	<? } ?>
 
-    <br/>
+	<br/>
 	<? foreach ($membersSum as $sum) : ?>
 		<h3>Aktive medlemmer (<?= $sum['sum'] ?>):</h3>
 	<? endforeach; ?>
-    <table id="BK-index-member-table">
+	<table id="BK-index-member-table">
 		<tr>
 			<th></th>
 			<th><?= CHtml::link('Navn', array('editmembers?orderby=firstName&order=' . $_SESSION['order'])) ?></th>
@@ -72,7 +72,7 @@
 				<td id="BK-index-checkboxcell"><input type='checkbox' name='selectedmembers[]' value='<?= $member['id'] ?>' /></td>
 			</tr>
 		<? endforeach; ?>
-    </table>
+	</table>
 </form>
 
 <br/>

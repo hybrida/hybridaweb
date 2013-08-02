@@ -24,7 +24,7 @@ class NewsEventFormTest extends CTestCase {
 	private function getNews() {
 		return Util::getNews();
 	}
-	
+
 	private function getNewEvent() {
 		return Util::getNewEvent();
 	}

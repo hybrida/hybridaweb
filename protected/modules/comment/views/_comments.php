@@ -21,10 +21,10 @@
 						class="g-deleteButton"
 						onclick="deleteComment(<?= $model->id ?>)"
 							>x</button>
-                    <div class="c-date">
+					<div class="c-date">
 				<? else: ?>
-                    <div class="c-date c-date-without-delete">
-                <? endif; ?>
+					<div class="c-date c-date-without-delete">
+				<? endif; ?>
 						<?= Html::dateToString($model->timestamp, 'mediumlong') ?>
 					</div>
 			</div>

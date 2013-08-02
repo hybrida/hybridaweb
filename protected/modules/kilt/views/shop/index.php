@@ -15,7 +15,7 @@
 	  <td colspan=4  class="shopTitle">
 		 <?= $cat; ?>
 	  </td>
-   </tr>	
+   </tr>
    <tr>
    <?  foreach($products as $p): ?>
 	  <? if ($counter % 4 == 0 && $counter != 0): ?>
@@ -55,7 +55,7 @@
 			<?= CHtml::dropDownList('size['.$id.']', $psize, $sizeNames); ?>
 		 <? endif; ?>
 
-		 <? if (isset($errors[$p['id']])): ?> 
+		 <? if (isset($errors[$p['id']])): ?>
 			<font class="shopError">
 			<? foreach($errors[$p['id']] as $e): ?>
 			   <br>
@@ -66,17 +66,17 @@
 	  </td>
    <? endforeach ?>
    </tr>
-<? endforeach ?>	
+<? endforeach ?>
    <tr>
 	  <td colspan=4  class="shopTitle">
 		 Annet
 	  </td>
-   </tr>	
+   </tr>
    <tr>
 	  <td colspan=4  class="shopTitle">
 		 <?= CHtml::textArea('comment', $comment); ?>
 	  </td>
-   </tr>	
+   </tr>
    <tr>
 	  <td colspan=4  class="shopContent">
 		 <?= CHtml::submitButton('Bestill', array(' id'=>'submit', 'name' =>'submit', 'disabled' => !$isShopOpen, 'class' => 'shopButton',)); ?>

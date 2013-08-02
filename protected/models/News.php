@@ -72,8 +72,8 @@ class News extends CActiveRecord {
 			'imageId' => 'Image',
 			'content' => 'Content',
 			'ingress' => 'Ingress',
-            'status' => 'Status',
-            'weight' => 'Weight',
+			'status' => 'Status',
+			'weight' => 'Weight',
 			'authorId' => 'Author',
 			'timestamp' => 'Timestamp',
 		);
@@ -154,21 +154,21 @@ class News extends CActiveRecord {
 		return $this->parentId;
 	}
 
-    public function getStatusName() {
-        switch ($this->status) {
-            case Status::PUBLISHED:
-                return "Published";
-                break;
-            case Status::DRAFT:
-                return "Draft";
-                break;
-            case Status::DELETED:
-                return "Deleted";
-                break;
-            default:
-                break;
-        }
-    }
+	public function getStatusName() {
+		switch ($this->status) {
+			case Status::PUBLISHED:
+				return "Published";
+				break;
+			case Status::DRAFT:
+				return "Draft";
+				break;
+			case Status::DELETED:
+				return "Deleted";
+				break;
+			default:
+				break;
+		}
+	}
 
 	public function getAuthorName() {
 		$authorId = User::model()->findByPk($this->authorId);

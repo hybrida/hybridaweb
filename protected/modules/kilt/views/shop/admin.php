@@ -44,10 +44,10 @@
 	</tr>
 	<? endforeach; ?>
 	<tr>
-		<td class="adminContent"> 
+		<td class="adminContent">
 			<?= CHtml::TextField('start', 'yyyy-mm-dd', array( 'size' => 7)); ?>
 		</td>
-		<td class="adminContent"> 
+		<td class="adminContent">
 			<?= CHtml::TextField('end', 'yyyy-mm-dd', array( 'size' => 7)); ?>
 		</td>
 		<td class="adminContent"> Ikke opprettet </td>
@@ -85,13 +85,13 @@
 					<td class="adminContent">
 						 <?= $products[$id]['type'] . ": " . $products[$id]['model']; ?>
 					</td>
-					<td class="adminContent"> 
+					<td class="adminContent">
 						<?= $sizes[$s]; ?>
 					</td>
-					<td class="adminContent"> 
+					<td class="adminContent">
 						<?= $o['qnty']; ?>
 					</td>
-					<td class="adminContent"> 
+					<td class="adminContent">
 						<? if (!$active): ?>
 							 <?= $o['recv'];?>
 						<? endif; ?>
@@ -109,7 +109,7 @@
 	$userDropDown[-1] = "None";
 ?>
 
-<? 
+<?
 	foreach($userOrders as $id => $timeOrder)
 		if (isset($timeOrder[$showTimeID]))
 			if (!$active)
@@ -140,7 +140,7 @@
 			<td class="adminTitle"> Produkt </td>
 			<td class="adminTitle"> Størrelse </td>
 			<td class="adminTitle"> Antall </td>
-			<td class="adminTitle"> 
+			<td class="adminTitle">
 				<? if (!$active): ?>
 					 Hentet
 				<? endif; ?>
@@ -150,20 +150,20 @@
 			<? foreach($size as $s => $o): ?>
 				<?
 					$qnty = $o['qnty'];
-					$recv = $o['recv']; 
-					$oid = $o['id']; 
+					$recv = $o['recv'];
+					$oid = $o['id'];
 				?>
 				<tr class="<? if (!$active): ?><?= ($recv) ? "green" : "red"; ?><? endif; ?>">
 					<td class="adminContent">
 						 <?= $products[$id]['type'] . ": " . $products[$id]['model']; ?>
 					</td>
-					<td class="adminContent"> 
+					<td class="adminContent">
 						<?= $sizes[$s]; ?>
 					</td>
 					<td class="adminContent">
 						<?= $qnty; ?>
 					</td>
-					<td class="adminContent"> 
+					<td class="adminContent">
 						<?  if (!$active): ?>
 							<?= CHtml::hiddenField('recv['.$oid.']','0');?>
 							<?= CHtml::CheckBox('recv['.$oid.']',$recv, array ( 'value'=>'1',));?>
@@ -213,7 +213,7 @@
 				<td width="25%">
 					<?= $name; ?>
 				</td>
-				<td width=75%> 
+				<td width=75%>
 					<?= $c; ?>
 				</td>
 			</tr>

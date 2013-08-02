@@ -18,10 +18,10 @@ class TestLib {
 	}
 
 	public static function deleteDummyDataFromNews() {
-		$sql = "delete from news where 
-				timestamp is null 
-				or title is null 
-				or authorId is null 
+		$sql = "delete from news where
+				timestamp is null
+				or title is null
+				or authorId is null
 				or content is null
 				or title = 'title'
 				or title = 'dummy'
@@ -35,8 +35,8 @@ class TestLib {
 	}
 
 	public static function deleteDummyDataFromArticle() {
-		$sql = "delete from article where 
-				title is null 
+		$sql = "delete from article where
+				title is null
 				or content is null
 				or title = 'title'
 				or title = 'dummy'

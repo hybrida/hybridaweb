@@ -40,11 +40,11 @@
 						}
 						?>
 						<td class="day <?php echo implode(' ', $classes) ?>">
-                            <? $span_class = $current ? "" : "notThisMonth"?>
+							<? $span_class = $current ? "" : "notThisMonth"?>
 							<span class="date <?= $span_class ?>"
-                                  title="<?php echo implode(' / ', $title) ?>">
-                                <?= $calendar->getOutputFor($current, $number); ?>
-                            </span>
+								  title="<?php echo implode(' / ', $title) ?>">
+								<?= $calendar->getOutputFor($current, $number); ?>
+							</span>
 							<div class="day-content">
 							<? if (!empty($output)): ?>
 								<ul class="output">
@@ -70,7 +70,7 @@
 	$(function() {
 		var nextMonthButton = $(".calendar-next-month-button");
 		var prevMonthButton = $(".calendar-previous-month-button");
-		
+
 		var nextMonthButtonUrl = "<?=$this->createUrl('/calendar/default/ajax', array(
 				'year' => $this->getNextMonthsYear(),
 				'month' => $this->getNextMonth()))?>";
@@ -78,13 +78,13 @@
 				'year' => $this->getPrevMonthsYear(),
 				'month' => $this->getPrevMonth()))?>";
 		var content = $(".calendarWrap");
-				
-				
+
+
 
 		function update(url) {
 			content.load(url)
 		}
-		
+
 		nextMonthButton.click(function () {
 			update(nextMonthButtonUrl)
 		});

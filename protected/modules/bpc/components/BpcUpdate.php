@@ -124,7 +124,7 @@ class BpcUpdate {
 		$news->authorId = null;
 		$news->save();
 	}
-	
+
 	private function getNewsTitle($bpcTitle) {
 		$title =  'Bedpres: ' . $bpcTitle;
 		return substr($title,0, 50);

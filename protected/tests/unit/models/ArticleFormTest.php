@@ -31,7 +31,7 @@ class ArticleFormTest extends CTestCase {
 		$form = $this->getForm($article);
 		$this->assertEquals("styret", $form->phpFile);
 	}
-	
+
 	public function test_fieldsAreSetOnInput_phpFile() {
 		$input = array(
 			'phpFile' => 'styret2',
@@ -41,7 +41,7 @@ class ArticleFormTest extends CTestCase {
 		$form->setAttributes($input);
 		$this->assertEquals("styret2", $form->phpFile);
 	}
-	
+
 
 	public function test_fieldsAreSetOnInput() {
 		$info = "sigurd";
@@ -91,16 +91,16 @@ class ArticleFormTest extends CTestCase {
 		$this->assertEquals($title, $form->getArticleModel()->title);
 		$this->assertEquals($content, $form->getArticleModel()->content);
 	}
-	
+
 	public function test_save_phpFile() {
 		$article = $this->getArticle();
 		$form = $this->getForm($article);
 		$form->phpFile = "styret";
 		$form->save();
-		
+
 		$article = Article::model()->findByPk($article->id);
 		$this->assertEquals("styret", $article->phpFile);
-		
+
 	}
 
 	public function test_save_access_newArticle() {

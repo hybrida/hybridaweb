@@ -42,7 +42,7 @@ class DefaultController extends Controller {
 //			'models' => Comment::getAll($type, $id),
 //		));
 	}
-	
+
 	public function actionGriffOn($id) {
 		$comment = Comment::model()->findByPk($id);
 		Griff::add($id, user()->id);
@@ -53,10 +53,10 @@ class DefaultController extends Controller {
 				user()->id,
 				$comment->id);
 	}
-	
+
 	public function actionGriffOff($id) {
 		Griff::remove($id, user()->id);
 	}
-	
+
 
 }

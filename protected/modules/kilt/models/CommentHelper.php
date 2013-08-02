@@ -6,17 +6,17 @@ class CommentHelper
 	private $statusPublished = Status::PUBLISHED;
 
 	public function getUserNameByID($id) {
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$sql = "SELECT firstName, lastName FROM user WHERE id = :id";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":id", $id);
 		$data = $command->queryRow(); 
-        return $data;
+		return $data;
 	}
 
 	public function insertComment($newComment, $timeID)
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$userID = Yii::app()->user->id;
 		$sql = "INSERT INTO kilt_comment (user_id,  comment,  time_id, status) 
 								VALUES ( :user_id, :comment, :time_id, :enabled)";
@@ -29,7 +29,7 @@ class CommentHelper
 	}
 	public function updateComment($newComment, $timeID)
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$userID = Yii::app()->user->id;
 		$sql = "UPDATE kilt_comment
 				SET comment = :comment
@@ -43,7 +43,7 @@ class CommentHelper
 	}
 	public function deleteComment($timeID)
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$userID = Yii::app()->user->id;
 		$sql = "UPDATE kilt_comment SET status = :disabled WHERE time_id = :time_id AND user_id = :user_id AND status = :enabled";
 		$command = $connection->createCommand($sql);
@@ -56,7 +56,7 @@ class CommentHelper
 
 	public function getUserCommentByTimeID($timeID)
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$userID = Yii::app()->user->id;
 		$sql = "SELECT comment FROM kilt_comment WHERE user_id = :user_id AND time_id = :time_id AND status = :enabled";
 		$command = $connection->createCommand($sql);
@@ -68,7 +68,7 @@ class CommentHelper
 	}
 	public function getCommentsByTimeIDIndexedByName($timeID)
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$sql = "SELECT * FROM kilt_comment WHERE time_id = :time_id AND status = :enabled";
 		$command = $connection->createCommand($sql);
 		$command = $command->bindParam(":time_id", $timeID);
@@ -81,11 +81,11 @@ class CommentHelper
 			$name = $name['firstName']." ".  $name['lastName'];
 			$commentsByName[$name] = $c['comment'];
 		}
-        return $commentsByName;
+		return $commentsByName;
 	}
 	public function getUserCommentsIndexedByTime()
 	{
-        $connection = Yii::app()->db;
+		$connection = Yii::app()->db;
 		$userID = Yii::app()->user->id;
 		$sql = "SELECT * FROM kilt_comment WHERE user_id = :user_id AND status = :enabled";
 		$command = $connection->createCommand($sql);

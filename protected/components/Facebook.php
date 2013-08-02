@@ -1,10 +1,10 @@
 <?php
 
 class Facebook {
-        public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
-        public $pageId = "218073661595571";
-        public $app_id = '202808609747231';
-        public $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
+		public $accessToken = "AAAC4dA8kMR8BALCoPTGWcxpcJ3ZB7​M2g2LtKEmT5aZBo3pGzZA1mtQaE6DQ​hMAfV6x8yZAp19PttZCVThq6wB8Ymx​CuoG5HBq0z0nCb9eQQZDZD";
+		public $pageId = "218073661595571";
+		public $app_id = '202808609747231';
+		public $app_secret = '4b90c084ad62659c966beb8a62c9bf62';
 
 	public function getAccessToken() {
 		$userId = Yii::app()->user->id;
@@ -61,13 +61,13 @@ class Facebook {
 		);
 		$this->runCurl($data, $postUrl);
 	}
-        
+		
 	// TODO: endre parameterinput til kun $url
 	public function publishEventAtFanpage($eventId) {
-                $title = News::model()->findByPk($id)->title;
-                $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
+				$title = News::model()->findByPk($id)->title;
+				$urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
 		$postUrl = 'https://graph.facebook.com/'.$this->pageId.'/feed';
-                $data['link'] = $urlEventPage;
+				$data['link'] = $urlEventPage;
 		$data['message'] = utf8_encode('har opprettet et arrangement');
 		$data['access_token'] = $this->accessToken;
 		$this->runCurl($data, $postUrl);
@@ -76,40 +76,40 @@ class Facebook {
 	// TODO: endre parameterinput til kun $url
 	public function publishNewsAtFanpage($newsId, $message) {
 		$title = News::model()->findByPk($id)->title;
-                $urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
+				$urlEventPage = Yii::app()->createAbsoluteUrl('/news/view', array('id' => $id, 'title' => $title));
 		$postUrl = "https://graph.facebook.com/".$this->pageId."/feed";
 		$data['link'] = $urlNewsPage;
 		$data['message'] = utf8_encode($message);
 		$data['access_token'] = $this->accessToken;
 		$this->runCurl($data, $postUrl);
 	}
-        
+		
 	private function runCurl($data, $postUrl) {
-                $ch = curl_init($postUrl);
-                curl_setopt_array($ch, array(
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_POST => true,
-                    CURLOPT_POSTFIELDS => $data
-                ));
-                $return = curl_exec($ch);
-                curl_close($ch);
+				$ch = curl_init($postUrl);
+				curl_setopt_array($ch, array(
+					CURLOPT_RETURNTRANSFER => true,
+					CURLOPT_POST => true,
+					CURLOPT_POSTFIELDS => $data
+				));
+				$return = curl_exec($ch);
+				curl_close($ch);
 	}
-        
-    public function addAccessToken($code){
-        $userId = Yii::app()->user->id;
-        $my_url = Yii::app()->createAbsoluteUrl('');
-                        
-        $token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->app_id . '&redirect_uri=' . $my_url . '/facebook&client_secret=' . $this->app_secret . '&code=' . $code;
-        $access = file_get_contents($token_url); 
-        $params = null;
-        parse_str($access, $params);
-        $accessToken = $params['access_token'];
-        
-        $array=array('uID' => $userId, 'aToken' => $accessToken, 'postEvents' => 'true');
-        $sql = 'INSERT INTO fb_user VALUES (:uID, :aToken, :postEvents) ON DUPLICATE KEY UPDATE userId = :uID';
-        $query = Yii::app()->db->getPdoInstance()->prepare($sql);
-        $query->execute($array);
-         
-        Header("Location: ".$my_url); //redirect tilbake til forsiden
-    }
+		
+	public function addAccessToken($code){
+		$userId = Yii::app()->user->id;
+		$my_url = Yii::app()->createAbsoluteUrl('');
+						
+		$token_url = 'https://graph.facebook.com/oauth/access_token?client_id=' . $this->app_id . '&redirect_uri=' . $my_url . '/facebook&client_secret=' . $this->app_secret . '&code=' . $code;
+		$access = file_get_contents($token_url); 
+		$params = null;
+		parse_str($access, $params);
+		$accessToken = $params['access_token'];
+		
+		$array=array('uID' => $userId, 'aToken' => $accessToken, 'postEvents' => 'true');
+		$sql = 'INSERT INTO fb_user VALUES (:uID, :aToken, :postEvents) ON DUPLICATE KEY UPDATE userId = :uID';
+		$query = Yii::app()->db->getPdoInstance()->prepare($sql);
+		$query->execute($array);
+		 
+		Header("Location: ".$my_url); //redirect tilbake til forsiden
+	}
 }

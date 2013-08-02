@@ -47,7 +47,7 @@ class NewsFeedTest extends CTestCase {
 			$this->assertTrue(app()->gatekeeper->hasPostAccess('news', $e->id));
 		}
 	}
-	
+
 	public function test_getElements_activeRecord() {
 		$limit = 10;
 		$feed = new NewsFeed($limit);
@@ -64,13 +64,13 @@ class NewsFeedTest extends CTestCase {
 		$elements = $feed->getElements();
 		$this->assertTrue(count($elements) < $limit);
 	}
-	
+
 	public function test_getLimit() {
 		$limit = 15;
 		$feed = new NewsFeed($limit);
 		$this->assertEquals($limit, $feed->getLimit());
 	}
-	
+
 	public function test_getOffset() {
 		$offset = 15;
 		$limit = 10;

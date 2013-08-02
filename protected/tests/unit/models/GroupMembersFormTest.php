@@ -3,11 +3,11 @@
 class GroupMembersFormTest extends CTestCase {
 
 	protected function setUp() {
-		
+
 	}
 
 	protected function tearDown() {
-		
+
 	}
 
 	private function getUser() {
