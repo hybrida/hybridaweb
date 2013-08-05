@@ -5,30 +5,9 @@ class NewsfeedController extends Controller {
 	private $offset = 0;
 
 	public function actionIndex() {
-		$feedElements = $this->getFeedElements();
 		$this->render("feed", array(
-			'models' => $feedElements,
-			'index' => $this->offset,
-			'limit' => $this->feedLimit,
 			'hasPublishAccess' => user()->checkAccess('createNews'),
 		));
-	}
-
-	public function actionFeedAjax($offset = 0) {
-		$feedElements = $this->getFeedElements($offset);
-		$this->renderPartial('_feed', array(
-			'models' => $feedElements,
-			'index' => $this->offset,
-			'limit' => $this->feedLimit,
-		));
-	}
-
-	private function getFeedElements($offset = 0) {
-		$feed = new NewsFeed($this->feedLimit, $offset);
-		$elements = $feed->getElements();
-		$this->offset = $feed->getOffset();
-
-		return $elements;
 	}
 
 	public function actionRSS($limit=30) {
@@ -70,7 +49,7 @@ class NewsfeedController extends Controller {
 	}
 
 	public function actionFeedJSON($minTimestamp, $minWeight, $limit) {
-		$models = $this->getFeedElements2($minTimestamp, $minWeight, $limit);
+		$models = $this->getFeedElements();
 		$output = array();
 		foreach ($models as $model) {
 			$ar = $model->attributes;
@@ -86,11 +65,18 @@ class NewsfeedController extends Controller {
 		echo CJSON::encode($output);
 	}
 
-	private function getFeedElements2($maxTimestamp, $maxWeight, $limit) {
+	private function getFeedElements() {
 		$criteria = new CDbCriteria();
 		// $criteria->limit = $limit;
 		$criteria->order = "weight DESC, timestamp DESC";
-		return News::model()->findAll($criteria);
+		$models = News::model()->findAll($criteria);
+		$modelsYouHaveAccessTo = array();
+		foreach ($models as $model) {
+			if (Yii::app()->gatekeeper->hasPostAccess('news', $model->id)) {
+				$modelsYouHaveAccessTo[] = $model;
+			}
+		}
+		return $modelsYouHaveAccessTo;
 	}
 
 }

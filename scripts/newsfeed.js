@@ -60,7 +60,7 @@ define([], function () {
 
 		this.lastTimestamp = 0;
 		this.lastWeight = Number.MIN_VALUE;  // Alt er bedre enn dette.
-		this.limit = options.limit;
+		this.limit = 2;
 		this.fetchButton = options.ajaxButton;
 
 		this.lastIndex = -1;

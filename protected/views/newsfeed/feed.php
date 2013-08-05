@@ -32,21 +32,20 @@ $this->beginClip('sidebar'); ?>
 $this->endClip();
 ?>
 <div class="newsfeedIndex">
-<div class="feeds"></div>
+	<div class="feeds"></div>
 
-<?=CHtml::button('Vis flere', array(
-	'class' => 'g-button',
-	'style' => 'display: block; width: 100%;',
-	'id' => 'fetchNews',
-))?>
+	<?=CHtml::button('Vis flere', array(
+		'class' => 'g-button',
+		'style' => 'display: block; width: 100%;',
+		'id' => 'fetchNews',
+	))?>
+</div>
 
-<!--
- -->
 <script language="text/html" id="newsfeed-template">
 	<div class="element">
 		<div class="header-wrapper">
 			<div class="header-title">
-				<h1><a href="<%- url %>"><%-title %></a></h1>
+				<h1><a href="{{ url }}">{{title }}</a></h1>
 			</div>
 			<div class="header-date">
 
@@ -55,17 +54,17 @@ $this->endClip();
 		<div class="text-content">
 
 			<% if (image) { %>
-				<a href="<%- url %>">
-					<%= image %>
+				<a href="{{ url }}">
+					{{ image }}
 				</a>
 			<% } %>
-			<%= ingress %>
+			{{ ingress }}
 			<% if (author) { %>
 				<div class="author">
-					<%= authorLink%>
+					{{ authorLink}}
 					den
 					<span class="date">
-						<%- date %>
+						{{ date }}
 					</span>
 				</div>
 			<% } else { %>
@@ -73,7 +72,7 @@ $this->endClip();
 					Hybrida
 					den
 					<span class="date">
-						<%- date %>
+						{{ date }}
 					</span>
 				</div>
 			<% } %>
@@ -100,11 +99,9 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 		var view = new newsfeed.NewsFeedView({
 			'template': template,
 			'feedContent': $('.feeds'),
-			'limit': <?= $limit ?>,
 			'ajaxButton': $("#fetchNews")
 		});
 
 		view.load();
 	});
 </script>
-</div>
