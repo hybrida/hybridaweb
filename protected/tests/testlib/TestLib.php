@@ -24,6 +24,7 @@ class TestLib {
 				or authorId is null
 				or content is null
 				or title = 'title'
+				or title = 'test'
 				or title = 'dummy'
 				or title = 'TestCase'
 				or content = 'TestCase'
@@ -37,11 +38,9 @@ class TestLib {
 	public static function deleteDummyDataFromArticle() {
 		$sql = "delete from article where
 				title is null
-				or content is null
 				or title = 'title'
 				or title = 'dummy'
 				or title = 'TestCase'
-				or content = 'TestCase'
 				or title = 'NewsEventFormTest'
 				or title Like 'Lipsum%'
 				";
