@@ -69,4 +69,28 @@ class NewsfeedController extends Controller {
 		return $feed;
 	}
 
+	public function actionFeedJSON($minTimestamp, $minWeight, $limit) {
+		$models = $this->getFeedElements2($minTimestamp, $minWeight, $limit);
+		$output = array();
+		foreach ($models as $model) {
+			$ar = $model->attributes;
+			$ar['author'] = $model->authorId != null;
+			if ($model->author) {
+				$ar['authorLink'] = CHtml::link($model->author->fullName, $model->author->viewUrl);
+			}
+			$ar['url'] = $model->viewUrl;
+			$ar['image'] = Image::tag($model->imageId, 'frontpage');
+			$ar['date'] = Html::dateToString($model->timestamp, 'mediumlong');
+			$output[] = $ar;
+		}
+		echo CJSON::encode($output);
+	}
+
+	private function getFeedElements2($maxTimestamp, $maxWeight, $limit) {
+		$criteria = new CDbCriteria();
+		// $criteria->limit = $limit;
+		$criteria->order = "weight DESC, timestamp DESC";
+		return News::model()->findAll($criteria);
+	}
+
 }

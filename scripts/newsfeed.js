@@ -1,47 +1,5 @@
 define([], function () {
 
-	var ajaxButton;
-	var feeds;
-	var count;
-	var limit;
-	var feedContentSelector;
-	var ajaxFeedUrl;
-
-	function init(data) {
-		ajaxButton = $(data.ajaxButtonSelector);
-		feeds = $(data.feedContentSelector);
-		count = data.count;
-		limit = data.limit;
-		feedContentSelector = data.feedContentSelector;
-		ajaxFeedUrl = data.ajaxFeedUrl;
-
-		addClickEventToAjaxButton();
-	}
-
-	function addClickEventToAjaxButton() {
-		ajaxButton.click(function (){
-			$.ajax({
-				success: function(html){
-					feeds.append(html);
-
-					if (html.indexOf("Ingen flere nyheter") != -1) {
-						ajaxButton.off('click');
-						ajaxButton.remove();
-					}
-				},
-				type: 'get',
-				url: ajaxFeedUrl + count,
-				data: {
-					index: $(feedContentSelector + " li").size()
-				},
-				cache: false,
-				dataType: 'html'
-			});
-			count += limit;
-		});
-	}
-
-
 	/**
 	 * Denne javascripten sjekker hvor langt ned en har scrollet
 	 * og trykker på 'fetchNews' - knappen når en er 100 pixler fra
@@ -58,7 +16,7 @@ define([], function () {
 		 * fort.
 		 */
 		$(window).scroll(function() {
-			var minScrollTime = 600;
+			var minScrollTime = 60;
 			var now = new Date().getTime();
 
 			if (!scrollTimer) {
@@ -92,8 +50,72 @@ define([], function () {
 
 	scrollChecker();
 
+
+
+	function NewsFeedView(options) {
+		var self = this;
+		this.template = options.template;
+		this.feedContent = options.feedContent;
+		this.url = "/newsfeed/feedJSON";
+
+		this.lastTimestamp = 0;
+		this.lastWeight = Number.MIN_VALUE;  // Alt er bedre enn dette.
+		this.limit = options.limit;
+		this.fetchButton = options.ajaxButton;
+
+		this.lastIndex = -1;
+
+		this.fetchButton.click(function (e) {
+			self.load();
+		});
+
+		this.removeFetchButton = function() {
+			this.fetchButton.remove();
+			console.log("Sletter boks");
+		};
+
+		this.load = function() {
+			var data = {
+				minWeight: this.lastWeight,
+				minTimestamp: this.lastTimestamp,
+				limit: this.limit
+			};
+
+			$.ajax({
+				url: self.url,
+				dataType: 'json',
+				success: function(json) {
+					self.addMore(json);
+				},
+				error: function(e) {
+					console.log("ERROR");
+					console.log(e.responseText);
+				},
+				data : data
+			});
+		};
+
+		this.addMore = function(news) {
+			var start = this.lastIndex + 1;
+			var end = start + this.limit;
+			for (var i = start; i < end ; i++) {
+				if (i >= news.length) {
+					this.removeFetchButton();
+					break;
+				}
+				var model = news[i];
+				var templateHtml = this.template(model);
+				this.feedContent.append(templateHtml);
+				this.lastTimestamp = model.timestamp;
+				this.lastWeight = model.weight;
+				this.lastIndex = i;
+			}
+		};
+	}
+
+
 	return {
-		init: init
+		NewsFeedView: NewsFeedView
 	};
 
 });
