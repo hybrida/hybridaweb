@@ -16,7 +16,7 @@ define([], function () {
 		 * fort.
 		 */
 		$(window).scroll(function() {
-			var minScrollTime = 60;
+			var minScrollTime = 300;
 			var now = new Date().getTime();
 
 			if (!scrollTimer) {
@@ -60,7 +60,7 @@ define([], function () {
 
 		this.lastTimestamp = 0;
 		this.lastWeight = Number.MIN_VALUE;  // Alt er bedre enn dette.
-		this.limit = 2;
+		this.limit = 5;
 		this.fetchButton = options.ajaxButton;
 
 		this.lastIndex = -1;
