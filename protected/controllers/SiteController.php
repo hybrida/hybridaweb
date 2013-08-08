@@ -32,7 +32,7 @@ class SiteController extends Controller {
 			$this->redirect($returnUrl);
 		} else {
 			throw new CHttpException(403,
-					"Logg inn ikke vellykket" . $identity->errorMessage);
+					"Logg inn ikke vellykket: " . $identity->getErrorMessage());
 		}
 	}
 

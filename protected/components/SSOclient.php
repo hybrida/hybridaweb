@@ -1,4 +1,6 @@
 <?php
+
+
 class SSOclient {
   var $loginvalues;
   var $crtfile;
@@ -34,7 +36,6 @@ class SSOclient {
 	  }
 	}
 	debug($this->loginvalues);
-	die();
 
 	// check the target
 	if($this->loginvalues['target'] == $this->target){
@@ -52,11 +53,11 @@ class SSOclient {
 	}
 
 	// check ip-number
-	//if ($this->loginvalues[remoteaddr] == $clientip)
-	//if ($this->loginvalues[remoteaddr] == $clientip)
-	//  $this->okip = true;
-	//else
-	//	$this->addError("wrong ip-number");
+	if ($this->loginvalues['remoteaddr'] == $clientip) {
+		$this->okip = true;
+	} else {
+		$this->addError("wrong ip-number");
+	}
 
 	// base64-decode the sig
 	// oppdatert
@@ -79,8 +80,7 @@ class SSOclient {
   }
 
   function verifies(){
-	return true;
-	//return $this->verifies;
+	return $this->verifies;
   }
 
   function oktime(){
@@ -97,11 +97,6 @@ class SSOclient {
 
   function loginvalues(){
 	return $this->loginvalues;
-  }
-
-  function reason(){
-	return $this->reason;
-	return "Deprecated";
   }
 
   function getErrors() {

@@ -65,7 +65,9 @@ class InnsidaIdentity extends CUserIdentity {
 	}
 
 	public function getErrorMessage() {
-		return $this->sso->reason();
+		$messages = $this->sso->getErrors();
+		$message = implode(", ", $messages);
+		return $message;
 	}
 
 	public function getName() {
