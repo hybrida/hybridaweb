@@ -21,10 +21,10 @@ class SiteController extends Controller {
 		}
 	}
 
-	public function actionInnsidaLogin($data, $sign, $target, $returnUrl) {
+	public function actionInnsidaLogin($data, $sign, $returnUrl) {
 		ob_clean();
 
-		$SSOclient = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR'], $target);
+		$SSOclient = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR']);
 		$identity = new InnsidaIdentity($SSOclient);
 
 		if ($identity->authenticate()) {

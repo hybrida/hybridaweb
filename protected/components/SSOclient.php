@@ -4,11 +4,17 @@ class SSOclient {
   var $crtfile;
   var $verifies;
   var $oktime;
-  var $reason;
+  private $errors;
   var $okip;
   var $oktarget;
+  private $target = "hybridaweb";
 
-  function SSOclient($data, $sign64, $clientip, $target){
+  function addError($error) {
+	  $this->errors[] = $error;
+  }
+
+
+  function SSOclient($data, $sign64, $clientip){
 	// set initial values
 	$this->crtfile = Yii::getPathOfAlias("webroot")."/innsida.crt";
 	$this->loginvalues = array();
@@ -27,12 +33,14 @@ class SSOclient {
 		$this->loginvalues[$k] = explode(":", $this->loginvalues[$k]);
 	  }
 	}
+	debug($this->loginvalues);
+	die();
 
 	// check the target
-	if($this->loginvalues['target'] == $target){
+	if($this->loginvalues['target'] == $this->target){
 	  $this->oktarget = true;
 	} else {
-	  $this->reason = "wrong target";
+	  $this->addError("wrong target");
 	}
 
 	// check the timestamp
@@ -40,7 +48,7 @@ class SSOclient {
 	if (($tdif > -100) && ($tdif < 100)) {
 	  $this->oktime = true;
 	} else {
-	  $this->reason = "wrong time";
+	  $this->addError("wrong time");
 	}
 
 	// check ip-number
@@ -48,7 +56,7 @@ class SSOclient {
 	//if ($this->loginvalues[remoteaddr] == $clientip)
 	//  $this->okip = true;
 	//else
-	//  $this->reason = "wrong ip-number";
+	//	$this->addError("wrong ip-number");
 
 	// base64-decode the sig
 	// oppdatert
@@ -63,7 +71,7 @@ class SSOclient {
 	// verify the sig
 	if(openssl_verify("$data", $sign, $pubkey) != 1){
 	  $this->verifies = false;
-	  $this->reason = "could not verify signature";
+	  $this->addError("could not verify signature");
 	} else {
 	  $this->verifies = true;
 	}
@@ -93,6 +101,11 @@ class SSOclient {
 
   function reason(){
 	return $this->reason;
+	return "Deprecated";
+  }
+
+  function getErrors() {
+	  return $this->errors;
   }
 
   function oklogin(){
