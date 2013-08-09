@@ -62,40 +62,18 @@ define([], function () {
 		this.lastWeight = Number.MIN_VALUE;  // Alt er bedre enn dette.
 		this.limit = 10;
 		this.fetchButton = options.ajaxButton;
+		this.jsonData = JSON.parse(options.jsonData);
+		console.log(this.jsonData);
 
 		this.lastIndex = -1;
-
-		this.fetchButton.click(function (e) {
-			self.load();
-		});
 
 		this.removeFetchButton = function() {
 			this.fetchButton.remove();
 			console.log("Sletter boks");
 		};
 
-		this.load = function() {
-			var data = {
-				minWeight: this.lastWeight,
-				minTimestamp: this.lastTimestamp,
-				limit: this.limit
-			};
-
-			$.ajax({
-				url: self.url,
-				dataType: 'json',
-				success: function(json) {
-					self.addMore(json);
-				},
-				error: function(e) {
-					console.log("ERROR");
-					console.log(e.responseText);
-				},
-				data : data
-			});
-		};
-
-		this.addMore = function(news) {
+		this.addMore = function() {
+			var news = self.jsonData;
 			var start = this.lastIndex + 1;
 			var end = start + this.limit;
 			for (var i = start; i < end ; i++) {
@@ -110,6 +88,14 @@ define([], function () {
 				this.lastWeight = model.weight;
 				this.lastIndex = i;
 			}
+		};
+
+		this.load = function() {
+			self.addMore();
+
+			this.fetchButton.click(function (e) {
+				self.addMore();
+			});
 		};
 	}
 

@@ -41,7 +41,7 @@ $this->endClip();
 	))?>
 </div>
 
-<script language="text/html" id="newsfeed-template">
+<script type="text/html" id="newsfeed-template">
 	<div class="element">
 		<div class="header-wrapper">
 			<div class="header-title">
@@ -81,6 +81,8 @@ $this->endClip();
 	</div>
 </script>
 
+<script type="text/json" id="newsfeed-data"><?= $jsonFeed ?></script>
+
 <?php
 
 $ajaxFeedUrl = $this->createUrl("feedAjax", array(
@@ -99,6 +101,7 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 		var view = new newsfeed.NewsFeedView({
 			'template': template,
 			'feedContent': $('.feeds'),
+			'jsonData': $("#newsfeed-data").html(),
 			'ajaxButton': $("#fetchNews")
 		});
 

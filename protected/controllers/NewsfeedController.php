@@ -1,12 +1,12 @@
 <?php
 
 class NewsfeedController extends Controller {
-	private $feedLimit = 10;
 	private $offset = 0;
 
 	public function actionIndex() {
 		$this->render("feed", array(
 			'hasPublishAccess' => user()->checkAccess('createNews'),
+			'jsonFeed' => $this->getFeedJSON(0, -1000, 10),
 		));
 	}
 
@@ -49,6 +49,10 @@ class NewsfeedController extends Controller {
 	}
 
 	public function actionFeedJSON($minTimestamp, $minWeight, $limit) {
+		echo $this->getFeedJSON($minTimestamp, $minWeight, $limit);
+	}
+
+	public function getFeedJSON($minTimestamp, $minWeight, $limit) {
 		$models = $this->getFeedElements();
 		$output = array();
 		foreach ($models as $model) {
@@ -62,7 +66,7 @@ class NewsfeedController extends Controller {
 			$ar['date'] = Html::dateToString($model->timestamp, 'mediumlong');
 			$output[] = $ar;
 		}
-		echo CJSON::encode($output);
+		return CJSON::encode($output);
 	}
 
 	private function getFeedElements() {
