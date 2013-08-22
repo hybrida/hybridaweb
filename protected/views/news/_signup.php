@@ -14,18 +14,18 @@
 		<p>Du har ikke tilgang til denne hendelsen</p>
 
 	<? endif ?>
-<? endif ?>
 
-<? if ($hasAccessToSignup): ?>
-		<h1> Påmeldte: (<?= $signup->getRegisteredAttendingCount() ?>)</h1>
-		<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
+	<? if ($hasAccessToSignup): ?>
+			<h1> Påmeldte: (<?= $signup->getRegisteredAttendingCount() ?>)</h1>
+			<?= Html::userListByYear($signup->attendersFiveYearArrays) ?>
 
-	<h2>Andre påmeldte: (<?= $signup->getAnonymousAttendingCount() ?>)</h2>
-	<div class="manualAttenders">
-		<? foreach ($signup->getAnonymousAttenders() as $attender): ?>
-		<ul class="attender">
-			<li class="name"><?= $attender->fullName ?></li>
-		</ul>
-		<? endforeach ?>
-	</div>
+		<h2>Andre påmeldte: (<?= $signup->getAnonymousAttendingCount() ?>)</h2>
+		<div class="manualAttenders">
+			<? foreach ($signup->getAnonymousAttenders() as $attender): ?>
+			<ul class="attender">
+				<li class="name"><?= $attender->fullName ?></li>
+			</ul>
+			<? endforeach ?>
+		</div>
+	<? endif ?>
 <? endif ?>
