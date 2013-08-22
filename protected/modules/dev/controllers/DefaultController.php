@@ -30,7 +30,7 @@ class DefaultController extends Controller {
 	public function actionCleanDB() {
 		Yii::import('application.tests.testlib.*');
 		TestLib::deleteDummyData();
-		echo "Database is cleaned";
+		$this->render("cleandb");
 	}
 
 	public function actionInstall() {
