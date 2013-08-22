@@ -94,17 +94,23 @@ class FieldtripSupport extends CActiveRecord
 		));
 	}
 
-	public static function canSupport($user) {
+	public static function canSupportDecoupled($user, $isSpring, $isFieldtripThisYear) {
 		if ($user === null) {
 			return false;
 		}
 		if ($user->classYear == 2) {
-			return YearConverter::isSpring() && !self::isFieldtripThisYear();
+			return $isSpring && !$isFieldtripThisYear;
 		} elseif ($user->classYear == 3) {
-			return YearConverter::isSpring() || self::isFieldTripThisYear();
+			return $isSpring || $isFieldtripThisYear;
 		} elseif($user->classYear == 4) {
-			return self::isFieldTripThisYear();
+			return $isFieldTripThisYear;
 		}
+	}
+	public static function canSupport($user) {
+		return self::canSupportDecoupled(
+						$user,
+						YearConverter::isSpring(),
+						self::isFieldtripThisYear());
 	}
 
 	public static function isFieldtripOnYear($year) {

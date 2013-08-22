@@ -9,6 +9,10 @@ class FieldtripSupportTest extends CTestCase {
 		$this->assertEquals($expected, FieldtripSupport::canSupport($user));
 	}
 
+	private function assertCanSupportDecoupled($expected, $user, $isSpring, $isFieldtripThisYear) {
+		$actual = FieldtripSupport::canSupportDecoupled($user, $isSpring, $isFieldtripThisYear);
+	}
+
 	private function modelCount() {
 		return FieldtripSupport::model()->count();
 	}
@@ -20,11 +24,18 @@ class FieldtripSupportTest extends CTestCase {
 		$this->assertCanSupport(false, $user);
 	}
 
-	public function test_canSupport_thirdYear_true() {
-		$user = Util::getUser();
+	public function test_canSupport_thirdYear() {
+		$user = Util::getNewUser();
 		$user->classYear = 3;
 		$user->save();
-		$this->assertCanSupport(true, $user);
+		// autumn - thisYear - true
+		$this->assertCanSupportDecoupled(true, $user, false, true);
+		// autumn - nextYear - true
+		$this->assertCanSupportDecoupled(true, $user, false, false);
+		// spring - thisYear - true
+		$this->assertCanSupportDecoupled(true, $user, true, true);
+		// spring - nextyear - false
+		$this->assertCanSupportDecoupled(false, $user, true, false);
 	}
 
 	public function test_isFieldtripOnYear_2012_true() {
