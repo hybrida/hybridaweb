@@ -6,11 +6,14 @@ class DefaultController extends Controller {
 		$this->render('index');
 	}
 
-	public function actionLogin($id) {
+	public function actionLogin($id, $page=null) {
 		$identity = new DefaultIdentity($id);
 		if ($identity->authenticate()) {
 			user()->login($identity);
-			$this->redirect(user()->returnUrl);
+			if ($page == null) {
+				$page = $this->createUrl("/newsfeed/index");
+			}
+			$this->redirect($page);
 		}
 	}
 

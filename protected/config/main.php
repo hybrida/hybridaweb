@@ -1,10 +1,37 @@
 <?php
 
+class ConfigData {
+
+	static function getScriptMap() {
+		if (YII_DEBUG) {
+			return array();
+		} else {
+			return array(
+				'jquery.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
+				'jquery.min.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
+				'jquery-ui.min.js' => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js",
+			);
+		}
+	}
+
+	static function getLoginUrl() {
+		if (YII_DEBUG) {
+			return array("/dev/login",
+						 'page' => $_SERVER['REQUEST_URI'],
+						 'id' => 'admin');
+		} else {
+			return array("/site/login", 'page' => $_SERVER['REQUEST_URI']);
+		}
+	}
+
+}
+
 function beginRequest() {
 	$cs = Yii::app()->getClientScript();
 	$cs->registerCoreScript('jquery');
 	$cs->registerCoreScript('jquery.ui');
 }
+
 
 return array(
 	'onBeginRequest' => 'beginRequest',
@@ -97,7 +124,8 @@ return array(
 		'user' => array(
 			// enable cookie-based authentication
 			'allowAutoLogin' => true,
-			'loginUrl' => array("/site/login", 'page' => $_SERVER['REQUEST_URI']),
+			'loginUrl' => ConfigData::getLoginUrl(),
+
 		),
 		'urlManager' => array(
 			'urlFormat' => 'path',
@@ -181,11 +209,10 @@ return array(
 			),
 		),
 		'clientScript' => array(
-			'scriptMap' => (!YII_DEBUG ? array(
-				'jquery.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
-				'jquery.min.js' => "http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js",
-				'jquery-ui.min.js' => "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.13/jquery-ui.min.js",
-			) : array()),
+			// if-testen under er for kun å bruke jquery fra cdn når det er i
+			// produksjon. Hvis man ikke på internett og jobber lokalt brukes
+			// lokale js-filer som ligger i yii-rammeverket.
+			'scriptMap' => ConfigData::getScriptMap(),
 		),
 		'cliColor' => array(
 			'class' => 'ext.yii-cli-color.components.KCliColor',
