@@ -1,16 +1,14 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
+
+use hybrida_dev;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `hybrida_dev`;
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (24, 4055, 'news', 0),
@@ -51,7 +49,8 @@ INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `articleTextId`,
 (80, 1, 'Lesesalen', NULL, 29, 381, '2012-09-06', 0),
 (81, NULL, 'Jubileum', NULL, 30, 381, '2013-01-29', 0),
 (82, 81, 'Program', NULL, 33, 381, '2013-01-29', 0),
-(83, 82, 'Dag 1', NULL, 32, 381, '2013-01-29', 0);
+(83, 82, 'Dag 1', NULL, 32, 381, '2013-01-29', 0),
+(111, 1, 'Griffens Orden', NULL, 72, 466, '2013-08-23', 0);
 
 INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`) VALUES
 (1, 56, '<p>\n</p><table cellspacing="6"><tr><td width="150"><a href="http://www.ntnu.no/studier/ingeniorvitenskap-ikt">I &amp; IKT på ntnu.no</a>\n</td>\n<td>\nRekrutterings- og infosider.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studieinformasjon/timeplan/">Timeplaner</a>\n</td><td>\nTimeplanene til alle klassetrinn.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studentservice/">Studentservice</a>\n</td><td>\nSvarer på alle spørsmål du måtte ha som NTNU-student.\n</td></tr><tr><td>\n<a href="http://www.studweb.ntnu.no">ITEAs infoweb</a>\n</td><td>\nInformasjonsbase for IT-systemet\n</td></tr><tr><td>\n<a href="http://www.orakel.ntnu.no">Orakeltjenesten</a>\n</td><td>\nSupport for IT-systemer under NTNU\n</td></tr><tr><td>\n<a href="http://www.samfundet.no">\nStudentersamfundet i Trondhjem</a>\n</td><td>\nNorges største og studentersamfunn.\n</td></tr><tr><td>\n<a href="http://www.universitetsavisa.no">Universitesavisa</a>\n</td><td>\nNyheter fra campus.\n</td></tr><tr><td>\n<a href="http://www.underdusken.no">Under Dusken</a>\n</td><td>\nTrondheims studentavis\n</td></tr><tr><td>\n<a href="http://www.studentrad.no/">Studentrådene</a>\n</td><td>\nStudentrådene ved NTNU\n</td></tr></table>', NULL, '2012-12-11'),
@@ -87,7 +86,8 @@ INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`
 (30, 81, '<p>\n	Testing testing</p>\n', NULL, '2013-01-29'),
 (31, 82, '', NULL, '2013-01-29'),
 (32, 83, '', NULL, '2013-01-29'),
-(33, 82, '<p>\n	Det har ikke kommet noe program enda </p>\n', NULL, '2013-01-29');
+(33, 82, '<p>\n	Det har ikke kommet noe program enda </p>\n', NULL, '2013-01-29'),
+(72, 111, '<p>\n	Griffens Orden er en orden bestående av Hybrida-medlemmer som er tildelt en utmerkelse for deres arbeid for Hybrida eller studieprogrammet Ingeniørvitenskap og IKT. Alle medlemmene av denne ordenen har tittelen "Ridder av Griffens Orden".</p>\n<p>\n	Ridder av Griffens Orden er en ærespris som tildeles medlemmer av Hybrida som har utmerket seg ut i sitt engasjement og arbeid for Linjeforeningen Hybrida eller studieprogrammet Ingeniørvitenskap og IKT. Medlemmet må ha vist ekstraordniært engasjement og iniativ, og vist stor glede av å ytre Hybridas formål og verdier. </p>\n<div>\n	Utnevnelsen bestemmes av Vokterne av Griffens Orden. Dette er en komité på 8 Hybrida-medlemmer, bestående av  minimum ett medlem fra hvert årskull. Vokterne er uavhengig av Hybridas styre, og står fritt til å tildele maks 3 utnevnelser hvert år. Ingen styremedlemmer fra Hybridas hovedstyre kan sitte i komitéen. Vokterne tar selv inn nye medlemmer når dette er nødvendig.</div>\n<div>\n	 </div>\n<div>\n	Alle medlemmer av Hybrida kan være med å påvirke valgene gjort av vokterne. Medlemmer kan når som helst nominere andre medlemmer de mener fortjener utnevnelsen, basert på kriteriene beskrevet ovenfor. Nominasjoner gjøres <a href="http://tinyurl.com/RidderAvGriffensOrden">her</a>. (Anonym nominasjon)</div>\n<div>\n	 </div>\n<div>\n	Utnevnelsen skal skje hvert år på Hybridas nyttårsball i januar. Representanter fra Vokterne av Griffens Orden vil utføre tildelingen.</div>\n<div>\n	 </div>\n<div>\n	Ønsker man mer direkte kontakt med Vokterne, kan nominasjoner sendes inn på mail: hybrida-nominasjon@list.stud.ntnu.no, dette hvis man ønsker mer en dialog for å presentere sin nominasjon. (ikke-anonym nominasjon)</div>\n<div>\n	 </div>\n<div>\n	 </div>\n<h3>\n	<b>Følgende medlemmer er tildelt Ridder av Griffens Orden:</b></h3>\n<div>\n	2013* - Sigbjørn Aukland</div>\n<div>\n	2013* - Sigurd Andreas Holsen</div>\n<div>\n	2013* - Teodor Elstad</div>\n<div>\n	2013* - Marianne Hønsi</div>\n<div>\n	2013* - Frans Erstad</div>\n<div>\n	2013* - Bård Gamnes</div>\n<div>\n	2013* - Stig Kjemperud</div>\n<div>\n	2013* - Daniel Aase</div>\n<div>\n	2013* - Ivar Marthinusen</div>\n<div>\n	2013* - Christoffer Lange</div>\n<div>\n	2013* - Tor Christian Sandø</div>\n<div>\n	2013* - Eirik Haarr</div>\n<div>\n	2013* - Eirin Mohn Lem</div>\n<div>\n	2013* - Marthe Almeland</div>\n<div>\n	2013* - Marius Flem Lunde</div>\n<div>\n	2013* - Harald Wathne</div>\n<div>\n	 </div>\n<div>\n	*  I 2013 ble alle tildelinger foretatt under Hybridas 10-årsjubileumsgalla. Under jubileumet ble utmerkelsene også  tildelt medlemmer som var alumni studenter. Derfor er det flere enn 3 stk som er tildelt utmerkelsen i 2013.</div>\n<div>\n	 </div>\n', NULL, '2013-08-23');
 
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (1, 1),
@@ -246,10 +246,10 @@ INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
 (3, 56),
 (38, 55);
 
-INSERT INTO `notification_listener` (`id`, `userID`, `parentType`, `parentID`) VALUES
-(33, 381, 'news', 370),
-(32, 381, 'profile', 381),
-(34, 381, 'news', 386);
+INSERT INTO `notification_listener` (`id`, `userID`, `parentType`, `parentID`, `isDeleted`) VALUES
+(32, 381, 'profile', 381, 0),
+(33, 381, 'news', 370, 0),
+(34, 381, 'news', 386, 0);
 
 INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('admin', 2, 'Administrator', '', 's:0:"";'),
@@ -345,10 +345,13 @@ INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 ('m121209_184746_move_from_article_content_to_article_text', 1355256727);
 
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `linkedin`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', NULL, NULL, 'pub/sigurd-holsen/4b/636/582', '2013-03-19 19:58:18', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n  Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n  <img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n  Meg og layla koser oss!</p>\n<p style="text-align:left;">\n Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n  <img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n  Jeg som har trent</p>\n<p style="text-align:left;">\n Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n  Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
-(466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', NULL, NULL, 'pub/sigurd-holsen/4b/636/582', '2013-08-23 18:34:33', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n  Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n  <img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n  Meg og layla koser oss!</p>\n<p style="text-align:left;">\n Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n  <img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n  Jeg som har trent</p>\n<p style="text-align:left;">\n Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n  Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(466, 'admin', 'admin', '', 'user', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, '2013-08-23 18:43:20', NULL, NULL, '', NULL, NULL, NULL, NULL);
 
 INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
 (293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
 SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
