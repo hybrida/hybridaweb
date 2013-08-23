@@ -42,7 +42,7 @@ class Notifications {
 		return $listenerCount == 1;
 	}
 
-	public function isListening($type, $id, $userId) {
+	public static function isListening($type, $id, $userId) {
 		return self::isUserAlreadyListening($type, $id, $userId);
 	}
 
