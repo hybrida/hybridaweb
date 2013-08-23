@@ -1,0 +1,45 @@
+     
+#knightPresentation_wrapper {
+        width:650px;
+        margin:0px auto;
+}
+
+#knightPresentation_content {
+        margin-top:10px;
+        padding-bottom:10px;
+}
+#knightPresentation_content div {
+        padding:10px;
+        float:left;
+}
+#knightPresentation_content-left {
+        width:180px;
+}
+#knightPresentation_content-main {
+        margin-left:10px;
+        width:180px;
+}
+#knightPresentation_content-right {
+        margin-left:10px;
+        width:180px;
+}
+#knightPresentation_footer {
+        
+}
+#knightPresentation_bottom {
+        clear:both;
+        text-align:right;
+}
+
+.knightPresentation_hidden{
+    display: none;
+    float:left;
+    margin-top:10px;
+    margin-bottom:10px;
+    padding:10px;
+    width:600px;
+}
+
+.knightPresentation_unhidden{
+    display: block;
+}
