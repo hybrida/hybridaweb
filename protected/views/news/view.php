@@ -18,12 +18,12 @@ $this->beginClip('sidebar');
 			"id" => $news->id), array(
 				'class' => 'g-button',
 			)) ?>
-		<?= CHtml::link("Påmeldte hybrider", array(
+		<?= CHtml::link("Rediger påmeldte hybrider", array(
 			'news/editSignup', 'id' => $news->id,
 		), array(
 			'class' => 'g-button',
 		)) ?>
-		<?= CHtml::link("Påmeldte ikke-hybrider", array(
+		<?= CHtml::link("Rediger påmeldte ikke-hybrider", array(
 			'news/manualSignup', 'id' => $signup->eventId,
 		), array(
 			'class' => 'g-button',
