@@ -12,8 +12,7 @@
 
         var knights = $("#widget-knightPresentation").find(".knight");
         knights.find(".name").click(function(e) {
-           var knight = $(e.currentTarget);
-           var parent = knight.parent();
+           var parent = $(this).parent();
            var reason = parent.find(".reason").toggle();
         });
 
