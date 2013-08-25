@@ -59,6 +59,7 @@ less compress:
 	Lag _en_ komprimert main.css fil. Denne som brukes i produksjon.
 less singles:
 	Lag en css-fil for alle less-filene. Denne kan brukes i debugging.
+
 EOT;
 		echo $helpText;
 	}
