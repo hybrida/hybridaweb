@@ -217,6 +217,9 @@ return array(
 		'cliColor' => array(
 			'class' => 'ext.yii-cli-color.components.KCliColor',
 		),
+		'lessCompiler' => array(
+			'class' => 'ext.lessphp.lessc.inc',
+		),
 	),
 	'params' => array(
 		'logoutUrl' => array("/site/logout"),

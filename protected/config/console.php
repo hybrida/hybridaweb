@@ -22,6 +22,9 @@ return array(
 		'cliColor' => array(
 			'class' => 'ext.yii-cli-color.components.KCliColor',
 		),
+		'lessCompiler' => array(
+			'class' => 'ext.lessphp.LessCompiler',
+		),
 	),
 	'modules' => array(
 		'dev','bpc',
