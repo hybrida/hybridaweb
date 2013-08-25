@@ -22,13 +22,13 @@ class LessCommand extends CConsoleCommand {
 		});
 	}
 
-	public function writeMainCss() {
+	public function writeMinCss() {
 		$files = $this->getLessFiles();
 		$cssCode = array();
 		foreach ($files as $file) {
 			$cssCode[] = $this->compiler->compile($this->lessDir . $file);
 		}
-		$mainCss = file_put_contents($this->cssDir . "main.css", implode("\n", $cssCode));
+		$mainCss = file_put_contents($this->cssDir . "min.css", implode("\n", $cssCode));
 	}
 
 	public function writeAllCssFiles() {
@@ -41,9 +41,9 @@ class LessCommand extends CConsoleCommand {
 	}
 
 	public function run($args) {
-		if (in_array("compress", $args)) {
-			$this->writeMainCss();
-		} elseif (in_array("singles", $args)) {
+		if (in_array("min", $args)) {
+			$this->writeMinCss();
+		} elseif (in_array("all", $args)) {
 			$this->writeAllCssFiles();
 		} else {
 			$this->help();
@@ -53,9 +53,9 @@ class LessCommand extends CConsoleCommand {
 	private function help() {
 		$helpText = <<<EOT
 HOWTO:
-less compress:
+less min:
 	Lag _en_ komprimert main.css fil. Denne som brukes i produksjon.
-less singles:
+less all:
 	Lag en css-fil for alle less-filene. Denne kan brukes i debugging.
 
 EOT;
