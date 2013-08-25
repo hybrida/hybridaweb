@@ -103,7 +103,7 @@ class FieldtripSupport extends CActiveRecord
 		} elseif ($user->classYear == 3) {
 			return $isSpring || $isFieldtripThisYear;
 		} elseif($user->classYear == 4) {
-			return $isFieldTripThisYear;
+			return $isFieldtripThisYear;
 		}
 	}
 	public static function canSupport($user) {
