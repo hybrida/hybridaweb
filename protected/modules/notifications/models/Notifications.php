@@ -90,7 +90,7 @@ class Notifications {
 	}
 
 	private static function insertNotifications($params) {
-		$sql = "INSERT IGNORE INTO `hybrida_dev`.`notification`
+		$sql = "INSERT IGNORE INTO `notification`
 				(`parentType`, `parentID`, `userID`,
 					`changedByUserID`, `commentID`, `statusCode`)
 				VALUES (:parentType, :parentId, :userID,
