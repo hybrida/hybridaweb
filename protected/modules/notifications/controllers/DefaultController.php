@@ -38,7 +38,7 @@ class DefaultController extends Controller {
 			if ($notification->userID !== user()->id) {
 				Yii::app()->end();
 			}
-			$notification->isRead = true;
+			$notification->isRead = 1;
 			$notification->save();
 		}
 	}
