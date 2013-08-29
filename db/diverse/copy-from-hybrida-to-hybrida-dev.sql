@@ -15,7 +15,9 @@ INSERT INTO hybrida_dev.group_membership SELECT * FROM hybrida.group_membership;
 
 -- Artikler
 DELETE FROM hybrida_dev.article;
+DELETE FROM hybrida_dev.article_text;
 INSERT INTO hybrida_dev.article SELECT * FROM hybrida.article;
+INSERT INTO hybrida_dev.article_text SELECT * FROM hybrida.article_text;
 
 -- Brukere
 SET FOREIGN_KEY_CHECKS=0;
