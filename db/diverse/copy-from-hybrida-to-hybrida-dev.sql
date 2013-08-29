@@ -18,5 +18,7 @@ DELETE FROM hybrida_dev.article;
 INSERT INTO hybrida_dev.article SELECT * FROM hybrida.article;
 
 -- Brukere
+SET FOREIGN_KEY_CHECKS=0;
 DELETE FROM hybrida_dev.user;
 INSERT INTO hybrida_dev.user SELECT * FROM hybrida.user;
+SET FOREIGN_KEY_CHECKS=1;

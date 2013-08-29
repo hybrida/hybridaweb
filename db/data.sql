@@ -1,14 +1,30 @@
-SET FOREIGN_KEY_CHECKS=0;
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+-- phpMyAdmin SQL Dump
+-- version 2.11.8.1deb5+lenny9
+-- http://www.phpmyadmin.net
+--
+-- Host: localhost
+-- Generation Time: Aug 29, 2013 at 06:55 PM
+-- Server version: 5.1.66
+-- PHP Version: 5.3.3-7+squeeze14
 
-use hybrida_dev;
+SET FOREIGN_KEY_CHECKS=0;
+
+SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
+--
+-- Database: `hybrida_dev`
+--
+USE `hybrida_dev`;
+
+--
+-- Dumping data for table `access_relations`
+--
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (24, 4055, 'news', 0),
@@ -17,40 +33,71 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (85, 2014, 'signup', 1),
 (85, 4055, 'signup', 0);
 
+--
+-- Dumping data for table `album`
+--
+
+
+--
+-- Dumping data for table `album_image`
+--
+
+
+--
+-- Dumping data for table `article`
+--
+
 INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `articleTextId`, `author`, `timestamp`, `weight`) VALUES
-(1, NULL, 'Hybrida', NULL, 8, 0, '0000-00-00', 0),
+(1, NULL, 'Hybrida', NULL, 124, 0, '0000-00-00', 0),
 (2, NULL, 'Bedrift', NULL, 7, 331, '2011-11-01', 0),
-(53, 1, 'Updateᵏ', NULL, 2, 381, '2012-03-07', 0),
+(53, 1, 'Updateᵏ', NULL, 215, 381, '2012-03-07', 0),
 (54, NULL, '2007', NULL, 4, 381, '2012-03-07', 0),
-(55, 1, 'Kontaktinfo', NULL, 5, 381, '2012-03-07', 0),
-(56, 1, 'Lenker', NULL, 1, 381, '2012-03-07', 0),
-(57, 1, 'Sanger', NULL, 6, 381, '2012-03-07', 0),
+(55, 1, 'Kontaktinfo', NULL, 120, 381, '2012-03-07', 0),
+(56, 1, 'Lenker', NULL, 105, 381, '2012-03-07', 0),
+(57, 1, 'Sanger', NULL, 82, 381, '2012-03-07', 0),
 (58, 1, 'Statutter', NULL, 9, 381, '2012-03-07', 0),
 (59, 1, 'Styre og stell', 'Styret', 10, 381, '2012-03-07', 0),
-(60, 59, 'Referater', NULL, 15, 381, '2012-03-07', 0),
+(60, 59, 'Referater', NULL, 213, 381, '2012-03-07', 0),
 (61, 55, 'Kontoret', NULL, 14, 381, '2012-03-07', 0),
-(62, NULL, 'I&amp;IKT-ringen', NULL, 16, 381, '2012-05-05', 0),
-(63, 62, 'Styret', 'Styret', 17, 381, '2012-05-05', 0),
-(64, 62, 'Visjon', NULL, 11, 293, '2012-05-05', 0),
-(65, 62, 'Medlemmer', NULL, 12, 293, '2012-05-05', 0),
-(66, 62, 'Årsmeldinger', 'Årsmeldinger', 13, 293, '2012-05-05', 0),
-(67, 62, 'Kontaktinformasjon', NULL, 18, 293, '2012-05-05', 0),
-(68, 62, 'Om', 'Om', 19, 293, '2012-05-05', 0),
-(69, 62, 'Bedriftens bidrag', NULL, 20, 293, '2012-05-05', 0),
-(70, 62, 'Promotering', NULL, 23, 293, '2012-05-08', 0),
-(71, 70, 'Presentasjoner', NULL, 24, 293, '2012-05-08', 0),
-(72, 70, 'Update^k', NULL, 25, 293, '2012-05-08', 0),
-(73, 2, 'Kontakt', NULL, 21, 293, '2012-05-08', 0),
-(74, 2, 'Medlemmer', NULL, 26, 293, '2012-05-08', 0),
+(62, NULL, 'I&amp;IKT-ringen', NULL, 210, 381, '2012-05-05', 0),
+(63, 62, 'Styret', NULL, 211, 381, '2012-05-05', 7),
+(64, 62, 'Visjon', NULL, 191, 293, '2012-05-05', 9),
+(65, 62, 'Medlemmer', NULL, 196, 293, '2012-05-05', 6),
+(66, 62, 'Årsmeldinger', NULL, 197, 293, '2012-05-05', 1),
+(67, 62, 'Kontaktinformasjon', NULL, 165, 293, '2012-05-05', 0),
+(68, 62, 'Om', NULL, 205, 293, '2012-05-05', 10),
+(69, 62, 'Bedriftens bidrag', NULL, 204, 293, '2012-05-05', 3),
+(70, 62, 'Promotering', NULL, 200, 293, '2012-05-08', 6),
+(71, 70, 'Bedriftspresentasjoner', NULL, 206, 293, '2012-05-08', 5),
+(72, 70, 'Update^K', NULL, 207, 293, '2012-05-08', 4),
+(73, 2, 'Kontakt', NULL, 27, 293, '2012-05-08', 0),
+(74, 2, 'Medlemmer', NULL, 33, 293, '2012-05-08', 0),
 (75, NULL, '2012', NULL, 3, 381, '2012-05-12', 0),
-(76, 1, 'Tillitsvalgte', 'Tillitsvalgte', 22, 317, '2012-09-04', 0),
-(77, 76, 'SPR', 'SPR', 27, 317, '2012-09-04', 2),
-(78, 76, 'KTR', 'KTR', 28, 317, '2012-09-04', 0),
-(80, 1, 'Lesesalen', NULL, 29, 381, '2012-09-06', 0),
-(81, NULL, 'Jubileum', NULL, 30, 381, '2013-01-29', 0),
-(82, 81, 'Program', NULL, 33, 381, '2013-01-29', 0),
-(83, 82, 'Dag 1', NULL, 32, 381, '2013-01-29', 0),
-(111, 1, 'Griffens Orden', NULL, 72, 466, '2013-08-23', 0);
+(76, 1, 'Tillitsvalgte', 'Tillitsvalgte', 85, 317, '2012-09-04', 0),
+(77, 76, 'SPR', 'SPR', 212, 317, '2012-09-04', 1),
+(78, 76, 'KTR', 'KTR', 35, 317, '2012-09-04', 0),
+(80, 1, 'Lesesalen', NULL, 40, 381, '2012-09-06', 0),
+(81, 62, 'I&amp;IKT-studenter', NULL, 199, 317, '2012-11-02', 4),
+(82, 81, 'Geomatikk', NULL, 160, 317, '2012-11-02', 0),
+(83, 81, 'Produkt og prosess', NULL, 164, 317, '2012-11-02', 0),
+(84, 81, 'Konstruksjonsteknikk', NULL, 161, 317, '2012-11-02', 0),
+(85, 81, 'Petroleumsfag', NULL, 163, 317, '2012-11-02', 0),
+(86, 81, 'Marin teknikk', NULL, 162, 317, '2012-11-02', 0),
+(87, 70, 'Andre promoteringsmetoder', NULL, 175, 317, '2012-11-02', 0),
+(88, 70, 'Ekskursjoner', NULL, 208, 317, '2012-11-02', 3),
+(89, 70, 'Stands', NULL, 209, 317, '2012-11-02', 2),
+(91, 65, 'Focus Software AS', NULL, 169, 317, '2012-11-02', 0),
+(92, 65, 'Norkart AS', NULL, 170, 317, '2012-11-02', 0),
+(93, 65, 'Aker Solutions KBe Design', NULL, 168, 317, '2013-01-19', 0),
+(95, 94, 'Progam', NULL, 47, 381, '2013-01-29', 0),
+(96, NULL, 'Guide til tilgangssystemet', 'Tilgang', 109, 504, '2013-01-29', 0),
+(97, NULL, 'Jubileum', NULL, 81, 370, '2013-02-03', 0),
+(99, 1, 'Griffens Orden', 'Griffens Orden', 219, 356, '2013-02-04', 0),
+(102, 80, 'Lesesal-IRC', NULL, 83, 380, '2013-02-06', 0);
+
+--
+-- Dumping data for table `article_text`
+--
 
 INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`) VALUES
 (1, 56, '<p>\n</p><table cellspacing="6"><tr><td width="150"><a href="http://www.ntnu.no/studier/ingeniorvitenskap-ikt">I &amp; IKT på ntnu.no</a>\n</td>\n<td>\nRekrutterings- og infosider.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studieinformasjon/timeplan/">Timeplaner</a>\n</td><td>\nTimeplanene til alle klassetrinn.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studentservice/">Studentservice</a>\n</td><td>\nSvarer på alle spørsmål du måtte ha som NTNU-student.\n</td></tr><tr><td>\n<a href="http://www.studweb.ntnu.no">ITEAs infoweb</a>\n</td><td>\nInformasjonsbase for IT-systemet\n</td></tr><tr><td>\n<a href="http://www.orakel.ntnu.no">Orakeltjenesten</a>\n</td><td>\nSupport for IT-systemer under NTNU\n</td></tr><tr><td>\n<a href="http://www.samfundet.no">\nStudentersamfundet i Trondhjem</a>\n</td><td>\nNorges største og studentersamfunn.\n</td></tr><tr><td>\n<a href="http://www.universitetsavisa.no">Universitesavisa</a>\n</td><td>\nNyheter fra campus.\n</td></tr><tr><td>\n<a href="http://www.underdusken.no">Under Dusken</a>\n</td><td>\nTrondheims studentavis\n</td></tr><tr><td>\n<a href="http://www.studentrad.no/">Studentrådene</a>\n</td><td>\nStudentrådene ved NTNU\n</td></tr></table>', NULL, '2012-12-11'),
@@ -86,8 +133,15 @@ INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`
 (30, 81, '<p>\n	Testing testing</p>\n', NULL, '2013-01-29'),
 (31, 82, '', NULL, '2013-01-29'),
 (32, 83, '', NULL, '2013-01-29'),
-(33, 82, '<p>\n	Det har ikke kommet noe program enda </p>\n', NULL, '2013-01-29'),
-(72, 111, '<p>\n	Griffens Orden er en orden bestående av Hybrida-medlemmer som er tildelt en utmerkelse for deres arbeid for Hybrida eller studieprogrammet Ingeniørvitenskap og IKT. Alle medlemmene av denne ordenen har tittelen "Ridder av Griffens Orden".</p>\n<p>\n	Ridder av Griffens Orden er en ærespris som tildeles medlemmer av Hybrida som har utmerket seg ut i sitt engasjement og arbeid for Linjeforeningen Hybrida eller studieprogrammet Ingeniørvitenskap og IKT. Medlemmet må ha vist ekstraordniært engasjement og iniativ, og vist stor glede av å ytre Hybridas formål og verdier. </p>\n<div>\n	Utnevnelsen bestemmes av Vokterne av Griffens Orden. Dette er en komité på 8 Hybrida-medlemmer, bestående av  minimum ett medlem fra hvert årskull. Vokterne er uavhengig av Hybridas styre, og står fritt til å tildele maks 3 utnevnelser hvert år. Ingen styremedlemmer fra Hybridas hovedstyre kan sitte i komitéen. Vokterne tar selv inn nye medlemmer når dette er nødvendig.</div>\n<div>\n	 </div>\n<div>\n	Alle medlemmer av Hybrida kan være med å påvirke valgene gjort av vokterne. Medlemmer kan når som helst nominere andre medlemmer de mener fortjener utnevnelsen, basert på kriteriene beskrevet ovenfor. Nominasjoner gjøres <a href="http://tinyurl.com/RidderAvGriffensOrden">her</a>. (Anonym nominasjon)</div>\n<div>\n	 </div>\n<div>\n	Utnevnelsen skal skje hvert år på Hybridas nyttårsball i januar. Representanter fra Vokterne av Griffens Orden vil utføre tildelingen.</div>\n<div>\n	 </div>\n<div>\n	Ønsker man mer direkte kontakt med Vokterne, kan nominasjoner sendes inn på mail: hybrida-nominasjon@list.stud.ntnu.no, dette hvis man ønsker mer en dialog for å presentere sin nominasjon. (ikke-anonym nominasjon)</div>\n<div>\n	 </div>\n<div>\n	 </div>\n<h3>\n	<b>Følgende medlemmer er tildelt Ridder av Griffens Orden:</b></h3>\n<div>\n	2013* - Sigbjørn Aukland</div>\n<div>\n	2013* - Sigurd Andreas Holsen</div>\n<div>\n	2013* - Teodor Elstad</div>\n<div>\n	2013* - Marianne Hønsi</div>\n<div>\n	2013* - Frans Erstad</div>\n<div>\n	2013* - Bård Gamnes</div>\n<div>\n	2013* - Stig Kjemperud</div>\n<div>\n	2013* - Daniel Aase</div>\n<div>\n	2013* - Ivar Marthinusen</div>\n<div>\n	2013* - Christoffer Lange</div>\n<div>\n	2013* - Tor Christian Sandø</div>\n<div>\n	2013* - Eirik Haarr</div>\n<div>\n	2013* - Eirin Mohn Lem</div>\n<div>\n	2013* - Marthe Almeland</div>\n<div>\n	2013* - Marius Flem Lunde</div>\n<div>\n	2013* - Harald Wathne</div>\n<div>\n	 </div>\n<div>\n	*  I 2013 ble alle tildelinger foretatt under Hybridas 10-årsjubileumsgalla. Under jubileumet ble utmerkelsene også  tildelt medlemmer som var alumni studenter. Derfor er det flere enn 3 stk som er tildelt utmerkelsen i 2013.</div>\n<div>\n	 </div>\n', NULL, '2013-08-23');
+(33, 82, '<p>\n	Det har ikke kommet noe program enda </p>\n', NULL, '2013-01-29');
+
+--
+-- Dumping data for table `bk_company`
+--
+
+--
+-- Dumping data for table `bk_company_specialization`
+--
 
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (1, 1),
@@ -111,8 +165,29 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (108, 3),
 (108, 4);
 
+--
+-- Dumping data for table `bk_company_update`
+--
+
+--
+-- Dumping data for table `bk_iktringen_information`
+--
+
+
+--
+-- Dumping data for table `book_sales`
+--
+
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
-(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 22:56:46');
+(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-20 00:56:46');
+
+--
+-- Dumping data for table `comment`
+--
+
+--
+-- Dumping data for table `event`
+--
 
 INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (71, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 0),
@@ -136,6 +211,10 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (109, '2021-06-05 17:00:00', '2021-06-05 17:00:00', 'R7', 0),
 (110, '2015-02-03 17:00:00', '2015-02-03 17:00:00', 'R7', 0);
 
+--
+-- Dumping data for table `event_company`
+--
+
 INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
 (100, NULL, 411),
 (101, NULL, 415),
@@ -146,25 +225,100 @@ INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
 (109, NULL, 98),
 (110, NULL, 92);
 
+--
+-- Dumping data for table `event_company_old`
+--
+
+
+--
+-- Dumping data for table `fb_user`
+--
+
+--
+-- Dumping data for table `fieldtrip_support`
+--
+
 INSERT INTO `fieldtrip_support` (`id`, `bpcId`, `userId`) VALUES
 (1, 98, 381);
+
+--
+-- Dumping data for table `forum`
+--
 
 INSERT INTO `forum` (`id`, `parent_id`, `title`, `description`, `listorder`, `is_locked`) VALUES
 (1, NULL, 'Hybrida', '', 1, 0);
 
-INSERT INTO `gallery` (`id`, `userId`, `title`, `imageId`, `timestamp`) VALUES
-(18, 1, 'lol', NULL, '2011-04-03 20:56:39'),
-(19, 1, 'lol', NULL, '2011-04-03 21:37:07'),
-(20, 1, 'n', NULL, '2011-04-03 22:12:46'),
-(21, 1, 'hello', NULL, '2011-04-03 23:23:11'),
-(22, 1, 'HELLO', NULL, '2011-04-03 23:24:42'),
-(23, 1, 'bears', NULL, '2011-04-03 23:39:46');
+--
+-- Dumping data for table `forum_post`
+--
+
+
+--
+-- Dumping data for table `forum_thread`
+--
+
+
+--
+-- Dumping data for table `forum_user`
+--
+
+
+--
+-- Dumping data for table `gallery`
+--
+
+
+--
+-- Dumping data for table `griff`
+--
+
+
+--
+-- Dumping data for table `griffgame_highscore`
+--
+
+
+--
+-- Dumping data for table `group_membership`
+--
+
+--
+-- Dumping data for table `groups`
+--
 
 INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 (55, 0, 'Webkom', 381, 'true', 'webkom'),
 (56, 0, 'Styret', 363, 'false', 'styret'),
 (57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bk'),
 (58, 0, 'UpdateK', 381, 'false', 'updatek');
+
+--
+-- Dumping data for table `iktringen_membership`
+--
+
+
+--
+-- Dumping data for table `image`
+--
+
+
+--
+-- Dumping data for table `job_announcement`
+--
+
+--
+-- Dumping data for table `kilt_comment`
+--
+
+
+--
+-- Dumping data for table `kilt_order`
+--
+
+
+--
+-- Dumping data for table `kilt_product`
+--
 
 INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (1, 'Kilt', 'Gutt', 'K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
@@ -191,6 +345,10 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (102, 'Ekstra', 'Flashes', 'FL_SOL.jpg', '631/Flashes----Solid-Color.html'),
 (103, 'Ekstra', 'Women''s Knee-Hi', '2009031615001048102_med.jpg', '1451/Women''s-Knee-Hi-Socks.html');
 
+--
+-- Dumping data for table `kilt_product_size`
+--
+
 INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (1, 1),
 (1, 2),
@@ -214,6 +372,10 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (103, 4),
 (103, 5);
 
+--
+-- Dumping data for table `kilt_size`
+--
+
 INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (1, 'Small'),
 (2, 'Medium'),
@@ -222,22 +384,26 @@ INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (5, 'XLarge'),
 (6, 'XXLarge');
 
-INSERT INTO `knights` (`id`, `firstName`, `lastName`, `graduationYear`, `grantYear`, `reason`) VALUES
-(1, 'Sigurd Andreas', 'Holsen', 2015, 2013, 'Neste utmerkelsen går til en person som gjennom sitt arbeid for Hybrida, har bidratt til nyutvikling, nytenkning og engasjement for Hybridas IKT. Personen har brukt utallige timer både på sitt arbeid for linjeforeningen, og på å utvikle andres ideer og kunnskap. Han blir sett på som en uvurdelig ressurs og en stor inspirasjon for hele Hybridas IKT. Som vevsjef klarte han det 2 vevsjefer ikke klarte før han; Nemlig å gi Hybrida en ny fresh hjemmeside. Og med kåringen "kullets partyløve" bak seg, bidrar han også til mer, enn bare IKT. Det er en stor glede å tildele denne utmerkelsen til Sigurd Andreas Holsen.'),
-(2, 'Sigbjørn', 'Aukland', 2015, 2013, 'Helt til sist vil vi gi en utmerkelse til en som har vært veldig synlig i Hybrida de siste årene. Han har har vært med i BedKom, men de fleste har nok merket mest til innsatsen hans i styrevervet han har hatt. Han er alltid full av ville påfunn, og han får også mange av dem gjennomført. Kanskje er det derfor jubileet vårt også har blitt så stort og flott som det har vært, med en festivalus som virkelig har benyttet seg av ArrKom, og gjort de til en enda bedre komité. Man kan dessuten ikke komme utenom at han bidro stort til at Hybrida endelig fikk sin egen kjeller...og mistet den igjen på grunn av et uhell med en gummihanske. Heldigvis får vi kjelleren tilbake om en måned. Kveldens siste utmerkelse går til rabbagasten som aldri blir kastet ut av et utested, han blir bare bedt om å gå, Sigbjørn Aukland!');
+--
+-- Dumping data for table `kilt_time`
+--
 
+
+--
+-- Dumping data for table `news`
+--
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `weight`, `timestamp`, `status`) VALUES
-(40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, 0, '2011-07-17 22:34:51', 0),
+(40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, 0, '2011-07-17 22:34:51', 0),
 (41, 73, 'event', 'Generalforsamling', NULL, 'Generalforsamling i Hybrida', '', 326, 0, '2011-11-10 21:14:21', 0),
 (56, NULL, NULL, 'Nytt styre', NULL, 'Vil gratulere de nye styremedlemmene med valget', '<p>\n   <strong>Festivalus</strong> - Sigbjørn Aukland\n</p>\n<p>\n   <strong>Skattemester</strong> - Tonje Sundstrøm\n</p>\n<p>\n   <strong>Vevsjef</strong> - Sigurd Holsen\n</p>\n<p>\n   <strong>SPR</strong> - Erik Aasmundrud\n</p>', 363, 0, '2011-11-26 20:02:14', 0),
-(364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>\n	Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>\n	Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p>\n	<strong>Lycheburger </strong>Lyches ubestridte klassiker. Med aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter. kr 109.</p>\n<p>\n	<strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli, pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.  kr 99</p>\n<p>\n	<strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår. Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte mandelpoteter. kr 129</p>\n<p>\n	<strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr 129</p>\n<p>\n	<strong><em>Dessertvalg:</em></strong></p>\n<p>\n	<strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr 45</p>\n<p>\n	<strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p>\n	 </p>\n<p>\n	Betaling skjer på Hybridas konto: 0539.26.44913 Prisen avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn + halvingfest</p>\n<p>\n	 </p>\n', 367, 0, '2012-02-17 19:09:39', 0),
+(364, 85, 'event', 'Halvingfest!', NULL, 'Tredje klasse feirer sin halvferdige universitetsutdannelse med en herlig middag på Lyche.', '<p>\n	Maten blir servert kl 20.00 (hver der ca en halvtime før) og de flotte tredjeklassingene dukker opp i relativt fin stas så koser vi oss!</p>\n<p>\n	Påmelding skjer her, husk at den er bindende. <u>Ved påmelding må du også sende en mail til halvingfest@gmail.com med menyen du ønsker.</u> Valg av hovedretter er:</p>\n<p>\n	<strong>Lycheburger </strong>Lyches ubestridte klassiker. Med aioli, pistou, bacon, cheddarost og paprikasalsa. Serveres med ovnsbakte mandelpoteter. kr 109.</p>\n<p>\n	<strong>Vegetarburger</strong> Lyches vegetarburger. Med aioli, pistou, cheddarost, salat og paprikasalsa. Serveres med ovnsbakte mandelpoteter.  kr 99</p>\n<p>\n	<strong>Confiterte andelår</strong> Langtidsstekt, sprøtt andelår. Serveres med ovnsbakte grønnsaker, pastinakkpuré, appelsinsaus og ovnsbakte mandelpoteter. kr 129</p>\n<p>\n	<strong>Ovnsbakt lakseloin</strong> Lakseloin med ovnsbakte grønnsaker og mandelpoteter, samt pastinakkpuré. Toppes med mandelvinaigrette. kr 129</p>\n<p>\n	<strong><em>Dessertvalg:</em></strong></p>\n<p>\n	<strong>Sjokoladelyche</strong><br />\n	Konfektkake av fyldig sjokolade, med pisket krem og bærsaus. kr 45</p>\n<p>\n	<strong>Panna cotta</strong><br />\n	Panna cotta med bærsaus. kr 35</p>\n<p>\n	 </p>\n<p>\n	Betaling skjer på Hybridas konto: 0539.26.44913 Prisen avhenger av hvilken rett du velger. Summer selv og overfør til konto merket med navn + halvingfest</p>\n<p>\n	 </p>\n', 367, 0, '2012-02-17 19:09:39', 0),
 (366, 89, 'event', 'Komitefest!', NULL, 'Det arrangeres komitefest for hybrida kommitémedlemmer 15. mars på kjellerne.', '', 381, 0, '2012-02-28 13:23:04', 0),
-(368, NULL, NULL, 'Den gamle siden', NULL, 'Den gamle siden vil ikke lenger bli vedlikeholdt, men finnes på <a href="http://www.hybrida.ntnu.no">http://www.hybrida.ntnu.no</a>', '<p>\n	 .</p>\n', 353, 0, '2012-04-25 23:17:43', 0),
-(369, NULL, NULL, 'Lesesal-IRC', NULL, 'Kjeder du deg på lesesalen? Skulle du ønske at det var mulig å snakke med andre hybrider på lesesalen? Da er lesesal-IRC noe for deg!', '<p>\n	 </p>\n<p>\n	Etter noe nedetid er IRC-serveren opp å går igjen. Koble deg på med:</p>\n<p>\n	Server: irc.hybrida.no</p>\n<p>\n	Port: 6667</p>\n<p>\n	Kanal: #lesesalen</p>\n<p>\n	De som ikke har brukt IRC før kan ta en titt her: <a href="https://cbe002.chat.mibbit.com/">https://cbe002.chat.mibbit.com/</a> (velg tilkobling med server)</p>\n', 331, 0, '2012-05-02 12:09:02', 0),
+(368, NULL, NULL, 'Den gamle siden', NULL, 'Den gamle siden vil ikke lenger bli vedlikeholdt, men finnes på <a href="http://www.hybrida.ntnu.no">http://www.hybrida.ntnu.no</a>', '<p>\n	 .</p>\n', 353, 0, '2012-04-25 23:17:43', 0),
+(369, NULL, NULL, 'Lesesal-IRC', NULL, 'Kjeder du deg på lesesalen? Skulle du ønske at det var mulig å snakke med andre hybrider på lesesalen? Da er lesesal-IRC noe for deg!', '<p>\n	 </p>\n<p>\n	Etter noe nedetid er IRC-serveren opp å går igjen. Koble deg på med:</p>\n<p>\n	Server: irc.hybrida.no</p>\n<p>\n	Port: 6667</p>\n<p>\n	Kanal: #lesesalen</p>\n<p>\n	De som ikke har brukt IRC før kan ta en titt her: <a href="https://cbe002.chat.mibbit.com/">https://cbe002.chat.mibbit.com/</a> (velg tilkobling med server)</p>\n', 331, 0, '2012-05-02 12:09:02', 0),
 (370, NULL, NULL, 'Reisebrev fra Asia', NULL, 'Her kommer Marius Røed sitt reisebrev fra Asia. Jeg fikk dette videresendt fra Update^K-redaktør, Eirik.', '<p>\n	Gå inn på <a href="/profil/mariuroe">bloggen til Marius</a> og se selv</p>\n', NULL, 0, '2012-05-04 14:00:07', 0),
 (371, 91, 'event', '17. mai-tog', NULL, '17. mai-toget begynner klokken 13.00 utenfor Nidarosdomen. Oppmøte: 12.45.\n\nVi går uansett vær!', '<p>\n	Møt opp og bli med i 17. mai-tog!</p>\n', 370, 0, '2012-05-17 00:39:04', 0),
-(373, NULL, NULL, 'Dette er bare en beta', NULL, 'Denne siden er bare en beta, gå til <a href="http://hybrida.no">hybrida.no</a> for å komme til hovedsiden.', '<h2>Database-værktøy:</h2>\n\n<a class="g-button" href="/dev/cleandb">Fjern testdata</a>\n<a class="g-button" href="/dev/update">Total oppdatering</a>\n', 381, 2147483647, '2025-07-05 07:18:12', 0),
+(373, NULL, NULL, 'Dette er bare en beta', NULL, 'Denne siden er bare en beta, gå til <a href="http://hybrida.no">hybrida.no</a> for å komme til hovedsiden', '', 381, 2147483647, '2025-07-05 07:18:12', 0),
 (375, 97, 'event', 'Testevent', NULL, 'oaietno', '<p>\n	awtaw</p>\n', 381, 0, '2012-08-24 08:55:52', 0),
 (377, 99, 'event', 'Evig event', NULL, 'Event som kun brukes til testing', '<p>\n	Denne hendelsen med påmelding er åpen frem til 2015. Veldig nyttig til testing</p>\n', 381, 0, '2012-09-11 13:39:55', 0),
 (382, NULL, NULL, 'Trenger ikke nytt passord likevel', NULL, '<p>\nNTNU har nettopp gått tilbake på deres beslutning om å stenge ned den gamle innloggingstjenesten, så det er ikke lenger noe akutt behov for å legge inn nytt passord.\n\nDe har gitt beskjed om at de kommer til å  videreføre den nåværende tjenesten intil videre, så da kommer vi til å benytte den.\n</p>\n\n<p>\nBeklager alt maset.\n</p>', '<p>\n	Hvis det skulle være at NTNU etter en tid velger å avslutte innloggingstjenesten, som opprinnelig var planen, kan det hende vi kommer til å gå over til å bruke eget hybrida-passord, slik som er praksis hos en del andre linjeforeninger, men det er altså ikke vits i å styre med dette lenger nå.</p>\n<p>\n	Vi kommer ikke til å slette de nye passordene på grunn av dette.</p>\n<p>\n	Om NTNU gjør en ny beslutning vil vi gi beskjed om dette i god tid.</p>\n', 381, 0, '2012-09-28 00:30:22', 0),
@@ -247,14 +413,55 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (389, 110, 'event', 'Bedpres: Geomatikk IKT', NULL, 'In eleifend nisl vel libero lacinia in ultricies felis sagittis. Sed eu urna tristique metus dapibus elementum. Nunc sed sem id nulla feugiat fermentum. In hendrerit sollicitudin lorem pellentesque egestas. Sed lobortis felis sed nibh pellentesque id consectetur est facilisis. Duis non sapien a orci faucibus sodales non at purus. Phasellus rutrum ultricies fermentum. Phasellus in diam et nisl sollicitudin vulputate ut et mi. Aenean ultrices lobortis tincidunt. Aenean rhoncus, arcu id feugiat semper, quam felis consequat augue, nec condimentum mi turpis sit amet purus. Ut molestie sapien nec er...', '<p>In eleifend nisl vel libero lacinia in ultricies felis sagittis. Sed eu urna tristique metus dapibus elementum. Nunc sed sem id nulla feugiat fermentum. In hendrerit sollicitudin lorem pellentesque egestas. Sed lobortis felis sed nibh pellentesque id consectetur est facilisis. Duis non sapien a orci faucibus sodales non at purus. Phasellus rutrum ultricies fermentum. Phasellus in diam et nisl sollicitudin vulputate ut et mi. Aenean ultrices lobortis tincidunt. Aenean rhoncus, arcu id feugiat semper, quam felis consequat augue, nec condimentum mi turpis sit amet purus. Ut molestie sapien nec eros volutpat et porta nisi mollis.</p>\n', NULL, 0, '2013-02-01 13:35:17', 0),
 (632, NULL, NULL, 'GryphusRegnatorImmortalis the game', NULL, 'Prøv det <a style="font-size:100px;" href="/game/griff">her</a>', '<p>\n	Tomt</p>\n', 381, 100, '2013-02-20 14:02:49', 0);
 
+--
+-- Dumping data for table `news_group`
+--
+
 INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
 (3, 56),
 (38, 55);
+
+--
+-- Dumping data for table `notification`
+--
+
+
+--
+-- Dumping data for table `notification_listener`
+--
 
 INSERT INTO `notification_listener` (`id`, `userID`, `parentType`, `parentID`, `isDeleted`) VALUES
 (32, 381, 'profile', 381, 0),
 (33, 381, 'news', 370, 0),
 (34, 381, 'news', 386, 0);
+
+--
+-- Dumping data for table `quiz_event`
+--
+
+
+--
+-- Dumping data for table `quiz_team`
+--
+
+
+--
+-- Dumping data for table `quiz_team_member`
+--
+
+
+--
+-- Dumping data for table `quiz_team_score`
+--
+
+
+--
+-- Dumping data for table `rbac_assignment`
+--
+
+--
+-- Dumping data for table `rbac_item`
+--
 
 INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('admin', 2, 'Administrator', '', 's:0:"";'),
@@ -270,6 +477,7 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('updateBedpres', 2, NULL, NULL, NULL),
 ('updateGroup', 0, '', '', NULL),
 ('updateNews', 0, 'oppdatere nyhet', '', 's:0:"";'),
+('updateOwn', 1, NULL, NULL, NULL),
 ('updateOwnArticle', 1, '', 'return isset($params["id"]) && Article::model()->findByPk($params["id"])->author == user()->id;', 's:0:"";'),
 ('updateOwnGroup', 1, '', 'return isset($params["id"]) && Groups::model()->findByPk($params["id"])->admin == user()->id;', NULL),
 ('updateOwnNews', 1, '', 'return isset($params["id"]) && News::model()->findByPk($params["id"])->authorId == user()->id;', 's:0:"";'),
@@ -278,34 +486,45 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('webkom', 2, 'Medlemmer av webkom', 'return Yii::app()->gatekeeper->hasGroupAccess(55);', NULL),
 ('writer', 2, 'Kan publisere', '', 's:0:"";');
 
+--
+-- Dumping data for table `rbac_itemchild`
+--
+
 INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
-('admin', 'deleteComment'),
-('admin', 'editor'),
-('admin', 'updateBedpres'),
-('admin', 'updateGroup'),
-('admin', 'updateProfile'),
-('admin', 'writer'),
-('all', 'bk'),
-('all', 'deleteOwnComment'),
-('all', 'styret'),
-('all', 'updateOwnProfile'),
-('all', 'webkom'),
-('bk', 'updateBedpres'),
-('bk', 'updateNews'),
-('deleteOwnComment', 'deleteComment'),
-('editor', 'updateArticle'),
-('editor', 'updateNews'),
-('styret', 'editor'),
-('styret', 'writer'),
-('updateOwnArticle', 'updateArticle'),
-('updateOwnNews', 'updateNews'),
-('updateOwnProfile', 'updateProfile'),
 ('webkom', 'admin'),
-('webkom', 'writer'),
+('all', 'bk'),
 ('writer', 'createArticle'),
 ('writer', 'createNews'),
+('deleteOwnComment', 'deleteComment'),
+('all', 'deleteOwnComment'),
+('admin', 'editor'),
+('styret', 'editor'),
+('all', 'styret'),
+('editor', 'updateArticle'),
+('updateOwnArticle', 'updateArticle'),
+('admin', 'updateBedpres'),
+('bk', 'updateBedpres'),
+('admin', 'updateGroup'),
+('bk', 'updateNews'),
+('editor', 'updateNews'),
+('updateOwnNews', 'updateNews'),
+('all', 'updateOwn'),
+('updateOwn', 'updateOwnArticle'),
 ('writer', 'updateOwnArticle'),
-('writer', 'updateOwnNews');
+('updateOwn', 'updateOwnGroup'),
+('updateOwn', 'updateOwnNews'),
+('writer', 'updateOwnNews'),
+('updateOwn', 'updateOwnProfile'),
+('admin', 'updateProfile'),
+('updateOwnProfile', 'updateProfile'),
+('all', 'webkom'),
+('admin', 'writer'),
+('styret', 'writer'),
+('webkom', 'writer');
+
+--
+-- Dumping data for table `signup`
+--
 
 INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
 (71, 47, '2011-12-07 22:25:40', '2012-01-01 22:35:00', 'false', 0),
@@ -334,6 +553,19 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (109, 110, '2012-02-01 15:00:00', '2016-11-04 17:00:00', 'false', 2),
 (110, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 2);
 
+--
+-- Dumping data for table `signup_membership`
+--
+
+--
+-- Dumping data for table `signup_membership_anonymous`
+--
+
+
+--
+-- Dumping data for table `specialization`
+--
+
 INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (1, 10, 'Geomatikk'),
 (2, 11, 'Marin Teknikk'),
@@ -345,19 +577,27 @@ INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (8, NULL, 'Produktutvikling og Materialer'),
 (9, NULL, 'Varme- og Strømningsteknikk');
 
+--
+-- Dumping data for table `tbl_migration`
+--
+
 INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 ('m000000_000000_base', 1355256725),
 ('m121209_184746_move_from_article_content_to_article_text', 1355256727);
 
+--
+-- Dumping data for table `user`
+--
+
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `linkedin`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
-(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen ', 2, 2015, 'true', 'male', NULL, NULL, 'pub/sigurd-holsen/4b/636/582', '2013-08-23 18:34:33', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n  Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n  <img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n  Meg og layla koser oss!</p>\n<p style="text-align:left;">\n Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n  <img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n  Jeg som har trent</p>\n<p style="text-align:left;">\n Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n  Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
-(466, 'admin', 'admin', '', 'user', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, '2013-08-23 18:43:20', NULL, NULL, '', NULL, NULL, NULL, NULL);
+(381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen', 2, 2015, 'true', 'male', NULL, 12345678, 'pub/sigurd-holsen/4b/636/582/', '2013-08-29 16:14:40', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
+(466, 'admin', 'ad', 'm', 'in', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
+
+--
+-- Dumping data for table `user_password`
+--
 
 INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
 (293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
-SET FOREIGN_KEY_CHECKS=1;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-COMMIT;
+SET FOREIGN_KEY_CHECKS=1;
