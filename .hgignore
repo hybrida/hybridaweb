@@ -11,4 +11,5 @@ upc/
 .DS_Store
 .git
 style/css/min.css
-style/less/*.css
+db/*.hash
+
