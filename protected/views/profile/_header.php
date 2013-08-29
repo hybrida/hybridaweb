@@ -12,7 +12,7 @@
 
 <h1><?=$user->getFullName()?></h1>
 
-<div id='g-groupNavigation'>
+<div class='g-groupNavigation'>
 	<?=CHtml::link('Vegg', array('/profile/comment', 'username' => $user->username), array(
 		'class' => 'g-groupNavigationItem',
 	))?>

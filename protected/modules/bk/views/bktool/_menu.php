@@ -1,4 +1,4 @@
-<div id='g-groupNavigation'>
+<div class='g-groupNavigation'>
 	<?= CHtml::link('Alumniliste', array('graduates'), array('class' => 'g-groupNavigationItem')) ?>
 	<?= CHtml::link('Bedriftsoversikt', array('companyoverview'), array('class' => 'g-groupNavigationItem')) ?>
 	<?= CHtml::link('Fordeling av bedrifter', array('companydistribution'), array('class' => 'g-groupNavigationItem')) ?>
