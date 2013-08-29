@@ -1,10 +1,12 @@
  <div id="widget-knightPresentation">
+     
 
     <?foreach ($models as $model) :?>
         <div class="knight g-clearfix">
             <div class="grantYear"><?= $model->grantYear ?></div>
             <div class="name"><?= $model->firstName . " " . $model->lastName ?></div>
-            <div class="reason"><?= $model->reason ?></div>
+            <div class="reason"><b>Avgangsår:</b> <?=$model->graduationYear ?></div>
+            <div class="reason"><b>Begrunnelse:</b> <?= $model->reason ?></div>
         </div>
     <?endforeach;?>
 
