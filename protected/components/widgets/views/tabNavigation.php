@@ -45,6 +45,9 @@
 					<li><?= CHtml::link("Medlemmer", array("/students/")); ?></li>
 					<li><?= CHtml::link("Forum", array("/forum")) ?></li>
 					<li><?= CHtml::link("Kiltbestilling", array("/kilt/")); ?></li>
+					<? if (user()->checkAccess('admin')): ?>
+						<li><?= CHtml::link("Riddere", array("/knight/")); ?></li>
+					<? endif  ?>
 				</ul>
 			</li>
 		<? endif ?>
