@@ -37,7 +37,7 @@
 			<div class="styretmedlem">
 				<h2>Leder</h2>
 				<img src="/upc/files/styret/artikkel/leder.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/torkvest">Tor Kvestad Idland</a>
+				<a href="/profil/aasmunph">&Aring;smund Pedersen Hugo</a>
 				3. kl
 				<div class="description">
 					Har det overordnede ansvaret i Hybrida.
@@ -47,7 +47,7 @@
 			<div class="styretmedlem">
 				<h2>Nestleder</h2>
 				<img src="/upc/files/styret/artikkel/nestleder.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/gurolar">Guro Larssen</a>
+				<a href="/profil/hannegje">Hanne Gjemdal</a>
 				3. kl
 				<div class="description">
 					Samarbeider med lederen om det organisatoriske og administrative ansvaret i 
@@ -58,7 +58,7 @@
 			<div class="styretmedlem">
 				<h2>Skattmester</h2>
 				<img src="/upc/files/styret/artikkel/skattemester.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/tonjeseg">Tonje Seglem Sundstr&oslash;m</a>
+				<a href="/profil/hegeaur">Hege Aur&Aring;en</a>
 				3. kl
 				<div class="description"></div>
 				Ansvaret for pengestr&oslash;mmen inn og, 
@@ -68,7 +68,7 @@
 			<div class="styretmedlem">
 				<h2>Festivalus</h2>
 				<img src="/upc/files/styret/artikkel/festivalus.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/sigbja">Sigbj&oslash;rn Aukland</a>
+				<a href="/profil/theret">Therese Torgersen</a>
 				3. kl
 				<div class="description">
 					Ansvaret for det som blir arrangert av fester, turer og diverse andre
@@ -79,7 +79,7 @@
 			<div class="styretmedlem">
 				<h2>Bedriftskomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/bksjef.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/aasmunph">&Aring;smund Pedersen Hugo</a>
+				<a href="/profil/simenlil">Simen Lillehagen</a>
 				2. kl
 				<div class="description">
 					Fikser og ordner med profileringen av linja og linjeforeningen utad til
@@ -90,8 +90,8 @@
 			<div class="styretmedlem">
 				<h2>Vevsjef</h2>
 				<img src="/upc/files/styret/artikkel/vevsjef.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/sigurhol">Sigurd Holsen</a>
-				3. kl
+				<a href="/profil/teodorlu">Teodor Lundaas Heggelund</a>
+				4. kl
 				<div class="description">
 					Ansvar for utvikling og drift av nettsidene samt informasjonsflyten i
 					linjeforeningen.
@@ -101,7 +101,7 @@
 			<div class="styretmedlem">
 				<h2>Jentekomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/jentekomsjef.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/andrewis">Andrea S&oslash;rdal Wist</a>
+				<a href="/profil/siljemol">Silje M&oslash;ller</a>
 				3. kl
 				<div class="description">
 					Sjef for jentekomiteen.
