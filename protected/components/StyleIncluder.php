@@ -1,13 +1,28 @@
 <?php
 
-class CssIncluder {
+class StyleIncluder {
 
 	private static $cssFiles = array();
+	private static $lessFiles = array();
 
 	public static function printCssTags() {
-		self::registerDirectories();
+		self::registerDirectory("style/css", self::$cssFiles);
 		$output = "";
 		foreach (self::$cssFiles as $file) {
+			$output .= CHtml::tag('link', array(
+				'rel' => 'stylesheet',
+				'type' => 'text/css',
+				'href' => $file,
+			)) . PHP_EOL;
+
+		}
+		return $output;
+	}
+
+	public static function printLessTags() {
+		self::registerDirectory("style/less", self::$lessFiles);
+		$output = "";
+		foreach (self::$lessFiles as $file) {
 			$output .= CHtml::tag('link', array(
 				'rel' => 'stylesheet/less',
 				'type' => 'text/css',
@@ -18,8 +33,7 @@ class CssIncluder {
 		return $output;
 	}
 
-	public static function registerDirectories() {
-		$dir = "style/less";
+	private static function registerDirectory($dir, & $fileList) {
 		$styleDir = dirname(Yii::app()->basePath) . "/" . $dir . "/";
 		$directoryHandle = opendir($styleDir);
 		while ($file = readdir($directoryHandle)) {
@@ -27,7 +41,7 @@ class CssIncluder {
 			if ($file == "." || $file == ".." || is_dir($fullPathName)) {
 				continue;
 			}
-			self::$cssFiles[] = Yii::app()->request->baseUrl . "/" . $dir . "/" . $file;
+			$fileList[] = Yii::app()->request->baseUrl . "/" . $dir . "/" . $file;
 		}
 	}
 
