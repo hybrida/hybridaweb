@@ -1,3 +1,5 @@
+@import "mixins.less";
+
 html{
 
 	background: url("/images/office.png") fixed;
@@ -50,7 +52,7 @@ a img {
 .layout-content {
 	width: 750px;
 	float:left;
-	border-right: 1px solid #ddd;
+	border-right: 1px solid @borderColorLight;
 }
 
 .layout-content > * {
@@ -59,7 +61,7 @@ a img {
 
 .layout-rightBar  {
 	width: 247px;
-	border-left: 1px solid #ddd;
+	border-left: 1px solid @borderColorLight;
 	float:left;
 	margin-left: -1px;
 }
