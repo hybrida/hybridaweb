@@ -54,11 +54,6 @@ $this->renderPartial('_header', array(
 			<td> <?= ($user->member == "true" ? "Medlem" : "Ikke Medlem") ?></td>
 		</tr>
 
-		<tr>
-			<th>Internnummer</th>
-			<td><?= $user->id ?></td>
-		</tr>
-
 	</table>
 	<article class="userDescription">
 		<?= $user->description ?>
