@@ -3,7 +3,7 @@ syntax: glob
 nbproject
 assets/*
 runtime
-.swp
+*.swp
 upc/
 .metadata/
 .project
