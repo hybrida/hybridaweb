@@ -70,33 +70,6 @@ return array(
 		'search',
 		'notifications',
 		'jobAnnouncement',
-		'srbac' => array(
-			'userclass' => 'User', //default: User
-			'userid' => 'id', //default: userid
-			'username' => 'username', //default:username
-			'delimeter' => '@', //default:-
-			'debug' => false, //default :false
-			'pageSize' => 10, // default : 15
-			'superUser' => 'admin', //default: Authorizer
-			'css' => 'srbac.css', //default: srbac.css
-			'layout' => '//layouts/singleColumn',
-			'notAuthorizedView' => 'srbac.views.authitem.unauthorized', // default:
-			//srbac.views.authitem.unauthorized, must be an existing alias
-			'alwaysAllowed' => array(),
-			'userActions' => array('Show', 'View', 'List'), //default: array()
-			'listBoxNumberOfLines' => 15, //default : 10
-			'imagesPath' => 'srbac.images', // default: srbac.images
-			'imagesPack' => 'noia', //default: noia
-			'iconText' => true, // default : false
-			'header' => 'srbac.views.authitem.header', //default : srbac.views.authitem.header,
-			//must be an existing alias
-			'footer' => 'srbac.views.authitem.footer', //default: srbac.views.authitem.footer,
-			//must be an existing alias
-			'showHeader' => true, // default: false
-			'showFooter' => true, // default: false
-			'alwaysAllowedPath' => 'srbac.components', // default: srbac.components
-		// must be an existing alias
-		)
 	),
 	'components' => array(
 		'cache' => array(
