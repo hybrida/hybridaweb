@@ -11,6 +11,7 @@ class FieldtripSupportTest extends CTestCase {
 
 	private function assertCanSupportDecoupled($expected, $user, $isSpring, $isFieldtripThisYear) {
 		$actual = FieldtripSupport::canSupportDecoupled($user, $isSpring, $isFieldtripThisYear);
+		$this->assertEquals($expected, $actual);
 	}
 
 	private function modelCount() {
@@ -24,19 +25,42 @@ class FieldtripSupportTest extends CTestCase {
 		$this->assertCanSupport(false, $user);
 	}
 
+	public function test_canSupport_secondYear() {
+		$user = Util::getNewUser();
+		$user->classYear = 2;
+		$user->save();
+
+		//$is->assertCanSupportDecoupled(false, $user, spring, thisyear);
+		$this->assertCanSupportDecoupled(false, $user, false, true);
+		$this->assertCanSupportDecoupled(false, $user, false, false);
+		$this->assertCanSupportDecoupled(false, $user, true, true);
+		$this->assertCanSupportDecoupled(true, $user, true, false);
+	}
+
 	public function test_canSupport_thirdYear() {
 		$user = Util::getNewUser();
 		$user->classYear = 3;
 		$user->save();
-		// autumn - thisYear - true
-		$this->assertCanSupportDecoupled(true, $user, false, true);
-		// autumn - nextYear - true
+
+		//$assertCanSupportDecoupled($expected, $user, spring, thisyear);
+		$this->assertCanSupportDecoupled(false, $user, false, true);
 		$this->assertCanSupportDecoupled(true, $user, false, false);
-		// spring - thisYear - true
 		$this->assertCanSupportDecoupled(true, $user, true, true);
-		// spring - nextyear - false
+		$this->assertCanSupportDecoupled(true, $user, true, false);
+	}
+
+	public function test_canSupport_fourthYear() {
+		$user = Util::getNewUser();
+		$user->classYear = 4;
+		$user->save();
+
+		//$assertCanSupportDecoupled($expected, $user, spring, thisyear);
+		$this->assertCanSupportDecoupled(false, $user, false, true);
+		$this->assertCanSupportDecoupled(true, $user, false, false);
+		$this->assertCanSupportDecoupled(true, $user, true, true);
 		$this->assertCanSupportDecoupled(false, $user, true, false);
 	}
+
 
 	public function test_isFieldtripOnYear_2012_true() {
 		$this->assertTrue(FieldtripSupport::isFieldtripOnYear(2012));

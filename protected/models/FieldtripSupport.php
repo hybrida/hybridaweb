@@ -99,13 +99,15 @@ class FieldtripSupport extends CActiveRecord
 			return false;
 		}
 		if ($user->classYear == 2) {
-			return $isSpring && !$isFieldtripThisYear;
+			return !$isFieldtripThisYear && $isSpring;
 		} elseif ($user->classYear == 3) {
-			return $isSpring || $isFieldtripThisYear;
-		} elseif($user->classYear == 4) {
-			return $isFieldtripThisYear;
+			return !$isFieldtripThisYear || $isSpring;
+		} elseif ($user->classYear == 4) {
+			return ($isFieldtripThisYear && $isSpring) ||
+				(!$isFieldtripThisYear && !$isSpring);
 		}
 	}
+
 	public static function canSupport($user) {
 		return self::canSupportDecoupled(
 						$user,
