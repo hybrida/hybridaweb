@@ -3,10 +3,12 @@
 <?
 
 function stotte() {	?>
-	<br>
-	<input type="checkbox" name="supportFieldtrip" value="1" />
-	<strong>Støtt ekskursjonen</strong> <a href="#" id="supportFieldtripDialog">Hva er dette?</a>
-	<br>
+
+	<div class="stotte">
+		<input type="checkbox" name="supportFieldtrip" value="1" />
+		<strong>Støtt ekskursjonen</strong> <a href="#" id="supportFieldtripDialog">Hva er dette?</a>
+		<br>
+	</div>
 	<div id="forklaring" style="background-color: white; padding: 20px; border: 1px solid black; border-radius: 2px">
 
 		Annethvert år reiser Hybrida på eksursjon. Hvis det er mindre enn 18
@@ -18,7 +20,7 @@ function stotte() {	?>
 
 	</div>
 
-	<style>
+	<style type="text/css">
 	.ui-icon-closethick {
 		background-color: #185c9b;
 		padding: 4px;
