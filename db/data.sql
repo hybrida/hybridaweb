@@ -436,13 +436,6 @@ INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
 --
 
 --
--- Dumping data for table `fieldtrip_support`
---
-
-INSERT INTO `fieldtrip_support` (`id`, `bpcId`, `userId`) VALUES
-(1, 98, 381);
-
---
 -- Dumping data for table `forum`
 --
 

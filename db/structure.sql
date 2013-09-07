@@ -166,6 +166,8 @@ CREATE TABLE IF NOT EXISTS `fieldtrip_support` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bpcId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `bpcId` (`bpcId`,`userId`),
   KEY `user` (`userId`)
