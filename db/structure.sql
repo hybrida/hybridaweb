@@ -1,7 +1,4 @@
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -15,7 +12,7 @@ USE `hybrida_dev`;
 CREATE TABLE IF NOT EXISTS `access_relations` (
   `id` int(11) NOT NULL,
   `access` int(11) NOT NULL,
-  `type` enum('article','event','image','news','signup','album', 'forumthread') COLLATE utf8_unicode_ci NOT NULL,
+  `type` enum('article','event','image','news','signup','album','forumthread') COLLATE utf8_unicode_ci NOT NULL,
   `super_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`,`type`,`access`,`super_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -54,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `article_text` (
   `phpFile` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=72 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=229 ;
 
 CREATE TABLE IF NOT EXISTS `bk_company` (
   `companyID` int(11) NOT NULL AUTO_INCREMENT,
@@ -182,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `forum` (
   `is_locked` tinyint(1) unsigned NOT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_forum_forum` (`parent_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
 CREATE TABLE IF NOT EXISTS `forum_post` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -192,7 +189,7 @@ CREATE TABLE IF NOT EXISTS `forum_post` (
   `content` text NOT NULL,
   `created` int(10) unsigned NOT NULL,
   `updated` int(10) unsigned NOT NULL,
-  `isDeleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `isDeleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_post_author` (`author_id`),
   KEY `FK_post_editor` (`editor_id`),
@@ -207,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `forum_thread` (
   `is_locked` tinyint(1) unsigned NOT NULL,
   `view_count` bigint(20) unsigned NOT NULL,
   `created` int(10) unsigned NOT NULL,
-  `isDeleted` tinyint(1) unsigned NOT NULL DEFAULT 0,
+  `isDeleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `FK_thread_forum` (`forum_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
@@ -405,7 +402,7 @@ CREATE TABLE IF NOT EXISTS `notification_listener` (
   `userID` int(11) NOT NULL,
   `parentType` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `parentID` int(11) NOT NULL,
-  `isDeleted` tinyint(1) NOT NULL DEFAULT 0,
+  `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `parentID` (`parentID`,`userID`,`parentType`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=43 ;
@@ -586,5 +583,7 @@ ALTER TABLE `rbac_assignment`
 ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
-SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

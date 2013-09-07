@@ -1,30 +1,16 @@
--- phpMyAdmin SQL Dump
--- version 2.11.8.1deb5+lenny9
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Sep 03, 2013 at 09:55 AM
--- Server version: 5.1.66
--- PHP Version: 5.3.3-7+squeeze14
-
 SET FOREIGN_KEY_CHECKS=0;
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
-
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `hybrida_dev`
---
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida_dev`;
-
---
--- Dumping data for table `access_relations`
---
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (24, 4055, 'news', 0),
@@ -32,20 +18,6 @@ INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
 (41, 2, 'news', 0),
 (85, 2014, 'signup', 1),
 (85, 4055, 'signup', 0);
-
---
--- Dumping data for table `album`
---
-
-
---
--- Dumping data for table `album_image`
---
-
-
---
--- Dumping data for table `article`
---
 
 INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `articleTextId`, `author`, `timestamp`, `weight`) VALUES
 (1, NULL, 'Hybrida', NULL, 124, 0, '0000-00-00', 0),
@@ -94,10 +66,6 @@ INSERT INTO `article` (`id`, `parentId`, `title`, `shorttitle`, `articleTextId`,
 (97, NULL, 'Jubileum', NULL, 81, 370, '2013-02-03', 0),
 (99, 1, 'Griffens Orden', 'Griffens Orden', 226, 356, '2013-02-04', 0),
 (102, 80, 'Lesesal-IRC', NULL, 83, 380, '2013-02-06', 0);
-
---
--- Dumping data for table `article_text`
---
 
 INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`) VALUES
 (1, 56, '<p>\n</p><table cellspacing="6"><tr><td width="150"><a href="http://www.ntnu.no/studier/ingeniorvitenskap-ikt">I &amp; IKT på ntnu.no</a>\n</td>\n<td>\nRekrutterings- og infosider.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studieinformasjon/timeplan/">Timeplaner</a>\n</td><td>\nTimeplanene til alle klassetrinn.\n</td></tr><tr><td>\n<a href="http://www.ntnu.no/studentservice/">Studentservice</a>\n</td><td>\nSvarer på alle spørsmål du måtte ha som NTNU-student.\n</td></tr><tr><td>\n<a href="http://www.studweb.ntnu.no">ITEAs infoweb</a>\n</td><td>\nInformasjonsbase for IT-systemet\n</td></tr><tr><td>\n<a href="http://www.orakel.ntnu.no">Orakeltjenesten</a>\n</td><td>\nSupport for IT-systemer under NTNU\n</td></tr><tr><td>\n<a href="http://www.samfundet.no">\nStudentersamfundet i Trondhjem</a>\n</td><td>\nNorges største og studentersamfunn.\n</td></tr><tr><td>\n<a href="http://www.universitetsavisa.no">Universitesavisa</a>\n</td><td>\nNyheter fra campus.\n</td></tr><tr><td>\n<a href="http://www.underdusken.no">Under Dusken</a>\n</td><td>\nTrondheims studentavis\n</td></tr><tr><td>\n<a href="http://www.studentrad.no/">Studentrådene</a>\n</td><td>\nStudentrådene ved NTNU\n</td></tr></table>', NULL, '2013-01-03'),
@@ -336,14 +304,6 @@ INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`
 (227, 60, '<p>\n	Vi har for tiden litt trøbbel med serverene våre. Referatene vil være oppe til studiestart</p>\n<p>\n	 </p>\n<p>\n	Her kommer alle referatene fra styremøter og generalforsamlinger i Hybrida.</p>\n<p>\n	Disse referatene er hentet fra forskjellige steder, så det kan hende at datoen ikke stemmer overens med datoen i dokumentet. Hvis du ser eksempler på dette er vi veldig takknemlige hvis du bruker Feedback-knappen til venstre, og sier ifra.</p>\n', 'styret_referater', '2013-09-03'),
 (228, 60, '<p>\n	Her kommer alle referatene fra styremøter og generalforsamlinger i Hybrida.</p>\n<p>\n	Disse referatene er hentet fra forskjellige steder, så det kan hende at datoen ikke stemmer overens med datoen i dokumentet. Hvis du ser eksempler på dette er vi veldig takknemlige hvis du bruker Feedback-knappen til venstre, og sier ifra.</p>\n', 'styret_referater', '2013-09-03');
 
---
--- Dumping data for table `bk_company`
---
-
---
--- Dumping data for table `bk_company_specialization`
---
-
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (1, 1),
 (1, 2),
@@ -366,29 +326,8 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (108, 3),
 (108, 4);
 
---
--- Dumping data for table `bk_company_update`
---
-
---
--- Dumping data for table `bk_iktringen_information`
---
-
-
---
--- Dumping data for table `book_sales`
---
-
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
-(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-20 00:56:46');
-
---
--- Dumping data for table `comment`
---
-
---
--- Dumping data for table `event`
---
+(5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 22:56:46');
 
 INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (71, '2012-01-29 07:00:00', '2012-02-02 20:00:00', 'Åre', 0),
@@ -412,10 +351,6 @@ INSERT INTO `event` (`id`, `start`, `end`, `location`, `status`) VALUES
 (109, '2021-06-05 17:00:00', '2021-06-05 17:00:00', 'R7', 0),
 (110, '2015-02-03 17:00:00', '2015-02-03 17:00:00', 'R7', 0);
 
---
--- Dumping data for table `event_company`
---
-
 INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
 (100, NULL, 411),
 (101, NULL, 415),
@@ -426,93 +361,14 @@ INSERT INTO `event_company` (`eventID`, `companyID`, `bpcID`) VALUES
 (109, NULL, 98),
 (110, NULL, 92);
 
---
--- Dumping data for table `event_company_old`
---
-
-
---
--- Dumping data for table `fb_user`
---
-
---
--- Dumping data for table `forum`
---
-
 INSERT INTO `forum` (`id`, `parent_id`, `title`, `description`, `listorder`, `is_locked`) VALUES
 (1, NULL, 'Hybrida', '', 1, 0);
-
---
--- Dumping data for table `forum_post`
---
-
-
---
--- Dumping data for table `forum_thread`
---
-
-
---
--- Dumping data for table `forum_user`
---
-
-
---
--- Dumping data for table `gallery`
---
-
-
---
--- Dumping data for table `griff`
---
-
-
---
--- Dumping data for table `griffgame_highscore`
---
-
-
---
--- Dumping data for table `group_membership`
---
-
---
--- Dumping data for table `groups`
---
 
 INSERT INTO `groups` (`id`, `menu`, `title`, `admin`, `committee`, `url`) VALUES
 (55, 0, 'Webkom', 381, 'true', 'webkom'),
 (56, 0, 'Styret', 363, 'false', 'styret'),
 (57, 0, 'Hybrida Bedriftskomité', 293, 'true', 'bk'),
 (58, 0, 'UpdateK', 381, 'false', 'updatek');
-
---
--- Dumping data for table `iktringen_membership`
---
-
-
---
--- Dumping data for table `image`
---
-
-
---
--- Dumping data for table `job_announcement`
---
-
---
--- Dumping data for table `kilt_comment`
---
-
-
---
--- Dumping data for table `kilt_order`
---
-
-
---
--- Dumping data for table `kilt_product`
---
 
 INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (1, 'Kilt', 'Gutt', 'K_IRISHER.jpg', '1111/Kilt---Irisher-Sport-Kilt.html'),
@@ -539,10 +395,6 @@ INSERT INTO `kilt_product` (`id`, `type`, `model`, `image_id`, `link`) VALUES
 (102, 'Ekstra', 'Flashes', 'FL_SOL.jpg', '631/Flashes----Solid-Color.html'),
 (103, 'Ekstra', 'Women''s Knee-Hi', '2009031615001048102_med.jpg', '1451/Women''s-Knee-Hi-Socks.html');
 
---
--- Dumping data for table `kilt_product_size`
---
-
 INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (1, 1),
 (1, 2),
@@ -566,10 +418,6 @@ INSERT INTO `kilt_product_size` (`product_id`, `size_id`) VALUES
 (103, 4),
 (103, 5);
 
---
--- Dumping data for table `kilt_size`
---
-
 INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (1, 'Small'),
 (2, 'Medium'),
@@ -577,20 +425,6 @@ INSERT INTO `kilt_size` (`id`, `size`) VALUES
 (4, 'Large'),
 (5, 'XLarge'),
 (6, 'XXLarge');
-
---
--- Dumping data for table `kilt_time`
---
-
-
---
--- Dumping data for table `knights`
---
-
-
---
--- Dumping data for table `news`
---
 
 INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress`, `content`, `authorId`, `weight`, `timestamp`, `status`) VALUES
 (40, 71, 'event', 'Åretur 2012', NULL, 'Hybrider! Da har det duket for årets høydepunkt, vinterens villeste eventyr: Åretur!!!', '<p>\n	Som de siste tre årene vil turen være i uke 5, eller for alle oss andre som hater ukesystemet: <strong>29. jan - 2. feb 2012. </strong> I år har vi fått boplass i Åre fjellby, rett ved trekket og utesteder, altså helt ypperlig!<br /><br />\n	Turen kommer på <strong> ca 2000kr </strong> per pers og inkluderer:<br />\n	 </p>\n<ul><li>\n		Tur/retur Åre sentrum</li>\n	<li>\n		4 netters opphold</li>\n	<li>\n		5 dagers skipass</li>\n	<li>\n		rabattkort</li>\n	<li>\n		mye fest og moro!</li>\n</ul><br /><p>\n	Vi har <strong>47 plasser </strong>, så her er det førstemann til mølla som gjelder!<br /><br />\n	 OBS! OBS! Videre info vil de påmeldte få via mail. Som tiden for avgang, når vi er tilbake, hytteoversikt, hyttefordeling, betalingsinfo med nøyaktig pris osv. Og for de som ikke vet det, her snakker vi helt bindende påmelding. <br />\n	 </p>\n', 326, 0, '2011-07-17 22:34:51', 0),
@@ -612,55 +446,14 @@ INSERT INTO `news` (`id`, `parentId`, `parentType`, `title`, `imageId`, `ingress
 (389, 110, 'event', 'Bedpres: Geomatikk IKT', NULL, 'In eleifend nisl vel libero lacinia in ultricies felis sagittis. Sed eu urna tristique metus dapibus elementum. Nunc sed sem id nulla feugiat fermentum. In hendrerit sollicitudin lorem pellentesque egestas. Sed lobortis felis sed nibh pellentesque id consectetur est facilisis. Duis non sapien a orci faucibus sodales non at purus. Phasellus rutrum ultricies fermentum. Phasellus in diam et nisl sollicitudin vulputate ut et mi. Aenean ultrices lobortis tincidunt. Aenean rhoncus, arcu id feugiat semper, quam felis consequat augue, nec condimentum mi turpis sit amet purus. Ut molestie sapien nec er...', '<p>In eleifend nisl vel libero lacinia in ultricies felis sagittis. Sed eu urna tristique metus dapibus elementum. Nunc sed sem id nulla feugiat fermentum. In hendrerit sollicitudin lorem pellentesque egestas. Sed lobortis felis sed nibh pellentesque id consectetur est facilisis. Duis non sapien a orci faucibus sodales non at purus. Phasellus rutrum ultricies fermentum. Phasellus in diam et nisl sollicitudin vulputate ut et mi. Aenean ultrices lobortis tincidunt. Aenean rhoncus, arcu id feugiat semper, quam felis consequat augue, nec condimentum mi turpis sit amet purus. Ut molestie sapien nec eros volutpat et porta nisi mollis.</p>\n', NULL, 0, '2013-02-01 13:35:17', 0),
 (632, NULL, NULL, 'GryphusRegnatorImmortalis the game', NULL, 'Prøv det <a style="font-size:100px;" href="/game/griff">her</a>', '<p>\n	Tomt</p>\n', 381, 100, '2013-02-20 14:02:49', 0);
 
---
--- Dumping data for table `news_group`
---
-
 INSERT INTO `news_group` (`newsId`, `groupId`) VALUES
 (3, 56),
 (38, 55);
-
---
--- Dumping data for table `notification`
---
-
-
---
--- Dumping data for table `notification_listener`
---
 
 INSERT INTO `notification_listener` (`id`, `userID`, `parentType`, `parentID`, `isDeleted`) VALUES
 (32, 381, 'profile', 381, 0),
 (33, 381, 'news', 370, 0),
 (34, 381, 'news', 386, 0);
-
---
--- Dumping data for table `quiz_event`
---
-
-
---
--- Dumping data for table `quiz_team`
---
-
-
---
--- Dumping data for table `quiz_team_member`
---
-
-
---
--- Dumping data for table `quiz_team_score`
---
-
-
---
--- Dumping data for table `rbac_assignment`
---
-
---
--- Dumping data for table `rbac_item`
---
 
 INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUES
 ('admin', 2, 'Administrator', '', 's:0:"";'),
@@ -685,45 +478,37 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('webkom', 2, 'Medlemmer av webkom', 'return Yii::app()->gatekeeper->hasGroupAccess(55);', NULL),
 ('writer', 2, 'Kan publisere', '', 's:0:"";');
 
---
--- Dumping data for table `rbac_itemchild`
---
-
 INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
-('webkom', 'admin'),
-('all', 'bk'),
-('writer', 'createArticle'),
-('writer', 'createNews'),
-('deleteOwnComment', 'deleteComment'),
-('all', 'deleteOwnComment'),
 ('admin', 'editor'),
-('styret', 'editor'),
-('all', 'styret'),
-('editor', 'updateArticle'),
-('updateOwnArticle', 'updateArticle'),
 ('admin', 'updateBedpres'),
-('bk', 'updateBedpres'),
 ('admin', 'updateGroup'),
-('bk', 'updateNews'),
-('editor', 'updateNews'),
-('updateOwnNews', 'updateNews'),
+('admin', 'updateProfile'),
+('admin', 'writer'),
+('all', 'bk'),
+('all', 'deleteOwnComment'),
+('all', 'styret'),
 ('all', 'updateOwn'),
+('all', 'webkom'),
+('bk', 'updateBedpres'),
+('bk', 'updateNews'),
+('deleteOwnComment', 'deleteComment'),
+('editor', 'updateArticle'),
+('editor', 'updateNews'),
+('styret', 'editor'),
+('styret', 'writer'),
 ('updateOwn', 'updateOwnArticle'),
-('writer', 'updateOwnArticle'),
 ('updateOwn', 'updateOwnGroup'),
 ('updateOwn', 'updateOwnNews'),
-('writer', 'updateOwnNews'),
 ('updateOwn', 'updateOwnProfile'),
-('admin', 'updateProfile'),
+('updateOwnArticle', 'updateArticle'),
+('updateOwnNews', 'updateNews'),
 ('updateOwnProfile', 'updateProfile'),
-('all', 'webkom'),
-('admin', 'writer'),
-('styret', 'writer'),
-('webkom', 'writer');
-
---
--- Dumping data for table `signup`
---
+('webkom', 'admin'),
+('webkom', 'writer'),
+('writer', 'createArticle'),
+('writer', 'createNews'),
+('writer', 'updateOwnArticle'),
+('writer', 'updateOwnNews');
 
 INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
 (71, 47, '2011-12-07 22:25:40', '2012-01-01 22:35:00', 'false', 0),
@@ -752,19 +537,6 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (109, 110, '2012-02-01 15:00:00', '2016-11-04 17:00:00', 'false', 2),
 (110, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 2);
 
---
--- Dumping data for table `signup_membership`
---
-
---
--- Dumping data for table `signup_membership_anonymous`
---
-
-
---
--- Dumping data for table `specialization`
---
-
 INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (1, 10, 'Geomatikk'),
 (2, 11, 'Marin Teknikk'),
@@ -776,28 +548,19 @@ INSERT INTO `specialization` (`id`, `siteId`, `name`) VALUES
 (8, NULL, 'Produktutvikling og Materialer'),
 (9, NULL, 'Varme- og Strømningsteknikk');
 
---
--- Dumping data for table `tbl_migration`
---
-
 INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 ('m000000_000000_base', 1355256725),
 ('m121209_184746_move_from_article_content_to_article_text', 1355256727);
 
---
--- Dumping data for table `user`
---
-
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `linkedin`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
 (381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen', 2, 2015, 'true', 'male', 275, 12345678, 'pub/sigurd-holsen/4b/636/582/', '2013-09-03 09:49:53', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
-(466, 'admin', 'admin', '', 'user', NULL, 2000, 'true', 'unknown', NULL, NULL, NULL, NULL, NULL, NULL, '', NULL, NULL, NULL, NULL);
-
---
--- Dumping data for table `user_password`
---
+(466, 'admin', 'admin', '', 'user', NULL, 2015, 'true', 'unknown', NULL, NULL, '', NULL, 'faec670ce75fe79cae1fa899617818031b1f201c', '', '', NULL, '', '0000-00-00', '');
 
 INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
 (293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
-
 SET FOREIGN_KEY_CHECKS=1;
 COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
