@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `fieldtrip_support` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `bpcId` (`bpcId`,`userId`),
   KEY `user` (`userId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 CREATE TABLE IF NOT EXISTS `forum` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
@@ -532,7 +532,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `altEmail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=679 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=762 ;
 
 CREATE TABLE IF NOT EXISTS `user_password` (
   `userId` int(11) NOT NULL,
@@ -543,7 +543,6 @@ CREATE TABLE IF NOT EXISTS `user_password` (
 
 
 ALTER TABLE `fieldtrip_support`
-  ADD CONSTRAINT `fieldtrip_support_ibfk_1` FOREIGN KEY (`bpcId`) REFERENCES `event_company` (`bpcID`),
   ADD CONSTRAINT `fieldtrip_support_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
 ALTER TABLE `forum`

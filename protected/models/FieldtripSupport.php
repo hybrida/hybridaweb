@@ -124,21 +124,31 @@ class FieldtripSupport extends CActiveRecord
 	}
 
 	public static function support($bpc, $user) {
-		if (!self::canSupport($user)) {
+		if (!static::canSupport($user)) {
 			return;
 		}
-		$ft = self::findByUserEventId($user->id, $bpc->id);
+		$ft = static::findByUserEventId($bpc->id, $user->id);
 		if ($ft === null) {
 			$ft = new FieldtripSupport();
 		}
 		$ft->userId = $user->id;
 		$ft->bpcId = $bpc->id;
 		$ft->save();
+		return $ft;
 	}
 
-	public static function findByUserEventId($userId, $bpcId) {
+	private static function findByUserEventId($bpcId, $userId) {
 		return FieldtripSupport::model()->find("userId = ? AND bpcId = ?", array(
 			$userId, $bpcId)
 		);
+	}
+
+	public static function removeSupport($bpcEvent, $user) {
+		$fieldtrip = self::findByUserEventId($bpcEvent->id, $user->id);
+		if ($fieldtrip === null) {
+			return;
+		}
+		$fieldtrip->isDeleted = 1;
+		$fieldtrip->save();
 	}
 }

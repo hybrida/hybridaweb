@@ -54,15 +54,35 @@ class DefaultController extends Controller {
 		return $news;
 	}
 
-	public function actionToggleAttending($bpcId, $supportFieldtrip) {
-		if (user()->isGuest) {
+	public function actionToggleAttending($bpcId) {
+		if (!Yii::app()->request->isPostRequest) {
+			throw new CHttpException(400, "Action only accepts post-requests");
+		} elseif (user()->isGuest) {
 			throw new CHttpException(403, "Du er ikke logget inn");
 		}
+
 		$user = User::model()->findByPk(user()->id);
+		$supportFieldtrip = $_POST['supportFieldtrip'];
 		$event = new BpcEvent($bpcId);
-		if (FieldtripSupport::canSupport($user) && $supportFieldtrip) {
-			FieldtripSupport::support($event, $user);
+		$this->setFieldtripSupport($event, $user, $supportFieldtrip);
+		$this->toggleAttending($event, $user);
+
+		$url = $this->createUrl('view', array('id' => $bpcId));
+		$this->redirect($url);
+	}
+
+	private function setFieldtripSupport($event, $user, $supportFieldtrip) {
+		if (!FieldtripSupport::canSupport($user)) {
+			return;
 		}
+		if ($supportFieldtrip) {
+			FieldtripSupport::support($event, $user);
+		} else {
+			FieldtripSupport::removeSupport($event, $user);
+		}
+	}
+
+	private function toggleAttending($event, $user) {
 		$isAttending = $event->isAttending($user->id);
 		if ($isAttending) {
 			if ($event->canUnattend()) {
@@ -73,8 +93,6 @@ class DefaultController extends Controller {
 				$event->addAttending($user->id);
 			}
 		}
-		$url = $this->createUrl('view', array('id' => $bpcId));
-		$this->redirect($url);
 	}
 
 }

@@ -21,14 +21,14 @@ function stotte() {	?>
 	</div>
 
 	<style type="text/css">
-	.ui-icon-closethick {
-		background-color: #185c9b;
-		padding: 4px;
-		border: 1px solid #888;
-		border-radius: 2px;
-		color: white;
+		.ui-icon-closethick {
+			background-color: #185c9b;
+			padding: 4px;
+			border: 1px solid #888;
+			border-radius: 2px;
+			color: white;
 
-	}
+		}
 	</style>
 
 	<script>
@@ -83,7 +83,7 @@ $this->beginClip('sidebar'); ?>
 </article>
 
 	<? $url = $this->createUrl('toggleAttending', array('bpcId' => $event->id)) ?>
-	<form method="get" action="<?=$url?>" />
+	<form method="post" action="<?=$url?>" />
 		<input type="hidden" name="supportFieldtrip" value="0" />
 		<? if ($canAttend): ?>
 			<? if ($canSupportFieldtrip): ?>
