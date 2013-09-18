@@ -23,6 +23,7 @@ class NewsfeedController extends Controller {
 		$criteria = new CDbCriteria();
 		$criteria->limit = $limit;
 		$criteria->order = "weight DESC, timestamp DESC";
+		$criteria->condition = "status = " . Status::PUBLISHED;
 		$models = News::model()->findAll($criteria);
 		return $models;
 	}
