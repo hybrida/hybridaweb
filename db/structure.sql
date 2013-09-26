@@ -220,15 +220,6 @@ CREATE TABLE IF NOT EXISTS `forum_user` (
   UNIQUE KEY `siteid` (`siteid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `gallery` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userId` int(11) NOT NULL,
-  `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
-  `imageId` int(11) DEFAULT NULL,
-  `timestamp` datetime DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=24 ;
-
 CREATE TABLE IF NOT EXISTS `griff` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commentId` int(11) NOT NULL,
