@@ -256,7 +256,7 @@ class NewsController extends Controller {
 			'event' => $news->event,
 			'news' => $news,
 			'signup' => $news->event->signup,
-			'attenders' => $news->event->signup->attenders,
+			'attenders' => $news->event->signup->attendersSortedByName,
 			'formModel' => new SignupMembershipManualForm($news->event->signup),
 		));
 	}

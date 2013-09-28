@@ -243,6 +243,14 @@ class Signup extends CActiveRecord {
 		return $attenders;
 	}
 
+	public function getAttendersSortedByName() {
+		$attenders = $this->getAttenders();
+		usort($attenders, function($a, $b) {
+			return $a->firstName > $b->firstName;
+		});
+		return $attenders;
+	}
+
 	public function getAnonymousAttenders() {
 		$criteria = new CDbCriteria();
 		$criteria->compare("eventId", $this->eventId );
