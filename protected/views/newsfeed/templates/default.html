@@ -1,0 +1,31 @@
+<div class="element">
+	<div class="header-wrapper">
+		<div class="header-title">
+			<h1><a href="{{ url }}">{{title }}</a></h1>
+		</div>
+		<div class="header-date">
+
+		</div>
+	</div>
+	<div class="text-content">
+
+		<% if (image) { %>
+			<a href="{{ url }}">
+				{{ image }}
+			</a>
+		<% } %>
+		{{ ingress }}
+		<div class="author">
+			Skrevet av
+			<% if (author) { %>
+				{{ authorLink}}
+			<% } else { %>
+				Hybrida
+			<% } %>
+			den
+			<span class="date">
+				{{ date }}
+			</span>
+		</div>
+	</div>
+</div>

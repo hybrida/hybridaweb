@@ -41,45 +41,6 @@ $this->endClip();
 	))?>
 </div>
 
-<script type="text/html" id="newsfeed-template">
-	<div class="element">
-		<div class="header-wrapper">
-			<div class="header-title">
-				<h1><a href="{{ url }}">{{title }}</a></h1>
-			</div>
-			<div class="header-date">
-
-			</div>
-		</div>
-		<div class="text-content">
-
-			<% if (image) { %>
-				<a href="{{ url }}">
-					{{ image }}
-				</a>
-			<% } %>
-			{{ ingress }}
-			<% if (author) { %>
-				<div class="author">
-					{{ authorLink}}
-					den
-					<span class="date">
-						{{ date }}
-					</span>
-				</div>
-			<% } else { %>
-				<div class="author">
-					Hybrida
-					den
-					<span class="date">
-						{{ date }}
-					</span>
-				</div>
-			<% } %>
-
-		</div>
-	</div>
-</script>
 
 <script type="text/json" id="newsfeed-data"><?= $jsonFeed ?></script>
 
@@ -89,17 +50,14 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 	'offset' => ''
 ));
 
+	$path = Yii::app()->basePath . '/views/newsfeed/templates/';
+	$pubpath = Yii::app()->getAssetManager()->publish($path);
 ?>
 
 <script language="javascript">
 	require(['newsfeed'], function(newsfeed) {
-
-		var templateString = $("#newsfeed-template").html();
-		var template = _.template(templateString);
-
-
 		var view = new newsfeed.NewsFeedView({
-			'template': template,
+			'templatePath': '<?= $pubpath ?>',
 			'feedContent': $('.feeds'),
 			'jsonData': $("#newsfeed-data").html(),
 			'ajaxButton': $("#fetchNews")

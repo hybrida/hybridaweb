@@ -16,11 +16,13 @@ return array(
 	'bk/<action:\w+>' => 'bk/bktool/<action>',
 
 	'gallery' => 'gallery/album',
+	'gallery/<id:\d+>' => 'gallery/album/view',
+	'gallery/<id:\d+>/<pid:\d+>' => 'gallery/album/picview',
+	'gallery/album' => 'gallery/album',
 	'gallery/<action:\w+>' => 'gallery/album/<action>',
 	'gallery/<action:\w+>/<id:\d+>' => 'gallery/album/<action>',
 	'gallery/<action:\w+>/<id:\d+>/<pid:\d+>' => 'gallery/album/<action>',
-	'gallery/<id:\d+>' => 'gallery/album/view',
-	'gallery/<id:\d+>/<pid:\d+>' => 'gallery/album/picview',
+
 	'get/<extra:\w+>' => 'ajax/get/<extra>',
 	'grupper' => 'group/index',
 	'grupper/<url:\w+>/<action:\w+>' => 'group/<action>',

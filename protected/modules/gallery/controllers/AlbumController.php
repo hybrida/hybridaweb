@@ -46,7 +46,7 @@ class AlbumController extends Controller
 			$album->getImages();
 		$this->render('index',array(
 					'albums'=> $albums,
-					'isLoggedIn' => user()->isGuest,
+					'isLoggedIn' => !user()->isGuest,
 					));
 	}
 
@@ -62,7 +62,7 @@ class AlbumController extends Controller
 		$this->render('view',array(
 					'album'=> $album,
 					'canDelete' => $canDelete,
-					'isLoggedIn' => user()->isGuest,
+					'isLoggedIn' => !user()->isGuest,
 					));
 	}
 
@@ -166,6 +166,13 @@ class AlbumController extends Controller
 					$model->addAlbumImageRelation($imageID);
 				}
 				$this->clearUploads();
+
+				$newsModel = new News();
+				$newsModel->parentId = $model->id;
+				$newsModel->parentType = 'album';
+				$newsModel->authorId = $model->user_id;
+				$newsModel->save();
+
 				$this->redirect('/gallery/'.$model->id);
 			}
 			else {
