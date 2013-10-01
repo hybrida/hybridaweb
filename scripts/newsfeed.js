@@ -56,7 +56,6 @@ define([], function () {
 		var self = this;
 		this.template = options.template;
 		this.feedContent = options.feedContent;
-		this.url = "/newsfeed/feedJSON";
 		this.lastTimestamp = 0;
 		this.lastWeight = Number.MIN_VALUE;  // Alt er bedre enn dette.
 		this.limit = 10;
