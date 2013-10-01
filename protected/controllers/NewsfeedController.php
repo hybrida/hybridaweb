@@ -57,13 +57,36 @@ class NewsfeedController extends Controller {
 		$output = array();
 		foreach ($models as $model) {
 			$ar = $model->attributes;
-			$ar['author'] = $model->authorId != null;
-			if ($model->author) {
-				$ar['authorLink'] = CHtml::link($model->author->fullName, $model->author->viewUrl);
-			}
 			$ar['url'] = $model->viewUrl;
-			$ar['image'] = Image::tag($model->imageId, 'frontpage');
-			$ar['date'] = Html::dateToString($model->timestamp, 'mediumlong');
+			$ar['author'] = $model->authorId != null;
+			if ($model->author)
+				$ar['authorLink']=CHtml::link($model->author->fullName, $model->author->viewUrl);
+			$ar['type'] = $model->parentType;
+
+			switch ($ar['type']) {
+				case 'event':
+					$ar['image'] = Image::tag($model->imageId, 'frontpage');
+					$ar['date'] = Html::dateToString($model->timestamp, 'mediumlong');
+					$ar['parent'] = Event::model()->findByPk($model->parentId)->attributes;
+					break;
+				case 'album':
+					Yii::app()->getModule('gallery');
+					$album = Album::model()->findByPk($model->parentId);
+					$album->getImages();
+					$ar['parent'] = $album->attributes;
+					$ar['albumUrl'] = '/gallery/' . $album->id;
+					$ar['imagecount'] = count($album->images);
+					foreach ($album->images as $image)
+						$ar['images'][] =CHtml::link(
+									Image::tag($image->id, "gallery_thumb"), 
+									'/gallery/'.$album->id."/".$image->id,
+									array('width' => 100)); 
+					break;
+				default:
+					$ar['image'] = Image::tag($model->imageId, 'frontpage');
+					$ar['date'] = Html::dateToString($model->timestamp, 'mediumlong');
+			}
+
 			$output[] = $ar;
 		}
 		return CJSON::encode($output);

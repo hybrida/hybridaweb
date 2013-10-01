@@ -57,13 +57,12 @@ define([], function () {
 		this.template = options.template;
 		this.feedContent = options.feedContent;
 		this.url = "/newsfeed/feedJSON";
-
 		this.lastTimestamp = 0;
 		this.lastWeight = Number.MIN_VALUE;  // Alt er bedre enn dette.
 		this.limit = 10;
 		this.fetchButton = options.ajaxButton;
 		this.jsonData = JSON.parse(options.jsonData);
-		console.log(this.jsonData);
+		this.templatePath = options.templatePath;
 
 		this.lastIndex = -1;
 
@@ -71,6 +70,30 @@ define([], function () {
 			this.fetchButton.remove();
 			console.log("Sletter boks");
 		};
+
+
+		this.make_template = function(filename) {
+			if ( !this.tmpl_cache ) { 
+				this.tmpl_cache = {};
+			}
+			if ( ! this.tmpl_cache[filename] ) {
+				var tmpl_url = this.templatePath + '/' + filename + '.html';
+				var tmpl_string;
+				$.ajax({
+					url: tmpl_url,
+					method: 'GET',
+					async: false,
+					success: function(data) {
+						tmpl_string = data;
+					},
+					error: function(obj, str, exc) {
+						tmpl_string = '<div>Template for \'' +filename+ '\' ikke funnet</div>';
+					}
+				});
+				this.tmpl_cache[filename] = _.template(tmpl_string);
+			}
+			return this.tmpl_cache[filename];
+		}
 
 		this.addMore = function() {
 			var news = self.jsonData;
@@ -82,7 +105,10 @@ define([], function () {
 					break;
 				}
 				var model = news[i];
-				var templateHtml = this.template(model);
+				var t = this.make_template('default');
+				if (model.type)
+					t = this.make_template(model.type);
+				var templateHtml = t(model);
 				this.feedContent.append(templateHtml);
 				this.lastTimestamp = model.timestamp;
 				this.lastWeight = model.weight;

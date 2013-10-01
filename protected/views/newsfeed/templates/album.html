@@ -1,0 +1,26 @@
+<div class="element">
+	<div class="header-wrapper">
+		<div class="header-title">
+			<h1><a href="{{ albumUrl }}">Album: {{ parent.title }}</a></h1>
+		</div>
+	</div>
+	<div>
+		<div style="text-align:center">
+			<% var style = new Array('float:left', 'display:inline', 'float:right'); %>
+			<% for (var i = 0; i < 3 && i < imagecount; i++) {%>
+				<div style="{{ style[i] }}">
+					{{ images[i] }}
+				</div>
+			<% } %>
+		</div>
+		<div class="text-content">
+			<div class="author">
+				Opprettet av {{ authorLink }}
+				<div align="right" style="float: right;">
+					Opprettet 
+					<span class="date">{{ parent.timestamp }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

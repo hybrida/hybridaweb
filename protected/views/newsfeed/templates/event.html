@@ -1,0 +1,26 @@
+<div class="element">
+	<div class="header-wrapper">
+		<div class="header-title">
+			<h1><a href="{{ url }}">{{title }}</a></h1>
+		</div>
+		<div class="header-date">
+
+		</div>
+	</div>
+	<div class="text-content">
+
+		<% if (image) { %>
+			<a href="{{ url }}">
+				{{ image }}
+			</a>
+		<% } %>
+		{{ ingress }}
+		<div class="author">
+			Sted: <span class="date">{{ parent.location }} </span>
+			<div align="right" style="float: right;">
+				Fra <span class="date">{{ parent.start }} </span> 
+				til <span class="date">{{ parent.end }} </span>
+			</div>
+		</div>
+	</div>
+</div>
