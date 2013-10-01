@@ -36,22 +36,16 @@ $this->endClip();
 
 	<?=CHtml::button('Vis flere', array(
 		'class' => 'g-button',
-		'style' => 'display: block; width: 100%;',
+		'style' => 'display: none; width: 100%;',
 		'id' => 'fetchNews',
 	))?>
 </div>
 
 
-<script type="text/json" id="newsfeed-data"><?= $jsonFeed ?></script>
-
 <?php
-
-$ajaxFeedUrl = $this->createUrl("feedAjax", array(
-	'offset' => ''
-));
-
 	$path = Yii::app()->basePath . '/views/newsfeed/templates/';
 	$pubpath = Yii::app()->getAssetManager()->publish($path);
+	$jsonpath = "newsfeed/FeedJSON?minTimestamp=0&minWeight=-10000&limit=0";
 ?>
 
 <script language="javascript">
@@ -59,7 +53,7 @@ $ajaxFeedUrl = $this->createUrl("feedAjax", array(
 		var view = new newsfeed.NewsFeedView({
 			'templatePath': '<?= $pubpath ?>',
 			'feedContent': $('.feeds'),
-			'jsonData': $("#newsfeed-data").html(),
+			'jsonUrl': '<?= $jsonpath ?>',
 			'ajaxButton': $("#fetchNews")
 		});
 

@@ -61,8 +61,8 @@ define([], function () {
 		this.lastWeight = Number.MIN_VALUE;  // Alt er bedre enn dette.
 		this.limit = 10;
 		this.fetchButton = options.ajaxButton;
-		this.jsonData = JSON.parse(options.jsonData);
 		this.templatePath = options.templatePath;
+		this.jsonUrl = options.jsonUrl;
 
 		this.lastIndex = -1;
 
@@ -116,9 +116,20 @@ define([], function () {
 			}
 		};
 
-		this.load = function() {
-			self.addMore();
+		this.loadJson = function() {
+			$.ajax({
+				url: self.jsonUrl,
+				method: 'GET',
+				async: false,
+				success: function(data) {
+					self.jsonData = JSON.parse(data);
+				},
+			});
+		}
 
+		this.load = function() {
+			this.loadJson();
+			this.addMore();
 			this.fetchButton.click(function (e) {
 				self.addMore();
 			});
