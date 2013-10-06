@@ -1,0 +1,25 @@
+#widget-knightPresentation .knight .name {
+  display: inline;
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #00509e;
+}
+#widget-knightPresentation .knight .grantYear {
+  display: inline;
+  padding-right: 20px;
+}
+#widget-knightPresentation .knight .reason {
+  display: none;
+  margin: 10px;
+}
+#widget-knightPresentation .knight .nameHeader {
+  display: inline;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#widget-knightPresentation .knight .grantYearHeader {
+  display: inline;
+  font-weight: bold;
+  font-size: 1.1em;
+}

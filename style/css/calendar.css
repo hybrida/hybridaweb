@@ -1,0 +1,66 @@
+.calendarData {
+  padding: .5em;
+}
+.big-calendar {
+  width: 98%;
+  border-collapse: collapse;
+}
+.big-calendar tr.navigation th {
+  padding-bottom: 20px;
+}
+.big-calendar th.current-month {
+  text-align: center;
+  font-size: 1.5em;
+}
+.big-calendar th.next-month {
+  text-align: right;
+}
+.big-calendar td {
+  width: 13%;
+  height: 100px;
+  vertical-align: top;
+  border: 1px solid #ccc;
+}
+.big-calendar th.week-number {
+  width: 5%;
+  font-size: 20px;
+}
+.big-calendar td.today {
+  background: #FFD;
+}
+.big-calendar td.prev-next {
+  background: #EEE;
+}
+.big-calendar td.prev-next span.date {
+  color: #9C9C9C;
+}
+.big-calendar td.holiday {
+  background: #DDFFDE;
+}
+.big-calendar span.date {
+  display: block;
+  line-height: 12px;
+  background: #EEE;
+  padding: 4px;
+}
+.big-calendar ul.output {
+  list-style: none;
+  margin: 0;
+  padding: 0 4px;
+}
+.big-calendar ul.output li {
+  line-height: 1em;
+  border-bottom: 1px solid #ccc;
+  margin: 0;
+  padding: 5px 0;
+}
+.big-calendar ul.output li:last-child {
+  border: 0;
+}
+.big-calendar .notThisMonth {
+  color: grey;
+}
+.big-calendar th.prev-month,
+.big-calendar tr.weekdays th {
+  text-align: left;
+}

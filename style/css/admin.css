@@ -1,0 +1,28 @@
+.g-adminSet {
+  border-color: #ccc;
+}
+.g-adminSet .g-button {
+  display: block;
+  margin: 10px auto;
+}
+.adminView table {
+  border-collapse: collapse;
+}
+.adminView td {
+  padding: 1em;
+}
+.adminView th {
+  padding: 1em;
+}
+.adminView tr {
+  text-align: center;
+}
+.adminView tr:nth-child(odd) {
+  background-color: #f6f6f6;
+}
+.adminView tr:nth-child(even) {
+  background-color: #ffffff;
+}
+.adminView td.date {
+  width: 80px;
+}

@@ -1,0 +1,36 @@
+.notificationIndex {
+  margin: 1em;
+}
+.notificationIndex h1 {
+  border-bottom: 2px solid #0066CC;
+  padding-left: 0.5em;
+}
+.notificationIndex .row {
+  margin: 0.2em 0;
+  padding-left: 1em;
+  padding: 10px;
+}
+.notificationIndex .row:nth-child(odd) {
+  background: #eee;
+}
+.notificationIndex .top:before,
+.notificationIndex .top:after {
+  content: "";
+  display: table;
+}
+.notificationIndex .top:after {
+  clear: both;
+}
+.notificationIndex .date {
+  color: #999;
+  display: block;
+  float: left;
+}
+.notificationIndex .delete {
+  display: block;
+  float: right;
+  margin: 0 1em;
+}
+.notificationIndex .content {
+  text-align: left;
+}

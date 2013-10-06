@@ -1,0 +1,82 @@
+.newsView {
+  margin: auto 1em;
+}
+.newsView .headerImage img {
+  margin-left: 0em;
+}
+.newsView .author {
+  padding: 0.3em;
+  padding-left: 0;
+  overflow: auto;
+  width: 350px;
+  margin-bottom: 1em;
+}
+.newsView .author img {
+  float: left;
+  display: block;
+  padding-right: 1em;
+}
+.newsView article {
+  text-align: justify;
+}
+.newsView article .ingress {
+  font-weight: bold;
+}
+.progressbar {
+  height: 20px;
+  width: 150px;
+  position: relative;
+  background: #DDD;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 1px;
+  -webkit-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+  -moz-box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+  box-shadow: inset 0 -1px 1px rgba(255,255,255,0.3);
+}
+.progressbar > span {
+  display: block;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.progressbar span.orange {
+  background-color: #f1a165;
+  background-image: -webkit-linear-gradient(top,#f1a165,#f36d0a);
+  background-image: -moz-linear-gradient(top,#f1a165,#f36d0a);
+  background-image: -o-linear-gradient(top,#f1a165,#f36d0a);
+  background-image: -ms-linear-gradient(top,#f1a165,#f36d0a);
+  background-image: linear-gradient(top,#f1a165,#f36d0a);
+}
+.progressbar span.red {
+  background-color: #F17D7D;
+  background-image: -webkit-linear-gradient(top,#F17D7D,#f42323);
+  background-image: -moz-linear-gradient(top,#F17D7D,#f42323);
+  background-image: -o-linear-gradient(top,#F17D7D,#f42323);
+  background-image: -ms-linear-gradient(top,#F17D7D,#f42323);
+  background-image: linear-gradient(top,#F17D7D,#f42323);
+}
+.progressbar span.green {
+  background-color: #2bc253;
+  background-image: -webkit-gradient(linear,left bottom,left top,color-stop(0,#2bc253),color-stop(1,#54f054));
+  background-image: -webkit-linear-gradient(center bottom,#2bc253 37%,#54f054 69%);
+  background-image: -moz-linear-gradient(center bottom,#2bc253 37%,#54f054 69%);
+  background-image: -ms-linear-gradient(center bottom,#2bc253 37%,#54f054 69%);
+  background-image: -o-linear-gradient(center bottom,#2bc253 37%,#54f054 69%);
+}
+.newsEmail .emails {
+  border: 1px solid #888;
+  width: 90%;
+  height: 500px;
+}
+.newsManualSignup table tr {
+  border-bottom: 1px solid #888;
+}
+.newsManualSignup table tr:nth-child(even) {
+  background-color: #ccc;
+}
+.newsEditSignup table.attenders td {
+  border: 1px solid #888;
+  padding: 0.2em;
+}

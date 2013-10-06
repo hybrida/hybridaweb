@@ -1,0 +1,24 @@
+.jobAnnouncementIndex {
+  margin: auto 1em;
+}
+.jobAnnouncementIndex .view {
+  background-color: #ECECEC;
+  padding: 1em;
+  margin-top: 0.6em;
+  border-radius: 2px;
+}
+.jobAnnouncementIndex .view .left {
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+  float: left;
+  background-color: white;
+  border-radius: 2px;
+}
+.jobAnnouncementIndex .view .right {
+  float: left;
+}
+.jobAnnouncementView {
+  margin: auto 1em;
+  color: black;
+}

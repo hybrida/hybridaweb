@@ -1,0 +1,119 @@
+.widget-comment .c-comment,
+.widget-comment .c-header {
+  overflow: hidden;
+  display: inline-block;
+  display: block;
+}
+.widget-comment .c-comment {
+  padding-left: 10px;
+  margin-left: 20px;
+  margin-right: 20px;
+  width: 650px;
+}
+.widget-comment .c-comment:nth-child(even) {
+  background-color: #eee;
+}
+.widget-comment .c-comment .c-profile-image {
+  width: 55px;
+  height: 55px;
+  margin-top: 0;
+  clear: both;
+}
+.widget-comment .c-date {
+  color: #666;
+  float: right;
+}
+.widget-comment .c-date-without-delete {
+  margin-right: 34px;
+}
+.widget-comment .c-author {
+  float: left;
+}
+.widget-comment .c-header {
+  margin-bottom: 0em;
+}
+.widget-comment .c-profileImage {
+  width: 50px;
+  float: left;
+}
+.widget-comment .c-right {
+  float: left;
+  width: 560px;
+  padding-left: 20px;
+  margin-left: 10px;
+}
+.widget-comment .c-right,
+.widget-comment .c-profileImage {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+.widget-comment .c-header .g-deleteButton {
+  float: right;
+}
+.widget-comment .c-comment textarea {
+  border: 1px solid #888;
+}
+.widget-comment .c-content {
+  margin-right: 34px;
+}
+.widget-comment .c-flashed {
+  border-left: 3px #185c9b solid;
+}
+.widget-comment .c-additions a {
+  padding: 0.3em;
+  border-radius: 2px;
+}
+.widget-comment .c-additions a:hover {
+  cursor: pointer;
+}
+.widget-comment .c-additions a span {
+  color: black;
+  font-weight: bold;
+  border-radius: 2px;
+}
+.widget-comment .c-additions img {
+  width: 24px;
+  position: relative;
+  top: 6px;
+}
+.widget-comment .c-additions .c-toggled {
+  background-color: #00509e;
+}
+.widget-comment .c-additions .c-toggled span {
+  color: white;
+}
+.widget-comment .c-additions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: right;
+}
+.widget-comment .c-additions li {
+  display: inline;
+}
+.widget-followButton {
+  text-align: right;
+}
+.widget-followButton a {
+  padding: 0.3em;
+  border-radius: 2px;
+}
+.widget-followButton a:hover {
+  cursor: pointer;
+}
+.widget-followButton a span {
+  color: black;
+  font-weight: bold;
+  border-radius: 2px;
+}
+.widget-followButton img {
+  width: 24px;
+  position: relative;
+  top: 6px;
+}
+.widget-followButton .c-toggled {
+  background-color: #00509e;
+}
+.widget-followButton .c-toggled span {
+  color: white;
+}

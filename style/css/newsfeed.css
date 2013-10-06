@@ -1,0 +1,61 @@
+.newsfeedIndex .element {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  height: auto;
+  width: auto;
+  text-align: justify;
+}
+.newsfeedIndex .header-wrapper {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  overflow: hidden;
+  display: inline-block;
+  display: block;
+}
+.newsfeedIndex .header-title {
+  float: left;
+  margin-left: 20px;
+}
+.newsfeedIndex .element h1 a {
+  text-decoration: none;
+  color: black;
+}
+.newsfeedIndex .header-title h1 {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+}
+.newsfeedIndex .header-date {
+  float: right;
+  display: inline;
+  margin-top: 20px;
+  font-style: italic;
+  margin-right: 3px;
+}
+.newsfeedIndex .text-content {
+  margin-left: 20px;
+  margin-top: 0.4em;
+}
+.newsfeedIndex .text-content img {
+  clear: both;
+  margin: 10px auto;
+  display: block;
+}
+.newsfeedIndex .author {
+  padding-top: 5px;
+  text-transform: uppercase;
+  color: #888;
+  border-top: 1px solid #ccc;
+  padding-bottom: 5px;
+  margin-top: 9px;
+  font-size: 0.6em;
+}
+.newsfeedIndex .author a {
+  color: #00509e;
+}
+.newsfeedIndex .date {
+  color: black;
+}
+.newsfeedIndex .author:before {
+  content: "skrevet av";
+}
