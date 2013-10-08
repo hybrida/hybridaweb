@@ -1,0 +1,113 @@
+@import "mixins.less";
+
+html{
+
+	background: url("/images/office.png") fixed;
+	/* Gill standard, ikke serif */
+	font-family: "Gill";
+	/*font-weight: lighter;*/
+}
+
+body {
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+a {
+	text-decoration: none;
+	color: @hybridaBlueMain;
+}
+
+a img {
+	border: 0;
+}
+
+.layout-wrap {
+	width: 1000px;
+	margin:0 auto;
+}
+
+.layout-head img {
+	float: left;
+	border: 0;
+}
+
+.layout-banner {
+	margin-bottom: 10px;
+}
+
+.layout-mainWrap {
+	box-shadow: 0 0 7px black;
+	overflow: auto;
+	background-color: white;
+	border-radius: 2px;
+	padding-bottom: 20px;
+}
+
+.layout-marginMaker {
+	margin-top: 20px;
+}
+
+.layout-content {
+	width: 750px;
+	float:left;
+	border-right: 1px solid @borderColorLight;
+}
+
+.layout-content > * {
+	margin: 30px;
+}
+
+.layout-rightBar  {
+	width: 247px;
+	border-left: 1px solid @borderColorLight;
+	float:left;
+	margin-left: -1px;
+}
+
+#instafeed {
+    display: hidden;
+    margin: 5px;
+}
+
+
+.layout-menu {
+	margin-top: 10px;
+}
+
+.layout-search {
+	float: right;
+	padding-top: 3em;
+}
+
+.layout-search input[type="text"] {
+	background: url(/images/search-white.png) no-repeat 10px 6px #444;
+	border: 0 none;
+	font: bold 12px Arial,Helvetica,Sans-serif;
+	color: #d7d7d7;
+	width:150px;
+	padding: 6px 15px 6px 35px;
+	-webkit-border-radius: 20px;
+	-moz-border-radius: 20px;
+	border-radius: 2px;
+	text-shadow: 0 2px 2px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 3px rgba(0, 0, 0, 0.2) inset;
+	-webkit-transition: all 0.7s ease 0s;
+	-moz-transition: all 0.7s ease 0s;
+	-o-transition: all 0.7s ease 0s;
+	transition: all 0.7s ease 0s;
+ }
+
+.layout-search input[type="text"]:focus {
+	background: url(/images/search-dark.png) no-repeat 10px 6px #fcfcfc;
+	color: #6a6f75;
+	width: 200px;
+	-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+	-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(0, 0, 0, 0.9) inset;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+	outline: none;
+ }

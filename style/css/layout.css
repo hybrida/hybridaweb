@@ -49,6 +49,11 @@ a img {
   float: left;
   margin-left: -1px;
 }
+
+#instafeed {
+    margin: 25px;
+}
+
 .layout-menu {
   margin-top: 10px;
 }
