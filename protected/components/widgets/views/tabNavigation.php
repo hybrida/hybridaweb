@@ -15,17 +15,16 @@
 					<li><?= CHtml::link('Om', array('/bk/bktool/index')) ?></li>
 					<li><?= CHtml::link('Oppdateringer', array('/bk/bktool/updates')) ?></li>
 					<li><?= CHtml::link('Presentasjoner', array('/bk/bktool/presentations')) ?></li>
+					<li><?= CHtml::link("Blogger", array("/article/view", 'id' => 1, 'title' => 'Blogger')); ?></li>
 				</ul>
 			</li>
 
 		<? endif ?>
 
-		<? if (!user()->isGuest): ?>
-		<? endif ?>
-
 		<li><?= CHtml::link("Bedrift", array("/article/view", 'id' => 2, 'title' => 'Bedrift')); ?></li>
 		<li><?= CHtml::link("I&IKT-ringen", array("/article/view", 'id' => 62, 'title' => 'IKT-ringen')); ?></li>
 		<li><?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 1, 'title' => 'Om Hybrida')); ?></li>
+		<li><?= CHtml::link("Blogger", array("/article/view", 'id' => 1, 'title' => 'Blogger')); ?></li>
 
 		<? if (user()->isGuest): ?>
 			<li class="userOptions"><?= CHtml::link("Logg inn", user()->loginUrl) ?></li>
