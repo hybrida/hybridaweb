@@ -20,11 +20,19 @@ $this->beginClip('sidebar'); ?>
 			)) ?>
 
 			<?= CHtml::link("Statistikk", array("admin/stats"), array(
-				'class' => 'g-button'
+					'class' => 'g-button'
 			)) ?>
 
 		</fieldset>
 	<? endif ?>
+
+<div class='g-barTitle'>Kontortider</div>
+<div class="g-sidebarNav">
+	<ul>
+	SPR: Tirsdag 12.15-14.00
+	Studentrådskontoret over kiosken på stripa
+	</ul>
+</div>
 	<?
 	$this->widget('application.components.widgets.ActivitiesFeed');
 	Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
