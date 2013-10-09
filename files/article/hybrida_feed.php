@@ -35,8 +35,9 @@
 </style>
 
 <script type="text/javascript">
-    require(['instafeedpage'], function() {
-        var feed = new Instafeed({
+    require(['instafeed'], function(insta) {
+        var feed = new insta.Instafeed({
+            target: 'instafeedpage',
             get: 'tagged',
             sortBy: 'most-liked',
             tagName: 'hybridantnu',
@@ -50,8 +51,9 @@
 </script>
 
 <script type="text/javascript">
-    require(['instafeed'], function() {
-        var feed = new Instafeed({
+    require(['instafeed'], function(insta) {
+        var feed = new insta.Instafeed({
+            target: 'instafeed',
             get: 'tagged',
             sortBy: 'random',
             tagName: 'hybridantnu',

@@ -68,8 +68,9 @@ $this->endClip();
 
 
 <script type="text/javascript">
-    require(['instafeedfront'], function() {
-        var feed = new Instafeed({
+    require(['instafeed'], function(insta) {
+        var feed = new insta.Instafeed({
+            target: 'instafeedfront',
             get: 'tagged',
             tagName: 'hybridantnu',
             clientId: '4607d54615d045968654b06a038c3d4d',
