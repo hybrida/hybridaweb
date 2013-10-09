@@ -11,3 +11,6 @@ upc/
 style/css/min.css
 db/*.hash
 
+# Intellij project files
+.idea/
+*.iml
