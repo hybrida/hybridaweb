@@ -5,10 +5,10 @@
         function e(e){
             var t,n;
             this.options={
-                target:"instafeedpage",
+                target:"instafeed",
                 get:"popular",
                 resolution:"thumbnail",
-                sortBy:"most-liked",
+                sortBy:"most-recent",
                 links:!0,
                 limit:15,
                 mock:!1
@@ -132,5 +132,4 @@
         },e
     }(),t=typeof exports!="undefined"&&exports!==null?exports:window,t.Instafeed=e
     }).call(this);
-    
     

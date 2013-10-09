@@ -30,7 +30,7 @@ $this->beginClip('sidebar'); ?>
 	<?
 	$this->widget('application.components.widgets.ActivitiesFeed');?>
     <div class='g-barTitle'>Hybdrida Feed</div>
-    <div id="instafeed"></div> 
+    <div id="instafeedfront"></div> 
 	<?Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 	$this->widget('JobAnnouncementFeed');
     
@@ -68,12 +68,12 @@ $this->endClip();
 
 
 <script type="text/javascript">
-    require(['instafeed.min'], function() {
+    require(['instafeedfront'], function() {
         var feed = new Instafeed({
             get: 'tagged',
             tagName: 'hybridantnu',
             clientId: '4607d54615d045968654b06a038c3d4d',
-            template: '<a href="{{link}}"><img src="{{image}}" /></a>',
+            template: '<div id="Instafeedfront>"<a href="{{link}}"><img src="{{image}}" /></a></div>',
             limit: 2 
         });
         feed.run();

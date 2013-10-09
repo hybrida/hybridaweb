@@ -5,7 +5,7 @@
         function e(e){
             var t,n;
             this.options={
-                target:"instafeed",
+                target:"instafeedfront",
                 get:"popular",
                 resolution:"thumbnail",
                 sortBy:"most-recent",
