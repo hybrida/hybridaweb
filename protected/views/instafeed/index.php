@@ -16,7 +16,13 @@
 <script type="text/template" id="instafeed-header-template">
     <div class="header">
         <h2>-- Nyeste bilde --</h2>
-        <a href="{{link}}"><img src="{{image}}" </br></br> Likes: {{likes}}</a>
+        <a href="{{link}}">
+            <img src="{{image}}" ></br>
+            <font face='webdings' size="5">&#40;</font>  {{comments}}
+            &nbsp;
+            <font face='webdings' size="5">&#89;</font>  {{likes}} </br>
+        </a>
+        <div class="caption">{{caption}}</div>
     </div>
 </script>
 
@@ -38,7 +44,12 @@
 
 <script type="text/template" id="instafeed-body-template">
     <div class="body">
-        <a href="{{link}}"><img src="{{image}}" </br></br> Likes: {{likes}} </a>
+        <a href="{{link}}">
+            <img src="{{image}}" </br></br>
+            <font face='webdings' size="4">&#40;</font>  {{comments}}
+            <font face='webdings' size="4">&#89;</font>  {{likes}}
+        </a>
+        <div class="caption">{{caption}}</div>
     </div>
 </script>
 
