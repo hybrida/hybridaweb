@@ -1,7 +1,9 @@
 <?php
 $this->pageTitle = "Nyhetsstrøm";
 $this->layout = "//layouts/newsfeed";
+?>
 
+<?php
 $this->beginClip('sidebar'); ?>
 	<? if ($hasPublishAccess): ?>
 		<fieldset class="g-adminSet">
@@ -34,9 +36,14 @@ $this->beginClip('sidebar'); ?>
 	</ul>
 </div>
 	<?
-	$this->widget('application.components.widgets.ActivitiesFeed');
-	Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
+	$this->widget('application.components.widgets.ActivitiesFeed');?>
+    <div class='g-barTitle'>Hybdrida Feed</div>
+    <div class="instafeed">
+        <div id="instafeed-front"></div> 
+    </div>
+	<?Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 	$this->widget('JobAnnouncementFeed');
+    
 $this->endClip();
 ?>
 <div class="newsfeedIndex">
@@ -67,4 +74,24 @@ $this->endClip();
 
 		view.load();
 	});
+</script>
+
+<script type="text/template" id="instafeed-front-template">
+    <div class="front">
+        <a href="{{link}}"><img src="{{image}}" /></a>
+    </div>
+</script>
+
+<script type="text/javascript">
+    require(['instafeed'], function(insta) {
+        var feed = new insta.Instafeed({
+            target: 'instafeed-front',
+            get: 'tagged',
+            tagName: 'hybridantnu',
+            clientId: '4607d54615d045968654b06a038c3d4d',
+            template: $('#instafeed-front-template').html(),
+            limit: 2 
+        });
+        feed.run();
+    });
 </script>
