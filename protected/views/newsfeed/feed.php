@@ -37,7 +37,7 @@ $this->beginClip('sidebar'); ?>
 </div>
 	<?
 	$this->widget('application.components.widgets.ActivitiesFeed');?>
-    <div class='g-barTitle'>Hybdrida Feed</div>
+    <div class='g-barTitle'><a href="\instafeed"> Hybrida Feed</a></div>
     <div class="instafeed">
         <div id="instafeed-front"></div> 
     </div>
