@@ -2,7 +2,7 @@
     
     <img class="banner" alt="Instagram Feed Logo"
 			 width="700"
-			 src="/upc/files/images/instafeed/instafeed_logo.png" />
+			 src="/upc/files/instafeed/instafeed_logo.png" />
 
     <div id="instafeed-header"></div> 
     
