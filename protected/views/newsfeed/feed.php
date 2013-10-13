@@ -39,13 +39,16 @@ $this->beginClip('sidebar'); ?>
 	$this->widget('application.components.widgets.ActivitiesFeed');?>
 
     
-
-    <div class='g-barTitle'><?= CHtml::link("HybridaFeed", array("instafeed/index")); ?></div>
-    <div class="instafeed">
-        <div id="instafeed-front"></div> 
-    </div>
+    <? if(!(Yii::app()->user->isGuest)){?>
+        <div class='g-barTitle'><?= CHtml::link("HybridaFeed", array("instafeed/index")); ?></div>
+        <div class="instafeed">
+            <div id="instafeed-front"></div> 
+        </div>
+    <? }?>
+    
 	<?Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 	$this->widget('JobAnnouncementFeed');
+    
     
 $this->endClip();
 ?>
