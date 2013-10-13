@@ -1,5 +1,3 @@
-syntax: glob
-
 nbproject
 assets/*
 runtime
