@@ -40,7 +40,7 @@ $this->beginClip('sidebar'); ?>
 
     
     <? if(!(Yii::app()->user->isGuest)){?>
-        <div class='g-barTitle'><?= CHtml::link("HybridaFeed", array("instafeed/index")); ?></div>
+        <div class='g-barTitle'><?= CHtml::link("Nyeste #hybridantnu", array("instafeed/index")); ?></div>
         <div class="instafeed">
             <div id="instafeed-front"></div> 
         </div>
@@ -84,7 +84,11 @@ $this->endClip();
 
 <script type="text/template" id="instafeed-front-template">
     <div class="front">
-        <a href="{{link}}"><img src="{{image}}" /></a>
+        <a href="{{link}}">
+            <img src="{{image}}" />
+            <font face='webdings' size="4">&#40;</font>  {{comments}}
+            <font face='webdings' size="4">&#89;</font>  {{likes}}
+        </a>
     </div>
 </script>
 

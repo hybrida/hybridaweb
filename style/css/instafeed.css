@@ -34,7 +34,10 @@
     }
     
     .instafeed .front {
-        margin: 20px;
+        width: 150px;
+        margin: 30px;
+        box-shadow: 0px 0px 10px #999;
+        padding: 5px;
     }
     
     .instafeed .header .caption {
@@ -48,4 +51,5 @@
         font-size: 8pt;
         color: grey;
     }
+    
     
