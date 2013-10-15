@@ -11,13 +11,16 @@
     } 
     .instafeed .header {
         float: left;
-        height: 440px;
+        height: 450px;
         box-shadow: 0px 0px 10px #999;
         margin-left: 180px;
         margin-right: 180px;
         margin-bottom: 50px;
         margin-top: 10px;
         padding: 15px;
+    }
+    .instafeed .header img {
+        margin-bottom: 5px;
     }
     
     .instafeed .header h2 {
