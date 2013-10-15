@@ -14,9 +14,9 @@
 		<? $this->renderPartial('//layouts/_matrix') ?>
 		<? $this->renderPartial('//layouts/_google_analytics') ?>
 
-		<script src="/scripts/dev/underscore-min.js"></script>
-		<script data-main="/scripts/main.js" src="/scripts/require.js"></script>
-        
+		<script src="/javascript/dev/underscore-min.js"></script>
+		<script data-main="/javascript/main.js" src="/javascript/require.js"></script>
+
 	</head>
 
 	<body>
