@@ -1,30 +1,12 @@
-import sys
-from random import randint
+from random import shuffle
 
-def randomized_order(names):
-    randomized = []
-    while (names):
-        index = randint(0, len(names)-1)
-        item = names.pop(index)
-        randomized.append(item)
-    return randomized
-
-
-def main():
-    week_number_start = 42
-    names = ["Teodor", "Sigurd", "Marius R", "Kristian", "Erling", 
-        "Sindre", "Herman", "Ivar", "Thormod", "Andrea Marie", "Kevin",
-        "Oda", "Sigurd", "Marius E"]
-    randomized = randomized_order(names)
-    randomized_numbered = []
-    for i in xrange(len(randomized)):
-        week_number = week_number_start + i
-        if (week_number > 48):
-            week_number -= 46
-        randomized_numbered.append((week_number, randomized[i]))
-    return randomized_numbered
+def cakeOrder():
+	names = ["Teodor", "Sigurd", "Marius R", "Kristian", "Erling", 
+		"Sindre", "Herman", "Ivar", "Thormod", "Andrea Marie", "Kevin",
+		"Oda", "Sigurd", "Marius E"]
+	weeks = range(42, 49)+range(3,10)
+	shuffle(names)
+	return [str(a)+": "+b for a,b in zip(weeks, names)]
 
 if __name__ == "__main__":
-    result = main()
-    if (result):
-        print(result)
+	print "\n".join(cakeOrder())
