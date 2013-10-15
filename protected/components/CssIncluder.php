@@ -1,12 +1,12 @@
 <?php
 
-class StyleIncluder {
+class CssIncluder {
 
 	private static $cssFiles = array();
 	private static $lessFiles = array();
 
-	public static function printCssTags() {
-		self::registerDirectory("style/css", self::$cssFiles);
+	public static function printTags() {
+		self::registerDirectory("css", self::$cssFiles);
 		$output = "";
 		foreach (self::$cssFiles as $file) {
 			if (strpos($file, "min.css") !== false) continue;
