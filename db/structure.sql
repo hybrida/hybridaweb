@@ -532,6 +532,13 @@ CREATE TABLE IF NOT EXISTS `user_password` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+CREATE TABLE IF NOT EXISTS `gossip` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gossipText` text COLLATE utf8_unicode_ci NOT NULL,
+  `submitDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
 
 ALTER TABLE `fieldtrip_support`
   ADD CONSTRAINT `fieldtrip_support_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
