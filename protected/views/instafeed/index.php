@@ -18,9 +18,9 @@
         <h2>-- Nyeste bilde --</h2>
         <a href="{{link}}">
             <img src="{{image}}" ></br>
-            <font face='webdings' size="5">&#40;</font>  {{comments}}
+            <i class="icon-comment icon-large"></i>   {{comments}}
             &nbsp;
-            <font face='webdings' size="5">&#89;</font>  {{likes}} </br>
+            <i class="icon-heart icon-large"></i> {{likes}} </br>
         </a>
         <div class="caption">{{caption}}</div>
     </div>
@@ -46,8 +46,8 @@
     <div class="body">
         <a href="{{link}}">
             <img src="{{image}}" </br></br>
-            <font face='webdings' size="4">&#40;</font>  {{comments}}
-            <font face='webdings' size="4">&#89;</font>  {{likes}}
+            <i class="icon-comment"></i>  {{comments}}
+            <i class="icon-heart"></i>   {{likes}}
         </a>
         <div class="caption">{{caption}}</div>
     </div>

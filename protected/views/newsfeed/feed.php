@@ -86,8 +86,8 @@ $this->endClip();
     <div class="front">
         <a href="{{link}}">
             <img src="{{image}}" />
-            <font face='webdings' size="4">&#40;</font>  {{comments}}
-            <font face='webdings' size="4">&#89;</font>  {{likes}}
+                <i class="icon-comment"></i>  {{comments}}
+                <i class="icon-heart"></i>   {{likes}}
         </a>
     </div>
 </script>

@@ -16,6 +16,8 @@
 
 		<script src="/javascript/dev/underscore-min.js"></script>
 		<script data-main="/javascript/main.js" src="/javascript/require.js"></script>
+        
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 
 	</head>
 
