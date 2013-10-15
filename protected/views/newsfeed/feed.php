@@ -84,8 +84,10 @@ $this->endClip();
 
 <script type="text/template" id="instafeed-front-template">
     <div class="front">
-        <a href="{{link}}">
+        <a href="<?=$this->createUrl("instafeed/index")?>">
             <img src="{{image}}" />
+        </a>
+            <a href="{{link}}">
                 <i class="icon-comment"></i>  {{comments}}
                 <i class="icon-heart"></i>   {{likes}}
         </a>
