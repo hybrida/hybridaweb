@@ -8,6 +8,7 @@ return array(
 	'alumni/form' => 'alumni/form',
 	'alumni' => '/graduate/index',
 	'alumni/<id:\d+>' => '/graduate/graduationyear',
+	'api/gossip' => '/api/addGossip',
 	'artikler/<id:\d+>/<title>' => '/article/view',
 
 	'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
