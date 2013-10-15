@@ -56,6 +56,3 @@
 .newsfeedIndex .date {
   color: black;
 }
-.newsfeedIndex .author:before {
-  content: "skrevet av";
-}
