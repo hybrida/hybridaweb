@@ -8,7 +8,7 @@ upc/
 .buildpath
 .DS_Store
 .git
-style/css/min.css
+css/min.css
 db/*.hash
 
 # Intellij project files
