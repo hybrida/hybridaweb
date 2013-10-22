@@ -80,7 +80,7 @@
 				<h2>Bedriftskomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/bksjef.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/simenlil">Simen Lillehagen</a>
-				2. kl
+				3. kl
 				<div class="description">
 					Fikser og ordner med profileringen av linja og linjeforeningen utad til
 					bedrifter og n&aelig;ringslivet generelt.
