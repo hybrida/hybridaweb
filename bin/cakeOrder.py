@@ -6,7 +6,7 @@ def cakeOrder():
 		"Oda", "Sigurd", "Marius E"]
 	weeks = range(42, 49)+range(3,10)
 	shuffle(names)
-	return [str(a).rjust(2)+": "+b for a,b in zip(weeks, names)]
+	return [str(w).rjust(2)+": "+n for (w,n) in zip(weeks, names)]
 
 if __name__ == "__main__":
 	print "\n".join(cakeOrder())
