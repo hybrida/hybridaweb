@@ -17,7 +17,10 @@ class DefaultController extends Controller
     public function actionIndex()
     {
         $this->checkAccess();
-		$this->render('index');
+        $logs = TrackerLog::model()->findAll();
+		$this->render('index', array(
+            'logs' => $logs,
+        ));
 	}
 
 	public function actionForm() {
