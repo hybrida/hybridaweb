@@ -98,4 +98,10 @@ class TrackerLog extends CActiveRecord
 	{
 		return parent::model($className);
 	}
+
+	public function afterConstruct() {
+		if ($this->isNewRecord) {
+			$this->date = new CDbExpression("NOW()");
+		}
+	}
 }

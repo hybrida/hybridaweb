@@ -2,6 +2,7 @@
 
 Yii::import("timetracker.controllers.*");
 
+
 class DefaultControllerTest extends CTestCase {
 
 	private $obj;
@@ -20,7 +21,9 @@ class DefaultControllerTest extends CTestCase {
 	}
 
 	public function test_userHasAccess_true_true() {
+		$session = new Session;
 		$trackerUser = Util::getTrackerUser();
+		$session->login($trackerUser->user_id);
 		$actual = $this->obj->userHasAccess($trackerUser->user_id);
 		$this->assertTrue($actual);
 	}

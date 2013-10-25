@@ -215,4 +215,18 @@ class Util {
 		return $user;
 	}
 
+	public static function getNewTrackerLog() {
+		$tracker = new TrackerLog();
+		$user = self::getTrackerUser();
+		$tracker->work_time = 0;
+		$tracker->user_id = $user->user_id;
+		return $tracker;
+	}
+
+	public static function getTrackerLog() {
+		$tracker = self::getNewTrackerLog();
+		$tracker->save();
+		return $tracker;
+	}
+
 }

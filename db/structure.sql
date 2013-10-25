@@ -595,6 +595,13 @@ ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
+ALTER TABLE `tracker_log`
+  ADD CONSTRAINT `tracker_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tracker_user` (`user_id`);
+
+ALTER TABLE `tracker_user`
+  ADD CONSTRAINT `tracker_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
