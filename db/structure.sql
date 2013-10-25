@@ -504,8 +504,9 @@ CREATE TABLE IF NOT EXISTS `tracker_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `date` date NOT NULL,
-  `work_time` decimal(10,0) NOT NULL,
+  `work_time` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id_2` (`user_id`,`date`),
   KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 

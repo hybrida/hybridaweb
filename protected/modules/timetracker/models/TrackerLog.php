@@ -101,7 +101,34 @@ class TrackerLog extends CActiveRecord
 
 	public function afterConstruct() {
 		if ($this->isNewRecord) {
-			$this->date = new CDbExpression("NOW()");
+			$this->date = date('Y-m-d', time());
 		}
+	}
+
+	public function beforeSave() {
+		$logsFromBefore = self::model()->findAll("user_id = ? and date = ?", array(
+			$this->user_id,
+			$this->date,
+		));
+		if (count($logsFromBefore) >= 1) {
+			$log = $logsFromBefore[0];
+			$this->overwritePrevious($log);
+			return false;
+		}
+		return true;
+	}
+
+	private function overwritePrevious($log) {
+        // Kan ikke bruke standard $log->save() fordi det fører til en uendelig
+		// rekursjon der afterValidate blir kallt gang på gang.
+		$tbl = $this->tableName();
+		$sql = "UPDATE ${tbl}
+				SET work_time = :work_time
+				WHERE user_id = :uid AND date = :date;";
+		$stmt = Yii::app()->db->pdoInstance->prepare($sql);
+		$stmt->bindValue(":work_time", $this->work_time);
+		$stmt->bindValue(":date", $this->date);
+		$stmt->bindValue(":uid", $this->user_id);
+		$stmt->execute();
 	}
 }

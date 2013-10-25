@@ -6,7 +6,7 @@
 
 <div class="g-form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php $form=$this->beginWidget('ActiveForm', array(
 	'id'=>'tracker-log-_form-form',
 	'enableAjaxValidation'=>false,
 	'enableClientValidation' => false,
