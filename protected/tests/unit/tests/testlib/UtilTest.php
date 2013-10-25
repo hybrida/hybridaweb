@@ -65,4 +65,14 @@ class UtilTest extends PHPUnit_Framework_TestCase {
 		$this->assertSave($score);
 	}
 
+	public function testGetNewTrackerUser () {
+		$user = Util::getNewTrackerUser();
+		$this->assertSave($user);
+	}
+
+	public function testGetTrackerUser() {
+		$user = Util::getTrackerUser();
+		$this->assertFalse($user->isNewRecord);
+	}
+
 }

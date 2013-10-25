@@ -3,6 +3,7 @@
 
 Yii::import("comment.models.*");
 Yii::import("comment.components.*");
+Yii::import("timetracker.models.*");
 
 class Util {
 
@@ -199,6 +200,19 @@ class Util {
 		}
 		$score->save();
 		return $score;
+	}
+
+	public static function getNewTrackerUser() {
+		$tracker = new TrackerUser();
+		$user = self::getUser();
+		$tracker->user_id = $user->id;
+		return $tracker;
+	}
+
+	public static function getTrackerUser() {
+		$user = self::getNewTrackerUser();
+		$user->save();
+		return $user;
 	}
 
 }

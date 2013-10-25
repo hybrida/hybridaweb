@@ -67,6 +67,7 @@ return array(
 		'bpc',
 		'calendar',
 		'comment',
+		'timetracker',
 		'search',
 		'notifications',
 		'jobAnnouncement',
