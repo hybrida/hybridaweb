@@ -16,7 +16,7 @@ class DefaultController extends Controller
 
     public function actionIndex() {
         $this->checkAccess();
-        $graph = new TrackGraph(7);
+        $graph = new TrackGraph(14);
 
 		$this->render('index', array(
             'graph' => $graph->getData(),

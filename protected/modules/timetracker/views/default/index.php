@@ -10,7 +10,7 @@ $this->breadcrumbs=array(
 
 <h1>Big Daddy</h1>
 
-Trykk <?= CHtml::link("her", array("form")) ?> for å vise hvor flink du er.
+<?= CHtml::link("HER", array("form"), array("class" => "g-button")) ?>
 
 
 
@@ -22,29 +22,26 @@ Trykk <?= CHtml::link("her", array("form")) ?> for å vise hvor flink du er.
 	$(function () {
         $('#container').highcharts({
             title: {
-                text: 'Monthly Average Temperature',
+                text: 'Arbeid siste 7 dager',
                 x: -20 //center
             },
             subtitle: {
-                text: 'Source: WorldClimate.com',
+                text: 'Husk at du bare konkurrer med deg selv!',
                 x: -20
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
             },
             yAxis: {
                 title: {
-                    text: 'Temperature (°C)'
+                    text: 'Antall timer (rad/sek)'
                 },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
+
             },
             tooltip: {
-                valueSuffix: '°C'
+                valueSuffix: ' rad/sek'
+            },
+            plotOptions: {
+                line: {
+                    animation: false
+                }
             },
             legend: {
                 layout: 'vertical',
