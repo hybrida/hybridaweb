@@ -42,7 +42,9 @@ $this->breadcrumbs=array(
             	}
             },
             tooltip: {
-                valueSuffix: ' timer'
+                valueSuffix: ' timer',
+                shared: true,
+                crosshairs: true
             },
             plotOptions: {
                 line: {
