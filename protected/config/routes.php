@@ -46,7 +46,9 @@ return array(
 	'varslinger' => '/notifications',
 
 	'bigdaddy/<action:\w+>' => 'timetracker/default/<action>',
+	'thetrumanshow/<action:\w+>' => 'timetracker/default/<action>',
 	'bigdaddy' => 'timetracker/default/index',
+	'thetrumanshow' => 'timetracker/default/index',
 
 	'dev/login/<id:\w+>' => 'dev/default/login',
 	'<module:(dev|ajax)>/<action:\w+>/<id:\d+>' => '<module>/default/<action>',
