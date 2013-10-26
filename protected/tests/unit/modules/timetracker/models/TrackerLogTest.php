@@ -53,4 +53,13 @@ class TrackerLogTest extends CTestCase {
 		$actual = TrackerLog::model()->findByPK($log->id);
 		$this->assertEquals(15.87, $actual->work_time);
 	}
+
+	public function test_userRelation () {
+		$log = Util::getTrackerLog();
+		$id1 = $log->user_id;
+
+		$id2 = $log->user->user->id;
+
+		$this->assertEquals($id1, $id2);
+	}
 }

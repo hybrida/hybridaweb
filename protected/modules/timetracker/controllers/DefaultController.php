@@ -14,12 +14,12 @@ class DefaultController extends Controller
         }
     }
 
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $this->checkAccess();
-        $logs = TrackerLog::model()->findAll();
+        $graph = new TrackGraph(7);
+
 		$this->render('index', array(
-            'logs' => $logs,
+            'graph' => $graph->getData(),
         ));
 	}
 
