@@ -31,12 +31,18 @@ $this->breadcrumbs=array(
             },
             yAxis: {
                 title: {
-                    text: 'Antall timer (rad/sek)'
+                    text: 'timer'
                 },
 
             },
+            xAxis: {
+            	categories: <?= $dates ?>,
+            	title: {
+            		text: "<?= date('F', time()) ?>"
+            	}
+            },
             tooltip: {
-                valueSuffix: ' rad/sek'
+                valueSuffix: ' timer'
             },
             plotOptions: {
                 line: {
@@ -49,7 +55,7 @@ $this->breadcrumbs=array(
                 verticalAlign: 'middle',
                 borderWidth: 0
             },
-            series: <?= $graph ?>
+            series: <?= $series ?>
         });
     });
 

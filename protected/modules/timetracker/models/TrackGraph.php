@@ -2,12 +2,12 @@
 
 class TrackGraph extends CComponent {
 
-	private $_days;
+	private $days;
 	private $_models;
 	private $_users;
 
 	public function __construct($days) {
-		$this->_days = $days;
+		$this->days = $days;
 		$this->gatherData();
 	}
 
@@ -20,7 +20,7 @@ class TrackGraph extends CComponent {
 		$criteria = new CDbCriteria();
 		$criteria->condition = "DATE_ADD(date, INTERVAL :days DAY) > NOW()";
 		$criteria->params = array(
-			':days' => $this->_days,
+			':days' => $this->days,
 		);
 		$this->_models = TrackerLog::model()->findAll($criteria);
 	}
@@ -29,19 +29,19 @@ class TrackGraph extends CComponent {
 		$this->_users = TrackerUser::model()->with('user')->findAll();
 	}
 
-	public function getData() {
+	public function getSeries() {
 		$graphs = array();
 		foreach ($this->_users as $user) {
 			$graph = new TrackerGraph();
 			$graph->user = $user->user;
-			$graph->data = array_fill(0, $this->_days, 0);
+			$graph->data = array_fill(0, $this->days, 0);
 			$graphs[] = $graph;
 		}
 		foreach ($this->_models as $model) {
 			$model_time = strtotime($model->date);
 			$current_time = time();
 			$time_diff = $current_time - $model_time;
-			$days_ago = $this->_days - ceil($time_diff / (60*60*24));
+			$days_ago = $this->days - ceil($time_diff / (60*60*24));
 			foreach ($this->_users as $key => $user) {
 				if ($user->user_id == $model->user_id) {
 					$graphs[$key]->data[$days_ago] += $model->work_time;
@@ -53,6 +53,19 @@ class TrackGraph extends CComponent {
 			$array[] = $graph->toArray();
 		}
 		return CJSON::encode($array);
+	}
+
+	public function getDates() {
+		$secondsInDay = 60*60*24;
+		$startTime = time() - $secondsInDay*($this->days-1);
+		$dates = array();
+		for ($i = 0; $i < $this->days; $i++) {
+			$time = $startTime + $secondsInDay * $i;
+			$date = date('d', $time);
+			$dates[] = $date;
+		}
+		return CJSON::encode($dates);
+
 	}
 
 }

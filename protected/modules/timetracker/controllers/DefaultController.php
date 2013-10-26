@@ -19,7 +19,8 @@ class DefaultController extends Controller
         $graph = new TrackGraph(14);
 
 		$this->render('index', array(
-            'graph' => $graph->getData(),
+            'series' => $graph->getSeries(),
+            'dates' => $graph->getDates(),
         ));
 	}
 
