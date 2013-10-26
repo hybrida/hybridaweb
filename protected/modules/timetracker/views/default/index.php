@@ -22,7 +22,7 @@ $this->breadcrumbs=array(
 	$(function () {
         $('#container').highcharts({
             title: {
-                text: 'Arbeid siste 7 dager',
+                text: 'Arbeid siste 14 dager',
                 x: -20 //center
             },
             subtitle: {
