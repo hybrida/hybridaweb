@@ -5,6 +5,31 @@ Yii::import('application.tests.mocks.BpcEventMock');
 
 class FieldtripSupportMockTest extends CTestCase {
 
+	private $user;
+	private $event;
+
+	public function setUp() {
+		$this->user = Util::getUser();
+		$this->event = BpcEventMock::mock();
+	}
+
+	public function test_setup() {
+		$this->assertNotNull($this->user);
+		$this->assertNotNull($this->event);
+	}
+
+	private function getSupport($fieldtrip) {
+		return FieldtripSupportMock::model()->findByPk($fieldtrip->primaryKey);
+	}
+
+	private function support() {
+		return FieldtripSupportMock::support($this->event, $this->user);
+	}
+
+	private function removeSupport() {
+		return FieldtripSupportMock::removeSupport($this->event, $this->user);
+	}
+
 	private function assertCanSupportDecoupled($expected, $user, $isSpring, $isFieldtripThisYear) {
 		$actual = FieldtripSupportMock::canSupportDecoupled($user, $isSpring, $isFieldtripThisYear);
 		$this->assertEquals($expected, $actual);
@@ -90,47 +115,59 @@ class FieldtripSupportMockTest extends CTestCase {
 	}
 
 	public function test_canSupport_withMock_modelCountIncremented() {
-		$user = Util::getNewUser();
-		$randomClassYear = 100;
-		$user->classYear = $randomClassYear;
-		$user->save();
-		$event = BpcEventMock::mock();
 		$beforeCount = $this->modelCount();
-		FieldtripSupportMock::support($event, $user);
+		$this->support();
 		$afterCount = $this->modelCount();
 		$this->assertEquals($afterCount, $beforeCount + 1);
 	}
 
 	public function test_support_timestampIsDelete_set () {
-		$user = Util::getUser();
-		$event = BpcEventMock::mock();
-		$fieldtrip = FieldtripSupportMock::support($event, $user);
-		$fieldtrip = FieldtripSupport::model()->findByPk($fieldtrip->id);
+		$fieldtrip = $this->support();
+		$fieldtrip = $this->getSupport($fieldtrip);
 		$this->assertNotNull($fieldtrip->timestamp);
 		$this->assertEquals(0, $fieldtrip->isDeleted);
 	}
 
 	public function test_deleteSupport_isDeleteIs0() {
-		$user = Util::getUser();
-		$event = BpcEventMock::mock();
-		$fieldtrip = FieldtripSupportMock::support($event, $user);
-
-		FieldtripSupport::removeSupport($event, $user);
-		$fieldtrip = FieldtripSupport::model()->findByPk($fieldtrip->id);
+		$fieldtrip = $this->support();
+		$this->removeSupport();
+		$fieldtrip = $this->getSupport($fieldtrip);
 		$this->assertEquals(1, $fieldtrip->isDeleted);
 	}
 
-	public function test_deleteSupprot_isNoFieldtrip_nothingHappens() {
-		$user = Util::getUser();
-		$event = BpcEventMock::mock();
-
-		FieldtripSupport::removeSupport($event, $user);
+	public function test_deleteSupport_isNoFieldtrip_nothingHappens() {
+		$this->removeSupport();
 	}
 
+	public function test_support_supportAndUnsupportStressTest () {
+		// Support
+		$ft = $this->support();
+		$ft = $this->getSupport($ft);
+		$this->assertEquals(0, $ft->isDeleted);
+
+		// Unsupport
+		$this->removeSupport();
+		$ft = $this->getSupport($ft);
+		$this->assertEquals(1, $ft->isDeleted);
+
+		// Support
+		$this->support();
+		$ft = $this->getSupport($ft);
+		$this->assertEquals(0, $ft->isDeleted);
+
+		// Unsupport
+		$this->removeSupport();
+		$ft = $this->getSupport($ft);
+		$this->assertEquals(1, $ft->isDeleted);
+	}
 }
 
 class FieldtripSupportMock extends FieldtripSupport {
 
+	// Denne må overkjøres siden den i implementasjonen avhenger av ytre
+	// tilstand som dato og om det er fildtrip dette året. Metoden kjører bare
+	// canSupportDecoupled som testes nøye i denne testcasen. Derfor er dette
+	// greit.
 	public static function canSupport($user) {
 		return true;
 	}
