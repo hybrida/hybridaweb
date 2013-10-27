@@ -68,7 +68,12 @@ class NewsfeedController extends Controller {
 				case 'event':
 					$ar['image'] = Image::tag($model->imageId, 'frontpage');
 					$ar['date'] = Html::dateToString($model->timestamp, 'mediumlong');
-					$ar['parent'] = Event::model()->findByPk($model->parentId)->attributes;
+					$parent = Event::model()->findByPk($model->parentId);
+					if ($parent !== NULL) {
+						$ar['parent'] = $parent->attributes;
+					} else {
+						$ar['parent'] = NULL;
+					}
 					break;
 				case 'album':
 					Yii::app()->getModule('gallery');
@@ -79,9 +84,9 @@ class NewsfeedController extends Controller {
 					$ar['imagecount'] = count($album->images);
 					foreach ($album->images as $image)
 						$ar['images'][] =CHtml::link(
-									Image::tag($image->id, "gallery_thumb"), 
+									Image::tag($image->id, "gallery_thumb"),
 									'/gallery/'.$album->id."/".$image->id,
-									array('width' => 100)); 
+									array('width' => 100));
 					break;
 				default:
 					$ar['image'] = Image::tag($model->imageId, 'frontpage');
