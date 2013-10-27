@@ -34,6 +34,7 @@ class TrackGraph extends CComponent {
 		foreach ($this->_users as $user) {
 			$graph = new TrackerGraph();
 			$graph->user = $user->user;
+			$graph->color = $user->graph_color;
 			$graph->data = array_fill(0, $this->days, 0);
 			$graphs[] = $graph;
 		}
@@ -73,12 +74,16 @@ class TrackGraph extends CComponent {
 class TrackerGraph extends CComponent {
 	public $user;
 	public $data = array();
+	public $color;
 
 	public function toArray() {
 		$out = array(
 			"name" => $this->user->fullName,
 			'data' => $this->data,
 		);
+		if ($this->color !== NULL) {
+			$out['color'] = "#" . $this->color;
+		}
 		return $out;
 	}
 }

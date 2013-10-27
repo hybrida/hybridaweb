@@ -512,8 +512,9 @@ CREATE TABLE IF NOT EXISTS `tracker_log` (
 
 CREATE TABLE IF NOT EXISTS `tracker_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `graph_color` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
