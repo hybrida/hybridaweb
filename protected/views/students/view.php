@@ -48,7 +48,7 @@ $this->endClip();
 					<? } ?>
 				</td>
 
-				<td><a href='<?= Yii::app()->baseURL ?>/#'><?= $user['name'] ?></a></td>
+				<td><a href='<?= Yii::app()->baseURL ?>/artikler/<?=$user['article_id']?>/<?=$user['name']?>'><?= $user['name'] ?></a></td>
 			</tr>
 		</div>
 	<? endforeach; ?>

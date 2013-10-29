@@ -28,7 +28,7 @@ class Profile {
 			'year' => $year
 		);
 
-		$sql = "SELECT ui.id, ui.username, ui.firstName, ui.middleName, ui.lastName, ui.imageId, ui.member, siteId, name
+		$sql = "SELECT ui.id, ui.username, ui.firstName, ui.middleName, ui.lastName, ui.imageId, ui.member, article_id, name
 				FROM user AS ui
 				LEFT JOIN specialization ON specializationId = specialization.id
 				WHERE graduationYear = :year
