@@ -20,6 +20,7 @@ $motivational_quotes = array(
     '"To different minds, the same world is a hell, and a heaven." – Ralph Waldo Emerson',
     '"It’s great to be great, but its greater to be human." – Will Rogers',
     '"Do not wait to strike till the iron is hot; but make it hot by striking." – William B. Sprague ',
+    'One day your life will flash before your eyes. Make sure it\'s worth watching.',
 );
 $quote = $motivational_quotes[array_rand($motivational_quotes)];
 
