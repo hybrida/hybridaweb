@@ -36,6 +36,7 @@ return array(
 	'kalender' => '/calendar/default/index',
 	'nyheter' => 'newsfeed/index',
 	'nyheter/<id:\d+>/<title>' => 'news/view',
+	'nyheter/<id:\d+>/' => 'news/view',
 
 	'profil' => '/profile/',
 	'profil/<username:\w+>/<action:\w+>' => 'profile/<action>/',
