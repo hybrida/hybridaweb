@@ -9,6 +9,7 @@ return array(
 	'alumni' => '/graduate/index',
 	'alumni/<id:\d+>' => '/graduate/graduationyear',
 	'artikler/<id:\d+>/<title>' => '/article/view',
+	'artikler/<id:\d+>/' => '/article/view',
 
 	'bedpres/<id:\d+>/<title>' => 'bpc/default/view',
 	'bilde/<size:\w+>/<id:\d+>' => 'image/view',
