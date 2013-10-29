@@ -40,14 +40,14 @@ class Album extends CActiveRecord
 		$this->_access->replace();
 		return parent::afterSave();
 	}
-	public function setAttributes($atts)
+	public function setAttributes($atts, $safeOnly = true)
 	{
 		if (array_key_exists('access', $atts))
 		{
 			$this->setAccess($atts['access']);
 			unset($atts['access']);
 		}
-		return parent::setAttributes($atts);
+		return parent::setAttributes($atts, $safeOnly);
 	}
 
 	public function getImages()
