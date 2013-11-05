@@ -5,7 +5,7 @@ function getDirContents($folderPath) {
 	$file = readdir($dirHandle);
 	$files = array();
 	while ($file) {
-		if ($file != "." && $file != ".." && $file != ".hg") {
+		if ($file != "." && $file != ".." && $file != ".git") {
 			$files[] = $file;
 		}
 		$file = readdir($dirHandle);
