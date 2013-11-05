@@ -1,6 +1,6 @@
 <?
 $this->breadcrumbs = array(
-	'Galleri' => array('/gallery'),
+	'Galleri' => array('/galleri'),
 );
 ?>
 

@@ -1,7 +1,7 @@
 <?
 $this->breadcrumbs = array(
-	'Galleri' => array('/gallery'),
-	$album->title => array('/gallery/'.$album->id),
+	'Galleri' => array('/galleri'),
+	$album->title => array('/galleri/'.$album->id),
 );
 ?>
 
@@ -44,7 +44,7 @@ $this->beginClip('sidebar');
 
 		<? if ($prevID >= 0): ?>
 				<?= CHtml::link('< forrige', 
-								'/gallery/'.$album->id.'/'.$album->images[$prevID]->id, 
+								'/galleri/'.$album->id.'/'.$album->images[$prevID]->id, 
 								array( 'id' => 'prev')
 								) ?>
 				<div id="noPrev" style="display: none;">første</div>
@@ -67,7 +67,7 @@ $this->beginClip('sidebar');
 
 		<? if ($nextID >= 0): ?>
 			<?= CHtml::link('neste >', 
-							'/gallery/'.$album->id.'/'.$album->images[$nextID]->id, 
+							'/galleri/'.$album->id.'/'.$album->images[$nextID]->id, 
 							 array('id' => 'next')
 							 ) ?>
 			<div id="noNext" style="display:none;">siste</div>
