@@ -418,7 +418,9 @@ class AlbumController extends Controller
 			// and is located at $targetDir . DIRECTORY_SEPARATOR . $fileName
 			// **********************************************************************************************
 
-			$ext = strtolower(end(explode('.', $fileName)));
+			$exploded = explode('.', $fileName);
+			$end = end($exploded);
+			$ext = strtolower($end);
 
 			if (in_array($ext, array('png', 'jpg', 'jpeg', 'gif')))
 			{
