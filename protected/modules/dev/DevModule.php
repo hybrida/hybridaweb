@@ -10,16 +10,6 @@ class DevModule extends CWebModule {
 			'dev.models.*',
 			'dev.components.*',
 		));
-		$this->throwExceptinIfBadServerName();
-	}
-
-	public function throwExceptinIfBadServerName() {
-		$serverName = Yii::app()->request->serverName;
-		$badServerName = "/hybrida.no/";
-		$isBadServer = preg_match($badServerName, $serverName);
-		if ($isBadServer) {
-			throw new CHttpException(403, "Kun for medlemmer av webkomiteen");
-		}
 	}
 
 	public function beforeControllerAction($controller, $action) {
