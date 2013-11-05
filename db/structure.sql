@@ -1,34 +1,14 @@
--- phpMyAdmin SQL Dump
--- version 3.5.3
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Nov 05, 2013 at 05:54 PM
--- Server version: 5.5.28-log
--- PHP Version: 5.4.8
-
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
---
--- Database: `hybrida_dev`
---
-CREATE DATABASE `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida_dev`;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `access_relations`
---
-
-DROP TABLE IF EXISTS `access_relations`;
 CREATE TABLE IF NOT EXISTS `access_relations` (
   `id` int(11) NOT NULL,
   `access` int(11) NOT NULL,
@@ -37,13 +17,6 @@ CREATE TABLE IF NOT EXISTS `access_relations` (
   PRIMARY KEY (`id`,`type`,`access`,`super_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `album`
---
-
-DROP TABLE IF EXISTS `album`;
 CREATE TABLE IF NOT EXISTS `album` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -53,26 +26,12 @@ CREATE TABLE IF NOT EXISTS `album` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `album_image`
---
-
-DROP TABLE IF EXISTS `album_image`;
 CREATE TABLE IF NOT EXISTS `album_image` (
   `image_id` int(11) NOT NULL,
   `album_id` int(11) NOT NULL,
   `status` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `article`
---
-
-DROP TABLE IF EXISTS `article`;
 CREATE TABLE IF NOT EXISTS `article` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
@@ -83,15 +42,8 @@ CREATE TABLE IF NOT EXISTS `article` (
   `timestamp` date NOT NULL,
   `weight` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=103 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=111 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `article_text`
---
-
-DROP TABLE IF EXISTS `article_text`;
 CREATE TABLE IF NOT EXISTS `article_text` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `articleId` int(11) NOT NULL,
@@ -101,13 +53,6 @@ CREATE TABLE IF NOT EXISTS `article_text` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=229 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `bk_company`
---
-
-DROP TABLE IF EXISTS `bk_company`;
 CREATE TABLE IF NOT EXISTS `bk_company` (
   `companyID` int(11) NOT NULL AUTO_INCREMENT,
   `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -132,26 +77,12 @@ CREATE TABLE IF NOT EXISTS `bk_company` (
   KEY `contactorID` (`contactorID`,`addedByID`,`updatedByID`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=219 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `bk_company_specialization`
---
-
-DROP TABLE IF EXISTS `bk_company_specialization`;
 CREATE TABLE IF NOT EXISTS `bk_company_specialization` (
   `companyId` int(11) NOT NULL,
   `specializationId` int(11) NOT NULL,
   PRIMARY KEY (`companyId`,`specializationId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `bk_company_update`
---
-
-DROP TABLE IF EXISTS `bk_company_update`;
 CREATE TABLE IF NOT EXISTS `bk_company_update` (
   `updateId` int(11) NOT NULL AUTO_INCREMENT,
   `relevantForUserId` int(11) DEFAULT NULL,
@@ -164,13 +95,6 @@ CREATE TABLE IF NOT EXISTS `bk_company_update` (
   KEY `relevantForUserId` (`relevantForUserId`,`companyId`,`addedById`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14610 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `bk_iktringen_information`
---
-
-DROP TABLE IF EXISTS `bk_iktringen_information`;
 CREATE TABLE IF NOT EXISTS `bk_iktringen_information` (
   `companyID` int(11) NOT NULL,
   `relevance` enum('Høy','Middels','Lav') COLLATE utf8_unicode_ci DEFAULT 'Middels',
@@ -178,13 +102,6 @@ CREATE TABLE IF NOT EXISTS `bk_iktringen_information` (
   PRIMARY KEY (`companyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `book_sales`
---
-
-DROP TABLE IF EXISTS `book_sales`;
 CREATE TABLE IF NOT EXISTS `book_sales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -197,13 +114,6 @@ CREATE TABLE IF NOT EXISTS `book_sales` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `comment`
---
-
-DROP TABLE IF EXISTS `comment`;
 CREATE TABLE IF NOT EXISTS `comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
@@ -215,15 +125,8 @@ CREATE TABLE IF NOT EXISTS `comment` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=448 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=454 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `event`
---
-
-DROP TABLE IF EXISTS `event`;
 CREATE TABLE IF NOT EXISTS `event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start` datetime DEFAULT NULL,
@@ -231,15 +134,8 @@ CREATE TABLE IF NOT EXISTS `event` (
   `location` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=111 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=151 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `event_company`
---
-
-DROP TABLE IF EXISTS `event_company`;
 CREATE TABLE IF NOT EXISTS `event_company` (
   `eventID` int(11) NOT NULL,
   `companyID` int(11) DEFAULT NULL,
@@ -249,13 +145,6 @@ CREATE TABLE IF NOT EXISTS `event_company` (
   KEY `companyID` (`companyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `event_company_old`
---
-
-DROP TABLE IF EXISTS `event_company_old`;
 CREATE TABLE IF NOT EXISTS `event_company_old` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `companyId` int(11) NOT NULL,
@@ -263,13 +152,6 @@ CREATE TABLE IF NOT EXISTS `event_company_old` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `fb_user`
---
-
-DROP TABLE IF EXISTS `fb_user`;
 CREATE TABLE IF NOT EXISTS `fb_user` (
   `userId` int(11) NOT NULL,
   `fb_token` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -277,13 +159,6 @@ CREATE TABLE IF NOT EXISTS `fb_user` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `fieldtrip_support`
---
-
-DROP TABLE IF EXISTS `fieldtrip_support`;
 CREATE TABLE IF NOT EXISTS `fieldtrip_support` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `bpcId` int(11) NOT NULL,
@@ -293,15 +168,8 @@ CREATE TABLE IF NOT EXISTS `fieldtrip_support` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `bpcId` (`bpcId`,`userId`),
   KEY `user` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `forum`
---
-
-DROP TABLE IF EXISTS `forum`;
 CREATE TABLE IF NOT EXISTS `forum` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) unsigned DEFAULT NULL,
@@ -313,13 +181,6 @@ CREATE TABLE IF NOT EXISTS `forum` (
   KEY `FK_forum_forum` (`parent_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `forum_post`
---
-
-DROP TABLE IF EXISTS `forum_post`;
 CREATE TABLE IF NOT EXISTS `forum_post` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `author_id` int(10) unsigned NOT NULL,
@@ -335,13 +196,6 @@ CREATE TABLE IF NOT EXISTS `forum_post` (
   KEY `FK_post_thread` (`thread_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `forum_thread`
---
-
-DROP TABLE IF EXISTS `forum_thread`;
 CREATE TABLE IF NOT EXISTS `forum_thread` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `forum_id` int(10) unsigned NOT NULL,
@@ -355,13 +209,6 @@ CREATE TABLE IF NOT EXISTS `forum_thread` (
   KEY `FK_thread_forum` (`forum_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `forum_user`
---
-
-DROP TABLE IF EXISTS `forum_user`;
 CREATE TABLE IF NOT EXISTS `forum_user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `siteid` varchar(200) NOT NULL,
@@ -373,13 +220,6 @@ CREATE TABLE IF NOT EXISTS `forum_user` (
   UNIQUE KEY `siteid` (`siteid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `griff`
---
-
-DROP TABLE IF EXISTS `griff`;
 CREATE TABLE IF NOT EXISTS `griff` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commentId` int(11) NOT NULL,
@@ -387,15 +227,8 @@ CREATE TABLE IF NOT EXISTS `griff` (
   `isDeleted` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `commentId` (`commentId`,`userId`,`isDeleted`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=87 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `griffgame_highscore`
---
-
-DROP TABLE IF EXISTS `griffgame_highscore`;
 CREATE TABLE IF NOT EXISTS `griffgame_highscore` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userId` int(11) NOT NULL,
@@ -405,13 +238,6 @@ CREATE TABLE IF NOT EXISTS `griffgame_highscore` (
   KEY `userId` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `group_membership`
---
-
-DROP TABLE IF EXISTS `group_membership`;
 CREATE TABLE IF NOT EXISTS `group_membership` (
   `groupId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -421,13 +247,6 @@ CREATE TABLE IF NOT EXISTS `group_membership` (
   PRIMARY KEY (`userId`,`groupId`,`end`,`start`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `groups`
---
-
-DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu` int(11) NOT NULL,
@@ -438,15 +257,8 @@ CREATE TABLE IF NOT EXISTS `groups` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `url` (`url`),
   KEY `members` (`admin`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=59 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=84 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `iktringen_membership`
---
-
-DROP TABLE IF EXISTS `iktringen_membership`;
 CREATE TABLE IF NOT EXISTS `iktringen_membership` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `companyId` int(11) DEFAULT NULL,
@@ -462,13 +274,6 @@ CREATE TABLE IF NOT EXISTS `iktringen_membership` (
   KEY `fk_iktringen_membership_bk_company1_idx` (`companyId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `image`
---
-
-DROP TABLE IF EXISTS `image`;
 CREATE TABLE IF NOT EXISTS `image` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -479,15 +284,8 @@ CREATE TABLE IF NOT EXISTS `image` (
   PRIMARY KEY (`id`),
   KEY `albumId` (`galleryId`,`userId`),
   KEY `userId` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=61 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `job_announcement`
---
-
-DROP TABLE IF EXISTS `job_announcement`;
 CREATE TABLE IF NOT EXISTS `job_announcement` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `companyId` int(11) NOT NULL,
@@ -498,13 +296,6 @@ CREATE TABLE IF NOT EXISTS `job_announcement` (
   KEY `companyId` (`companyId`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `kilt_comment`
---
-
-DROP TABLE IF EXISTS `kilt_comment`;
 CREATE TABLE IF NOT EXISTS `kilt_comment` (
   `id` int(11) NOT NULL,
   `comment` text COLLATE utf8_unicode_ci NOT NULL,
@@ -513,13 +304,6 @@ CREATE TABLE IF NOT EXISTS `kilt_comment` (
   `status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `kilt_order`
---
-
-DROP TABLE IF EXISTS `kilt_order`;
 CREATE TABLE IF NOT EXISTS `kilt_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
@@ -532,13 +316,6 @@ CREATE TABLE IF NOT EXISTS `kilt_order` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `kilt_product`
---
-
-DROP TABLE IF EXISTS `kilt_product`;
 CREATE TABLE IF NOT EXISTS `kilt_product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
@@ -548,38 +325,17 @@ CREATE TABLE IF NOT EXISTS `kilt_product` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=104 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `kilt_product_size`
---
-
-DROP TABLE IF EXISTS `kilt_product_size`;
 CREATE TABLE IF NOT EXISTS `kilt_product_size` (
   `product_id` int(11) NOT NULL,
   `size_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `kilt_size`
---
-
-DROP TABLE IF EXISTS `kilt_size`;
 CREATE TABLE IF NOT EXISTS `kilt_size` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `size` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `kilt_time`
---
-
-DROP TABLE IF EXISTS `kilt_time`;
 CREATE TABLE IF NOT EXISTS `kilt_time` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start` date NOT NULL,
@@ -587,13 +343,6 @@ CREATE TABLE IF NOT EXISTS `kilt_time` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `knights`
---
-
-DROP TABLE IF EXISTS `knights`;
 CREATE TABLE IF NOT EXISTS `knights` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstName` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -602,19 +351,12 @@ CREATE TABLE IF NOT EXISTS `knights` (
   `grantYear` int(11) NOT NULL,
   `reason` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `news`
---
-
-DROP TABLE IF EXISTS `news`;
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
-  `parentType` enum('event','article','group','album') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parentType` enum('event','article','group', 'album') COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `imageId` int(11) DEFAULT NULL,
   `ingress` text COLLATE utf8_unicode_ci,
@@ -626,27 +368,13 @@ CREATE TABLE IF NOT EXISTS `news` (
   PRIMARY KEY (`id`),
   KEY `parentId` (`parentId`,`authorId`),
   KEY `author` (`authorId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=633 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=713 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `news_group`
---
-
-DROP TABLE IF EXISTS `news_group`;
 CREATE TABLE IF NOT EXISTS `news_group` (
   `newsId` int(11) NOT NULL,
   `groupId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `notification`
---
-
-DROP TABLE IF EXISTS `notification`;
 CREATE TABLE IF NOT EXISTS `notification` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentType` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -658,15 +386,8 @@ CREATE TABLE IF NOT EXISTS `notification` (
   `commentID` int(11) DEFAULT NULL,
   `statusCode` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `notification_listener`
---
-
-DROP TABLE IF EXISTS `notification_listener`;
 CREATE TABLE IF NOT EXISTS `notification_listener` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `userID` int(11) NOT NULL,
@@ -675,15 +396,8 @@ CREATE TABLE IF NOT EXISTS `notification_listener` (
   `isDeleted` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `parentID` (`parentID`,`userID`,`parentType`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=35 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=43 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `quiz_event`
---
-
-DROP TABLE IF EXISTS `quiz_event`;
 CREATE TABLE IF NOT EXISTS `quiz_event` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `responsibleQuizTeamId` int(11) NOT NULL,
@@ -691,30 +405,16 @@ CREATE TABLE IF NOT EXISTS `quiz_event` (
   `eventDate` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `responsibleQuizTeamId` (`responsibleQuizTeamId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `quiz_team`
---
-
-DROP TABLE IF EXISTS `quiz_team`;
 CREATE TABLE IF NOT EXISTS `quiz_team` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(75) COLLATE utf8_unicode_ci NOT NULL,
   `foundedDate` date NOT NULL,
   PRIMARY KEY (`id`),
   KEY `foundedDate` (`foundedDate`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `quiz_team_member`
---
-
-DROP TABLE IF EXISTS `quiz_team_member`;
 CREATE TABLE IF NOT EXISTS `quiz_team_member` (
   `userId` int(11) NOT NULL,
   `quizTeamId` int(11) NOT NULL,
@@ -722,13 +422,6 @@ CREATE TABLE IF NOT EXISTS `quiz_team_member` (
   KEY `quizTeamId` (`quizTeamId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `quiz_team_score`
---
-
-DROP TABLE IF EXISTS `quiz_team_score`;
 CREATE TABLE IF NOT EXISTS `quiz_team_score` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `quizEventId` int(11) NOT NULL,
@@ -738,15 +431,8 @@ CREATE TABLE IF NOT EXISTS `quiz_team_score` (
   UNIQUE KEY `quizEventId` (`quizEventId`,`quizTeamId`),
   KEY `score` (`score`),
   KEY `quizTeamId` (`quizTeamId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `rbac_assignment`
---
-
-DROP TABLE IF EXISTS `rbac_assignment`;
 CREATE TABLE IF NOT EXISTS `rbac_assignment` (
   `itemname` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `userid` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -755,13 +441,6 @@ CREATE TABLE IF NOT EXISTS `rbac_assignment` (
   PRIMARY KEY (`itemname`,`userid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `rbac_item`
---
-
-DROP TABLE IF EXISTS `rbac_item`;
 CREATE TABLE IF NOT EXISTS `rbac_item` (
   `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `type` int(11) NOT NULL,
@@ -771,13 +450,6 @@ CREATE TABLE IF NOT EXISTS `rbac_item` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `rbac_itemchild`
---
-
-DROP TABLE IF EXISTS `rbac_itemchild`;
 CREATE TABLE IF NOT EXISTS `rbac_itemchild` (
   `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
@@ -785,13 +457,6 @@ CREATE TABLE IF NOT EXISTS `rbac_itemchild` (
   KEY `child` (`child`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `signup`
---
-
-DROP TABLE IF EXISTS `signup`;
 CREATE TABLE IF NOT EXISTS `signup` (
   `eventId` int(11) NOT NULL DEFAULT '0',
   `spots` int(11) NOT NULL,
@@ -802,13 +467,6 @@ CREATE TABLE IF NOT EXISTS `signup` (
   PRIMARY KEY (`eventId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `signup_membership`
---
-
-DROP TABLE IF EXISTS `signup_membership`;
 CREATE TABLE IF NOT EXISTS `signup_membership` (
   `eventId` int(11) NOT NULL,
   `userId` int(11) NOT NULL,
@@ -817,13 +475,6 @@ CREATE TABLE IF NOT EXISTS `signup_membership` (
   PRIMARY KEY (`eventId`,`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `signup_membership_anonymous`
---
-
-DROP TABLE IF EXISTS `signup_membership_anonymous`;
 CREATE TABLE IF NOT EXISTS `signup_membership_anonymous` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `eventId` int(11) NOT NULL DEFAULT '0',
@@ -833,43 +484,38 @@ CREATE TABLE IF NOT EXISTS `signup_membership_anonymous` (
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `signedOff` enum('true','false') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'false',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `specialization`
---
-
-DROP TABLE IF EXISTS `specialization`;
 CREATE TABLE IF NOT EXISTS `specialization` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `article_id` int(11) DEFAULT NULL,
   `name` varchar(70) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `siteId` (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=41 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_migration`
---
-
-DROP TABLE IF EXISTS `tbl_migration`;
 CREATE TABLE IF NOT EXISTS `tbl_migration` (
   `version` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `apply_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `tracker_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `work_time` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `user_id_2` (`user_id`,`date`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
---
--- Table structure for table `user`
---
+CREATE TABLE IF NOT EXISTS `tracker_user` (
+  `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `graph_color` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
@@ -893,15 +539,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `altEmail` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=577 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=762 ;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `user_password`
---
-
-DROP TABLE IF EXISTS `user_password`;
 CREATE TABLE IF NOT EXISTS `user_password` (
   `userId` int(11) NOT NULL,
   `password` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -909,83 +548,62 @@ CREATE TABLE IF NOT EXISTS `user_password` (
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Constraints for dumped tables
---
+CREATE TABLE IF NOT EXISTS `gossip` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gossipText` text COLLATE utf8_unicode_ci NOT NULL,
+  `submitDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
---
--- Constraints for table `fieldtrip_support`
---
+
 ALTER TABLE `fieldtrip_support`
   ADD CONSTRAINT `fieldtrip_support_ibfk_2` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
---
--- Constraints for table `forum`
---
 ALTER TABLE `forum`
   ADD CONSTRAINT `FK_forum_forum` FOREIGN KEY (`parent_id`) REFERENCES `forum` (`id`) ON DELETE CASCADE;
 
---
--- Constraints for table `forum_post`
---
 ALTER TABLE `forum_post`
   ADD CONSTRAINT `FK_post_author` FOREIGN KEY (`author_id`) REFERENCES `forum_user` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_post_editor` FOREIGN KEY (`editor_id`) REFERENCES `forum_user` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_post_thread` FOREIGN KEY (`thread_id`) REFERENCES `forum_thread` (`id`) ON DELETE CASCADE;
 
---
--- Constraints for table `forum_thread`
---
 ALTER TABLE `forum_thread`
   ADD CONSTRAINT `FK_thread_forum` FOREIGN KEY (`forum_id`) REFERENCES `forum` (`id`) ON DELETE CASCADE;
 
---
--- Constraints for table `griffgame_highscore`
---
 ALTER TABLE `griffgame_highscore`
   ADD CONSTRAINT `griffgame_highscore_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
---
--- Constraints for table `iktringen_membership`
---
 ALTER TABLE `iktringen_membership`
   ADD CONSTRAINT `fk_iktringen_membership_bk_company1` FOREIGN KEY (`companyId`) REFERENCES `bk_company` (`companyID`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
---
--- Constraints for table `job_announcement`
---
 ALTER TABLE `job_announcement`
   ADD CONSTRAINT `job_announcement_ibfk_1` FOREIGN KEY (`companyId`) REFERENCES `bk_company` (`companyID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `quiz_event`
---
 ALTER TABLE `quiz_event`
   ADD CONSTRAINT `quiz_event_ibfk_1` FOREIGN KEY (`responsibleQuizTeamId`) REFERENCES `quiz_team` (`id`);
 
---
--- Constraints for table `quiz_team_member`
---
 ALTER TABLE `quiz_team_member`
-  ADD CONSTRAINT `quiz_team_member_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `quiz_team_member_ibfk_2` FOREIGN KEY (`quizTeamId`) REFERENCES `quiz_team` (`id`);
+  ADD CONSTRAINT `quiz_team_member_ibfk_2` FOREIGN KEY (`quizTeamId`) REFERENCES `quiz_team` (`id`),
+  ADD CONSTRAINT `quiz_team_member_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `user` (`id`);
 
---
--- Constraints for table `quiz_team_score`
---
 ALTER TABLE `quiz_team_score`
   ADD CONSTRAINT `quiz_team_score_ibfk_1` FOREIGN KEY (`quizEventId`) REFERENCES `quiz_event` (`id`),
   ADD CONSTRAINT `quiz_team_score_ibfk_2` FOREIGN KEY (`quizTeamId`) REFERENCES `quiz_team` (`id`);
 
---
--- Constraints for table `rbac_assignment`
---
 ALTER TABLE `rbac_assignment`
   ADD CONSTRAINT `rbac_assignment_ibfk_1` FOREIGN KEY (`itemname`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `rbac_itemchild`
---
 ALTER TABLE `rbac_itemchild`
   ADD CONSTRAINT `rbac_itemchild_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `rbac_itemchild_ibfk_2` FOREIGN KEY (`child`) REFERENCES `rbac_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE `tracker_log`
+  ADD CONSTRAINT `tracker_log_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tracker_user` (`user_id`);
+
+ALTER TABLE `tracker_user`
+  ADD CONSTRAINT `tracker_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

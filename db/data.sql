@@ -1,4 +1,7 @@
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET FOREIGN_KEY_CHECKS=0;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -6,8 +9,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-DROP DATABASE `hybrida_dev`;
-CREATE DATABASE `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 USE `hybrida_dev`;
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
@@ -477,36 +479,36 @@ INSERT INTO `rbac_item` (`name`, `type`, `description`, `bizrule`, `data`) VALUE
 ('writer', 2, 'Kan publisere', '', 's:0:"";');
 
 INSERT INTO `rbac_itemchild` (`parent`, `child`) VALUES
-('webkom', 'admin'),
-('all', 'bk'),
-('writer', 'createArticle'),
-('writer', 'createNews'),
-('deleteOwnComment', 'deleteComment'),
-('all', 'deleteOwnComment'),
 ('admin', 'editor'),
-('styret', 'editor'),
-('all', 'styret'),
-('editor', 'updateArticle'),
-('updateOwnArticle', 'updateArticle'),
 ('admin', 'updateBedpres'),
-('bk', 'updateBedpres'),
 ('admin', 'updateGroup'),
-('bk', 'updateNews'),
-('editor', 'updateNews'),
-('updateOwnNews', 'updateNews'),
+('admin', 'updateProfile'),
+('admin', 'writer'),
+('all', 'bk'),
+('all', 'deleteOwnComment'),
+('all', 'styret'),
 ('all', 'updateOwn'),
+('all', 'webkom'),
+('bk', 'updateBedpres'),
+('bk', 'updateNews'),
+('deleteOwnComment', 'deleteComment'),
+('editor', 'updateArticle'),
+('editor', 'updateNews'),
+('styret', 'editor'),
+('styret', 'writer'),
 ('updateOwn', 'updateOwnArticle'),
-('writer', 'updateOwnArticle'),
 ('updateOwn', 'updateOwnGroup'),
 ('updateOwn', 'updateOwnNews'),
-('writer', 'updateOwnNews'),
 ('updateOwn', 'updateOwnProfile'),
-('admin', 'updateProfile'),
+('updateOwnArticle', 'updateArticle'),
+('updateOwnNews', 'updateNews'),
 ('updateOwnProfile', 'updateProfile'),
-('all', 'webkom'),
-('admin', 'writer'),
-('styret', 'writer'),
-('webkom', 'writer');
+('webkom', 'admin'),
+('webkom', 'writer'),
+('writer', 'createArticle'),
+('writer', 'createNews'),
+('writer', 'updateOwnArticle'),
+('writer', 'updateOwnNews');
 
 INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) VALUES
 (71, 47, '2011-12-07 22:25:40', '2012-01-01 22:35:00', 'false', 0),
@@ -543,18 +545,27 @@ INSERT INTO `specialization` (`id`, `article_id`, `name`) VALUES
 (7, 83, 'Integrerte Operasjoner'),
 (8, 83, 'Produktutvikling og Materialer'),
 (9, 83, 'Varme- og Strømningsteknikk'),
-(37, 85, 'Integrerte Operasjoner i Petroleumsindustrien'),
-(38, 85, 'Petroleumsteknologi'),
-(39, 85, 'Petroleumsgeofysikk'),
-(40, 85, 'Petroleumsgeologi');
+(10, 85, 'Integrerte Operasjoner i Petroleumsindustrien'),
+(11, 85, 'Petroleumsteknologi'),
+(12, 85, 'Petroleumsgeofysikk'),
+(13, 85, 'Petroleumsgeologi');
 
 INSERT INTO `tbl_migration` (`version`, `apply_time`) VALUES
 ('m000000_000000_base', 1355256725),
 ('m121209_184746_move_from_article_content_to_article_text', 1355256727);
 
+INSERT INTO `tracker_user` (`user_id`, `graph_color`) VALUES
+(466, NULL);
+
 INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `specializationId`, `graduationYear`, `member`, `gender`, `imageId`, `phoneNumber`, `linkedin`, `lastLogin`, `cardHash`, `description`, `workDescription`, `workCompanyID`, `workPlace`, `birthdate`, `altEmail`) VALUES
 (381, 'sigurhol', 'Sigurd', 'Andreas', 'Holsen', 2, 2015, 'true', 'male', 275, 12345678, 'pub/sigurd-holsen/4b/636/582/', '2013-09-03 09:49:53', '276d89c72e366f3e72ce695fd7c9593f67ef3b76', '<h1 style="text-align:left;">\n	Hei eksamensbloggen min!</h1>\n<p style="text-align:left;">\n	Denne dagen har vært syyykt lang..har ikke gjort en dritt egentlig,men dagen har bare gått sykt sakte.. kjedelig! Så tenkte jeg! Blogg, det må jeg få meg. For det er jo bare så syykt kult lissom. Har prøvd og prøvd og prøvd sånn der blogg.no, men det funker ikke. MEN, så tenkte jeg! Jeg kan jo gjøre som mitt store forbilde SIGGE. For han er jo bare SÅ KUUUL! Å bruke denne hybsiden, jeg har laget til å BLOGGE på!</p>\n<p style="text-align:left;">\n	Forresten, hils på pusen min layla, det er min femine side og vi deler alt sammen lissom.</p>\n<p>\n	<img alt="cat.jpg" src="http://dl.dropbox.com/u/13200640/cat.jpg" width="400" /><br />\n	Meg og layla koser oss!</p>\n<p style="text-align:left;">\n	Jeg hadde et sånt påskeforsett og har begynt å trene syykt mye nå.. Og blitt kjempe sterk lissom!</p>\n<p>\n	<img alt="Jeg er digg" src="http://dl.dropbox.com/u/13200640/muscles.jpg" /><br />\n	Jeg som har trent</p>\n<p style="text-align:left;">\n	Etter jeg hadde tatt, sånn vanvittig mye i benk idag lissom, dro jeg hjem og spise 3 store kyllinger! Jeg ble helt latterlig mett, og gikk sikkert opp sånn 20 kilo på vekten lissom. Men det var veldig grisete, så jeg måtte vaske meg og layla også. Heldigvis har vi et sånn stort badekar, som jeg plutselig fikk av en gjeng ungdommer ved nidelven i høst, så det gikk fint!</p>\n<p style="text-align:left;">\n	Men jeg har ett stort problem da folkens! Har blitt så sykt hekta på Sigge sine pannekaker!! De er syykkt gode... Helt sant!! Så spiser det til frokost og kvelds HVER dag! Magen min den bare vokser og vokser og vokser og vokser.. Ser snart ut som en bjørn!</p>\n<p style="text-align:left;">\n	Men folkens! Jeg har ett stort mål! Å bli sånn som mitt store idol SIGGE :D:D Kanskje derfor jeg spiser så veldig mye... Jeg vil også bli så stor og så sterk og stor.. Men, men.. Nå kom layla og satt seg i fanget mitt, nyvasket og myk og da blir jeg så ukonsentrert. Så chill''an .. Så prates vi på trening lissom <img alt="blank.gif" class="emote_img" src="https://s-static.ak.facebook.com/images/blank.gif" style="border-top-width:0px;border-right-width:0px;border-bottom-width:0px;border-left-width:0px;height:16px;vertical-align:top;width:16px;background-image:url(&quot;https://s-static.ak.fbcdn.net/rsrc.php/v1/yM/r/WlL6q4xDPOA.png&quot;);margin-bottom:-2px;color:rgb(51,51,51);font-family:''lucida grande'', tahoma, verdana, arial, sans-serif;font-size:11px;line-height:14px;background-position:-80px 0px;" title=";)" /></p>\n', '<br />', NULL, '', '1990-12-23', 'sighol@gmail.com'),
-(466, 'admin', 'admin', '', 'user', NULL, 2015, 'true', 'unknown', NULL, NULL, '', '2013-10-29 19:23:48', 'faec670ce75fe79cae1fa899617818031b1f201c', '', '', NULL, '', '0000-00-00', '');
+(466, 'admin', 'admin', '', 'user', NULL, 2015, 'true', 'unknown', NULL, NULL, '', NULL, 'faec670ce75fe79cae1fa899617818031b1f201c', '', '', NULL, '', '0000-00-00', '');
 
 INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
 (293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
+SET FOREIGN_KEY_CHECKS=1;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
