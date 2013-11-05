@@ -538,9 +538,9 @@ INSERT INTO `signup` (`eventId`, `spots`, `open`, `close`, `signoff`, `status`) 
 (110, 50, '2011-12-02 17:00:00', '2012-05-06 17:00:00', 'false', 2);
 
 INSERT INTO `specialization` (`id`, `article_id`, `name`) VALUES
-(1, 10, 'Geomatikk'),
-(2, 11, 'Marin Teknikk'),
-(4, 13, 'Konstruksjonsteknikk'),
+(1, 82, 'Geomatikk'),
+(2, 86, 'Marin Teknikk'),
+(4, 84, 'Konstruksjonsteknikk'),
 (6, 83, 'Produksjon og Ledelse'),
 (7, 83, 'Integrerte Operasjoner'),
 (8, 83, 'Produktutvikling og Materialer'),
