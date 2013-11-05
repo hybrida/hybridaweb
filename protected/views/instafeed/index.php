@@ -58,7 +58,7 @@
         var feed = new insta.Instafeed({
             target: 'instafeed-body',
             get: 'tagged',
-            sortBy: 'random',
+            sortBy: 'most-recent',
             tagName: 'hybridantnu',
             clientId: '4607d54615d045968654b06a038c3d4d',
             template: $('#instafeed-body-template').html()
