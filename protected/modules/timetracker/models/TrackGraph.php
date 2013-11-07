@@ -56,6 +56,30 @@ class TrackGraph extends CComponent {
 		return CJSON::encode($array);
 	}
 
+	public function getHistory() {
+		$histories = array();
+		foreach ($this->_users as $user) {
+			$hist = new UserHistory;
+			$hist->user = $user->user;
+			foreach ($this->_models as $model) {
+				if ($model->user_id == $user->user_id && $this->isLast7days($model)) {
+					$hist->hours += $model->work_time;
+					$hist->date[] = $model->date;
+				}
+			}
+			$histories[] = $hist->toArray();
+		}
+		return $histories;
+	}
+
+	private function isLast7days($model) {
+		$secondsInDay = 60 * 60 * 24;
+		$lastWeek = time() - $secondsInDay * 8;
+		$today = time() - $secondsInDay;
+		$modelTime = strtotime($model->date);
+		return $modelTime > $lastWeek && $modelTime < $today;
+	}
+
 	public function getDates() {
 		$secondsInDay = 60*60*24;
 		$startTime = time() - $secondsInDay*($this->days-1);
@@ -66,9 +90,25 @@ class TrackGraph extends CComponent {
 			$dates[] = $date;
 		}
 		return CJSON::encode($dates);
-
 	}
 
+}
+
+class UserHistory extends CComponent {
+	public $user;
+	public $last7days;
+	public $hours = 0;
+	public $date = array();
+
+	public function toArray() {
+		$out = array(
+			'name' => $this->user->fullName,
+			'hours' => $this->hours,
+			'date' => implode(", ", $this->date),
+		);
+		return $out;
+
+	}
 }
 
 class TrackerGraph extends CComponent {

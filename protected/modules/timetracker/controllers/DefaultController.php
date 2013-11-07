@@ -21,6 +21,7 @@ class DefaultController extends Controller
 		$this->render('index', array(
             'series' => $graph->getSeries(),
             'dates' => $graph->getDates(),
+            'history' => $graph->getHistory(),
         ));
 	}
 

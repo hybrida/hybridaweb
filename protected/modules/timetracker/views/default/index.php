@@ -81,8 +81,21 @@ $quote = $motivational_quotes[array_rand($motivational_quotes)];
         });
     });
 
-
-
 </script>
+
+<?php foreach ($history as $hist): ?>
+    <h2><?= $hist['name'] ?></h2>
+    <table>
+        <tr>
+            <th>Timer sist uke</th>
+            <td><?= $hist['hours'] ?></td>
+        </tr>
+
+        <tr>
+            <th>Snitt pr arbeidsdag</th>
+            <td><?= $hist['hours']/5 ?></td>
+        </tr>
+    </table>
+<?php endforeach ?>
 
 </div>
