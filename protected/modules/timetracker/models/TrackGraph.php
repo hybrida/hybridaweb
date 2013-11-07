@@ -69,6 +69,9 @@ class TrackGraph extends CComponent {
 			}
 			$histories[] = $hist->toArray();
 		}
+		usort($histories, function($a, $b) {
+			return $a['hours'] < $b['hours'];
+		});
 		return $histories;
 	}
 

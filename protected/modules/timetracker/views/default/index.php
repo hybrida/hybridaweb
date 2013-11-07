@@ -107,12 +107,14 @@ $quote = $motivational_quotes[array_rand($motivational_quotes)];
     </style>
     <table>
         <tr>
+            <th>#</th>
             <th>Navn</th>
             <th>Timer</th>
             <th>Timer / arbeidsdag</th>
         </tr>
-        <?php foreach ($history as $hist): ?>
+        <?php foreach ($history as $nr =>$hist): ?>
             <tr>
+                <th><?= $nr+1 ?></th>
                 <th><?= $hist['name'] ?></th>
                 <td><?= $hist['hours'] ?></td>
                 <td><?= $hist['hours']/5 ?></td>
