@@ -647,19 +647,6 @@ CREATE TABLE IF NOT EXISTS `blogpost` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
---
--- Dumping data for table `blogpost`
---
-
-INSERT INTO `blogpost` (`id`, `title`, `content`, `time`, `uid`) VALUES
-(1, 'Control', 'Lorem', '2013-11-10 09:20:36', 1),
-(2, 'Second post', 'Control Shift', '2013-11-10 09:29:26', 23),
-(3, 'Tredje', 'Nig', '2013-11-10 09:29:31', 15),
-(4, 'Fjerde....', 'Derpiderptext', '2013-11-10 09:29:36', 18),
-(5, 'Dette er en test', 'Ja, det er det', '2013-11-10 11:09:47', 466),
-(6, '5e Setning', 'Jaja dette er bra', '2013-11-10 11:10:37', 466),
-(7, '6e Test', 'Det kommer til å gå bra,... håper jeg :S', '2013-11-10 11:21:00', 466);
-
 -- --------------------------------------------------------
 
 --
