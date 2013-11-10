@@ -1,4 +1,4 @@
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -607,3 +607,77 @@ ALTER TABLE `tracker_user`
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- phpMyAdmin SQL Dump
+-- version 4.0.4.1
+-- http://www.phpmyadmin.net
+--
+-- Host: 127.0.0.1
+-- Generation Time: Nov 10, 2013 at 12:52 PM
+-- Server version: 5.6.11
+-- PHP Version: 5.5.3
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+--
+-- Database: `hybrida_dev`
+--
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `hybrida_dev`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blogpost`
+--
+
+CREATE TABLE IF NOT EXISTS `blogpost` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `uid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `blogpost`
+--
+
+INSERT INTO `blogpost` (`id`, `title`, `content`, `time`, `uid`) VALUES
+(1, 'Control', 'Lorem', '2013-11-10 09:20:36', 1),
+(2, 'Second post', 'Control Shift', '2013-11-10 09:29:26', 23),
+(3, 'Tredje', 'Nig', '2013-11-10 09:29:31', 15),
+(4, 'Fjerde....', 'Derpiderptext', '2013-11-10 09:29:36', 18),
+(5, 'Dette er en test', 'Ja, det er det', '2013-11-10 11:09:47', 466),
+(6, '5e Setning', 'Jaja dette er bra', '2013-11-10 11:10:37', 466),
+(7, '6e Test', 'Det kommer til å gå bra,... håper jeg :S', '2013-11-10 11:21:00', 466);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `blog_writers`
+--
+
+CREATE TABLE IF NOT EXISTS `blog_writers` (
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='A table containing the users that are allowed to write blog posts';
+
+--
+-- Dumping data for table `blog_writers`
+--
+
+INSERT INTO `blog_writers` (`userId`) VALUES
+(466);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
