@@ -2,6 +2,19 @@
 
 <h1>Endre profil</h1>
 
+<?
+	$form = $this->beginWidget('ActiveForm', array(
+	'id' => 'profile-edit-form',
+	'htmlOptions' => array(
+		'enctype' => 'multipart/form-data',
+	),
+	'enableClientValidation' => true,
+	'clientOptions' => array(
+		'validateOnSubmit' => true,
+	),
+		));
+?>
+
 <div class="formSection">
 	<? if(!$hasConnectedToFacebook): ?>
 	   <div class="fieldDefinition">Facebook:</div>
@@ -28,19 +41,6 @@
 	<? endif ?>
 	   <div class="fieldExplanation"></div>
 </div>
-
-<?
-	$form = $this->beginWidget('ActiveForm', array(
-	'id' => 'profile-edit-form',
-	'htmlOptions' => array(
-		'enctype' => 'multipart/form-data',
-	),
-	'enableClientValidation' => true,
-	'clientOptions' => array(
-		'validateOnSubmit' => true,
-	),
-		));
-?>
 
 <div class="formSection">
 	<div class="inputGroup">
