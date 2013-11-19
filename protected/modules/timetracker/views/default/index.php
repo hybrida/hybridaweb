@@ -28,61 +28,99 @@ $quote = $motivational_quotes[array_rand($motivational_quotes)];
 
 <div id="timetrackerIndex">
 
-<h1>Big Daddy</h1>
+    <h1>Big Daddy</h1>
 
-<?= CHtml::link("HER", array("form"), array("class" => "g-button")) ?>
+    <?= CHtml::link("HER", array("form"), array("class" => "g-button")) ?>
 
+    <script src="http://code.highcharts.com/highcharts.js"></script>
 
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
-<script src="http://code.highcharts.com/highcharts.js"></script>
-
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
-<script>
-	$(function () {
-        $('#container').highcharts({
-            title: {
-                text: 'Arbeid siste 14 dager',
-                x: -20 //center
-            },
-            subtitle: {
-                text: '<?= $quote ?>',
-                x: -20
-            },
-            yAxis: {
+    <script>
+    	$(function () {
+            $('#container').highcharts({
                 title: {
-                    text: 'timer'
+                    text: 'Arbeid siste 14 dager',
+                    x: -20 //center
                 },
+                subtitle: {
+                    text: '<?= $quote ?>',
+                    x: -20
+                },
+                yAxis: {
+                    title: {
+                        text: 'timer'
+                    },
 
-            },
-            xAxis: {
-            	categories: <?= $dates ?>,
-            	title: {
-            		text: "<?= date('F', time()) ?>"
-            	}
-            },
-            tooltip: {
-                valueSuffix: ' timer',
-                shared: true,
-                crosshairs: true
-            },
-            plotOptions: {
-                line: {
-                    animation: false
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'middle',
-                borderWidth: 0
-            },
-            series: <?= $series ?>
+                },
+                xAxis: {
+                	categories: <?= $dates ?>,
+                	title: {
+                		text: "<?= date('F', time()) ?>"
+                	}
+                },
+                tooltip: {
+                    valueSuffix: ' timer',
+                    shared: true,
+                    crosshairs: true
+                },
+                plotOptions: {
+                    line: {
+                        animation: false
+                    }
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: <?= $series ?>
+            });
         });
-    });
+
+    </script>
+
+    <h2>Arbeid siste 7 dager</h2>
+    <h3>Ikke med dagen i dag</h3>
+
+    <style>
+        #timetrackerIndex table tr:nth-child(odd){
+            background-color: #ffc;
+        }
+
+        #timetrackerIndex table tr:nth-child(1) {
+            background-color: #ddd;
+        }
+
+        #timetrackerIndex table {
+            border-collapse: collapse;
+
+        }
 
 
+        #timetrackerIndex table th,
+        #timetrackerIndex table td {
+            padding: 0.4em;
+            border: 1px solid black;
+        }
+    </style>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Navn</th>
+            <th>Timer</th>
+            <th>Timer / arbeidsdag</th>
+        </tr>
+        <?php foreach ($history as $nr =>$hist): ?>
+            <tr>
+                <th><?= $nr+1 ?></th>
+                <th><?= $hist['name'] ?></th>
+                <td><?= $hist['hours'] ?></td>
+                <td><?= $hist['hours']/5 ?></td>
+            </tr>
+        <?php endforeach ?>
+    </table>
 
-</script>
 
 </div>

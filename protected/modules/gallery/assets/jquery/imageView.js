@@ -10,13 +10,13 @@ $('#delLink').click(function(e){
 	e.preventDefault();
 	r = confirm('Er du sikker på at du vil slette dette bildet?');
 	if(r) {
-		var  url = '/gallery/picdelete/' + albumID + "/" + imageID;
+		var  url = '/galleri/picdelete/' + albumID + "/" + imageID;
 		var request =  get_XmlHttp();
 		request.open("POST", url, true);
 		request.send(null);
 		request.onreadystatechange = function() {
 			if (request.readyState == 4) {
-				window.location.href = "/gallery/" + albumID;
+				window.location.href = "/galleri/" + albumID;
 			}
 		}
 	}
@@ -48,7 +48,7 @@ function get_XmlHttp() {
 
 function ajaxrequest(pictureID) {
 	var request =  get_XmlHttp();
-	var  url = '/gallery/ajax/' + window.albumID + "/" + pictureID;
+	var  url = '/galleri/ajax/' + window.albumID + "/" + pictureID;
 
 	request.open("POST", url, true);
 	request.send(null);
@@ -62,7 +62,7 @@ function ajaxrequest(pictureID) {
 			var data = JSON.parse(json);
 			data.comments = comments;
 			changeData(data);
-			history.pushState('data', '','/gallery/' + albumID + "/" + pictureID);
+			history.pushState('data', '','/galleri/' + albumID + "/" + pictureID);
 		}
 	}
 }
@@ -79,7 +79,7 @@ function changeData(data) {
 	$("#userName").text(data.userName);	
 	$("#comments").html(data.comments);
 	if (nextID >= 0) {
-		$("#next").attr("href", "/gallery/"+albumID+"/"+nextID);
+		$("#next").attr("href", "/galleri/"+albumID+"/"+nextID);
 		$("#next").attr("style", "");
 		$("#noNext").attr("style", "display:none;");
 	} else {
@@ -87,7 +87,7 @@ function changeData(data) {
 		$("#next").attr("style", "display:none;");
 	}
 	if (prevID >= 0) {
-		$("#prev").attr("href", "/gallery/"+albumID+"/"+prevID);
+		$("#prev").attr("href", "/galleri/"+albumID+"/"+prevID);
 		$("#prev").attr("style", "");
 		$("#noPrev").attr("style", "display:none;");
 	} else {

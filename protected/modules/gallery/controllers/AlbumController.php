@@ -173,7 +173,7 @@ class AlbumController extends Controller
 				$newsModel->authorId = $model->user_id;
 				$newsModel->save();
 
-				$this->redirect('/gallery/'.$model->id);
+				$this->redirect('/galleri/'.$model->id);
 			}
 			else {
 				$errors[] = "Albumet må ha tittel";
@@ -199,9 +199,9 @@ class AlbumController extends Controller
 		{
 			$this->clearUploads();
 			if ($id > 0)
-				$this->redirect('/gallery/update/'.$id);
+				$this->redirect('/galleri/update/'.$id);
 			else
-				$this->redirect('/gallery/create');
+				$this->redirect('/galleri/create');
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -225,7 +225,7 @@ class AlbumController extends Controller
 					$model->addAlbumImageRelation($imageID);
 				}
 				$this->clearUploads();
-				$this->redirect('/gallery/'.$model->id);
+				$this->redirect('/galleri/'.$model->id);
 			}
 			else {
 				$errors[] = "Albumet må ha tittel";
@@ -258,7 +258,7 @@ class AlbumController extends Controller
 			$model->delAlbumRelations();
 			$model->delAlbum();
 
-			$this->redirect('/gallery/');
+			$this->redirect('/galleri/');
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -276,7 +276,7 @@ class AlbumController extends Controller
 
 			$model->delAlbumImageRelation($pid);
 
-			$this->redirect('/gallery/'.$model->id);
+			$this->redirect('/galleri/'.$model->id);
 		}
 		else
 			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
@@ -418,7 +418,9 @@ class AlbumController extends Controller
 			// and is located at $targetDir . DIRECTORY_SEPARATOR . $fileName
 			// **********************************************************************************************
 
-			$ext = strtolower(end(explode('.', $fileName)));
+			$exploded = explode('.', $fileName);
+			$end = end($exploded);
+			$ext = strtolower($end);
 
 			if (in_array($ext, array('png', 'jpg', 'jpeg', 'gif')))
 			{

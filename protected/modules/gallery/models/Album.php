@@ -50,6 +50,22 @@ class Album extends CActiveRecord
 		return parent::setAttributes($atts, $safeOnly);
 	}
 
+	public static function getAlbums()
+	{
+		$criteria=new CDbCriteria;
+		$criteria->condition='status=:status';
+		$criteria->params=array(':status'=>Status::PUBLISHED);
+		$criteria->order = 'id DESC';
+		$allAlbums = Album::model()->findAll($criteria);
+		$albums = array();
+		foreach($allAlbums as $album)
+			if ($album->hasViewAccess())
+				$albums[] = $album;
+		foreach($albums as $album)
+			$album->getImages();
+		return $albums;
+	}
+
 	public function getImages()
 	{
 		$id = $this->id;
@@ -73,7 +89,7 @@ class Album extends CActiveRecord
 	}
 	public function hasDeleteAccess()
 	{
-		if (!isset(Yii::app()->user))
+		if (user()->isGuest)
 			return false;
 
 		if	(Yii::app()->user->id == $this->user_id)
@@ -91,7 +107,7 @@ class Album extends CActiveRecord
 		$connection = Yii::app()->db;
 		$sql = "INSERT INTO album_image (album_id,  image_id) VALUES (:album_id, :image_id)";
 		$command = $connection->createCommand($sql);
-		$command = $command->bindParam(":album_id", $this->getAttribute("id"));
+		$command = $command->bindParam(":album_id", $id);
 		$command = $command->bindParam(":image_id", $pid);
 		$command->execute();
 	 }

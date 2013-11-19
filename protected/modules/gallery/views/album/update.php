@@ -1,7 +1,7 @@
 
 <?
 $this->breadcrumbs = array(
-	'Galleri' => array('/gallery'),
+	'Galleri' => array('/galleri'),
 );
 ?>
 
@@ -12,7 +12,7 @@ $this->breadcrumbs = array(
 
 	<?php $form=$this->beginWidget('ActiveForm', array(
 		'id'=>'album-form',
-		'action'=>Yii::app()->createUrl('/gallery/update/'.$model->id),
+		'action'=>Yii::app()->createUrl('/galleri/update/'.$model->id),
 		'enableAjaxValidation'=>false,
 		'htmlOptions' => array('enctype' => 'multipart/form-data'),
 	)); ?>
