@@ -304,6 +304,9 @@ INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`
 (227, 60, '<p>\n	Vi har for tiden litt trøbbel med serverene våre. Referatene vil være oppe til studiestart</p>\n<p>\n	 </p>\n<p>\n	Her kommer alle referatene fra styremøter og generalforsamlinger i Hybrida.</p>\n<p>\n	Disse referatene er hentet fra forskjellige steder, så det kan hende at datoen ikke stemmer overens med datoen i dokumentet. Hvis du ser eksempler på dette er vi veldig takknemlige hvis du bruker Feedback-knappen til venstre, og sier ifra.</p>\n', 'styret_referater', '2013-09-03'),
 (228, 60, '<p>\n	Her kommer alle referatene fra styremøter og generalforsamlinger i Hybrida.</p>\n<p>\n	Disse referatene er hentet fra forskjellige steder, så det kan hende at datoen ikke stemmer overens med datoen i dokumentet. Hvis du ser eksempler på dette er vi veldig takknemlige hvis du bruker Feedback-knappen til venstre, og sier ifra.</p>\n', 'styret_referater', '2013-09-03');
 
+INSERT INTO `blog_writers` (`userId`) VALUES
+(466);
+
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (1, 1),
 (1, 2),
