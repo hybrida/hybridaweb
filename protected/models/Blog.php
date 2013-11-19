@@ -17,7 +17,7 @@
 			return $com->query();
 		}
 
-		public function getLatestPosts($count = 3) {
+		public function getLatestPosts($count = 90) {
 			$raw_rows = $this->getPostRows($count);
 			$con = Yii::app()->db;
 			$rows = array();
