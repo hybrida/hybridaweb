@@ -1,4 +1,4 @@
-﻿SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -6,8 +6,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-
-CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `hybrida_dev`;
 
 CREATE TABLE IF NOT EXISTS `access_relations` (
@@ -53,19 +52,6 @@ CREATE TABLE IF NOT EXISTS `article_text` (
   `timestamp` date NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=229 ;
-
-CREATE TABLE IF NOT EXISTS `blogpost` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
-  `content` text COLLATE utf8_unicode_ci NOT NULL,
-  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `uid` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
-
-CREATE TABLE IF NOT EXISTS `blog_writers` (
-  `userId` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='A table containing the users that are allowed to write blog posts';
 
 CREATE TABLE IF NOT EXISTS `bk_company` (
   `companyID` int(11) NOT NULL AUTO_INCREMENT,
@@ -115,6 +101,19 @@ CREATE TABLE IF NOT EXISTS `bk_iktringen_information` (
   `dateContacted` datetime DEFAULT NULL,
   PRIMARY KEY (`companyID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE IF NOT EXISTS `blogpost` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(35) COLLATE utf8_unicode_ci NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `uid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+
+CREATE TABLE IF NOT EXISTS `blog_writers` (
+  `userId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='A table containing the users that are allowed to write blog posts';
 
 CREATE TABLE IF NOT EXISTS `book_sales` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -234,6 +233,13 @@ CREATE TABLE IF NOT EXISTS `forum_user` (
   UNIQUE KEY `siteid` (`siteid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
+CREATE TABLE IF NOT EXISTS `gossip` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `gossipText` text COLLATE utf8_unicode_ci NOT NULL,
+  `submitDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
 CREATE TABLE IF NOT EXISTS `griff` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commentId` int(11) NOT NULL,
@@ -252,15 +258,6 @@ CREATE TABLE IF NOT EXISTS `griffgame_highscore` (
   KEY `userId` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `group_membership` (
-  `groupId` int(11) NOT NULL,
-  `userId` int(11) NOT NULL,
-  `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `start` date NOT NULL DEFAULT '0000-00-00',
-  `end` date NOT NULL DEFAULT '0000-00-00',
-  PRIMARY KEY (`userId`,`groupId`,`end`,`start`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `menu` int(11) NOT NULL,
@@ -272,6 +269,15 @@ CREATE TABLE IF NOT EXISTS `groups` (
   UNIQUE KEY `url` (`url`),
   KEY `members` (`admin`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=84 ;
+
+CREATE TABLE IF NOT EXISTS `group_membership` (
+  `groupId` int(11) NOT NULL,
+  `userId` int(11) NOT NULL,
+  `comission` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `start` date NOT NULL DEFAULT '0000-00-00',
+  `end` date NOT NULL DEFAULT '0000-00-00',
+  PRIMARY KEY (`userId`,`groupId`,`end`,`start`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE IF NOT EXISTS `iktringen_membership` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -370,7 +376,7 @@ CREATE TABLE IF NOT EXISTS `knights` (
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `parentId` int(11) DEFAULT NULL,
-  `parentType` enum('event','article','group', 'album') COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parentType` enum('event','article','group','album') COLLATE utf8_unicode_ci DEFAULT NULL,
   `title` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `imageId` int(11) DEFAULT NULL,
   `ingress` text COLLATE utf8_unicode_ci,
@@ -528,7 +534,7 @@ CREATE TABLE IF NOT EXISTS `tracker_user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
   `graph_color` varchar(6) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=467 ;
 
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -561,13 +567,6 @@ CREATE TABLE IF NOT EXISTS `user_password` (
   `expired` tinyint(1) NOT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-CREATE TABLE IF NOT EXISTS `gossip` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `gossipText` text COLLATE utf8_unicode_ci NOT NULL,
-  `submitDate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 
 ALTER TABLE `fieldtrip_support`
@@ -616,3 +615,7 @@ ALTER TABLE `tracker_log`
 
 ALTER TABLE `tracker_user`
   ADD CONSTRAINT `tracker_user_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

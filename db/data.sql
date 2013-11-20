@@ -1,7 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -9,7 +7,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `hybrida_dev`;
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
@@ -304,9 +302,6 @@ INSERT INTO `article_text` (`id`, `articleId`, `content`, `phpFile`, `timestamp`
 (227, 60, '<p>\n	Vi har for tiden litt trøbbel med serverene våre. Referatene vil være oppe til studiestart</p>\n<p>\n	 </p>\n<p>\n	Her kommer alle referatene fra styremøter og generalforsamlinger i Hybrida.</p>\n<p>\n	Disse referatene er hentet fra forskjellige steder, så det kan hende at datoen ikke stemmer overens med datoen i dokumentet. Hvis du ser eksempler på dette er vi veldig takknemlige hvis du bruker Feedback-knappen til venstre, og sier ifra.</p>\n', 'styret_referater', '2013-09-03'),
 (228, 60, '<p>\n	Her kommer alle referatene fra styremøter og generalforsamlinger i Hybrida.</p>\n<p>\n	Disse referatene er hentet fra forskjellige steder, så det kan hende at datoen ikke stemmer overens med datoen i dokumentet. Hvis du ser eksempler på dette er vi veldig takknemlige hvis du bruker Feedback-knappen til venstre, og sier ifra.</p>\n', 'styret_referater', '2013-09-03');
 
-INSERT INTO `blog_writers` (`userId`) VALUES
-(466);
-
 INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (1, 1),
 (1, 2),
@@ -328,6 +323,9 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (79, 2),
 (108, 3),
 (108, 4);
+
+INSERT INTO `blog_writers` (`userId`) VALUES
+(466);
 
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
 (5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 22:56:46');
@@ -567,7 +565,6 @@ INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `sp
 INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
 (293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
 SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
