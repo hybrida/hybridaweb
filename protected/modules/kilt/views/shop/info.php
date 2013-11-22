@@ -102,7 +102,7 @@ $this->renderPartial("_menu");
 				<td width="200">
 					Størrelse</td>
 				<td width="200">
-					Tommer rundt livet</td>
+					Centimeter rundt livet</td>
 			</tr>
 			<tr>
 				<td>

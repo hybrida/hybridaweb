@@ -14,3 +14,6 @@ db/*.hash
 # Intellij project files
 .idea/
 *.iml
+
+# Temporary files
+*~
