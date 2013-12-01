@@ -1,0 +1,3 @@
+[submodule "upc/files/styret/referater"]
+	path = upc/files/styret/referater
+	url = git@hybrida.no:referater
