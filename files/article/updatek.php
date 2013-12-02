@@ -1,11 +1,15 @@
 <?php
 
+
 function getDirContents($folderPath) {
+	$illegal_files = array(
+		".", "..", ".hg", ".git", ".hgignore", ".gitignore",
+	);
 	$dirHandle = opendir($folderPath);
 	$file = readdir($dirHandle);
 	$files = array();
 	while ($file) {
-		if ($file != "." && $file != ".." && $file != ".hg" && $file != ".hgignore") {
+		if (!in_array($file, $illegal_files)) {
 			$files[] = $file;
 		}
 		$file = readdir($dirHandle);
