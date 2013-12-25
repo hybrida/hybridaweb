@@ -1,7 +1,23 @@
 <?php
 
-$templatePath = dirname(__FILE__) . DIRECTORY_SEPARATOR . "web.php";
+// Denne filen kjøres to ganger: Først gang for å laste inn alle konstanter, og
+// andre gang for å hente inn konfigurasjon. Dette gjøres slik at all
+// konfigurasjon finnes på ett sted.
 
+//// Yii-instillinger ---------------------------------------------------
+if (!defined('YII_DEBUG')) {
+
+	// remove the following lines when in production mode
+	define('YII_DEBUG',true);
+
+	// specify how many levels of call stack should be shown in each log message
+	define('YII_TRACE_LEVEL',3);
+
+	return;
+}
+//// App-instillinger -------------------------------------------------
+
+$templatePath = dirname(__FILE__) . DIRECTORY_SEPARATOR . "web.php";
 $templateConf = require($templatePath);
 
 return CMap::mergeArray($templateConf, array(
