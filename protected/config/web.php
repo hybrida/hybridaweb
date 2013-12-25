@@ -65,9 +65,10 @@ return array(
 			'class'=>'application.modules.yii-forum.YiiForumModule',
 		),
 		'bpc' => array(
-			'requestUrl' => 'http://testing.bedriftspresentasjon.no/remote/',
-			'foreningID' => 12,
-			'handshakeID' => '27ede510ee989207365b8e9eef46309a82b8e7de',
+			// must be specified in main.php
+			'requestUrl' => '',
+			'foreningID' => 0,
+			'handshakeID' => '',
 		),
 		'calendar',
 		'comment',
@@ -111,14 +112,6 @@ return array(
 			'showScriptName' => false,
 			'rules' => require(dirname(__FILE__) . "/routes.php"),
 		),
-		'db' => array(
-			'connectionString' => 'mysql:host=localhost;dbname=hybrida_dev',
-			'emulatePrepare' => true,
-			'username' => 'www-data',
-			'password' => 'Q8JdU5MY7dDr5XEU',
-			'charset' => 'utf8',
-			'schemaCachingDuration' => 1000,
-		),
 		'errorHandler' => array(
 			'errorAction' => 'site/error',
 		),
@@ -143,9 +136,6 @@ return array(
 		),
 		'cliColor' => array(
 			'class' => 'ext.yii-cli-color.components.KCliColor',
-		),
-		'lessCompiler' => array(
-			'class' => 'ext.lessphp.lessc.inc',
 		),
 	),
 	'params' => array(
