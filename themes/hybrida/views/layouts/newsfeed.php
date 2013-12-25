@@ -1,8 +1,5 @@
 <?php $this->beginContent('//layouts/main'); ?>
-				<img
-					src="/images/800x299.jpg"
-					alt=""
-					/>
+			<?= FrontpageBanner::getBanner() ?>
 			<div class="layout-content">
 				<?php if (isset($this->breadcrumbs) && isset($this->breadcrumbOptions)): ?>
 					<?php

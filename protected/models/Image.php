@@ -19,6 +19,7 @@ class Image extends CActiveRecord {
 		'xsmall' => array('width' => 55, 'height' => 55),
 		'mini' => array('width' => 40, 'height' => 40),
 		'frontpage' => array('width' => 600, 'height' => 150),
+		'frontpage_banner' => array('width' => 1000),
 		'sidebar' => array('width' => 150),
 		'gallery_thumb' => array('width' => 225, 'height' => 225),
 		'gallery_big' => array('max_width' => 691),

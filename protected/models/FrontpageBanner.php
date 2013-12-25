@@ -12,6 +12,8 @@
  */
 class FrontpageBanner extends CActiveRecord
 {
+
+	public $imageUpload;
 	/**
 	 * @return string the associated database table name
 	 */
@@ -73,11 +75,28 @@ class FrontpageBanner extends CActiveRecord
 		return parent::model($className);
 	}
 
-	public static function getLatestImageId() {
+	public static function getLatestBanner() {
 		$crit = new CDbCriteria();
 		$crit->limit = 1;
 		$crit->order = "timestamp DESC";
 		$model = self::model()->find($crit);
-		return $model->imageId;
+		return $model;
+	}
+
+	public static function getBanner() {
+		$banner = self::getLatestBanner();
+		$imgTag = Image::tag($banner->imageId, 'frontpage_banner');
+		if ($banner->url) {
+			return CHtml::link($imgTag, $banner->url);
+		}
+		return $imgTag;
+	}
+
+	public function beforeValidate() {
+		if ($this->isNewRecord) {
+			$this->timestamp = new CDbExpression("NOW()");
+		}
+		return true;
+
 	}
 }

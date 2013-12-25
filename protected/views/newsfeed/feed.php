@@ -25,6 +25,12 @@ $this->beginClip('sidebar'); ?>
 					'class' => 'g-button'
 			)) ?>
 
+			<?= CHtml::link("Forsidebilde", array("frontpageBanner/index"), array(
+					'class' => 'g-button'
+			)) ?>
+
+
+
 		</fieldset>
 	<? endif ?>
 
@@ -38,18 +44,18 @@ $this->beginClip('sidebar'); ?>
 	<?
 	$this->widget('application.components.widgets.ActivitiesFeed');?>
 
-    
+
     <? if(!(Yii::app()->user->isGuest)){?>
         <div class='g-barTitle'><?= CHtml::link("Nyeste #hybridantnu", array("instafeed/index")); ?></div>
         <div class="instafeed">
-            <div id="instafeed-front"></div> 
+            <div id="instafeed-front"></div>
         </div>
     <? }?>
-    
+
 	<?Yii::import('jobAnnouncement.widgets.JobAnnouncementFeed');
 	$this->widget('JobAnnouncementFeed');
-    
-    
+
+
 $this->endClip();
 ?>
 <div class="newsfeedIndex">
@@ -102,7 +108,7 @@ $this->endClip();
             tagName: 'hybridantnu',
             clientId: '4607d54615d045968654b06a038c3d4d',
             template: $('#instafeed-front-template').html(),
-            limit: 2 
+            limit: 2
         });
         feed.run();
     });
