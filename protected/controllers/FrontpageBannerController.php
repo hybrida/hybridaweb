@@ -1,6 +1,24 @@
 <?php
 
+
+
 class FrontpageBannerController extends Controller {
+
+	public function filters() {
+		return array(
+			'accessControl',
+		);
+	}
+
+	public function accessRules() {
+		return array(
+			array('allow',
+				'actions' => array('index'),
+				'roles' => array('admin'),
+			),
+			array('deny'),
+		);
+	}
 
 	public function actionIndex() {
 
