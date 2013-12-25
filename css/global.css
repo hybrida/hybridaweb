@@ -50,6 +50,11 @@ table.g-membertable * {
   background-image: -ms-linear-gradient(top,#14427f,#004063);
   background-image: linear-gradient(top,#14427f,#004063);
 }
+
+fieldset .g-button {
+  display: block;
+  margin: 0.3em;
+}
 .g-buttonRightSide {
   float: right;
   margin-top: 5px;
