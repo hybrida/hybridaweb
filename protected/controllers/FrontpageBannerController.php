@@ -21,10 +21,8 @@ class FrontpageBannerController extends Controller {
 	}
 
 	public function actionIndex() {
-
 		$model = new FrontpageBanner;
 
-		debug($_POST);
 		if(isset($_POST['FrontpageBanner'])) {
 			$model->attributes=$_POST['FrontpageBanner'];
 			if($model->validate(array("timestamp", "title"))) {
@@ -32,12 +30,12 @@ class FrontpageBannerController extends Controller {
 				$model->imageId = $image->id;
 				if ($model->validate()) {
 					$model->save();
-					$this->redirect($this->createUrl("all"));
+					$this->redirect($this->createUrl("/newsfeed/index"));
 				} else {
-					debug($model->getErrors(), "inner");
+					debug($model->getErrors(), "Inner Error");
 				}
 			} else {
-				debug($model->getErrors(), "outer");
+				debug($model->getErrors(), "Outer Error");
 			}
 		}
 		$this->render('index', array(
