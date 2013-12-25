@@ -38,20 +38,11 @@ class DefaultController extends Controller {
 			'id' => $id,
 			'isAjaxRequest' => true,
 		));
-//		$this->renderPartial("_comments", array(
-//			'models' => Comment::getAll($type, $id),
-//		));
 	}
 
 	public function actionGriffOn($id) {
 		$comment = Comment::model()->findByPk($id);
 		Griff::add($id, user()->id);
-		Yii::app()->notification->notifyAndAddListener(
-				$comment->parentType,
-				$comment->parentId,
-				Notification::STATUS_GRIFF_COMMENT,
-				user()->id,
-				$comment->id);
 	}
 
 	public function actionGriffOff($id) {

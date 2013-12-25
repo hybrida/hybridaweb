@@ -1,11 +1,15 @@
 <?php
 
+
 function getDirContents($folderPath) {
+	$illegal_files = array(
+		".", "..", ".hg", ".git", ".hgignore", ".gitignore",
+	);
 	$dirHandle = opendir($folderPath);
 	$file = readdir($dirHandle);
 	$files = array();
 	while ($file) {
-		if ($file != "." && $file != ".." && $file != ".hg" && $file != ".hgignore") {
+		if (!in_array($file, $illegal_files)) {
 			$files[] = $file;
 		}
 		$file = readdir($dirHandle);
@@ -107,10 +111,10 @@ $utgaveMapper = getUtgaveFolders($folderPath);
 
 	}
 	.utgave a {
-		width: 200px;
+		width: 100px;
 		float: left;
-		padding: 0.5em;
-		margin: 0.3em;
+		padding: 0.2em;
+		margin: 0.1em;
 		background-color: #eee;
 		overflow: auto;
 		border-radius: 2px;
@@ -118,8 +122,7 @@ $utgaveMapper = getUtgaveFolders($folderPath);
 	}
 
 	.utgave a img {
-		width: 200px;
-		height: 283px;
+		width: 100px;
 		position: relative;
 		top: 2px;
 	}

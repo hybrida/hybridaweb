@@ -1,7 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -9,7 +7,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8 */;
 
-CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+CREATE DATABASE IF NOT EXISTS `hybrida_dev` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `hybrida_dev`;
 
 INSERT INTO `access_relations` (`id`, `access`, `type`, `super_id`) VALUES
@@ -326,6 +324,9 @@ INSERT INTO `bk_company_specialization` (`companyId`, `specializationId`) VALUES
 (108, 3),
 (108, 4);
 
+INSERT INTO `blog_writers` (`userId`) VALUES
+(466);
+
 INSERT INTO `book_sales` (`id`, `title`, `content`, `price`, `status`, `author`, `imageID`, `timestamp`) VALUES
 (5, 'Gult statistikkark', 'Det samme gule arket som jeg brukte under eksamen i Statistikk 2012', 5, 0, 381, 2, '2012-06-19 22:56:46');
 
@@ -564,7 +565,6 @@ INSERT INTO `user` (`id`, `username`, `firstName`, `middleName`, `lastName`, `sp
 INSERT INTO `user_password` (`userId`, `password`, `expired`) VALUES
 (293, '3a6ecb8517060495cfaa4585d617b3ee6cdefa88', 0);
 SET FOREIGN_KEY_CHECKS=1;
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

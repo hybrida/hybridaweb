@@ -2,20 +2,16 @@
 
 class BpcRequest {
 
-	private static $foreningID = 12;
-	private static $handshakeID = '27ede510ee989207365b8e9eef46309a82b8e7de';
 	private static $responseMethod = 'serialized_array';
-	private static $requestUrl = "You are not allowed to connect to bpc from this url";
-	// private static $requestUrl = 'http://testing.bedriftspresentasjon.no/remote/';
-	// private static $requestUrl = 'http://www.bedriftspresentasjon.no/remote/';
-	private static $isDebug = false;
-	private static $timing = false;
-	private static $version = '1.1';
+
+	private $module;
+
 	private $postdata = array();
 	private $curl = null;
 	private $curlResponse = null;
 
 	public function __construct($postdata) {
+		$this->module = Yii::app()->controller->module;
 		$this->setPostdata($postdata);
 	}
 
@@ -26,11 +22,11 @@ class BpcRequest {
 
 	private function initCommonPostdata() {
 		$this->postdata = array(
-			'forening' => self::$foreningID,
-			'key' => self::$handshakeID,
-			'debug' => self::$isDebug,
-			'timing' => self::$timing,
-			'version' => self::$version,
+			'forening' => $this->module->foreningID,
+			'key' => $this->module->handshakeID,
+			'debug' => $this->module->isDebug,
+			'timing' => $this->module->timing,
+			'version' => $this->module->version,
 			'method' => self::$responseMethod,
 		);
 	}
@@ -47,7 +43,7 @@ class BpcRequest {
 	}
 
 	private function initCurlOptions() {
-		curl_setopt($this->curl, CURLOPT_URL, self::$requestUrl);
+		curl_setopt($this->curl, CURLOPT_URL, $this->module->requestUrl);
 		curl_setopt($this->curl, CURLOPT_POSTFIELDS, $this->postdata);
 		curl_setopt($this->curl, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, 1);

@@ -78,14 +78,6 @@ class Notifications {
 				'changedByUserID' => $changedByUserID,
 				'commentID' => $commentID,
 			));
-//			$notification = new Notification;
-//			$notification->parentID = $id;
-//			$notification->parentType = $type;
-//			$notification->userID = $listenerID;
-//			$notification->statusCode = $statusCode;
-//			$notification->changedByUserID = $changedByUserID;
-//			$notification->commentID = $commentID;
-//			$notification->save();
 		}
 	}
 

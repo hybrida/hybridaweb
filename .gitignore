@@ -14,3 +14,7 @@ db/*.hash
 # Intellij project files
 .idea/
 *.iml
+
+# Temporary files
+*~
+protected/config/main.php
