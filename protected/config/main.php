@@ -64,7 +64,11 @@ return array(
 		'forum'=>array(
 			'class'=>'application.modules.yii-forum.YiiForumModule',
 		),
-		'bpc',
+		'bpc' => array(
+			'requestUrl' => 'http://testing.bedriftspresentasjon.no/remote/',
+			'foreningID' => 12,
+			'handshakeID' => '27ede510ee989207365b8e9eef46309a82b8e7de',
+		),
 		'calendar',
 		'comment',
 		'timetracker',

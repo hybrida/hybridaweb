@@ -1,7 +1,13 @@
 <?php
 
-class BpcModule extends CWebModule
-{
+class BpcModule extends CWebModule {
+
+	public $requestUrl;
+	public $foreningID;
+	public $handshakeID;
+	public $isDebug = false;
+	public $timing = 0;
+
 	public function init()
 	{
 		// this method is called when the module is being created
