@@ -26,7 +26,7 @@
 					<? if (user()->checkAccess('updateNews', array('id' => $newsItem->id))): ?>
 						<?=
 						CHtml::link("Rediger", array("news/edit", 'id' => $newsItem->id), array(
-							'class' => 'g-button'
+							// 'class' => 'g-button'
 						));
 						?>
 					<? endif ?>
