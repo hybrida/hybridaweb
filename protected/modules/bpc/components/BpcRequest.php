@@ -11,7 +11,7 @@ class BpcRequest {
 	private $curlResponse = null;
 
 	public function __construct($postdata) {
-		$this->module = Yii::app()->controller->module;
+		$this->module = Yii::app()->getModule('bpc');
 		$this->setPostdata($postdata);
 	}
 

@@ -3,7 +3,10 @@ include dirname(dirname(dirname(__FILE__))) . "/globals.php";
 
 // This is the configuration for yiic console application.
 // Any writable CConsoleApplication properties can be configured here.
-return array(
+
+$main_temp = require dirname(__FILE__) . "/main.php";
+
+$console_temp = array(
 	'import' => array(
 		'application.exceptions.*',
 		'application.models.*',
@@ -30,3 +33,7 @@ return array(
 		'dev','bpc',
 	)
 );
+
+$console_temp['modules']['bpc'] = $main_temp['modules']['bpc'];
+
+return $console_temp;
