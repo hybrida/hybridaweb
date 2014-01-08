@@ -85,6 +85,9 @@ class FrontpageBanner extends CActiveRecord
 
 	public static function getBanner() {
 		$banner = self::getLatestBanner();
+		if ($banner === null) {
+			return "";
+		}
 		$imgTag = Image::tag($banner->imageId, 'frontpage_banner');
 		if ($banner->url) {
 			return CHtml::link($imgTag, $banner->url);
