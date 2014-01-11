@@ -12,20 +12,9 @@ class NewsfeedController extends Controller {
 
 	public function actionRSS($limit=30) {
 		Yii::import('ext.efeed.*');
-		$models = $this->getRSSModels($limit);
-
+		$models = $this->getFeedElements($limit);
 		$feed = $this->getRSSFeed($models);
-
 		$feed->generateFeed();
-	}
-
-	private function getRSSModels($limit) {
-		$criteria = new CDbCriteria();
-		$criteria->limit = $limit;
-		$criteria->order = "weight DESC, timestamp DESC";
-		$criteria->condition = "status = " . Status::PUBLISHED;
-		$models = News::model()->findAll($criteria);
-		return $models;
 	}
 
 	private function getRSSFeed($models) {
@@ -98,9 +87,9 @@ class NewsfeedController extends Controller {
 		return CJSON::encode($output);
 	}
 
-	private function getFeedElements() {
+	private function getFeedElements($limit=1000) {
 		$criteria = new CDbCriteria();
-		// $criteria->limit = $limit;
+		$criteria->limit = $limit;
 		$criteria->order = "weight DESC, timestamp DESC";
 		$criteria->condition = "status = " . Status::PUBLISHED;
 		$models = News::model()->findAll($criteria);
