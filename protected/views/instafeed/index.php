@@ -60,6 +60,7 @@
             get: 'tagged',
             sortBy: 'most-recent',
             tagName: 'hybridantnu',
+            limit: 60,
             clientId: '4607d54615d045968654b06a038c3d4d',
             template: $('#instafeed-body-template').html()
         });
