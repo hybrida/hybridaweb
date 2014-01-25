@@ -19,3 +19,7 @@ vendor/
 # Temporary files
 *~
 protected/config/main.php
+
+# Sublime
+*.sublime-project
+*.sublime-workspace
