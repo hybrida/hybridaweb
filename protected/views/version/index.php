@@ -4,6 +4,6 @@
 		<strong><?= $hash ?></strong>
 	</p>
 
-	Du kan gå inn på <a href="<?= $url ?>">github</a> for å se revisjonen.
+	Du kan gå inn på <a href="<?= $url ?>">github</a> for å se koden.
 
 </div>
