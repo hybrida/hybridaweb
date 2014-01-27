@@ -10,6 +10,7 @@ upc/
 .git
 css/min.css
 db/*.hash
+vendor/
 
 # Intellij project files
 .idea/
@@ -18,3 +19,7 @@ db/*.hash
 # Temporary files
 *~
 protected/config/main.php
+
+# Sublime
+*.sublime-project
+*.sublime-workspace

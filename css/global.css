@@ -226,3 +226,10 @@ li.collapsibleListClosed .node {
   font-size: 18px;
   font-weight: normal;
 }
+
+.g-code {
+  background-color: #eee;
+  padding: 1em;
+  margin: 0.5em;
+  border-radius: 2px;
+}

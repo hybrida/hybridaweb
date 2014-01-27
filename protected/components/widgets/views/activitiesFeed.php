@@ -4,7 +4,12 @@
 	<ul>
 		<? foreach ($models as $model): ?>
 			<li>
-				<?= CHtml::link($model->title, $model->viewUrl) ?>
+				<?
+					$date = new DateTime($model->event->start);
+					$now = new DateTime('NOW');
+					$days = $now->diff($date)->days;
+				?>
+				<?= CHtml::link($model->title, $model->viewUrl) . "(" . $days . "d)" ?>
 			</li>
 		<? endforeach ?>
 
