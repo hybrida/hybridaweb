@@ -9,7 +9,10 @@
 					$now = new DateTime('NOW');
 					$days = $now->diff($date)->days;
 				?>
-				<?= CHtml::link($model->title, $model->viewUrl) . "(" . $days . "d)" ?>
+				<?= CHtml::link($model->title, $model->viewUrl)?>
+                <div id="g-activityFeedCounter">
+                    <?= $days . " dager igjen! " ?>
+                </div>
 			</li>
 		<? endforeach ?>
 
