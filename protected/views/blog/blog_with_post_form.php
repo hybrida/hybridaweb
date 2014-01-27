@@ -1,11 +1,3 @@
-
-
-<?php
-/* @var $this BlogEntryController */
-/* @var $model BlogEntry */
-/* @var $form CActiveForm */
-?>
- 
 <div class="g-form">
  
 <?php $form=$this->beginWidget('ActiveForm', array(
