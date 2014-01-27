@@ -33,7 +33,7 @@
             get: 'tagged',
             sortBy: 'most-liked',
             tagName: 'hybridantnu',
-            clientId: '4607d54615d045968654b06a038c3d4d',
+            clientId: '0e3d7923e15646fdb1e1f1e6220bd852',
             template: $('#instafeed-header-template').html(),
             resolution: 'low_resolution',
             limit: 1
@@ -61,7 +61,7 @@
             sortBy: 'most-recent',
             tagName: 'hybridantnu',
             limit: 60,
-            clientId: '4607d54615d045968654b06a038c3d4d',
+            clientId: '0e3d7923e15646fdb1e1f1e6220bd852',
             template: $('#instafeed-body-template').html()
         });
         feed.run();

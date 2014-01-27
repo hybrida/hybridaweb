@@ -18,7 +18,7 @@ class SSOclient {
 
 	function SSOclient($data, $sign64, $clientip){
 		// set initial values
-		$this->crtfile = Yii::getPathOfAlias("webroot")."/innsida.crt";
+		$this->crtfile = dirname(Yii::getPathOfAlias("webroot"))."/innsida.crt";
 		$this->loginvalues = array();
 		$this->verifies = false;
 		$this->oktime = false;

@@ -147,6 +147,17 @@ li.collapsibleListClosed {
 li.collapsibleListClosed .node {
   display: none;
 }
+
+#g-activityFeedCounter {
+    text-transform: uppercase;
+    color: #888;
+    font-size: 0.6em;
+    padding: 0.0em 0.0em 0.9em 1.4em;
+    display: block;
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+
 .g-barTitle {
   color: #000000;
   border-bottom: 1px solid #ccc;
@@ -225,4 +236,11 @@ li.collapsibleListClosed .node {
   display: block;
   font-size: 18px;
   font-weight: normal;
+}
+
+.g-code {
+  background-color: #eee;
+  padding: 1em;
+  margin: 0.5em;
+  border-radius: 2px;
 }

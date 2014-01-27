@@ -21,7 +21,10 @@ class ActivitiesFeed extends CWidget {
 class SignupFeed extends AbstractFeed {
 
 	protected function getActiveRecord($id) {
-		return News::model()->findByPk($id);
+		$model =  News::model()->findByPk($id);
+		$parent = Event::model()->findByPk($model->parentId);
+		$model['event'] = $parent;
+		return $model;
 	}
 
 	protected function getMaxElementCount() {
