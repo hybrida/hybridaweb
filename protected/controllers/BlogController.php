@@ -25,14 +25,17 @@
 						$this->render("post_feedback", array("data" => $val));
 					}
 					else {
+						echo "Rendering with post form";
 						$this->render("blog_with_post_form", array("data" => $data, "formdata" => $formdata));
 					}
 				}
 				else {
+					echo "Rendering without post form";
 					$this->render("blog_no_post");
 				}
 			}
 			else {
+				echo "Rendering";
 				$this->render("blog", array("data" => $data));
 			}
 		}
