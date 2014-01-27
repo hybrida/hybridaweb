@@ -10,7 +10,7 @@ define([], function() {
 	        resolution: 'thumbnail',
 	        sortBy: 'most-recent',
 	        links: true,
-	        limit: 15,
+	        limit: 30,
 	        mock: false
 	      };
 	      if (typeof params === 'object') {
