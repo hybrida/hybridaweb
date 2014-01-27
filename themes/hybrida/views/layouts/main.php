@@ -19,6 +19,8 @@
         
         <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 
+        <script src="/js/jquery.slides.min.js"></script>
+        
 	</head>
 
 	<body>
