@@ -56,3 +56,9 @@
 .newsfeedIndex .date {
   color: black;
 }
+
+.officeHours {
+    padding: 0.0em 0.0em 0.0em 1.8em;
+    display: block;
+    border-top-left-radius: 2px;
+}

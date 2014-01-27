@@ -34,13 +34,18 @@ $this->beginClip('sidebar'); ?>
 		</fieldset>
 	<? endif ?>
 
-<div class='g-barTitle'>Kontortider</div>
-<div class="g-sidebarNav">
-	<ul>
-	SPR: Tirsdag 12.15-14.00
-	Studentrådskontoret over kiosken på stripa
-	</ul>
-</div>
+    <div class='g-barTitle'>Kontortider</div>
+    <div class="g-sidebarNav">
+        <div class="officeHours">
+            <p>
+                Styret: <br/>Torsdag 10:15-12:00<br/>
+                Hybridakontoret, Gamle kjemi
+                <br/><br/>
+                SPR: <br/>Tirsdag 12.15-14.00<br/>
+                Studentrådskontoret over <br/>kiosken på stripa
+            </p>
+        </div>
+    </div>
 	<?
 	$this->widget('application.components.widgets.ActivitiesFeed');?>
 
