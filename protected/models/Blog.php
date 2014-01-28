@@ -9,20 +9,20 @@
 		}
 
 		private function getPostRows($count) {
-			$count--;
-			$rowcnt = $this->getTotalRowCount();
 			$con = Yii::app()->db;
-			$sql = "SELECT * FROM blogpost WHERE id BETWEEN " . ($rowcnt - $count) . " AND $rowcnt";
+			$sql = "SELECT * FROM blogpost ORDER BY time DESC LIMIT $count";
 			$com = $con->createCommand($sql);
 			return $com->query();
 		}
 
 		public function getLatestPosts($count = 90) {
-			$raw_rows = $this->getPostRows($count);
 			$con = Yii::app()->db;
+
+			$raw_rows = $this->getPostRows($count);
+			$count = $this->getPostRows($count)->count();
 			$rows = array();
-			
-			for ($i = 0; $i < $raw_rows->count(); ++$i) {
+
+			for ($i = 0; $i < $count; ++$i) {
 				$row = $raw_rows->read();
 				$sql = "SELECT * FROM user WHERE id = " . $row["uid"];
 				$com = $con->createCommand($sql);
@@ -31,7 +31,8 @@
 				$row["uid"] = $user["firstName"] . " " . $user["lastName"];
 				array_push($rows, $row);
 			}
-			return array_reverse($rows);
+			// return array_reverse($rows);
+			return $rows;
 		}
 
 		public function attributeNames() {
