@@ -7,23 +7,39 @@
 */
 
 #slides {
-      display: none
+      display: none;
+      position: relative;
+      
     }
 
     #slides .slidesjs-navigation {
       margin-top:3px;
-      display: none;
+
     }
 
     #slides .slidesjs-previous {
+      position: absolute;
       margin-right: 5px;
-      float: left;
-      display: none;
+      font-size: 40px;
+      top:37%;
+      left:1%;
+      filter:alpha(opacity=50);
+      -moz-opacity:0.5;
+      -khtml-opacity: 0.5;
+      opacity: 0.5;
     }
+
 
     #slides .slidesjs-next {
       margin-right: 5px;
-      float: left;
+      position: absolute;
+      font-size: 40px;
+      top:37%;
+      left:96%;
+      filter:alpha(opacity=50);
+      -moz-opacity:0.5;
+      -khtml-opacity: 0.5;
+      opacity: 0.5;
     }
 
     .slidesjs-pagination {
