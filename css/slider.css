@@ -23,10 +23,11 @@
       font-size: 40px;
       top:37%;
       left:1%;
-      filter:alpha(opacity=50);
-      -moz-opacity:0.5;
-      -khtml-opacity: 0.5;
-      opacity: 0.5;
+      filter:alpha(opacity=60);
+      -moz-opacity:0.6;
+      -khtml-opacity: 0.6;
+      opacity: 0.6;
+      z-index: 1000;
     }
 
 
@@ -36,10 +37,11 @@
       font-size: 40px;
       top:37%;
       left:96%;
-      filter:alpha(opacity=50);
-      -moz-opacity:0.5;
-      -khtml-opacity: 0.5;
-      opacity: 0.5;
+      filter:alpha(opacity=60);
+      -moz-opacity:0.6;
+      -khtml-opacity: 0.6;
+      opacity: 0.6;
+      z-index: 1000;
     }
 
     .slidesjs-pagination {
@@ -79,5 +81,5 @@
 
     #slides a:hover,
     #slides a:active {
-      color: #9e2020
+      color: #024f9d
     }
