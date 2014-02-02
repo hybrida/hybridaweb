@@ -2,7 +2,6 @@
 
 <div id="slides">
     <?= FrontpageBanner::getBanner() ?>
-    <img src="/upc/images/frontpage_banner/banner.png">
     <img src="/upc/images/frontpage_banner/banner2.png">
     <span class="slidesjs-previous slidesjs-navigation"><a href="#" class="slidesjs-previous slidesjs-navigation"><i class="icon-chevron-left icon-large"></i></a></span>
     <span class="slidesjs-next slidesjs-navigation"><a href="#" class="slidesjs-next slidesjs-navigation"><i class="icon-chevron-right icon-large"></i></a></span>
