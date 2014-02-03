@@ -36,7 +36,7 @@ $this->beginClip('sidebar'); ?>
     <div class="g-sidebarNav">
         <div class="officeHours">
             <p>
-                <div class="title">Styret:</div> Torsdag 10:15-12:00<br/>
+                <div class="title">Styret:</div> Torsdag 12:15-14:00<br/>
                 Hybridakontoret, Gamle kjemi
                 <br/><br/>
                 <div class="title">SPR:</div> Tirsdag 12.15-14.00<br/>
