@@ -50,7 +50,7 @@ $this->renderPartial('_header', array(
 			<td><?=CHtml::link($user->graduationYear, array('/students/view', 'id' => $user->graduationYear))?></td>
 		</tr>
 		<tr>
-			<th>Medlemskap: </th>
+			<th>Medlemskapet: </th>
 			<td> <?= ($user->member == "true" ? "Medlem" : "Ikke Medlem") ?></td>
 		</tr>
 
