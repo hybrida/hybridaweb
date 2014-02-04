@@ -39,7 +39,7 @@ $this->beginClip('sidebar'); ?>
                 <div class="title">Styret:</div> Torsdag 12:15-14:00<br/>
                 Hybridakontoret, Gamle kjemi
                 <br/><br/>
-                <div class="title">SPR:</div> Tirsdag 12.15-14.00<br/>
+                <div class="title">SPR:</div> Torsdag 12.15-14.00<br/>
                 Studentrådskontoret over <br/>kiosken på stripa
             </p>
         </div>
