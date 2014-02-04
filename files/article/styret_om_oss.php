@@ -93,7 +93,7 @@
 				<a href="/profil/oysteibh">&Oslash;ystein Hauan</a>
 				1. kl
 				<div class="description">
-					Ansvar for utvikling og drift av nettsidene samt informasjonsflyten i
+					Ansvar for utvikling og drift av nettsidene, samt informasjonsflyten i
 					linjeforeningen.
 				</div>
 			</div>
