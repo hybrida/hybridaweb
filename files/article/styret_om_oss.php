@@ -90,7 +90,7 @@
 			<div class="styretmedlem">
 				<h2>Vevsjef</h2>
 				<img src="/upc/files/styret/artikkel/vevsjef.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/oysteibh">&Oslash;ystein Hauan</a>
+				<a href="/profil/oysteibh">&Oslash;ystein Bjerke Hauan</a>
 				1. kl
 				<div class="description">
 					Ansvar for utvikling og drift av nettsidene samt informasjonsflyten i
