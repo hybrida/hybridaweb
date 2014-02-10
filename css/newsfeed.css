@@ -63,6 +63,7 @@
 
 .layout-rightBar > .g-sidebarNav > ul, .layout-rightBar > .g-sidebarNav > ul > li {
     margin-left: 0;
+    padding-left: 0;
 }
 
 .officeHours {
