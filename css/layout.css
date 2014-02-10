@@ -18,6 +18,7 @@ a img {
   width: 1000px;
   margin: 0 auto;
 }
+
 .layout-head img {
   float: left;
   border: 0;
@@ -31,6 +32,7 @@ a img {
   background-color: white;
   border-radius: 2px;
   padding-bottom: 20px;
+  
 }
 .layout-marginMaker {
   margin-top: 20px;
@@ -52,6 +54,10 @@ a img {
 
 .layout-menu {
   margin-top: 10px;
+}
+
+.layout-menu ul ul {
+    z-index: 10000;
 }
 .layout-search {
   float: right;
