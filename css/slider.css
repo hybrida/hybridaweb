@@ -9,12 +9,10 @@
 #slides {
       display: none;
       position: relative;
-      
     }
 
     #slides .slidesjs-navigation {
       margin-top:3px;
-
     }
 
     #slides .slidesjs-previous {

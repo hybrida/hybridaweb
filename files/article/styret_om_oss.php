@@ -30,7 +30,7 @@
 
 		<p>
 			<strong>Dette er de syv styremedlemmene som per dags dato har hovedansvaret 
-				for &aring; holde liv i linjeforeningen.</strong>
+				for &aring; holde liv i linjeforeningen (og dens medlemmer).</strong>
 		</p>
 
 		<div class="styretmedlemmer">
@@ -59,7 +59,7 @@
 				<h2>Skattmester</h2>
 				<img src="/upc/files/styret/artikkel/skattemester.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/astridnd">Astrid Nerhus Dale</a>
-				3. kl
+				1. kl
 				<div class="description"></div>
 				Ansvaret for pengestr&oslash;mmen inn og, 
 				sannsynligvis mest, ut.
@@ -69,7 +69,7 @@
 				<h2>Festivalus</h2>
 				<img src="/upc/files/styret/artikkel/festivalus.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/liveja">Live Jacobsen</a>
-				3. kl
+				2. kl
 				<div class="description">
 					Ansvaret for det som blir arrangert av fester, turer og diverse andre
 					arrangementer.
@@ -91,9 +91,9 @@
 				<h2>Vevsjef</h2>
 				<img src="/upc/files/styret/artikkel/vevsjef.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/oysteibh">&Oslash;ystein Hauan</a>
-				4. kl
+				1. kl
 				<div class="description">
-					Ansvar for utvikling og drift av nettsidene samt informasjonsflyten i
+					Ansvar for utvikling og drift av nettsidene, samt informasjonsflyten i
 					linjeforeningen.
 				</div>
 			</div>
