@@ -30,7 +30,7 @@
 
 		<p>
 			<strong>Dette er de syv styremedlemmene som per dags dato har hovedansvaret 
-				for &aring; holde liv i linjeforeningen.</strong>
+				for &aring; holde liv i linjeforeningen (og dens medlemmer).</strong>
 		</p>
 
 		<div class="styretmedlemmer">
