@@ -115,7 +115,7 @@ fieldset .g-button {
   list-style: none;
 }
 .g-sidebarNav ul li a {
-  padding: 0.2em 0.8em;
+  padding: 0.2em 0;
   display: block;
   border-top-left-radius: 2px;
   border-bottom-left-radius: 2px;
@@ -150,7 +150,7 @@ li.collapsibleListClosed .node {
     text-transform: uppercase;
     color: #888;
     font-size: 0.6em;
-    padding: 0.0em 0.0em 0.9em 1.4em;
+    padding: 0.0em 0.0em 0.9em 0;
     display: block;
     border-top-left-radius: 2px;
     border-bottom-left-radius: 2px;
