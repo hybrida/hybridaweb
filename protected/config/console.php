@@ -25,9 +25,6 @@ $console_temp = array(
 		'cliColor' => array(
 			'class' => 'ext.yii-cli-color.components.KCliColor',
 		),
-		'lessCompiler' => array(
-			'class' => 'ext.lessphp.LessCompiler',
-		),
 	),
 	'modules' => array(
 		'dev','bpc',
@@ -35,5 +32,6 @@ $console_temp = array(
 );
 
 $console_temp['modules']['bpc'] = $main_temp['modules']['bpc'];
+$console_temp['components']['db'] = $main_temp['components']['db'];
 
 return $console_temp;

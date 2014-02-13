@@ -39,6 +39,7 @@ class BpcUpdate {
 		if ($data === null) {
 			$data = $this->getUpdateAllRequest();
 		}
+		cdebug($data);
 		if (!isset($data['event'])) {
 			return;
 		}
