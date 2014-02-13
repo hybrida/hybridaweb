@@ -1,5 +1,7 @@
 <?php $this->beginContent('//layouts/main'); ?>
-			<?= FrontpageBanner::getBanner() ?>
+
+            <?php $this->widget("Slider"); ?>
+
 			<div class="layout-content">
 				<?php if (isset($this->breadcrumbs) && isset($this->breadcrumbOptions)): ?>
 					<?php
@@ -24,3 +26,4 @@
 				</div>
 			</div>
 <?php $this->endContent(); ?>
+

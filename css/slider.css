@@ -1,0 +1,83 @@
+/* 
+    Document   : slider
+    Created on : 27.jan.2014, 18:53:20
+    Author     : mariuroe
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#slides {
+      display: none;
+      position: relative;
+    }
+
+    #slides .slidesjs-navigation {
+      margin-top:3px;
+    }
+
+    #slides .slidesjs-previous {
+      position: absolute;
+      margin-right: 5px;
+      font-size: 40px;
+      top:37%;
+      left:1%;
+      filter:alpha(opacity=60);
+      -moz-opacity:0.6;
+      -khtml-opacity: 0.6;
+      opacity: 0.6;
+      z-index: 1000;
+    }
+
+
+    #slides .slidesjs-next {
+      margin-right: 5px;
+      position: absolute;
+      font-size: 40px;
+      top:37%;
+      left:96%;
+      filter:alpha(opacity=60);
+      -moz-opacity:0.6;
+      -khtml-opacity: 0.6;
+      opacity: 0.6;
+      z-index: 1000;
+    }
+
+    .slidesjs-pagination {
+      margin: 6px 0 0;
+      float: right;
+      list-style: none;
+    }
+
+    .slidesjs-pagination li {
+      float: left;
+      margin: 0 1px;
+    }
+
+    .slidesjs-pagination li a {
+      display: block;
+      width: 13px;
+      height: 0;
+      padding-top: 13px;
+      background-position: 0 0;
+      float: left;
+      overflow: hidden;
+    }
+
+    .slidesjs-pagination li a.active,
+    .slidesjs-pagination li a:hover.active {
+      background-position: 0 -13px
+    }
+
+    .slidesjs-pagination li a:hover {
+      background-position: 0 -26px
+    }
+
+    #slides a:link,
+    #slides a:visited {
+      color: #333
+    }
+
+    #slides a:hover,
+    #slides a:active {
+      color: #024f9d
+    }

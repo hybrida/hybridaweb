@@ -56,3 +56,23 @@
 .newsfeedIndex .date {
   color: black;
 }
+
+.layout-rightBar > .g-sidebarNav {
+    margin-left: 2.8em;
+}
+
+.layout-rightBar > .g-sidebarNav > ul, .layout-rightBar > .g-sidebarNav > ul > li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.officeHours {
+    display: block;
+    border-top-left-radius: 2px;
+}
+
+.officeHours .title {
+    text-transform: uppercase;
+    font-size: 0.9em;
+    color: #888;
+}

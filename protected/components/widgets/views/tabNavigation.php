@@ -23,7 +23,6 @@
 		<li><?= CHtml::link("Bedrift", array("/article/view", 'id' => 2, 'title' => 'Bedrift')); ?></li>
 		<li><?= CHtml::link("I&IKT-ringen", array("/article/view", 'id' => 62, 'title' => 'IKT-ringen')); ?></li>
 		<li><?= CHtml::link("Om Hybrida", array("/article/view", 'id' => 1, 'title' => 'Om Hybrida')); ?></li>
-		<li><?= CHtml::link("Blogg", array("/blog")); ?></li>
 
 		<? if (user()->isGuest): ?>
 			<li class="userOptions"><?= CHtml::link("Logg inn", user()->loginUrl) ?></li>
