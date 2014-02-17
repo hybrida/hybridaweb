@@ -139,7 +139,7 @@ class JobAnnouncementController extends Controller
 	{
 		$dataProvider=new CActiveDataProvider('JobAnnouncement', array(
             'criteria'=>array(
-                'order'=>'date DESC',
+                'order'=>'deadline DESC',
             )
         ));
         
