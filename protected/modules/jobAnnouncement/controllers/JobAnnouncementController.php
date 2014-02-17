@@ -32,7 +32,7 @@ class JobAnnouncementController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','create', 'update', 'delete'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin', 'bk'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
