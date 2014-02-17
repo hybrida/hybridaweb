@@ -137,7 +137,12 @@ class JobAnnouncementController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('JobAnnouncement');
+		$dataProvider=new CActiveDataProvider('JobAnnouncement', array(
+            'criteria'=>array(
+                'order'=>'date DESC',
+            )
+        ));
+        
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
