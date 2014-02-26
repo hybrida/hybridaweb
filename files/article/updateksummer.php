@@ -1,5 +1,3 @@
-updateksummer.php
-
 <?php
 
 
@@ -147,6 +145,8 @@ $utgaveMapper = getUtgaveFolders($folderPath);
 </div>
 
 <div id="article-content">
+
+<a href="/artikler/53/Updateᵏ+-+Alle+utgaver">Alle Utgaver (kun medlemmer)</a>
 
 	<div>
 		<?= $article->content ?>
