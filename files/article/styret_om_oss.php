@@ -40,7 +40,7 @@
 				<a href="/profil/aasmunph">&Aring;smund Pedersen Hugo</a>
 				3. kl
 				<div class="description">
-					Har det overordnede ansvaret i Hybrida.
+					Har det overordnede ansvaret i Hybrida, og er rett og slett helt sjef.
 				</div>
 			</div>
 
@@ -94,7 +94,7 @@
 				1. kl
 				<div class="description">
 					Ansvar for utvikling og drift av nettsidene, samt informasjonsflyten i
-					linjeforeningen.
+					linjeforeningen. 
 				</div>
 			</div>
 
