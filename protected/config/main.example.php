@@ -23,9 +23,9 @@ $templateConf = require($templatePath);
 return CMap::mergeArray($templateConf, array(
 	'modules' => array(
 		'bpc' => array(
-			'requestUrl' => 'http://testing.bedriftspresentasjon.no/remote/',
+			'requestUrl' => 'http://bedriftspresentasjon.no/remote/',
 			'foreningID' => 12,
-			'handshakeID' => '27ede510ee989207365b8e9eef46309a82b8e7de',
+			'handshakeID' => 'c41d13e6ab5445e04c6fe6ee82c9cbedd27a2dfe',
 		),
 	),
 	'components' => array(

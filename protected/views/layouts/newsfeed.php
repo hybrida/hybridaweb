@@ -17,7 +17,7 @@
 			<div class="layout-rightBar">
 				<?= $this->clips['sidebar'] ?>
 				<? $this->widget('IKTRingenAdvertisement') ?>
-
+				<? $this->renderPartial("//layouts/_eksursjonsponsing")  ?>
 				<div class="g-barTitle">Sponsorer</div>
 				<div class="g-barText">
 					<a href="http://www.sit.no">

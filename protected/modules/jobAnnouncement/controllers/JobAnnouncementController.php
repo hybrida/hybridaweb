@@ -32,7 +32,7 @@ class JobAnnouncementController extends Controller
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','create', 'update', 'delete'),
-				'roles'=>array('admin'),
+				'roles'=>array('admin', 'bk'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -137,7 +137,12 @@ class JobAnnouncementController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('JobAnnouncement');
+		$dataProvider=new CActiveDataProvider('JobAnnouncement', array(
+            'criteria'=>array(
+                'order'=>'deadline DESC',
+            )
+        ));
+        
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));

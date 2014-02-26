@@ -38,7 +38,6 @@ function beginRequest() {
 
 return array(
 	'onBeginRequest' => 'beginRequest',
-	'theme' => 'hybrida',
 	'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
 	'name' => 'Hybrida',
 	'preload' => array('log'),

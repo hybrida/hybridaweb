@@ -57,8 +57,16 @@
   color: black;
 }
 
+.layout-rightBar > .g-sidebarNav {
+    margin-left: 2.8em;
+}
+
+.layout-rightBar > .g-sidebarNav > ul, .layout-rightBar > .g-sidebarNav > ul > li {
+    margin-left: 0;
+    padding-left: 0;
+}
+
 .officeHours {
-    padding: 0.0em 0.0em 0.0em 1.8em;
     display: block;
     border-top-left-radius: 2px;
 }
