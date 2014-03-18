@@ -33,6 +33,8 @@
 }
 
 .blog_entry .content .image {
+	width:100%; [img]link[/img]
+	height:auto;
 }
 
 .blog_entry .dateline {
@@ -51,3 +53,4 @@
 	border-width: 0px;
 	background-color: #FFCB3B;
 }
+
