@@ -40,4 +40,8 @@
 		public function actionPost() {
 			$this->render("newpost");
 		}
+		
+		public function actionRemovePost() {
+			
+		}
 	}

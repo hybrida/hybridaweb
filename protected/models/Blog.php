@@ -28,7 +28,7 @@
 				$com = $con->createCommand($sql);
 				$res = $com->query();
 				$user = $res->read();
-				$row["uid"] = $user["firstName"] . " " . $user["lastName"];
+				$row["name"] = $user["firstName"] . " " . $user["lastName"];
 				array_push($rows, $row);
 			}
 			// return array_reverse($rows);

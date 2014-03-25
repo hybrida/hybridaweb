@@ -70,7 +70,19 @@
         echo "<div class=\"title\">" . $row["title"] . "</div>";
         echo "<hr class=\"underline\" />";
         echo "<div class=\"content\">" . $row["content"] . "</div>";
-        echo "<div class=\"dateline\"> Av " . $row["uid"] . ", " . $row["time"] . "</div>";
+        echo "<div class=\"dateline\"> Av " . $row["name"] . ", " . $row["time"] . "</div>";
         echo "</div>";
+        
+        if (isset(Yii::app()->user->id)) {
+			if (Yii::app()->user->id==$row["uid"]) {
+				echo "<a href='blog_with_post_form.php?get=.. Something" . $row["id"] . "'> Fjern </a>";		
+			}
+			else {
+				echo "The ID is not equal to the\n";
+			}
+		}
+		else {
+			echo "User ID is not set!\n";
+		}
     }
 ?>
