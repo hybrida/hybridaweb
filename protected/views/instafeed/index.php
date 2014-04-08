@@ -1,14 +1,16 @@
 <div class="instafeed">
-    
+
     <img class="banner" alt="Instagram Feed Logo"
 			 width="700"
 			 src="/upc/files/instafeed/instafeed_logo.jpg" />
 
-    <div id="instafeed-header"></div> 
-    
+    <div id="instafeed-header"></div>
+
     <h2>Bruk <b>#hybridantnu</b>, og del dine opplevelser med oss!</h2>
 
-    <div id="instafeed-body"></div>
+    <div id="instafeed-body" class="g-clearfix"></div>
+
+    <input type="button" value="Neste side" class="nextPageButton g-button">
 
 </div>
 
@@ -64,6 +66,13 @@
             clientId: '0e3d7923e15646fdb1e1f1e6220bd852',
             template: $('#instafeed-body-template').html()
         });
+
+        var nextPageButton = document.getElementsByClassName("nextPageButton")[0];
+
+        nextPageButton.addEventListener('click', function() {
+            feed.next();
+        });
+
         feed.run();
     });
 </script>
