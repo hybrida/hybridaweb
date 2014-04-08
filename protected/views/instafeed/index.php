@@ -29,6 +29,7 @@
 </script>
 
 <script type="text/javascript">
+    // For det øverste bildet
     require(['instafeed'], function(insta) {
         var feed = new insta.Instafeed({
             target: 'instafeed-header',
@@ -56,6 +57,7 @@
 </script>
 
 <script type="text/javascript">
+    // For selve feeden
     require(['instafeed'], function(insta) {
         var feed = new insta.Instafeed({
             target: 'instafeed-body',
@@ -64,7 +66,19 @@
             tagName: 'hybridantnu',
             limit: 60,
             clientId: '0e3d7923e15646fdb1e1f1e6220bd852',
-            template: $('#instafeed-body-template').html()
+            template: $('#instafeed-body-template').html(),
+            after: function(json) {
+                var captionMaxLength = 80;
+                var captions = $("#instafeed-body .body .caption");
+                for (var i = 0; i < captions.length; i++) {
+                    var capt = $(captions[i]);
+                    var text = capt.html();
+                    if (text.length > captionMaxLength) {
+                        text = text.substr(0, captionMaxLength) + " . . .";
+                        capt.html(text);
+                    }
+                }
+            }
         });
 
         var nextPageButton = document.getElementsByClassName("nextPageButton")[0];
