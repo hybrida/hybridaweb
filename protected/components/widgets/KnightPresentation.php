@@ -8,12 +8,14 @@
 class KnightPresentation extends CWidget {
 
     private $models;
-
+ 
     public function init() {
         parent::init();
-        $this->models = Knight::model()->findAll();
+        $criteria = new CDbCriteria();
+        $criteria->order = "grantYear desc";
+        $this->models = Knight::model()->findAll($criteria);
     }
-
+ 
     public function run() {
         $this->render('knightPresentation', array(
             'models' => $this->models,
