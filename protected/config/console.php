@@ -15,13 +15,6 @@ $console_temp = array(
 	'name' => 'My Console Application',
 	// application components
 	'components' => array(
-		'db' => array(
-			'connectionString' => 'mysql:host=localhost;dbname=hybrida_dev',
-			'emulatePrepare' => true,
-			'username' => 'www-data',
-			'password' => 'Q8JdU5MY7dDr5XEU',
-			'charset' => 'utf8',
-		),
 		'cliColor' => array(
 			'class' => 'ext.yii-cli-color.components.KCliColor',
 		),
@@ -33,5 +26,7 @@ $console_temp = array(
 
 $console_temp['modules']['bpc'] = $main_temp['modules']['bpc'];
 $console_temp['components']['db'] = $main_temp['components']['db'];
+
+cdebug($console_temp);
 
 return $console_temp;

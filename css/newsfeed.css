@@ -58,10 +58,11 @@
 }
 
 .layout-rightBar > .g-sidebarNav {
-    margin-left: 2.8em;
+    margin-left: 2em;
 }
 
-.layout-rightBar > .g-sidebarNav > ul, .layout-rightBar > .g-sidebarNav > ul > li {
+.layout-rightBar > .g-sidebarNav > ul,
+.layout-rightBar > .g-sidebarNav > ul > li {
     margin-left: 0;
     padding-left: 0;
 }

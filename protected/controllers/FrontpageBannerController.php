@@ -13,7 +13,7 @@ class FrontpageBannerController extends Controller {
 	public function accessRules() {
 		return array(
 			array('allow',
-				'actions' => array('index'),
+				'actions' => array('index', 'all'),
 				'roles' => array('admin'),
 			),
 			array('deny'),

@@ -1,14 +1,16 @@
 <div class="instafeed">
-    
+
     <img class="banner" alt="Instagram Feed Logo"
 			 width="700"
 			 src="/upc/files/instafeed/instafeed_logo.jpg" />
 
-    <div id="instafeed-header"></div> 
-    
+    <div id="instafeed-header"></div>
+
     <h2>Bruk <b>#hybridantnu</b>, og del dine opplevelser med oss!</h2>
 
-    <div id="instafeed-body"></div>
+    <div id="instafeed-body" class="g-clearfix"></div>
+
+    <input type="button" value="Neste side" class="nextPageButton g-button">
 
 </div>
 
@@ -27,6 +29,7 @@
 </script>
 
 <script type="text/javascript">
+    // For det øverste bildet
     require(['instafeed'], function(insta) {
         var feed = new insta.Instafeed({
             target: 'instafeed-header',
@@ -54,6 +57,7 @@
 </script>
 
 <script type="text/javascript">
+    // For selve feeden
     require(['instafeed'], function(insta) {
         var feed = new insta.Instafeed({
             target: 'instafeed-body',
@@ -62,8 +66,27 @@
             tagName: 'hybridantnu',
             limit: 60,
             clientId: '0e3d7923e15646fdb1e1f1e6220bd852',
-            template: $('#instafeed-body-template').html()
+            template: $('#instafeed-body-template').html(),
+            after: function(json) {
+                var captionMaxLength = 80;
+                var captions = $("#instafeed-body .body .caption");
+                for (var i = 0; i < captions.length; i++) {
+                    var capt = $(captions[i]);
+                    var text = capt.html();
+                    if (text.length > captionMaxLength) {
+                        text = text.substr(0, captionMaxLength) + " . . .";
+                        capt.html(text);
+                    }
+                }
+            }
         });
+
+        var nextPageButton = document.getElementsByClassName("nextPageButton")[0];
+
+        nextPageButton.addEventListener('click', function() {
+            feed.next();
+        });
+
         feed.run();
     });
 </script>
