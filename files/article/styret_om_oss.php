@@ -38,9 +38,10 @@
 				<h2>Leder</h2>
 				<img src="/upc/files/styret/artikkel/leder.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/simenlil">Simen Lillehagen</a>
-				4. kl
+				, 4. kl
 				<div class="description">
-					Har det overordnede ansvaret i Hybrida, og er rett og slett helt sjef.
+					Har det overordnede ansvaret i Hybrida, og er rett og slett helt sjef. 
+					Glad for å ha mange jenter i styret.
 				</div>
 			</div>
 
@@ -48,9 +49,9 @@
 				<h2>Nestleder</h2>
 				<img src="/upc/files/styret/artikkel/nestleder.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/stephabu">Stephanie Buadu</a>
-				2. kl
+				, 2. kl
 				<div class="description">
-					Samarbeider med lederen om det organisatoriske og administrative ansvaret i 
+					"Samarbeider" med lederen om det organisatoriske og administrative ansvaret i 
 					styret.
 				</div>
 			</div>
@@ -59,20 +60,21 @@
 				<h2>Skattmester</h2>
 				<img src="/upc/files/styret/artikkel/skattemester.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/astridnd">Astrid Nerhus Dale</a>
-				2. kl
+				, 2. kl
 				<div class="description"></div>
 				Ansvaret for pengestr&oslash;mmen inn og, 
-				sannsynligvis mest, ut.
+				selvfølgelig mest, ut. Driver i følge pålitelige kilder
+				ikke med underslag (men man vet jo aldri). 
 			</div>
 
 			<div class="styretmedlem">
 				<h2>Festivalus</h2>
 				<img src="/upc/files/styret/artikkel/festivalus.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/liveja">Live Jacobsen</a>
-				3. kl
+				, 3. kl
 				<div class="description">
-					Ansvaret for det som blir arrangert av fester, turer og diverse andre
-					arrangementer.
+					Ansvaret for det som blir arrangert av fester, turer og en hel rekke andre
+					arrangementer. Er også daglig leder på Hybridas eksklusive bar på Moholt.  
 				</div>
 			</div>
 
@@ -80,10 +82,11 @@
 				<h2>Bedriftskomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/bksjef.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/andreamf">Andrea Marie Festøy</a>
-				2. kl
+				, 2. kl
 				<div class="description">
 					Fikser og ordner med profileringen av linja og linjeforeningen utad til
-					bedrifter og n&aelig;ringslivet generelt.
+					bedrifter og n&aelig;ringslivet. Sørger for at vi får de saftigste jobbene 
+					på markedet. 
 				</div>
 			</div>
 
@@ -91,10 +94,11 @@
 				<h2>Vevsjef</h2>
 				<img src="/upc/files/styret/artikkel/vevsjef.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/oysteibh">&Oslash;ystein Hauan</a>
-				2. kl
+				, 2. kl
 				<div class="description">
 					Ansvar for utvikling og drift av nettsidene, samt informasjonsflyten i
-					linjeforeningen. 
+					linjeforeningen og HybridLAN. Tar det mye med ro, særlig når det kommer til
+					matte to.  
 				</div>
 			</div>
 
@@ -102,9 +106,10 @@
 				<h2>Jentekomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/jentekomsjef.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/helendyp">Helene Dypbukt</a>
-				2. kl
+				, 2. kl
 				<div class="description">
-					Sjef for jentekomiteen.
+					Sjef for jentekomiteen, eller chicas united som det kalles i spania. 
+					sørger for at damene oppfører seg i henhold. 
 				</div>
 			</div>
 			<br clear="all" />
