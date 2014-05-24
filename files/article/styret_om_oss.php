@@ -69,7 +69,7 @@
 				<h2>Festivalus</h2>
 				<img src="/upc/files/styret/artikkel/festivalus.jpg" alt ="Leder av Hybrida" />
 				<a href="/profil/liveja">Live Jacobsen</a>
-				2. kl
+				3. kl
 				<div class="description">
 					Ansvaret for det som blir arrangert av fester, turer og diverse andre
 					arrangementer.
@@ -79,7 +79,7 @@
 			<div class="styretmedlem">
 				<h2>Bedriftskomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/bksjef.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/andreamf">Andre Marie Festøy</a>
+				<a href="/profil/andreamf">Andrea Marie Festøy</a>
 				2. kl
 				<div class="description">
 					Fikser og ordner med profileringen av linja og linjeforeningen utad til
