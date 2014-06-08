@@ -35,7 +35,9 @@
 					</a>
 				</div>
 				<div class="layout-search">
-					<input type="text" id="searchField" placeholder="Søk"/>
+					<div class="layout-search">
+						<input type="text" id="searchField" placeholder="Søk"/>
+					</div>
 				</div>
 				<div style="clear: both"></div>
 				<div class="layout-headBottom">
