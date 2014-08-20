@@ -2,15 +2,6 @@
 
 class DefaultController extends Controller {
 
-	private function throwExceptinIfBadServerName() {
-		$serverName = Yii::app()->request->serverName;
-		$badServerName = "/hybrida.no/";
-		$isBadServer = preg_match($badServerName, $serverName);
-		if ($isBadServer) {
-			throw new CHttpException(403, "Kun for medlemmer av webkomiteen");
-		}
-	}
-
 	public function actionIndex() {
 		$this->render('index');
 	}
@@ -27,7 +18,6 @@ class DefaultController extends Controller {
 	}
 
 	public function actionDumpNews() {
-		$this->throwExceptinIfBadServerName();
 		$lipsum = new LoremIpsumGenerator();
 		$i = 0;
 		for ($i = 0; $i < 150; $i++) {
@@ -41,21 +31,18 @@ class DefaultController extends Controller {
 	}
 
 	public function actionCleanDB() {
-		$this->throwExceptinIfBadServerName();
 		Yii::import('application.tests.testlib.*');
 		TestLib::deleteDummyData();
 		$this->render("cleandb");
 	}
 
 	public function actionInstall() {
-		$this->throwExceptinIfBadServerName();
 		$install = new Install;
 		$install->install();
 		$this->render('install');
 	}
 
 	public function actionUpdate() {
-		$this->throwExceptinIfBadServerName();
 		$install = new Install;
 		$install->update();
 		$this->render('update');

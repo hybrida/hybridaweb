@@ -14,12 +14,21 @@ class DevModule extends CWebModule {
 
 	public function beforeControllerAction($controller, $action) {
 		if (parent::beforeControllerAction($controller, $action)) {
-			// this method is called before any module controller action is performed
-			// you may place customized code here
+			$this->throwExceptionIfBadServerName();
 			return true;
 		}
 		else
 			return false;
 	}
+
+	private function throwExceptionIfBadServerName() {
+		$serverName = Yii::app()->request->serverName;
+		$badServerName = "/hybrida.no/";
+		$isBadServer = preg_match($badServerName, $serverName);
+		if ($isBadServer) {
+			throw new CHttpException(403, "Kun for medlemmer av webkomiteen");
+		}
+	}
+
 
 }
