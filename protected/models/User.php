@@ -59,9 +59,8 @@ class User extends CActiveRecord {
 		// will receive user inputs.
 		return array(
 			array('username, firstName, lastName, member', 'required'),
-			array('specializationId, imageId, phoneNumber, workCompanyID, cardNumber', 'numerical', 'integerOnly' => true),
+			array('specializationId, imageId, phoneNumber, workCompanyID', 'numerical', 'integerOnly' => true),
 			array('username', 'length', 'max' => 10),
-			array('cardNumber', 'length', 'max' => 8),
 			array('cardNumber', 'length', 'min' => 5),
 			array('firstName, middleName, lastName', 'length', 'max' => 75),
 			array('linkedin', 'length', 'max' => 75),
