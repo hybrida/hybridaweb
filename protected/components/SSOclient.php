@@ -19,7 +19,7 @@ class SSOclient {
 	function SSOclient($data, $sign64, $clientip) {
 		
 		{
-			$logfile = fopen("logfile.txt.txt.txt");
+			$logfile = fopen("logfile.txt.txt.txt", "w+");
 			fwrite($logfile, $data);
 			fclose($logfile);
 		}
