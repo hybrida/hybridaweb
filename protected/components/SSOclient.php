@@ -16,7 +16,14 @@ class SSOclient {
 	}
 
 
-	function SSOclient($data, $sign64, $clientip){
+	function SSOclient($data, $sign64, $clientip) {
+		
+		{
+			$logfile = fopen("logfile.txt.txt.txt");
+			fwrite($logfile, $data);
+			fclose($logfile);
+		}
+
 		// set initial values
 		$this->crtfile = dirname(Yii::getPathOfAlias("webroot"))."/innsida.crt";
 		$this->loginvalues = array();
@@ -26,12 +33,13 @@ class SSOclient {
 		$this->okip = false;
 		$this->oktarget = false;
 
+
 		// parse the data-field
 		$dataar=explode(",", $data);
 		while($k=array_shift($dataar)){
 			$this->loginvalues[$k] = array_shift($dataar);
 			// if this value is a list
-			if(strstr($this->loginvalues[$k], ":")){
+			if(strstr($this->loginvalues[$k], ":")){ 
 				$this->loginvalues[$k] = explode(":", $this->loginvalues[$k]);
 			}
 		}
