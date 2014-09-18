@@ -42,10 +42,10 @@ class SiteController extends Controller {
 	}
 
 	public function getLoginRedirect($page) {
-		$innsidaLoginActionUrl = $this->createAbsoluteUrl("/site/innsidalogin");
-		$innsidaLoginActionUrl = str_replace("http://", "", $innsidaLoginActionUrl);
-		$returnUrl = $innsidaLoginActionUrl ."," .$page;
-
+		$innsidaLoginActionUrl = $this->createAbsoluteUrl("/site/innsidalogin"); // hybrida.no/site/innsidalogin
+		$innsidaLoginActionUrl = str_replace("http://", "", $innsidaLoginActionUrl); // hybrida.no/site/innsidalogin
+		$returnUrl = $innsidaLoginActionUrl ."," .$page; // returnUrl = hybrida.no/site/innsidalogin,/current_page
+		// https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=hybrida.no/site/innsidalogin,/current_page
 		$redirectUrl = self::$innsidaLink . $returnUrl;
 
 		return $redirectUrl;
