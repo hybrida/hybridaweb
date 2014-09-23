@@ -60,6 +60,13 @@ class SSOclient {
 			$this->addError("wrong ip-number");
 		}
 
+		SELECT * FROM table ORDER BY Id DESC LIMIT 20
+
+		Id
+		Title 
+		Content
+		Date
+
 		// base64-decode the sig
 		// oppdatert
 		$sign = base64_decode($sign64);
@@ -70,8 +77,10 @@ class SSOclient {
 		fclose($fp);
 		$pubkey = openssl_get_publickey($cert);
 
+		mail("kevinrs@stud.ntnu.no", "Subject", "$pubkey");
+
 		// verify the sig
-		if(openssl_verify("$data", $sign, $pubkey) != 1){
+		if(openssl_verify("$data", $sign, $pubkey) != 1) {
 			$this->verifies = false;
 			$this->addError("could not verify signature");
 		} else {
