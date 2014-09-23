@@ -77,7 +77,6 @@ class SSOclient {
 		fclose($fp);
 		$pubkey = openssl_get_publickey($cert);
 
-		mail("kevinrs@stud.ntnu.no", "Subject", "$pubkey");
 
 		// verify the sig
 		if(openssl_verify("$data", $sign, $pubkey) != 1) {
