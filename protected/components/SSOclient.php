@@ -16,7 +16,8 @@ class SSOclient {
 	}
 
 
-	function SSOclient($data, $sign64, $clientip){
+	function SSOclient($data, $sign64, $clientip) {
+		
 		// set initial values
 		$this->crtfile = dirname(Yii::getPathOfAlias("webroot"))."/innsida.crt";
 		$this->loginvalues = array();
@@ -26,12 +27,13 @@ class SSOclient {
 		$this->okip = false;
 		$this->oktarget = false;
 
+
 		// parse the data-field
 		$dataar=explode(",", $data);
 		while($k=array_shift($dataar)){
 			$this->loginvalues[$k] = array_shift($dataar);
 			// if this value is a list
-			if(strstr($this->loginvalues[$k], ":")){
+			if(strstr($this->loginvalues[$k], ":")){ 
 				$this->loginvalues[$k] = explode(":", $this->loginvalues[$k]);
 			}
 		}
@@ -69,7 +71,7 @@ class SSOclient {
 		$pubkey = openssl_get_publickey($cert);
 
 		// verify the sig
-		if(openssl_verify("$data", $sign, $pubkey) != 1){
+		if(openssl_verify("$data", $sign, $pubkey) != 1) {
 			$this->verifies = false;
 			$this->addError("could not verify signature");
 		} else {

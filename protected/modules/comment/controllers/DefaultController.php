@@ -7,8 +7,9 @@ class DefaultController extends Controller {
 			throw new CHttpException(403, "Du har ikke tilgang");
 		}
 		$model = new CommentForm();
+		$userId = user()->id;
 
-		if (isset($_POST['CommentForm'])) {
+		if (isset($_POST['CommentForm']) && $userId != 900) {
 			$model->attributes = $_POST['CommentForm'];
 			$model->save();
 			Yii::app()->notification->notifyAndAddListener(
