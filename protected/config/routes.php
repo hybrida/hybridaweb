@@ -1,6 +1,7 @@
 <?php
 
 return array(
+	'http://login.hybrida.no' => '/site/innsidaLogin',
 	'admin/articles' => '/admin/articles',
 	'admin/news' => '/admin/news',
 	'admin/stats' => '/admin/stats',

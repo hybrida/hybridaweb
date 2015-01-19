@@ -21,14 +21,23 @@ class SiteController extends Controller {
 		}
 	}
 
-	public function actionInnsidaLogin($data, $sign, $returnUrl) {
-		ob_clean();
+	public function actionInnsidaLogin($data, $sign, $returnargs) {
+		if ($_SERVER['HTTP_HOST'] == "login.hybrida.no") {
+			$hybridaUrl = "http://hybrida.no" .
+				$this->createUrl("site/innsidalogin", array(
+					'data' => $data,
+					'sign' => $sign,
+					'returnargs' => $returnargs));
+			$this->redirect($hybridaUrl);
+			return;
+		}
 
 		$SSOclient = new SSOclient($data, $sign, $_SERVER['REMOTE_ADDR']);
 		$identity = new InnsidaIdentity($SSOclient);
 
 		if ($identity->authenticate()) {
 			user()->login($identity);
+			$returnUrl = "http://hybrida.no" . $returnargs;
 			$this->redirect($returnUrl);
 		} else {
 			throw new CHttpException(403,
@@ -37,18 +46,8 @@ class SiteController extends Controller {
 	}
 
 	public function actionLogin($page) {
-		$redirect = $this->getLoginRedirect($page);
+		$redirect = self::$innsidaLink . $page;
 		$this->redirect($redirect);
-	}
-
-	public function getLoginRedirect($page) {
-		$innsidaLoginActionUrl = $this->createAbsoluteUrl("/site/innsidalogin"); // hybrida.no/site/innsidalogin
-		$innsidaLoginActionUrl = str_replace("http://", "", $innsidaLoginActionUrl); // hybrida.no/site/innsidalogin
-		$returnUrl = $innsidaLoginActionUrl ."," .$page; // returnUrl = hybrida.no/site/innsidalogin,/current_page
-		// https://innsida.ntnu.no/sso/?target=hybridaweb&returnargs=hybrida.no/site/innsidalogin,/current_page
-		$redirectUrl = self::$innsidaLink . $returnUrl;
-
-		return $redirectUrl;
 	}
 
 	public function actionLogout() {
