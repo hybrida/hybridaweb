@@ -3,6 +3,7 @@ assets/*
 runtime
 *.swp
 upc/
+_upc/
 .metadata/
 .project
 .buildpath
