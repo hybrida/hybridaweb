@@ -1,6 +1,6 @@
 html {
   background: url("/images/office.png") fixed;
-  font-family: "Gill";
+  font-family: "open_sanslight";
 }
 body {
   height: 100%;
@@ -32,7 +32,7 @@ a img {
   background-color: white;
   border-radius: 2px;
   padding-bottom: 20px;
-  
+
 }
 .layout-marginMaker {
   margin-top: 20px;
