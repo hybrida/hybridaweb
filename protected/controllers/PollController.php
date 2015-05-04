@@ -26,10 +26,13 @@ class PollController extends Controller {
     }
 
     public function actionVote($id) {
-        $model = Poll::model()->findByPk($id);
+        $model = $this->getPollModel($id);
+        if (!$model->status == 'hidden' && !Poll::userHasAdminRights($id, user()->getId())) {
+            throw new CHttpException(403, "Avstemningen er ikke tilgjengelig");
+        }
         $options = PollOption::model()->findAllByAttributes(array('pollId' => $id));
 
-        $this->render("vote", array('model' => $model, 'options' => $options));
+        $this->render("vote", array('model' => $model, 'options' => $options, 'voted' => null));
     }
 
     public function actionResults($id) {
@@ -40,6 +43,7 @@ class PollController extends Controller {
         $form = new PollForm($model);
         if (isset($_POST['PollForm'])) {
             $form->setAttributes($_POST['PollForm']);
+            if (isset($_))
             $form->save();
 
             $this->redirect($form->getPollModel()->getEditUrl());
@@ -54,7 +58,7 @@ class PollController extends Controller {
         if ($model) {
             return $model;
         } else {
-            throw new CHttpException(404, "Pollen finnes ikke");
+            throw new CHttpException(404, "Avstemningen finnes ikke");
         }
     }
 }
