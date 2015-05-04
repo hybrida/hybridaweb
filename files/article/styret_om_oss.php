@@ -58,19 +58,16 @@
 			<div>
 				<h2>Leder</h2>
 				<img src="/upc/files/styret/artikkel/leder.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/simenlil">Simen Lillehagen</a>
-				, 4. kl
+				<a href="/profil/andreamf">Andrea Marie Fest&oslash;y</a>, 2. kl
 				<div class="description">
-					Har det overordnede ansvaret i Hybrida, og er rett og slett helt sjef. 
-					Glad for å ha mange jenter i styret.
+					V&aring;r &aelig;rede leder. Har det overordnede ansvaret i Hybrida, og er rett og slett helt sjef.
 				</div>
 			</div>
 
 			<div>
 				<h2>Nestleder</h2>
 				<img src="/upc/files/styret/artikkel/nestleder.jpg" alt ="Nestleder" />
-				<a href="/profil/stephabu">Stephanie Buadu</a>
-				, 2. kl
+				<a href="/profil/henrilof">Henrik L&oslash;faldli</a>, 2. kl
 				<div class="description">
 					"Samarbeider" med lederen om det organisatoriske og administrative ansvaret i 
 					styret.
@@ -80,11 +77,10 @@
 			<div>
 				<h2>Skattmester</h2>
 				<img src="/upc/files/styret/artikkel/skattmester.jpg" alt ="Skattmester" />
-				<a href="/profil/sigribra">Sigrid Bratsberg</a>
-				, 1. kl
+				<a href="/profil/sigribra">Sigrid Bratsberg</a>, 1. kl
 				<div class="description">
                     Ansvaret for pengestr&oslash;mmen inn og,
-                    selvfølgelig mest, ut. Driver i følge pålitelige kilder
+                    selvf&oslash;lgelig mest, ut. Driver i f&oslash;lge p&aring;litelige kilder
                     ikke med underslag (men man vet jo aldri).
                 </div>
 			</div>
@@ -92,45 +88,41 @@
 			<div>
 				<h2>Festivalus</h2>
 				<img src="/upc/files/styret/artikkel/festivalus.jpg" alt ="Festivalus" />
-				<a href="/profil/liveja">Astrid Nerhus Dale</a>
-				, 2. kl
+				<a href="/profil/astridnd">Astrid Nerhus Dale</a>, 2. kl
 				<div class="description">
 					Ansvaret for det som blir arrangert av fester, turer og en hel rekke andre
-					arrangementer. Er også daglig leder på Hybridas eksklusive bar på Moholt.  
+					arrangementer.
 				</div>
 			</div>
 
 			<div>
 				<h2>Bedriftskomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/bksjef.jpg" alt ="Bedkomsjef" />
-				<a href="/profil/andreamf">Andrea Marie Festøy</a>
-				, 2. kl
+				<a href="/profil/arntks">Arnt Kristoffer S&oslash;rli</a>, 1. kl
 				<div class="description">
 					Fikser og ordner med profileringen av linja og linjeforeningen utad til
-					bedrifter og n&aelig;ringslivet. Sørger for at vi får de saftigste jobbene 
-					på markedet. 
+					bedrifter og n&aelig;ringslivet. S&oslash;rger for at vi f&aring;r de saftigste jobbene 
+					p&aring; markedet. 
 				</div>
 			</div>
 
 			<div>
 				<h2>Vevsjef</h2>
 				<img src="/upc/files/styret/artikkel/vevsjef.jpg" alt ="Vevsjef" />
-				<a href="/profil/ivarhk">Ivar Haga Kr&aring;b&oslash;l</a>
-				, 2. kl
+				<a href="/profil/ivarhk">Ivar Haga Kr&aring;b&oslash;l</a>, 2. kl
 				<div class="description">
-					Ansvar for utvikling og drift av nettsidene, samt informasjonsflyten i
-					linjeforeningen og HybridLAN. Jau.
+					Har ansvaret for utvikling og drift av nettsidene og HybridLAN, samt informasjonsflyten i
+                    linjeforeningen.
 				</div>
 			</div>
 
             <div>
                 <h2>Jentekomit&eacute;sjef</h2>
                 <img src="/upc/files/styret/artikkel/jentekomsjef.jpg" alt ="Jentekomsjef" />
-                <a href="/profil/helendyp">Helene Dypbukt</a>
-                , 2. kl
+                <a href="/profil/tonjerm">Tonje Mikalsen</a>, 1. kl
                 <div class="description">
                     Sjef for jentekomiteen, eller chicas united som det kalles i spania.
-                    sørger for at damene oppfører seg i henhold.
+                    S&oslash;rger for at damene oppf&oslash;rer seg i henhold til forskriftene.
                 </div>
             </div>
 			<br clear="all" />
