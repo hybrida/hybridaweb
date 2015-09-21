@@ -39,7 +39,8 @@ $this->beginClip('sidebar'); ?>
                 <!-- <div class="title">Styret:</div> Torsdag 10:15-12:00<br/>
                 Hybridakontoret, Gamle kjemiiiii
                 <br/><br/>-->
-                <div class="title">PTV:</div> 12:15-14:00 hver mandag, innerst i gangen, inn døra til venstre i andre etasje på gamle fysikk
+                <div class="title">PTV:</div>
+				12:15-14:00 hver mandag, innerst i gangen, inn døra til venstre i andre etasje på gamle fysikk.
             </p>
         </div>
     </div>
