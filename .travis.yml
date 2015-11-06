@@ -7,4 +7,4 @@ before_script:
     - cp protected/config/main.example.php protected/config/main.php
 
 script:
-    - ./vendor/bin/phpunit -c protected/tests/phpunit.xml --bootstrap protected/tests/bootstrap.php --stderr protected/tests/unit
+    - php -d short_open_tag=On vendor/bin/phpunit -c protected/tests/phpunit.xml --bootstrap protected/tests/bootstrap.php --stderr protected/tests/unit
