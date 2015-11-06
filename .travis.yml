@@ -4,6 +4,7 @@ php:
 
 before_script:
     - composer install
+    - cp protected/config/main.example.php protected/config/main.php
 
 script:
     - ./vendor/bin/phpunit -c protected/tests/phpunit.xml --bootstrap protected/tests/bootstrap.php --stderr protected/tests/unit
