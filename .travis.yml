@@ -2,9 +2,14 @@ language: php
 php:
     - 5.5
 
+addons:
+  mariadb: '10.1.8'
+
 before_script:
     - composer install
     - cp protected/config/main.example.php protected/config/main.php
+    - mysql < db/structure.sql
+    - mysql < db/data.sql
 
 script:
     - php -d short_open_tag=On vendor/bin/phpunit -c protected/tests/phpunit.xml --bootstrap protected/tests/bootstrap.php --stderr protected/tests/unit
