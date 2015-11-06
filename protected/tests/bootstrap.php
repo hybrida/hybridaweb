@@ -4,6 +4,7 @@
 // (endring av session) etter at testene har begynt å kjøre.
 //ob_start();
 
+error_reporting(E_STRICT);
 
 // change the following paths if necessary
 $yiit=dirname(__FILE__).'/../../framework/yiit.php';

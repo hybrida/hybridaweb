@@ -55,7 +55,7 @@ class YearConverter {
 		return static::$isAutumn;
 	}
 
-	public function isSpring() {
+	public static function isSpring() {
 		return !static::$isAutumn;
 	}
 
