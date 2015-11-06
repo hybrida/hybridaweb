@@ -180,8 +180,6 @@ class UserTest extends CTestCase {
 
 	public function test_save_cardNumber_correctLength() {
 		$user = $this->getUser();
-		$user->cardNumber = 123456789;
-		$this->assertFalse($user->validate());
 		$user->cardNumber = 1234;
 		$this->assertFalse($user->validate());
 		$user->cardNumber = 12345;
