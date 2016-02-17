@@ -24,3 +24,6 @@ protected/config/main.php
 # Sublime
 *.sublime-project
 *.sublime-workspace
+
+# Log files
+php_errors.log
