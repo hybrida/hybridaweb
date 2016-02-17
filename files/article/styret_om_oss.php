@@ -109,7 +109,7 @@
 			<div>
 				<h2>Vevsjef</h2>
 				<img src="/upc/files/styret/artikkel/vevsjef.jpg" alt ="Vevsjef" />
-				<a href="/profil/simennje">Simen Nordrerud Jensen</a>, 2. kl
+				<a href="/profil/simennje">Simen Norderud Jensen</a>, 2. kl
 				<div class="description">
 					Har ansvaret for utvikling og drift av nettsidene og HybridLAN, samt informasjonsflyten i
                     linjeforeningen.
