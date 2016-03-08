@@ -23,6 +23,11 @@ class SiteController extends Controller {
 
 	public function actionInnsidaLogin($data, $sign, $returnargs) {
 		if ($_SERVER['HTTP_HOST'] == "login.hybrida.no") {
+			if (strlen($returnargs) > 1 && $returnargs[strlen($returnargs) - 1] == ',') {
+				header('Location: http://beta.hybrida.no/verifylogin?data=' . urlencode($data . '&sign=' . $sign .
+					'&returnargs=' . $returnargs));
+				die();
+			}
 			$hybridaUrl = "http://hybrida.no" .
 				$this->createUrl("site/innsidalogin", array(
 					'data' => $data,
