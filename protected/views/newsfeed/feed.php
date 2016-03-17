@@ -40,7 +40,7 @@ $this->beginClip('sidebar'); ?>
                 Hybridakontoret, Gamle kjemiiiii
                 <br/><br/>-->
                 <div class="title">PTV:</div>
-				12:15-14:00 hver mandag, innerst i gangen, inn døra til venstre i andre etasje på gamle fysikk
+				12:15-14:00 hver fredag, innerst i gangen, inn døra til venstre i andre etasje på gamle fysikk
             </p>
         </div>
     </div>
