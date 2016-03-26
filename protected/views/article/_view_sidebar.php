@@ -10,4 +10,5 @@
 
 </div>
 
+<div class='g-barTitle'><?= Html::link('Alumni', array('/alumni')) ?></div>
 <div class='g-barTitle'><?= Html::link('Pensumbøker', array('/booksale')) ?></div>
