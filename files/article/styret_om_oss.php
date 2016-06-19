@@ -58,7 +58,7 @@
 			<div>
 				<h2>Leder</h2>
 				<img src="/upc/files/styret/artikkel/leder.jpg" alt ="Leder av Hybrida" />
-				<a href="/profil/andreamf">Andrea Marie Fest&oslash;y</a>, 3. kl
+				<a href="/profil/martiaks">Martin Vee Akselsen</a>, 3. kl
 				<div class="description">
 					V&aring;r &aelig;rede leder. Har det overordnede ansvaret i Hybrida, og er rett og slett helt sjef.
 				</div>
@@ -67,7 +67,7 @@
 			<div>
 				<h2>Nestleder</h2>
 				<img src="/upc/files/styret/artikkel/nestleder.jpg" alt ="Nestleder" />
-				<a href="/profil/henrilof">Henrik L&oslash;faldli</a>, 3. kl
+				<a href="/profil/sigribra">Sigrid Bratsberg</a>, 3. kl
 				<div class="description">
 					"Samarbeider" med lederen om det organisatoriske og administrative ansvaret i 
 					styret.
@@ -98,7 +98,7 @@
 			<div>
 				<h2>Bedriftskomit&eacute;sjef</h2>
 				<img src="/upc/files/styret/artikkel/bksjef.jpg" alt ="Bedkomsjef" />
-				<a href="/profil/arntks">Arnt Kristoffer S&oslash;rli</a>, 2. kl
+				<a href="/profil/ludviglj">Ludvig Lilleby Johansson</a>, 2. kl
 				<div class="description">
 					Fikser og ordner med profileringen av linja og linjeforeningen utad til
 					bedrifter og n&aelig;ringslivet. S&oslash;rger for at vi f&aring;r de saftigste jobbene 
@@ -119,7 +119,7 @@
             <div>
                 <h2>Jentekomit&eacute;sjef</h2>
                 <img src="/upc/files/styret/artikkel/jentekomsjef.jpg" alt ="Jentekomsjef" />
-                <a href="/profil/tonjerm">Tonje Mikalsen</a>, 2. kl
+                <a href="/profil/gurogb">Guro Golberg Br&oslash;to</a>, 2. kl
                 <div class="description">
                     Sjef for jentekomiteen, eller chicas united som det kalles i spania.
                     S&oslash;rger for at damene oppf&oslash;rer seg i henhold til forskriftene.
